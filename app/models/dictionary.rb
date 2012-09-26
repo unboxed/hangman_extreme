@@ -38,7 +38,7 @@ class Dictionary < SortedSet
 
   def self.define(word)
     user_agent = 'Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us)'
-
+    Rails.logger.info "Google define #{word}"
     parse(open "https://www.google.com/search?q=define+#{word}", 'User-Agent' => user_agent)
   end
 

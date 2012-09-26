@@ -2,6 +2,11 @@ require 'spec_helper'
 
 describe WordsController do
 
+  before :each do
+    @current_user = create(:user)
+    controller.stub(:current_user).and_return(@current_user)
+  end
+
   describe "GET 'define'" do
 
     before :each do
