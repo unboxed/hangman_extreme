@@ -1,5 +1,12 @@
-<h1><%= params[:order].to_s.humanize %></h1>
-
+<b><%= params[:order].to_s.humanize %></b>
+   <br/>
+<% case params[:order] %>
+<% when 'top_week' %>
+    This ranking is calculated by using the top 20 scored games for the week
+<% when 'top_month' %>
+    This ranking is calculated by using the top 80 scored games for the month
+<% end %>
+   <br/>
 <ul>
   <%= content_tag_for(:li, @users) do |user| %>
     <%= display_user_name(user.name) %> - <%= params[:order] == 'top_week' ? user.weekly_rating : user.monthly_rating  %>
@@ -9,4 +16,10 @@
 <br/>
 
 <%= link_to 'home', root_path, id: 'root_page' %> |
-view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %>
+view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %> |
+<% case params[:order] %>
+<% when 'top_week' %>
+    top <%= link_to 'month', users_path(order: 'top_month'), id: 'view_top_month_users' %> players
+<% when 'top_month' %>
+    top <%= link_to 'week', users_path(order: 'top_week'), id: 'view_top_week_users' %> players
+<% end %>
