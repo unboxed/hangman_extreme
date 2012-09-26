@@ -3,7 +3,7 @@ module ApplicationHelper
   def shinka_ad
     result = ""
     begin
-    ads = ActiveSupport::JSON.decode(open("http://ox-d.shinka.sh/ma/1.0/arj?auid=290386").read)
+    ads = ActiveSupport::JSON.decode(open("http://ox-d.shinka.sh/ma/1.0/arj?auid=290386c.age=#{@mxit_profile.age}&c.gender=#{@mxit_profile.gender}&c.country=#{@mxit_profile.country}").read)
     ad = ads['ads']["ad"].sample
     result = ad["html"].html_safe
     impression = ad["creative"].first["tracking"]["impression"]
