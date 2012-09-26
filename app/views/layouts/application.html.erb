@@ -7,6 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<% random_number = rand(999999999999) %>
+<a href="http://ox-d.shinka.sh/mw/1.0/rc?cs=5062bf5fc46f8&cb=<%= random_number %>" >
+  <img src="http://ox-d.shinka.sh/mw/1.0/ai?auid=290386&cs=5062bf5fc46f8&cb=<%= random_number %>" border="0" alt="">
+</a>
 
 <% if notice -%>
     <div class="alert alert-info" style="color:#00008b;"><%= notice %></div>
@@ -15,11 +19,6 @@
 <% end -%>
 
 <%= yield %>
-
-<% random_number = rand(999999999999) %>
-<a href="http://ox-d.shinka.sh/mw/1.0/rc?cs=5062bf5fc46f8&cb=<%= random_number %>" >
-  <img src="http://ox-d.shinka.sh/mw/1.0/ai?auid=290386&cs=5062bf5fc46f8&cb=<%= random_number %>" border="0" alt="">
-</a>
 
 
 </body>
