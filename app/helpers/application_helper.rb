@@ -12,7 +12,7 @@ module ApplicationHelper
     if alt.include?("http:")
       result
     else
-      "<img href=#{impression} /><a href=#{click} onclick='window.open(this.href); return false;' >#{alt}</a>".html_safe
+      "<img href=#{impression} alt=""/><a href=#{click} onclick='window.open(this.href); return false;' >#{alt}</a>".html_safe
     end
     rescue Exception => e
       Rails.logger.error e.message
