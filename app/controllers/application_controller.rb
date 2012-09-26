@@ -9,42 +9,29 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def current_user=(user)
-    session[:current_user_id] = user.try(:id)
-  end
-
   def current_user
     @current_user ||= User.find_by_id(session[:current_user_id])
   end
 
   helper_method :current_user
 
-
   def login_required
     return true if current_user
     access_denied
   end
 
-  # Redirect as appropriate when an access request fails.
-  #
-  # The default action is to redirect to the login screen.
-  #
-  # Override this method in your controllers if you want to have special
-  # behavior in case the admin_user is not authorized
-  # to access the requested action.  For example, a popup window might
-  # simply close itself.
   def access_denied
     redirect_to '/auth/developer'
     false
   end
 
   def send_stats
-    if ENV['GA_TRACKING_CODE'] && current_user
+    if tracking_enabled? && current_user
       begin
-      g = Gabba::Gabba.new(ENV['GA_TRACKING_CODE'], "mxithangmanleague.herokuapp.com")
+      g = Gabba::Gabba.new(tracking_code, "mxithangmanleague.herokuapp.com")
       if request.env['HTTP_X_DEVICE_USER_AGENT']
-        g.user_agent = request.env['HTTP_X_DEVICE_USER_AGENT']
-      else
+        g.user_agent = "Mxit #{request.env['HTTP_X_DEVICE_USER_AGENT']}"
+      elsif request.env['HTTP_USER_AGENT']
         g.user_agent = request.env['HTTP_USER_AGENT']
       end
       if request.env["HTTP_X_MXIT_PROFILE"]
@@ -55,7 +42,7 @@ class ApplicationController < ActionController::Base
       end
       if request.env["HTTP_X_MXIT_LOCATION"]
         location = MxitLocation.new(request.env["HTTP_X_MXIT_LOCATION"])
-        g.set_custom_var(3, 'Location', "#{location.country_name},#{location.principal_subdivision_name}", 1)
+        g.set_custom_var(3, location.country_name, location.principal_subdivision_name, 1)
       end
       g.set_custom_var(5, 'Provider', current_user.provider, 1)
       current_user.update_attribute(:utma,g.cookie_params(current_user.id)) unless current_user.utma?
@@ -64,6 +51,7 @@ class ApplicationController < ActionController::Base
       rescue Exception => e
         Rails.logger.error e.message
         # ignore errors
+        raise if Rails.env.test?
       end
     end
   end
@@ -91,6 +79,16 @@ class ApplicationController < ActionController::Base
         false
       end
     end
+  end
+
+  private
+
+  def tracking_enabled?
+    !ENV['GA_TRACKING_CODE'].blank?
+  end
+
+  def tracking_code
+    ENV['GA_TRACKING_CODE']
   end
 
 end

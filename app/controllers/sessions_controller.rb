@@ -10,5 +10,9 @@ class SessionsController < ApplicationController
     request.env['omniauth.auth']
   end
 
+  def current_user=(user)
+    session[:current_user_id] = user.try(:id)
+  end
+
 end
 
