@@ -3,7 +3,7 @@ module ApplicationHelper
   def shinka_ad
     result = ""
     begin
-    ads = ActiveSupport::JSON.decode(open("http://ox-d.shinka.sh/ma/1.0/arj?auid=290386c.age=#{@mxit_profile.age}&c.gender=#{@mxit_profile.gender}&c.country=#{@mxit_profile.country}").read)
+    ads = ActiveSupport::JSON.decode(open("http://ox-d.shinka.sh/ma/1.0/arj?auid=290386").read)
     ad = ads['ads']["ad"].sample
     result = ad["html"].html_safe
     impression = ad["creative"].first["tracking"]["impression"]
@@ -16,7 +16,7 @@ module ApplicationHelper
     end
     rescue Exception => e
       Rails.logger.error e.message
-       return result
+      return result
     end
   end
 
