@@ -13,6 +13,8 @@ class Game < ActiveRecord::Base
   after_save :update_user_score
 
   scope :active_first, order('completed ASC, created_at DESC').where('completed IS NOT NULL')
+  scope :completed, where('completed = ?', true)
+
   scope :this_week, lambda{ where('created_at > ?',Time.current.beginning_of_week) }
   scope :this_month, lambda{ where('created_at > ?',Time.current.beginning_of_month) }
   scope :this_year, lambda{ where('created_at > ?',Time.current.beginning_of_year) }

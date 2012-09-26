@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :provider, :uid, :weekly_rating, :monthly_rating, :yearly_rating
+  attr_accessible :name, :provider, :uid, :weekly_rating, :monthly_rating, :yearly_rating, :weekly_precision, :monthly_precision
 
   has_many :games
 
@@ -22,6 +22,19 @@ class User < ActiveRecord::Base
     return user
   end
 
+  def calculate_weekly_precision
+    scope = games.this_week.completed
+    return 0 if scope.count < 10
+    (scope.inject(0){|sum,game| sum += game.attempts_left.to_i } * 10) / scope.count
+  end
+
+  def calculate_monthly_precision
+    scope = games.this_month.completed
+    return 0 if scope.count < 40
+    (scope.inject(0){|sum,game| sum += game.attempts_left.to_i } * 10) / scope.count
+  end
+
+
   def calculate_weekly_rating
     games.this_week.top(20).inject(0){|sum,game| sum += game.score.to_i }
   end
@@ -37,7 +50,8 @@ class User < ActiveRecord::Base
   def update_ratings
     update_attributes(weekly_rating: calculate_weekly_rating,
                       monthly_rating: calculate_monthly_rating,
-                      yearly_rating: calculate_yearly_rating)
+                      weekly_precision: calculate_weekly_precision,
+                      monthly_precision: calculate_monthly_precision)
   end
 
   def weekly_rank
@@ -46,6 +60,14 @@ class User < ActiveRecord::Base
 
   def monthly_rank
     User.where("monthly_rating > ?", monthly_rating).count + 1
+  end
+
+  def weekly_precision_rank
+    User.where("weekly_precision > ?", weekly_precision).count + 1
+  end
+
+  def monthly_precision_rank
+    User.where("monthly_precision > ?", monthly_precision).count + 1
   end
 
   def yearly_rank

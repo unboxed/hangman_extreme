@@ -27,6 +27,72 @@ describe User do
     user.game_count.should == 6
   end
 
+  context "calculate_weekly_precision" do
+
+    it "must use the attempts left per game" do
+      user = create(:user)
+      create_list(:won_game,9, word: "test", choices: "tes", user: user)
+      create(:won_game, word: "test", choices: "ters", user: user)
+      user.calculate_weekly_precision.should == 99
+    end
+
+    it "must use only completed games" do
+      user = create(:user)
+      create_list(:won_game,10, word: "test", choices: "tes", user: user)
+      create(:game, word: "test", choices: "ter", user: user)
+      user.calculate_weekly_precision.should == 100
+    end
+
+    it "must use games only from this week" do
+      user = create(:user)
+      create_list(:won_game,10, word: "test", choices: "tes", user: user)
+      Timecop.freeze(1.week.ago - 1.day) do
+        create(:won_game, word: "test", choices: "tes", user: user)
+      end
+      user.calculate_weekly_precision.should == 100
+    end
+
+    it "must return 0 if less than 10 games played" do
+      user = create(:user)
+      create_list(:won_game,9, word: "test", choices: "tes", user: user)
+      user.calculate_weekly_precision.should == 0
+    end
+
+  end
+
+  context "calculate_monthly_precision" do
+
+    it "must use the attempts left per game" do
+      user = create(:user)
+      create_list(:won_game,39, word: "test", choices: "tes", user: user)
+      create(:won_game, word: "test", choices: "ters", user: user)
+      user.calculate_monthly_precision.should == 99
+    end
+
+    it "must use only completed games" do
+      user = create(:user)
+      create_list(:won_game,40, word: "test", choices: "tes", user: user)
+      create(:game, word: "test", choices: "ter", user: user)
+      user.calculate_monthly_precision.should == 100
+    end
+
+    it "must use games only from this week" do
+      user = create(:user)
+      create_list(:won_game,40, word: "test", choices: "tes", user: user)
+      Timecop.freeze(1.week.ago - 1.day) do
+        create(:won_game, word: "test", choices: "tes", user: user)
+      end
+      user.calculate_monthly_precision.should == 100
+    end
+
+    it "must return 0 if less than 40 games played" do
+      user = create(:user)
+      create_list(:won_game,39, word: "test", choices: "tes", user: user)
+      user.calculate_monthly_precision.should == 0
+    end
+
+  end
+
   context "calculate_weekly_rating" do
 
     it "must use 20 games in the last week" do
@@ -111,11 +177,13 @@ describe User do
       user = stub_model(User)
       user.stub(:calculate_weekly_rating).and_return(20)
       user.stub(:calculate_monthly_rating).and_return(80)
-      user.stub(:calculate_yearly_rating).and_return(960)
+      user.stub(:calculate_weekly_precision).and_return(100)
+      user.stub(:calculate_monthly_precision).and_return(90)
       user.update_ratings
       user.weekly_rating.should == 20
       user.monthly_rating.should == 80
-      user.yearly_rating.should == 960
+      user.weekly_precision.should == 100
+      user.monthly_precision.should == 90
     end
 
   end
@@ -141,6 +209,20 @@ describe User do
       user1.yearly_rank.should == 3
       user3.yearly_rank.should == 1
       user2.yearly_rank.should == 2
+    end
+
+    it "should return correct weekly precision rank" do
+      user1, user3, user2 = create(:user, weekly_precision: 20), create(:user, weekly_precision: 40), create(:user, weekly_precision: 30)
+      user1.weekly_precision_rank.should == 3
+      user3.weekly_precision_rank.should == 1
+      user2.weekly_precision_rank.should == 2
+    end
+
+    it "should return correct monthly_precision rank" do
+      user1, user3, user2 = create(:user, monthly_precision: 20), create(:user, monthly_precision: 40), create(:user, monthly_precision: 30)
+      user1.monthly_precision_rank.should == 3
+      user3.monthly_precision_rank.should == 1
+      user2.monthly_precision_rank.should == 2
     end
 
   end

@@ -7,18 +7,21 @@ describe "users/show.html.erb" do
     @user = assign(:user, stub_model(User, game_count: 100,
                                            weekly_rank: 1, weekly_rating: 20,
                                            monthly_rank: 2, monthly_rating: 80,
-                                           yearly_rank: 3, yearly_rating: 960))
+                                           weekly_precision_rank: 1, weekly_precision: 20,
+                                           monthly_precision_rank: 2, monthly_precision: 80))
   end
 
   it "renders a list of games" do
     render
     rendered.should have_content("Games Played: 100")
-    rendered.should have_content("Week Rank: 1st")
-    rendered.should have_content("Month Rank: 2nd")
-    rendered.should have_content("Year Rank: 3rd")
+    rendered.should have_content("Week Rating Rank: 1st")
+    rendered.should have_content("Month Rating Rank: 2nd")
     rendered.should have_content("Week Rating: 20")
     rendered.should have_content("Month Rating: 80")
-    rendered.should have_content("Year Rating: 960")
+    rendered.should have_content("Week Precision Rank: 1st")
+    rendered.should have_content("Month Precision Rank: 2nd")
+    rendered.should have_content("Week Precision: 20")
+    rendered.should have_content("Month Precision: 80")
   end
 
   it "should have a home page link" do
