@@ -59,4 +59,8 @@ describe Dictionary do
     Dictionary.clear.size.should == 0
   end
 
+  it "must define the word" do
+    Dictionary.define("word").should_not be_blank
+  end
+
 end

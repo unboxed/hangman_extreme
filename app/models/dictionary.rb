@@ -21,15 +21,11 @@ class Dictionary < SortedSet
   end
 
   def self.method_missing(m, *args, &block)
-    if instance.respond_to?(m, *args, &block)
-      instance.send(m,*args,&block)
-    else
-      super
-    end
+    instance.respond_to?(m, *args, &block) ? instance.send(m,*args,&block) : super
   end
 
   def self.respond_to?(m, *args, &block)
-    super || instance.respond_to?(m,*args, &block)
+    instance.respond_to?(m,*args, &block) || super
   end
 
   def random_value
