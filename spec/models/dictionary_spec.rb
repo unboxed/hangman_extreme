@@ -60,6 +60,10 @@ describe Dictionary do
   end
 
   it "must define the word" do
+    @body = %~<table class="ts"><tbody><tr><td valign="top" width="80px" style="padding-bottom:5px;padding-top:5px;color:#666">Adverb:</td><td valign="top" style="padding-bottom:5px;padding-top:5px"><table class="ts"><tbody><tr><td><ol style="padding-left:19px"><li style="list-style-type:decimal">In or after a short time:  "he'll be home soon".</li><li style="list-style-type:decimal">Early:  "it was too soon to know".</li></ol></td></tr></tbody></table></td></tr><tr height="1px" bgcolor="#ddd"><td height="1px" colspan="2"></td></tr><tr><td valign="top" width="80px" style="padding-bottom:5px;padding-top:5px;color:#666">Synonyms:</td><td valign="top" style="padding-bottom:5px;padding-top:5px"><div>shortly - early - presently - anon - before long</div></td></tr></tbody></table>~
+    stub_request(:get, "https://www.google.com/search?q=define%20word").
+      with(:headers => {'Accept'=>'*/*', 'User-Agent'=>'Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us)'}).
+      to_return(:status => 200, :body => @body, :headers => {})
     Dictionary.define("word").should_not be_blank
   end
 
