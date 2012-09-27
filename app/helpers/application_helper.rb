@@ -9,7 +9,7 @@ module ApplicationHelper
     impression = ad["creative"].first["tracking"]["impression"]
     alt = ad["creative"].first["alt"]
     click = ad["creative"].first["tracking"]["click"]
-    if alt.include?("http:")
+    if alt.include?("http:") || @mxit_device.to_s.downcase == "iphone"
       result
     else
       "<img href=#{impression} alt=""/><a href=#{click} onclick='window.open(this.href); return false;' >#{alt}</a>".html_safe

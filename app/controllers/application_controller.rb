@@ -64,6 +64,9 @@ class ApplicationController < ActionController::Base
       if request.env["HTTP_X_MXIT_PROFILE"]
         @mxit_profile = MxitProfile.new(request.env["HTTP_X_MXIT_PROFILE"])
       end
+      if request.env['HTTP_X_DEVICE_USER_AGENT']
+        @mxit_device = request.env['HTTP_X_DEVICE_USER_AGENT']
+      end
     end
   end
 
