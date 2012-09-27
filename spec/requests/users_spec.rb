@@ -11,11 +11,7 @@ describe 'users' do
     score = create(:won_game, user: @current_user).score
     visit '/'
     click_link('view_rank')
-    page.should have_content("Games Played: 1")
-    page.should have_content("Week Rating Rank: 1st")
-    page.should have_content("Month Rating Rank: 1st")
-    page.should have_content("Week Rating: #{score}")
-    page.should have_content("Month Rating: #{score}")
+    page.should have_content("You Ranking")
     click_link('root_page')
     page.current_path.should == '/'
   end

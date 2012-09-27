@@ -27,6 +27,50 @@ describe User do
     user.game_count.should == 6
   end
 
+  context "calculate_games_won_this_week" do
+
+    it "must use only won games" do
+      user = create(:user)
+      create_list(:won_game,2, user: user)
+      create(:lost_game, user: user)
+      create(:game, user: user)
+      user.calculate_games_won_this_week.should == 2
+    end
+
+
+    it "must use games only from this week" do
+      user = create(:user)
+      create_list(:won_game,2,user: user)
+      Timecop.freeze(1.week.ago - 1.day) do
+        create_list(:won_game,2,user: user)
+      end
+      user.calculate_games_won_this_week.should == 2
+    end
+
+  end
+
+  context "calculate_games_won_this_month" do
+
+    it "must use only won games" do
+      user = create(:user)
+      create_list(:won_game,2, user: user)
+      create(:lost_game, user: user)
+      create(:game, user: user)
+      user.calculate_games_won_this_month.should == 2
+    end
+
+
+    it "must use games only from this month" do
+      user = create(:user)
+      create_list(:won_game,2,user: user)
+      Timecop.freeze(1.month.ago - 1.day) do
+        create_list(:won_game,2,user: user)
+      end
+      user.calculate_games_won_this_month.should == 2
+    end
+
+  end
+
   context "calculate_weekly_precision" do
 
     it "must use the attempts left per game" do
@@ -47,7 +91,7 @@ describe User do
       user = create(:user)
       create_list(:won_game,10, word: "test", choices: "tes", user: user)
       Timecop.freeze(1.week.ago - 1.day) do
-        create(:won_game, word: "test", choices: "tes", user: user)
+        create(:won_game, word: "test", choices: "ters", user: user)
       end
       user.calculate_weekly_precision.should == 100
     end
@@ -76,11 +120,11 @@ describe User do
       user.calculate_monthly_precision.should == 100
     end
 
-    it "must use games only from this week" do
+    it "must use games only from this month" do
       user = create(:user)
       create_list(:won_game,40, word: "test", choices: "tes", user: user)
-      Timecop.freeze(1.week.ago - 1.day) do
-        create(:won_game, word: "test", choices: "tes", user: user)
+      Timecop.freeze(1.month.ago - 1.day) do
+        create(:won_game, word: "test", choices: "ters", user: user)
       end
       user.calculate_monthly_precision.should == 100
     end
@@ -179,50 +223,26 @@ describe User do
       user.stub(:calculate_monthly_rating).and_return(80)
       user.stub(:calculate_weekly_precision).and_return(100)
       user.stub(:calculate_monthly_precision).and_return(90)
+      user.stub(:calculate_games_won_this_week).and_return(200)
+      user.stub(:calculate_games_won_this_month).and_return(210)
       user.update_ratings
       user.weekly_rating.should == 20
       user.monthly_rating.should == 80
       user.weekly_precision.should == 100
       user.monthly_precision.should == 90
+      user.games_won_this_week.should == 200
+      user.games_won_this_month.should == 210
     end
 
   end
 
   context "rank" do
 
-    it "should return correct weekly rank" do
+    it "should return correct rankings" do
       user1, user3, user2 = create(:user, weekly_rating: 20), create(:user, weekly_rating: 40), create(:user, weekly_rating: 30)
-      user1.weekly_rank.should == 3
-      user3.weekly_rank.should == 1
-      user2.weekly_rank.should == 2
-    end
-
-    it "should return correct monthly rank" do
-      user1, user3, user2 = create(:user, monthly_rating: 20), create(:user, monthly_rating: 40), create(:user, monthly_rating: 30)
-      user1.monthly_rank.should == 3
-      user3.monthly_rank.should == 1
-      user2.monthly_rank.should == 2
-    end
-
-    it "should return correct yearly rank" do
-      user1, user3, user2 = create(:user, yearly_rating: 20), create(:user, yearly_rating: 40), create(:user, yearly_rating: 30)
-      user1.yearly_rank.should == 3
-      user3.yearly_rank.should == 1
-      user2.yearly_rank.should == 2
-    end
-
-    it "should return correct weekly precision rank" do
-      user1, user3, user2 = create(:user, weekly_precision: 20), create(:user, weekly_precision: 40), create(:user, weekly_precision: 30)
-      user1.weekly_precision_rank.should == 3
-      user3.weekly_precision_rank.should == 1
-      user2.weekly_precision_rank.should == 2
-    end
-
-    it "should return correct monthly_precision rank" do
-      user1, user3, user2 = create(:user, monthly_precision: 20), create(:user, monthly_precision: 40), create(:user, monthly_precision: 30)
-      user1.monthly_precision_rank.should == 3
-      user3.monthly_precision_rank.should == 1
-      user2.monthly_precision_rank.should == 2
+      user1.rank(:weekly_rating).should == 3
+      user3.rank(:weekly_rating).should == 1
+      user2.rank(:weekly_rating).should == 2
     end
 
   end

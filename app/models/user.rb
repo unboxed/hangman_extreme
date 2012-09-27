@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :provider, :uid, :weekly_rating, :monthly_rating, :yearly_rating, :weekly_precision, :monthly_precision
+  attr_accessible :name, :provider, :uid, :weekly_rating, :games_won_this_week, :games_won_this_month,
+                  :monthly_rating, :yearly_rating, :weekly_precision, :monthly_precision
 
   has_many :games
 
@@ -20,6 +21,14 @@ class User < ActiveRecord::Base
       user.save!
     end
     return user
+  end
+
+  def calculate_games_won_this_week
+    games.this_week.completed.all.count{|game| game.is_won?}
+  end
+
+  def calculate_games_won_this_month
+    games.this_month.completed.all.count{|game| game.is_won?}
   end
 
   def calculate_weekly_precision
@@ -51,27 +60,13 @@ class User < ActiveRecord::Base
     update_attributes(weekly_rating: calculate_weekly_rating,
                       monthly_rating: calculate_monthly_rating,
                       weekly_precision: calculate_weekly_precision,
-                      monthly_precision: calculate_monthly_precision)
+                      monthly_precision: calculate_monthly_precision,
+                      games_won_this_week: calculate_games_won_this_week,
+                      games_won_this_month: calculate_games_won_this_month)
   end
 
-  def weekly_rank
-    User.where("weekly_rating > ?", weekly_rating).count + 1
-  end
-
-  def monthly_rank
-    User.where("monthly_rating > ?", monthly_rating).count + 1
-  end
-
-  def weekly_precision_rank
-    User.where("weekly_precision > ?", weekly_precision).count + 1
-  end
-
-  def monthly_precision_rank
-    User.where("monthly_precision > ?", monthly_precision).count + 1
-  end
-
-  def yearly_rank
-    User.where("yearly_rating > ?", yearly_rating).count + 1
+  def rank(field)
+    User.where("#{field} > ?", send(field)).count + 1
   end
 
   def game_count
