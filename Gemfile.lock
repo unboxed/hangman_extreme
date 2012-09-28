@@ -178,6 +178,7 @@ DEPENDENCIES
   factory_girl_rails
   flog
   gabba
+  json
   kaminari
   launchy
   newrelic_rpm
