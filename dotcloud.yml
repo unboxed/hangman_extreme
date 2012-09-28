@@ -1,0 +1,10 @@
+www:
+  type: ruby
+  config:
+      ruby-version: 1.9.3
+  exclude_bundler_groups:
+      - development
+      - test
+  approot: .
+db:
+  type: postgresql
