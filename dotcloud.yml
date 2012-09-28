@@ -5,6 +5,5 @@ www:
   exclude_bundler_groups:
       - development
       - test
-  approot: .
 db:
   type: postgresql
