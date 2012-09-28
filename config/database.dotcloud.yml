@@ -1,0 +1,3 @@
+<% env = JSON.parse(File.read('/home/dotcloud/environment.json')) %>
+production:
+  url: <%= env['DOTCLOUD_DATA_SQL_URL'] %>

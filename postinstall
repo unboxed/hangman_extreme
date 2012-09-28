@@ -1,3 +1,4 @@
 #!/bin/sh
+cp config/database.dotcloud.yml config/database.yml
 RAILS_ENV=production bundle exec rake db:migrate
 RAILS_ENV=production bundle exec rake db:seed
