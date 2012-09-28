@@ -9,6 +9,7 @@ module ApplicationHelper
     impression = ad["creative"].first["tracking"]["impression"]
     alt = ad["creative"].first["alt"]
     click = ad["creative"].first["tracking"]["click"]
+    return "" if alt.include?("http")
     "<a href=#{click} onclick='window.open(this.href); return false;' >#{alt}</a>".html_safe
     rescue Exception => e
       Rails.logger.error e.message
