@@ -4,49 +4,43 @@
 <table>
   <tbody>
   <tr>
-    <td></td>
+    <td><b>This Week</b></td>
     <td>Score</td>
     <td>Rank</td>
   </tr>
-   <tr>
-    <th>This Week</th>
-    <td></td>
-    <td></td>
-   </tr>
-
     <tr>
       <td>Games Won:</td>
-      <td><%= @user.games_won_this_week %></td>
+      <td><%= @user.games_won_this_week %> |</td>
       <td><%= @user.rank(:games_won_this_week).ordinalize %></td>
     </tr>
     <tr>
       <td>Rating:</td>
-      <td><%= @user.weekly_rating %></td>
+      <td><%= @user.weekly_rating %> |</td>
       <td><%= @user.rank(:weekly_rating).ordinalize %></td>
     </tr>
     <tr>
       <td>Precision:</td>
-      <td><%= @user.weekly_precision %></td>
+      <td><%= @user.weekly_precision %> |</td>
       <td><%= @user.rank(:weekly_precision).ordinalize %></td>
     </tr>
    <tr>
-     <th>This Month</th>
+     <td><b>This Month</b></td>
      <td></td>
      <td></td>
    </tr>
   <tr>
     <td>Games Won:</td>
-    <td><%= @user.games_won_this_month %></td>
+    <td><%= @user.games_won_this_month %> |</td>
     <td><%= @user.rank(:games_won_this_month).ordinalize %></td>
   </tr>
   <tr>
     <td>Rating:</td>
-    <td><%= @user.monthly_rating %></td>
+    <td><%= @user.monthly_rating %> |</td>
     <td><%= @user.rank(:monthly_rating).ordinalize %></td>
   </tr>
   <tr>
     <td>Precision:</td>
-    <td><%= @user.monthly_precision %></td>
+    <td><%= @user.monthly_precision %> |</td>
     <td><%= @user.rank(:monthly_precision).ordinalize %></td>
   </tr>
   </tbody>
