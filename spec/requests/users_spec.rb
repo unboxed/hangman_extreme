@@ -8,7 +8,7 @@ describe 'users' do
   end
 
   it "must show users rating" do
-    score = create(:won_game, user: @current_user).score
+    create(:won_game, user: @current_user).score
     visit '/'
     click_link('view_rank')
     page.should have_content("You Ranking")
@@ -17,17 +17,21 @@ describe 'users' do
   end
 
   it "must the show the current top players" do
-    users = create_list(:user,10).each{|user| create(:won_game, user: user) }
+    users = create_list(:user,9).each{|user| create(:won_game, user: user) }
     visit '/'
     click_link('view_rank')
-    click_link('view_top_week_users')
+    click_link('daily_rating')
     users.each do |user|
       page.should have_content(user.name)
     end
     click_link('root_page')
     page.current_path.should == '/'
     click_link('view_rank')
-    click_link('view_top_month_users')
+    click_link('weekly_rating')
+    users.each do |user|
+      page.should have_content(user.name)
+    end
+    click_link('monthly_rating')
     users.each do |user|
       page.should have_content(user.name)
     end

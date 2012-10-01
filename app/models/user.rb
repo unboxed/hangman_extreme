@@ -1,14 +1,12 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :provider, :uid, :weekly_rating, :games_won_this_week, :games_won_this_month,
-                  :monthly_rating, :yearly_rating, :weekly_precision, :monthly_precision
+  attr_accessible :name, :provider, :uid
 
   has_many :games
 
   validates :provider, :uid, presence: true
   validates_uniqueness_of :uid, :scope => :provider
 
-  scope :top_this_week, lambda{ |amount| order('weekly_rating DESC').limit(amount) }
-  scope :top_this_month, lambda{ |amount| order('monthly_rating DESC').limit(amount) }
+  scope :top_scorers, lambda{ |field| order("#{field} DESC").limit(10) }
 
   def self.find_or_create_from_auth_hash(auth_hash)
     auth_hash.stringify_keys!
@@ -23,46 +21,53 @@ class User < ActiveRecord::Base
     return user
   end
 
+  def calculate_games_won_today
+    calculate_games_won(games.today)
+  end
+
   def calculate_games_won_this_week
-    games.this_week.completed.all.count{|game| game.is_won?}
+    calculate_games_won(games.this_week)
   end
 
   def calculate_games_won_this_month
-    games.this_month.completed.all.count{|game| game.is_won?}
+    calculate_games_won(games.this_month)
+  end
+
+  def calculate_daily_precision
+    calculate_precision(games.today)
   end
 
   def calculate_weekly_precision
-    scope = games.this_week.completed
-    return 0 if scope.count < 10
-    (scope.inject(0){|sum,game| sum += game.attempts_left.to_i } * 10) / scope.count
+    calculate_precision(games.this_week)
   end
 
   def calculate_monthly_precision
-    scope = games.this_month.completed
-    return 0 if scope.count < 40
-    (scope.inject(0){|sum,game| sum += game.attempts_left.to_i } * 10) / scope.count
+    calculate_precision(games.this_month)
   end
 
+  def calculate_daily_rating
+    calculate_rating(games.today.top(10))
+  end
 
   def calculate_weekly_rating
-    games.this_week.top(20).inject(0){|sum,game| sum += game.score.to_i }
+    calculate_rating(games.this_week.top(20))
   end
 
   def calculate_monthly_rating
-    games.this_month.top(80).inject(0){|sum,game| sum += game.score.to_i }
-  end
-
-  def calculate_yearly_rating
-    games.this_year.top(160).inject(0){|sum,game| sum += game.score.to_i }
+    calculate_rating(games.this_month.top(80))
   end
 
   def update_ratings
-    update_attributes(weekly_rating: calculate_weekly_rating,
-                      monthly_rating: calculate_monthly_rating,
-                      weekly_precision: calculate_weekly_precision,
-                      monthly_precision: calculate_monthly_precision,
-                      games_won_this_week: calculate_games_won_this_week,
-                      games_won_this_month: calculate_games_won_this_month)
+    self.daily_rating = calculate_daily_rating
+    self.weekly_rating = calculate_weekly_rating
+    self.monthly_rating = calculate_monthly_rating
+    self.daily_precision = calculate_daily_precision
+    self.weekly_precision = calculate_weekly_precision
+    self.monthly_precision = calculate_monthly_precision
+    self.games_won_today = calculate_games_won_today
+    self.games_won_this_week = calculate_games_won_this_week
+    self.games_won_this_month = calculate_games_won_this_month
+    save
   end
 
   def rank(field)
@@ -71,6 +76,22 @@ class User < ActiveRecord::Base
 
   def game_count
     games.count
+  end
+
+  private
+
+  def calculate_games_won(scope)
+    scope.completed.all.count{|game| game.is_won?}
+  end
+
+  def calculate_precision(game_scope)
+    scope = game_scope.completed
+    return 0 if scope.count < 10
+    (scope.inject(0){|sum,game| sum += game.attempts_left.to_i } * 10) / scope.count
+  end
+
+  def calculate_rating(scope)
+    scope.inject(0){|sum,game| sum += game.score.to_i }
   end
 
 end

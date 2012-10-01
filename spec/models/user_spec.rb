@@ -27,6 +27,28 @@ describe User do
     user.game_count.should == 6
   end
 
+  context "calculate_games_won_today" do
+
+    it "must use only won games" do
+      user = create(:user)
+      create_list(:won_game,2, user: user)
+      create(:lost_game, user: user)
+      create(:game, user: user)
+      user.calculate_games_won_today.should == 2
+    end
+
+
+    it "must use games only from today" do
+      user = create(:user)
+      create_list(:won_game,2,user: user)
+      Timecop.freeze(1.day.ago) do
+        create_list(:won_game,2,user: user)
+      end
+      user.calculate_games_won_today.should == 2
+    end
+
+  end
+
   context "calculate_games_won_this_week" do
 
     it "must use only won games" do
@@ -71,6 +93,39 @@ describe User do
 
   end
 
+  context "calculate_daily_precision" do
+
+    it "must use the attempts left per game" do
+      user = create(:user)
+      create_list(:won_game,9, word: "test", choices: "tes", user: user)
+      create(:won_game, word: "test", choices: "ters", user: user)
+      user.calculate_daily_precision.should == 99
+    end
+
+    it "must use only completed games" do
+      user = create(:user)
+      create_list(:won_game,10, word: "test", choices: "tes", user: user)
+      create(:game, word: "test", choices: "ter", user: user)
+      user.calculate_daily_precision.should == 100
+    end
+
+    it "must use games only from today" do
+      user = create(:user)
+      create_list(:won_game,10, word: "test", choices: "tes", user: user)
+      Timecop.freeze(1.day.ago) do
+        create(:won_game, word: "test", choices: "ters", user: user)
+      end
+      user.calculate_daily_precision.should == 100
+    end
+
+    it "must return 0 if less than 10 games played" do
+      user = create(:user)
+      create_list(:won_game,9, word: "test", choices: "tes", user: user)
+      user.calculate_daily_precision.should == 0
+    end
+
+  end
+
   context "calculate_weekly_precision" do
 
     it "must use the attempts left per game" do
@@ -108,31 +163,57 @@ describe User do
 
     it "must use the attempts left per game" do
       user = create(:user)
-      create_list(:won_game,39, word: "test", choices: "tes", user: user)
+      create_list(:won_game,9, word: "test", choices: "tes", user: user)
       create(:won_game, word: "test", choices: "ters", user: user)
       user.calculate_monthly_precision.should == 99
     end
 
     it "must use only completed games" do
       user = create(:user)
-      create_list(:won_game,40, word: "test", choices: "tes", user: user)
+      create_list(:won_game,10, word: "test", choices: "tes", user: user)
       create(:game, word: "test", choices: "ter", user: user)
       user.calculate_monthly_precision.should == 100
     end
 
     it "must use games only from this month" do
       user = create(:user)
-      create_list(:won_game,40, word: "test", choices: "tes", user: user)
+      create_list(:won_game,10, word: "test", choices: "tes", user: user)
       Timecop.freeze(1.month.ago - 1.day) do
         create(:won_game, word: "test", choices: "ters", user: user)
       end
       user.calculate_monthly_precision.should == 100
     end
 
-    it "must return 0 if less than 40 games played" do
+    it "must return 0 if less than 9 games played" do
       user = create(:user)
-      create_list(:won_game,39, word: "test", choices: "tes", user: user)
+      create_list(:won_game,9, word: "test", choices: "tes", user: user)
       user.calculate_monthly_precision.should == 0
+    end
+
+  end
+
+  context "calculate_daily_rating" do
+
+    it "must use 10 games in the last week" do
+      user = create(:user)
+      create_list(:won_game, 11,  score: 1, user: user)
+      user.calculate_daily_rating.should == 10
+    end
+
+    it "must use games only from today" do
+      user = create(:user)
+      create(:won_game, score: 20, user: user)
+      Timecop.freeze(1.day.ago) do
+        create(:won_game, score: 20, user: user)
+      end
+      user.calculate_daily_rating.should == 20
+    end
+
+    it "must use top scoring games in the last day" do
+      user = create(:user)
+      create_list(:won_game, 10,  score: 1, user: user)
+      create(:won_game, score: 21, user: user)
+      user.calculate_daily_rating.should == 30
     end
 
   end
@@ -189,47 +270,27 @@ describe User do
 
   end
 
-  context "calculate_yearly_rating" do
-
-    it "must use 160 games in the last month" do
-      user = create(:user)
-      create_list(:won_game, 161,  score: 1, user: user)
-      user.calculate_yearly_rating.should == 160
-    end
-
-    it "must use games only from this year" do
-      user = create(:user)
-      create(:won_game, score: 20, user: user)
-      Timecop.freeze(1.year.ago - 1.day) do
-        create(:won_game, score: 20, user: user)
-      end
-      user.calculate_yearly_rating.should == 20
-    end
-
-    it "must use top scoring games in the last year" do
-      user = create(:user)
-      create_list(:won_game, 160,  score: 1, user: user)
-      create(:won_game, score: 41, user: user)
-      user.calculate_yearly_rating.should == 200
-    end
-
-  end
-
   context "calculate_score" do
 
     it "must update the ratings" do
       user = stub_model(User)
+      user.stub(:calculate_daily_rating).and_return(10)
       user.stub(:calculate_weekly_rating).and_return(20)
       user.stub(:calculate_monthly_rating).and_return(80)
+      user.stub(:calculate_daily_precision).and_return(75)
       user.stub(:calculate_weekly_precision).and_return(100)
       user.stub(:calculate_monthly_precision).and_return(90)
+      user.stub(:calculate_games_won_today).and_return(50)
       user.stub(:calculate_games_won_this_week).and_return(200)
       user.stub(:calculate_games_won_this_month).and_return(210)
       user.update_ratings
+      user.daily_rating.should == 10
       user.weekly_rating.should == 20
       user.monthly_rating.should == 80
+      user.daily_precision.should == 75
       user.weekly_precision.should == 100
       user.monthly_precision.should == 90
+      user.games_won_today.should == 50
       user.games_won_this_week.should == 200
       user.games_won_this_month.should == 210
     end

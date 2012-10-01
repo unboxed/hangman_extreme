@@ -30,7 +30,7 @@ describe UsersController do
 
       it "assigns all top week users as @users" do
         user = create(:user)
-        do_get_index :order => 'top_week'
+        do_get_index :period => 'weekly'
         assigns(:users).should include(user)
       end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120927115712) do
+ActiveRecord::Schema.define(:version => 20121001142304) do
 
   create_table "games", :force => true do |t|
     t.string   "word"
@@ -41,10 +41,16 @@ ActiveRecord::Schema.define(:version => 20120927115712) do
     t.integer  "monthly_precision",    :default => 0
     t.integer  "games_won_this_week",  :default => 0
     t.integer  "games_won_this_month", :default => 0
+    t.integer  "daily_rating",         :default => 0
+    t.integer  "daily_precision",      :default => 0
+    t.integer  "games_won_today",      :default => 0
   end
 
+  add_index "users", ["daily_precision"], :name => "index_users_on_daily_precision"
+  add_index "users", ["daily_rating"], :name => "index_users_on_daily_rating"
   add_index "users", ["games_won_this_month"], :name => "index_users_on_games_won_this_month"
   add_index "users", ["games_won_this_week"], :name => "index_users_on_games_won_this_week"
+  add_index "users", ["games_won_today"], :name => "index_users_on_games_won_today"
   add_index "users", ["monthly_precision"], :name => "index_users_on_monthly_precision"
   add_index "users", ["monthly_rating"], :name => "index_users_on_monthly_rating"
   add_index "users", ["uid", "provider"], :name => "index_users_on_uid_and_provider"

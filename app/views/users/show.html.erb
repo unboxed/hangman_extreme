@@ -4,6 +4,26 @@
 <table>
   <tbody>
   <tr>
+    <td><b>Today</b></td>
+    <td>Score</td>
+    <td>Rank</td>
+  </tr>
+  <tr>
+    <td>Games Won:</td>
+    <td><%= @user.games_won_today %> |</td>
+    <td><%= @user.rank(:games_won_today).ordinalize %></td>
+  </tr>
+  <tr>
+    <td>Rating:</td>
+    <td><%= @user.weekly_rating %> |</td>
+    <td><%= @user.rank(:daily_rating).ordinalize %></td>
+  </tr>
+  <tr>
+    <td>Precision:</td>
+    <td><%= @user.weekly_precision %> |</td>
+    <td><%= @user.rank(:daily_precision).ordinalize %></td>
+  </tr>
+  <tr>
     <td><b>This Week</b></td>
     <td>Score</td>
     <td>Rank</td>
@@ -25,8 +45,8 @@
     </tr>
    <tr>
      <td><b>This Month</b></td>
-     <td></td>
-     <td></td>
+     <td>Score</td>
+     <td>Rank</td>
    </tr>
   <tr>
     <td>Games Won:</td>
@@ -48,8 +68,7 @@
 <br/>
 
 <%= link_to 'home', root_path, id: 'root_page' %> |
-top <%= link_to 'week', users_path(order: 'top_week'), id: 'view_top_week_users' %> players |
-top <%= link_to 'month', users_path(order: 'top_month'), id: 'view_top_month_users' %> players
+<%= render :partial => "ranking_links" %>
 
 
 

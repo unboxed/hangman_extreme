@@ -2,11 +2,18 @@ class UsersController < ApplicationController
   before_filter :login_required, :except => :facebook_oauth
 
   def index
-    case params[:order]
-      when 'top_week'
-        @users = User.top_this_week(10)
+    case params[:rank_by]
+      when 'wins'
+        case params[:period]
+          when 'weekly'
+            @users = User.top_scorers("games_won_this_week")
+          when 'monthly'
+            @users = User.top_scorers("games_won_this_month")
+          else
+            @users = User.top_scorers("games_won_today")
+        end
       else
-        @users = User.top_this_month(10)
+        @users = User.top_scorers("#{params[:period] || 'daily'}_#{params[:rank_by]|| 'rating'}")
     end
   end
 
