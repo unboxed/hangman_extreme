@@ -1,0 +1,6 @@
+test:
+  adapter: mysql
+  encoding: utf8
+  username: jenkins
+  password:
+  database: jenkins_hangman_extreme
