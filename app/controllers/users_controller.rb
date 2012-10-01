@@ -6,15 +6,16 @@ class UsersController < ApplicationController
       when 'wins'
         case params[:period]
           when 'weekly'
-            @users = User.top_scorers("games_won_this_week")
+            @send = "games_won_this_week"
           when 'monthly'
-            @users = User.top_scorers("games_won_this_month")
+            @send = "games_won_this_month"
           else
-            @users = User.top_scorers("games_won_today")
+            @send = "games_won_today"
         end
       else
-        @users = User.top_scorers("#{params[:period] || 'daily'}_#{params[:rank_by]|| 'rating'}")
+        @send = "#{params[:period] || 'daily'}_#{params[:rank_by]|| 'rating'}"
     end
+    @users = User.top_scorers(@send)
   end
 
   def show
