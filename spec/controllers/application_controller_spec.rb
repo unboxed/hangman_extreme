@@ -53,6 +53,8 @@ describe ApplicationController do
       before :each do
         request.env['HTTP_X_MXIT_USERID_R'] = 'm2604100'
         request.env['HTTP_X_MXIT_NICK'] = 'grant'
+        @user_request_info = UserRequestInfo.new
+        UserRequestInfo.stub!(:new).and_return(@user_request_info)
       end
 
       it "loads the mxit user into current_user" do
@@ -64,6 +66,32 @@ describe ApplicationController do
         User.stub!(:find_or_create_from_auth_hash).and_return('mxit_user')
         get :index
         assigns(:current_user).should == 'mxit_user'
+      end
+
+      it "must assign the user request info" do
+        request.env['HTTP_X_MXIT_PROFILE'] = 'test'
+        get :index
+        assigns(:current_user_request_info).should == @user_request_info
+      end
+
+      it "must assign mxit profile to user request info" do
+        request.env['HTTP_X_MXIT_PROFILE'] = 'test'
+        MxitProfile.should_receive(:new).with('test').and_return('profile')
+        @user_request_info.should_receive(:mxit_profile=).with('profile')
+        get :index
+      end
+
+      it "must assign user_agent to user request info" do
+        request.env['HTTP_X_DEVICE_USER_AGENT'] = 'iphone'
+        @user_request_info.should_receive(:user_agent=).with('Mxit iphone')
+        get :index
+      end
+
+      it "must assign mxit profile to user request info" do
+        request.env['HTTP_X_MXIT_LOCATION'] = 'test'
+        MxitLocation.should_receive(:new).with('test').and_return('location')
+        @user_request_info.should_receive(:mxit_location=).with('location')
+        get :index
       end
 
     end
@@ -103,8 +131,10 @@ describe ApplicationController do
 
     before :each do
       @user = stub_model(User)
+      @user_request_info = UserRequestInfo.new
       controller.stub(:tracking_enabled?).and_return(true)
       controller.stub(:current_user).and_return(@user)
+      controller.stub(:current_user_request_info).and_return(@user_request_info)
       @gabba = mock('connection',
                     :user_agent= => '',
                     :utmul= => '',
@@ -121,46 +151,40 @@ describe ApplicationController do
       get :index
     end
 
-    it "must set the mxit user_agent" do
-      request.env['HTTP_X_DEVICE_USER_AGENT'] = "iphone"
-      @gabba.should_receive(:user_agent=).with("Mxit iphone")
+    it "must set the user_agent" do
+      @user_request_info.user_agent = "Mxit Nokia"
+      @gabba.should_receive(:user_agent=).with("Mxit Nokia")
       get :index
     end
 
-    it "must set the user_agent" do
+    it "must set the user_agent if no user_request_info" do
       request.env['HTTP_USER_AGENT'] = "iphone"
       @gabba.should_receive(:user_agent=).with("iphone")
       get :index
     end
 
-    context "mxit profile" do
+    it "must set the language" do
+      @user_request_info.language = "afr"
+      @gabba.should_receive(:utmul=).with("afr")
+      get :index
+    end
 
-      before :each do
-        request.env['HTTP_X_MXIT_PROFILE'] = "mxit_profile"
-        MxitProfile.stub(:new).and_return(mock('profile', language: 'en', age: 20, gender: 'male'))
-      end
+    it "must set the mxit gender" do
+      @user_request_info.gender = "female"
+      @gabba.should_receive(:set_custom_var).with(1,'Gender','female',1)
+      get :index
+    end
 
-      it "must set the language" do
-        @gabba.should_receive(:utmul=).with('en')
-        get :index
-      end
-
-      it "must set the mxit gender" do
-        @gabba.should_receive(:set_custom_var).with(1,'Gender','male',1)
-        get :index
-      end
-
-      it "must set the mxit age" do
-        @gabba.should_receive(:set_custom_var).with(2,'Age','20',1)
-        get :index
-      end
-
+    it "must set the mxit age" do
+      @user_request_info.age = "21"
+      @gabba.should_receive(:set_custom_var).with(2,'Age','21',1)
+      get :index
     end
 
     it "must set the mxit location" do
-      request.env['HTTP_X_MXIT_LOCATION'] = "mxit_location"
-      MxitLocation.stub(:new).and_return(mock('location', country_name: 'ZA', principal_subdivision_name: 'WC'))
-      @gabba.should_receive(:set_custom_var).with(3,'ZA','WC',1)
+      @user_request_info.country = "South Africa"
+      @user_request_info.area = "Cape"
+      @gabba.should_receive(:set_custom_var).with(3,'South Africa','Cape',1)
       get :index
     end
 

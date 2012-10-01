@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by_id(session[:current_user_id])
   end
 
+  def current_user_request_info
+    @current_user_request_info ||= UserRequestInfo.new
+  end
+
   helper_method :current_user
 
   def login_required
@@ -29,21 +33,11 @@ class ApplicationController < ActionController::Base
     if tracking_enabled? && current_user
       begin
       g = Gabba::Gabba.new(tracking_code, "mxithangmanleague.herokuapp.com")
-      if request.env['HTTP_X_DEVICE_USER_AGENT']
-        g.user_agent = "Mxit #{request.env['HTTP_X_DEVICE_USER_AGENT']}"
-      elsif request.env['HTTP_USER_AGENT']
-        g.user_agent = request.env['HTTP_USER_AGENT']
-      end
-      if request.env["HTTP_X_MXIT_PROFILE"]
-        profile = MxitProfile.new(request.env["HTTP_X_MXIT_PROFILE"])
-        g.utmul = profile.language
-        g.set_custom_var(1, 'Gender', profile.gender, 1)
-        g.set_custom_var(2, 'Age', profile.age.to_s, 1)
-      end
-      if request.env["HTTP_X_MXIT_LOCATION"]
-        location = MxitLocation.new(request.env["HTTP_X_MXIT_LOCATION"])
-        g.set_custom_var(3, location.country_name, location.principal_subdivision_name, 1)
-      end
+      g.user_agent = current_user_request_info.user_agent || request.env['HTTP_USER_AGENT']
+      g.utmul = current_user_request_info.language || "en"
+      g.set_custom_var(1, 'Gender', current_user_request_info.gender || "unknown", 1)
+      g.set_custom_var(2, 'Age', current_user_request_info.age || "unknown", 1)
+      g.set_custom_var(3, current_user_request_info.country || "unknown Country", current_user_request_info.area || "unknown", 1)
       g.set_custom_var(5, 'Provider', current_user.provider, 1)
       current_user.update_attribute(:utma,g.cookie_params(current_user.id)) unless current_user.utma?
       g.identify_user(current_user.utma) if current_user.utma?
@@ -63,9 +57,14 @@ class ApplicationController < ActionController::Base
                                                              info: { name: request.env['HTTP_X_MXIT_NICK']})
       if request.env["HTTP_X_MXIT_PROFILE"]
         @mxit_profile = MxitProfile.new(request.env["HTTP_X_MXIT_PROFILE"])
+        current_user_request_info.mxit_profile = @mxit_profile
       end
       if request.env['HTTP_X_DEVICE_USER_AGENT']
-        @mxit_device = request.env['HTTP_X_DEVICE_USER_AGENT']
+        current_user_request_info.user_agent = "Mxit #{request.env['HTTP_X_DEVICE_USER_AGENT']}"
+      end
+      if request.env["HTTP_X_MXIT_LOCATION"]
+        @mxit_location = MxitLocation.new(request.env["HTTP_X_MXIT_LOCATION"])
+        current_user_request_info.mxit_location = @mxit_location
       end
     end
   end
