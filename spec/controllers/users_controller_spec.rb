@@ -24,8 +24,14 @@ describe UsersController do
 
     describe "GET index" do
 
-      def do_get_index
-        get :index
+      def do_get_index(params = {})
+        get :index, params
+      end
+
+      it "assigns all top week users as @users" do
+        user = create(:user)
+        do_get_index :order => 'top_week'
+        assigns(:users).should include(user)
       end
 
       it "assigns all users as @users" do
