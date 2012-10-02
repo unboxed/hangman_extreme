@@ -18,9 +18,19 @@ describe ApplicationHelper do
       helper.shinka_ad.should include("onclick='window.open(this.href); return false;'")
     end
 
+    it "must load a add from shinka that has not alt" do
+      body = "{\"ads\":\n {\n  \"version\": 1,\n  \"count\": 1,\n  \"ad\": [\n        {\n         \"adunitid\":290386,\n         \"adid\":560495,\n         \"type\":\"html\",\n         \"html\":\"<div id='beacon_62963331' style='position: absolute; left: 0px; top: 0px; visibility: hidden;'><img src='http://ox-d.shinka.sh/ma/1.0/ri?ai=750791de-cd54-0598-330c-d49894818f95&ts=1fHNpZD01OTI4MXxhdWlkPTI5MDM4NnxhaWQ9NTYwNDk1fHB1Yj03Mzg0MnxsaWQ9MzEzMTg0fHQ9MTB8cmlkPTU1MTAzMzI0LTUzMjItNGE5Ny1hMGZhLWRlYjQxM2IzZTZkNHxvaWQ9ODgyNjd8Ym09QlVZSU5HLkhPVVNFfHBjPVpBUnxwPTB8YWM9WkFSfHBtPVBSSUNJTkcuQ1BNfHJ0PTEzNDkxODAyMDF8cHI9MHxhZHY9NjYzMDg&cb=62963331'/></div><a href=http://ox-d.shinka.sh/ma/1.0/rc?ai=750791de-cd54-0598-330c-d49894818f95&ts=1fHNpZD01OTI4MXxhdWlkPTI5MDM4NnxhaWQ9NTYwNDk1fHB1Yj03Mzg0MnxsaWQ9MzEzMTg0fHQ9MTB8cmlkPTU1MTAzMzI0LTUzMjItNGE5Ny1hMGZhLWRlYjQxM2IzZTZkNHxvaWQ9ODgyNjd8Ym09QlVZSU5HLkhPVVNFfHBjPVpBUnxwPTB8YWM9WkFSfHBtPVBSSUNJTkcuQ1BNfHJ0PTEzNDkxODAyMDF8cHI9MHxhZHY9NjYzMDg&r=>Advertise on the Shinka Network now!</a>\\n\",\n         \"is_fallback\":0,\n         \"creative\":[\n           {\n             \"width\":\"300\",\n             \"height\":\"50\",\n             \"target\":\"_blank\",\n             \"mime\":\"text/html\",\n             \"media\": \"<a href=http://ox-d.shinka.sh/ma/1.0/rc?ai=750791de-cd54-0598-330c-d49894818f95&ts=1fHNpZD01OTI4MXxhdWlkPTI5MDM4NnxhaWQ9NTYwNDk1fHB1Yj03Mzg0MnxsaWQ9MzEzMTg0fHQ9MTB8cmlkPTU1MTAzMzI0LTUzMjItNGE5Ny1hMGZhLWRlYjQxM2IzZTZkNHxvaWQ9ODgyNjd8Ym09QlVZSU5HLkhPVVNFfHBjPVpBUnxwPTB8YWM9WkFSfHBtPVBSSUNJTkcuQ1BNfHJ0PTEzNDkxODAyMDF8cHI9MHxhZHY9NjYzMDg&r=>Advertise on the Shinka Network now!</a>\",\n             \"tracking\":{\n               \"impression\":\"http://ox-d.shinka.sh/ma/1.0/ri?ai=750791de-cd54-0598-330c-d49894818f95&ts=1fHNpZD01OTI4MXxhdWlkPTI5MDM4NnxhaWQ9NTYwNDk1fHB1Yj03Mzg0MnxsaWQ9MzEzMTg0fHQ9MTB8cmlkPTU1MTAzMzI0LTUzMjItNGE5Ny1hMGZhLWRlYjQxM2IzZTZkNHxvaWQ9ODgyNjd8Ym09QlVZSU5HLkhPVVNFfHBjPVpBUnxwPTB8YWM9WkFSfHBtPVBSSUNJTkcuQ1BNfHJ0PTEzNDkxODAyMDF8cHI9MHxhZHY9NjYzMDg&cb=62963331\",\n               \"inview\":\"http://ox-d.shinka.sh/ma/1.0/rvi?ai=750791de-cd54-0598-330c-d49894818f95&ts=1fHNpZD01OTI4MXxhdWlkPTI5MDM4NnxhaWQ9NTYwNDk1fHB1Yj03Mzg0MnxsaWQ9MzEzMTg0fHQ9MTB8cmlkPTU1MTAzMzI0LTUzMjItNGE5Ny1hMGZhLWRlYjQxM2IzZTZkNHxvaWQ9ODgyNjd8Ym09QlVZSU5HLkhPVVNFfHBjPVpBUnxwPTB8YWM9WkFSfHBtPVBSSUNJTkcuQ1BNfHJ0PTEzNDkxODAyMDF8cHI9MHxhZHY9NjYzMDg&cb=62963331\",\n               \"click\":\"http://ox-d.shinka.sh/ma/1.0/rc?ai=750791de-cd54-0598-330c-d49894818f95&ts=1fHNpZD01OTI4MXxhdWlkPTI5MDM4NnxhaWQ9NTYwNDk1fHB1Yj03Mzg0MnxsaWQ9MzEzMTg0fHQ9MTB8cmlkPTU1MTAzMzI0LTUzMjItNGE5Ny1hMGZhLWRlYjQxM2IzZTZkNHxvaWQ9ODgyNjd8Ym09QlVZSU5HLkhPVVNFfHBjPVpBUnxwPTB8YWM9WkFSfHBtPVBSSUNJTkcuQ1BNfHJ0PTEzNDkxODAyMDF8cHI9MHxhZHY9NjYzMDg\"\n             }\n           }\n         ]\n        }\n  ]\n }\n}\n"
+      stub_request(:get, "http://ox-d.shinka.sh/ma/1.0/arj?auid=123&c.age=&c.country=&c.gender=").
+        with(:headers => {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
+        to_return(:status => 200, :body => body, :headers => {})
+      helper.stub(:current_user_request_info).and_return(UserRequestInfo.new)
+      helper.shinka_ad.should include("onclick='window.open(this.href); return false;'")
+    end
+
     it "must load blank ad if shinka code throws exception" do
+      Settings.last_shinka_ad = "<a>Ad</a>"
       helper.stub(:current_user_request_info).and_raise
-      helper.shinka_ad.should include("")
+      helper.shinka_ad.should == "<a>Ad</a>"
     end
 
   end

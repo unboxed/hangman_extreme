@@ -1,10 +1,9 @@
 module ApplicationHelper
 
   def shinka_ad
-    result = ""
+    result = Settings.last_shinka_ad || ""
     return result unless shinka_ads_enabled?
     begin
-      Timeout::timeout(15) do
         ads = ActiveSupport::JSON.decode(open("http://ox-d.shinka.sh/ma/1.0/arj?auid=#{shinka_auid}&c.age=#{current_user_request_info.age}&c.gender=#{current_user_request_info.gender}&c.country=#{current_user_request_info.country}").read)
         ad = ads['ads']["ad"].sample
         result = ad["html"].html_safe
@@ -14,12 +13,11 @@ module ApplicationHelper
         if alt.blank? || alt.include?("http")
           link = ad["creative"].first["media"]
           return "" if link.blank? || !link.include?("href=")
-          link.gsub!("href=","onclick='window.open(this.href); return false; href=")
-          "<img href=#{impression} alt=\"\" height=\"1\" width=\"1\"/>#{link}".html_safe
+          link.gsub!("href=","onclick='window.open(this.href); return false;' href=")
+          Settings.last_shinka_ad = "<img href=#{impression} alt=\"\" height=\"1\" width=\"1\"/>#{link}".html_safe
         else
-          "<img href=#{impression} alt=\"\" height=\"1\" width=\"1\"/><a href=#{click} onclick='window.open(this.href); return false;' >#{alt}</a>".html_safe
+          Settings.last_shinka_ad = "<img href=#{impression} alt=\"\" height=\"1\" width=\"1\"/><a href=#{click} onclick='window.open(this.href); return false;' >#{alt}</a>".html_safe
         end
-      end
     rescue Exception => e
       ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
       Settings.shinka_disabled_until = 10.minutes.from_now # disable for a hour
