@@ -89,7 +89,7 @@ class ApplicationController < ActionController::Base
   private
 
   def tracking_enabled?
-    !ENV['GA_TRACKING_CODE'].blank?
+    ENV['GA_TRACKING_CODE'].present?
   end
 
   def tracking_code

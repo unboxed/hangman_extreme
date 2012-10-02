@@ -2,8 +2,9 @@ module ApplicationHelper
 
   def shinka_ad
     result = ""
+    return result unless shinka_ads_enabled?
     begin
-      ads = ActiveSupport::JSON.decode(open("http://ox-d.shinka.sh/ma/1.0/arj?auid=290386&c.age=#{current_user_request_info.age}&c.gender=#{current_user_request_info.gender}&c.country=#{current_user_request_info.country}").read)
+      ads = ActiveSupport::JSON.decode(open("http://ox-d.shinka.sh/ma/1.0/arj?auid=#{shinka_auid}&c.age=#{current_user_request_info.age}&c.gender=#{current_user_request_info.gender}&c.country=#{current_user_request_info.country}").read)
       ad = ads['ads']["ad"].sample
       result = ad["html"].html_safe
       impression = ad["creative"].first["tracking"]["impression"]
@@ -15,6 +16,14 @@ module ApplicationHelper
       Rails.logger.error e.message
       return result
     end
+  end
+
+  def shinka_ads_enabled?
+    ENV['SHINKA_AUID'].present?
+  end
+
+  def shinka_auid
+    ENV['SHINKA_AUID']
   end
 
 end
