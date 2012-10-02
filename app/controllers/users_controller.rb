@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   before_filter :login_required, :except => :facebook_oauth
 
   def index
+    params[:period]  ||= 'daily'
+    params[:rank_by] ||= 'rating'
     case params[:rank_by]
       when 'wins'
         case params[:period]
@@ -13,7 +15,7 @@ class UsersController < ApplicationController
             @send = "games_won_today"
         end
       else
-        @send = "#{params[:period] || 'daily'}_#{params[:rank_by]|| 'rating'}"
+        @send = "#{params[:period]}_#{params[:rank_by]}"
     end
     @users = User.top_scorers(@send)
   end

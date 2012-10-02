@@ -1,8 +1,14 @@
+<br/>
 <% ['daily','weekly','monthly'].each do |time_period| %>
-    <% ['wins','rating','precision'].each do |rank| %>
-        <%= link_to_unless params[:period] == time_period && params[:rank_by] == rank,
-                           "#{time_period} #{rank}",
-                           users_path(period: time_period, rank_by: rank),
-                           id: "#{time_period}_#{rank}" %> |
-    <% end %>
+    <%= link_to_unless params[:period] == time_period,
+                       time_period,
+                       users_path(period: time_period, rank_by: params[:rank_by]),
+                       id: "#{time_period}_#{params[:rank_by] || 'rating'}" %> |
+<% end %>
+<br/>
+<% ['wins','rating','precision'].each do |rank| %>
+    <%= link_to_unless params[:rank_by] == rank,
+                       rank,
+                       users_path(period: params[:period], rank_by: rank),
+                       id: "#{params[:period] || 'daily'}_#{rank}" %> |
 <% end %>

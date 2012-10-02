@@ -11,7 +11,7 @@ describe 'users' do
     create(:won_game, user: @current_user).score
     visit '/'
     click_link('view_rank')
-    page.should have_content("You Ranking")
+    page.should have_content("Your Ranking")
     click_link('root_page')
     page.current_path.should == '/'
   end
@@ -20,7 +20,7 @@ describe 'users' do
     users = create_list(:user,9).each{|user| create(:won_game, user: user) }
     visit '/'
     click_link('view_rank')
-    click_link('daily_rating')
+    click_link('daily_wins')
     users.each do |user|
       page.should have_content(user.name)
     end
@@ -31,7 +31,11 @@ describe 'users' do
     users.each do |user|
       page.should have_content(user.name)
     end
-    click_link('monthly_rating')
+    click_link('weekly_precision')
+    users.each do |user|
+      page.should have_content(user.name)
+    end
+    click_link('monthly_precision')
     users.each do |user|
       page.should have_content(user.name)
     end
