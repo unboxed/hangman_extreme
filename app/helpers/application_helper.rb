@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def shinka_ad
-    result = Settings.last_shinka_ad || ""
+    result = Settings.last_shinka_ad.try(:html_safe) || ""
     return result unless shinka_ads_enabled?
     begin
       Timeout::timeout(15) do
