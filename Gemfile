@@ -11,6 +11,7 @@ gem 'kaminari'
 gem 'gabba'
 gem 'nokogiri'
 gem 'json'
+gem 'airbrake'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -24,6 +25,7 @@ group :development, :test do
   gem 'annotate'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'heroku'
 end
 
 group :test do
