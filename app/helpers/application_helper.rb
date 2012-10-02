@@ -10,8 +10,14 @@ module ApplicationHelper
       impression = ad["creative"].first["tracking"]["impression"]
       alt = ad["creative"].first["alt"]
       click = ad["creative"].first["tracking"]["click"]
-      return "" if alt.include?("http")
-      "<img href=#{impression} alt=\"\" height=\"1\" width=\"1\"/><a href=#{click} onclick='window.open(this.href); return false;' >#{alt}</a>".html_safe
+      if alt.blank? || alt.include?("http")
+        link = ad["creative"].first["media"]
+        return "" if link.blank? || !link.include?("href=")
+        link.gsub!("href=","onclick='window.open(this.href); return false; href=")
+        "<img href=#{impression} alt=\"\" height=\"1\" width=\"1\"/>#{link}".html_safe
+      else
+        "<img href=#{impression} alt=\"\" height=\"1\" width=\"1\"/><a href=#{click} onclick='window.open(this.href); return false;' >#{alt}</a>".html_safe
+      end
     rescue Exception => e
       ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
       Settings.shinka_disabled_until = 1.hour.from_now # disable for a hour
