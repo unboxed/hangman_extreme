@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
       g.page_view("#{params[:controller]} #{params[:action]}", request.fullpath,current_user.id)
       rescue Exception => e
         ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
-        Settings.ga_tracking_disabled_until = 1.hour.from_now # disable for a hour
+        Settings.ga_tracking_disabled_until = 20.minutes.from_now # disable for a hour
         # ignore errors
         raise if Rails.env.test?
       end

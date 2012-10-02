@@ -20,7 +20,7 @@ module ApplicationHelper
       end
     rescue Exception => e
       ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
-      Settings.shinka_disabled_until = 1.hour.from_now # disable for a hour
+      Settings.shinka_disabled_until = 10.minutes.from_now # disable for a hour
       Rails.logger.error e.message
       return result
     end
