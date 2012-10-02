@@ -32,16 +32,18 @@ class ApplicationController < ActionController::Base
   def send_stats
     if tracking_enabled? && current_user
       begin
-      g = Gabba::Gabba.new(tracking_code, "mxithangmanleague.herokuapp.com")
-      g.user_agent = current_user_request_info.user_agent || request.env['HTTP_USER_AGENT']
-      g.utmul = current_user_request_info.language || "en"
-      g.set_custom_var(1, 'Gender', current_user_request_info.gender || "unknown", 1)
-      g.set_custom_var(2, 'Age', current_user_request_info.age || "unknown", 1)
-      g.set_custom_var(3, current_user_request_info.country || "unknown Country", current_user_request_info.area || "unknown", 1)
-      g.set_custom_var(5, 'Provider', current_user.provider, 1)
-      current_user.update_attribute(:utma,g.cookie_params(current_user.id)) unless current_user.utma?
-      g.identify_user(current_user.utma) if current_user.utma?
-      g.page_view("#{params[:controller]} #{params[:action]}", request.fullpath,current_user.id)
+        Timeout::timeout(15) do
+          g = Gabba::Gabba.new(tracking_code, "mxithangmanleague.herokuapp.com")
+          g.user_agent = current_user_request_info.user_agent || request.env['HTTP_USER_AGENT']
+          g.utmul = current_user_request_info.language || "en"
+          g.set_custom_var(1, 'Gender', current_user_request_info.gender || "unknown", 1)
+          g.set_custom_var(2, 'Age', current_user_request_info.age || "unknown", 1)
+          g.set_custom_var(3, current_user_request_info.country || "unknown Country", current_user_request_info.area || "unknown", 1)
+          g.set_custom_var(5, 'Provider', current_user.provider, 1)
+          current_user.update_attribute(:utma,g.cookie_params(current_user.id)) unless current_user.utma?
+          g.identify_user(current_user.utma) if current_user.utma?
+          g.page_view("#{params[:controller]} #{params[:action]}", request.fullpath,current_user.id)
+        end
       rescue Exception => e
         ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
         Settings.ga_tracking_disabled_until = 20.minutes.from_now # disable for a hour

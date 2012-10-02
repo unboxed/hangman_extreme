@@ -4,19 +4,21 @@ module ApplicationHelper
     result = ""
     return result unless shinka_ads_enabled?
     begin
-      ads = ActiveSupport::JSON.decode(open("http://ox-d.shinka.sh/ma/1.0/arj?auid=#{shinka_auid}&c.age=#{current_user_request_info.age}&c.gender=#{current_user_request_info.gender}&c.country=#{current_user_request_info.country}").read)
-      ad = ads['ads']["ad"].sample
-      result = ad["html"].html_safe
-      impression = ad["creative"].first["tracking"]["impression"]
-      alt = ad["creative"].first["alt"]
-      click = ad["creative"].first["tracking"]["click"]
-      if alt.blank? || alt.include?("http")
-        link = ad["creative"].first["media"]
-        return "" if link.blank? || !link.include?("href=")
-        link.gsub!("href=","onclick='window.open(this.href); return false; href=")
-        "<img href=#{impression} alt=\"\" height=\"1\" width=\"1\"/>#{link}".html_safe
-      else
-        "<img href=#{impression} alt=\"\" height=\"1\" width=\"1\"/><a href=#{click} onclick='window.open(this.href); return false;' >#{alt}</a>".html_safe
+      Timeout::timeout(15) do
+        ads = ActiveSupport::JSON.decode(open("http://ox-d.shinka.sh/ma/1.0/arj?auid=#{shinka_auid}&c.age=#{current_user_request_info.age}&c.gender=#{current_user_request_info.gender}&c.country=#{current_user_request_info.country}").read)
+        ad = ads['ads']["ad"].sample
+        result = ad["html"].html_safe
+        impression = ad["creative"].first["tracking"]["impression"]
+        alt = ad["creative"].first["alt"]
+        click = ad["creative"].first["tracking"]["click"]
+        if alt.blank? || alt.include?("http")
+          link = ad["creative"].first["media"]
+          return "" if link.blank? || !link.include?("href=")
+          link.gsub!("href=","onclick='window.open(this.href); return false; href=")
+          "<img href=#{impression} alt=\"\" height=\"1\" width=\"1\"/>#{link}".html_safe
+        else
+          "<img href=#{impression} alt=\"\" height=\"1\" width=\"1\"/><a href=#{click} onclick='window.open(this.href); return false;' >#{alt}</a>".html_safe
+        end
       end
     rescue Exception => e
       ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
