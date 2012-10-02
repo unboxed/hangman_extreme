@@ -8,16 +8,16 @@ module ApplicationHelper
         ads = ActiveSupport::JSON.decode(open("http://ox-d.shinka.sh/ma/1.0/arj?auid=#{shinka_auid}&c.age=#{current_user_request_info.age}&c.gender=#{current_user_request_info.gender}&c.country=#{current_user_request_info.country}").read)
         ad = ads['ads']["ad"].sample
         result = ad["html"].html_safe
-        impression = ad["creative"].first["tracking"]["impression"]
-        alt = ad["creative"].first["alt"]
-        click = ad["creative"].first["tracking"]["click"]
+        creative = ad["creative"].first
+        tracking = creative["tracking"]
+        alt = creative["alt"]
         if alt.blank? || alt.include?("http")
-          link = ad["creative"].first["media"]
+          link = creative["media"]
           return "" if link.blank? || !link.include?("href=")
           link.gsub!("href=","onclick='window.open(this.href); return false;' href=")
-          Settings.last_shinka_ad = "<img href=#{impression} alt=\"\" height=\"1\" width=\"1\"/>#{link}".html_safe
+          Settings.last_shinka_ad = "<img href=#{tracking['impression']} alt=\"\" height=\"1\" width=\"1\"/>#{link}".html_safe
         else
-          Settings.last_shinka_ad = "<img href=#{impression} alt=\"\" height=\"1\" width=\"1\"/><a href=#{click} onclick='window.open(this.href); return false;' >#{alt}</a>".html_safe
+          Settings.last_shinka_ad = "<img href=#{tracking['impression']} alt=\"\" height=\"1\" width=\"1\"/><a href=#{tracking['click']} onclick='window.open(this.href); return false;' >#{alt}</a>".html_safe
         end
       end
     rescue Exception => e
