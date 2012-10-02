@@ -9,7 +9,7 @@ class UserRequestInfo
   end
 
   def mxit_profile=(mxit_profile)
-    self.age = mxit_profile.age
+    self.age = mxit_profile.age.to_s
     self.country = mxit_profile.country
     self.gender = mxit_profile.gender
     self.language = mxit_profile.language

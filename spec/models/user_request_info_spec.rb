@@ -67,7 +67,8 @@ describe UserRequestInfo do
       end
 
       it "must return the correct age" do
-        @request.age.should == 29
+        # result must be a string, not a integer
+        @request.age.should == "29"
       end
 
       it "must assign the right language" do
