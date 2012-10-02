@@ -13,13 +13,16 @@ module ApplicationHelper
       return "" if alt.include?("http")
       "<img href=#{impression} alt=\"\" height=\"1\" width=\"1\"/><a href=#{click} onclick='window.open(this.href); return false;' >#{alt}</a>".html_safe
     rescue Exception => e
+      ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
+      Settings.shinka_disabled_until = 1.hour.from_now # disable for a hour
       Rails.logger.error e.message
       return result
     end
   end
 
   def shinka_ads_enabled?
-    ENV['SHINKA_AUID'].present?
+    (Settings.shinka_disabled_until.blank? || Time.current > Settings.shinka_disabled_until) &&
+      ENV['SHINKA_AUID'].present?
   end
 
   def shinka_auid

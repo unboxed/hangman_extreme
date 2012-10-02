@@ -43,7 +43,8 @@ class ApplicationController < ActionController::Base
       g.identify_user(current_user.utma) if current_user.utma?
       g.page_view("#{params[:controller]} #{params[:action]}", request.fullpath,current_user.id)
       rescue Exception => e
-        Rails.logger.error e.message
+        ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
+        Settings.ga_tracking_disabled_until = 1.hour.from_now # disable for a hour
         # ignore errors
         raise if Rails.env.test?
       end
@@ -89,7 +90,8 @@ class ApplicationController < ActionController::Base
   private
 
   def tracking_enabled?
-    ENV['GA_TRACKING_CODE'].present?
+    (Settings.ga_tracking_disabled_until.blank? || Time.current > Settings.ga_tracking_disabled_until) &&
+      ENV['GA_TRACKING_CODE'].present?
   end
 
   def tracking_code

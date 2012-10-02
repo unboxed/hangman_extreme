@@ -12,6 +12,7 @@ gem 'gabba'
 gem 'nokogiri'
 gem 'json'
 gem 'airbrake'
+gem 'ledermann-rails-settings', :require => 'rails-settings'
 
 # Gems used only for assets and not required
 # in production environments by default.
