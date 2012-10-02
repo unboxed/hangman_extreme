@@ -28,10 +28,12 @@ describe UsersController do
         get :index, params
       end
 
-      it "assigns all top week users as @users" do
-        user = create(:user)
-        do_get_index :period => 'weekly'
-        assigns(:users).should include(user)
+      ['daily','weekly', 'monthly'].each do |period|
+        it "assigns all top #{period} wins users as @users" do
+          user = create(:user)
+          do_get_index :rank_by => 'wins', :period => period
+          assigns(:users).should include(user)
+        end
       end
 
       it "assigns all users as @users" do

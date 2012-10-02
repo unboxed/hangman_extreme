@@ -2,6 +2,15 @@ require 'spec_helper'
 
 describe UsersHelper do
 
+  context "display_user_name" do
+
+    it "must use mxit_markup" do
+      helper.should_receive(:mxit_markup).with("My name")
+      helper.display_user_name("My name")
+    end
+
+  end
+
   context "mxit_markup" do
 
     it "removes .+ and .-" do

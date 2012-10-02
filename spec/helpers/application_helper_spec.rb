@@ -2,6 +2,19 @@ require 'spec_helper'
 
 describe ApplicationHelper do
 
+  context "shinka_ads_enabled?" do
+
+    it "wont work if shinka_auid is blank" do
+      helper.should_not be_shinka_ads_enabled
+    end
+
+    it "must work if shinka_auid" do
+      helper.stub!(:shinka_auid).and_return("123")
+      helper.should be_shinka_ads_enabled
+    end
+
+  end
+
   context "shinka_ad" do
 
     before :each do
