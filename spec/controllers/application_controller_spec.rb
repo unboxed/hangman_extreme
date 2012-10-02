@@ -147,7 +147,7 @@ describe ApplicationController do
 
     it "must create a new gabba connection" do
       controller.stub(:tracking_code).and_return('test')
-      Gabba::Gabba.should_receive(:new).with('test','mxithangmanleague.herokuapp.com').and_return(@gabba)
+      Gabba::Gabba.should_receive(:new).with('test','test.host').and_return(@gabba)
       get :index
     end
 

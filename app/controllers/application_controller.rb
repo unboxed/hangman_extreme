@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
     if tracking_enabled? && current_user
       begin
         Timeout::timeout(15) do
-          g = Gabba::Gabba.new(tracking_code, "mxithangmanleague.herokuapp.com")
+          g = Gabba::Gabba.new(tracking_code, request.host)
           g.user_agent = current_user_request_info.user_agent || request.env['HTTP_USER_AGENT']
           g.utmul = current_user_request_info.language || "en"
           g.set_custom_var(1, 'Gender', current_user_request_info.gender || "unknown", 1)
