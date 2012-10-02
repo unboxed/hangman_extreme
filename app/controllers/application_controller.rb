@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     @current_user_request_info ||= UserRequestInfo.new
   end
 
-  helper_method :current_user, :current_user_request_info
+  helper_method :current_user, :current_user_request_info, :notify_airbrake
 
   def login_required
     return true if current_user
