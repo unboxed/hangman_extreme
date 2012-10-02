@@ -11,10 +11,12 @@ class GamesController < ApplicationController
   end
 
   def play_letter
-    week_rating, monthly_rating = @game.user.weekly_rating, @game.user.monthly_rating
+    daily_rating, week_rating, monthly_rating = @game.user.daily_rating, @game.user.weekly_rating, @game.user.monthly_rating
     @game.add_choice(params[:letter])
     @game.save
-    if week_rating < @game.user.weekly_rating
+    if daily_rating < @game.user.daily_rating
+      @notice = "Your daily rating has increased to #{@game.user.daily_rating}, you are ranked #{@game.user.rank(:daily_rating).ordinalize} today"
+    elsif week_rating < @game.user.weekly_rating
       @notice = "Your weekly rating has increased to #{@game.user.weekly_rating}, you are ranked #{@game.user.rank(:weekly_rating).ordinalize} this week"
     elsif monthly_rating < @game.user.monthly_rating
       @notice = "Your monthly rating has increased to #{@game.user.monthly_rating}, you are ranked #{@game.user.rank(:monthly_rating).ordinalize} this month"
