@@ -145,6 +145,12 @@ describe ApplicationController do
       Gabba::Gabba.stub(:new).and_return(@gabba)
     end
 
+    it "wont create a new gabba connection if being redirected" do
+      controller.stub(:status).and_return(302)
+      Gabba::Gabba.should_not_receive(:new)
+      get :index
+    end
+
     it "must create a new gabba connection" do
       controller.stub(:tracking_code).and_return('test')
       Gabba::Gabba.should_receive(:new).with('test','test.host').and_return(@gabba)

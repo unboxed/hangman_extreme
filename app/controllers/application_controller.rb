@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   end
 
   def send_stats
-    if tracking_enabled? && current_user
+    if tracking_enabled? && current_user && status != 302
       begin
         Timeout::timeout(15) do
           g = Gabba::Gabba.new(tracking_code, request.host)
@@ -54,6 +54,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_mxit_user
+    Rails.logger.info(request.env.find_all{|key,value| key.include?("X_MXIT") }.inspect) # log mxit headers
     if request.env['HTTP_X_MXIT_USERID_R']
       @current_user = User.find_or_create_from_auth_hash(provider: 'mxit',
                                                               uid: request.env['HTTP_X_MXIT_USERID_R'],
