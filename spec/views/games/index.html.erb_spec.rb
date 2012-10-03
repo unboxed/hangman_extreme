@@ -53,7 +53,6 @@ describe "games/index" do
 
   it "should have a authorise" do
     render
-    puts @rendered
     rendered.should have_link("authorise", href: mxit_authorise_url(response_type: 'code',
                                                                     host: "test.host",
                                                                     client_id: ENV['MXIT_CLIENT_ID'],
