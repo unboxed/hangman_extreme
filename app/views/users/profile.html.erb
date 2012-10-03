@@ -1,0 +1,14 @@
+<b>Your Profile</b>
+
+<div>We require your <b>Real name</b> and <b>Mobile number</b> to payout any moola winnings</div>
+<div>This information will not be displayed anywhere on hangman extreme or sold to third parties</div>
+<br/>
+
+Real name: <%= current_user.real_name %><br/>
+Mobile number: <%= current_user.mobile_number %><br/><br/>
+
+all information is <%= link_to 'correct', root_path, id: 'root_page' %> |
+<%= link_to 'modify', edit_user_path(current_user), id: 'edit' %> profile |
+
+
+

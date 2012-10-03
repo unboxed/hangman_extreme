@@ -43,4 +43,23 @@ describe 'users' do
     end
   end
 
+  it "must have a fill in profile information" do
+    body = %&{"FirstName":"Grant",
+              "LastName":"Speelman",
+              "MobileNumber":"0821234567"}&
+    stub_request(:get, "http://auth.mxit.com/user/profile").to_return(:status => 200, :body => body, :headers => {})
+    visit '/'
+    click_link('authorise')
+    page.should have_content("Grant Speelman")
+    page.should have_content("0821234567")
+    click_link('edit')
+    fill_in 'user_real_name', with: "Joe Barber"
+    fill_in 'user_mobile_number', with: "0821234561"
+    click_button 'submit'
+    page.should have_content("Joe Barber")
+    page.should have_content("0821234561")
+    click_link('correct')
+    page.current_path.should == '/'
+  end
+
 end

@@ -13,6 +13,7 @@ gem 'nokogiri'
 gem 'json'
 gem 'airbrake'
 gem 'ledermann-rails-settings', :require => 'rails-settings'
+gem 'rest-client', require: 'rest_client'
 
 # Gems used only for assets and not required
 # in production environments by default.

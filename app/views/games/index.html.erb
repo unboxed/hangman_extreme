@@ -20,5 +20,10 @@ Coming soon daily and weekly prize for the top players
 <br/>
 
 <%= link_to 'new', new_game_path, id: 'new_game' %> game |
-view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %>
+view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %> |
+<%= link_to 'profile', mxit_authorise_url(response_type: 'code',
+                                            host: Rails.env.test? ? request.host : "auth.mxit.com",
+                                            client_id: ENV['MXIT_CLIENT_ID'],
+                                            redirect_uri: users_url(host: "test.host"),
+                                            scope: "profile/public profile/private"), id: 'authorise' %>
 

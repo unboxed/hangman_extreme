@@ -215,6 +215,7 @@ DEPENDENCIES
   omniauth
   pg
   rails (~> 3.2.1)
+  rest-client
   rspec-rails
   simplecov
   simplecov-rcov

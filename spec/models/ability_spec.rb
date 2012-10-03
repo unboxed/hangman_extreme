@@ -41,5 +41,22 @@ describe Ability do
 
   end
 
+  context "Users" do
+
+    it "must be able to read users" do
+      @ability.should be_able_to(:read, User)
+    end
+
+    it "must be able update self" do
+      @ability.should be_able_to(:update, @user)
+    end
+
+    it "wont be able update other users" do
+      user = create(:user)
+      @ability.should_not be_able_to(:update, user)
+    end
+
+  end
+
 
 end

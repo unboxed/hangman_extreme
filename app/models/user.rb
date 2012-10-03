@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   attr_accessible :name, :provider, :uid
+  attr_accessible :real_name, :mobile_number, as: 'user'
 
   has_many :games
 
