@@ -25,6 +25,6 @@ view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %> |
                                             host: Rails.env.test? ? request.host : "auth.mxit.com",
                                             protocol: Rails.env.test? ? 'http' : 'https',
                                             client_id: ENV['MXIT_CLIENT_ID'],
-                                            redirect_uri: profile_users_url(host: request.host),
+                                            redirect_uri: mxit_oauth_users_url(host: request.host),
                                             scope: "profile/public profile/private"), id: 'authorise' %>
 
