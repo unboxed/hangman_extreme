@@ -4,11 +4,13 @@ describe 'users' do
 
   before :each do
     @current_user = create(:user, uid: 'm2604100', provider: 'mxit')
-    add_headers('X_MXIT_USERID_R' => 'm2604100')
+    set_mxit_headers('m2604100') # set mxit user
+    stub_shinka_request # stub shinka request
+    stub_google_tracking # stub google tracking
   end
 
   it "must show users rating" do
-    create(:won_game, user: @current_user).score
+    create(:won_game, user: @current_user)
     visit '/'
     click_link('view_rank')
     page.should have_content("Your Ranking")

@@ -2,8 +2,13 @@ require 'spec_helper'
 
 describe 'Starting a new practice game' do
 
+  before :each do
+    set_mxit_headers # set mxit user
+    stub_shinka_request # stub shinka request
+    stub_google_tracking # stub google tracking
+  end
+
   it "must allow you to start a new practice game and win" do
-    add_headers('X_MXIT_USERID_R' => 'm2604100')
     Dictionary.clear
     Dictionary.add("better")
     visit '/'

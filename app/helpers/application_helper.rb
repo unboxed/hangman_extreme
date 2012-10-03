@@ -5,7 +5,7 @@ module ApplicationHelper
     return result unless shinka_ads_enabled?
     begin
       Timeout::timeout(15) do
-        ads = ActiveSupport::JSON.decode(open("http://ox-d.shinka.sh/ma/1.0/arj?auid=#{shinka_auid}&c.age=#{current_user_request_info.age}&c.gender=#{current_user_request_info.gender}&c.country=#{current_user_request_info.country}").read)
+        ads = ActiveSupport::JSON.decode(open("http://ox-d.shinka.sh/ma/1.0/arj?auid=#{shinka_auid}&c.age=#{current_user_request_info.age}&c.gender=#{current_user_request_info.gender}").read)
         ad = ads['ads']["ad"].sample
         result = ad["html"].html_safe
         creative = ad["creative"].first
@@ -24,6 +24,7 @@ module ApplicationHelper
       ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
       Settings.shinka_disabled_until = 10.minutes.from_now # disable for a hour
       Rails.logger.error e.message
+      raise if Rails.env.test?
       return result
     end
   end
