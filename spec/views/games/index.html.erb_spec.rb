@@ -56,7 +56,7 @@ describe "games/index" do
     rendered.should have_link("authorise", href: mxit_authorise_url(response_type: 'code',
                                                                     host: "test.host",
                                                                     client_id: ENV['MXIT_CLIENT_ID'],
-                                                                    redirect_uri: users_url(host: "test.host"),
+                                                                    redirect_uri: profile_users_url(host: "test.host"),
                                                                     scope: "profile/public profile/private"))
   end
 
