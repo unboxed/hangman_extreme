@@ -17,7 +17,9 @@ class UserRequestInfo
 
   def mxit_location=(mxit_location)
     self.country = mxit_location.country_name
-    self.area = mxit_location.principal_subdivision_name
+    self.area = mxit_location.city_name
+    self.country = mxit_location.country if country.blank?
+    self.area = mxit_location.city if area.blank?
   end
 
 end

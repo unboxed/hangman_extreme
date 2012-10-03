@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
         end
       rescue Exception => e
         ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
-        Settings.ga_tracking_disabled_until = 20.minutes.from_now # disable for a hour
+        Settings.ga_tracking_disabled_until = 20.minutes.from_now # disable for a 20 minutes
         # ignore errors
         raise if Rails.env.test?
       end

@@ -36,16 +36,29 @@ describe UserRequestInfo do
     context "assigning mxit location" do
 
       before :all do
-        @mxit_location = MxitLocation.new("ZA,Nambia,11,Cape,23,Kraaifontein,88,13072382,8fbe253")
-        @request.mxit_location = @mxit_location
+        @mxit_location = MxitLocation.new("NA,Nambia,11,Cape,23,Kraaifontein,88,13072382,8fbe253")
       end
 
       it "must assign the right country" do
+        @request.mxit_location = @mxit_location
         @request.country.should == "Nambia"
       end
 
       it "must assign the area" do
-        @request.area.should == "Cape"
+        @request.mxit_location = @mxit_location
+        @request.area.should == "Kraaifontein"
+      end
+
+      it "must assign the code if country name is blank" do
+        @mxit_location.stub(:country_name).and_return("")
+        @request.mxit_location = @mxit_location
+        @request.country.should == "NA"
+      end
+
+      it "must assign the area code if city_name is blank" do
+        @mxit_location.stub(:city_name).and_return("")
+        @request.mxit_location = @mxit_location
+        @request.area.should == "23"
       end
 
     end
