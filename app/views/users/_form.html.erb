@@ -1,7 +1,7 @@
 <%= form_for(@user) do |f| %>
-    <%= f.label :real_name %>
+    Enter your Real name
     <%= f.text_field :real_name %>
-    <%= f.label :mobile_number %>
+    Enter your Mobile number
     <%= f.text_field :mobile_number %>
-    <%= f.submit 'update', id: 'submit' %>
+    <%= f.submit 'save', id: 'submit' %>
 <% end %>
