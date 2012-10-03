@@ -17,7 +17,7 @@ HangmanLeague::Application.routes.draw do
   match '/define/:word', to: 'words#define', as: 'define_word'
   match '/facebook_oauth', to: 'users#facebook_oauth', as: 'facebook_oauth'
   match '/auth/:provider/callback', to: 'sessions#create'
-  match '/authorise', to: 'users#mxit_authorise', as: 'mxit_authorise'
+  match '/authorize', to: 'users#mxit_authorise', as: 'mxit_authorise'
 
   root :to => 'games#index'
 end
