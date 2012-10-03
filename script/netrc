@@ -1,6 +1,0 @@
-machine api.heroku.com
-  login alphen@unboxedconsulting.com
-  password 175eb1bfd7379f9dc3a3c8cfd144c7d19f6e7089
-machine code.heroku.com
-  login alphen@unboxedconsulting.com
-  password 175eb1bfd7379f9dc3a3c8cfd144c7d19f6e7089
