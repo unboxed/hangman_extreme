@@ -42,18 +42,42 @@ class UsersController < ApplicationController
   end
 
   def mxit_oauth
-    RestClient.get('http://auth.mxit.com/user/profile', :accept => :json, :authorization => "Bearer #{params[:code]}") do |response, request, result, &block|
-      case response.code
-        when 200
-          data = ActiveSupport::JSON.decode(response.body)
-          current_user.real_name = "#{data['FirstName']} #{data['LastName']}"
-          current_user.mobile_number = data['MobileNumber']
-          current_user.save
-          redirect_to profile_users_path
-        else
-          message = {response: response.inspect, request: request.inspect, result: result.inspect}.inspect
-          ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(Exception.new(message)) : Rails.logger.error(message)
-          redirect_to profile_users_path, alert: "Authorisation failed"
+    if params[:code].blank?
+      redirect_to profile_users_path, alert: "Authorisation failed: #{params[:error].to_s}"
+    else
+      basic_auth = Base64.encode64("#{ENV['MXIT_CLIENT_ID']}:#{ENV['MXIT_CLIENT_SECRET']}")
+      access_token = nil
+      RestClient.post('http://auth.mxit.com/token',
+                      {:grant_type => 'authorization_code',
+                       :code => params[:code],
+                       :redirect_uri => profile_users_url(host: request.host)},
+                      :accept => :json,
+                      :authorization => "Basic #{basic_auth}") do |response, request, result, &block|
+        case response.code
+          when 200
+            data = ActiveSupport::JSON.decode(response.body)
+            access_token = data['access_token']
+          else
+            message = {response: response.inspect, request: request.inspect, result: result.inspect}.inspect
+            ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(Exception.new(message)) : Rails.logger.error(message)
+            redirect_to profile_users_path, alert: "Authorisation failed"
+        end
+      end
+      if access_token
+        RestClient.get('http://auth.mxit.com/user/profile', :accept => :json, :authorization => "Bearer #{access_token}") do |response, request, result, &block|
+          case response.code
+            when 200
+              data = ActiveSupport::JSON.decode(response.body)
+              current_user.real_name = "#{data['FirstName']} #{data['LastName']}"
+              current_user.mobile_number = data['MobileNumber']
+              current_user.save
+              redirect_to profile_users_path
+            else
+              message = {response: response.inspect, request: request.inspect, result: result.inspect}.inspect
+              ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(Exception.new(message)) : Rails.logger.error(message)
+              redirect_to profile_users_path, alert: "Authorisation failed"
+          end
+        end
       end
     end
   end

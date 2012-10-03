@@ -29,6 +29,18 @@ describe UsersController do
     describe "GET 'mxit_oauth'" do
 
       before :each do
+        token_body = %&{
+                         "access_token":"c71219af53f5409e9d1db61db8a08248",
+                         "token_type":"bearer",
+                         "expires_in":3600,
+                         "refresh_token":"7f4b56bda11e4f7ba84c9e35c76b7aea",
+                         "scope":"message"
+                       }&
+        stub_request(:post, "http://auth.mxit.com/token").
+          with(:body => {"code"=>"123", "grant_type"=>"authorization_code", "redirect_uri"=>"http://test.host/users/profile"},
+               :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Content-Length'=>'92', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Ruby'}).
+          to_return(:status => 200, :body => token_body, :headers => {})
+
         body = %&{
                     "DisplayName":"String content",
                     "AvatarId":"String content",
@@ -61,7 +73,7 @@ describe UsersController do
                     "WhereAmI":"String content"
                 }&
         stub_request(:get, "http://auth.mxit.com/user/profile").
-          with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer 123', 'User-Agent'=>'Ruby'}).
+          with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer c71219af53f5409e9d1db61db8a08248', 'User-Agent'=>'Ruby'}).
           to_return(:status => 200, :body => body, :headers => {})
       end
 
@@ -77,11 +89,22 @@ describe UsersController do
         response.should redirect_to(profile_users_path)
       end
 
-      it "returns redirects to root page if auth fails" do
-        stub_request(:get, "http://auth.mxit.com/user/profile").
-          with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer 123', 'User-Agent'=>'Ruby'}).
-          to_return(:status => 401, :body => '', :headers => {})
+      it "returns redirects to root page if token request fails" do
+        stub_request(:post, "http://auth.mxit.com/token").to_return(:status => 401, :body => '', :headers => {})
         get 'mxit_oauth', code: "123"
+        response.should redirect_to(profile_users_path)
+        flash[:alert].should_not be_blank
+      end
+
+      it "returns redirects to root page if auth fails" do
+        stub_request(:get, "http://auth.mxit.com/user/profile").to_return(:status => 401, :body => '', :headers => {})
+        get 'mxit_oauth', code: "123"
+        response.should redirect_to(profile_users_path)
+        flash[:alert].should_not be_blank
+      end
+
+      it "returns redirects to root page if no code" do
+        get 'mxit_oauth'
         response.should redirect_to(profile_users_path)
         flash[:alert].should_not be_blank
       end
