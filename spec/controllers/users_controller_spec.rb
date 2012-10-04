@@ -29,78 +29,31 @@ describe UsersController do
     describe "GET 'mxit_oauth'" do
 
       before :each do
-        token_body = %&{
-                         "access_token":"c71219af53f5409e9d1db61db8a08248",
-                         "token_type":"bearer",
-                         "expires_in":3600,
-                         "refresh_token":"7f4b56bda11e4f7ba84c9e35c76b7aea",
-                         "scope":"message"
-                       }&
-        stub_request(:post, "https://auth.mxit.com/token").
-          with(:body => "code=123&grant_type=authorization_code&redirect_uri=http%3A%2F%2Ftest.host%2Fusers%2Fprofile",
-               :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Content-Length'=>'92', 'User-Agent'=>'Ruby'}).
-          to_return(:status => 200, :body => token_body, :headers => {})
+        @connection = mock('MxitApi', access_token: "123", profile: {})
+        MxitApi.stub(:new).and_return(@connection)
+      end
 
-        body = %&{
-                    "DisplayName":"String content",
-                    "AvatarId":"String content",
-                    "State":{
-                        "Availability":0,
-                        "IsOnline":true,
-                        "LastModified":"\\/Date(928142400000+0200)\\/",
-                        "LastOnline":"\\/Date(928142400000+0200)\\/",
-                        "Mood":0,
-                        "StatusMessage":"String content"
-                    },
-                    "UserId":"String content",
-                    "AboutMe":"String content",
-                    "Age":32767,
-                    "FirstName":"Grant",
-                    "Gender":0,
-                    "LanguageCode":"String content",
-                    "LastKnownCountryCode":"String content",
-                    "LastName":"Speelman",
-                    "NetworkOperatorCode":"String content",
-                    "RegisteredCountryCode":"String content",
-                    "RegistrationDate":"\\/Date(928142400000+0200)\\/",
-                    "StatusMessage":"String content",
-                    "Title":"String content",
-                    "CurrentCultureName":"String content",
-                    "DateOfBirth":"\\/Date(928142400000+0200)\\/",
-                    "Email":"String content",
-                    "MobileNumber":"0821234567",
-                    "RelationshipStatus":0,
-                    "WhereAmI":"String content"
-                }&
-        stub_request(:get, "https://auth.mxit.com/user/profile").
-          with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer c71219af53f5409e9d1db61db8a08248', 'User-Agent'=>'Ruby'}).
-          to_return(:status => 200, :body => body, :headers => {})
+      it "must create a new mxit connection" do
+        MxitApi.should_receive(:connect).with("123",profile_users_url(host: 'test.host')).and_return(@connection)
+        get 'mxit_oauth', code: "123"
       end
 
       it "returns sets and save profile information" do
+        @connection.should_receive(:profile).and_return(:first_name => "Grant", :last_name => "Speelman", :mobile_number => "0821234567")
         @current_user.should_receive(:save)
         get 'mxit_oauth', code: "123"
         @current_user.real_name.should == "Grant Speelman"
         @current_user.mobile_number.should == "0821234567"
       end
 
-      it "returns redirects to profile page" do
+      it "must not change values" do
+        @current_user.real_name = "Joe Barber"
+        @current_user.mobile_number = "0821234123"
+        @connection.stub(:profile).and_return(:first_name => "Grant", :last_name => "Speelman", :mobile_number => "0821234567")
+        @current_user.stub(:save)
         get 'mxit_oauth', code: "123"
-        response.should redirect_to(profile_users_path)
-      end
-
-      it "returns redirects to root page if token request fails" do
-        stub_request(:post, "https://auth.mxit.com/token").to_return(:status => 401, :body => '', :headers => {})
-        get 'mxit_oauth', code: "123"
-        response.should redirect_to(profile_users_path)
-        flash[:alert].should_not be_blank
-      end
-
-      it "returns redirects to root page if auth fails" do
-        stub_request(:get, "https://auth.mxit.com/user/profile").to_return(:status => 401, :body => '', :headers => {})
-        get 'mxit_oauth', code: "123"
-        response.should redirect_to(profile_users_path)
-        flash[:alert].should_not be_blank
+        @current_user.real_name.should == "Joe Barber"
+        @current_user.mobile_number.should == "0821234123"
       end
 
       it "returns redirects to root page if no code" do

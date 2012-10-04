@@ -45,41 +45,16 @@ class UsersController < ApplicationController
     if params[:code].blank?
       redirect_to profile_users_path, alert: "Authorisation failed: #{params[:error].to_s}"
     else
-
-      basic_auth = Base64.encode64("#{ENV['MXIT_CLIENT_ID']}:#{ENV['MXIT_CLIENT_SECRET']}")
-      access_token = nil
-      RestClient.post('https://auth.mxit.com/token',
-                      {:grant_type => 'authorization_code',
-                       :code => params[:code],
-                       :redirect_uri => profile_users_url(host: request.host)}.to_query,
-                      :accept => :json,
-                      :authorization => "Basic #{basic_auth}") do |response, request, result, &block|
-        case response.code
-          when 200
-            data = ActiveSupport::JSON.decode(response.body)
-            access_token = data['access_token']
-          else
-            message = {response: response.inspect, request: request.inspect, result: result.inspect}.inspect
-            ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(Exception.new(message)) : Rails.logger.error(message)
-            redirect_to profile_users_path, alert: "Authorisation failed"
+      mxit_connection = MxitApi.connect(params[:code],profile_users_url(host: request.host))
+      if mxit_connection
+        mxit_user_profile = mxit_connection.profile
+        unless mxit_user_profile.empty?
+          current_user.real_name = "#{mxit_user_profile[:first_name]} #{mxit_user_profile[:last_name]}" if current_user.real_name.blank?
+          current_user.mobile_number = mxit_user_profile[:mobile_number] if current_user.mobile_number.blank?
+          current_user.save
         end
       end
-      if access_token
-        RestClient.get('https://auth.mxit.com/user/profile', :accept => :json, :authorization => "Bearer #{access_token}") do |response, request, result, &block|
-          case response.code
-            when 200
-              data = ActiveSupport::JSON.decode(response.body)
-              current_user.real_name = "#{data['FirstName']} #{data['LastName']}"
-              current_user.mobile_number = data['MobileNumber']
-              current_user.save
-              redirect_to profile_users_path
-            else
-              message = {response: response.inspect, request: request.inspect, result: result.inspect}.inspect
-              ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(Exception.new(message)) : Rails.logger.error(message)
-              redirect_to profile_users_path, alert: "Authorisation failed"
-          end
-        end
-      end
+      redirect_to profile_users_path
     end
   end
 
