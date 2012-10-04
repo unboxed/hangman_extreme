@@ -40,6 +40,15 @@ describe ApplicationHelper do
       helper.shinka_ad.should include("onclick='window.open(this.href); return false;'")
     end
 
+    it "must return empty string if no ad results" do
+      body = "{\"ads\":\n {\n  \"version\": 1,\n  \"count\": 0}\n}\n"
+      stub_request(:get, "http://ox-d.shinka.sh/ma/1.0/arj?auid=123&c.age=&c.gender=").
+        with(:headers => {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
+        to_return(:status => 200, :body => body, :headers => {})
+      helper.stub(:current_user_request_info).and_return(UserRequestInfo.new)
+      helper.shinka_ad.should be_blank
+    end
+
     it "must load blank ad if shinka code throws exception" do
       Settings.last_shinka_ad = "<a>Ad</a>"
       helper.stub(:current_user_request_info).and_raise
