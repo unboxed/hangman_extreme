@@ -71,4 +71,16 @@ ActiveRecord::Schema.define(:version => 20121003115737) do
   add_index "users", ["weekly_rating"], :name => "index_users_on_weekly_rating"
   add_index "users", ["yearly_rating"], :name => "index_users_on_yearly_rating"
 
+  create_table "winners", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "reason"
+    t.integer  "amount"
+    t.string   "period"
+    t.date     "start_of_period_on"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "winners", ["user_id"], :name => "index_winners_on_user_id"
+
 end

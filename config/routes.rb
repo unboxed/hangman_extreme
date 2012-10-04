@@ -1,5 +1,4 @@
 HangmanLeague::Application.routes.draw do
-  get "users/show"
 
   resources :games, :except => [:edit, :update, :destroy] do
     get 'page/:page', :action => :index, :on => :collection
@@ -9,10 +8,14 @@ HangmanLeague::Application.routes.draw do
   end
   resources :users, :except => [:create, :new, :destroy] do
     collection do
+      get 'my_rank', action: "show"
       get 'mxit_oauth', action: 'mxit_oauth', as: 'mxit_oauth'
       get 'profile', action: 'profile', as: 'profile'
     end
   end
+
+  resources :winners, :except => [:edit, :update, :create, :new, :destroy]
+
 
   match '/define/:word', to: 'words#define', as: 'define_word'
   match '/facebook_oauth', to: 'users#facebook_oauth', as: 'facebook_oauth'

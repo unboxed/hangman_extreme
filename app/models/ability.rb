@@ -7,5 +7,7 @@ class Ability
 
     can :read, User
     can :update, user
+
+    can :read, Winner
   end
 end

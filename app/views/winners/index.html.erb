@@ -1,0 +1,34 @@
+<h1>Yesterday's Winners</h1>
+<% if @winners.empty? %>
+    <p><b>Coming Soon</b></p>
+<% else %>
+<table>
+  <tbody>
+  <tr>
+      <td><b>name</b> | </td>
+      <td><b>moola</b> | </td>
+      <td><b>reason</b> | </td>
+  </tr>
+  <%= content_tag_for(:tr, @winners) do |winner| %>
+      <td><%= winner.name %> | </td>
+      <td><%= winner.amount %> | </td>
+      <td><%= winner.reason %> | </td>
+  <% end %>
+  </tbody>
+</table>
+<% end %>
+
+
+<%= link_to 'home', root_path, id: 'root_page' %> |
+<%= link_to_unless params[:reason] == 'daily_rating',
+                   'rating',
+                   {reason: 'daily_rating'},
+                   id: "rating" %> |
+<%= link_to_unless params[:reason] == 'games_won_today',
+                   'wins',
+                   {reason: 'games_won_today'},
+                   id: "rating" %> |
+<%= link_to_unless params[:reason] == 'daily_precision',
+                   'precision',
+                   {reason: 'daily_precision'},
+                   id: "rating" %>

@@ -58,5 +58,13 @@ describe Ability do
 
   end
 
+  context "Winners" do
+
+    it "must be able to read winners" do
+      @ability.should be_able_to(:read, Winner)
+    end
+
+  end
+
 
 end

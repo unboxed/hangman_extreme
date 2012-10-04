@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   attr_accessible :real_name, :mobile_number, as: 'user'
 
   has_many :games
+  has_many :winners
 
   validates :provider, :uid, presence: true
   validates_uniqueness_of :uid, :scope => :provider
