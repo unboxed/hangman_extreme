@@ -47,7 +47,7 @@ class UsersController < ApplicationController
     else
       basic_auth = Base64.encode64("#{ENV['MXIT_CLIENT_ID']}:#{ENV['MXIT_CLIENT_SECRET']}")
       access_token = nil
-      RestClient.post('http://auth.mxit.com/token',
+      RestClient.post('https://auth.mxit.com/token',
                       {:grant_type => 'authorization_code',
                        :code => params[:code],
                        :redirect_uri => profile_users_url(host: request.host)},
@@ -64,7 +64,7 @@ class UsersController < ApplicationController
         end
       end
       if access_token
-        RestClient.get('http://auth.mxit.com/user/profile', :accept => :json, :authorization => "Bearer #{access_token}") do |response, request, result, &block|
+        RestClient.get('https://auth.mxit.com/user/profile', :accept => :json, :authorization => "Bearer #{access_token}") do |response, request, result, &block|
           case response.code
             when 200
               data = ActiveSupport::JSON.decode(response.body)
