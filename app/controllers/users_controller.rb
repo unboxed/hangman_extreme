@@ -45,14 +45,18 @@ class UsersController < ApplicationController
     if params[:code].blank?
       redirect_to profile_users_path, alert: "Authorisation failed: #{params[:error].to_s}"
     else
-      mxit_connection = MxitApi.connect(params[:code],profile_users_url(host: request.host))
-      if mxit_connection
-        mxit_user_profile = mxit_connection.profile
-        unless mxit_user_profile.empty?
-          current_user.real_name = "#{mxit_user_profile[:first_name]} #{mxit_user_profile[:last_name]}" if current_user.real_name.blank?
-          current_user.mobile_number = mxit_user_profile[:mobile_number] if current_user.mobile_number.blank?
-          current_user.save
+      begin
+        mxit_connection = MxitApi.connect(params[:code],profile_users_url(host: request.host))
+        if mxit_connection
+          mxit_user_profile = mxit_connection.profile
+          unless mxit_user_profile.empty?
+            current_user.real_name = "#{mxit_user_profile[:first_name]} #{mxit_user_profile[:last_name]}" if current_user.real_name.blank?
+            current_user.mobile_number = mxit_user_profile[:mobile_number] if current_user.mobile_number.blank?
+            current_user.save
+          end
         end
+      rescue
+        # ignore error
       end
       redirect_to profile_users_path
     end
