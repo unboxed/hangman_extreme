@@ -37,8 +37,8 @@ describe UsersController do
                          "scope":"message"
                        }&
         stub_request(:post, "https://auth.mxit.com/token").
-          with(:body => {"code"=>"123", "grant_type"=>"authorization_code", "redirect_uri"=>"http://test.host/users/profile"},
-               :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Content-Length'=>'92', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Ruby'}).
+          with(:body => "code=123&grant_type=authorization_code&redirect_uri=http%3A%2F%2Ftest.host%2Fusers%2Fprofile",
+               :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Content-Length'=>'92', 'User-Agent'=>'Ruby'}).
           to_return(:status => 200, :body => token_body, :headers => {})
 
         body = %&{

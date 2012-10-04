@@ -45,12 +45,13 @@ class UsersController < ApplicationController
     if params[:code].blank?
       redirect_to profile_users_path, alert: "Authorisation failed: #{params[:error].to_s}"
     else
+
       basic_auth = Base64.encode64("#{ENV['MXIT_CLIENT_ID']}:#{ENV['MXIT_CLIENT_SECRET']}")
       access_token = nil
       RestClient.post('https://auth.mxit.com/token',
                       {:grant_type => 'authorization_code',
                        :code => params[:code],
-                       :redirect_uri => profile_users_url(host: request.host)},
+                       :redirect_uri => profile_users_url(host: request.host)}.to_query,
                       :accept => :json,
                       :authorization => "Basic #{basic_auth}") do |response, request, result, &block|
         case response.code
