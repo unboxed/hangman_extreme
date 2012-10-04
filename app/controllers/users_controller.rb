@@ -55,8 +55,9 @@ class UsersController < ApplicationController
             current_user.save
           end
         end
-      rescue
+      rescue Exception => e
         # ignore error
+        ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(message)
       end
       redirect_to profile_users_path
     end
