@@ -8,17 +8,20 @@ module ApplicationHelper
         ads = ActiveSupport::JSON.decode(open("http://ox-d.shinka.sh/ma/1.0/arj?auid=#{shinka_auid}&c.age=#{current_user_request_info.age}&c.gender=#{current_user_request_info.gender}").read)
         return result if ads['ads']['count'].to_i == 0
         ad = ads['ads']["ad"].sample
-        result = ad["html"].html_safe
+        result = ad["html"].gsub("href=","onclick='window.open(this.href); return false;' href=").html_safe
         creative = ad["creative"].first
         tracking = creative["tracking"]
         alt = creative["alt"]
+        beacon = "<div style='position: absolute; left: 0px; top: 0px; visibility: hidden;'>"
+        beacon << "<img src='#{tracking['impression']}' alt=\"\" height=\"1\" width=\"1\"/>"
+        beacon << "</div>"
         if alt.blank? || alt.include?("http")
           link = creative["media"]
-          return "" if link.blank? || !link.include?("href=")
+          return result if link.blank? || !link.include?("href=")
           link.gsub!("href=","onclick='window.open(this.href); return false;' href=")
-          Settings.last_shinka_ad = "<img href=#{tracking['impression']} alt=\"\" height=\"1\" width=\"1\"/>#{link}".html_safe
+          Settings.last_shinka_ad = "#{beacon}#{link}".html_safe
         else
-          Settings.last_shinka_ad = "<img href=#{tracking['impression']} alt=\"\" height=\"1\" width=\"1\"/><a href=#{tracking['click']} onclick='window.open(this.href); return false;' >#{alt}</a>".html_safe
+          Settings.last_shinka_ad = "#{beacon}<a href=#{tracking['click']} onclick='window.open(this.href); return false;' >#{alt}</a>".html_safe
         end
       end
     rescue Exception => e
