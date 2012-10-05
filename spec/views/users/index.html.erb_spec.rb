@@ -9,8 +9,13 @@ describe "users/index" do
       stub_model(User, id: 100, name: "hello"),
       stub_model(User, id: 101, name: "goodbye")
     ])
-    view.stub!(:paginate)
     view.stub!(:current_user).and_return(stub_model(User, id: 50))
+    stub_template "_ranking_links.html.erb" => "<div>Ranking list</div>"
+  end
+
+  it "renders the ranking list" do
+    render
+    rendered.should have_content("Ranking list")
   end
 
   it "renders a list of users" do

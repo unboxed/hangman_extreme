@@ -30,17 +30,17 @@ describe "winners/index.html.erb" do
 
   it "should have a rating link" do
     render
-    rendered.should have_link("rating", href: winners_path(reason: 'daily_rating'))
+    rendered.should have_link("rating", href: winners_path(reason: 'rating'))
   end
 
   it "should have a precision link" do
     render
-    rendered.should have_link("precision", href: winners_path(reason: 'daily_precision'))
+    rendered.should have_link("precision", href: winners_path(reason: 'precision'))
   end
 
   it "should have a wins link" do
     render
-    rendered.should have_link("wins", href: winners_path(reason: 'games_won_today'))
+    rendered.should have_link("wins", href: winners_path(reason: 'wins'))
   end
 
 end

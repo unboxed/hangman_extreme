@@ -1,4 +1,4 @@
-<h1>Yesterday's Winners</h1>
+<b>Yesterday's <i><%= params[:reason] %></i> Winners</b><br/>
 <% if @winners.empty? %>
     <p><b>Coming Soon</b></p>
 <% else %>
@@ -18,15 +18,12 @@
 
 
 <%= link_to 'home', root_path, id: 'root_page' %> |
-<%= link_to_unless params[:reason] == 'daily_rating',
+<%= link_to_unless params[:reason] == 'rating',
                    'rating',
-                   {reason: 'daily_rating'},
-                   id: "rating" %> |
-<%= link_to_unless params[:reason] == 'games_won_today',
+                   {reason: 'rating'} %> |
+<%= link_to_unless params[:reason] == 'wins',
                    'wins',
-                   {reason: 'games_won_today'},
-                   id: "rating" %> |
-<%= link_to_unless params[:reason] == 'daily_precision',
+                   {reason: 'wins'} %> |
+<%= link_to_unless params[:reason] == 'precision',
                    'precision',
-                   {reason: 'daily_precision'},
-                   id: "rating" %>
+                   {reason: 'precision'} %>

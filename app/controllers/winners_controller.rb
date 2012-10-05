@@ -3,7 +3,7 @@ class WinnersController < ApplicationController
   load_and_authorize_resource
 
   def index
-    params[:reason] ||= 'daily_rating'
-    @winners = @winners.where(['reason = ?',params[:reason]]).order('created_at DESC').page(params[:page]).per(10)
+    params[:reason] ||= 'rating'
+    @winners = @winners.period('daily').reason(params[:reason]).order('created_at DESC').page(params[:page]).per(10)
   end
 end

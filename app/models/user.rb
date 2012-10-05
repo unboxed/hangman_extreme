@@ -23,15 +23,27 @@ class User < ActiveRecord::Base
     return user
   end
 
-  def calculate_games_won_today
+  def daily_rating_winners
+    winners.period('daily').reason('rating')
+  end
+
+  def daily_precision_winners
+    winners.period('daily').reason('precision')
+  end
+
+  def daily_wins_winners
+    winners.period('daily').reason('wins')
+  end
+
+  def calculate_daily_wins
     calculate_games_won(games.today)
   end
 
-  def calculate_games_won_this_week
+  def calculate_weekly_wins
     calculate_games_won(games.this_week)
   end
 
-  def calculate_games_won_this_month
+  def calculate_monthly_wins
     calculate_games_won(games.this_month)
   end
 
@@ -66,9 +78,9 @@ class User < ActiveRecord::Base
     self.daily_precision = calculate_daily_precision
     self.weekly_precision = calculate_weekly_precision
     self.monthly_precision = calculate_monthly_precision
-    self.games_won_today = calculate_games_won_today
-    self.games_won_this_week = calculate_games_won_this_week
-    self.games_won_this_month = calculate_games_won_this_month
+    self.daily_wins = calculate_daily_wins
+    self.weekly_wins = calculate_weekly_wins
+    self.monthly_wins = calculate_monthly_wins
     save
   end
 

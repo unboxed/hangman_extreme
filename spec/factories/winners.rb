@@ -1,11 +1,11 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
+ # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
   factory :winner do
-    user
-    reason "daily_rating"
+    reason "rating"
     amount 1
     start_of_period_on Date.today
     period 'daily'
+    user { create(:user, name: "user_#{reason} #{User.count}" )}
   end
 end

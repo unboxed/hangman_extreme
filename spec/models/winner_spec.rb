@@ -34,47 +34,45 @@ describe Winner do
   context "create_daily_winners" do
 
     before :each do
-      User.stub(:top_scorers).and_return([])
+      create_list(:user,10, daily_rating: 0, daily_precision: 0, daily_wins: 0)
     end
 
     it "must create the rating winner" do
-      @user = stub_model(User)
-      User.should_receive(:top_scorers).with('daily_rating').and_return([@user])
+      @user = create(:user, daily_rating: 100)
       Winner.create_daily_winners([10] * 10)
-      @user.should have(1).winners
-      winner = @user.winners.first
+      @user.should have(1).daily_rating_winners
+      winner = @user.daily_rating_winners.first
       winner.should be_daily
       winner.start_of_period_on.should == Date.today
       winner.amount.should == 10
-      winner.reason.should == 'daily_rating'
+      winner.reason.should == 'rating'
     end
 
     it "must create the precision winner" do
-      @user = create(:user)
-      User.should_receive(:top_scorers).with('daily_precision').and_return([@user])
+      @user = create(:user, daily_precision: 100)
       Winner.create_daily_winners((1..10).to_a.reverse)
-      @user.should have(1).winners
-      winner = @user.winners.first
+      @user.should have(1).daily_precision_winners
+      winner = @user.daily_precision_winners.first
       winner.should be_daily
       winner.start_of_period_on.should == Date.today
       winner.amount.should == 10
-      winner.reason.should == 'daily_precision'
+      winner.reason.should == 'precision'
     end
 
     it "must create the wins winner" do
-      @user = create(:user)
-      User.should_receive(:top_scorers).with('games_won_today').and_return([@user])
+      @user = create(:user, daily_wins: 100)
       Winner.create_daily_winners((11..20).to_a.reverse)
-      @user.should have(1).winners
-      winner = @user.winners.first
+      @user.should have(1).daily_wins_winners
+      winner = @user.daily_wins_winners.first
       winner.should be_daily
       winner.start_of_period_on.should == Date.today
       winner.amount.should == 20
-      winner.reason.should == 'games_won_today'
+      winner.reason.should == 'wins'
     end
 
     it "wont create new winners if they already exist for period" do
       create(:winner, period: 'daily', start_of_period_on: Date.today)
+      User.should respond_to(:top_scorers)
       User.should_not_receive(:top_scorers)
       expect {
         Winner.create_daily_winners((11..20).to_a.reverse)

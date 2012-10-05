@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121003115737) do
+ActiveRecord::Schema.define(:version => 20121005075914) do
 
   create_table "games", :force => true do |t|
     t.string   "word"
@@ -42,33 +42,33 @@ ActiveRecord::Schema.define(:version => 20121003115737) do
     t.string   "name"
     t.string   "uid"
     t.string   "provider"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
-    t.integer  "weekly_rating",        :default => 0
-    t.integer  "monthly_rating",       :default => 0
-    t.integer  "yearly_rating",        :default => 0
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.integer  "weekly_rating",     :default => 0
+    t.integer  "monthly_rating",    :default => 0
+    t.integer  "yearly_rating",     :default => 0
     t.string   "utma"
-    t.integer  "weekly_precision",     :default => 0
-    t.integer  "monthly_precision",    :default => 0
-    t.integer  "games_won_this_week",  :default => 0
-    t.integer  "games_won_this_month", :default => 0
-    t.integer  "daily_rating",         :default => 0
-    t.integer  "daily_precision",      :default => 0
-    t.integer  "games_won_today",      :default => 0
+    t.integer  "weekly_precision",  :default => 0
+    t.integer  "monthly_precision", :default => 0
+    t.integer  "weekly_wins",       :default => 0
+    t.integer  "monthly_wins",      :default => 0
+    t.integer  "daily_rating",      :default => 0
+    t.integer  "daily_precision",   :default => 0
+    t.integer  "daily_wins",        :default => 0
     t.string   "real_name"
     t.string   "mobile_number"
   end
 
   add_index "users", ["daily_precision"], :name => "index_users_on_daily_precision"
   add_index "users", ["daily_rating"], :name => "index_users_on_daily_rating"
-  add_index "users", ["games_won_this_month"], :name => "index_users_on_games_won_this_month"
-  add_index "users", ["games_won_this_week"], :name => "index_users_on_games_won_this_week"
-  add_index "users", ["games_won_today"], :name => "index_users_on_games_won_today"
+  add_index "users", ["daily_wins"], :name => "index_users_on_games_won_today"
   add_index "users", ["monthly_precision"], :name => "index_users_on_monthly_precision"
   add_index "users", ["monthly_rating"], :name => "index_users_on_monthly_rating"
+  add_index "users", ["monthly_wins"], :name => "index_users_on_games_won_this_month"
   add_index "users", ["uid", "provider"], :name => "index_users_on_uid_and_provider"
   add_index "users", ["weekly_precision"], :name => "index_users_on_weekly_precision"
   add_index "users", ["weekly_rating"], :name => "index_users_on_weekly_rating"
+  add_index "users", ["weekly_wins"], :name => "index_users_on_games_won_this_week"
   add_index "users", ["yearly_rating"], :name => "index_users_on_yearly_rating"
 
   create_table "winners", :force => true do |t|

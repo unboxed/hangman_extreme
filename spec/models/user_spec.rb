@@ -27,14 +27,14 @@ describe User do
     user.game_count.should == 6
   end
 
-  context "calculate_games_won_today" do
+  context "calculate_daily_wins" do
 
     it "must use only won games" do
       user = create(:user)
       create_list(:won_game,2, user: user)
       create(:lost_game, user: user)
       create(:game, user: user)
-      user.calculate_games_won_today.should == 2
+      user.calculate_daily_wins.should == 2
     end
 
 
@@ -44,19 +44,19 @@ describe User do
       Timecop.freeze(1.day.ago) do
         create_list(:won_game,2,user: user)
       end
-      user.calculate_games_won_today.should == 2
+      user.calculate_daily_wins.should == 2
     end
 
   end
 
-  context "calculate_games_won_this_week" do
+  context "calculate_weekly_wins" do
 
     it "must use only won games" do
       user = create(:user)
       create_list(:won_game,2, user: user)
       create(:lost_game, user: user)
       create(:game, user: user)
-      user.calculate_games_won_this_week.should == 2
+      user.calculate_weekly_wins.should == 2
     end
 
 
@@ -66,19 +66,19 @@ describe User do
       Timecop.freeze(1.week.ago - 1.day) do
         create_list(:won_game,2,user: user)
       end
-      user.calculate_games_won_this_week.should == 2
+      user.calculate_weekly_wins.should == 2
     end
 
   end
 
-  context "calculate_games_won_this_month" do
+  context "calculate_monthly_wins" do
 
     it "must use only won games" do
       user = create(:user)
       create_list(:won_game,2, user: user)
       create(:lost_game, user: user)
       create(:game, user: user)
-      user.calculate_games_won_this_month.should == 2
+      user.calculate_monthly_wins.should == 2
     end
 
 
@@ -88,7 +88,7 @@ describe User do
       Timecop.freeze(1.month.ago - 1.day) do
         create_list(:won_game,2,user: user)
       end
-      user.calculate_games_won_this_month.should == 2
+      user.calculate_monthly_wins.should == 2
     end
 
   end
@@ -280,9 +280,9 @@ describe User do
       user.stub(:calculate_daily_precision).and_return(75)
       user.stub(:calculate_weekly_precision).and_return(100)
       user.stub(:calculate_monthly_precision).and_return(90)
-      user.stub(:calculate_games_won_today).and_return(50)
-      user.stub(:calculate_games_won_this_week).and_return(200)
-      user.stub(:calculate_games_won_this_month).and_return(210)
+      user.stub(:calculate_daily_wins).and_return(50)
+      user.stub(:calculate_weekly_wins).and_return(200)
+      user.stub(:calculate_monthly_wins).and_return(210)
       user.update_ratings
       user.daily_rating.should == 10
       user.weekly_rating.should == 20
@@ -290,9 +290,9 @@ describe User do
       user.daily_precision.should == 75
       user.weekly_precision.should == 100
       user.monthly_precision.should == 90
-      user.games_won_today.should == 50
-      user.games_won_this_week.should == 200
-      user.games_won_this_month.should == 210
+      user.daily_wins.should == 50
+      user.weekly_wins.should == 200
+      user.monthly_wins.should == 210
     end
 
   end

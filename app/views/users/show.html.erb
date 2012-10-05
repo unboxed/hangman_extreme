@@ -10,8 +10,8 @@
   </tr>
   <tr>
     <td>Games Won:</td>
-    <td><%= @user.games_won_today %> |</td>
-    <td><%= @user.rank(:games_won_today).ordinalize %></td>
+    <td><%= @user.daily_wins %> |</td>
+    <td><%= @user.rank(:daily_wins).ordinalize %></td>
   </tr>
   <tr>
     <td>Rating:</td>
@@ -30,8 +30,8 @@
   </tr>
     <tr>
       <td>Games Won:</td>
-      <td><%= @user.games_won_this_week %> |</td>
-      <td><%= @user.rank(:games_won_this_week).ordinalize %></td>
+      <td><%= @user.weekly_wins %> |</td>
+      <td><%= @user.rank(:weekly_wins).ordinalize %></td>
     </tr>
     <tr>
       <td>Rating:</td>
@@ -50,8 +50,8 @@
    </tr>
   <tr>
     <td>Games Won:</td>
-    <td><%= @user.games_won_this_month %> |</td>
-    <td><%= @user.rank(:games_won_this_month).ordinalize %></td>
+    <td><%= @user.monthly_wins %> |</td>
+    <td><%= @user.rank(:monthly_wins).ordinalize %></td>
   </tr>
   <tr>
     <td>Rating:</td>
