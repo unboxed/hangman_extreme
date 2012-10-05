@@ -19,7 +19,6 @@ describe 'winners' do
       page.should have_content(winner.name)
     end
     click_link('precision')
-    save_and_open_page
     precision_winners.each do |winner|
       page.should have_content(winner.name)
     end
