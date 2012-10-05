@@ -1,2 +1,6 @@
 git remote add staging git@heroku.com:tryhangmanleague.git
-git push staging master --verbose && heroku run rake db:migrate --app tryhangmanleague && heroku run rake airbrake:deploy TO=staging --app tryhangmanleague
+heroku maintenance:on --app tryhangmanleague && \
+git push staging master --verbose && \
+heroku run rake db:migrate --app tryhangmanleague && \
+heroku run rake airbrake:deploy TO=staging --app tryhangmanleague && \
+heroku maintenance:off --app tryhangmanleague
