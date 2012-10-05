@@ -7,10 +7,8 @@ describe "winners/index.html.erb" do
     @winners =
       assign(:winners, [
         stub_model(Winner, id: 100, name: "hello", amount: "123", reason: "daily_rating"),
-        stub_model(Winner, id: 101, name: "goodbye")
+        stub_model(Winner, id: 101, name: "goodbye", amount: "124")
       ])
-    view.stub!(:paginate)
-    view.stub!(:current_user).and_return(stub_model(User, id: 50))
   end
 
   it "renders a list of users" do
@@ -18,11 +16,10 @@ describe "winners/index.html.erb" do
     within("#winner_100") do
       rendered.should have_content("hello")
       rendered.should have_content("123")
-      rendered.should have_content("hello")
-      rendered.should have_content("hello")
     end
     within("#winner_101") do
       rendered.should have_content("goodbye")
+      rendered.should have_content("124")
     end
   end
 
