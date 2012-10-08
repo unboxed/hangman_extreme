@@ -339,4 +339,20 @@ describe User do
 
   end
 
+  context "umta", :redis => true do
+
+    it "must return proper encoded google umta" do
+      user = stub_model(User)
+      user.utma.should match(/1\.[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\.15/)
+    end
+
+    it "must update umta" do
+      user = stub_model(User)
+      expect{
+        sleep 1; user.utma(true)
+      }.to change(user,:utma)
+    end
+
+  end
+
 end

@@ -40,8 +40,7 @@ class ApplicationController < ActionController::Base
           g.set_custom_var(2, 'Age', current_user_request_info.age || "unknown", 1)
           g.set_custom_var(3, current_user_request_info.country || "unknown Country", current_user_request_info.area || "unknown", 1)
           g.set_custom_var(5, 'Provider', current_user.provider, 1)
-          current_user.update_attribute(:utma,g.cookie_params(current_user.id)) unless current_user.utma?
-          g.identify_user(current_user.utma) if current_user.utma?
+          g.identify_user(current_user.utma(true))
           g.page_view("#{params[:controller]} #{params[:action]}", request.fullpath,current_user.id)
         end
       rescue Exception => e

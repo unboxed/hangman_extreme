@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121005075914) do
+ActiveRecord::Schema.define(:version => 20121008121128) do
 
   create_table "games", :force => true do |t|
     t.string   "word"
@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(:version => 20121005075914) do
     t.integer  "weekly_rating",     :default => 0
     t.integer  "monthly_rating",    :default => 0
     t.integer  "yearly_rating",     :default => 0
-    t.string   "utma"
     t.integer  "weekly_precision",  :default => 0
     t.integer  "monthly_precision", :default => 0
     t.integer  "weekly_wins",       :default => 0

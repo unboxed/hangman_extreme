@@ -121,6 +121,14 @@ Spork.each_run do
       DatabaseCleaner.clean
     end
 
+    config.before(:each, :redis => true) do
+      begin
+        REDIS.flushall
+      rescue Redis::CannotConnectError => e
+        Rails.logger.error(e.message)
+      end
+    end
+
   end
 
 end
