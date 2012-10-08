@@ -47,7 +47,7 @@ describe 'users' do
     body = %&{"FirstName":"Grant",
               "LastName":"Speelman",
               "MobileNumber":"0821234567"}&
-    stub_request(:get, "https://auth.mxit.com/user/profile").to_return(:status => 200, :body => body, :headers => {})
+    stub_request(:get, "https://api.mxit.com/user/profile").to_return(:status => 200, :body => body, :headers => {})
     token_body = %&{ "access_token":"c71219af53f5409e9d1db61db8a08248" }&
     stub_request(:post, "https://auth.mxit.com/token").to_return(:status => 200, :body => token_body, :headers => {})
     visit '/'

@@ -2,28 +2,24 @@ require 'spec_helper'
 
 describe MxitApi do
 
-  context "new" do
-
-    before :each do
-      MxitApi.stub(:basic_auth).and_return("BASICAUTH")
-      token_body = %&{"access_token":"c71219af53f5409e9d1db61db8a08248",
+  before :each do
+    MxitApi.stub(:client_id).and_return("1")
+    MxitApi.stub(:client_secret).and_return("1")
+    token_body = %&{"access_token":"c71219af53f5409e9d1db61db8a08248",
                     "token_type":"bearer",
                     "expires_in":3600,
                     "refresh_token":"7f4b56bda11e4f7ba84c9e35c76b7aea",
                     "scope":"message"}&
-      stub_request(:post, "https://auth.mxit.com/token").to_return(:status => 200, :body => token_body, :headers => {})
-    end
+    stub_request(:post, "https://1:1@auth.mxit.com/token").to_return(:status => 200, :body => token_body, :headers => {})
+  end
+
+  context "new" do
 
     it "must post to mxit api requesting token" do
-      MxitApi.new("456","/")
-      assert_requested(:post, "https://auth.mxit.com/token",
-                       :body => "grant_type=authorization_code&code=456&redirect_uri=%2F",
-                       :headers => {'Accept'=>'application/json',
-                                    'Accept-Encoding'=>'gzip, deflate',
-                                    'Authorization'=>'BASICAUTH',
-                                    'Content-Length'=>'55',
-                                    'Content-Type'=>'application/x-www-form-urlencoded',
-                                    'User-Agent'=>'Ruby'})
+      MxitApi.new("456","http://www.hangman_league.dev/users/mxit_oauth")
+      assert_requested(:post, "https://1:1@auth.mxit.com/token",
+                       :body => "grant_type=authorization_code&code=456&redirect_uri=http%3A%2F%2Fwww.hangman_league.dev%2Fusers%2Fmxit_oauth",
+                       :headers => {'Accept'=>'*/*', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Ruby'})
     end
 
     it "must set the access_token" do
@@ -54,7 +50,7 @@ describe MxitApi do
     end
 
     it "must handle a failed response" do
-      stub_request(:post, "https://auth.mxit.com/token").to_return(:status => 401, :body => '', :headers => {})
+      stub_request(:post, "https://1:1@auth.mxit.com/token").to_return(:status => 401, :body => '', :headers => {})
       connection = MxitApi.new("456","/")
       connection.access_token.should be_nil
     end
@@ -110,8 +106,7 @@ describe MxitApi do
                   "RelationshipStatus":0,
                   "WhereAmI":"String content"
                 }&
-      stub_request(:get, "https://auth.mxit.com/user/profile").to_return(:status => 200, :body => body, :headers => {})
-      RestClient.stub(:post)
+      stub_request(:get, "https://api.mxit.com/user/profile").to_return(:status => 200, :body => body, :headers => {})
       @connection = MxitApi.new("456","/")
     end
 
@@ -127,15 +122,14 @@ describe MxitApi do
       @connection.stub(:access_token).and_return("c71219af53f5409e9d1db61db8a08248")
       @connection.stub(:token_type).and_return("bearer")
       @connection.profile
-      assert_requested(:get, "https://auth.mxit.com/user/profile",
-                       :headers => {'Accept'=>'application/json',
-                                    'Accept-Encoding'=>'gzip, deflate',
+      assert_requested(:get, "https://api.mxit.com/user/profile",
+                       :headers => {'Accept'=>'*/*',
                                     'Authorization'=>'bearer c71219af53f5409e9d1db61db8a08248',
                                     'User-Agent'=>'Ruby'})
     end
 
     it "must handle a failed response" do
-      stub_request(:get, "https://auth.mxit.com/user/profile").to_return(:status => 401, :body => '', :headers => {})
+      stub_request(:get, "https://api.mxit.com/user/profile").to_return(:status => 401, :body => '', :headers => {})
       profile = @connection.profile
       profile.should be_empty
     end
