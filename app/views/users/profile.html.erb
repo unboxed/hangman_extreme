@@ -4,11 +4,13 @@
 <div>This information will not be displayed anywhere on hangman extreme or sold to third parties</div>
 <br/>
 
-Real name: <%= current_user.real_name %><br/>
-Mobile number: <%= current_user.mobile_number %><br/><br/>
+change <%= link_to 'real name', edit_user_path(current_user, :field => 'real_name'), id: 'edit_real_name' %>:
+<%= current_user.real_name %><br/>
+change <%= link_to 'mobile number', edit_user_path(current_user, :field => 'mobile_number'), id: 'edit_mobile_number' %>:
+<%= current_user.mobile_number %><br/>
+<br/>
 
-all information is <%= link_to 'correct', root_path, id: 'root_page' %> |
-<%= link_to 'modify', edit_user_path(current_user), id: 'edit' %> profile |
+all information is <%= link_to 'correct', root_path, id: 'root_page' %>
 
 
 

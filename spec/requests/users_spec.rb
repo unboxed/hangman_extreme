@@ -54,8 +54,10 @@ describe 'users' do
     click_link('authorise')
     page.should have_content("Grant Speelman")
     page.should have_content("0821234567")
-    click_link('edit')
+    click_link('edit_real_name')
     fill_in 'user_real_name', with: "Joe Barber"
+    click_button 'submit'
+    click_link('edit_mobile_number')
     fill_in 'user_mobile_number', with: "0821234561"
     click_button 'submit'
     page.should have_content("Joe Barber")

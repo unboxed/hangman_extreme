@@ -1,7 +1,10 @@
 <%= form_for(@user) do |f| %>
-    Enter your Real name
-    <%= f.text_field :real_name %>
-    Enter your Mobile number
-    <%= f.text_field :mobile_number %>
+    <% if params[:field] == 'real_name' %>
+        Enter your Real name
+        <%= f.text_field :real_name %>
+    <% else %>
+        Enter your Mobile number
+        <%= f.text_field :mobile_number %>
+    <% end %>
     <%= f.submit 'save', id: 'submit' %>
 <% end %>

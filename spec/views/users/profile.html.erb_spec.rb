@@ -19,11 +19,14 @@ describe "users/profile.html.erb" do
     rendered.should have_link("root_page", href: '/')
   end
 
-  it "should have a modify profile link" do
+  it "should have a modify real name link" do
     render
-    rendered.should have_link("edit", href: edit_user_path(@user))
+    rendered.should have_link("edit_real_name", href: edit_user_path(@user, :field => 'real_name'))
   end
 
-
+  it "should have a modify mobile number link" do
+    render
+    rendered.should have_link("edit_mobile_number", href: edit_user_path(@user, :field => 'mobile_number'))
+  end
 
 end
