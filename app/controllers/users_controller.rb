@@ -33,7 +33,7 @@ class UsersController < ApplicationController
       redirect_to profile_users_path, alert: "Authorisation failed: #{params[:error].to_s}"
     else
       begin
-        mxit_connection = MxitApi.connect(params[:code],profile_users_url(host: request.host))
+        mxit_connection = MxitApi.connect(params[:code],mxit_oauth_users_url(host: request.host))
         if mxit_connection
           mxit_user_profile = mxit_connection.profile
           unless mxit_user_profile.empty?
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
         end
       rescue Exception => e
         # ignore error
-        ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(message)
+        ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : raise
       end
       redirect_to profile_users_path
     end

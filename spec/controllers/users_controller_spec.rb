@@ -34,7 +34,7 @@ describe UsersController do
       end
 
       it "must create a new mxit connection" do
-        MxitApi.should_receive(:connect).with("123",profile_users_url(host: 'test.host')).and_return(@connection)
+        MxitApi.should_receive(:connect).with("123",mxit_oauth_users_url(host: 'test.host')).and_return(@connection)
         get 'mxit_oauth', code: "123"
       end
 
