@@ -15,7 +15,6 @@ gem 'airbrake'
 gem 'ledermann-rails-settings', :require => 'rails-settings'
 gem 'rest-client', require: 'rest_client'
 gem 'ohm'
-gem 'ohm-expire', require: 'ohm/expire'
 
 # Gems used only for assets and not required
 # in production environments by default.

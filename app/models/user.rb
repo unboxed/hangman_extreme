@@ -94,11 +94,11 @@ class User < ActiveRecord::Base
 
   def utma(update_tracking = false)
     google_tracking.update_tracking if update_tracking
-    "1.#{id}.#{google_tracking.initial_visit}.#{google_tracking.previous_session}.#{google_tracking.current_session}.15"
+    "1.#{id}00145214523.#{google_tracking.initial_visit}.#{google_tracking.previous_session}.#{google_tracking.current_session}.15"
   end
 
   def google_tracking
-    @google_tracking ||= GoogleTracking.find_or_create_by_user_id(user_id: id)
+    @google_tracking ||= GoogleTracking.find_or_create_by_user_id(id)
   end
 
   private

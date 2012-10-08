@@ -108,8 +108,6 @@ GEM
       nest (~> 1.0)
       redis
       scrivener (~> 0.0.3)
-    ohm-expire (0.1.3.1)
-      ohm (>= 0.1.5)
     omniauth (1.1.1)
       hashie (~> 1.2)
       rack
@@ -225,7 +223,6 @@ DEPENDENCIES
   newrelic_rpm
   nokogiri
   ohm
-  ohm-expire
   omniauth
   pg
   rails (~> 3.2.1)

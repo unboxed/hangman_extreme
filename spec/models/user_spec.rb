@@ -351,6 +351,10 @@ describe User do
       expect{
         sleep 1; user.utma(true)
       }.to change(user,:utma)
+      user = stub_model(User)
+      expect{
+        sleep 1; user.utma(false)
+      }.to_not change(user,:utma)
     end
 
   end
