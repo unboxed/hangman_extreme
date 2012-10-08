@@ -102,9 +102,13 @@ class User < ActiveRecord::Base
     @google_tracking ||= GoogleTracking.find_or_create_by_user_id(id)
   end
 
-  def self.send_message(msg)
-    if mxit.any?
-      to = mxit.collect(&:uid).join(",")
+  def send_message(msg)
+    User.send_message(msg,[self])
+  end
+
+  def self.send_message(msg, users = User.mxit)
+    unless users.empty?
+      to = users.collect(&:uid).join(",")
       mxit_connection = MxitApi.connect
       mxit_connection.send_message(Body: msg, To: to) if mxit_connection
     end
