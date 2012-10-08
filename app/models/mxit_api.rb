@@ -1,7 +1,7 @@
 class MxitApi
 
   attr_reader :access_token, :token_type, :refresh_token, :scope, :expire_at
-  def initialize(form_data = {grant_type: 'client_credentials', scope: 'message'})
+  def initialize(form_data = {grant_type: 'client_credentials', scope: 'message/send'})
     url = URI.parse('https://auth.mxit.com/token')
     req = Net::HTTP::Post.new(url.path, 'Accept'=>'application/json')
     req.set_form_data(form_data)
@@ -34,12 +34,13 @@ class MxitApi
   end
 
   def send_message(params)
-    url = URI.parse('https://api.mxit.com/message/send')
+    params.reverse_merge!(Body: 'Test', ContainsMarkup: 'true', From: ENV['MXIT_APP_NAME'])
+    url = URI.parse('https://api.mxit.com/message/send/')
     req = Net::HTTP::Post.new(url.path, 'Authorization' => "#{token_type} #{access_token}", 'Accept'=>'application/json')
     req.set_form_data(params)
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
-    response = http.request(req)
+    http.request(req)
   end
 
   def self.connect(*args)

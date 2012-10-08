@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :uid, :scope => :provider
 
   scope :top_scorers, lambda{ |field| order("#{field} DESC").limit(10) }
+  scope :mxit, where(provider: 'mxit')
 
   def self.find_or_create_from_auth_hash(auth_hash)
     auth_hash.stringify_keys!
@@ -99,6 +100,14 @@ class User < ActiveRecord::Base
 
   def google_tracking
     @google_tracking ||= GoogleTracking.find_or_create_by_user_id(id)
+  end
+
+  def self.send_message(msg)
+    if mxit.any?
+      to = mxit.collect(&:uid).join(",")
+      mxit_connection = MxitApi.connect
+      mxit_connection.send_message(Body: msg, To: to) if mxit_connection
+    end
   end
 
   private

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121008121128) do
+ActiveRecord::Schema.define(:version => 20121008151754) do
 
   create_table "games", :force => true do |t|
     t.string   "word"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20121008121128) do
   add_index "settings", ["target_type", "target_id", "var"], :name => "index_settings_on_target_type_and_target_id_and_var", :unique => true
 
   create_table "users", :force => true do |t|
-    t.string   "name"
+    t.text     "name"
     t.string   "uid"
     t.string   "provider"
     t.datetime "created_at",                       :null => false
