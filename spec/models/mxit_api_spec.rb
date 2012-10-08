@@ -16,42 +16,56 @@ describe MxitApi do
   context "new" do
 
     it "must post to mxit api requesting token" do
-      MxitApi.new("456","http://www.hangman_league.dev/users/mxit_oauth")
+      MxitApi.new(:grant_type => 'authorization_code',
+                  :code => "456",
+                  :redirect_uri => "http://www.hangman_league.dev/users/mxit_oauth")
       assert_requested(:post, "https://1:1@auth.mxit.com/token",
                        :body => "grant_type=authorization_code&code=456&redirect_uri=http%3A%2F%2Fwww.hangman_league.dev%2Fusers%2Fmxit_oauth",
                        :headers => {'Accept'=>'application/json', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Ruby'})
     end
 
     it "must set the access_token" do
-      connection = MxitApi.new("456","/")
+      connection = MxitApi.new(:grant_type => 'authorization_code',
+                               :code => "456",
+                               :redirect_uri => "/")
       connection.access_token.should == "c71219af53f5409e9d1db61db8a08248"
     end
 
     it "must set the token_type" do
-      connection = MxitApi.new("456","/")
+      connection = MxitApi.new(:grant_type => 'authorization_code',
+                               :code => "456",
+                               :redirect_uri => "/")
       connection.token_type.should == "bearer"
     end
 
     it "must set expire_at" do
       Timecop.freeze do
-        connection = MxitApi.new("456","/")
+        connection = MxitApi.new(:grant_type => 'authorization_code',
+                                 :code => "456",
+                                 :redirect_uri => "/")
         connection.expire_at.should == 1.hour.from_now
       end
     end
 
     it "must set the refresh_token" do
-      connection = MxitApi.new("456","/")
+      connection = MxitApi.new(:grant_type => 'authorization_code',
+                               :code => "456",
+                               :redirect_uri => "/")
       connection.refresh_token.should == "7f4b56bda11e4f7ba84c9e35c76b7aea"
     end
 
     it "must set the scope" do
-      connection = MxitApi.new("456","/")
+      connection = MxitApi.new(:grant_type => 'authorization_code',
+                               :code => "456",
+                               :redirect_uri => "/")
       connection.scope.should == "message"
     end
 
     it "must handle a failed response" do
       stub_request(:post, "https://1:1@auth.mxit.com/token").to_return(:status => 401, :body => '', :headers => {})
-      connection = MxitApi.new("456","/")
+      connection = MxitApi.new(:grant_type => 'authorization_code',
+                               :code => "456",
+                               :redirect_uri => "/")
       connection.access_token.should be_nil
     end
 
@@ -61,14 +75,22 @@ describe MxitApi do
 
     it "must return connection if has access_token" do
       connection = mock('MxitApi', access_token: "123")
-      MxitApi.should_receive(:new).with("123","/new").and_return(connection)
-      MxitApi.connect("123","/new").should == connection
+      MxitApi.should_receive(:new).with(:grant_type => 'authorization_code',
+                                        :code => "456",
+                                        :redirect_uri => "/").and_return(connection)
+      MxitApi.connect(:grant_type => 'authorization_code',
+                      :code => "456",
+                      :redirect_uri => "/").should == connection
     end
 
     it "wont return connection if not access_token" do
       connection = mock('MxitApi', access_token: nil)
-      MxitApi.should_receive(:new).with("123","/new").and_return(connection)
-      MxitApi.connect("123","/new").should be_nil
+      MxitApi.should_receive(:new).with(:grant_type => 'authorization_code',
+                                        :code => "456",
+                                        :redirect_uri => "/").and_return(connection)
+      MxitApi.connect(:grant_type => 'authorization_code',
+                      :code => "456",
+                      :redirect_uri => "/").should be_nil
     end
 
   end
@@ -107,7 +129,9 @@ describe MxitApi do
                   "WhereAmI":"String content"
                 }&
       stub_request(:get, "https://api.mxit.com/user/profile").to_return(:status => 200, :body => body, :headers => {})
-      @connection = MxitApi.new("456","/")
+      @connection = MxitApi.new(:grant_type => 'authorization_code',
+                                :code => "456",
+                                :redirect_uri => "/")
     end
 
     it "must return a hash of the profile" do

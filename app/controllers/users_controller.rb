@@ -33,7 +33,9 @@ class UsersController < ApplicationController
       redirect_to profile_users_path, alert: "Authorisation failed: #{params[:error].to_s}"
     else
       begin
-        mxit_connection = MxitApi.connect(params[:code],mxit_oauth_users_url(host: request.host))
+        mxit_connection = MxitApi.connect(:grant_type => 'authorization_code',
+                                          :code => params[:code],
+                                          :redirect_uri => mxit_oauth_users_url(host: request.host))
         if mxit_connection
           mxit_user_profile = mxit_connection.profile
           unless mxit_user_profile.empty?
