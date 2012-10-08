@@ -36,8 +36,11 @@ class MxitApi
   def send_message(params)
     params.reverse_merge!(Body: 'Test', ContainsMarkup: 'true', From: ENV['MXIT_APP_NAME'])
     url = URI.parse('https://api.mxit.com/message/send/')
-    req = Net::HTTP::Post.new(url.path, 'Authorization' => "#{token_type} #{access_token}", 'Accept'=>'application/json')
-    req.set_form_data(params)
+    req = Net::HTTP::Post.new(url.path,
+                              'Authorization' => "#{token_type} #{access_token}",
+                              'Accept'=>'application/json',
+                              'Content-Type' =>'application/json')
+    req.body = params.to_json
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
     http.request(req)
