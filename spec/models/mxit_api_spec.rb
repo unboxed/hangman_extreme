@@ -19,7 +19,7 @@ describe MxitApi do
       MxitApi.new("456","http://www.hangman_league.dev/users/mxit_oauth")
       assert_requested(:post, "https://1:1@auth.mxit.com/token",
                        :body => "grant_type=authorization_code&code=456&redirect_uri=http%3A%2F%2Fwww.hangman_league.dev%2Fusers%2Fmxit_oauth",
-                       :headers => {'Accept'=>'*/*', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Ruby'})
+                       :headers => {'Accept'=>'application/json', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Ruby'})
     end
 
     it "must set the access_token" do
@@ -123,7 +123,7 @@ describe MxitApi do
       @connection.stub(:token_type).and_return("bearer")
       @connection.profile
       assert_requested(:get, "https://api.mxit.com/user/profile",
-                       :headers => {'Accept'=>'*/*',
+                       :headers => {'Accept'=>'application/json',
                                     'Authorization'=>'bearer c71219af53f5409e9d1db61db8a08248',
                                     'User-Agent'=>'Ruby'})
     end

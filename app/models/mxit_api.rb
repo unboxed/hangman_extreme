@@ -3,7 +3,7 @@ class MxitApi
   attr_reader :access_token, :token_type, :refresh_token, :scope, :expire_at
   def initialize(code, redirect_uri)
     url = URI.parse('https://auth.mxit.com/token')
-    req = Net::HTTP::Post.new(url.path)
+    req = Net::HTTP::Post.new(url.path, 'Accept'=>'application/json')
     req.set_form_data(:grant_type => 'authorization_code',
                       :code => code,
                       :redirect_uri => redirect_uri)
@@ -24,7 +24,7 @@ class MxitApi
   def profile
     profile = {}
     url = URI.parse('https://api.mxit.com/user/profile')
-    req = Net::HTTP::Get.new(url.path, 'Authorization' => "#{token_type} #{access_token}")
+    req = Net::HTTP::Get.new(url.path, 'Authorization' => "#{token_type} #{access_token}", 'Accept'=>'application/json')
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
     response = http.request(req)
