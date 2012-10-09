@@ -3,7 +3,7 @@
 <ul>
   <%= content_tag_for(:li, @users) do |user| %>
     <%= display_user_name(user.name) %> -
-      <%= user.send(@send.to_sym) if @send %>
+      <%= user.send(@send.to_sym) %>
   <% end %>
 </ul>
 
