@@ -6,7 +6,7 @@ else
 end
 Redis.current = REDIS
 class Redis
-  def self.connect(options = {})                                 s
+  def self.connect(options = {})
     current
   end
 end
