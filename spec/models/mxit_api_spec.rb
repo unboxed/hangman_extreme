@@ -160,4 +160,25 @@ describe MxitApi do
 
   end
 
+  context "send_message" do
+
+    before :each do
+      stub_request(:post, "https://api.mxit.com/message/send/").to_return(:status => 200, :body => '', :headers => {})
+      @connection = MxitApi.new
+    end
+
+    it "must make the correct api request" do
+      @connection.stub(:access_token).and_return("c71219af53f5409e9d1db61db8a08248")
+      @connection.stub(:token_type).and_return("bearer")
+      @connection.send_message(:to => "m123", :body => "Hello from the Mxit Api")
+      assert_requested(:post, "https://api.mxit.com/message/send/",
+                       :body => '{"To":"m123","Body":"Hello from the Mxit Api","ContainsMarkup":"true","From":"hangman"}',
+                       :headers => {'Accept'=>'application/json',
+                                    'Authorization'=>'bearer c71219af53f5409e9d1db61db8a08248',
+                                    'User-Agent'=>'Ruby',
+                                    'Content-Type' =>'application/json'})
+    end
+
+  end
+
 end
