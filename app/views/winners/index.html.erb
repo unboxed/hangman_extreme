@@ -5,12 +5,12 @@
 <table>
   <tbody>
   <tr>
-      <td><b>name</b> | </td>
-      <td><b>moola</b> | </td>
+    <td><b>moola</b> | </td>
+    <td><b>name</b></td>
   </tr>
   <%= content_tag_for(:tr, @winners) do |winner| %>
-      <td><%= display_user_name(winner.name) %> | </td>
       <td><%= winner.amount %> | </td>
+      <td><%= display_user_name(winner.name) %></td>
   <% end %>
   </tbody>
 </table>
