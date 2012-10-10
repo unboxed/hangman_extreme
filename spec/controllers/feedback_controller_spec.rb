@@ -54,7 +54,7 @@ describe FeedbackController do
         @current_user.real_name = "Grant"
         @current_user.uid = "m123"
         @current_user.provider = "mxit"
-        Feedback.should_receive(:send_support).with(:email => 'm123@mxit.io',
+        Feedback.should_receive(:send_support).with(:email => 'm123_mxit@noreply.io',
                                                     :subject => 'The message',
                                                     :message => "The very long part of the message")
         do_create
@@ -64,7 +64,7 @@ describe FeedbackController do
         @current_user.real_name = "Grant"
         @current_user.uid = "m123"
         @current_user.provider = "mxit"
-        Feedback.should_receive(:send_suggestion).with(:email => 'm123@mxit.io',
+        Feedback.should_receive(:send_suggestion).with(:email => 'm123_mxit@noreply.io',
                                                     :subject => 'The message',
                                                     :message => "The very long part of the message")
         do_create 'suggestion'
