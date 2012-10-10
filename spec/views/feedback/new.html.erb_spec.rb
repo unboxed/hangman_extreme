@@ -12,7 +12,6 @@ describe "feedback/new.html.erb" do
 
   it "renders feedback field" do
     render
-    puts @rendered
     within('form') do
       rendered.should have_field('feedback')
     end
