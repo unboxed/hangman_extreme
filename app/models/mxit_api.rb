@@ -34,17 +34,22 @@ class MxitApi
   end
 
   def send_message(params)
-    params = Hash[params.map {|k, v| [k.to_s.camelize, v] }]
-    params.reverse_merge!('Body' => 'Test', 'ContainsMarkup' => 'true', 'From' => ENV['MXIT_APP_NAME'] || 'hangman', 'SpoolTimeout' => 23.hours.to_i)
-    url = URI.parse('https://api.mxit.com/message/send/')
-    req = Net::HTTP::Post.new(url.path,
-                              'Authorization' => "#{token_type} #{access_token}",
-                              'Accept'=>'application/json',
-                              'Content-Type' =>'application/json')
-    req.body = params.to_json
-    http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = true
-    http.request(req)
+    begin
+      params = Hash[params.map {|k, v| [k.to_s.camelize, v] }]
+      params.reverse_merge!('Body' => 'Test', 'ContainsMarkup' => 'true', 'From' => ENV['MXIT_APP_NAME'] || 'hangman', 'SpoolTimeout' => 23.hours.to_i)
+      url = URI.parse('https://api.mxit.com/message/send/')
+      req = Net::HTTP::Post.new(url.path,
+                                'Authorization' => "#{token_type} #{access_token}",
+                                'Accept'=>'application/json',
+                                'Content-Type' =>'application/json')
+      req.body = params.to_json
+      http = Net::HTTP.new(url.host, url.port)
+      http.use_ssl = true
+      http.request(req)
+    rescue Exception => e
+      ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
+      raise if Rails.env.test?
+    end
   end
 
   def self.connect(*args)
