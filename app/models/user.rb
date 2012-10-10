@@ -24,16 +24,8 @@ class User < ActiveRecord::Base
     return user
   end
 
-  def daily_rating_winners
-    winners.period('daily').reason('rating')
-  end
-
-  def daily_precision_winners
-    winners.period('daily').reason('precision')
-  end
-
-  def daily_wins_winners
-    winners.period('daily').reason('wins')
+  def winners_for_period_and_reason(period,reason)
+    winners.period(period).reason(reason)
   end
 
   def calculate_daily_wins
