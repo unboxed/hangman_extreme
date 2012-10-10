@@ -35,7 +35,7 @@ class MxitApi
 
   def send_message(params)
     params = Hash[params.map {|k, v| [k.to_s.camelize, v] }]
-    params.reverse_merge!('Body' => 'Test', 'ContainsMarkup' => 'true', 'From' => ENV['MXIT_APP_NAME'] || 'hangman')
+    params.reverse_merge!('Body' => 'Test', 'ContainsMarkup' => 'true', 'From' => ENV['MXIT_APP_NAME'] || 'hangman', 'SpoolTimeout' => 23.hours.to_i)
     url = URI.parse('https://api.mxit.com/message/send/')
     req = Net::HTTP::Post.new(url.path,
                               'Authorization' => "#{token_type} #{access_token}",

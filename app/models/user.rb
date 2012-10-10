@@ -100,9 +100,13 @@ class User < ActiveRecord::Base
 
   def self.send_message(msg, users = User.mxit)
     unless users.empty?
-      to = users.collect(&:uid).join(",")
       mxit_connection = MxitApi.connect
-      mxit_connection.send_message(Body: msg, To: to) if mxit_connection
+      if mxit_connection
+        users.in_groups_of(20,false).each do |user_group|
+          to = user_group.collect(&:uid).join(",")
+          mxit_connection.send_message(body: msg, to: to)
+        end
+      end
     end
   end
 
