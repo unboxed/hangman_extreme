@@ -14,6 +14,7 @@ gem 'json'
 gem 'airbrake'
 gem 'ledermann-rails-settings', :require => 'rails-settings'
 gem 'rest-client', require: 'rest_client'
+gem 'redis', '~> 2.2.0'
 gem 'ohm'
 
 # Gems used only for assets and not required
