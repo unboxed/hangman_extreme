@@ -69,7 +69,7 @@ describe Winner do
     it "must send the players a message" do
       user = create(:user, daily_wins: 10)
       User.should_receive(:send_message).
-        with("Congratulation, you have won *10 moola* for $daily wins$. Please make sure you have entered your details on the $profile$ page so we can pay you out.",
+        with("Congratulations, you have won *10 moola* for $daily wins$. Please make sure you have entered your details on the $profile$ page so we can pay you out.",
              [user])
       Winner.create_daily_winners_for_category("wins",[10] * 10)
     end
@@ -82,6 +82,8 @@ describe Winner do
       create_list(:user,10, daily_rating: 0, daily_precision: 0, daily_wins: 0)
       Winner.should respond_to(:create_daily_winners_for_category)
       Winner.stub(:create_daily_winners_for_category)
+      User.should respond_to(:send_message)
+      User.stub(:send_message)
     end
 
     it "must create the rating winner" do
@@ -96,6 +98,12 @@ describe Winner do
 
     it "must create the wins winner" do
       Winner.should_receive(:create_daily_winners_for_category).with("wins",(11..20).to_a.reverse)
+      Winner.create_daily_winners((11..20).to_a.reverse)
+    end
+
+    it "must send a message to everyone" do
+      User.should_receive(:send_message).
+        with("We have selected our $winners$ for the day, Congratulations to those who have won.")
       Winner.create_daily_winners((11..20).to_a.reverse)
     end
 

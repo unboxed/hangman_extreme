@@ -9,7 +9,7 @@ namespace :scheduler do
 
     desc "what must be run at end of the day"
     task "end_of_day" => :environment do
-      Winner.create_daily_winners([0,0,0,0,0,0,0,0,0,0])
+      Winner.create_daily_winners([10,9,8,7,6,5,4,3,2,1])
     end
   end
 

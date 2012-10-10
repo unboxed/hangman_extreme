@@ -16,6 +16,7 @@ class Winner < ActiveRecord::Base
     ['rating','precision','wins'].each do |field|
       create_daily_winners_for_category(field,winnings)
     end
+    User.send_message("We have selected our $winners$ for the day, Congratulations to those who have won.")
   end
 
   def self.create_daily_winners_for_category(field,winnings)
@@ -26,7 +27,7 @@ class Winner < ActiveRecord::Base
                      reason: field,
                      start_of_period_on: Date.today,
                      period: 'daily')
-      user.send_message("Congratulation, you have won *#{amount} moola* for $daily #{field}$. Please make sure you have entered your details on the $profile$ page so we can pay you out.")
+      user.send_message("Congratulations, you have won *#{amount} moola* for $daily #{field}$. Please make sure you have entered your details on the $profile$ page so we can pay you out.")
     end
   end
 
