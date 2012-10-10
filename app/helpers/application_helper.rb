@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def shinka_ad
-    result = Settings.last_shinka_ad.try(:html_safe) || ""
+    result = ""
     return result unless shinka_ads_enabled?
     begin
       Timeout::timeout(15) do
@@ -19,16 +19,15 @@ module ApplicationHelper
           link = creative["media"]
           return result if link.blank? || !link.include?("href=")
           link.gsub!("href=","onclick='window.open(this.href); return false;' href=")
-          Settings.last_shinka_ad = "#{beacon}#{link}".html_safe
+          "#{beacon}#{link}".html_safe
         else
-          Settings.last_shinka_ad = "#{beacon}<a href=#{tracking['click']} onclick='window.open(this.href); return false;' >#{alt}</a>".html_safe
+          "#{beacon}<a href=#{tracking['click']} onclick='window.open(this.href); return false;' >#{alt}</a>".html_safe
         end
       end
     rescue Exception => e
       ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
       Settings.shinka_disabled_until = 10.minutes.from_now # disable for a hour
-      Rails.logger.error e.message
-      raise if Rails.env.test?
+      raise unless Rails.env.production?
       return result
     end
   end

@@ -50,10 +50,9 @@ describe ApplicationHelper do
     end
 
     it "must load blank ad if shinka code throws exception" do
-      Settings.last_shinka_ad = "<a>Ad</a>"
       helper.stub(:current_user_request_info).and_raise
-      Rails.env.stub(:test?).and_return(false)
-      helper.shinka_ad.should == "<a>Ad</a>"
+      Rails.env.stub(:production?).and_return(true)
+      helper.shinka_ad.should == ""
     end
 
   end
