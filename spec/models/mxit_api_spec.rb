@@ -172,7 +172,7 @@ describe MxitApi do
       @connection.stub(:token_type).and_return("bearer")
       @connection.send_message(:to => "m123", :body => "Hello from the Mxit Api")
       assert_requested(:post, "https://api.mxit.com/message/send/",
-                       :body => '{"To":"m123","Body":"Hello from the Mxit Api","ContainsMarkup":"true","From":"hangman"}',
+                       :body => '{"To":"m123","Body":"Hello from the Mxit Api","ContainsMarkup":"true","From":"hangman","SpoolTimeout":82800}',
                        :headers => {'Accept'=>'application/json',
                                     'Authorization'=>'bearer c71219af53f5409e9d1db61db8a08248',
                                     'User-Agent'=>'Ruby',
