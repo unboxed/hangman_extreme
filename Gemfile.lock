@@ -104,7 +104,7 @@ GEM
     netrc (0.7.7)
     newrelic_rpm (3.4.2.1)
     nokogiri (1.5.5)
-    ohm (1.2.0)
+    ohm (1.1.2)
       nest (~> 1.0)
       redis
       scrivener (~> 0.0.3)
@@ -222,7 +222,7 @@ DEPENDENCIES
   mysql
   newrelic_rpm
   nokogiri
-  ohm
+  ohm (~> 1.1.2)
   omniauth
   pg
   rails (~> 3.2.1)
