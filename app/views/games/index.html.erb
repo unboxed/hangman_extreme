@@ -27,5 +27,6 @@ view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %> |
                                             client_id: ENV['MXIT_CLIENT_ID'],
                                             redirect_uri: mxit_oauth_users_url(host: request.host),
                                             scope: "profile/public profile/private"), id: 'authorise' %> |
-view <%= link_to 'winners', winners_path, id: 'winners' %>
+view <%= link_to 'winners', winners_path, id: 'winners' %> |
+send <%= link_to 'feedback', feedback_index_path, id: 'feedback' %>
 

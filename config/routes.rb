@@ -13,9 +13,8 @@ HangmanLeague::Application.routes.draw do
       get 'profile', action: 'profile', as: 'profile'
     end
   end
-
+  resources :feedback, :except => [:show, :edit, :update, :destroy]
   resources :winners, :except => [:edit, :update, :create, :new, :destroy]
-
 
   match '/define/:word', to: 'words#define', as: 'define_word'
   match '/facebook_oauth', to: 'users#facebook_oauth', as: 'facebook_oauth'

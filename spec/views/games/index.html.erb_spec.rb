@@ -51,6 +51,11 @@ describe "games/index" do
     rendered.should have_content("Pagination")
   end
 
+  it "should have a feedback link" do
+    render
+    rendered.should have_link("feedback", href: feedback_index_path)
+  end
+
   it "should have a authorise" do
     render
     rendered.should have_link("authorise", href: mxit_authorise_url(response_type: 'code',

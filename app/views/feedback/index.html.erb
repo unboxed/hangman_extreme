@@ -1,0 +1,11 @@
+<b>Feedback</b><br/>
+
+<p>What kind of feedback do you want to give?</p>
+
+<ul>
+  <li><%= link_to '1', new_feedback_path(:type => 'support'), id: 'support' %>) support</li>
+  <li><%= link_to '2', new_feedback_path(:type => 'suggestion'), id: 'suggestion' %>) suggestion</li>
+</ul>
+
+<br/>
+<%= link_to 'cancel', root_path, id: 'home' %> feedback

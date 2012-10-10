@@ -16,6 +16,7 @@ gem 'ledermann-rails-settings', :require => 'rails-settings'
 gem 'rest-client', require: 'rest_client'
 gem 'redis'
 gem 'ohm'
+gem 'uservoice-ruby'
 
 # Gems used only for assets and not required
 # in production environments by default.
