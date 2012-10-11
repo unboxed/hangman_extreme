@@ -5,11 +5,10 @@ module ApplicationHelper
     return result unless shinka_ads_enabled?
     begin
       Timeout::timeout(15) do
-        ads = ActiveSupport::JSON.decode(open("http://ox-d.shinka.sh/ma/1.0/arj?auid=#{shinka_auid}&c.age=#{current_user_request_info.age}&c.gender=#{current_user_request_info.gender}").read)
-        if ads['ads']['count'].to_i == 0
-          ads = ActiveSupport::JSON.decode(open("http://ox-d.shinka.sh/ma/1.0/arj?auid=#{shinka_auid}").read)
-          return "" if ads['ads']['count'].to_i == 0
-        end
+        headers = {"User-Agent" => "Mozilla Compatible/5.0 #{env['HTTP_USER_AGENT']}",
+                   "X-FORWARDED_FOR" => env["HTTP_X_FORWARDED_FOR"]}
+        ads = ActiveSupport::JSON.decode(open("http://ox-d.shinka.sh/ma/1.0/arj?auid=#{shinka_auid}&c.age=#{current_user_request_info.age}&c.gender=#{current_user_request_info.gender}",headers).read)
+        return "" if ads['ads']['count'].to_i == 0
         ad = ads['ads']["ad"].sample
         result = ad["html"].gsub("href=","onclick='window.open(this.href); return false;' href=").html_safe
         creative = ad["creative"].first
@@ -42,6 +41,10 @@ module ApplicationHelper
 
   def shinka_auid
     ENV['SHINKA_AUID']
+  end
+
+  def env
+    request.env
   end
 
 end

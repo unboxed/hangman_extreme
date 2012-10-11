@@ -41,7 +41,9 @@ describe UsersController do
       end
 
       it "returns sets and save profile information" do
-        @connection.should_receive(:profile).and_return(:first_name => "Grant", :last_name => "Speelman", :mobile_number => "0821234567")
+        @connection.should_receive(:profile).and_return(:first_name => "Grant",
+                                                        :last_name => "Speelman",
+                                                        :mobile_number => "0821234567")
         @current_user.should_receive(:save)
         get 'mxit_oauth', code: "123"
         @current_user.real_name.should == "Grant Speelman"
