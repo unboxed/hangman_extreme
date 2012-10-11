@@ -136,6 +136,7 @@ describe ApplicationController do
       controller.stub(:current_user).and_return(@user)
       controller.stub(:current_user_request_info).and_return(@user_request_info)
       @gabba = mock('connection',
+                    :ip_address= => '',
                     :user_agent= => '',
                     :utmul= => '',
                     :set_custom_var => '',

@@ -41,6 +41,7 @@ class ApplicationController < ActionController::Base
           g.set_custom_var(3, current_user_request_info.country || "unknown Country", current_user_request_info.area || "unknown", 1)
           g.set_custom_var(5, 'Provider', current_user.provider, 1)
           g.identify_user(current_user.utma(true))
+          g.ip_address = request.env['HTTP_X_FORWARDED_FOR'] || request.env['HTTP_CLIENT_IP'] || request.env['REMOTE_ADDR']
           g.page_view("#{params[:controller]} #{params[:action]}", request.fullpath,current_user.id)
         end
       rescue Exception => e
