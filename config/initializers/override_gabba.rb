@@ -13,7 +13,7 @@ module Gabba
         request = Net::HTTP::Get.new("#{BEACON_PATH}?#{query}")
         request["User-Agent"] = URI.escape(user_agent)
         request["Accept"] = "*/*"
-        request["X-FORWARDED_FOR"] = URI.escape(ip_address) if ip_address
+        request["X-Forwarded-For"] = URI.escape(ip_address) if ip_address
         http.request(request)
       end
 
