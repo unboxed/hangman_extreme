@@ -1,10 +1,10 @@
 <b>Your Profile</b>
 
-<div>We require your <b>Real name</b> and <b>Mobile number</b> to payout any moola winnings</div>
+<div>We require your <b>Full real name</b> and <b>Mobile number</b> to payout any moola winnings</div>
 <div>This information will not be displayed anywhere on hangman extreme or sold to third parties</div>
 <br/>
 
-change <%= link_to 'real name', edit_user_path(current_user, :field => 'real_name'), id: 'edit_real_name' %>:
+change full <%= link_to 'real name', edit_user_path(current_user, :field => 'real_name'), id: 'edit_real_name' %>:
 <%= current_user.real_name %><br/>
 change <%= link_to 'mobile number', edit_user_path(current_user, :field => 'mobile_number'), id: 'edit_mobile_number' %>:
 <%= current_user.mobile_number %><br/>
