@@ -51,7 +51,7 @@ describe UsersController do
       end
 
       it "returns usings mxit.im address if no email set" do
-        @connection.should_receive(:profile).and_return(:user_id => "m123",:email => "")
+        @connection.should_receive(:profile).and_return(:user_id => "m123")
         @current_user.should_receive(:save)
         get 'mxit_oauth', code: "123"
         @current_user.email.should == "m123@mxit.im"
