@@ -26,12 +26,12 @@ class UsersController < ApplicationController
   end
 
   def mxit_authorise
-    redirect_to action: 'mxit_oauth', code: "MXITAUTH"
+    redirect_to action: 'mxit_oauth', code: "MXITAUTH", state: params[:state]
   end
 
   def mxit_oauth
     if params[:code].blank?
-      redirect_to profile_users_path, alert: "Authorisation failed: #{params[:error].to_s}"
+      redirect_to mxit_oauth_redirect_to_path, alert: "Authorisation failed: #{params[:error].to_s}"
     else
       begin
         mxit_connection = MxitApi.connect(:grant_type => 'authorization_code',
@@ -42,6 +42,7 @@ class UsersController < ApplicationController
           unless mxit_user_profile.empty?
             current_user.real_name = "#{mxit_user_profile[:first_name]} #{mxit_user_profile[:last_name]}" if current_user.real_name.blank?
             current_user.mobile_number = mxit_user_profile[:mobile_number] if current_user.mobile_number.blank?
+            current_user.email = "#{mxit_user_profile[:user_id]}@mxit.im" if current_user.email.blank?
             current_user.save
           end
         end
@@ -49,7 +50,17 @@ class UsersController < ApplicationController
         # ignore error
         ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : raise
       end
-      redirect_to profile_users_path
+      redirect_to mxit_oauth_redirect_to_path
+    end
+  end
+
+  private
+
+  def mxit_oauth_redirect_to_path
+    if params[:state] == 'feedback'
+      feedback_index_path
+    else
+      profile_users_path
     end
   end
 

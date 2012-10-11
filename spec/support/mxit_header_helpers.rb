@@ -5,3 +5,13 @@ def set_mxit_headers(id = "m2604100")
               'X_DEVICE_USER_AGENT' => "iphone",
               'X_MXIT_NICK' => "#FF00FF_G_*r*/a$n$t/")
 end
+
+def stub_mxit_oauth(fields = {})
+  # stub out mxit oauth
+  body = Hash[fields.map {|k, v| [k.to_s.camelize, v] }].to_json
+  stub_request(:get, "https://api.mxit.com/user/profile").to_return(:status => 200, :body => body, :headers => {})
+  stub_request(:get, "https://1:@api.mxit.com/user/profile").to_return(:status => 200, :body => body, :headers => {})
+  token_body = %&{ "access_token":"c71219af53f5409e9d1db61db8a08248" }&
+  stub_request(:post, "https://auth.mxit.com/token").to_return(:status => 200, :body => token_body, :headers => {})
+  stub_request(:post, "https://1:@auth.mxit.com/token").to_return(:status => 200, :body => token_body, :headers => {})
+end

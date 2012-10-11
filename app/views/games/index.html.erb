@@ -27,7 +27,14 @@ view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %> |
                                             protocol: Rails.env.test? ? 'http' : 'https',
                                             client_id: ENV['MXIT_CLIENT_ID'],
                                             redirect_uri: mxit_oauth_users_url(host: request.host),
-                                            scope: "profile/public profile/private"), id: 'authorise' %> |
+                                            scope: "profile/public profile/private",
+                                            state: "profile"), id: 'authorise' %> |
 view <%= link_to 'winners', winners_path, id: 'winners' %> |
-send <%= link_to 'feedback', feedback_index_path, id: 'feedback' %>
+send <%= link_to 'feedback', mxit_authorise_url(response_type: 'code',
+                                          host: Rails.env.test? ? request.host : "auth.mxit.com",
+                                          protocol: Rails.env.test? ? 'http' : 'https',
+                                          client_id: ENV['MXIT_CLIENT_ID'],
+                                          redirect_uri: mxit_oauth_users_url(host: request.host),
+                                          scope: "profile/public profile/private",
+                                          state: "feedback"), id: 'feedback' %> |
 

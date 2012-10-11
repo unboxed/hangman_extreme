@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121008151754) do
+ActiveRecord::Schema.define(:version => 20121011103107) do
 
   create_table "games", :force => true do |t|
     t.string   "word"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(:version => 20121008151754) do
     t.integer  "daily_wins",        :default => 0
     t.string   "real_name"
     t.string   "mobile_number"
+    t.string   "email"
   end
 
   add_index "users", ["daily_precision"], :name => "index_users_on_daily_precision"

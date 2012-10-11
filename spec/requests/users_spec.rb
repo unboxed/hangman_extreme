@@ -44,14 +44,7 @@ describe 'users' do
   end
 
   it "must have a fill in profile information" do
-    body = %&{"FirstName":"Grant",
-              "LastName":"Speelman",
-              "MobileNumber":"0821234567"}&
-    stub_request(:get, "https://api.mxit.com/user/profile").to_return(:status => 200, :body => body, :headers => {})
-    stub_request(:get, "https://1:@api.mxit.com/user/profile").to_return(:status => 200, :body => body, :headers => {})
-    token_body = %&{ "access_token":"c71219af53f5409e9d1db61db8a08248" }&
-    stub_request(:post, "https://auth.mxit.com/token").to_return(:status => 200, :body => token_body, :headers => {})
-    stub_request(:post, "https://1:@auth.mxit.com/token").to_return(:status => 200, :body => token_body, :headers => {})
+    stub_mxit_oauth :first_name => "Grant", :last_name => "Speelman", :mobile_number => "0821234567"
     visit '/'
     click_link('authorise')
     page.should have_content("Grant Speelman")

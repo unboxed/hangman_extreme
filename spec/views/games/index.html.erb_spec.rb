@@ -53,7 +53,12 @@ describe "games/index" do
 
   it "should have a feedback link" do
     render
-    rendered.should have_link("feedback", href: feedback_index_path)
+    rendered.should have_link("feedback", href: mxit_authorise_url(response_type: 'code',
+                                                                    host: "test.host",
+                                                                    client_id: ENV['MXIT_CLIENT_ID'],
+                                                                    redirect_uri: mxit_oauth_users_url(host: "test.host"),
+                                                                    scope: "profile/public profile/private",
+                                                                    state: "feedback"))
   end
 
   it "should have a authorise" do
@@ -62,7 +67,8 @@ describe "games/index" do
                                                                     host: "test.host",
                                                                     client_id: ENV['MXIT_CLIENT_ID'],
                                                                     redirect_uri: mxit_oauth_users_url(host: "test.host"),
-                                                                    scope: "profile/public profile/private"))
+                                                                    scope: "profile/public profile/private",
+                                                                    state: "profile"))
   end
 
 end

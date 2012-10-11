@@ -50,10 +50,20 @@ describe UsersController do
         @current_user.mobile_number.should == "0821234567"
       end
 
+      it "returns usings mxit.im address if no email set" do
+        @connection.should_receive(:profile).and_return(:user_id => "m123",:email => "")
+        @current_user.should_receive(:save)
+        get 'mxit_oauth', code: "123"
+        @current_user.email.should == "m123@mxit.im"
+      end
+
       it "must not change values" do
         @current_user.real_name = "Joe Barber"
         @current_user.mobile_number = "0821234123"
-        @connection.stub(:profile).and_return(:first_name => "Grant", :last_name => "Speelman", :mobile_number => "0821234567")
+        @current_user.email = "joe.barber@mail.com"
+        @connection.stub(:profile).and_return(:first_name => "Grant",
+                                              :last_name => "Speelman",
+                                              :mobile_number => "0821234567")
         @current_user.stub(:save)
         get 'mxit_oauth', code: "123"
         @current_user.real_name.should == "Joe Barber"
