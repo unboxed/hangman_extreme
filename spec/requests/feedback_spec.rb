@@ -7,7 +7,7 @@ describe 'feedback' do
     set_mxit_headers('m2604100') # set mxit user
     stub_shinka_request # stub shinka request
     stub_google_tracking # stub google tracking
-    stub_mxit_oauth :avatar_id => "gman"
+    stub_mxit_oauth :user_id => "m2604100"
     # stub out uservoice
     stub_request(:post, "https://#{ENV['UV_SUBDOMAIN_NAME']}.uservoice.com/api/v1/tickets.json").
       to_return(:status => 200, :body => "{}")

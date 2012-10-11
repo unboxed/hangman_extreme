@@ -42,7 +42,7 @@ class UsersController < ApplicationController
           unless mxit_user_profile.empty?
             current_user.real_name = "#{mxit_user_profile[:first_name]} #{mxit_user_profile[:last_name]}" if current_user.real_name.blank?
             current_user.mobile_number = mxit_user_profile[:mobile_number] if current_user.mobile_number.blank?
-            current_user.email = "#{mxit_user_profile[:avatar_id]}@mxit.im"
+            current_user.email = "#{request.env['HTTP_X_MXIT_LOGIN'] || mxit_user_profile[:user_id]}@mxit.im"
             current_user.save
           end
         end
