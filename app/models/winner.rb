@@ -27,7 +27,7 @@ class Winner < ActiveRecord::Base
                      reason: field,
                      start_of_period_on: Date.today,
                      period: 'daily')
-      user.send_message("Congratulations, you have won *#{amount} moola* for $daily #{field}$. Please make sure you have entered your details on the $profile$ page so we can pay you out.")
+      user.send_message("Congratulations, you have won *#{amount} moola* for $daily #{field}$. Please make sure you have entered your details on the $profile$ and you have added the *extremepayout* contact.")
     end
   end
 

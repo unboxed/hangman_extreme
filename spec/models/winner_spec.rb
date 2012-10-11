@@ -69,7 +69,7 @@ describe Winner do
     it "must send the players a message" do
       user = create(:user, daily_wins: 10)
       User.should_receive(:send_message).
-        with("Congratulations, you have won *10 moola* for $daily wins$. Please make sure you have entered your details on the $profile$ page so we can pay you out.",
+        with("Congratulations, you have won *10 moola* for $daily wins$. Please make sure you have entered your details on the $profile$ and you have added the *extremepayout* contact.",
              [user])
       Winner.create_daily_winners_for_category("wins",[10] * 10)
     end
