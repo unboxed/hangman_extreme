@@ -8,7 +8,7 @@
     <td><b>moola</b> | </td>
     <td><b>name</b></td>
   </tr>
-  <%= content_tag_for(:tr, @winners.sort{|x,y| y <=> x}) do |winner| %>
+  <%= content_tag_for(:tr, @winners.sort{|x,y| y.amount <=> x.amount}) do |winner| %>
       <td><%= winner.amount %> | </td>
       <td><%= display_user_name(winner.name) %></td>
   <% end %>
