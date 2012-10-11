@@ -57,14 +57,16 @@ describe FeedbackController do
       it "must send support feedback" do
         Feedback.should_receive(:send_support).with(:email => 'm123_mxit@noreply.io',
                                                     :subject => 'The message',
-                                                    :message => "The very long part of the message")
+                                                    :message => "The very long part of the message",
+                                                    :name=>"Grant")
         do_create
       end
 
       it "must send suggestion feedback" do
         Feedback.should_receive(:send_suggestion).with(:email => 'm123_mxit@noreply.io',
-                                                    :subject => 'The message',
-                                                    :message => "The very long part of the message")
+                                                       :subject => 'The message',
+                                                       :message => "The very long part of the message",
+                                                       :name=>"Grant")
         do_create 'suggestion'
       end
 

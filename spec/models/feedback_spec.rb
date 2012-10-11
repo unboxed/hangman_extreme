@@ -12,9 +12,9 @@ describe Feedback do
 
     it "must send the support" do
       stub_request(:post, "https://ubxd.uservoice.com/api/v1/tickets.json").to_return(:status => 200, :body => "{}", :headers => {})
-      Feedback.send_support(email: "test@mail.com", subject: "Test subject", message: "hello")
+      Feedback.send_support(name: "Grant", email: "test@mail.com", subject: "Test subject", message: "hello")
       assert_requested(:post, "https://ubxd.uservoice.com/api/v1/tickets.json",
-                       :body => "{\"email\":\"test@mail.com\",\"ticket\":{\"subject\":\"Test subject\",\"message\":\"hello\"}}")
+                       :body => '{"email":"test@mail.com","name":"Grant","ticket":{"subject":"Test subject","message":"hello"}}')
     end
 
   end

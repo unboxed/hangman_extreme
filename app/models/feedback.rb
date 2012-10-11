@@ -25,6 +25,7 @@ class Feedback
       client = UserVoice::Client.new(subdomain_name, api_key, api_secret)
       client.post("/api/v1/tickets.json", {
         :email => options[:email],
+        :name => options[:name],
         :ticket => {
           :subject => options[:subject],
           :message => options[:message]
