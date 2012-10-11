@@ -20,6 +20,9 @@ describe ApplicationHelper do
     before :each do
       helper.stub(:shinka_ads_enabled?).and_return(true)
       helper.stub(:shinka_auid).and_return("123")
+      stub_request(:get, "http://ox-d.shinka.sh/ma/1.0/arj?auid=123").
+        with(:headers => {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
+        to_return(:status => 200, :body => "{\"ads\":\n {\n  \"version\": 1,\n  \"count\": 0}\n}\n", :headers => {})
     end
 
     it "must load a add from shinka" do

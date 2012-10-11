@@ -6,7 +6,10 @@ module ApplicationHelper
     begin
       Timeout::timeout(15) do
         ads = ActiveSupport::JSON.decode(open("http://ox-d.shinka.sh/ma/1.0/arj?auid=#{shinka_auid}&c.age=#{current_user_request_info.age}&c.gender=#{current_user_request_info.gender}").read)
-        return result if ads['ads']['count'].to_i == 0
+        if ads['ads']['count'].to_i == 0
+          ads = ActiveSupport::JSON.decode(open("http://ox-d.shinka.sh/ma/1.0/arj?auid=#{shinka_auid}").read)
+          return "" if ads['ads']['count'].to_i == 0
+        end
         ad = ads['ads']["ad"].sample
         result = ad["html"].gsub("href=","onclick='window.open(this.href); return false;' href=").html_safe
         creative = ad["creative"].first
