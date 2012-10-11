@@ -13,7 +13,7 @@ class FeedbackController < ApplicationController
     else
       body, subject = params[:feedback].split(":",2).reverse
       send_options = {:email => "#{current_user.uid}_#{current_user.provider}@noreply.io",
-                            :subject => subject || "Message from #{current_user.real_name}",
+                            :subject => subject || body[0,30],
                             :message => body}
       if params[:type] == 'suggestion'
         Feedback.send_suggestion(send_options)
