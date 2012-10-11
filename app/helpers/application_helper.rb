@@ -6,7 +6,7 @@ module ApplicationHelper
     begin
       Timeout::timeout(15) do
         headers = {"User-Agent" => "Mozilla Compatible/5.0 #{env['HTTP_USER_AGENT']}",
-                   "X-FORWARDED_FOR" => env["HTTP_X_FORWARDED_FOR"]}
+                   "X-FORWARDED_FOR" => request_ip_address}
         ads = ActiveSupport::JSON.decode(open("http://ox-d.shinka.sh/ma/1.0/arj?auid=#{shinka_auid}&c.age=#{current_user_request_info.age}&c.gender=#{current_user_request_info.gender}",headers).read)
         return "" if ads['ads']['count'].to_i == 0
         ad = ads['ads']["ad"].sample
@@ -45,6 +45,10 @@ module ApplicationHelper
 
   def env
     request.env
+  end
+
+  def request_ip_address
+    Rails.env.test? ? (env["HTTP_X_FORWARDED_FOR"] || request.env['REMOTE_ADDR']) : env["HTTP_X_FORWARDED_FOR"]
   end
 
 end
