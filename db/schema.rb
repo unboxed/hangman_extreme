@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121011103107) do
+ActiveRecord::Schema.define(:version => 20121012093216) do
 
   create_table "games", :force => true do |t|
     t.string   "word"
@@ -26,6 +26,20 @@ ActiveRecord::Schema.define(:version => 20121011103107) do
   add_index "games", ["created_at"], :name => "index_games_on_created_at"
   add_index "games", ["score"], :name => "index_games_on_score"
   add_index "games", ["user_id"], :name => "index_games_on_user_id"
+
+  create_table "purchase_transactions", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "product_id",          :null => false
+    t.string   "product_name",        :null => false
+    t.text     "product_description"
+    t.integer  "moola_amount",        :null => false
+    t.string   "currency_amount",     :null => false
+    t.string   "ref"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "purchase_transactions", ["user_id"], :name => "index_purchase_transactions_on_user_id"
 
   create_table "settings", :force => true do |t|
     t.string   "var",                       :null => false
@@ -57,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20121011103107) do
     t.string   "real_name"
     t.string   "mobile_number"
     t.string   "email"
+    t.integer  "clue_points",       :default => 2, :null => false
   end
 
   add_index "users", ["daily_precision"], :name => "index_users_on_daily_precision"

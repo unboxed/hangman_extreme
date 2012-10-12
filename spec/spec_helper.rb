@@ -39,14 +39,6 @@ Spork.prefork do
   require 'rspec/autorun'
   require 'webmock/rspec'
 
-  #case ENV["BROWSER"].to_s.downcase
-  #  when 'firefox'
-  #    # do nothing
-  #  when 'phantomjs'
-  #    require 'capybara/poltergeist'
-  #  else
-  #    require 'capybara/webkit'
-  #end
 end
 
 Spork.each_run do
@@ -65,22 +57,6 @@ Spork.each_run do
 
   RSpec.configure do |config|
     config.include FactoryGirl::Syntax::Methods
-    # Default driver is stil :rack_test because it's fast. Rspec will only run :webkit as a driver for JavaScript tests.
-    # Add ":js => true" before the block in rspec tests to do this
-    #case ENV["BROWSER"].to_s.downcase
-    #  when 'firefox'
-    #    Capybara.default_driver = :selenium
-    #    Capybara.javascript_driver = :selenium
-    #    Capybara.default_wait_time = 5
-    #  when 'phantomjs'
-    #    Capybara.default_driver = :poltergeist
-    #    Capybara.javascript_driver = :poltergeist
-    #  when 'webkit'
-    #    Capybara.default_driver = :webkit
-    #    Capybara.javascript_driver = :webkit
-    #  else
-    #    Capybara.javascript_driver = :webkit
-    #end
     config.filter_run_excluding :redis => true if ENV["EXCLUDE_REDIS_SPECS"]
 
     # Run specs in random order to surface order dependencies. If you find an
