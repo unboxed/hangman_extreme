@@ -14,6 +14,9 @@ class Game < ActiveRecord::Base
 
   scope :active_first, order('completed ASC, created_at DESC').where('completed IS NOT NULL')
   scope :completed, where('completed = ?', true)
+  scope :incompleted, where('completed = ?', false)
+
+
 
   scope :today, lambda{ where('created_at > ?',Time.current.beginning_of_day) }
   scope :this_week, lambda{ where('created_at > ?',Time.current.beginning_of_week) }

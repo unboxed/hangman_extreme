@@ -9,6 +9,9 @@ change full <%= link_to 'real name', edit_user_path(current_user, :field => 'rea
 change <%= link_to 'mobile number', edit_user_path(current_user, :field => 'mobile_number'), id: 'edit_mobile_number' %>:
 <%= current_user.mobile_number %><br/>
 <br/>
+<%= current_user.clue_points %> clue points :
+<%= link_to 'buy', purchases_path, id: 'buy_clue_points' %> more<br/>
+<b>1 clue point</b> can be used per game to reveal the word clue<br/>
 
 all information is <%= link_to 'correct', root_path, id: 'root_page' %>
 

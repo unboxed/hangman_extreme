@@ -66,5 +66,27 @@ describe Ability do
 
   end
 
+  context "Purchase Transactions" do
+
+    it "must be able to view purchase transactions" do
+      @ability.should be_able_to(:read, PurchaseTransaction)
+    end
+
+    it "wont be able to read other users purchase_transactions" do
+      trans = create(:purchase_transaction, user: create(:user))
+      @ability.should_not be_able_to(:read, trans)
+    end
+
+    it "must be able to read own purchase_transactions" do
+      trans = create(:purchase_transaction, user: @user)
+      @ability.should be_able_to(:read, trans)
+    end
+
+    it "must be able to create purchase_transactions" do
+      @ability.should be_able_to(:create, PurchaseTransaction)
+    end
+
+  end
+
 
 end

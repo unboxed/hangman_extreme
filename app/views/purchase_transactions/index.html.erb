@@ -1,0 +1,20 @@
+<h1>Buy Clues</h1>
+
+<ul>
+    <% PurchaseTransaction.products.each_with_index do |product,index| %>
+        <% product_id, hash = product %>
+        <li id="product_<%= product_id %>">
+            <%= link_to(index + 1, new_purchase_path(product_id: product_id), id: "buy_#{product_id}" )  %>)
+            <%= hash[:moola_amount] %> moola for
+            <b><%= hash[:product_name] %></b>
+        </li>
+    <% end %>
+</ul>
+
+<br/>
+
+<%= link_to 'home', root_path, id: 'root_page' %> |
+<%= link_to 'profile', profile_users_path, id: 'profile' %>
+<% if game = current_user.games.incompleted.active_first.first %>
+| <%= link_to 'continue', game_path(game) %> game
+<% end %>

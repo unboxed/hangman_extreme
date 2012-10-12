@@ -9,5 +9,8 @@ class Ability
     can :update, user
 
     can :read, Winner
+
+    can :create, PurchaseTransaction
+    can :read, PurchaseTransaction, user_id: user.id
   end
 end
