@@ -4,7 +4,9 @@ namespace :scheduler do
     desc "what must be run at start of the day"
     task "start_of_day" => :environment do
       User.all.each { |user| user.update_ratings }
-      puts
+      User.where('updated_at > ?',1.days.ago).each do |user|
+        user.increment!(:clue_points)
+      end
     end
 
     desc "what must be run at end of the day"

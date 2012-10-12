@@ -3,12 +3,12 @@ You about to purchase <b><%= @purchase_transaction.product_name %></b> for
 <i><%= @purchase_transaction.moola_amount %> moola</i>
 <br/>
 <%= link_to 'Proceed', mxit_purchase_url(host: Rails.env.production? ? 'billing.internal.mxit.com' : request.host,
-                                     VendorId: ENV['MXIT_VENDOR_ID'] || 1,
-                                     TransactionReference: @ref,
-                                     CallbackUrl: create_purchase_url(product_id: @purchase_transaction.product_id,
-                                                                      ref: @ref) ,
-                                     ProductId: @purchase_transaction.product_id,
-                                     ProductName: @purchase_transaction.product_name,
-                                     MoolaAmount: @purchase_transaction.moola_amount,
-                                     CurrencyAmount: @purchase_transaction.currency_amount),
+                                         VendorId: ENV['MXIT_VENDOR_ID'],
+                                         TransactionReference: @ref,
+                                         CallbackUrl: create_purchase_url(product_id: @purchase_transaction.product_id,
+                                                                                 ref: @ref) ,
+                                         ProductId: @purchase_transaction.product_id,
+                                         ProductName: @purchase_transaction.product_name,
+                                         MoolaAmount: @purchase_transaction.moola_amount,
+                                         CurrencyAmount: @purchase_transaction.currency_amount),
                     id: 'submit'%>

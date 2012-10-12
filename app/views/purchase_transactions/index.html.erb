@@ -1,6 +1,9 @@
 <h1>Buy Clues</h1>
 
 You have currently have <b><%= current_user.clue_points %></b> clue points</br>
+You will receive 1 free clue point every day that you play</br>
+
+<% if Rails.env.test? || ENV['MXIT_VENDOR_ID'] %>
 <ul>
     <% PurchaseTransaction.products.each_with_index do |product,index| %>
         <% product_id, hash = product %>
@@ -11,6 +14,9 @@ You have currently have <b><%= current_user.clue_points %></b> clue points</br>
         </li>
     <% end %>
 </ul>
+<% else %>
+    <p>Coming soon, clue point purchases</p>
+<% end %>
 
 <br/>
 
