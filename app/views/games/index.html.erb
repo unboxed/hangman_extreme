@@ -33,8 +33,9 @@ send <%= link_to 'feedback', mxit_authorise_url(response_type: 'code',
                                           client_id: ENV['MXIT_CLIENT_ID'],
                                           redirect_uri: mxit_oauth_users_url(host: request.host),
                                           scope: "profile/public profile/private",
-                                          state: "feedback"), id: 'feedback' %> |
+                                          state: "feedback"), id: 'feedback' %>
+<br/>
 <a href="mxit://[communityportal]/RecommendPage?ItemId=7297721" type="mxit/service-navigation">
-  Tell your friends about Hangman Extreme
-</a>
+  Tell your friends
+</a>  about Hangman Extreme
 
