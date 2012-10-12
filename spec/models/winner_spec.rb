@@ -26,9 +26,9 @@ describe Winner do
     Winner.new(period: "yearly").should have(1).errors_on(:period)
   end
 
-  it "must have a start_of_period_on" do
-    Winner.new.should have(1).errors_on(:start_of_period_on)
-    Winner.new(start_of_period_on: Date.today).should have(0).errors_on(:start_of_period_on)
+  it "must have a end_of_period_on" do
+    Winner.new.should have(1).errors_on(:end_of_period_on)
+    Winner.new(end_of_period_on: Date.today).should have(0).errors_on(:end_of_period_on)
   end
 
   context "create_daily_winners_for_category" do
@@ -46,7 +46,7 @@ describe Winner do
         user.should have(1).winners_for_period_and_reason('daily','rating')
         winner = user.winners_for_period_and_reason('daily','rating').first
         winner.should be_daily
-        winner.start_of_period_on.should == Date.today
+        winner.end_of_period_on.should == Date.today
         winner.amount.should == 10
         winner.reason.should == 'rating'
       end
@@ -109,7 +109,7 @@ describe Winner do
 
     it "wont create new winners if they already exist for period" do
       Winner.should_not_receive(:create_daily_winners_for_category)
-      create(:winner, period: 'daily', start_of_period_on: Date.today)
+      create(:winner, period: 'daily', end_of_period_on: Date.today)
       Winner.create_daily_winners((11..20).to_a.reverse)
     end
 

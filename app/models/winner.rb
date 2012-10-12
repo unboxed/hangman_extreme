@@ -1,19 +1,19 @@
 class Winner < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :user_id, :amount, :reason, :period, :start_of_period_on
+  attr_accessible :user_id, :amount, :reason, :period, :end_of_period_on
 
-  validates :user_id, :amount, :reason, :start_of_period_on, presence: true
+  validates :user_id, :amount, :reason, :end_of_period_on, presence: true
   validates :period, inclusion: %w(daily weekly monthly)
 
   scope :period, lambda{ |p| where("period = ?",p) }
   scope :reason, lambda{ |r| where("reason = ?",r) }
-  scope :yesterday, lambda{ where(:start_of_period_on => Date.yesterday) }
+  scope :yesterday, lambda{ where(:end_of_period_on => Date.yesterday) }
 
 
   delegate :name, to: :user
 
   def self.create_daily_winners(winnings)
-    return if where(start_of_period_on: Date.today, period: 'daily').any?
+    return if where(end_of_period_on: Date.today, period: 'daily').any?
     ['rating','precision','wins'].each do |field|
       create_daily_winners_for_category(field,winnings)
     end
@@ -26,7 +26,7 @@ class Winner < ActiveRecord::Base
       Winner.create!(user_id: user.id,
                      amount: amount,
                      reason: field,
-                     start_of_period_on: Date.today,
+                     end_of_period_on: Date.today,
                      period: 'daily')
       user.send_message("Congratulations, you have won *#{amount} moola* for $daily #{field}$. Please make sure you have entered your details on the $profile$ and you have added the *extremepayout* contact.")
     end
