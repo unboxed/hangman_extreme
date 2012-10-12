@@ -1,10 +1,7 @@
-<b>Welcome to hangman extreme</b>
-<br/>
-Have fun guessing the word.
-<br/>
-<p>Daily winners are selected everyday at 11:30pm</p>
-<b>Coming soon, weekly winners of up to 200 moola</b>
-<br/>
+<b>Welcome to hangman extreme</b><br/>
+Have fun guessing the word.<br/>
+Daily winners are selected everyday at 11:30pm<br/>
+<b>Coming soon, weekly winners of up to 200 moola</b><br/>
 
 <ul>
   <%= content_tag_for(:li, @games) do |game| %>
@@ -37,4 +34,7 @@ send <%= link_to 'feedback', mxit_authorise_url(response_type: 'code',
                                           redirect_uri: mxit_oauth_users_url(host: request.host),
                                           scope: "profile/public profile/private",
                                           state: "feedback"), id: 'feedback' %> |
+<a href="mxit://[communityportal]/RecommendPage?ItemId=7297721" type="mxit/service-navigation">
+  Tell your friends about Hangman Extreme
+</a>
 
