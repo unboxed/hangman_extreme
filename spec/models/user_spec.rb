@@ -359,4 +359,38 @@ describe User do
 
   end
 
+  context "send_message" do
+
+    before :each do
+      MxitApi.should respond_to(:connect)
+      MxitApi.new(nil).should respond_to(:send_message)
+      @mxit_connection = mock('Mxit Connection', :send_message => true)
+      MxitApi.stub(:connect).and_return(@mxit_connection)
+    end
+
+    it "must not connect if no users selected" do
+      MxitApi.should_not_receive(:connect)
+      User.send_message("Nobody!!",[])
+    end
+
+    it "must send a message to a user" do
+      user = stub_model(User, uid: 'm345')
+      @mxit_connection.should_receive(:send_message).once.with(body: 'Single user', to: "m345")
+      User.send_message("Single user",[user])
+    end
+
+    it "must break up users into groups of 20" do
+      @mxit_connection.should_receive(:send_message).twice
+      users = create_list(:user, 21)
+      User.send_message("Single user",users)
+    end
+
+    it "must work with relations in groups of 20" do
+      @mxit_connection.should_receive(:send_message).twice
+      create_list(:user, 21, provider: 'mxit')
+      User.send_message("Single user",User.mxit)
+    end
+
+  end
+
 end

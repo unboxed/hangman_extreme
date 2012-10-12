@@ -7,6 +7,7 @@ class Winner < ActiveRecord::Base
 
   scope :period, lambda{ |p| where("period = ?",p) }
   scope :reason, lambda{ |r| where("reason = ?",r) }
+  scope :yesterday, lambda{ where(:start_of_period_on => Date.yesterday) }
 
 
   delegate :name, to: :user

@@ -102,9 +102,18 @@ class User < ActiveRecord::Base
     unless users.empty?
       mxit_connection = MxitApi.connect
       if mxit_connection
-        users.in_groups_of(20,false).each do |user_group|
-          to = user_group.collect(&:uid).join(",")
-          mxit_connection.send_message(body: msg, to: to)
+        if users.kind_of?(ActiveRecord::Relation)
+          page = 1
+          while((user_group = users.order(:id).page(page).per(20)).any?)
+            to = user_group.collect(&:uid).join(",")
+            mxit_connection.send_message(body: msg, to: to)
+            page += 1
+          end
+        else
+          users.uniq.in_groups_of(20,false).each do |user_group|
+            to = user_group.collect(&:uid).join(",")
+            mxit_connection.send_message(body: msg, to: to)
+          end
         end
       end
     end
