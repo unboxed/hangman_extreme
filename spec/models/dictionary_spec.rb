@@ -13,6 +13,11 @@ describe Dictionary do
       expect{Dictionary.add("")}.to_not change(Dictionary,:size)
     end
 
+    it "must be able to add clues for words" do
+      Dictionary.set_clue("test","pass")
+      Dictionary.clue("test").should == "pass"
+    end
+
     it "must have a unique value" do
       expect{Dictionary << "test"}.to change(Dictionary,:size)
       expect{Dictionary << "test"}.to_not change(Dictionary,:size)

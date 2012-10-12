@@ -4,6 +4,7 @@ describe "games/show" do
   before(:each) do
     @game = assign(:game, stub_model(Game,attempts_left: 5,
                                           hangman_text: "__t__",
+                                          word: "cltdo",
                                           done?: false,
                                           is_won?: false,
                                           is_lost?: false))
@@ -77,6 +78,21 @@ describe "games/show" do
     @game.stub(:is_lost?).and_return(true)
     render
     rendered.should have_content("You lose")
+  end
+
+  it "must have a link to reveal the clue" do
+    Dictionary.should_receive(:clue).with(@game.word).and_return("Cluedo")
+    @game.stub(:clue_revealed?).and_return(false)
+    render
+    rendered.should have_link('show_clue', href: play_letter_game_path(@game,'show_clue'))
+  end
+
+  it "must show the clue if it has been revealed" do
+    Dictionary.should_receive(:clue).with(@game.word).and_return("Cluedo")
+    @game.stub(:clue_revealed?).and_return(true)
+    render
+    rendered.should_not have_link('show_clue', href: play_letter_game_path(@game,'show_clue'))
+    rendered.should have_content("Cluedo")
   end
 
 end

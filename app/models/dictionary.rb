@@ -13,6 +13,15 @@ class Dictionary < SortedSet
     super if valid_value?(value)
   end
 
+  def set_clue(value,clue)
+    @clues ||= {}
+    @clues[value] = clue
+  end
+
+  def clue(value)
+    @clues[value]
+  end
+
   def clear
     @array = nil
     super
@@ -20,6 +29,14 @@ class Dictionary < SortedSet
 
   def self.instance
     @instance ||= self.new
+  end
+
+  def self.set_clue(value,clue)
+    instance.set_clue(value,clue)
+  end
+
+  def self.clue(value)
+    instance.clue(value)
   end
 
   def self.method_missing(m, *args, &block)

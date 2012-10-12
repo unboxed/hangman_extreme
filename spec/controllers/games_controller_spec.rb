@@ -51,7 +51,7 @@ describe GamesController do
     describe "GET play_letter" do
 
       before :each do
-        @game = create(:game, choices: "a")
+        @game = create(:game, choices: "a", user: @current_user)
       end
 
       def do_get_play_letter
@@ -76,6 +76,20 @@ describe GamesController do
           do_get_play_letter
         }.to change{@current_user.reload;@current_user.weekly_rating}
         flash[:notice].should_not be_blank
+      end
+
+      it "must show clue" do
+        @current_user.update_attribute(:clue_points,1)
+        expect {
+          get :play_letter, :id => @game.to_param, :letter => "show_clue"
+        }.to change{@game.reload;@game.clue_revealed}
+      end
+
+      it "must show clue" do
+        @current_user.update_attribute(:clue_points,0)
+        get :play_letter, :id => @game.to_param, :letter => "show_clue"
+        response.should redirect_to(purchases_path)
+        flash[:alert].should_not be_blank
       end
 
     end

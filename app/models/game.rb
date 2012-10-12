@@ -35,6 +35,13 @@ class Game < ActiveRecord::Base
     self.choices += letter if letter =~ /\p{Lower}/
   end
 
+  def reveal_clue
+    if user.clue_points > 0 && !clue_revealed?
+      user.decrement(:clue_points)
+      toggle(:clue_revealed)
+    end
+  end
+
   def attempts_left
     Game::ATTEMPTS - attempts
   end

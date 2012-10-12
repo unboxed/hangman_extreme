@@ -12,7 +12,16 @@ class GamesController < ApplicationController
 
   def play_letter
     daily_rating, week_rating, monthly_rating = @game.user.daily_rating, @game.user.weekly_rating, @game.user.monthly_rating
-    @game.add_choice(params[:letter])
+    if params[:letter] == 'show_clue'
+      if current_user.clue_points < 1
+        redirect_to  purchases_path, alert: "No more clue points left"
+        return
+      end
+      @game.reveal_clue
+      @notice = "Clue revealed"
+    else
+      @game.add_choice(params[:letter])
+    end
     @game.save
     if daily_rating < @game.user.daily_rating
       @notice = "Your daily rating has increased to #{@game.user.daily_rating}, you are ranked #{@game.user.rank(:daily_rating).ordinalize} today"

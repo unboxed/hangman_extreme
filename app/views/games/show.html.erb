@@ -1,3 +1,4 @@
+<% clue = Dictionary.clue(@game.word) %>
 <% if @game.is_won? %>
 <b style="color:green">You win!</b>
 <% elsif @game.is_lost? %>
@@ -8,6 +9,15 @@ You have <span><%= @game.attempts_left %></span> attempts left
 <div <% if @game.is_lost? %>style="color:red;"<% end %>><%= render partial: 'hangman' %></div>
 <br/>
 <b style="color:purple;"><%= @game.hangman_text.split("").join(" ") %></b>
+<% if clue  %>
+    (
+    <% if @game.clue_revealed? %>
+        <i><%= clue %></i>
+    <% else %>
+        <%= link_to 'show', play_letter_game_path(@game,'show_clue'), id: 'show_clue' %> clue
+    <% end %>
+        )
+<% end %>
 <br/>
 <% if @game.done? %>
     <%= link_to 'new', new_game_path, id: "new_game" %> game |
