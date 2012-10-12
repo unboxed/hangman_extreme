@@ -104,7 +104,7 @@ class User < ActiveRecord::Base
       if mxit_connection
         if users.kind_of?(ActiveRecord::Relation)
           page = 1
-          while((user_group = users.order(:id).page(page).per(20)).any?)
+          while((user_group = users.order(:id).page(page).per(100)).any?)
             to = user_group.collect(&:uid).join(",")
             mxit_connection.send_message(body: msg, to: to)
             page += 1
