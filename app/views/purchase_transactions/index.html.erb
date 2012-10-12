@@ -1,7 +1,7 @@
 <h1>Buy Clues</h1>
 
-You have currently have <b><%= current_user.clue_points %></b> clue points</br>
-You will receive 1 free clue point every day that you play</br>
+You have currently have <b><%= current_user.clue_points %></b> clue points<br/>
+You will receive 1 free clue point every day that you play<br/>
 
 <% if Rails.env.test? || ENV['MXIT_VENDOR_ID'] %>
 <ul>
@@ -15,7 +15,7 @@ You will receive 1 free clue point every day that you play</br>
     <% end %>
 </ul>
 <% else %>
-    <p>Coming soon, clue point purchases</p>
+    <br/><b>Coming soon, clue point purchases</b><br/>
 <% end %>
 
 <br/>
