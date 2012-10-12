@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121012122721) do
+ActiveRecord::Schema.define(:version => 20121012143236) do
 
   create_table "games", :force => true do |t|
     t.string   "word"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(:version => 20121012122721) do
     t.integer  "clue_points",       :default => 2, :null => false
   end
 
+  add_index "users", ["created_at"], :name => "index_users_on_created_at"
   add_index "users", ["daily_precision"], :name => "index_users_on_daily_precision"
   add_index "users", ["daily_rating"], :name => "index_users_on_daily_rating"
   add_index "users", ["daily_wins"], :name => "index_users_on_games_won_today"
@@ -82,6 +83,7 @@ ActiveRecord::Schema.define(:version => 20121012122721) do
   add_index "users", ["monthly_rating"], :name => "index_users_on_monthly_rating"
   add_index "users", ["monthly_wins"], :name => "index_users_on_games_won_this_month"
   add_index "users", ["uid", "provider"], :name => "index_users_on_uid_and_provider"
+  add_index "users", ["updated_at"], :name => "index_users_on_updated_at"
   add_index "users", ["weekly_precision"], :name => "index_users_on_weekly_precision"
   add_index "users", ["weekly_rating"], :name => "index_users_on_weekly_rating"
   add_index "users", ["weekly_wins"], :name => "index_users_on_games_won_this_week"
