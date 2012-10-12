@@ -35,6 +35,5 @@ send <%= link_to 'feedback', mxit_authorise_url(response_type: 'code',
                                           scope: "profile/public profile/private",
                                           state: "feedback"), id: 'feedback' %>
 <br/>
-Winnings is based on the amount of active players on hangman extreme (currently <%= User.where('updated_at > ?',7.days.ago).count %> Players)<br/>
-So <a href="mxit://[communityportal]/RecommendPage?ItemId=7297721" type="mxit/service-navigation">Tell your friends</a> about Hangman Extreme
+<a href="mxit://[communityportal]/RecommendPage?ItemId=7297721" type="mxit/service-navigation">Tell your friends</a> about Hangman Extreme
 
