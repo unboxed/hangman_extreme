@@ -1,5 +1,6 @@
 <h1>Buy Clues</h1>
 
+You have currently have <b><%= current_user.clue_points %></b> clue points</br>
 <ul>
     <% PurchaseTransaction.products.each_with_index do |product,index| %>
         <% product_id, hash = product %>

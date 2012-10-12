@@ -8,8 +8,8 @@ class PurchaseTransactionsController < ApplicationController
 
   def new
     @purchase_transaction.product_id = params[:product_id]
-    redirect_to({action: 'index'}, alert: 'Invalid product code') if @purchase_transaction.product_name.blank?
     @ref = @purchase_transaction.generate_ref
+    redirect_to({action: 'index'}, alert: 'Invalid product code') if @purchase_transaction.product_name.blank?
   end
 
   def create
@@ -44,8 +44,11 @@ class PurchaseTransactionsController < ApplicationController
   end
 
   def simulate_purchase
-    raise unless Rails.env.test?
-    redirect_to action: 'create', product_id: params['ProductId'], ref: params['TransactionReference'], mxit_transaction_res: 0
+    raise if Rails.env.production?
+    redirect_to action: 'create',
+                product_id: params['ProductId'],
+                ref: params['TransactionReference'],
+                mxit_transaction_res: 0
   end
 
 end

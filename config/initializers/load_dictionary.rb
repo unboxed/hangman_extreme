@@ -6,6 +6,6 @@ end
 # words with clues
 File.readlines('db/words_with_clues.csv').each do |line|
   word,clue = line.split(",",2)
-  Dictionary.add(word)
   Dictionary.set_clue(word,clue)
+  Dictionary.add(word)
 end

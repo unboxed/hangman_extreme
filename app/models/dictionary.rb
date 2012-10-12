@@ -3,6 +3,7 @@ require 'open-uri'
 
 class Dictionary < SortedSet
 
+  attr_reader :clues
   WORDREF_API_KEY = "be388"
 
   def <<(value)
@@ -19,6 +20,7 @@ class Dictionary < SortedSet
   end
 
   def clue(value)
+    @clues ||= {}
     @clues[value]
   end
 

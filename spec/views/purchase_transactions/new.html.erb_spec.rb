@@ -23,7 +23,7 @@ describe "purchase_transactions/new.html.erb" do
   end
 
   it "should have a home link" do
-    rendered.should have_link("cancel", href: root_path)
+    rendered.should have_link("cancel", href: purchases_path)
   end
 
 end
