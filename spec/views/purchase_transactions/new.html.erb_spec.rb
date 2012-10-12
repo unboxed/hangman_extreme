@@ -16,23 +16,8 @@ describe "purchase_transactions/new.html.erb" do
     rendered.should have_content('10 moola')
   end
 
-  it "must have the correct fields" do
-    puts @rendered
-    within('form') do
-      rendered.should have_css('#VendorId')
-      rendered.should have_css('#TransactionReference')
-      rendered.should have_css('#CallbackUrl')
-      rendered.should have_css('#ProductId')
-      rendered.should have_css('#ProductName')
-      rendered.should have_css('#MoolaAmount')
-      rendered.should have_css('#CurrencyAmount')
-    end
-  end
-
   it "renders a submit button" do
-    within('form') do
-      rendered.should have_button('submit')
-    end
+    rendered.should have_link('submit')
   end
 
   it "should have a home link" do

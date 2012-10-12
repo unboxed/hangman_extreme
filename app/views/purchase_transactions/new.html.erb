@@ -1,24 +1,14 @@
-<%= form_tag(mxit_purchase_url(host: Rails.env.production? ? 'billing.internal.mxit.com' : request.host)) do %>
-    <%= link_to 'cancel', purchases_path, id: 'cancel' %> Purchase<br/>
-    You about to purchase <b><%= @purchase_transaction.product_name %></b> for
-    <i><%= @purchase_transaction.moola_amount %> moola</i>
-    <%= hidden_field_tag 'VendorId', ENV['MXIT_VENDOR_ID'] || 1 %>
-    <%= hidden_field_tag 'TransactionReference', @ref %>
-    <%= hidden_field_tag 'CallbackUrl',
-                         create_purchase_url(product_id: @purchase_transaction.product_id,
-                                              ref: @ref) %>
-    <%= hidden_field_tag 'ProductId', @purchase_transaction.product_id %>
-    <%= hidden_field_tag 'ProductName', @purchase_transaction.product_name %>
-    <%= hidden_field_tag 'MoolaAmount', @purchase_transaction.moola_amount %>
-    <%= hidden_field_tag 'CurrencyAmount', @purchase_transaction.currency_amount %>
-    <%= link_to 'Buy', mxit_purchase_url(host: Rails.env.production? ? 'billing.internal.mxit.com' : request.host,
-                                         VendorId: ENV['MXIT_VENDOR_ID'] || 1,
-                                         TransactionReference: @ref,
-                                         CallbackUrl: create_purchase_url(product_id: @purchase_transaction.product_id,
-                                                                          ref: @ref) ,
-                                         ProductId: @purchase_transaction.product_id,
-                                         ProductName: @purchase_transaction.product_name,
-                                         MoolaAmount: @purchase_transaction.moola_amount,
-                                         CurrencyAmount: @purchase_transaction.currency_amount) %>
-    <%= submit_tag 'Proceed', id: 'submit' %>
-<% end %>
+<%= link_to 'cancel', purchases_path, id: 'cancel' %> Purchase<br/>
+You about to purchase <b><%= @purchase_transaction.product_name %></b> for
+<i><%= @purchase_transaction.moola_amount %> moola</i>
+<br/>
+<%= link_to 'Proceed', mxit_purchase_url(host: Rails.env.production? ? 'billing.internal.mxit.com' : request.host,
+                                     VendorId: ENV['MXIT_VENDOR_ID'] || 1,
+                                     TransactionReference: @ref,
+                                     CallbackUrl: create_purchase_url(product_id: @purchase_transaction.product_id,
+                                                                      ref: @ref) ,
+                                     ProductId: @purchase_transaction.product_id,
+                                     ProductName: @purchase_transaction.product_name,
+                                     MoolaAmount: @purchase_transaction.moola_amount,
+                                     CurrencyAmount: @purchase_transaction.currency_amount),
+                    id: 'submit'%>

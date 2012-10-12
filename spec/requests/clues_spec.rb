@@ -17,7 +17,7 @@ describe 'clues' do
     page.should have_content("2 clue points")
     click_link('buy_clue_points')
     click_link('buy_clue11')
-    click_button('submit')
+    click_link('submit')
     click_link('profile')
     page.should have_content("13 clue points")
   end
