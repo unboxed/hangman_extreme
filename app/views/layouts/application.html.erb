@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>HangmanLeague</title>
-  <% if params[:action] == 'new' && params[:controller] == 'games' %>
+  <% if params[:action] == 'show' && params[:controller] == 'games' && @game && @game.choices.blank? %>
     <meta name="mxit" content="clearscreen" />
   <% end %>
   <%= stylesheet_link_tag    "application", :media => "all" %>
