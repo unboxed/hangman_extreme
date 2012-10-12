@@ -1,4 +1,4 @@
-<%= form_tag(mxit_purchase_url(host: Rails.env.production? ? 'http://billing.internal.mxit.com' : request.host)) do %>
+<%= form_tag(mxit_purchase_url(host: Rails.env.production? ? 'billing.internal.mxit.com' : request.host)) do %>
     <%= link_to 'cancel', purchases_path, id: 'cancel' %> Purchase<br/>
     You about to purchase <b><%= @purchase_transaction.product_name %></b> for
     <i><%= @purchase_transaction.moola_amount %> moola</i>
