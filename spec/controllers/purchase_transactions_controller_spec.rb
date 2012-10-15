@@ -51,6 +51,8 @@ describe PurchaseTransactionsController do
   describe "GET create" do
 
     def do_get_create(response = 0)
+      @gabba = mock('connection',:transaction => '')
+      Gabba::Gabba.stub(:new).and_return(@gabba)
       get :create, product_id: PurchaseTransaction.products.keys.first, ref: 'a123', mxit_transaction_res: response
     end
 
@@ -67,11 +69,20 @@ describe PurchaseTransactionsController do
       response.should redirect_to(action: 'index')
     end
 
-    it "wont create if response != 0" do
-      do_get_create(1)
-      assigns(:purchase_transaction).should be_kind_of(PurchaseTransaction)
-      assigns(:purchase_transaction).should_not be_persisted
-      flash[:alert].should_not be_blank
+    context "faild" do
+
+      it "wont create if response != 0" do
+        do_get_create(1)
+        assigns(:purchase_transaction).should be_kind_of(PurchaseTransaction)
+        assigns(:purchase_transaction).should_not be_persisted
+        flash[:alert].should_not be_blank
+      end
+
+      it "wont notify google" do
+        do_get_create(1)
+        Gabba::Gabba.should_not_receive(:new)
+      end
+
     end
 
   end

@@ -42,4 +42,5 @@ class PurchaseTransaction < ActiveRecord::Base
     user.update_attribute(:clue_points,user.clue_points + clue_points)
   end
 
+
 end
