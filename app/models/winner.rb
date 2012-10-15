@@ -37,4 +37,8 @@ class Winner < ActiveRecord::Base
     period == 'daily'
   end
 
+  def self.yesterday_winners_to_s
+    yesterday.group_by(&:user).collect{|u,w|[CGI::unescape(u.name),u.real_name,u.uid,w.sum(&:amount)].join(" : ")}.join("\n")
+  end
+
 end

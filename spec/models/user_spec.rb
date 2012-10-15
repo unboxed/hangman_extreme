@@ -379,15 +379,15 @@ describe User do
       User.send_message("Single user",[user])
     end
 
-    it "must break up users into groups of 20" do
+    it "must break up users into groups of 100" do
       @mxit_connection.should_receive(:send_message).twice
-      users = create_list(:user, 21)
+      users = create_list(:user, 101)
       User.send_message("Single user",users)
     end
 
-    it "must work with relations in groups of 20" do
+    it "must work with relations in groups of 100" do
       @mxit_connection.should_receive(:send_message).twice
-      create_list(:user, 21, provider: 'mxit')
+      create_list(:user, 101, provider: 'mxit')
       User.send_message("Single user",User.mxit)
     end
 

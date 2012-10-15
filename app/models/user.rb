@@ -110,7 +110,7 @@ class User < ActiveRecord::Base
             page += 1
           end
         else
-          users.uniq.in_groups_of(20,false).each do |user_group|
+          users.uniq.in_groups_of(100,false).each do |user_group|
             to = user_group.collect(&:uid).join(",")
             mxit_connection.send_message(body: msg, to: to)
           end
