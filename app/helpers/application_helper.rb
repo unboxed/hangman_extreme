@@ -26,6 +26,10 @@ module ApplicationHelper
           "#{beacon}<a href=#{tracking['click']} onclick='window.open(this.href); return false;' >#{alt}</a>".html_safe
         end
       end
+    rescue Timeout::Error => time_error
+      Rails.logger.error(time_error.message)
+      Settings.shinka_disabled_until = 2.minutes.from_now # disable for 2 minutes
+      return result
     rescue Exception => e
       ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
       Settings.shinka_disabled_until = 10.minutes.from_now # disable for a hour
