@@ -7,8 +7,6 @@
 You have <span><%= @game.attempts_left %></span> attempts left
 <% end %>
 <div <% if @game.is_lost? %>style="color:red;"<% end %>><%= render partial: 'hangman' %></div>
-<br/>
-<b style="color:purple;"><%= @game.hangman_text.split("").join(" ") %></b>
 <% if clue  %>
     (
     <% if @game.clue_revealed? %>
@@ -16,16 +14,22 @@ You have <span><%= @game.attempts_left %></span> attempts left
     <% else %>
         <%= link_to 'show', play_letter_game_path(@game,'show_clue'), id: 'show_clue' %> clue
     <% end %>
-        )
+    )
 <% end %>
+<br/>
+<b style="color:purple;"><%= @game.hangman_text.split("").join(" ") %></b>
 <br/>
 <% if @game.done? %>
     <%= link_to 'new', new_game_path, id: "new_game" %> game |
     <%#= link_to 'define', define_word_path(word: @game.hangman_text), id: "define_word" %> word |
     view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %>
+    <br/>
 <% else %>
-    <% ("a".."z").each do |letter| -%>
-      <%= link_to_unless(@game.choices.to_s.include?(letter),letter, play_letter_game_path(@game,letter), id: letter) %>
+    <% ("a".."z").to_a.in_groups_of(15,false).each do |letters| -%>
+        <% letters.each do |letter| -%>
+            <%= link_to_unless(@game.choices.to_s.include?(letter),letter, play_letter_game_path(@game,letter), id: letter) %>
+        <% end -%>
+        <br/>
     <% end -%>
 <% end %>
 <br/>

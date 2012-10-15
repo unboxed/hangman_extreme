@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121012143236) do
+ActiveRecord::Schema.define(:version => 20121012152209) do
 
   create_table "games", :force => true do |t|
     t.string   "word"
@@ -94,9 +94,9 @@ ActiveRecord::Schema.define(:version => 20121012143236) do
     t.string   "reason"
     t.integer  "amount"
     t.string   "period"
-    t.date     "start_of_period_on"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.date     "end_of_period_on"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   add_index "winners", ["user_id"], :name => "index_winners_on_user_id"

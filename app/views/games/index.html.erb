@@ -1,6 +1,5 @@
 <b>Welcome to hangman extreme</b><br/>
 Have fun guessing the word.<br/>
-Daily winners are selected everyday at 11:30pm<br/>
 <b>Coming soon, weekly winners of up to 200 moola</b><br/>
 
 <ul>
@@ -11,29 +10,15 @@ Daily winners are selected everyday at 11:30pm<br/>
   <% end %>
 </ul>
 
-<br/>
-
 <%= paginate @games %>
 
 <br/>
 
 <%= link_to 'new', new_game_path, id: 'new_game' %> game |
 view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %> |
-<%= link_to 'profile', mxit_authorise_url(response_type: 'code',
-                                            host: Rails.env.test? ? request.host : "auth.mxit.com",
-                                            protocol: Rails.env.test? ? 'http' : 'https',
-                                            client_id: ENV['MXIT_CLIENT_ID'],
-                                            redirect_uri: mxit_oauth_users_url(host: request.host),
-                                            scope: "profile/public profile/private",
-                                            state: "profile"), id: 'authorise' %> |
+send <%= mxit_authorise_link 'profile', {state: "profile"}, id: 'authorise' %> |
 view <%= link_to 'winners', winners_path, id: 'winners' %> |
-send <%= link_to 'feedback', mxit_authorise_url(response_type: 'code',
-                                          host: Rails.env.test? ? request.host : "auth.mxit.com",
-                                          protocol: Rails.env.test? ? 'http' : 'https',
-                                          client_id: ENV['MXIT_CLIENT_ID'],
-                                          redirect_uri: mxit_oauth_users_url(host: request.host),
-                                          scope: "profile/public profile/private",
-                                          state: "feedback"), id: 'feedback' %>
+send <%= mxit_authorise_link 'feedback', {state: "feedback"}, id: 'feedback' %>
 <br/>
 <a href="mxit://[communityportal]/RecommendPage?ItemId=7297721" type="mxit/service-navigation">Tell your friends</a> about Hangman Extreme
 
