@@ -12,7 +12,7 @@ You have <span><%= @game.attempts_left %></span> attempts left
     <% if @game.clue_revealed? %>
         <i><%= clue %></i>
     <% else %>
-        <%= link_to 'show', play_letter_game_path(@game,'show_clue'), id: 'show_clue' %> clue
+        <%= link_to_unless @game.completed?, 'show', play_letter_game_path(@game,'show_clue'), id: 'show_clue' %> clue
     <% end %>
     )
 <% end %>
