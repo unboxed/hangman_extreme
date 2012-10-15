@@ -15,4 +15,18 @@ namespace :scheduler do
     end
   end
 
+  namespace :weekly do
+    desc "what must be run at end of the week"
+    task "end_of_week" => :environment do
+      Winner.create_weekly_winners([0,0,0,0,0,0,0,0,0,0])
+    end
+  end
+
+  namespace :monthly do
+    desc "what must be run at end of the month"
+    task "end_of_month" => :environment do
+      Winner.create_monthly_winners([0,0,0,0,0,0,0,0,0,0])
+    end
+  end
+
 end

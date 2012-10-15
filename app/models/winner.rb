@@ -13,28 +13,41 @@ class Winner < ActiveRecord::Base
   delegate :name, to: :user
 
   def self.create_daily_winners(winnings)
-    return if where(end_of_period_on: Date.today, period: 'daily').any?
-    ['rating','precision','wins'].each do |field|
-      create_daily_winners_for_category(field,winnings)
-    end
-    User.send_message("We have selected our $winners$ for the day, Congratulations to those who have won.")
+    create_winners('daily',winnings)
   end
 
-  def self.create_daily_winners_for_category(field,winnings)
-    User.top_scorers("daily_#{field}").each_with_index do |user|
-      amount = winnings[user.rank("daily_#{field}") - 1]
+  def self.create_weekly_winners(winnings)
+    create_winners('weekly',winnings)
+  end
+
+  def self.create_monthly_winners(winnings)
+    create_winners('monthly',winnings)
+  end
+
+  def self.create_winners(period, winnings)
+    return if where(end_of_period_on: Date.today, period: period).any?
+    ['rating','precision','wins'].each do |score_by|
+      create_winners_for_category(score_by: score_by, winnings: winnings, period: period)
+    end
+    User.send_message("We have selected our $winners$ for the #{period} prizes, Congratulations to those who have won.")
+  end
+
+  def self.create_winners_for_category(options)
+    options = HashWithIndifferentAccess.new(options)
+    field = "#{options[:period]}_#{options[:score_by]}"
+    User.top_scorers(field).each_with_index do |user|
+      amount = options[:winnings][user.rank(field) - 1]
       Winner.create!(user_id: user.id,
                      amount: amount,
-                     reason: field,
+                     reason: options[:score_by],
                      end_of_period_on: Date.today,
-                     period: 'daily')
-      user.send_message("Congratulations, you have won *#{amount} moola* for $daily #{field}$. Please make sure you have entered your details on the $profile$ and you have added the *extremepayout* contact.")
+                     period: options[:period])
+      if amount > 0
+        user.send_message("Congratulations, you have won *#{amount} moola* for $#{options[:period]} #{options[:score_by]}$.
+                           Please make sure you have entered your details on $profile$ and
+                           that you have added the *extremepayout* contact to receive your moola winnings.")
+      end
     end
-  end
-
-
-  def daily?
-    period == 'daily'
   end
 
   def self.yesterday_winners_to_s
