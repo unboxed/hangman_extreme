@@ -14,7 +14,7 @@ Have fun guessing the word.<br/>
 
 <br/>
 
-<%= link_to 'new', new_game_path, id: 'new_game' %> game |
+<b><%= link_to 'new', new_game_path, id: 'new_game' %> game</b> |
 view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %>
 <br/>
 send <%= mxit_authorise_link 'profile', {state: "profile"}, id: 'authorise' %> |
