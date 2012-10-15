@@ -16,10 +16,10 @@ describe 'clues' do
     click_link('profile')
     page.should have_content("2 clue points")
     click_link('buy_clue_points')
-    click_link('buy_clue11')
+    click_link('buy_clue12')
     click_link('submit')
     click_link('profile')
-    page.should have_content("13 clue points")
+    page.should have_content("14 clue points")
   end
 
   it "must allow use to cancel purchase of clue points" do
@@ -28,7 +28,7 @@ describe 'clues' do
     click_link('profile')
     page.should have_content("2 clue points")
     click_link('buy_clue_points')
-    click_link('buy_clue11')
+    click_link('buy_clue12')
     click_link('cancel')
     click_link('profile')
     page.should have_content("2 clue points")
