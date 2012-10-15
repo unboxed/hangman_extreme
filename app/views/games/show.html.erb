@@ -25,7 +25,7 @@ You have <span><%= @game.attempts_left %></span> attempts left
     view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %>
     <br/>
 <% else %>
-    <% ("a".."z").to_a.in_groups_of(15,false).each do |letters| -%>
+    <% ("a".."z").to_a.in_groups_of(10,false).each do |letters| -%>
         <% letters.each do |letter| -%>
             <%= link_to_unless(@game.choices.to_s.include?(letter),letter, play_letter_game_path(@game,letter), id: letter) %>
         <% end -%>
