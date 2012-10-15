@@ -71,4 +71,9 @@ describe "games/index" do
                                                                     state: "profile"))
   end
 
+  it "should have a buy more clue points link" do
+    render
+    rendered.should have_link("buy_clue_points", href: purchases_path)
+  end
+
 end

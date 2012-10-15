@@ -15,10 +15,13 @@ Have fun guessing the word.<br/>
 <br/>
 
 <%= link_to 'new', new_game_path, id: 'new_game' %> game |
-view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %> |
+view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %>
+<br/>
 send <%= mxit_authorise_link 'profile', {state: "profile"}, id: 'authorise' %> |
-view <%= link_to 'winners', winners_path, id: 'winners' %> |
 send <%= mxit_authorise_link 'feedback', {state: "feedback"}, id: 'feedback' %>
+<br/>
+view <%= link_to 'winners', winners_path, id: 'winners' %> |
+<%= link_to 'buy', purchases_path, id: 'buy_clue_points' %> clue points
 <br/>
 <a href="mxit://[communityportal]/RecommendPage?ItemId=7297721" type="mxit/service-navigation">Tell your friends</a> about Hangman Extreme
 
