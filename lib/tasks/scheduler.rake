@@ -7,6 +7,7 @@ namespace :scheduler do
       User.where('updated_at > ?',1.days.ago).each do |user|
         user.increment!(:clue_points)
       end
+      Game.purge_old
     end
 
     desc "what must be run at end of the day"

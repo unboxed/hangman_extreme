@@ -181,4 +181,24 @@ describe MxitApi do
 
   end
 
+  context "send_invite" do
+
+    before :each do
+      stub_request(:put, "https://api.mxit.com/user/socialgraph/contact/contactname").
+        to_return(:status => 200, :body => '', :headers => {})
+      @connection = MxitApi.new
+    end
+
+    it "must make the correct api request" do
+      @connection.stub(:access_token).and_return("c71219af53f5409e9d1db61db8a08248")
+      @connection.stub(:token_type).and_return("bearer")
+      @connection.send_invite("contactname")
+      assert_requested(:put, "https://api.mxit.com/user/socialgraph/contact/contactname",
+                       :headers => {'Accept'=>'application/json',
+                                    'Authorization'=>'bearer c71219af53f5409e9d1db61db8a08248',
+                                    'User-Agent'=>'Ruby'})
+    end
+
+  end
+
 end

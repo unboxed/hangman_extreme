@@ -11,7 +11,11 @@ def stub_mxit_oauth(fields = {})
   body = Hash[fields.map {|k, v| [k.to_s.camelize, v] }].to_json
   stub_request(:get, "https://api.mxit.com/user/profile").to_return(:status => 200, :body => body, :headers => {})
   stub_request(:get, "https://1:@api.mxit.com/user/profile").to_return(:status => 200, :body => body, :headers => {})
-  token_body = %&{ "access_token":"c71219af53f5409e9d1db61db8a08248" }&
+  token_body = %&{ "scope":"contact/invite profile/public profile/private", "access_token":"c71219af53f5409e9d1db61db8a08248" }&
   stub_request(:post, "https://auth.mxit.com/token").to_return(:status => 200, :body => token_body, :headers => {})
   stub_request(:post, "https://1:@auth.mxit.com/token").to_return(:status => 200, :body => token_body, :headers => {})
+  stub_request(:put, "https://1:@api.mxit.com/user/socialgraph/contact/extremepayout").
+    to_return(:status => 200, :body => "", :headers => {})
+  stub_request(:put, "https://api.mxit.com/user/socialgraph/contact/extremepayout").
+    to_return(:status => 200, :body => "", :headers => {})
 end

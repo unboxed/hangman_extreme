@@ -10,7 +10,8 @@ describe "games/index" do
       stub_model(Game, id: 101, done?: false, hangman_text: "goodbye", score: 500)
     ])
     view.stub!(:paginate)
-    view.stub!(:current_user).and_return(stub_model(User, id: 50))
+    @current_user = stub_model(User, id: 50)
+    view.stub!(:current_user).and_return(@current_user)
   end
 
   it "renders a list of games" do
@@ -74,6 +75,23 @@ describe "games/index" do
   it "should have a buy more clue points link" do
     render
     rendered.should have_link("buy_clue_points", href: purchases_path)
+  end
+
+  it "should have a link to redeem winnings if user have prize points" do
+    @current_user.prize_points = 50
+    render
+    rendered.should have_link("redeem", href: mxit_authorise_url(response_type: 'code',
+                                                                 host: "test.host",
+                                                                 client_id: ENV['MXIT_CLIENT_ID'],
+                                                                 redirect_uri: mxit_oauth_users_url(host: "test.host"),
+                                                                 scope: "contact/invite",
+                                                                 state: "winnings"))
+  end
+
+  it "wont have a link to redeem winnings if user have no prize points" do
+    @current_user.prize_points = 0
+    render
+    rendered.should_not have_link("redeem")
   end
 
 end

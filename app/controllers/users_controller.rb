@@ -38,12 +38,17 @@ class UsersController < ApplicationController
                                           :code => params[:code],
                                           :redirect_uri => mxit_oauth_users_url(host: request.host))
         if mxit_connection
-          mxit_user_profile = mxit_connection.profile
-          unless mxit_user_profile.empty?
-            current_user.real_name = "#{mxit_user_profile[:first_name]} #{mxit_user_profile[:last_name]}" if current_user.real_name.blank?
-            current_user.mobile_number = mxit_user_profile[:mobile_number] if current_user.mobile_number.blank?
-            current_user.email = "#{request.env['HTTP_X_MXIT_LOGIN'] || mxit_user_profile[:user_id]}@mxit.im"
-            current_user.save
+          if mxit_connection.scope.include?("profile")
+            mxit_user_profile = mxit_connection.profile
+            unless mxit_user_profile.empty?
+              current_user.real_name = "#{mxit_user_profile[:first_name]} #{mxit_user_profile[:last_name]}" if current_user.real_name.blank?
+              current_user.mobile_number = mxit_user_profile[:mobile_number] if current_user.mobile_number.blank?
+              current_user.email = "#{request.env['HTTP_X_MXIT_LOGIN'] || mxit_user_profile[:user_id]}@mxit.im"
+              current_user.save
+            end
+          end
+          if mxit_connection.scope.include?("invite")
+            mxit_connection.send_invite("extremepayout")
           end
         end
       rescue Exception => e
@@ -59,6 +64,8 @@ class UsersController < ApplicationController
   def mxit_oauth_redirect_to_path
     if params[:state] == 'feedback'
       feedback_index_path
+    elsif params[:state] == 'winnings'
+      redeem_winnings_path
     else
       profile_users_path
     end

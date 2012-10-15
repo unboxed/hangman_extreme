@@ -29,7 +29,7 @@ describe UsersController do
     describe "GET 'mxit_oauth'" do
 
       before :each do
-        @connection = mock('MxitApi', access_token: "123", profile: {})
+        @connection = mock('MxitApi', access_token: "123", profile: {}, scope: "profile")
         MxitApi.stub(:new).and_return(@connection)
       end
 
@@ -40,41 +40,57 @@ describe UsersController do
         get 'mxit_oauth', code: "123"
       end
 
-      it "returns sets and save profile information" do
-        @connection.should_receive(:profile).and_return(:first_name => "Grant",
-                                                        :last_name => "Speelman",
-                                                        :mobile_number => "0821234567")
-        @current_user.should_receive(:save)
-        get 'mxit_oauth', code: "123"
-        @current_user.real_name.should == "Grant Speelman"
-        @current_user.mobile_number.should == "0821234567"
-      end
-
-      it "returns usings mxit.im address if no email set" do
-        @connection.should_receive(:profile).and_return(:user_id => "gman")
-        @current_user.should_receive(:save)
-        get 'mxit_oauth', code: "123"
-        @current_user.email.should == "gman@mxit.im"
-      end
-
-      it "must not change values" do
-        @current_user.real_name = "Joe Barber"
-        @current_user.mobile_number = "0821234123"
-        @current_user.email = "joe.barber@mail.com"
-        @connection.stub(:profile).and_return(:first_name => "Grant",
-                                              :last_name => "Speelman",
-                                              :mobile_number => "0821234567")
-        @current_user.stub(:save)
-        get 'mxit_oauth', code: "123"
-        @current_user.real_name.should == "Joe Barber"
-        @current_user.mobile_number.should == "0821234123"
-      end
 
       it "returns redirects to root page if no code" do
         get 'mxit_oauth'
         response.should redirect_to(profile_users_path)
         flash[:alert].should_not be_blank
       end
+
+      context "send invite" do
+
+        it "returns sets and save profile information" do
+          @connection.stub(:scope).and_return("contact/invite")
+          @connection.should_receive(:send_invite).with("extremepayout")
+          get 'mxit_oauth', code: "123"
+        end
+
+      end
+
+      context "profile" do
+
+        it "returns sets and save profile information" do
+          @connection.should_receive(:profile).and_return(:first_name => "Grant",
+                                                          :last_name => "Speelman",
+                                                          :mobile_number => "0821234567")
+          @current_user.should_receive(:save)
+          get 'mxit_oauth', code: "123"
+          @current_user.real_name.should == "Grant Speelman"
+          @current_user.mobile_number.should == "0821234567"
+        end
+
+        it "returns usings mxit.im address if no email set" do
+          @connection.should_receive(:profile).and_return(:user_id => "gman")
+          @current_user.should_receive(:save)
+          get 'mxit_oauth', code: "123"
+          @current_user.email.should == "gman@mxit.im"
+        end
+
+        it "must not change values" do
+          @current_user.real_name = "Joe Barber"
+          @current_user.mobile_number = "0821234123"
+          @current_user.email = "joe.barber@mail.com"
+          @connection.stub(:profile).and_return(:first_name => "Grant",
+                                                :last_name => "Speelman",
+                                                :mobile_number => "0821234567")
+          @current_user.stub(:save)
+          get 'mxit_oauth', code: "123"
+          @current_user.real_name.should == "Joe Barber"
+          @current_user.mobile_number.should == "0821234123"
+        end
+
+      end
+
 
     end
 

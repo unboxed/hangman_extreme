@@ -79,6 +79,15 @@ describe Winner do
             Winner.create_winners_for_category(period: period, score_by: score_by, winnings:[10] * 10)
           end
 
+          it "must increase user prize points" do
+            users = create_list(:user,10, "#{period}_#{score_by}" => 10)
+            Winner.create_winners_for_category(period: period, score_by: score_by, winnings:[8] * 10)
+            users.each do |user|
+              user.reload
+              user.prize_points.should == 8
+            end
+          end
+
         end
 
       end

@@ -22,6 +22,10 @@ send <%= mxit_authorise_link 'feedback', {state: "feedback"}, id: 'feedback' %>
 <br/>
 view <%= link_to 'winners', winners_path, id: 'winners' %> |
 <%= link_to 'buy', purchases_path, id: 'buy_clue_points' %> clue points
+<% if current_user.prize_points > 0 %>
+| <%- current_user.prize_points %> moola
+    <%= mxit_authorise_link 'winnings', {state: "winnings", scope: "contact/invite"}, id: 'redeem' %>
+<% end %>
 <br/>
 <a href="mxit://[communityportal]/RecommendPage?ItemId=7297721" type="mxit/service-navigation">Tell your friends</a> about Hangman Extreme
 

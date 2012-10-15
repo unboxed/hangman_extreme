@@ -1,0 +1,9 @@
+<h1>Redeeming Winnings</h1>
+You have <%= current_user.prize_points %> moola waiting to be paid out.
+<p>Make sure to add the contact <b>extremepayout</b> in order to receive your moola winnings</p>
+
+<br/>
+<%= link_to 'home', root_path, id: 'root_page' %> |
+<b><%= link_to 'new', new_game_path, id: 'new_game' %> game</b> |
+view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %> |
+

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121012152209) do
+ActiveRecord::Schema.define(:version => 20121015135316) do
 
   create_table "games", :force => true do |t|
     t.string   "word"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20121012152209) do
     t.string   "mobile_number"
     t.string   "email"
     t.integer  "clue_points",       :default => 2, :null => false
+    t.integer  "prize_points",      :default => 0, :null => false
   end
 
   add_index "users", ["created_at"], :name => "index_users_on_created_at"
