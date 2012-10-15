@@ -27,7 +27,7 @@ class PurchaseTransaction < ActiveRecord::Base
   def self.products
     return @p if @p
     @p = {}
-    [[1,1],[10,12],[20,26],[50,66],[100,135]].each do |moola,amount|
+    [[1,1],[10,11],[20,23],[50,59],[100,120]].each do |moola,amount|
       @p["clue#{amount}"] = HashWithIndifferentAccess.new(currency_amount: "#{moola} cents",
                                                           moola_amount: moola,
                                                           product_name: "#{amount} clue points",
