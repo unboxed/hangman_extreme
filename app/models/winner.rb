@@ -44,9 +44,9 @@ class Winner < ActiveRecord::Base
                      period: options[:period])
       if amount > 0
         user.increment!(:prize_points,amount)
-        user.send_message("Congratulations, you have won *#{amount} moola* for $#{options[:period]} #{options[:score_by]}$.
+        user.send_message("Congratulations, you have won *#{amount} moola* for _#{options[:period]} #{options[:score_by]}_.
                            Please make sure you have entered your details on $profile$ and
-                           that you have added the *extremepayout* contact to receive your moola winnings.")
+                           that you have added the $extremepayout$ contact to receive your moola winnings.")
       end
     end
   end

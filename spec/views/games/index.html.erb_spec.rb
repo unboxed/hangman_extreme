@@ -84,7 +84,7 @@ describe "games/index" do
                                                                  host: "test.host",
                                                                  client_id: ENV['MXIT_CLIENT_ID'],
                                                                  redirect_uri: mxit_oauth_users_url(host: "test.host"),
-                                                                 scope: "contact/invite",
+                                                                 scope: "contact/invite graph/read",
                                                                  state: "winnings"))
   end
 

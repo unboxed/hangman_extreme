@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :load_mxit_user, :load_facebook_user
+  before_filter :load_mxit_user, :load_facebook_user, :check_mxit_input_for_redirect
   after_filter :send_stats
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -88,6 +88,23 @@ class ApplicationController < ActionController::Base
         false
       end
     end
+  end
+
+  def check_mxit_input_for_redirect
+    case request.env["HTTP_X_MXIT_USER_INPUT"]
+     when "extremepayout"
+      redirect_to(mxit_authorise_url(response_type: 'code',
+                                    host: Rails.env.test? ? request.host : "auth.mxit.com",
+                                    protocol: Rails.env.test? ? 'http' : 'https',
+                                    client_id: ENV['MXIT_CLIENT_ID'],
+                                    redirect_uri: mxit_oauth_users_url(host: request.host),
+                                    scope: "contact/invite graph/read"))
+      when "profile"
+        redirect_to(profile_users_path)
+      when 'winners'
+        redirect_to(winners_path)
+    end
+    status != 302
   end
 
   private

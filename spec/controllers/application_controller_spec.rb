@@ -208,4 +208,42 @@ describe ApplicationController do
 
   end
 
+  describe "it captures mxit user input" do
+
+    controller do
+      def index
+        render :text => "hello"
+      end
+    end
+
+    it "must render page if no user input" do
+      get :index
+      response.should be_success
+    end
+
+    it "must redirect to mxit invite if input extremepayout" do
+      request.env['HTTP_X_MXIT_USER_INPUT'] = "extremepayout"
+      get :index
+      response.should redirect_to(mxit_authorise_url(response_type: 'code',
+                                                     host: "test.host",
+                                                     protocol: 'http',
+                                                     client_id: ENV['MXIT_CLIENT_ID'],
+                                                     redirect_uri: mxit_oauth_users_url(host: 'test.host'),
+                                                     scope: "contact/invite graph/read"))
+    end
+
+    it "must redirect to mxit invite if input extremepayout" do
+      request.env['HTTP_X_MXIT_USER_INPUT'] = "profile"
+      get :index
+      response.should redirect_to(profile_users_path)
+    end
+
+    it "must redirect to mxit invite if input extremepayout" do
+      request.env['HTTP_X_MXIT_USER_INPUT'] = "winners"
+      get :index
+      response.should redirect_to(winners_path)
+    end
+
+  end
+
 end
