@@ -25,7 +25,6 @@ HangmanLeague::Application.routes.draw do
   resources :winners, :except => [:edit, :update, :create, :new, :destroy]
   resources :redeem_winnings, :except => [:show, :edit, :update, :create, :new, :destroy]
 
-
   match '/define/:word', to: 'words#define', as: 'define_word'
   match '/facebook_oauth', to: 'users#facebook_oauth', as: 'facebook_oauth'
   match '/auth/:provider/callback', to: 'sessions#create'

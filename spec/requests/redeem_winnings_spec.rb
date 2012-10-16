@@ -20,4 +20,8 @@ describe 'users' do
     page.current_path.should == '/'
   end
 
+  it "must show users redeem winnings link" do
+
+  end
+
 end

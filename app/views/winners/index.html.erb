@@ -19,12 +19,18 @@ So <a href="mxit://[communityportal]/RecommendPage?ItemId=7297721" type="mxit/se
 <% end %>
 
 <%= link_to 'home', root_path, id: 'root_page' %> |
-<%= link_to_unless params[:reason] == 'rating',
-                   'rating',
-                   {reason: 'rating'} %> |
-<%= link_to_unless params[:reason] == 'wins',
-                   'wins',
-                   {reason: 'wins'} %> |
-<%= link_to_unless params[:reason] == 'precision',
-                   'precision',
-                   {reason: 'precision'} %>
+<br/>
+<% ['daily','weekly','monthly'].each do |time_period| %>
+    <%= link_to_unless params[:period] == time_period,
+                       time_period,
+                       {period: time_period, reason: params[:reason]},
+                       id: "#{time_period}_#{params[:reason] || 'rating'}" %> |
+<% end %>
+<br/>
+<% ['wins','rating','precision'].each do |reason| %>
+    <%= link_to_unless params[:reason] == reason,
+                       reason,
+                       {period: params[:period], reason: reason},
+                       id: "#{params[:period] || 'daily'}_#{reason}" %> |
+<% end %>
+

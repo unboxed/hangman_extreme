@@ -4,6 +4,7 @@ class WinnersController < ApplicationController
 
   def index
     params[:reason] ||= 'rating'
-    @winners = @winners.period('daily').reason(params[:reason]).order('created_at DESC').page(params[:page]).per(10)
+    params[:period] ||= 'daily'
+    @winners = @winners.period(params[:period]).reason(params[:reason]).order('created_at DESC').page(params[:page]).per(10)
   end
 end
