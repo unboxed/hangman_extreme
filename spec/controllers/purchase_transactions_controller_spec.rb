@@ -66,7 +66,7 @@ describe PurchaseTransactionsController do
 
     it "redirects to index" do
       do_get_create
-      response.should redirect_to(action: 'index')
+      response.should redirect_to(action: 'index', mxit_transaction_res: 0)
     end
 
     context "faild" do

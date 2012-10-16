@@ -25,11 +25,9 @@ class PurchaseTransactionsController < ApplicationController
         end
       rescue Exception => e
         ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
-        Settings.ga_tracking_disabled_until = 20.minutes.from_now # disable for a 20 minutes
-                                                                  # ignore errors
         raise if Rails.env.test?
       end
-      redirect_to({ action: 'index'}, notice: 'Purchase successful')
+      redirect_to({ action: 'index', mxit_transaction_res: params[:mxit_transaction_res]}, notice: 'Purchase successful')
     else
       alert_text =
       case params[:mxit_transaction_res].to_i
@@ -50,7 +48,7 @@ class PurchaseTransactionsController < ApplicationController
         when -1
           "Technical system error occurred"
       end
-      redirect_to({ action: 'index'}, alert: alert_text)
+      redirect_to({ action: 'index', mxit_transaction_res: params[:mxit_transaction_res]}, alert: alert_text)
     end
   end
 
