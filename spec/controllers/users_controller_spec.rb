@@ -51,7 +51,7 @@ describe UsersController do
 
         it "returns sets and save profile information" do
           @connection.stub(:scope).and_return("contact/invite")
-          @connection.should_receive(:send_invite).with("extremepayout")
+          @connection.should_receive(:send_invite).with("m40363966002")
           get 'mxit_oauth', code: "123"
         end
 

@@ -48,7 +48,7 @@ class UsersController < ApplicationController
             end
           end
           if mxit_connection.scope.include?("invite")
-            mxit_connection.send_invite("extremepayout")
+            mxit_connection.send_invite("m40363966002") # mxitid of extremepayout
           end
         end
       rescue Exception => e
