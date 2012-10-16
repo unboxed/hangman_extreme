@@ -98,7 +98,8 @@ class ApplicationController < ActionController::Base
                                     protocol: Rails.env.test? ? 'http' : 'https',
                                     client_id: ENV['MXIT_CLIENT_ID'],
                                     redirect_uri: mxit_oauth_users_url(host: request.host),
-                                    scope: "contact/invite graph/read"))
+                                    scope: "contact/invite graph/read",
+                                    state: "winnings"))
       when "profile"
         redirect_to(profile_users_path)
       when 'winners'

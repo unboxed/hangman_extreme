@@ -229,7 +229,8 @@ describe ApplicationController do
                                                      protocol: 'http',
                                                      client_id: ENV['MXIT_CLIENT_ID'],
                                                      redirect_uri: mxit_oauth_users_url(host: 'test.host'),
-                                                     scope: "contact/invite graph/read"))
+                                                     scope: "contact/invite graph/read",
+                                                     state: "winnings"))
     end
 
     it "must redirect to mxit invite if input extremepayout" do
