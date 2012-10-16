@@ -87,7 +87,8 @@ class User < ActiveRecord::Base
 
   def utma(update_tracking = false)
     google_tracking.update_tracking if update_tracking
-    "1.#{id}00145214523.#{google_tracking.initial_visit}.#{google_tracking.previous_session}.#{google_tracking.current_session}.15"
+    utma = "1.#{id}00145214523.#{google_tracking.initial_visit}.#{google_tracking.previous_session}.#{google_tracking.current_session}.15"
+    "__utma=#{utma};+__utmz=1.#{google_tracking.current_session}.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none);"
   end
 
   def google_tracking

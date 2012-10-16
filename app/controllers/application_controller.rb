@@ -82,7 +82,7 @@ class ApplicationController < ActionController::Base
       if @data.kind_of?(Hash) && @data['user_id']
         self.current_user = User.find_or_create_from_auth_hash(provider: 'facebook_canvas',
                                                                     uid: @data['user_id'],
-                                                                  info: { name: "user #{@data['user_id']}"})
+                                                                   info: { name: "user #{@data['user_id']}"})
       else
         redirect_to facebook_oauth_path
         false
