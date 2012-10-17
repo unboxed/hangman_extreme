@@ -35,13 +35,16 @@ class Winner < ActiveRecord::Base
   def self.create_winners_for_category(options)
     options = HashWithIndifferentAccess.new(options)
     field = "#{options[:period]}_#{options[:score_by]}"
-    User.top_scorers(field).each_with_index do |user|
-      amount = options[:winnings][user.rank(field) - 1]
-      Winner.create!(user_id: user.id,
-                     amount: amount,
-                     reason: options[:score_by],
-                     end_of_period_on: Date.today,
-                     period: options[:period])
+    winners = []
+    User.top_scorers(field).
+      collect{|u|[u,options[:winnings][u.rank(field) - 1] || options[:winnings].last]}.each_with_index do |user,amount|
+      winners << Winner.create(user_id: user.id,
+                              amount: amount,
+                              reason: options[:score_by],
+                              end_of_period_on: Date.today,
+                              period: options[:period])
+    end
+    winners.collect{|w|[w.user,w.amount]}.each do |user,amount|
       if amount > 0
         user.increment!(:prize_points,amount)
         user.send_message("Congratulations, you have won *#{amount} moola* for _#{options[:period]} #{options[:score_by]}_.
