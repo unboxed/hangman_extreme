@@ -58,7 +58,10 @@ describe ApplicationController do
       end
 
       it "loads the mxit user into current_user" do
-        User.should_receive(:find_or_create_from_auth_hash).with(uid: 'm2604100', provider: 'mxit', info: {name: 'grant'})
+        User.should_receive(:find_or_create_from_auth_hash).with(uid: 'm2604100',
+                                                                 provider: 'mxit',
+                                                                 info: {name: 'grant',
+                                                                        login: nil})
         get :index
       end
 
