@@ -37,7 +37,7 @@ class Winner < ActiveRecord::Base
     field = "#{options[:period]}_#{options[:score_by]}"
     winners = []
     User.top_scorers(field).
-      collect{|u|[u,options[:winnings][u.rank(field) - 1] || options[:winnings].last]}.each_with_index do |user,amount|
+      collect{|u|[u,options[:winnings][u.rank(field) - 1] || options[:winnings].last]}.each do |user,amount|
       winners << Winner.create(user_id: user.id,
                               amount: amount,
                               reason: options[:score_by],
