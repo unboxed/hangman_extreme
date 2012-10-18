@@ -120,6 +120,47 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.cohort_array
+    cohort = []
+    end_of_week = Time.current.beginning_of_day - 1.day
+    start_of_week = end_of_week - 7.days
+    while(Game.where('games.created_at >= ? AND games.created_at <= ?',start_of_week,end_of_week).any?)
+      user_scope = User.mxit.where('users.created_at <= ?',end_of_week )
+      all_users_count = user_scope.count
+      new_active_users = new_competitive_users = 0
+      user_scope.where('users.created_at >= ?',start_of_week).joins(:games).
+      where("games.created_at >= ? AND games.created_at <= ?",start_of_week,end_of_week).
+      count("games.id",group: 'users.id').each do |user_id,count|
+        if count > 35
+          new_competitive_users += 1
+        else
+          new_active_users += 1
+        end
+      end
+      active_users = competitive_users = 0
+      user_scope.where('users.created_at <= ?',start_of_week).
+        joins("LEFT JOIN games ON users.id = games.user_id").
+        where("(games.created_at >= ? AND games.created_at <= ?) OR games.created_at IS NULL",start_of_week,end_of_week).
+        count("games.id",group: 'users.id').each do |user_id,count|
+          if count > 35
+            competitive_users += 1
+          else
+            active_users += 1
+          end
+      end
+      inactive_users = all_users_count - (new_active_users + new_competitive_users + active_users + competitive_users)
+      cohort << [start_of_week.strftime("%d-%m"),
+                new_active_users,
+                new_competitive_users,
+                inactive_users,
+                active_users,
+                competitive_users]
+      start_of_week -= 1.day
+      end_of_week -= 1.day
+    end
+    cohort.reverse
+  end
+
   private
 
   def calculate_games_won(scope)

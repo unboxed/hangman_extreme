@@ -16,6 +16,7 @@ HangmanLeague::Application.routes.draw do
   end
   resources :users, :except => [:create, :new, :destroy] do
     collection do
+      get 'stats', action: "stats"
       get 'my_rank', action: "show"
       get 'mxit_oauth', action: 'mxit_oauth', as: 'mxit_oauth'
       get 'profile', action: 'profile', as: 'profile'

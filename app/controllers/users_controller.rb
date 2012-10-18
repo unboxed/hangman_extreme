@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_filter :login_required, :except => :facebook_oauth
-  load_and_authorize_resource :except => [:mxit_authorise,:mxit_oauth,:profile]
+  load_and_authorize_resource :except => [:mxit_authorise,:mxit_oauth,:profile, :stats]
+  caches_action :stats, expires_in: 1.day, :cache_path => proc{ {date: Date.today} }
 
   def index
     params[:period] = 'daily' unless ['daily','weekly','monthly'].include?(params[:period].to_s)
@@ -56,6 +57,20 @@ class UsersController < ApplicationController
         ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : raise
       end
       redirect_to mxit_oauth_redirect_to_path
+    end
+  end
+
+  def stats
+    @cohort = User.cohort_array
+    @cohort_percentage = @cohort.collect do |v|
+      sum = v[1] + v[2] + v[3] + v[4] + v[5]
+      [ v[0],
+        (v[1] * 10000) / sum,
+        (v[2] * 10000) / sum,
+        (v[3] * 10000) / sum,
+        (v[4] * 10000) / sum,
+        (v[5] * 10000) / sum,
+      ]
     end
   end
 
