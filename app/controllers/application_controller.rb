@@ -58,7 +58,8 @@ class ApplicationController < ActionController::Base
     if request.env['HTTP_X_MXIT_USERID_R']
       @current_user = User.find_or_create_from_auth_hash(provider: 'mxit',
                                                               uid: request.env['HTTP_X_MXIT_USERID_R'],
-                                                             info: { name: request.env['HTTP_X_MXIT_NICK']})
+                                                             info: { name: request.env['HTTP_X_MXIT_NICK'],
+                                                                     login: request.env['HTTP_X_MXIT_LOGIN'] })
       if request.env["HTTP_X_MXIT_PROFILE"]
         @mxit_profile = MxitProfile.new(request.env["HTTP_X_MXIT_PROFILE"])
         current_user_request_info.mxit_profile = @mxit_profile

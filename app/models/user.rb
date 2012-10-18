@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
     if auth_hash['info']
       auth_hash['info'].stringify_keys!
       user.name = auth_hash['info']['name']
+      user.login = auth_hash['info']['login']
       user.save!
     end
     return user
