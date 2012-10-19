@@ -13,6 +13,7 @@ class PurchaseTransactionsController < ApplicationController
   end
 
   def create
+
     if params[:mxit_transaction_res].to_i == 0
       @purchase_transaction.user = current_user
       @purchase_transaction.product_id = params[:product_id]
@@ -29,25 +30,15 @@ class PurchaseTransactionsController < ApplicationController
       end
       redirect_to({ action: 'index', mxit_transaction_res: params[:mxit_transaction_res]}, notice: 'Purchase successful')
     else
-      alert_text =
-      case params[:mxit_transaction_res].to_i
-        when 1
-          "Transaction rejected"
-        when 2
-          "Authentication Failure"
-        when 3
-          "Account is locked"
-        when 4
-          "Insufficient funds"
-        when 5
-          "Transaction timed out"
-        when 6
-          "Logged out or Transaction rejected"
-        when -2
-          "transaction parameters are not valid"
-        when -1
-          "Technical system error occurred"
-      end
+      mxit_transaction_text = {1 => "Transaction rejected",
+                               2 => "Authentication Failure",
+                               3 => "Account is locked",
+                               4 => "Insufficient funds",
+                               5 => "Transaction timed out",
+                               6 => "Logged out or Transaction rejected",
+                               -2 => "transaction parameters are not valid",
+                               -1 => "Technical system error occurred"}
+      alert_text = mxit_transaction_text[params[:mxit_transaction_res].to_i]
       redirect_to({ action: 'index', mxit_transaction_res: params[:mxit_transaction_res]}, alert: alert_text)
     end
   end

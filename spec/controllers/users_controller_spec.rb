@@ -123,6 +123,16 @@ describe UsersController do
 
     end
 
+    describe "GET stats" do
+
+      it "renders the application layout" do
+        create(:game)
+        get :stats
+        response.should render_template("layouts/application")
+      end
+
+    end
+
     describe "PUT update" do
 
       before :each do

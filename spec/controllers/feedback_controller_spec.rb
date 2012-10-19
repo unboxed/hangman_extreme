@@ -70,6 +70,12 @@ describe FeedbackController do
         do_create 'suggestion'
       end
 
+      it "wont send feedback if no feedback" do
+        Feedback.should_not_receive(:send_suggestion)
+        Feedback.should_not_receive(:send_support)
+        post :create, :feedback => ""
+      end
+
       it "redirects to home" do
         do_create
         response.should redirect_to(root_path)

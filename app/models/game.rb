@@ -83,7 +83,7 @@ class Game < ActiveRecord::Base
   end
 
   def self.purge_old
-    Game.where('created_at < ?',5.weeks.ago).delete_all
+    Game.where('created_at < ?',20.weeks.ago).delete_all
   end
 
   def self.cohort_array
