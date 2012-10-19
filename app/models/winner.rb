@@ -29,7 +29,8 @@ class Winner < ActiveRecord::Base
     ['rating','precision','wins'].each do |score_by|
       create_winners_for_category(score_by: score_by, winnings: winnings, period: period)
     end
-    User.send_message("We have selected our $winners$ for the #{period} prizes, Congratulations to those who have won.")
+    User.send_message("We have selected our $winners$ for the #{period} prizes, Congratulations to those who have won.",
+                      User.mxit.where('updated_at > ?',3.day.ago))
   end
 
   def self.create_winners_for_category(options)

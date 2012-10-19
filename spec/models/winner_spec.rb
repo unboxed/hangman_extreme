@@ -123,7 +123,8 @@ describe Winner do
 
     it "must send a message to everyone" do
       User.should_receive(:send_message).
-        with("We have selected our $winners$ for the daily prizes, Congratulations to those who have won.")
+        with("We have selected our $winners$ for the daily prizes, Congratulations to those who have won.",
+             anything())
       Winner.create_daily_winners((11..20).to_a.reverse)
     end
 
