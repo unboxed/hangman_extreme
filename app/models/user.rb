@@ -150,7 +150,7 @@ class User < ActiveRecord::Base
           end
       end
       inactive_users = all_users_count - (new_active_users + new_competitive_users + active_users + competitive_users)
-      cohort << [start_of_week.strftime("%d-%m"),
+      cohort << [end_of_week.strftime("%d-%m"),
                 new_active_users,
                 new_competitive_users,
                 inactive_users,

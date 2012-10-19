@@ -86,6 +86,30 @@ class Game < ActiveRecord::Base
     Game.where('created_at < ?',5.weeks.ago).delete_all
   end
 
+  def self.cohort_array
+    cohort = []
+    day = Game.maximum(:created_at).beginning_of_day
+    game_scope = Game.where('games.created_at >= ? AND games.created_at < ?',day,day + 1.day)
+    while(game_scope.any?) do
+      completed_games = game_scope.completed
+      clue_completed_games = completed_games.where('clue_revealed = ?',true).count
+      no_clue_completed_games = completed_games.count - clue_completed_games
+
+      incompleted_games = game_scope.incompleted
+      clue_incompleted_games = incompleted_games.where('clue_revealed = ?',true).count
+      no_clue_incompleted_games = incompleted_games.count - clue_incompleted_games
+
+      cohort << [day.strftime("%d-%m"),
+                 clue_incompleted_games,
+                 no_clue_incompleted_games,
+                 no_clue_completed_games,
+                 clue_completed_games]
+      day -= 1.day
+      game_scope = Game.where('games.created_at >= ? AND games.created_at < ?',day,day + 1.day)
+    end
+    cohort.reverse
+  end
+
   protected
 
   def set_score

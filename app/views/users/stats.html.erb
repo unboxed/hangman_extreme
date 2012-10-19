@@ -30,6 +30,14 @@
 
 </div>
 
+<div id="games_cohort">
+
+</div>
+
+<div id="games_growth">
+
+</div>
+
 <script type="text/javascript"  src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src='https://www.google.com/jsapi?autoload={"modules":[{"name":"visualization","version":"1","packages":["corechart"]}]}'></script>
 <script type="text/javascript">
@@ -69,6 +77,28 @@
 
         chart = new google.visualization.AreaChart(document.getElementById('growth'));
         chart.draw(data, $.extend({isStacked: true }, defaultGraphStyles, { title:'Growth' }));
+
+        data = new google.visualization.DataTable();
+        data.addColumn('string', 'Date');
+        data.addColumn('number', 'clue incompleted');
+        data.addColumn('number', 'no clue incompleted');
+        data.addColumn('number', 'no clue completed');
+        data.addColumn('number', 'clue completed');
+        data.addRows(<%= raw @games_cohort_percentage.to_json %>);
+
+        chart = new google.visualization.AreaChart(document.getElementById('games_cohort'));
+        chart.draw(data, $.extend({isStacked: true }, defaultGraphStyles, { title:'Games cohort' }));
+
+        data = new google.visualization.DataTable();
+        data.addColumn('string', 'Date');
+        data.addColumn('number', 'clue incompleted');
+        data.addColumn('number', 'no clue incompleted');
+        data.addColumn('number', 'no clue completed');
+        data.addColumn('number', 'clue completed');
+        data.addRows(<%= raw @games_cohort.to_json %>);
+
+        chart = new google.visualization.AreaChart(document.getElementById('games_growth'));
+        chart.draw(data, $.extend({isStacked: true }, defaultGraphStyles, { title:'Games growth' }));
     }
 
 </script>
