@@ -22,7 +22,12 @@ class RedeemWinningsController < ApplicationController
       RedeemWinning.transaction do
         @redeem_winning.save!
       end
-      redirect_to({action: 'index'}, notice: 'prize successful')
+      if @redeem_winning.prize_type == 'moola'
+        notice = "Please must sure you have added extremepayout and allow 48 hours for your moola to be paid out."
+      else
+        notice = 'prize successful'
+      end
+      redirect_to({action: 'index'}, notice: notice)
     rescue
       redirect_to({action: 'index'}, alert: 'prize failed.')
     end
