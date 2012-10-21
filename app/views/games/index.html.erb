@@ -1,6 +1,6 @@
 <b>Welcome to hangman extreme</b><br/>
 Have fun guessing the word.<br/>
-<b>Coming soon, weekly winners of up to 200 moola</b><br/>
+<b>We have changed the way we give prizes, check out the <i>redeem</i> section to see why.</b><br/>
 
 <ul>
   <%= content_tag_for(:li, @games) do |game| %>
@@ -21,11 +21,8 @@ send <%= mxit_authorise_link 'profile', {state: "profile"}, id: 'authorise' %> |
 send <%= mxit_authorise_link 'feedback', {state: "feedback"}, id: 'feedback' %>
 <br/>
 view <%= link_to 'winners', winners_path, id: 'winners' %> |
-<%= link_to 'buy', purchases_path, id: 'buy_clue_points' %> clue points
-<% if current_user.prize_points > 0 %>
-| <%- current_user.prize_points %> moola
-    <%= mxit_authorise_link 'winnings', {state: "winnings", scope: "contact/invite graph/read"}, id: 'redeem' %>
-<% end %>
+<%= link_to 'buy', purchases_path, id: 'buy_clue_points' %> clue points |
+<%= link_to 'redeem', redeem_winnings_path, id: 'redeem' %> prize_points
 <br/>
 <a href="mxit://[communityportal]/RecommendPage?ItemId=7297721" type="mxit/service-navigation">Tell your friends</a> about Hangman Extreme
 

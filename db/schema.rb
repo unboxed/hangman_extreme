@@ -42,6 +42,17 @@ ActiveRecord::Schema.define(:version => 20121018104819) do
 
   add_index "purchase_transactions", ["user_id"], :name => "index_purchase_transactions_on_user_id"
 
+  create_table "redeem_winnings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "prize_amount"
+    t.string   "prize_type"
+    t.string   "state"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "redeem_winnings", ["user_id"], :name => "index_redeem_winnings_on_user_id"
+
   create_table "settings", :force => true do |t|
     t.string   "var",                       :null => false
     t.text     "value"

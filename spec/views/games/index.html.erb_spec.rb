@@ -78,20 +78,8 @@ describe "games/index" do
   end
 
   it "should have a link to redeem winnings if user have prize points" do
-    @current_user.prize_points = 50
     render
-    rendered.should have_link("redeem", href: mxit_authorise_url(response_type: 'code',
-                                                                 host: "test.host",
-                                                                 client_id: ENV['MXIT_CLIENT_ID'],
-                                                                 redirect_uri: mxit_oauth_users_url(host: "test.host"),
-                                                                 scope: "contact/invite graph/read",
-                                                                 state: "winnings"))
-  end
-
-  it "wont have a link to redeem winnings if user have no prize points" do
-    @current_user.prize_points = 0
-    render
-    rendered.should_not have_link("redeem")
+    rendered.should have_link("redeem", href: redeem_winnings_path)
   end
 
 end

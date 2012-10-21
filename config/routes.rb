@@ -5,6 +5,7 @@ HangmanLeague::Application.routes.draw do
   get "purchase_transactions", to: 'purchase_transactions#index', as: 'purchases'
   get "purchase_transactions/new", as: 'new_purchase'
   match "purchase_transactions/create", to: 'purchase_transactions#create', as: 'create_purchase'
+
   match "Transaction/PaymentRequest", to: 'purchase_transactions#simulate_purchase', as: 'mxit_purchase'
 
 
@@ -24,7 +25,7 @@ HangmanLeague::Application.routes.draw do
   end
   resources :feedback, :except => [:show, :edit, :update, :destroy]
   resources :winners, :except => [:edit, :update, :create, :new, :destroy]
-  resources :redeem_winnings, :except => [:show, :edit, :update, :create, :new, :destroy]
+  resources :redeem_winnings, :except => [:edit, :update, :destroy]
 
   match '/define/:word', to: 'words#define', as: 'define_word'
   match '/facebook_oauth', to: 'users#facebook_oauth', as: 'facebook_oauth'

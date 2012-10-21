@@ -88,5 +88,28 @@ describe Ability do
 
   end
 
+  context "Redeem Winnings" do
+
+    it "must be able to view redeem_winning" do
+      @ability.should be_able_to(:read, RedeemWinning)
+    end
+
+    it "wont be able to read other users redeem_winnings" do
+      trans = create(:redeem_winning, user: create(:user, prize_points: 2))
+      @ability.should_not be_able_to(:read, trans)
+    end
+
+    it "must be able to read own redeem_winnings" do
+      @user.increment!(:prize_points)
+      trans = create(:redeem_winning, user: @user)
+      @ability.should be_able_to(:read, trans)
+    end
+
+    it "must be able to create redeem_winning" do
+      @ability.should be_able_to(:create, RedeemWinning)
+    end
+
+  end
+
 
 end

@@ -12,5 +12,8 @@ class Ability
 
     can :create, PurchaseTransaction
     can :read, PurchaseTransaction, user_id: user.id
+
+    can :create, RedeemWinning
+    can :read, RedeemWinning, user_id: user.id
   end
 end

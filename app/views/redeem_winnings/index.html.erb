@@ -1,6 +1,30 @@
 <h1>Redeeming Winnings</h1>
 You have <%= current_user.prize_points %> prize points.
-
+<br/>
+You can redeem your points for:
+<%= index = 0 %>
+<ul>
+  <% if current_user.prize_points == 0 %>
+    <li>clue points</li>
+  <% else current_user.prize_points > 0  %>
+    <li><%= link_to (index += 1).to_s,
+                    new_redeem_winning_path(:prize_type => 'clue_points',
+                                            :prize_amount => [current_user.prize_points,10].min),
+                    id: 'clue_points' %>
+         <%= [current_user.prize_points,10].min %> clue points</li>
+  <% end %>
+  <% if current_user.prize_points < 20 %>
+      <li>moola (<span style="color: red;">You need more <%= 20 - current_user.prize_points %>prize points</span>)</li>
+  <% else current_user.prize_points >= 20  %>
+      <li><%= link_to (index += 1).to_s,
+                      new_redeem_winning_path(:prize_type => 'moola',
+                                              :prize_amount => [current_user.prize_points,100].min),
+                      id: 'moola' %>
+        <%= [current_user.prize_points,100].min %> moola</li>
+  <% end %>
+  <li>coming soon airtime</li>
+  <li>coming soon mimoney</li>
+</ul>
 <br/>
 <%= link_to 'home', root_path, id: 'root_page' %> |
 <b><%= link_to 'new', new_game_path, id: 'new_game' %> game</b> |
