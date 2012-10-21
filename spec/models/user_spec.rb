@@ -194,78 +194,78 @@ describe User do
 
   context "calculate_daily_rating" do
 
-    it "must use 10 games in the last week" do
+    it "must use 10 games in the last day" do
       user = create(:user)
-      create_list(:won_game, 11,  score: 1, user: user)
+      create_list(:game, 11,  score: 1, user: user)
       user.calculate_daily_rating.should == 10
     end
 
     it "must use games only from today" do
       user = create(:user)
-      create(:won_game, score: 20, user: user)
+      create(:game, score: 20, user: user)
       Timecop.freeze(1.day.ago) do
-        create(:won_game, score: 20, user: user)
+        create(:game, score: 20, user: user)
       end
       user.calculate_daily_rating.should == 20
     end
 
-    it "must use top scoring games in the last day" do
+    it "must use first scoring games in the last day" do
       user = create(:user)
-      create_list(:won_game, 10,  score: 1, user: user)
-      create(:won_game, score: 21, user: user)
-      user.calculate_daily_rating.should == 30
+      create_list(:game, 10,  score: 1, user: user)
+      create(:game, score: 21, user: user)
+      user.calculate_daily_rating.should == 10
     end
 
   end
 
   context "calculate_weekly_rating" do
 
-    it "must use 20 games in the last week" do
+    it "must use 35 games in the last week" do
       user = create(:user)
-      create_list(:won_game, 21,  score: 1, user: user)
-      user.calculate_weekly_rating.should == 20
+      create_list(:game, 36,  score: 1, user: user)
+      user.calculate_weekly_rating.should == 35
     end
 
     it "must use games only from this week" do
       user = create(:user)
-      create(:won_game, score: 20, user: user)
+      create(:game, score: 20, user: user)
       Timecop.freeze(1.week.ago - 1.day) do
-        create(:won_game, score: 20, user: user)
+        create(:game, score: 20, user: user)
       end
       user.calculate_weekly_rating.should == 20
     end
 
-    it "must use top scoring games in the last week" do
+    it "must use first scoring games in the last week" do
       user = create(:user)
-      create_list(:won_game, 20,  score: 1, user: user)
-      create(:won_game, score: 21, user: user)
-      user.calculate_weekly_rating.should == 40
+      create_list(:game, 35,  score: 1, user: user)
+      create(:game, score: 21, user: user)
+      user.calculate_weekly_rating.should == 35
     end
 
   end
 
   context "calculate_monthly_rating" do
 
-    it "must use 80 games in the last month" do
+    it "must use 70 games in the last month" do
       user = create(:user)
-      create_list(:won_game, 81,  score: 1, user: user)
-      user.calculate_monthly_rating.should == 80
+      create_list(:game, 76,  score: 1, user: user)
+      user.calculate_monthly_rating.should == 70
     end
 
     it "must use games only from this month" do
       user = create(:user)
-      create(:won_game, score: 20, user: user)
+      create(:game, score: 20, user: user)
       Timecop.freeze(1.month.ago - 1.day) do
-        create(:won_game, score: 20, user: user)
+        create(:game, score: 20, user: user)
       end
       user.calculate_monthly_rating.should == 20
     end
 
-    it "must use top scoring games in the last week" do
+    it "must use firt scoring games in the last month" do
       user = create(:user)
-      create_list(:won_game, 80,  score: 1, user: user)
+      create_list(:game, 70,  score: 1, user: user)
       create(:won_game, score: 21, user: user)
-      user.calculate_monthly_rating.should == 100
+      user.calculate_monthly_rating.should == 70
     end
 
   end
