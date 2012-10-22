@@ -78,6 +78,13 @@ class User < ActiveRecord::Base
     save
   end
 
+  def update_daily_scores
+    self.daily_rating = calculate_daily_rating
+    self.daily_precision = calculate_daily_precision
+    self.daily_wins = calculate_daily_wins
+    save
+  end
+
   def rank(field)
     User.where("#{field} > ?", send(field)).count + 1
   end

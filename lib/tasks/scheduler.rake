@@ -3,9 +3,15 @@ namespace :scheduler do
   namespace :daily do
     desc "what must be run at start of the day"
     task "start_of_day" => :environment do
-      User.all.each { |user| user.update_ratings }
-      User.where('updated_at > ?',1.days.ago).each do |user|
-        user.increment!(:clue_points)
+      User.update_all(daily_rating: 0, daily_precision: 0, daily_wins: 0)
+      user_ids = Game.yesterday.collect{|g|g.user_id}.uniq
+      User.where('id IN (?)',user_ids).each do |user|
+        begin
+          user.increment(:clue_points)
+          user.update_daily_scores
+        rescue Exception => e
+          # ignore
+        end
       end
       Game.purge_old
     end

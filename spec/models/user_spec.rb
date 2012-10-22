@@ -295,6 +295,17 @@ describe User do
       user.monthly_wins.should == 210
     end
 
+    it "must update the daily scores" do
+      user = stub_model(User)
+      user.should_receive(:calculate_daily_rating).and_return(10)
+      user.should_receive(:calculate_daily_precision).and_return(75)
+      user.should_receive(:calculate_daily_wins).and_return(50)
+      user.update_daily_scores
+      user.daily_rating.should == 10
+      user.daily_precision.should == 75
+      user.daily_wins.should == 50
+    end
+
   end
 
   context "rank" do
