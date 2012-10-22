@@ -11,7 +11,6 @@ class GamesController < ApplicationController
   end
 
   def play_letter
-    daily_rating, week_rating, monthly_rating = @game.user.daily_rating, @game.user.weekly_rating, @game.user.monthly_rating
     if params[:letter] == 'show_clue'
       if current_user.clue_points < 1
         redirect_to  purchases_path, alert: "No more clue points left"
@@ -22,13 +21,27 @@ class GamesController < ApplicationController
     else
       @game.add_choice(params[:letter])
     end
+    ranks = {}
+    ['rating','precision','wins'].each do |score_by|
+      ['daily','weekly','monthly'].each do |period|
+        rank_by = "#{period}_#{score_by}"
+        ranks[rank_by] = current_user.rank(rank_by)
+      end
+    end
     @game.save
-    if daily_rating < @game.user.daily_rating
-      @notice = "Your daily rating has increased to #{@game.user.daily_rating}, you are ranked #{@game.user.rank(:daily_rating).ordinalize} today"
-    elsif week_rating < @game.user.weekly_rating
-      @notice = "Your weekly rating has increased to #{@game.user.weekly_rating}, you are ranked #{@game.user.rank(:weekly_rating).ordinalize} this week"
-    elsif monthly_rating < @game.user.monthly_rating
-      @notice = "Your monthly rating has increased to #{@game.user.monthly_rating}, you are ranked #{@game.user.rank(:monthly_rating).ordinalize} this month"
+    if @game.completed?
+      current_user.reload
+      @notice ||= ""
+      ['rating','precision','wins'].each do |score_by|
+        ['daily','weekly','monthly'].each do |period|
+          rank_by = "#{period}_#{score_by}"
+          rank = current_user.rank(rank_by)
+          if rank < ranks[rank_by]
+            @notice << "#{period} #{score_by}: #{rank.ordinalize}. "
+            break
+          end
+        end
+      end
     end
     redirect_to @game, notice: @notice
   end
