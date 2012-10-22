@@ -127,6 +127,7 @@ describe UsersController do
 
       it "renders the application layout" do
         create(:game)
+        create(:winner)
         get :stats
         response.should render_template("layouts/application")
       end

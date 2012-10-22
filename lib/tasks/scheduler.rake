@@ -25,7 +25,7 @@ namespace :scheduler do
   namespace :weekly do
     desc "what must be run at end of the week"
     task "end_of_week" => :environment do
-      Winner.create_weekly_winners([0,0,0,0,0,0,0,0,0,0])
+      Winner.create_weekly_winners([100,90,80,70,60,50,40,30,20,10])
     end
   end
 
