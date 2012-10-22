@@ -306,6 +306,17 @@ describe User do
       user.daily_wins.should == 50
     end
 
+    it "must update weekly scores" do
+      user = stub_model(User)
+      user.stub(:calculate_weekly_rating).and_return(20)
+      user.stub(:calculate_weekly_precision).and_return(100)
+      user.stub(:calculate_weekly_wins).and_return(200)
+      user.update_ratings
+      user.weekly_rating.should == 20
+      user.weekly_precision.should == 100
+      user.weekly_wins.should == 200
+    end
+
   end
 
   context "rank" do

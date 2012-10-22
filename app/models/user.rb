@@ -85,6 +85,13 @@ class User < ActiveRecord::Base
     save
   end
 
+  def update_weekly_scores
+    self.weekly_rating = calculate_weekly_rating
+    self.weekly_precision = calculate_weekly_precision
+    self.weekly_wins = calculate_weekly_wins
+    save
+  end
+
   def rank(field)
     User.where("#{field} > ?", send(field)).count + 1
   end

@@ -4,7 +4,7 @@ namespace :scheduler do
     desc "what must be run at start of the day"
     task "start_of_day" => :environment do
       User.update_all(daily_rating: 0, daily_precision: 0, daily_wins: 0)
-      user_ids = Game.yesterday.collect{|g|g.user_id}.uniq
+      user_ids = Game.since_yesterday.collect{|g|g.user_id}.uniq
       User.where('id IN (?)',user_ids).each do |user|
         begin
           user.increment(:clue_points)
@@ -23,6 +23,19 @@ namespace :scheduler do
   end
 
   namespace :weekly do
+    desc "what must be run at start of the week"
+    task "start_of_week" => :environment do
+      User.update_all(weekly_rating: 0, weekly_precision: 0, weekly_wins: 0)
+      user_ids = Game.since_yesterday.collect{|g|g.user_id}.uniq
+      User.where('id IN (?)',user_ids).each do |user|
+        begin
+          user.update_weekly_scores
+        rescue Exception => e
+          # ignore
+        end
+      end
+    end
+
     desc "what must be run at end of the week"
     task "end_of_week" => :environment do
       Winner.create_weekly_winners([100,90,80,70,60,50,40,30,20,10])

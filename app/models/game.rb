@@ -18,6 +18,7 @@ class Game < ActiveRecord::Base
 
   scope :today, lambda{ where('created_at > ?',Time.current.beginning_of_day) }
   scope :since_yesterday, lambda{ where('created_at > ?',Time.current.beginning_of_day - 1.day) }
+
   scope :this_week, lambda{ where('created_at > ?',Time.current.beginning_of_week) }
   scope :this_month, lambda{ where('created_at > ?',Time.current.beginning_of_month) }
   scope :this_year, lambda{ where('created_at > ?',Time.current.beginning_of_year) }
