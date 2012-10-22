@@ -82,6 +82,7 @@ class UsersController < ApplicationController
         (v[4] * 10000) / sum,
       ]
     end
+    @winners_cohort = Winner.cohort_array
   end
 
   private

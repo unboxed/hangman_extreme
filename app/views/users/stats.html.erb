@@ -38,6 +38,10 @@
 
 </div>
 
+<div id="winners_cohort">
+
+</div>
+
 <script type="text/javascript"  src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src='https://www.google.com/jsapi?autoload={"modules":[{"name":"visualization","version":"1","packages":["corechart"]}]}'></script>
 <script type="text/javascript">
@@ -99,6 +103,16 @@
 
         chart = new google.visualization.AreaChart(document.getElementById('games_growth'));
         chart.draw(data, $.extend({isStacked: true }, defaultGraphStyles, { title:'Games growth' }));
+
+        data = new google.visualization.DataTable();
+        data.addColumn('string', 'Date');
+        data.addColumn('number', 'In a row Winners');
+        data.addColumn('number', 'Previous Winners');
+        data.addColumn('number', 'First Time Winners');
+        data.addRows(<%= raw @winners_cohort.to_json %>);
+
+        chart = new google.visualization.AreaChart(document.getElementById('winners_cohort'));
+        chart.draw(data, $.extend({isStacked: true }, defaultGraphStyles, { title:'Winners cohort' }));
     }
 
 </script>

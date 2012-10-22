@@ -136,4 +136,13 @@ describe Winner do
 
   end
 
+  context "cohort_array" do
+
+    it "must run" do
+      create(:winner)
+      Winner.cohort_array.should be_kind_of(Array)
+    end
+
+  end
+
 end

@@ -54,8 +54,28 @@ class Winner < ActiveRecord::Base
     end
   end
 
-  def self.yesterday_winners_to_s
-    yesterday.group_by(&:user).collect{|u,w|[CGI::unescape(u.name),u.real_name,u.uid,w.sum(&:amount)].join(" : ")}.join("\n")
+  def self.cohort_array
+    cohort = []
+    day = Winner.maximum(:created_at).beginning_of_day
+    winner_scope = Winner.where('winners.created_at >= ? AND winners.created_at < ?',day,day + 1.day)
+    while(winner_scope.any?) do
+      user_ids = winner_scope.collect{|w| w.user_id }.uniq
+      win_earlier_user_ids = Winner.where('winners.created_at < ?',day).collect{|w| w.user_id }.uniq
+      first_time_user_ids = user_ids - win_earlier_user_ids
+      user_ids -= first_time_user_ids
+      won_yesterday_user_ids =  Winner.where('winners.created_at >= ? AND winners.created_at < ?',day - 1.day,day).collect{|w| w.user_id }.uniq
+      yesterday_user_ids = user_ids - won_yesterday_user_ids
+
+      cohort << [day.strftime("%d-%m"),
+                 user_ids.size - yesterday_user_ids.size,
+                 yesterday_user_ids.size,
+                 first_time_user_ids.size]
+
+      day -= 1.day
+      winner_scope = Winner.where('winners.created_at >= ? AND winners.created_at < ?',day,day + 1.day)
+    end
+    cohort.reverse
   end
+
 
 end
