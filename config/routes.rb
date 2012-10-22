@@ -1,13 +1,10 @@
 HangmanLeague::Application.routes.draw do
 
-  get "redeem_winnings/index"
-
   get "purchase_transactions", to: 'purchase_transactions#index', as: 'purchases'
   get "purchase_transactions/new", as: 'new_purchase'
   match "purchase_transactions/create", to: 'purchase_transactions#create', as: 'create_purchase'
-
   match "Transaction/PaymentRequest", to: 'purchase_transactions#simulate_purchase', as: 'mxit_purchase'
-
+  get "explain/:action", as: 'explain', controller: 'explain'
 
   resources :games, :except => [:edit, :update, :destroy] do
     get 'page/:page', :action => :index, :on => :collection
