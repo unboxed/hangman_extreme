@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :provider, :uid, :clue_points, :prize_points
   attr_accessible :real_name, :mobile_number, as: 'user'
 
-  has_many :games
+  has_many :games, :order => 'id ASC'
   has_many :winners
 
   validates :provider, :uid, presence: true
@@ -92,6 +92,13 @@ class User < ActiveRecord::Base
     save
   end
 
+  def update_monthly_scores
+    self.monthly_rating = calculate_monthly_rating
+    self.monthly_precision = calculate_monthly_precision
+    self.monthly_wins = calculate_monthly_wins
+    save
+  end
+
   def rank(field)
     User.where("#{field} > ?", send(field)).count + 1
   end
@@ -131,6 +138,31 @@ class User < ActiveRecord::Base
             mxit_connection.send_message(body: msg, to: to)
           end
         end
+      end
+    end
+  end
+
+  def self.new_day_set_scores!
+    User.update_all(daily_rating: 0, daily_precision: 0, daily_wins: 0)
+    if Date.today == Date.today.beginning_of_week
+      User.update_all(weekly_rating: 0, weekly_precision: 0, weekly_wins: 0)
+    end
+    if Date.today == Date.today.beginning_of_month
+      User.update_all(monthly_rating: 0, monthly_precision: 0, monthly_wins: 0)
+    end
+    user_ids = Game.today.collect{|g|g.user_id}.uniq
+    User.where('id IN (?)',user_ids).each do |user|
+      begin
+        user.increment(:clue_points)
+        user.update_daily_scores
+        if Date.today == Date.today.beginning_of_week
+          user.update_weekly_scores
+        end
+        if Date.today == Date.today.beginning_of_month
+          user.update_monthly_scores
+        end
+      rescue Exception => e
+        raise if Rails.env.test?
       end
     end
   end
@@ -175,6 +207,16 @@ class User < ActiveRecord::Base
       end_of_week -= 2.day
     end
     cohort.reverse
+  end
+
+  def self.scoring_fields
+    fields = []
+    ['rating','precision','wins'].each do |score_by|
+      ['daily','weekly','monthly'].each do |period|
+        fields << "#{period}_#{score_by}"
+      end
+    end
+    fields
   end
 
   private

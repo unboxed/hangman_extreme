@@ -317,6 +317,90 @@ describe User do
       user.weekly_wins.should == 200
     end
 
+    it "must update monthly scores" do
+      user = stub_model(User)
+      user.stub(:calculate_monthly_rating).and_return(80)
+      user.stub(:calculate_monthly_precision).and_return(90)
+      user.stub(:calculate_monthly_wins).and_return(210)
+      user.update_monthly_scores
+      user.monthly_rating.should == 80
+      user.monthly_precision.should == 90
+      user.monthly_wins.should == 210
+    end
+
+  end
+
+  context "new_day_set_scores!" do
+
+    it "must set all daily scores to 0" do
+      user = create(:user,daily_rating: 11, daily_precision: 12, daily_wins: 13)
+      User.new_day_set_scores!
+      user.reload
+      user.daily_rating.should == 0
+      user.daily_precision.should == 0
+      user.daily_wins.should == 0
+    end
+
+    it "must set all weekly scores to 0 if beginning of week" do
+      user = create(:user,weekly_rating: 11, weekly_precision: 12, weekly_wins: 13)
+      Timecop.freeze(Time.current.beginning_of_week) do
+        User.new_day_set_scores!
+        user.reload
+        user.weekly_rating.should == 0
+        user.weekly_precision.should == 0
+        user.weekly_wins.should == 0
+      end
+    end
+
+    it "wont set all weekly scores to 0 if not beginning of week" do
+      user = create(:user,weekly_rating: 11, weekly_precision: 12, weekly_wins: 13)
+      Timecop.freeze(Time.current.beginning_of_week + 2.days) do
+        User.new_day_set_scores!
+        user.reload
+        user.weekly_rating.should == 11
+        user.weekly_precision.should == 12
+        user.weekly_wins.should == 13
+      end
+    end
+
+    it "must set all monthly scores to 0 if beginning of month" do
+      user = create(:user,monthly_rating: 11, monthly_precision: 12, monthly_wins: 13)
+      Timecop.freeze(Time.current.beginning_of_month) do
+        User.new_day_set_scores!
+        user.reload
+        user.monthly_rating.should == 0
+        user.monthly_precision.should == 0
+        user.monthly_wins.should == 0
+      end
+    end
+
+    it "wont set all monthly scores to 0 if not beginning of month" do
+      user = create(:user,monthly_rating: 11, monthly_precision: 12, monthly_wins: 13)
+      Timecop.freeze(Time.current.beginning_of_month + 2.days) do
+        User.new_day_set_scores!
+        user.reload
+        user.monthly_rating.should == 11
+        user.monthly_precision.should == 12
+        user.monthly_wins.should == 13
+      end
+    end
+
+    it "must set all scores for players who have played today" do
+      Timecop.freeze(2013, 4, 1,1) do # Monday 1st April
+        user = create(:won_game).user
+        create_list(:won_game,20, user: user)
+        user.update_ratings
+        scores = User.scoring_fields.collect{|field| [field,user.send(field.to_sym)] }
+        User.new_day_set_scores!
+        user.reload
+        new_scores = User.scoring_fields.collect{|field| [field,user.send(field.to_sym)] }
+        scores.each do |score|
+          new_scores.should include(score)
+        end
+      end
+
+    end
+
   end
 
   context "rank" do

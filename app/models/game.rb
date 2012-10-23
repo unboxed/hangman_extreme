@@ -82,7 +82,7 @@ class Game < ActiveRecord::Base
     [10 - ((Time.current - created_at).to_i / 10),0].max
   end
 
-  def self.purge_old
+  def self.purge_old!
     Game.where('created_at < ?',20.weeks.ago).delete_all
   end
 
