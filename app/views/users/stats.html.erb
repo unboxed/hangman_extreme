@@ -49,8 +49,8 @@
     google.setOnLoadCallback(drawCharts);
 
     var defaultGraphStyles = {
-        width:1020, height:380,
-        chartArea:{ left:50, width:970 },
+        width:1220, height:480,
+        chartArea:{ left:50, width:1170 },
         titlePosition:'out', titleTextStyle:{ color:'#333', fontSize:14 },
         legend:{ position:'top', alignment:'end', textStyle:{ color:'#333' } },
         hAxis:{ textStyle:{ color:'#333' } },
@@ -74,13 +74,12 @@
         data.addColumn('string', 'Date');
         data.addColumn('number', 'New Casual users');
         data.addColumn('number', 'New Competitive users');
-        data.addColumn('number', 'Inactive users');
         data.addColumn('number', 'Casual users');
         data.addColumn('number', 'Competitive users');
-        data.addRows(<%= raw @cohort.to_json %>);
+        data.addRows(<%= raw @cohort.collect{|v|[v[0], v[1],v[2],v[4],v[5]]}.to_json %>);
 
         chart = new google.visualization.AreaChart(document.getElementById('growth'));
-        chart.draw(data, $.extend({isStacked: true }, defaultGraphStyles, { title:'Growth' }));
+        chart.draw(data, $.extend({isStacked: true }, defaultGraphStyles, { title:'Active Growth' }));
 
         data = new google.visualization.DataTable();
         data.addColumn('string', 'Date');

@@ -137,9 +137,10 @@ class User < ActiveRecord::Base
 
   def self.cohort_array
     cohort = []
+    first_day = Game.minimum(:created_at).beginning_of_day
     end_of_week = Time.current.beginning_of_day - 1.day
     start_of_week = end_of_week - 7.days
-    while(Game.where('games.created_at >= ? AND games.created_at <= ?',start_of_week,end_of_week).any?)
+    while(start_of_week >= first_day)
       user_scope = User.mxit.where('users.created_at <= ?',end_of_week )
       all_users_count = user_scope.count
       new_active_users = new_competitive_users = 0
@@ -170,8 +171,8 @@ class User < ActiveRecord::Base
                 inactive_users,
                 active_users,
                 competitive_users]
-      start_of_week -= 1.day
-      end_of_week -= 1.day
+      start_of_week -= 2.day
+      end_of_week -= 2.day
     end
     cohort.reverse
   end

@@ -88,9 +88,10 @@ class Game < ActiveRecord::Base
 
   def self.cohort_array
     cohort = []
+    first_day = Game.minimum(:created_at).beginning_of_day
     day = Game.maximum(:created_at).beginning_of_day
-    game_scope = Game.where('games.created_at >= ? AND games.created_at < ?',day,day + 1.day)
-    while(game_scope.any?) do
+    while(day >= first_day) do
+      game_scope = Game.where('games.created_at >= ? AND games.created_at < ?',day,day + 1.day)
       completed_games = game_scope.completed
       clue_completed_games = completed_games.where('clue_revealed = ?',true).count
       no_clue_completed_games = completed_games.count - clue_completed_games
@@ -105,7 +106,6 @@ class Game < ActiveRecord::Base
                  no_clue_completed_games,
                  clue_completed_games]
       day -= 1.day
-      game_scope = Game.where('games.created_at >= ? AND games.created_at < ?',day,day + 1.day)
     end
     cohort.reverse
   end
