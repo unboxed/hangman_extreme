@@ -343,7 +343,7 @@ describe User do
 
     it "must set all weekly scores to 0 if beginning of week" do
       user = create(:user,weekly_rating: 11, weekly_precision: 12, weekly_wins: 13)
-      Timecop.freeze(Time.current.beginning_of_week) do
+      Timecop.freeze(Date.today.beginning_of_week) do
         User.new_day_set_scores!
         user.reload
         user.weekly_rating.should == 0
@@ -354,7 +354,7 @@ describe User do
 
     it "wont set all weekly scores to 0 if not beginning of week" do
       user = create(:user,weekly_rating: 11, weekly_precision: 12, weekly_wins: 13)
-      Timecop.freeze(Time.current.beginning_of_week + 2.days) do
+      Timecop.freeze(Date.today.beginning_of_week + 1) do
         User.new_day_set_scores!
         user.reload
         user.weekly_rating.should == 11
@@ -365,7 +365,7 @@ describe User do
 
     it "must set all monthly scores to 0 if beginning of month" do
       user = create(:user,monthly_rating: 11, monthly_precision: 12, monthly_wins: 13)
-      Timecop.freeze(Time.current.beginning_of_month) do
+      Timecop.freeze(Date.today.beginning_of_month) do
         User.new_day_set_scores!
         user.reload
         user.monthly_rating.should == 0
@@ -376,7 +376,7 @@ describe User do
 
     it "wont set all monthly scores to 0 if not beginning of month" do
       user = create(:user,monthly_rating: 11, monthly_precision: 12, monthly_wins: 13)
-      Timecop.freeze(Time.current.beginning_of_month + 2.days) do
+      Timecop.freeze(Date.today.beginning_of_month + 2) do
         User.new_day_set_scores!
         user.reload
         user.monthly_rating.should == 11
