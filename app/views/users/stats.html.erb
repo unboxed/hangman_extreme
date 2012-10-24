@@ -42,6 +42,10 @@
 
 </div>
 
+<div id="purchases_cohort">
+
+</div>
+
 <script type="text/javascript"  src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src='https://www.google.com/jsapi?autoload={"modules":[{"name":"visualization","version":"1","packages":["corechart"]}]}'></script>
 <script type="text/javascript">
@@ -112,6 +116,16 @@
 
         chart = new google.visualization.AreaChart(document.getElementById('winners_cohort'));
         chart.draw(data, $.extend({isStacked: true }, defaultGraphStyles, { title:'Winners cohort' }));
+
+        data = new google.visualization.DataTable();
+        data.addColumn('string', 'Date');
+        <% PurchaseTransaction.products.each do |product_id,product_details| %>
+            data.addColumn('number', "<%= product_id %>");
+        <% end %>
+        data.addRows(<%= raw @purchase_cohort.to_json %>);
+
+        chart = new google.visualization.AreaChart(document.getElementById('purchases_cohort'));
+        chart.draw(data, $.extend({isStacked: true }, defaultGraphStyles, { title:'Moola purchases' }));
     }
 
 </script>

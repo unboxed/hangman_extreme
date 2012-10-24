@@ -91,6 +91,8 @@ class UsersController < ApplicationController
       end
     end.compact
     @winners_cohort = Winner.cohort_array
+    @purchase_cohort = PurchaseTransaction.cohort_array
+
   end
 
   private

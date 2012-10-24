@@ -36,6 +36,22 @@ class PurchaseTransaction < ActiveRecord::Base
     @p.freeze
   end
 
+  def self.cohort_array
+    cohort = []
+    day = maximum(:created_at).end_of_day
+    first_day = minimum(:created_at).end_of_day
+    while(day >= first_day) do
+      scope = where('created_at < ?',day)
+      values = [day.strftime("%d-%m")]
+      products.each do |product_id,product_details|
+        values << scope.where(product_id: product_id).sum(:moola_amount)
+      end
+      cohort << values
+      day -= 1.day
+    end
+    cohort.reverse
+  end
+
   protected
 
   def update_user_clue_points

@@ -88,8 +88,8 @@ class Game < ActiveRecord::Base
 
   def self.cohort_array
     cohort = []
-    first_day = Game.minimum(:created_at).beginning_of_day
-    day = Game.maximum(:created_at).beginning_of_day
+    day = Game.maximum(:created_at).beginning_of_day - 1.day
+    first_day = day - 20.days
     while(day >= first_day) do
       game_scope = Game.where('games.created_at >= ? AND games.created_at < ?',day,day + 1.day)
       completed_games = game_scope.completed
