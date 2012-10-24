@@ -5,5 +5,6 @@ FactoryGirl.define do
     ref {PurchaseTransaction.new.generate_ref}
     product_id PurchaseTransaction.products.keys.first
     product_description "MyText"
+    user
   end
 end
