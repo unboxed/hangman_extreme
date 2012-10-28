@@ -3,9 +3,13 @@
     You about to redeem
     <b><%= @redeem_winning.prize_amount %> prize points</b>
     for
-    <i><%= @redeem_winning.prize_amount %>
-      <%= @redeem_winning.prize_type == 'moola' ? "moola" : "clue points" %>
-    </i>
+    <% if @redeem_winning.prize_type.include?('airtime') %>
+        R2 vodago airtime
+    <% else %>
+        <i><%= @redeem_winning.prize_amount %>
+          <%= @redeem_winning.prize_type == 'moola' ? "moola" : "clue points" %>
+        </i>
+    <% end %>
     <br/>
     <%= f.hidden_field :prize_type %>
     <%= f.hidden_field :prize_amount %>

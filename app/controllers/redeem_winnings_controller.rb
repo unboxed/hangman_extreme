@@ -6,7 +6,7 @@ class RedeemWinningsController < ApplicationController
   end
 
   def new
-    if params[:prize_type].present? && ['moola','clue_points'].include?(params[:prize_type])
+    if params[:prize_type].present? && RedeemWinning::PRIZE_TYPES.include?(params[:prize_type])
       @redeem_winning.prize_type = params[:prize_type]
       @redeem_winning.prize_amount = params[:prize_amount].to_i
       @redeem_winning.state = 'pending'

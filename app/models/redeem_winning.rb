@@ -1,8 +1,9 @@
 class RedeemWinning < ActiveRecord::Base
+  PRIZE_TYPES = ['clue_points','moola','vodago_airtime']
   attr_accessible :prize_amount, :prize_type, :state, :user_id
 
   validates :user_id, presence: true
-  validates :prize_type, inclusion: ['clue_points','moola','vodago_airtime']
+  validates :prize_type, inclusion: PRIZE_TYPES
   validates :state, inclusion: ['pending','paid']
   validates_numericality_of :prize_amount, greater_than: 0
 
