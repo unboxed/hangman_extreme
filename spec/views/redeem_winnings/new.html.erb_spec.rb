@@ -5,10 +5,11 @@ describe "redeem_winnings/new.html.erb" do
 
   before(:each) do
     @redeem_winning = assign(:redeem_winning,stub_model(RedeemWinning))
-    render
+    @redeem_winning.prize_type = 'moola'
   end
 
   it "renders should have correct fields" do
+    render
     within("form") do
       rendered.should have_css('input#redeem_winning_prize_type')
       rendered.should have_css('input#redeem_winning_prize_amount')
@@ -17,10 +18,18 @@ describe "redeem_winnings/new.html.erb" do
   end
 
   it "renders a submit button" do
+    render
     rendered.should have_button('submit')
   end
 
   it "should have a home link" do
+    render
+    rendered.should have_link("cancel", href: redeem_winnings_path)
+  end
+
+  it "should render with vodago_airtime prize type" do
+    @redeem_winning.prize_type = 'vodago_airtime'
+    render
     rendered.should have_link("cancel", href: redeem_winnings_path)
   end
 
