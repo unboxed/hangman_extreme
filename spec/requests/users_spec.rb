@@ -22,7 +22,7 @@ describe 'users' do
     users = create_list(:user,9).each{|user| create(:won_game, user: user) }
     visit '/'
     click_link('view_rank')
-    click_link('daily_wins')
+    click_link('daily_points')
     users.each do |user|
       page.should have_content(user.name)
     end

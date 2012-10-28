@@ -101,7 +101,7 @@ describe UsersController do
       end
 
       ['daily','weekly', 'monthly'].each do |period|
-        ['wins','rating', 'precision'].each do |ranking|
+        ['points','rating', 'precision'].each do |ranking|
           it "assigns all top #{period} #{ranking} users as @users" do
             user = create(:user)
             do_get_index :rank_by => ranking, :period => period

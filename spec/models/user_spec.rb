@@ -27,14 +27,14 @@ describe User do
     user.game_count.should == 6
   end
 
-  context "calculate_daily_wins" do
+  context "calculate_daily_points" do
 
     it "must use only won games" do
       user = create(:user)
-      create_list(:won_game,2, user: user)
+      create_list(:won_game,5, user: user)
       create(:lost_game, user: user)
       create(:game, user: user)
-      user.calculate_daily_wins.should == 2
+      user.calculate_daily_points.should == 27
     end
 
 
@@ -44,19 +44,19 @@ describe User do
       Timecop.freeze(1.day.ago) do
         create_list(:won_game,2,user: user)
       end
-      user.calculate_daily_wins.should == 2
+      user.calculate_daily_points.should == 20
     end
 
   end
 
-  context "calculate_weekly_wins" do
+  context "calculate_weekly_points" do
 
     it "must use only won games" do
       user = create(:user)
-      create_list(:won_game,2, user: user)
+      create_list(:won_game,5, user: user)
       create(:lost_game, user: user)
       create(:game, user: user)
-      user.calculate_weekly_wins.should == 2
+      user.calculate_weekly_points.should == 27
     end
 
 
@@ -66,19 +66,19 @@ describe User do
       Timecop.freeze(1.week.ago - 1.day) do
         create_list(:won_game,2,user: user)
       end
-      user.calculate_weekly_wins.should == 2
+      user.calculate_weekly_points.should == 20
     end
 
   end
 
-  context "calculate_monthly_wins" do
+  context "calculate_monthly_points" do
 
     it "must use only won games" do
       user = create(:user)
-      create_list(:won_game,2, user: user)
+      create_list(:won_game,5, user: user)
       create(:lost_game, user: user)
       create(:game, user: user)
-      user.calculate_monthly_wins.should == 2
+      user.calculate_monthly_points.should == 27
     end
 
 
@@ -88,7 +88,7 @@ describe User do
       Timecop.freeze(1.month.ago - 1.day) do
         create_list(:won_game,2,user: user)
       end
-      user.calculate_monthly_wins.should == 2
+      user.calculate_monthly_points.should == 20
     end
 
   end
@@ -280,9 +280,9 @@ describe User do
       user.stub(:calculate_daily_precision).and_return(75)
       user.stub(:calculate_weekly_precision).and_return(100)
       user.stub(:calculate_monthly_precision).and_return(90)
-      user.stub(:calculate_daily_wins).and_return(50)
-      user.stub(:calculate_weekly_wins).and_return(200)
-      user.stub(:calculate_monthly_wins).and_return(210)
+      user.stub(:calculate_daily_points).and_return(50)
+      user.stub(:calculate_weekly_points).and_return(200)
+      user.stub(:calculate_monthly_points).and_return(210)
       user.update_ratings
       user.daily_rating.should == 10
       user.weekly_rating.should == 20
@@ -290,42 +290,42 @@ describe User do
       user.daily_precision.should == 75
       user.weekly_precision.should == 100
       user.monthly_precision.should == 90
-      user.daily_wins.should == 50
-      user.weekly_wins.should == 200
-      user.monthly_wins.should == 210
+      user.daily_points.should == 50
+      user.weekly_points.should == 200
+      user.monthly_points.should == 210
     end
 
     it "must update the daily scores" do
       user = stub_model(User)
       user.should_receive(:calculate_daily_rating).and_return(10)
       user.should_receive(:calculate_daily_precision).and_return(75)
-      user.should_receive(:calculate_daily_wins).and_return(50)
+      user.should_receive(:calculate_daily_points).and_return(50)
       user.update_daily_scores
       user.daily_rating.should == 10
       user.daily_precision.should == 75
-      user.daily_wins.should == 50
+      user.daily_points.should == 50
     end
 
     it "must update weekly scores" do
       user = stub_model(User)
       user.stub(:calculate_weekly_rating).and_return(20)
       user.stub(:calculate_weekly_precision).and_return(100)
-      user.stub(:calculate_weekly_wins).and_return(200)
+      user.stub(:calculate_weekly_points).and_return(200)
       user.update_ratings
       user.weekly_rating.should == 20
       user.weekly_precision.should == 100
-      user.weekly_wins.should == 200
+      user.weekly_points.should == 200
     end
 
     it "must update monthly scores" do
       user = stub_model(User)
       user.stub(:calculate_monthly_rating).and_return(80)
       user.stub(:calculate_monthly_precision).and_return(90)
-      user.stub(:calculate_monthly_wins).and_return(210)
+      user.stub(:calculate_monthly_points).and_return(210)
       user.update_monthly_scores
       user.monthly_rating.should == 80
       user.monthly_precision.should == 90
-      user.monthly_wins.should == 210
+      user.monthly_points.should == 210
     end
 
   end
@@ -333,55 +333,55 @@ describe User do
   context "new_day_set_scores!" do
 
     it "must set all daily scores to 0" do
-      user = create(:user,daily_rating: 11, daily_precision: 12, daily_wins: 13)
+      user = create(:user,daily_rating: 11, daily_precision: 12, daily_points: 13)
       User.new_day_set_scores!
       user.reload
       user.daily_rating.should == 0
       user.daily_precision.should == 0
-      user.daily_wins.should == 0
+      user.daily_points.should == 0
     end
 
     it "must set all weekly scores to 0 if beginning of week" do
-      user = create(:user,weekly_rating: 11, weekly_precision: 12, weekly_wins: 13)
+      user = create(:user,weekly_rating: 11, weekly_precision: 12, weekly_points: 13)
       Timecop.freeze(Date.today.beginning_of_week) do
         User.new_day_set_scores!
         user.reload
         user.weekly_rating.should == 0
         user.weekly_precision.should == 0
-        user.weekly_wins.should == 0
+        user.weekly_points.should == 0
       end
     end
 
     it "wont set all weekly scores to 0 if not beginning of week" do
-      user = create(:user,weekly_rating: 11, weekly_precision: 12, weekly_wins: 13)
+      user = create(:user,weekly_rating: 11, weekly_precision: 12, weekly_points: 13)
       Timecop.freeze(Date.today.beginning_of_week + 1) do
         User.new_day_set_scores!
         user.reload
         user.weekly_rating.should == 11
         user.weekly_precision.should == 12
-        user.weekly_wins.should == 13
+        user.weekly_points.should == 13
       end
     end
 
     it "must set all monthly scores to 0 if beginning of month" do
-      user = create(:user,monthly_rating: 11, monthly_precision: 12, monthly_wins: 13)
+      user = create(:user,monthly_rating: 11, monthly_precision: 12, monthly_points: 13)
       Timecop.freeze(Date.today.beginning_of_month) do
         User.new_day_set_scores!
         user.reload
         user.monthly_rating.should == 0
         user.monthly_precision.should == 0
-        user.monthly_wins.should == 0
+        user.monthly_points.should == 0
       end
     end
 
     it "wont set all monthly scores to 0 if not beginning of month" do
-      user = create(:user,monthly_rating: 11, monthly_precision: 12, monthly_wins: 13)
+      user = create(:user,monthly_rating: 11, monthly_precision: 12, monthly_points: 13)
       Timecop.freeze(Date.today.beginning_of_month + 2) do
         User.new_day_set_scores!
         user.reload
         user.monthly_rating.should == 11
         user.monthly_precision.should == 12
-        user.monthly_wins.should == 13
+        user.monthly_points.should == 13
       end
     end
 

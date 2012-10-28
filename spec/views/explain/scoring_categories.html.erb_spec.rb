@@ -6,11 +6,6 @@ describe "explain/scoring_categories.html.erb" do
     view.stub!(:current_user).and_return(stub_model(User, id: 44))
   end
 
-  it "must have a link to wins" do
-    render
-    rendered.should have_link("wins", href: explain_path(action: 'wins'))
-  end
-
   it "must have a link to points" do
     render
     rendered.should have_link("points", href: explain_path(action: 'points'))

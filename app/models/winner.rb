@@ -26,7 +26,7 @@ class Winner < ActiveRecord::Base
 
   def self.create_winners(period, winnings)
     return if where(end_of_period_on: Date.today, period: period).any?
-    ['rating','precision','wins'].each do |score_by|
+    ['rating','precision','points'].each do |score_by|
       create_winners_for_category(score_by: score_by, winnings: winnings, period: period)
     end
     User.send_message("We have selected our $winners$ for the #{period} prizes, Congratulations to those who have won.",

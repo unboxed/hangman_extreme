@@ -25,7 +25,7 @@
                        id: "#{time_period}_#{params[:reason] || 'rating'}" %> |
 <% end %>
 <br/>
-<% ['wins','rating','precision'].each do |reason| %>
+<% ['points','rating','precision'].each do |reason| %>
     <%= link_to_unless params[:reason] == reason,
                        reason,
                        {period: params[:period], reason: reason},

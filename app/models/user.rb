@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 
   has_many :games, :order => 'id ASC'
   has_many :winners
+  has_many :redeem_winnings
 
   validates :provider, :uid, presence: true
   validates_uniqueness_of :uid, :scope => :provider
@@ -29,16 +30,16 @@ class User < ActiveRecord::Base
     winners.period(period).reason(reason)
   end
 
-  def calculate_daily_wins
-    calculate_games_won(games.today)
+  def calculate_daily_points
+    calculate_games_points(games.today)
   end
 
-  def calculate_weekly_wins
-    calculate_games_won(games.this_week)
+  def calculate_weekly_points
+    calculate_games_points(games.this_week)
   end
 
-  def calculate_monthly_wins
-    calculate_games_won(games.this_month)
+  def calculate_monthly_points
+    calculate_games_points(games.this_month)
   end
 
   def calculate_daily_precision
@@ -72,30 +73,30 @@ class User < ActiveRecord::Base
     self.daily_precision = calculate_daily_precision
     self.weekly_precision = calculate_weekly_precision
     self.monthly_precision = calculate_monthly_precision
-    self.daily_wins = calculate_daily_wins
-    self.weekly_wins = calculate_weekly_wins
-    self.monthly_wins = calculate_monthly_wins
+    self.daily_points = calculate_daily_points
+    self.weekly_points = calculate_weekly_points
+    self.monthly_points = calculate_monthly_points
     save
   end
 
   def update_daily_scores
     self.daily_rating = calculate_daily_rating
     self.daily_precision = calculate_daily_precision
-    self.daily_wins = calculate_daily_wins
+    self.daily_points = calculate_daily_points
     save
   end
 
   def update_weekly_scores
     self.weekly_rating = calculate_weekly_rating
     self.weekly_precision = calculate_weekly_precision
-    self.weekly_wins = calculate_weekly_wins
+    self.weekly_points = calculate_weekly_points
     save
   end
 
   def update_monthly_scores
     self.monthly_rating = calculate_monthly_rating
     self.monthly_precision = calculate_monthly_precision
-    self.monthly_wins = calculate_monthly_wins
+    self.monthly_points = calculate_monthly_points
     save
   end
 
@@ -143,12 +144,12 @@ class User < ActiveRecord::Base
   end
 
   def self.new_day_set_scores!
-    User.update_all(daily_rating: 0, daily_precision: 0, daily_wins: 0)
+    User.update_all(daily_rating: 0, daily_precision: 0, daily_points: 0)
     if Date.today == Date.today.beginning_of_week
-      User.update_all(weekly_rating: 0, weekly_precision: 0, weekly_wins: 0)
+      User.update_all(weekly_rating: 0, weekly_precision: 0, weekly_points: 0)
     end
     if Date.today == Date.today.beginning_of_month
-      User.update_all(monthly_rating: 0, monthly_precision: 0, monthly_wins: 0)
+      User.update_all(monthly_rating: 0, monthly_precision: 0, monthly_points: 0)
     end
     user_ids = Game.today.collect{|g|g.user_id}.uniq
     User.where('id IN (?)',user_ids).each do |user|
@@ -211,7 +212,7 @@ class User < ActiveRecord::Base
 
   def self.scoring_fields
     fields = []
-    ['rating','precision','wins'].each do |score_by|
+    ['rating','precision','points'].each do |score_by|
       ['daily','weekly','monthly'].each do |period|
         fields << "#{period}_#{score_by}"
       end
@@ -221,8 +222,16 @@ class User < ActiveRecord::Base
 
   private
 
-  def calculate_games_won(scope)
-    scope.completed.all.count{|game| game.is_won?}
+  def calculate_games_points(scope)
+    scope.all.inject(0) do |acc,game|
+      if game.is_won?
+        acc += 10
+      elsif game.is_lost?
+        acc -= 3
+      else
+        acc -= 20
+      end
+    end
   end
 
   def calculate_precision(game_scope)

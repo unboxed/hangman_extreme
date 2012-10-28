@@ -12,7 +12,7 @@ describe 'winners' do
   it "must show the last winners" do
     rating_winners = create_list(:winner,9, reason: "rating", period: 'daily')
     precision_winners = create_list(:winner,9, reason: "precision", period: 'daily')
-    wins_winners = create_list(:winner,9, reason: "wins", period: 'daily')
+    points_winners = create_list(:winner,9, reason: "points", period: 'daily')
     visit '/'
     click_link('winners')
     rating_winners.each do |winner|
@@ -22,8 +22,8 @@ describe 'winners' do
     precision_winners.each do |winner|
       page.should have_content(winner.name)
     end
-    click_link('wins')
-    wins_winners.each do |winner|
+    click_link('points')
+    points_winners.each do |winner|
       page.should have_content(winner.name)
     end
   end
@@ -31,7 +31,7 @@ describe 'winners' do
   it "must show the weekly winners" do
     rating_winners = create_list(:winner,9, reason: "rating", period: 'weekly')
     precision_winners = create_list(:winner,9, reason: "precision", period: 'weekly')
-    wins_winners = create_list(:winner,9, reason: "wins", period: 'weekly')
+    points_winners = create_list(:winner,9, reason: "points", period: 'weekly')
     visit '/'
     click_link('winners')
     click_link('weekly')
@@ -42,8 +42,8 @@ describe 'winners' do
     precision_winners.each do |winner|
       page.should have_content(winner.name)
     end
-    click_link('wins')
-    wins_winners.each do |winner|
+    click_link('points')
+    points_winners.each do |winner|
       page.should have_content(winner.name)
     end
   end
@@ -51,7 +51,7 @@ describe 'winners' do
   it "must show the monthly winners" do
     rating_winners = create_list(:winner,9, reason: "rating", period: 'monthly')
     precision_winners = create_list(:winner,9, reason: "precision", period: 'monthly')
-    wins_winners = create_list(:winner,9, reason: "wins", period: 'monthly')
+    points_winners = create_list(:winner,9, reason: "points", period: 'monthly')
     visit '/'
     click_link('winners')
     click_link('monthly')
@@ -62,8 +62,8 @@ describe 'winners' do
     precision_winners.each do |winner|
       page.should have_content(winner.name)
     end
-    click_link('wins')
-    wins_winners.each do |winner|
+    click_link('points')
+    points_winners.each do |winner|
       page.should have_content(winner.name)
     end
   end

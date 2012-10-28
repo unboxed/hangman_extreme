@@ -38,7 +38,7 @@ describe Winner do
       User.stub(:send_message)
     end
 
-    ['rating','precision','wins'].each do |score_by|
+    ['rating','precision','points'].each do |score_by|
 
       ['daily','weekly','monthly'].each do |period|
 
@@ -99,7 +99,7 @@ describe Winner do
   context "create_daily_winners" do
 
     before :each do
-      create_list(:user,10, daily_rating: 0, daily_precision: 0, daily_wins: 0)
+      create_list(:user,10, daily_rating: 0, daily_precision: 0, daily_points: 0)
       Winner.should respond_to(:create_winners_for_category)
       Winner.stub(:create_winners_for_category)
       User.should respond_to(:send_message)
@@ -116,8 +116,8 @@ describe Winner do
       Winner.create_daily_winners((1..10).to_a.reverse)
     end
 
-    it "must create the wins winner" do
-      Winner.should_receive(:create_winners_for_category).with(period: 'daily', score_by: 'wins',winnings: (11..20).to_a.reverse)
+    it "must create the points winner" do
+      Winner.should_receive(:create_winners_for_category).with(period: 'daily', score_by: 'points',winnings: (11..20).to_a.reverse)
       Winner.create_daily_winners((11..20).to_a.reverse)
     end
 

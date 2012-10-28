@@ -22,7 +22,7 @@ class GamesController < ApplicationController
       @game.add_choice(params[:letter])
     end
     ranks = {}
-    ['rating','precision','wins'].each do |score_by|
+    ['rating','precision','points'].each do |score_by|
       ['daily','weekly','monthly'].each do |period|
         rank_by = "#{period}_#{score_by}"
         ranks[rank_by] = current_user.rank(rank_by)
@@ -32,7 +32,7 @@ class GamesController < ApplicationController
     if @game.completed?
       current_user.reload
       @notice ||= ""
-      ['rating','precision','wins'].each do |score_by|
+      ['rating','precision','points'].each do |score_by|
         ['daily','weekly','monthly'].each do |period|
           rank_by = "#{period}_#{score_by}"
           rank = current_user.rank(rank_by)
