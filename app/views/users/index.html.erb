@@ -1,26 +1,9 @@
 <b><%= "#{params[:period]} #{params[:rank_by]}".to_s.humanize %></b>
 <br/>
 Please note we have changed our prize points
-<%= link_to 'payouts', explain_path(action: 'payouts'), id: 'payouts' %>. |
+<%= link_to 'payouts', explain_path(action: 'payouts'), id: 'payouts' %>.
 <br/>
-<p style="color:blue;">
-  This ranking is based on the
-  <% if params[:rank_by] == 'rating' %>
-      score of the first
-      <% if params[:period] == 'daily' %>
-        10
-      <% elsif params[:period] == 'weekly' %>
-        35
-      <% else %>
-        70
-      <% end %>
-      games played
-  <% elsif params[:rank_by] == 'precision' %>
-      amount of guesses you use per game
-  <% else %>
-      amount of games won.
-  <% end %>
-</p>
+
 <ul>
   <%= content_tag_for(:li, @users) do |user| %>
       <%= display_user_name(user.name) %> -
