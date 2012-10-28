@@ -49,6 +49,7 @@ describe RedeemWinningsController do
   describe "POST create" do
 
     def do_create
+      @current_user.increment!(:prize_points,valid_attributes[:prize_amount])
       post :create, :redeem_winning => valid_attributes
     end
 
@@ -87,7 +88,7 @@ describe RedeemWinningsController do
 
       before :each do
         # Trigger the behavior that occurs when invalid params are submitted
-        RedeemWinning.any_instance.stub(:save).and_return(false)
+        RedeemWinning.any_instance.stub(:save!).and_raise("error")
       end
 
       it "assigns a newly created but unsaved game as @redeem_winning" do

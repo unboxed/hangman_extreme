@@ -22,8 +22,17 @@ You can redeem your points for:
                       id: 'moola' %>
         <%= [current_user.prize_points,100].min %> moola</li>
   <% end %>
-  <li>coming soon airtime</li>
-  <li>coming soon mimoney</li>
+  <% if current_user.prize_points < 200 %>
+      <li>R2 vodago airtime (<span style="color: red;">You need more <%= 200 - current_user.prize_points %>prize points</span>)</li>
+  <% else current_user.prize_points >= 200  %>
+      <li><%= link_to (index += 1).to_s,
+                      new_redeem_winning_path(:prize_type => 'vodago_airtime',
+                                              :prize_amount => 200),
+                      id: 'vodago_airtime' %>
+        R2 vodago airtime</li>
+  <% end %>
+  <li>coming soon Cell C airtime</li>
+  <li>coming soon MTN airtime</li>
 </ul>
 <br/>
 <%= link_to 'home', root_path, id: 'root_page' %> |

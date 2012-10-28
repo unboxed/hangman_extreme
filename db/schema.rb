@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121021084640) do
+ActiveRecord::Schema.define(:version => 20121028183847) do
 
   create_table "games", :force => true do |t|
     t.string   "word"
@@ -75,11 +75,11 @@ ActiveRecord::Schema.define(:version => 20121021084640) do
     t.integer  "yearly_rating",     :default => 0
     t.integer  "weekly_precision",  :default => 0
     t.integer  "monthly_precision", :default => 0
-    t.integer  "weekly_wins",       :default => 0
-    t.integer  "monthly_wins",      :default => 0
+    t.integer  "weekly_points",     :default => 0
+    t.integer  "monthly_points",    :default => 0
     t.integer  "daily_rating",      :default => 0
     t.integer  "daily_precision",   :default => 0
-    t.integer  "daily_wins",        :default => 0
+    t.integer  "daily_points",      :default => 0
     t.string   "real_name"
     t.string   "mobile_number"
     t.string   "email"
@@ -90,17 +90,17 @@ ActiveRecord::Schema.define(:version => 20121021084640) do
   end
 
   add_index "users", ["created_at"], :name => "index_users_on_created_at"
+  add_index "users", ["daily_points"], :name => "index_users_on_games_won_today"
   add_index "users", ["daily_precision"], :name => "index_users_on_daily_precision"
   add_index "users", ["daily_rating"], :name => "index_users_on_daily_rating"
-  add_index "users", ["daily_wins"], :name => "index_users_on_games_won_today"
+  add_index "users", ["monthly_points"], :name => "index_users_on_games_won_this_month"
   add_index "users", ["monthly_precision"], :name => "index_users_on_monthly_precision"
   add_index "users", ["monthly_rating"], :name => "index_users_on_monthly_rating"
-  add_index "users", ["monthly_wins"], :name => "index_users_on_games_won_this_month"
   add_index "users", ["uid", "provider"], :name => "index_users_on_uid_and_provider"
   add_index "users", ["updated_at"], :name => "index_users_on_updated_at"
+  add_index "users", ["weekly_points"], :name => "index_users_on_games_won_this_week"
   add_index "users", ["weekly_precision"], :name => "index_users_on_weekly_precision"
   add_index "users", ["weekly_rating"], :name => "index_users_on_weekly_rating"
-  add_index "users", ["weekly_wins"], :name => "index_users_on_games_won_this_week"
   add_index "users", ["yearly_rating"], :name => "index_users_on_yearly_rating"
 
   create_table "winners", :force => true do |t|

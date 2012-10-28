@@ -10,7 +10,7 @@ describe RedeemWinning do
     end
 
     it "must have a valid prize type" do
-      ['clue_points'].each do |t|
+      ['clue_points','moola','vodago_airtime'].each do |t|
         RedeemWinning.new(prize_type: t).should have(0).errors_on(:prize_type)
       end
       ['nonsense'].each do |t|

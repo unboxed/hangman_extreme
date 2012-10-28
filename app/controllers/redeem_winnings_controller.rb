@@ -24,11 +24,14 @@ class RedeemWinningsController < ApplicationController
       end
       if @redeem_winning.prize_type == 'moola'
         notice = "Please must sure you have added extremepayout and allow 48 hours for your moola to be paid out."
+      elsif @redeem_winning.prize_type == 'vodago_airtime'
+          notice = "Please make sure you have entered your correct cellphone number on the profile page and allow 48 hours for your airtime to be paid out."
       else
         notice = 'prize successful'
       end
       redirect_to({action: 'index'}, notice: notice)
-    rescue
+    rescue Exception => e
+      ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
       redirect_to({action: 'index'}, alert: 'prize failed.')
     end
   end
