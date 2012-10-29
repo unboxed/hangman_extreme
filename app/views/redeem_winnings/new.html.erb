@@ -4,7 +4,11 @@
     <b><%= @redeem_winning.prize_amount %> prize points</b>
     for
     <% if @redeem_winning.prize_type.include?('airtime') %>
-        R2 vodago airtime
+        R5
+        <%= "vodago" if @redeem_winning.prize_type.include?('vodago') %>
+        <%= "MTN" if @redeem_winning.prize_type.include?('mtn') %>
+        <%= "Cell C" if @redeem_winning.prize_type.include?('cellc') %>
+        airtime
     <% else %>
         <i><%= @redeem_winning.prize_amount %>
           <%= @redeem_winning.prize_type == 'moola' ? "moola" : "clue points" %>

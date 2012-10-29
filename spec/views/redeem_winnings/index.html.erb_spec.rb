@@ -83,27 +83,27 @@ describe "redeem_winnings/index.html.erb" do
   context "vodago airtime" do
 
     it "must have R2 vodago airtime" do
-      @current_user.prize_points = 200
+      @current_user.prize_points = 500
       render
-      rendered.should have_content("R2 vodago airtime")
+      rendered.should have_content("R5 vodago airtime")
     end
 
     it "must have a text if not enough prize points" do
-      @current_user.prize_points = 199
+      @current_user.prize_points = 499
       render
-      rendered.should have_content("R2 vodago airtime")
+      rendered.should have_content("R5 vodago airtime")
     end
 
     it "must have a vodago airtime link" do
-      @current_user.prize_points = 220
+      @current_user.prize_points = 520
       render
       rendered.should have_link("vodago_airtime",
                                 href: new_redeem_winning_path(:prize_type => 'vodago_airtime',
-                                                              :prize_amount => 200))
+                                                              :prize_amount => 500))
     end
 
     it "wont have a moola link if not enough prize points" do
-      @current_user.prize_points = 199
+      @current_user.prize_points = 499
       render
       rendered.should_not have_link("vodago_airtime")
     end

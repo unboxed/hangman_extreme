@@ -46,14 +46,14 @@ describe 'redeem winnings' do
   end
 
   it "must allow to redeem prize points for moola" do
-    @current_user.update_attributes(:prize_points => 257)
+    @current_user.update_attributes(:prize_points => 555)
     visit '/'
     click_link('redeem')
-    page.should have_content("257 prize points")
+    page.should have_content("555 prize points")
     click_link('vodago_airtime')
-    page.should have_content("R2 vodago airtime")
+    page.should have_content("R5 vodago airtime")
     click_button('redeem')
-    page.should have_content("57 prize points")
+    page.should have_content("55 prize points")
   end
 
 end
