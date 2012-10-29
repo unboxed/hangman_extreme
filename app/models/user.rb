@@ -143,6 +143,13 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.add_clue_point_to_active_players!
+    user_ids = Game.today.collect{|g|g.user_id}.uniq
+    User.find(user_ids).each do |user|
+      user.increment!(:clue_points)
+    end
+  end
+
   def self.new_day_set_scores!
     User.update_all(daily_rating: 0, daily_precision: 0, daily_points: 0)
     if Date.today == Date.today.beginning_of_week
@@ -151,10 +158,9 @@ class User < ActiveRecord::Base
     if Date.today == Date.today.beginning_of_month
       User.update_all(monthly_rating: 0, monthly_precision: 0, monthly_points: 0)
     end
-    user_ids = Game.today.collect{|g|g.user_id}.uniq
+    user_ids = Game.since_yesterday.collect{|g|g.user_id}.uniq
     User.where('id IN (?)',user_ids).each do |user|
       begin
-        user.increment(:clue_points)
         user.update_daily_scores
         if Date.today == Date.today.beginning_of_week
           user.update_weekly_scores

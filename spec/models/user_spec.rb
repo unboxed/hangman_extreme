@@ -330,6 +330,27 @@ describe User do
 
   end
 
+  context "add_clue_point_to_active_players!" do
+
+    it "must increases users clue_points who played today by one" do
+      user = create(:game, user: create(:user, clue_points: 2)).user
+      User.add_clue_point_to_active_players!
+      user.reload
+      user.clue_points.should == 3
+    end
+
+    it "wont increases users clue_points who did not play today" do
+      user = create(:user, clue_points: 2)
+      Timecop.freeze(1.day.ago) do
+        create(:game, user: user)
+      end
+      User.add_clue_point_to_active_players!
+      user.reload
+      user.clue_points.should == 2
+    end
+
+  end
+
   context "new_day_set_scores!" do
 
     it "must set all daily scores to 0" do

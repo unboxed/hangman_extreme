@@ -58,12 +58,12 @@ describe Winner do
             end
           end
 
-          it "must give players that scored the same, the same amount" do
+          it "must share point if players score the same" do
             users_with_10 = create_list(:user,2, "#{period}_#{score_by}" => 10)
             users_with_9 = create_list(:user,3, "#{period}_#{score_by}" => 9)
             users_with_8 = create_list(:user,5, "#{period}_#{score_by}" => 8)
-            Winner.create_winners_for_category(period: period, score_by: score_by, winnings:[10,9,8,7,6,5,4,3,2,1])
-            [[users_with_10,10],[users_with_9,8],[users_with_8,5]].each do |users,amount|
+            Winner.create_winners_for_category(period: period, score_by: score_by, winnings:[20,18,16,14,12,5,4,3,2,1])
+            [[users_with_10,19],[users_with_9,14],[users_with_8,3]].each do |users,amount|
               users.each do |user|
                 user.should have(1).winners_for_period_and_reason(period,score_by)
                 winner = user.winners_for_period_and_reason(period,score_by).first

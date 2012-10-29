@@ -16,6 +16,7 @@ namespace :scheduler do
       #if Date.today == Date.today.end_of_month
       #  Winner.create_monthly_winners([0,0,0,0,0,0,0,0,0,0])
       #end
+      User.add_clue_point_to_active_players!
     end
   end
 
