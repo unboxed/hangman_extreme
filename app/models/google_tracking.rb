@@ -5,10 +5,15 @@ class GoogleTracking < Ohm::Model
   attribute :initial_visit
   attribute :previous_session
   attribute :current_session
+  attribute :last_visit
 
   def update_tracking
-    self.previous_session = self.current_session
-    self.current_session = Time.now.to_i
+    now = Time.now.to_i
+    if (Time.now.to_i - last_visit.to_i > 1.hour.to_i)
+      self.previous_session = self.current_session
+      self.current_session = now
+    end
+    self.last_visit = now
     save
   end
 
@@ -18,7 +23,8 @@ class GoogleTracking < Ohm::Model
     create(user_id: user_id.to_s,
            current_session: now,
            previous_session: now,
-           initial_visit: now)
+           initial_visit: now,
+           last_visit: now)
   end
 
 end

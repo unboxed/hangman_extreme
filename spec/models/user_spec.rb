@@ -473,11 +473,12 @@ describe User do
       user.utma.should match(/1\.[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\.15/)
     end
 
-    it "must update umta" do
+    it "must update umta if inactive for a hour" do
       user = stub_model(User)
-      expect{
-        sleep 1; user.utma(true)
-      }.to change(user,:utma)
+      last_utma = user.utma(true)
+      Timecop.freeze(1.hour.from_now + 1.second) do
+        user.utma(true).should_not == last_utma
+      end
       user = stub_model(User)
       expect{
         sleep 1; user.utma(false)
