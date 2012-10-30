@@ -14,7 +14,7 @@ You can redeem your points for:
          <%= [current_user.prize_points,10].min %> clue points</li>
   <% end %>
   <% if current_user.prize_points < 20 %>
-      <li>moola (<span style="color: red;">You need more <%= 20 - current_user.prize_points %>prize points</span>)</li>
+      <li>moola (<span style="color: red;"><%= 20 - current_user.prize_points %> more prize points</span>)</li>
   <% else current_user.prize_points >= 20  %>
       <li><%= link_to (index += 1).to_s,
                       new_redeem_winning_path(:prize_type => 'moola',
@@ -23,7 +23,7 @@ You can redeem your points for:
         <%= [current_user.prize_points,100].min %> moola</li>
   <% end %>
   <% if current_user.prize_points < 500 %>
-      <li>R5 vodago airtime (<span style="color: red;">You need more <%= 500 - current_user.prize_points %>prize points</span>)</li>
+      <li>R5 vodago airtime (<span style="color: red;"><%= 500 - current_user.prize_points %> more prize points</span>)</li>
   <% else current_user.prize_points >= 500  %>
       <li><%= link_to (index += 1).to_s,
                       new_redeem_winning_path(:prize_type => 'vodago_airtime',
