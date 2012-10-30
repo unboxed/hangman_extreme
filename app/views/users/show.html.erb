@@ -9,7 +9,7 @@
     <td>Rank</td>
   </tr>
   <tr>
-    <td>Games Won:</td>
+    <td>Points:</td>
     <td><%= @user.daily_points %> |</td>
     <td><%= @user.rank(:daily_points).ordinalize %></td>
   </tr>
@@ -29,7 +29,7 @@
     <td>Rank</td>
   </tr>
     <tr>
-      <td>Games Won:</td>
+      <td>Points:</td>
       <td><%= @user.weekly_points %> |</td>
       <td><%= @user.rank(:weekly_points).ordinalize %></td>
     </tr>
@@ -49,7 +49,7 @@
      <td>Rank</td>
    </tr>
   <tr>
-    <td>Games Won:</td>
+    <td>Points:</td>
     <td><%= @user.monthly_points %> |</td>
     <td><%= @user.rank(:monthly_points).ordinalize %></td>
   </tr>

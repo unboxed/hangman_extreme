@@ -15,14 +15,14 @@ describe "users/show.html.erb" do
 
   it "renders a list of games" do
     render
-    rendered.should have_content("Games Won")
+    rendered.should have_content("Points")
     rendered.should have_content("Rating")
     rendered.should have_content("Precision")
   end
 
   context "Today scores" do
 
-    it "must games won" do
+    it "must show points scored" do
       @user.should_receive(:daily_points).and_return("111")
       @user.should_receive(:rank).with(:daily_points).and_return(1)
       render
@@ -50,7 +50,7 @@ describe "users/show.html.erb" do
 
   context "Weeks scores" do
 
-    it "must games won" do
+    it "must show points scored" do
       @user.should_receive(:weekly_points).and_return("1111")
       @user.should_receive(:rank).with(:weekly_points).and_return(1)
       render
@@ -78,7 +78,7 @@ describe "users/show.html.erb" do
 
   context "Month scores" do
 
-    it "must games won" do
+    it "must show points scored" do
       @user.should_receive(:monthly_points).and_return("11111")
       @user.should_receive(:rank).with(:monthly_points).and_return(1)
       render
