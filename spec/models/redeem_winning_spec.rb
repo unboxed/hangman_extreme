@@ -9,13 +9,14 @@ describe RedeemWinning do
       RedeemWinning.new(prize_type: 'clue_points').should have(0).errors_on(:prize_type)
     end
 
-    it "must have a valid prize type" do
-      ['clue_points','moola','vodago_airtime'].each do |t|
+    ['clue_points','moola','vodago_airtime','cell_c_airtime','mtn_airtime'].each do |t|
+      it "must accept #{t} as valid prize type" do
         RedeemWinning.new(prize_type: t).should have(0).errors_on(:prize_type)
       end
-      ['nonsense'].each do |t|
-        RedeemWinning.new(prize_type: t).should have(1).errors_on(:prize_type)
-      end
+    end
+
+    it "wont accept invalid prize type" do
+      RedeemWinning.new(prize_type: 'nonsense').should have(1).errors_on(:prize_type)
     end
 
     it "must have a valid prize_amount" do
@@ -38,7 +39,10 @@ describe RedeemWinning do
 
     it "must have a valid state" do
       RedeemWinning.new.should have(1).errors_on(:state)
-      ['pending','paid'].each do |t|
+    end
+
+    ['pending','paid'].each do |t|
+      it "must accept #{t} as valid state" do
         RedeemWinning.new(state: t).should have(0).errors_on(:state)
       end
     end

@@ -80,32 +80,36 @@ describe "redeem_winnings/index.html.erb" do
 
   end
 
-  context "vodago airtime" do
+  ['vodago','cell_c','mtn'].each do |provider|
 
-    it "must have R2 vodago airtime" do
-      @current_user.prize_points = 500
-      render
-      rendered.should have_content("R5 vodago airtime")
-    end
+    context "#{provider} airtime" do
 
-    it "must have a text if not enough prize points" do
-      @current_user.prize_points = 499
-      render
-      rendered.should have_content("R5 vodago airtime")
-    end
+      it "must have R2 vodago airtime" do
+        @current_user.prize_points = 500
+        render
+        rendered.should have_content("R5 #{provider.gsub("_"," ")} airtime")
+      end
 
-    it "must have a vodago airtime link" do
-      @current_user.prize_points = 520
-      render
-      rendered.should have_link("vodago_airtime",
-                                href: new_redeem_winning_path(:prize_type => 'vodago_airtime',
-                                                              :prize_amount => 500))
-    end
+      it "must have a text if not enough prize points" do
+        @current_user.prize_points = 499
+        render
+        rendered.should have_content("R5 #{provider.gsub("_"," ")} airtime")
+      end
 
-    it "wont have a moola link if not enough prize points" do
-      @current_user.prize_points = 499
-      render
-      rendered.should_not have_link("vodago_airtime")
+      it "must have a vodago airtime link" do
+        @current_user.prize_points = 520
+        render
+        rendered.should have_link("#{provider}_airtime",
+                                  href: new_redeem_winning_path(:prize_type => "#{provider}_airtime",
+                                                                :prize_amount => 500))
+      end
+
+      it "wont have a moola link if not enough prize points" do
+        @current_user.prize_points = 499
+        render
+        rendered.should_not have_link("#{provider}_airtime")
+      end
+
     end
 
   end

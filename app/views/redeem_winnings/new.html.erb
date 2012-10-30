@@ -6,8 +6,8 @@
     <% if @redeem_winning.prize_type.include?('airtime') %>
         R5
         <%= "vodago" if @redeem_winning.prize_type.include?('vodago') %>
-        <%= "MTN" if @redeem_winning.prize_type.include?('mtn') %>
-        <%= "Cell C" if @redeem_winning.prize_type.include?('cellc') %>
+        <%= "mtn" if @redeem_winning.prize_type.include?('mtn') %>
+        <%= "cell c" if @redeem_winning.prize_type.include?('cell') %>
         airtime
     <% else %>
         <i><%= @redeem_winning.prize_amount %>
