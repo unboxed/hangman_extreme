@@ -17,5 +17,15 @@ describe "users/_ranking_links.html.erb" do
     rendered.should have_link("daily_precision", :href => users_path(rank_by: 'precision'))
   end
 
+  it "must have a link to explain the scoring" do
+    render :partial => "users/ranking_links"
+    rendered.should have_link("scoring_categories", :href => explain_path(action: 'scoring_categories'))
+  end
+
+  it "must have a link to the winners page" do
+    render :partial => "users/ranking_links"
+    rendered.should have_link("winners", :href => winners_path)
+  end
+
 
 end

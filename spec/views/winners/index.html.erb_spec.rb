@@ -9,6 +9,8 @@ describe "winners/index.html.erb" do
         stub_model(Winner, id: 100, name: "hello", amount: "123", reason: "daily_rating"),
         stub_model(Winner, id: 101, name: "goodbye", amount: "124")
       ])
+    @current_user = stub_model(User, id: 33)
+    view.stub!(:current_user).and_return(@current_user)
   end
 
   it "renders a list of users" do
@@ -26,6 +28,11 @@ describe "winners/index.html.erb" do
   it "should have a home page link" do
     render
     rendered.should have_link("root_page", href: '/')
+  end
+
+  it "should have a view rank link" do
+    render
+    rendered.should have_link("view_rank", href: user_path(33))
   end
 
   it "should have a rating link" do

@@ -14,6 +14,7 @@ describe 'winners' do
     precision_winners = create_list(:winner,9, reason: "precision", period: 'daily')
     points_winners = create_list(:winner,9, reason: "points", period: 'daily')
     visit '/'
+    click_link('rank')
     click_link('winners')
     rating_winners.each do |winner|
       page.should have_content(winner.name)
@@ -33,6 +34,7 @@ describe 'winners' do
     precision_winners = create_list(:winner,9, reason: "precision", period: 'weekly')
     points_winners = create_list(:winner,9, reason: "points", period: 'weekly')
     visit '/'
+    click_link('rank')
     click_link('winners')
     click_link('weekly')
     rating_winners.each do |winner|
@@ -53,6 +55,7 @@ describe 'winners' do
     precision_winners = create_list(:winner,9, reason: "precision", period: 'monthly')
     points_winners = create_list(:winner,9, reason: "points", period: 'monthly')
     visit '/'
+    click_link('rank')
     click_link('winners')
     click_link('monthly')
     rating_winners.each do |winner|

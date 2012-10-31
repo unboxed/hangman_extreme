@@ -1,5 +1,6 @@
 <b>Welcome to hangman extreme</b><br/>
 Have fun guessing the word.<br/>
+<span style="color:blue;">Updated the amount of prize points 5th to 10th place recieves.</span>
 
 <ul>
   <%= content_tag_for(:li, @games) do |game| %>
@@ -9,19 +10,12 @@ Have fun guessing the word.<br/>
   <% end %>
 </ul>
 
-<%= paginate @games %>
-
-<br/>
-
-<b><%= link_to 'new', new_game_path, id: 'new_game' %> game</b> |
-view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %>
-<br/>
-send <%= mxit_authorise_link 'profile', {state: "profile"}, id: 'authorise' %> |
-send <%= mxit_authorise_link 'feedback', {state: "feedback"}, id: 'feedback' %>
-<br/>
-view <%= link_to 'winners', winners_path, id: 'winners' %> |
-<%= link_to 'buy', purchases_path, id: 'buy_clue_points' %> clue points |
-<%= link_to 'redeem', redeem_winnings_path, id: 'redeem' %> prize points
-<br/>
-<a href="mxit://[communityportal]/RecommendPage?ItemId=7297721" type="mxit/service-navigation">Tell your friends</a> about Hangman Extreme
-
+<ul>
+  <li><%= link_to 'new', new_game_path, id: 'new_game' %> game</li>
+  <li>view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %></li>
+  <li>update <%= mxit_authorise_link 'profile', {state: "profile"}, id: 'authorise' %></li>
+  <li>send <%= mxit_authorise_link 'feedback', {state: "feedback"}, id: 'feedback' %></li>
+  <li><%= link_to 'buy', purchases_path, id: 'buy_clue_points' %> clue points</li>
+  <li><%= link_to 'redeem', redeem_winnings_path, id: 'redeem' %> prize points</li>
+  <li>Tell your<a href="mxit://[communityportal]/RecommendPage?ItemId=7297721" type="mxit/service-navigation">friends</a> about Hangman Extreme</li>
+</ul>

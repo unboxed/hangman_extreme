@@ -9,7 +9,6 @@ describe "games/index" do
       stub_model(Game, id: 100, done?: true, hangman_text: "hello", score: 100),
       stub_model(Game, id: 101, done?: false, hangman_text: "goodbye", score: 500)
     ])
-    view.stub!(:paginate)
     @current_user = stub_model(User, id: 50)
     view.stub!(:current_user).and_return(@current_user)
   end
@@ -44,12 +43,6 @@ describe "games/index" do
   it "should have a view rank link" do
     render
     rendered.should have_link("view_rank", href: user_path(50))
-  end
-
-  it "should rendered the pagination" do
-    view.should_receive(:paginate).with(@games).and_return("<span>Pagination</span>")
-    render
-    rendered.should have_content("Pagination")
   end
 
   it "should have a feedback link" do
