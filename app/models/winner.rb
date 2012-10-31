@@ -1,4 +1,6 @@
 class Winner < ActiveRecord::Base
+  WEEKLY_PRIZE_AMOUNTS = [500,250,150,50,50,50,50,50,50,50]
+  DAILY_PRIZE_AMOUNTS = [50,25,15,5,5,5,5,5,5,5]
   belongs_to :user
   attr_accessible :user_id, :amount, :reason, :period, :end_of_period_on
 
@@ -12,11 +14,11 @@ class Winner < ActiveRecord::Base
 
   delegate :name, to: :user
 
-  def self.create_daily_winners(winnings)
+  def self.create_daily_winners(winnings = DAILY_PRIZE_AMOUNTS)
     create_winners('daily',winnings)
   end
 
-  def self.create_weekly_winners(winnings)
+  def self.create_weekly_winners(winnings = WEEKLY_PRIZE_AMOUNTS)
     create_winners('weekly',winnings)
   end
 
@@ -30,7 +32,7 @@ class Winner < ActiveRecord::Base
       create_winners_for_category(score_by: score_by, winnings: winnings, period: period)
     end
     User.send_message("We have selected our $winners$ for the #{period} prizes, Congratulations to those who have won.",
-                      User.mxit.where('updated_at > ?',3.day.ago))
+                      User.mxit.where('updated_at > ?',2.day.ago))
   end
 
   def self.create_winners_for_category(options)

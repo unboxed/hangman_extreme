@@ -9,9 +9,9 @@ namespace :scheduler do
 
     desc "what must be run at end of the day"
     task "end_of_day" => :environment do
-      Winner.create_daily_winners([50,25,15,5,1,1,1,1,1,1])
+      Winner.create_daily_winners
       if Date.today == Date.today.end_of_week
-        Winner.create_weekly_winners([500,250,150,50,10,10,10,10,10,10])
+        Winner.create_weekly_winners
       end
       #if Date.today == Date.today.end_of_month
       #  Winner.create_monthly_winners([0,0,0,0,0,0,0,0,0,0])

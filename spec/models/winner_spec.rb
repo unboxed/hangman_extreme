@@ -96,7 +96,7 @@ describe Winner do
 
   end
 
-  context "create_daily_winners" do
+  context "create_winners" do
 
     before :each do
       create_list(:user,10, daily_rating: 0, daily_precision: 0, daily_points: 0)
@@ -132,6 +132,14 @@ describe Winner do
       Winner.should_not_receive(:create_winners_for_category)
       create(:winner, period: 'daily', end_of_period_on: Date.today)
       Winner.create_daily_winners((11..20).to_a.reverse)
+    end
+
+    it "must run without arguments" do
+      Winner.create_daily_winners
+    end
+
+    it "must run without arguments" do
+      Winner.create_weekly_winners
     end
 
   end
