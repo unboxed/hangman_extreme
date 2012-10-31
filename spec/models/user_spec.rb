@@ -276,23 +276,17 @@ describe User do
       user = stub_model(User)
       user.stub(:calculate_daily_rating).and_return(10)
       user.stub(:calculate_weekly_rating).and_return(20)
-      user.stub(:calculate_monthly_rating).and_return(80)
       user.stub(:calculate_daily_precision).and_return(75)
       user.stub(:calculate_weekly_precision).and_return(100)
-      user.stub(:calculate_monthly_precision).and_return(90)
       user.stub(:calculate_daily_points).and_return(50)
       user.stub(:calculate_weekly_points).and_return(200)
-      user.stub(:calculate_monthly_points).and_return(210)
       user.update_ratings
       user.daily_rating.should == 10
       user.weekly_rating.should == 20
-      user.monthly_rating.should == 80
       user.daily_precision.should == 75
       user.weekly_precision.should == 100
-      user.monthly_precision.should == 90
       user.daily_points.should == 50
       user.weekly_points.should == 200
-      user.monthly_points.should == 210
     end
 
     it "must update the daily scores" do

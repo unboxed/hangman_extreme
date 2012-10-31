@@ -70,13 +70,10 @@ class User < ActiveRecord::Base
   def update_ratings
     self.daily_rating = calculate_daily_rating
     self.weekly_rating = calculate_weekly_rating
-    self.monthly_rating = calculate_monthly_rating
     self.daily_precision = calculate_daily_precision
     self.weekly_precision = calculate_weekly_precision
-    self.monthly_precision = calculate_monthly_precision
     self.daily_points = calculate_daily_points
     self.weekly_points = calculate_weekly_points
-    self.monthly_points = calculate_monthly_points
     save
   end
 
