@@ -2,7 +2,7 @@ class Winner < ActiveRecord::Base
   WEEKLY_PRIZE_AMOUNTS = [500,250,150,50,50,50,50,50,50,50]
   DAILY_PRIZE_AMOUNTS = [50,25,15,5,5,5,5,5,5,5]
   WINNING_PERIODS = ['daily','weekly']
-  WINNING_REASONS = ['rating','precision','points']
+  WINNING_REASONS = ['points','rating','precision']
   belongs_to :user
   attr_accessible :user_id, :amount, :reason, :period, :end_of_period_on
 
