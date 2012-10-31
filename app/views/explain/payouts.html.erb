@@ -1,13 +1,13 @@
 <h1>Daily Payouts</h1>
 <ol>
   <% Winner::DAILY_PRIZE_AMOUNTS.each do |amount| %>
-    <% content_tag :li, amount %>
+    <%= content_tag :li, amount %>
   <% end %>
 </ol>
 <h1>Weekly Payouts</h1>
 <ol>
   <% Winner::WEEKLY_PRIZE_AMOUNTS.each do |amount| %>
-      <% content_tag :li, amount %>
+      <%= content_tag :li, amount %>
   <% end %>
 </ol>
 
