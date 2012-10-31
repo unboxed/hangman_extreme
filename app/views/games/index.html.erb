@@ -11,11 +11,9 @@ Have fun guessing the word.<br/>
 </ul>
 
 <ul>
-  <li><%= link_to 'new', new_game_path, id: 'new_game' %> game</li>
-  <li>view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %></li>
-  <li>update <%= mxit_authorise_link 'profile', {state: "profile"}, id: 'authorise' %></li>
-  <li>send <%= mxit_authorise_link 'feedback', {state: "feedback"}, id: 'feedback' %></li>
+  <li><%= link_to 'new', new_game_path, id: 'new_game' %> game | <%= link_to 'rank', user_path(current_user), id: 'view_rank' %></li>
+  <li><%= mxit_authorise_link 'profile', {state: "profile"}, id: 'authorise' %> | <%= mxit_authorise_link 'feedback', {state: "feedback"}, id: 'feedback' %></li>
   <li><%= link_to 'buy', purchases_path, id: 'buy_clue_points' %> clue points</li>
   <li><%= link_to 'redeem', redeem_winnings_path, id: 'redeem' %> prize points</li>
-  <li>Tell your<a href="mxit://[communityportal]/RecommendPage?ItemId=7297721" type="mxit/service-navigation">friends</a> about Hangman Extreme</li>
+  <li>Share with your <a href="mxit://[communityportal]/RecommendPage?ItemId=7297721" type="mxit/service-navigation">friends</a></li>
 </ul>
