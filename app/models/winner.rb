@@ -1,6 +1,8 @@
 class Winner < ActiveRecord::Base
   WEEKLY_PRIZE_AMOUNTS = [500,250,150,50,50,50,50,50,50,50]
   DAILY_PRIZE_AMOUNTS = [50,25,15,5,5,5,5,5,5,5]
+  WINNING_PERIODS = ['daily','weekly']
+  WINNING_REASONS = ['rating','precision','points']
   belongs_to :user
   attr_accessible :user_id, :amount, :reason, :period, :end_of_period_on
 
@@ -28,7 +30,7 @@ class Winner < ActiveRecord::Base
 
   def self.create_winners(period, winnings)
     return if where(end_of_period_on: Date.today, period: period).any?
-    ['rating','precision','points'].each do |score_by|
+    WINNING_REASONS.each do |score_by|
       create_winners_for_category(score_by: score_by, winnings: winnings, period: period)
     end
     User.send_message("We have selected our $winners$ for the #{period} prizes, Congratulations to those who have won.",

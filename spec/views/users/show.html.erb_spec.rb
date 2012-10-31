@@ -15,9 +15,9 @@ describe "users/show.html.erb" do
 
   it "renders a list of games" do
     render
-    rendered.should have_content("Points")
-    rendered.should have_content("Rating")
-    rendered.should have_content("Precision")
+    rendered.should have_content("points")
+    rendered.should have_content("rating")
+    rendered.should have_content("precision")
   end
 
   context "Today scores" do
@@ -71,34 +71,6 @@ describe "users/show.html.erb" do
       @user.should_receive(:rank).with(:weekly_precision).and_return(3)
       render
       rendered.should have_content("1131")
-      rendered.should have_content("3rd")
-    end
-
-  end
-
-  context "Month scores" do
-
-    it "must show points scored" do
-      @user.should_receive(:monthly_points).and_return("11111")
-      @user.should_receive(:rank).with(:monthly_points).and_return(1)
-      render
-      rendered.should have_content("11111")
-      rendered.should have_content("1st")
-    end
-
-    it "must show rating" do
-      @user.should_receive(:monthly_rating).and_return("11211")
-      @user.should_receive(:rank).with(:monthly_rating).and_return(2)
-      render
-      rendered.should have_content("11211")
-      rendered.should have_content("2nd")
-    end
-
-    it "must show precision" do
-      @user.should_receive(:monthly_precision).and_return("11311")
-      @user.should_receive(:rank).with(:monthly_precision).and_return(3)
-      render
-      rendered.should have_content("11311")
       rendered.should have_content("3rd")
     end
 

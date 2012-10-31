@@ -60,9 +60,4 @@ describe "winners/index.html.erb" do
     rendered.should have_link("weekly_rating", href: winners_path(period: 'weekly'))
   end
 
-  it "should have a monthly link" do
-    render
-    rendered.should have_link("monthly_rating", href: winners_path(period: 'monthly'))
-  end
-
 end

@@ -1,12 +1,12 @@
 <br/>
-<% ['daily','weekly','monthly'].each do |time_period| %>
+<% Winner::WINNING_PERIODS.each do |time_period| %>
     <%= link_to_unless params[:period] == time_period,
                        time_period,
                        users_path(period: time_period, rank_by: params[:rank_by]),
                        id: "#{time_period}_#{params[:rank_by] || 'rating'}" %> |
 <% end %>
 <br/>
-<% ['points','rating','precision'].each do |rank| %>
+<% Winner::WINNING_REASONS.each do |rank| %>
     <%= link_to_unless params[:rank_by] == rank,
                        rank,
                        users_path(period: params[:period], rank_by: rank),

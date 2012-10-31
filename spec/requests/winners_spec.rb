@@ -50,25 +50,4 @@ describe 'winners' do
     end
   end
 
-  it "must show the monthly winners" do
-    rating_winners = create_list(:winner,9, reason: "rating", period: 'monthly')
-    precision_winners = create_list(:winner,9, reason: "precision", period: 'monthly')
-    points_winners = create_list(:winner,9, reason: "points", period: 'monthly')
-    visit '/'
-    click_link('rank')
-    click_link('winners')
-    click_link('monthly')
-    rating_winners.each do |winner|
-      page.should have_content(winner.name)
-    end
-    click_link('precision')
-    precision_winners.each do |winner|
-      page.should have_content(winner.name)
-    end
-    click_link('points')
-    points_winners.each do |winner|
-      page.should have_content(winner.name)
-    end
-  end
-
 end

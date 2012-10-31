@@ -29,17 +29,17 @@ describe 'users' do
     click_link('root_page')
     page.current_path.should == '/'
     click_link('view_rank')
-    click_link('weekly_rating')
-    users.each do |user|
-      page.should have_content(user.name)
+    ['daily'].product(['rating','precision','points']).map{|x,y| "#{x}_#{y}"}.each do |link|
+      click_link(link)
+      users.each do |user|
+        page.should have_content(user.name)
+      end
     end
-    click_link('weekly_precision')
-    users.each do |user|
-      page.should have_content(user.name)
-    end
-    click_link('monthly_precision')
-    users.each do |user|
-      page.should have_content(user.name)
+    ['weekly'].product(['points','rating','precision']).map{|x,y| "#{x}_#{y}"}.each do |link|
+      click_link(link)
+      users.each do |user|
+        page.should have_content(user.name)
+      end
     end
   end
 

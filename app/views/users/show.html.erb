@@ -3,66 +3,21 @@
 <br/>
 <table>
   <tbody>
-  <tr>
-    <td><b>Today</b></td>
-    <td>Score</td>
-    <td>Rank</td>
-  </tr>
-  <tr>
-    <td>Points:</td>
-    <td><%= @user.daily_points %> |</td>
-    <td><%= @user.rank(:daily_points).ordinalize %></td>
-  </tr>
-  <tr>
-    <td>Rating:</td>
-    <td><%= @user.daily_rating %> |</td>
-    <td><%= @user.rank(:daily_rating).ordinalize %></td>
-  </tr>
-  <tr>
-    <td>Precision:</td>
-    <td><%= @user.daily_precision %> |</td>
-    <td><%= @user.rank(:daily_precision).ordinalize %></td>
-  </tr>
-  <tr>
-    <td><b>This Week</b></td>
-    <td>Score</td>
-    <td>Rank</td>
-  </tr>
-    <tr>
-      <td>Points:</td>
-      <td><%= @user.weekly_points %> |</td>
-      <td><%= @user.rank(:weekly_points).ordinalize %></td>
-    </tr>
-    <tr>
-      <td>Rating:</td>
-      <td><%= @user.weekly_rating %> |</td>
-      <td><%= @user.rank(:weekly_rating).ordinalize %></td>
-    </tr>
-    <tr>
-      <td>Precision:</td>
-      <td><%= @user.weekly_precision %> |</td>
-      <td><%= @user.rank(:weekly_precision).ordinalize %></td>
-    </tr>
-   <tr>
-     <td><b>This Month</b></td>
-     <td>Score</td>
-     <td>Rank</td>
-   </tr>
-  <tr>
-    <td>Points:</td>
-    <td><%= @user.monthly_points %> |</td>
-    <td><%= @user.rank(:monthly_points).ordinalize %></td>
-  </tr>
-  <tr>
-    <td>Rating:</td>
-    <td><%= @user.monthly_rating %> |</td>
-    <td><%= @user.rank(:monthly_rating).ordinalize %></td>
-  </tr>
-  <tr>
-    <td>Precision:</td>
-    <td><%= @user.monthly_precision %> |</td>
-    <td><%= @user.rank(:monthly_precision).ordinalize %></td>
-  </tr>
+  <% Winner::WINNING_PERIODS.each do |time_period| %>
+      <tr>
+        <td><b><%= time_period %></b></td>
+        <td>Score</td>
+        <td>Rank</td>
+      </tr>
+      <% Winner::WINNING_REASONS.each do |rank_by| %>
+        <% field = "#{time_period}_#{rank_by}".to_sym %>
+          <tr>
+            <td><%= rank_by %>:</td>
+            <td><%= @user.send(field) %> |</td>
+            <td><%= @user.rank(field).ordinalize %></td>
+          </tr>
+      <% end %>
+  <% end %>
   </tbody>
 </table>
 <br/>

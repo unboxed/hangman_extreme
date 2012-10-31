@@ -4,8 +4,8 @@ class UsersController < ApplicationController
   caches_action :stats, expires_in: 1.day, :cache_path => proc{ {date: Date.today} }
 
   def index
-    params[:period] = 'daily' unless ['daily','weekly','monthly'].include?(params[:period].to_s)
-    params[:rank_by] = 'rating' unless ['points','rating', 'precision'].include?(params[:rank_by].to_s)
+    params[:period] = 'daily' unless Winner::WINNING_PERIODS.include?(params[:period].to_s)
+    params[:rank_by] = 'rating' unless Winner::WINNING_REASONS.include?(params[:rank_by].to_s)
     @send = "#{params[:period]}_#{params[:rank_by]}"
     @users = @users.top_scorers(@send)
   end

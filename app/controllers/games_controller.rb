@@ -22,25 +22,16 @@ class GamesController < ApplicationController
       @game.add_choice(params[:letter])
     end
     ranks = {}
-    ['rating','precision','points'].each do |score_by|
-      ['daily','weekly','monthly'].each do |period|
-        rank_by = "#{period}_#{score_by}"
-        ranks[rank_by] = current_user.rank(rank_by)
-      end
+    User::RANKING_FIELDS.each do |rank_by|
+      ranks[rank_by] = current_user.rank(rank_by)
     end
     @game.save
     if @game.completed?
       current_user.reload
       @notice ||= ""
-      ['rating','precision','points'].each do |score_by|
-        ['daily','weekly','monthly'].each do |period|
-          rank_by = "#{period}_#{score_by}"
-          rank = current_user.rank(rank_by)
-          if rank < ranks[rank_by]
-            @notice << "#{period} #{score_by}: #{rank.ordinalize}. "
-            break
-          end
-        end
+      User::RANKING_FIELDS.each do |rank_by|
+        rank = current_user.rank(rank_by)
+        @notice << "#{rank_by.gsub("_"," ")}: #{rank.ordinalize}. "  if rank < ranks[rank_by]
       end
     end
     redirect_to @game, notice: @notice

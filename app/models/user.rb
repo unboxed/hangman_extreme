@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :name, :provider, :uid, :clue_points, :prize_points
   attr_accessible :real_name, :mobile_number, as: 'user'
+  RANKING_FIELDS = Winner::WINNING_PERIODS.product(Winner::WINNING_REASONS).map{|x,y| "#{x}_#{y}"}
 
   has_many :games, :order => 'id ASC'
   has_many :winners
@@ -217,13 +218,7 @@ class User < ActiveRecord::Base
   end
 
   def self.scoring_fields
-    fields = []
-    ['rating','precision','points'].each do |score_by|
-      ['daily','weekly','monthly'].each do |period|
-        fields << "#{period}_#{score_by}"
-      end
-    end
-    fields
+    RANKING_FIELDS.clone
   end
 
   private

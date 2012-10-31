@@ -19,14 +19,14 @@
 <%= link_to 'home', root_path, id: 'root_page' %> |
 view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %>
 <br/>
-<% ['daily','weekly','monthly'].each do |time_period| %>
+<% Winner::WINNING_PERIODS.each do |time_period| %>
     <%= link_to_unless params[:period] == time_period,
                        time_period,
                        {period: time_period, reason: params[:reason]},
                        id: "#{time_period}_#{params[:reason] || 'rating'}" %> |
 <% end %>
 <br/>
-<% ['points','rating','precision'].each do |reason| %>
+<% Winner::WINNING_REASONS.each do |reason| %>
     <%= link_to_unless params[:reason] == reason,
                        reason,
                        {period: params[:period], reason: reason},

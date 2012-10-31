@@ -7,7 +7,6 @@ describe "users/_ranking_links.html.erb" do
     render :partial => "users/ranking_links"
     rendered.should have_link("daily_rating", :href => users_path(period: 'daily'))
     rendered.should have_link("weekly_rating", :href => users_path(period: 'weekly'))
-    rendered.should have_link("monthly_rating", :href => users_path(period: 'monthly'))
   end
 
   it "must have points,rating and precision links" do
