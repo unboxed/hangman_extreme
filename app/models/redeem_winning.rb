@@ -12,6 +12,12 @@ class RedeemWinning < ActiveRecord::Base
 
   belongs_to :user
 
+  scope :pending, where('state = ?','pending')
+
+  def self.pending_winnings_text
+    pending.collect{|rw| [rw.prize_type,rw.id,rw.user.uid,rw.user.login,rw.user.mobile_number,rw.prize_amount].join(" : ")}.join("\n")
+  end
+
   protected
 
   def check_user_prize_points
