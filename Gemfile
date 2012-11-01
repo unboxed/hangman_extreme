@@ -35,7 +35,7 @@ end
 
 group :test do
   gem 'sqlite3'
-  gem 'mysql'
+  gem 'mysql2'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
