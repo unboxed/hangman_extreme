@@ -18,6 +18,10 @@ class RedeemWinning < ActiveRecord::Base
     pending.collect{|rw| [rw.prize_type,rw.id,rw.user.uid,rw.user.login,rw.user.mobile_number,rw.prize_amount].join(" : ")}.join("\n")
   end
 
+  def self.paid!(id)
+    find(id).update_column(:state, 'paid')
+  end
+
   protected
 
   def check_user_prize_points
