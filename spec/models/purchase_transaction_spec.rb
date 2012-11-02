@@ -42,4 +42,17 @@ describe PurchaseTransaction do
 
   end
 
+  context "cohort_array" do
+
+    it "must run" do
+      14.times do |i|
+        Timecop.freeze(i.days.ago) do
+          create(:purchase_transaction)
+        end
+      end
+      PurchaseTransaction.cohort_array.should be_kind_of(Array)
+    end
+
+  end
+
 end

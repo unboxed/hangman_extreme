@@ -41,10 +41,24 @@ describe UsersController do
       end
 
 
-      it "returns redirects to root page if no code" do
+      it "Sets a alert if no code" do
+        get 'mxit_oauth'
+        flash[:alert].should_not be_blank
+      end
+
+      it "returns redirects to profile page" do
         get 'mxit_oauth'
         response.should redirect_to(profile_users_path)
-        flash[:alert].should_not be_blank
+      end
+
+      it "returns redirects to feedback page if state is feedback" do
+        get 'mxit_oauth', state: 'feedback'
+        response.should redirect_to(feedback_index_path)
+      end
+
+      it "returns redirects to winnings page if state is winnings" do
+        get 'mxit_oauth', state: 'winnings'
+        response.should redirect_to(redeem_winnings_path)
       end
 
       context "send invite" do
@@ -128,9 +142,10 @@ describe UsersController do
     describe "GET stats" do
 
       it "renders the application layout" do
-        create(:game)
-        create(:winner)
-        create(:purchase_transaction)
+        User.stub(:cohort_array).and_return([[1,1,1,1,1,1]])
+        Game.stub(:cohort_array).and_return([[2,2,2,2,2]])
+        Winner.stub(:cohort_array).and_return([[2,2,2,2,2]])
+        PurchaseTransaction.stub(:cohort_array).and_return([[2,2,2,2,2]])
         get :stats
         response.should render_template("layouts/application")
       end

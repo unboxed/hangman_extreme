@@ -18,9 +18,10 @@ describe ApplicationHelper do
   context "shinka_ad" do
 
     before :each do
+      request = mock("request", env: {"HTTP_X_FORWARDED_FOR" => "127.0.0.1"})
       helper.stub(:shinka_ads_enabled?).and_return(true)
       helper.stub(:shinka_auid).and_return("123")
-      helper.stub(:env).and_return({"HTTP_X_FORWARDED_FOR" => "127.0.0.1"})
+      helper.stub(:request).and_return(request)
     end
 
     it "must load a add from shinka" do
@@ -50,10 +51,28 @@ describe ApplicationHelper do
       helper.shinka_ad.should be_blank
     end
 
-    it "must load blank ad if shinka code throws exception" do
-      helper.stub(:current_user_request_info).and_raise
-      Rails.env.stub(:production?).and_return(true)
-      helper.shinka_ad.should == ""
+    it "must load blank ad if shinka code times out and disable shinka" do
+      expect {
+        helper.stub(:current_user_request_info).and_raise(Timeout::Error)
+        helper.shinka_ad.should == ""
+      }.to change(Settings,:shinka_disabled_until)
+    end
+
+    it "must load blank ad if shinka code throws exception and disable shinka" do
+      expect {
+        helper.stub(:current_user_request_info).and_raise
+        Rails.env.stub(:production?).and_return(true)
+        helper.shinka_ad.should == ""
+      }.to change(Settings,:shinka_disabled_until)
+    end
+
+  end
+
+  context "mxit_authorise_link" do
+
+    it "should work" do
+      helper.mxit_authorise_link("name", state: "testing").should ==
+        "<a href=\"http://test.host/authorize?redirect_uri=http%3A%2F%2Ftest.host%2Fusers%2Fmxit_oauth&amp;response_type=code&amp;scope=profile%2Fpublic+profile%2Fprivate&amp;state=testing\">name</a>"
     end
 
   end

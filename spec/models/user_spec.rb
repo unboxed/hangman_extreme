@@ -518,7 +518,11 @@ describe User do
   context "cohort_array" do
 
     it "must run" do
-      create(:game)
+      14.times do |i|
+        Timecop.freeze(i.days.ago) do
+          create(:game)
+        end
+      end
       User.cohort_array.should be_kind_of(Array)
     end
 

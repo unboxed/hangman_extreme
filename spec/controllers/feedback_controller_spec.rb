@@ -81,6 +81,14 @@ describe FeedbackController do
         response.should redirect_to(root_path)
       end
 
+      it "redirects to home if error occurs" do
+        Rails.logger.should_receive(:error).with("error")
+        Feedback.stub(:send_support).and_raise("error")
+        Rails.env.stub(:test?).and_return(false)
+        do_create
+        response.should redirect_to(root_path)
+      end
+
     end
 
   end
