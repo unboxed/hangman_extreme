@@ -9,5 +9,6 @@
 </ul>
 <br/>
 <%= link_to 'home', root_path, id: 'root_page' %>  |
-view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %>
+<%= link_to('payouts',explain_path(action: 'payouts'),id: 'payouts') %> |
+<%= link_to 'rank', user_path(current_user), id: 'view_rank' %>
 

@@ -36,4 +36,9 @@ describe "explain/scoring_categories.html.erb" do
     rendered.should have_link("view_rank", href: user_path(44))
   end
 
+  it "must have a link to payouts" do
+    render
+    rendered.should have_link("payouts", href: explain_path(action: 'payouts'))
+  end
+
 end
