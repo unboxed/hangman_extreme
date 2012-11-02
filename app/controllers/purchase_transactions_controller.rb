@@ -19,15 +19,6 @@ class PurchaseTransactionsController < ApplicationController
       @purchase_transaction.product_id = params[:product_id]
       @purchase_transaction.ref = params[:ref]
       @purchase_transaction.save!
-      begin
-        Timeout::timeout(15) do
-          g = Gabba::Gabba.new(tracking_code, request.host)
-          g.transaction(@purchase_transaction.ref,@purchase_transaction.moola_amount)
-        end
-      rescue Exception => e
-        ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
-        raise if Rails.env.test?
-      end
       redirect_to({ action: 'index', mxit_transaction_res: params[:mxit_transaction_res]}, notice: 'Purchase successful')
     else
       mxit_transaction_text = {1 => "Transaction rejected",
