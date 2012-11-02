@@ -1,5 +1,7 @@
 class Feedback
 
+  cattr_accessor :subdomain_name, :api_key, :api_secret
+
   def self.send_suggestion(options = {})
     client = UserVoice::Client.new(subdomain_name, api_key, api_secret)
     forum = client.get("/api/v1/forums.json")['forums'].first
@@ -25,20 +27,6 @@ class Feedback
         :message => options[:message]
       }
     })
-  end
-
-  private
-
-  def self.subdomain_name
-    ENV['UV_SUBDOMAIN_NAME']
-  end
-
-  def self.api_key
-    ENV['UV_API_KEY']
-  end
-
-  def self.api_secret
-    ENV['UV_API_SECRET']
   end
 
 end
