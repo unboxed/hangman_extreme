@@ -18,15 +18,6 @@ describe User do
     User.new(uid: 'xx', provider: "zz").should have(0).errors_on(:uid)
   end
 
-  it "must return the amount of games" do
-    user = create(:user)
-    user.game_count.should == 0
-    create(:game, user: user)
-    user.game_count.should == 1
-    create_list(:game,5, user: user)
-    user.game_count.should == 6
-  end
-
   context "calculate_daily_points" do
 
     it "must use only won games" do

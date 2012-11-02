@@ -20,6 +20,8 @@ describe 'users' do
 
   it "must the show the current top players" do
     users = create_list(:user,9).each{|user| create(:won_game, user: user) }
+    User.new_day_set_scores!
+    User.add_clue_point_to_active_players!
     visit '/'
     click_link('view_rank')
     click_link('daily_points')
@@ -66,8 +68,12 @@ describe 'users' do
     MxitApi.any_instance.stub(:send_message).and_return(true)
     users = create_list(:user,10)
     users.each do |user|
-      create_list(:won_game,rand(5) + 1, user: user)
-      create(:purchase_transaction, user: user)
+      14.times do |i|
+        Timecop.freeze(i.days.ago) do
+          create_list(:won_game,rand(5) + 1, user: user)
+        end
+        create(:purchase_transaction, user: user)
+      end
     end
     Winner.create_daily_winners
     visit '/users/stats'

@@ -52,13 +52,8 @@ class User < ActiveRecord::Base
   end
 
   def update_ratings
-    self.daily_rating = calculate_daily_rating
-    self.weekly_rating = calculate_weekly_rating
-    self.daily_precision = calculate_daily_precision
-    self.weekly_precision = calculate_weekly_precision
-    self.daily_points = calculate_daily_points
-    self.weekly_points = calculate_weekly_points
-    save
+    update_daily_scores
+    update_weekly_scores
   end
 
   def update_daily_scores
@@ -77,10 +72,6 @@ class User < ActiveRecord::Base
 
   def rank(field)
     User.where("#{field} > ?", send(field)).count + 1
-  end
-
-  def game_count
-    games.count
   end
 
   def utma(update_tracking = false)
