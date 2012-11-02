@@ -71,28 +71,6 @@ describe User do
 
   end
 
-  context "calculate_monthly_points" do
-
-    it "must use only won games" do
-      user = create(:user)
-      create_list(:won_game,5, user: user)
-      create(:lost_game, user: user)
-      create(:game, user: user)
-      user.calculate_monthly_points.should == 27
-    end
-
-
-    it "must use games only from this month" do
-      user = create(:user)
-      create_list(:won_game,2,user: user)
-      Timecop.freeze(1.month.ago - 1.day) do
-        create_list(:won_game,2,user: user)
-      end
-      user.calculate_monthly_points.should == 20
-    end
-
-  end
-
   context "calculate_daily_precision" do
 
     it "must use the attempts left per game" do
@@ -159,39 +137,6 @@ describe User do
 
   end
 
-  context "calculate_monthly_precision" do
-
-    it "must use the attempts left per game" do
-      user = create(:user)
-      create_list(:won_game,9, word: "test", choices: "tes", user: user)
-      create(:won_game, word: "test", choices: "ters", user: user)
-      user.calculate_monthly_precision.should == 99
-    end
-
-    it "must use only completed games" do
-      user = create(:user)
-      create_list(:won_game,10, word: "test", choices: "tes", user: user)
-      create(:game, word: "test", choices: "ter", user: user)
-      user.calculate_monthly_precision.should == 100
-    end
-
-    it "must use games only from this month" do
-      user = create(:user)
-      create_list(:won_game,10, word: "test", choices: "tes", user: user)
-      Timecop.freeze(1.month.ago - 1.day) do
-        create(:won_game, word: "test", choices: "ters", user: user)
-      end
-      user.calculate_monthly_precision.should == 100
-    end
-
-    it "must return 0 if less than 9 games played" do
-      user = create(:user)
-      create_list(:won_game,9, word: "test", choices: "tes", user: user)
-      user.calculate_monthly_precision.should == 0
-    end
-
-  end
-
   context "calculate_daily_rating" do
 
     it "must use 10 games in the last day" do
@@ -244,32 +189,6 @@ describe User do
 
   end
 
-  context "calculate_monthly_rating" do
-
-    it "must use 70 games in the last month" do
-      user = create(:user)
-      create_list(:game, 76,  score: 1, user: user)
-      user.calculate_monthly_rating.should == 70
-    end
-
-    it "must use games only from this month" do
-      user = create(:user)
-      create(:game, score: 20, user: user)
-      Timecop.freeze(1.month.ago - 1.day) do
-        create(:game, score: 20, user: user)
-      end
-      user.calculate_monthly_rating.should == 20
-    end
-
-    it "must use firt scoring games in the last month" do
-      user = create(:user)
-      create_list(:game, 70,  score: 1, user: user)
-      create(:won_game, score: 21, user: user)
-      user.calculate_monthly_rating.should == 70
-    end
-
-  end
-
   context "calculate_score" do
 
     it "must update the ratings" do
@@ -309,17 +228,6 @@ describe User do
       user.weekly_rating.should == 20
       user.weekly_precision.should == 100
       user.weekly_points.should == 200
-    end
-
-    it "must update monthly scores" do
-      user = stub_model(User)
-      user.stub(:calculate_monthly_rating).and_return(80)
-      user.stub(:calculate_monthly_precision).and_return(90)
-      user.stub(:calculate_monthly_points).and_return(210)
-      user.update_monthly_scores
-      user.monthly_rating.should == 80
-      user.monthly_precision.should == 90
-      user.monthly_points.should == 210
     end
 
   end
@@ -375,28 +283,6 @@ describe User do
         user.weekly_rating.should == 11
         user.weekly_precision.should == 12
         user.weekly_points.should == 13
-      end
-    end
-
-    it "must set all monthly scores to 0 if beginning of month" do
-      user = create(:user,monthly_rating: 11, monthly_precision: 12, monthly_points: 13)
-      Timecop.freeze(Time.current.beginning_of_month) do
-        User.new_day_set_scores!
-        user.reload
-        user.monthly_rating.should == 0
-        user.monthly_precision.should == 0
-        user.monthly_points.should == 0
-      end
-    end
-
-    it "wont set all monthly scores to 0 if not beginning of month" do
-      user = create(:user,monthly_rating: 11, monthly_precision: 12, monthly_points: 13)
-      Timecop.freeze(Time.current.beginning_of_month + 2.days) do
-        User.new_day_set_scores!
-        user.reload
-        user.monthly_rating.should == 11
-        user.monthly_precision.should == 12
-        user.monthly_points.should == 13
       end
     end
 

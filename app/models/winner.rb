@@ -7,7 +7,7 @@ class Winner < ActiveRecord::Base
   attr_accessible :user_id, :amount, :reason, :period, :end_of_period_on
 
   validates :user_id, :amount, :reason, :end_of_period_on, presence: true
-  validates :period, inclusion: %w(daily weekly monthly)
+  validates :period, inclusion: %w(daily weekly)
 
   scope :period, lambda{ |p| where("period = ?",p) }
   scope :reason, lambda{ |r| where("reason = ?",r) }
@@ -22,10 +22,6 @@ class Winner < ActiveRecord::Base
 
   def self.create_weekly_winners(winnings = WEEKLY_PRIZE_AMOUNTS)
     create_winners('weekly',winnings)
-  end
-
-  def self.create_monthly_winners(winnings)
-    create_winners('monthly',winnings)
   end
 
   def self.create_winners(period, winnings)

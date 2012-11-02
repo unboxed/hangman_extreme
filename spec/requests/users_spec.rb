@@ -61,4 +61,17 @@ describe 'users' do
     page.current_path.should == '/'
   end
 
+  it "must show stats" do
+    stub_mxit_oauth
+    MxitApi.any_instance.stub(:send_message).and_return(true)
+    users = create_list(:user,10)
+    users.each do |user|
+      create_list(:won_game,rand(5) + 1, user: user)
+      create(:purchase_transaction, user: user)
+    end
+    Winner.create_daily_winners
+    visit '/users/stats'
+    page.should have_content("Date")
+  end
+
 end

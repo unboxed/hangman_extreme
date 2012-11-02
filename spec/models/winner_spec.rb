@@ -22,7 +22,7 @@ describe Winner do
     Winner.new(period: "hourly").should have(1).errors_on(:period)
     Winner.new(period: "daily").should have(0).errors_on(:period)
     Winner.new(period: "weekly").should have(0).errors_on(:period)
-    Winner.new(period: "monthly").should have(0).errors_on(:period)
+    Winner.new(period: "monthly").should have(1).errors_on(:period)
     Winner.new(period: "yearly").should have(1).errors_on(:period)
   end
 
@@ -40,7 +40,7 @@ describe Winner do
 
     ['rating','precision','points'].each do |score_by|
 
-      ['daily','weekly','monthly'].each do |period|
+      ['daily','weekly'].each do |period|
 
         context "#{period} #{score_by}" do
 
@@ -49,8 +49,8 @@ describe Winner do
             top_players = create_list(:user,10, "#{period}_#{score_by}" => 10)
             Winner.create_winners_for_category(period: period, score_by: score_by, winnings: [10] * 10)
             top_players.each do |user|
-              user.should have(1).winners_for_period_and_reason(period,score_by)
-              winner = user.winners_for_period_and_reason(period,score_by).first
+              user.winners.period(period).reason(score_by).count == 1
+              winner = user.winners.period(period).reason(score_by).first
               winner.period.should == period
               winner.end_of_period_on.should == Date.today
               winner.amount.should == 10
@@ -65,8 +65,8 @@ describe Winner do
             Winner.create_winners_for_category(period: period, score_by: score_by, winnings:[20,18,16,14,12,5,4,3,2,1])
             [[users_with_10,19],[users_with_9,14],[users_with_8,3]].each do |users,amount|
               users.each do |user|
-                user.should have(1).winners_for_period_and_reason(period,score_by)
-                winner = user.winners_for_period_and_reason(period,score_by).first
+                user.winners.period(period).reason(score_by).count == 1
+                winner = user.winners.period(period).reason(score_by).first
                 winner.amount.should == amount
               end
             end

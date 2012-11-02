@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121028183847) do
+ActiveRecord::Schema.define(:version => 20121102105108) do
 
   create_table "games", :force => true do |t|
     t.string   "word"
@@ -68,34 +68,28 @@ ActiveRecord::Schema.define(:version => 20121028183847) do
     t.text     "name"
     t.string   "uid"
     t.string   "provider"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
-    t.integer  "weekly_rating",     :default => 0
-    t.integer  "monthly_rating",    :default => 0
-    t.integer  "yearly_rating",     :default => 0
-    t.integer  "weekly_precision",  :default => 0
-    t.integer  "monthly_precision", :default => 0
-    t.integer  "weekly_points",     :default => 0
-    t.integer  "monthly_points",    :default => 0
-    t.integer  "daily_rating",      :default => 0
-    t.integer  "daily_precision",   :default => 0
-    t.integer  "daily_points",      :default => 0
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.integer  "weekly_rating",    :default => 0
+    t.integer  "yearly_rating",    :default => 0
+    t.integer  "weekly_precision", :default => 0
+    t.integer  "weekly_points",    :default => 0
+    t.integer  "daily_rating",     :default => 0
+    t.integer  "daily_precision",  :default => 0
+    t.integer  "daily_points",     :default => 0
     t.string   "real_name"
     t.string   "mobile_number"
     t.string   "email"
-    t.integer  "clue_points",       :default => 2, :null => false
-    t.integer  "prize_points",      :default => 0, :null => false
+    t.integer  "clue_points",      :default => 2, :null => false
+    t.integer  "prize_points",     :default => 0, :null => false
     t.string   "login"
-    t.integer  "lock_version",      :default => 0, :null => false
+    t.integer  "lock_version",     :default => 0, :null => false
   end
 
   add_index "users", ["created_at"], :name => "index_users_on_created_at"
   add_index "users", ["daily_points"], :name => "index_users_on_games_won_today"
   add_index "users", ["daily_precision"], :name => "index_users_on_daily_precision"
   add_index "users", ["daily_rating"], :name => "index_users_on_daily_rating"
-  add_index "users", ["monthly_points"], :name => "index_users_on_games_won_this_month"
-  add_index "users", ["monthly_precision"], :name => "index_users_on_monthly_precision"
-  add_index "users", ["monthly_rating"], :name => "index_users_on_monthly_rating"
   add_index "users", ["uid", "provider"], :name => "index_users_on_uid_and_provider"
   add_index "users", ["updated_at"], :name => "index_users_on_updated_at"
   add_index "users", ["weekly_points"], :name => "index_users_on_games_won_this_week"

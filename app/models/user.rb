@@ -27,20 +27,12 @@ class User < ActiveRecord::Base
     return user
   end
 
-  def winners_for_period_and_reason(period,reason)
-    winners.period(period).reason(reason)
-  end
-
   def calculate_daily_points
     calculate_games_points(games.today)
   end
 
   def calculate_weekly_points
     calculate_games_points(games.this_week)
-  end
-
-  def calculate_monthly_points
-    calculate_games_points(games.this_month)
   end
 
   def calculate_daily_precision
@@ -51,20 +43,12 @@ class User < ActiveRecord::Base
     calculate_precision(games.this_week)
   end
 
-  def calculate_monthly_precision
-    calculate_precision(games.this_month)
-  end
-
   def calculate_daily_rating
     calculate_rating(games.today.first(10))
   end
 
   def calculate_weekly_rating
     calculate_rating(games.this_week.first(35))
-  end
-
-  def calculate_monthly_rating
-    calculate_rating(games.this_month.first(70))
   end
 
   def update_ratings
@@ -88,13 +72,6 @@ class User < ActiveRecord::Base
     self.weekly_rating = calculate_weekly_rating
     self.weekly_precision = calculate_weekly_precision
     self.weekly_points = calculate_weekly_points
-    save
-  end
-
-  def update_monthly_scores
-    self.monthly_rating = calculate_monthly_rating
-    self.monthly_precision = calculate_monthly_precision
-    self.monthly_points = calculate_monthly_points
     save
   end
 
@@ -153,18 +130,12 @@ class User < ActiveRecord::Base
     if Date.today == Date.today.beginning_of_week
       User.update_all(weekly_rating: 0, weekly_precision: 0, weekly_points: 0)
     end
-    if Date.today == Date.today.beginning_of_month
-      User.update_all(monthly_rating: 0, monthly_precision: 0, monthly_points: 0)
-    end
     user_ids = Game.since_yesterday.collect{|g|g.user_id}.uniq
     User.where('id IN (?)',user_ids).each do |user|
       begin
         user.update_daily_scores
         if Date.today == Date.today.beginning_of_week
           user.update_weekly_scores
-        end
-        if Date.today == Date.today.beginning_of_month
-          user.update_monthly_scores
         end
       rescue Exception => e
         raise if Rails.env.test?
