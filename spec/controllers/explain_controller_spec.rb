@@ -30,9 +30,9 @@ describe ExplainController do
     end
   end
 
-  describe "GET 'points'" do
+  describe "GET 'score'" do
     it "returns http success" do
-      get 'points'
+      get 'score'
       response.should be_success
     end
   end
@@ -40,6 +40,13 @@ describe ExplainController do
   describe "GET 'winning_streak'" do
     it "returns http success" do
       get 'winning_streak'
+      response.should be_success
+    end
+  end
+
+  describe "GET 'payouts'" do
+    it "returns http success" do
+      get 'payouts'
       response.should be_success
     end
   end

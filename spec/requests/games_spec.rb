@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Starting a new practice game' do
+describe 'Starting a new  game' do
 
   before :each do
     @current_user = create(:user, uid: 'm2604100', provider: 'mxit')
@@ -10,7 +10,7 @@ describe 'Starting a new practice game' do
     stub_google_tracking # stub google tracking
   end
 
-  it "must allow you to start a new practice game and win" do
+  it "must allow you to start a new game and win" do
     Dictionary.clear
     Dictionary.add("better")
     visit '/'
@@ -32,7 +32,7 @@ describe 'Starting a new practice game' do
     page.should have_link('games_index')
   end
 
-  it "must allow you to start a new practice game and lose" do
+  it "must allow you to start a new game and lose" do
     Dictionary.clear
     Dictionary.add("tester")
     visit '/'

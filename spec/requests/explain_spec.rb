@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'feedback' do
+describe 'explain' do
 
   before :each do
     @current_user = create(:user, uid: 'm2604100', provider: 'mxit')
@@ -21,27 +21,20 @@ describe 'feedback' do
       to_return(:status => 200, :body => "{}")
   end
 
-  it "must allow to send support feedback" do
+  it "must allow to browse explain section" do
     visit '/'
-    click_link('feedback')
-    click_link('support')
-    fill_in 'feedback', with: "I have a support issue for you"
-    click_button 'submit'
-    page.current_path.should == '/'
-    page.should have_content("Thank you")
+    click_link('rank')
+    click_link('scoring')
+    click_link('score')
+    click_link('scoring')
+    click_link('rating')
+    click_link('scoring')
+    click_link('precision')
+    click_link('scoring')
+    click_link('winning_streak')
+    click_link('scoring')
+    click_link('payouts')
+    click_link('home')
   end
-
-  it "must allow to send suggestion feedback" do
-    visit '/'
-    click_link('feedback')
-    click_link('suggestion')
-    fill_in 'feedback', with: "I have a suggestion issue for you"
-    click_button 'submit'
-    page.current_path.should == '/'
-    page.should have_content("Thank you")
-  end
-
-
-
 
 end

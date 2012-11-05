@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "explain/points.html.erb" do
+describe "explain/score.html.erb" do
 
   before(:each) do
     stub_template "_links.html.erb" => "<div>Links</div>"
