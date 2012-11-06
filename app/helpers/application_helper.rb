@@ -4,7 +4,7 @@ module ApplicationHelper
     result = ""
     return result unless shinka_ads_enabled?
     begin
-      Timeout::timeout(15) do
+      Timeout::timeout(5) do
         headers = {"User-Agent" => "Mozilla Compatible/5.0 #{env['HTTP_USER_AGENT']}",
                    "X-FORWARDED-FOR" => request_ip_address}
         ads = ActiveSupport::JSON.decode(open("http://ox-d.shinka.sh/ma/1.0/arj?auid=#{shinka_auid}&c.age=#{current_user_request_info.age}&c.gender=#{current_user_request_info.gender}",headers).read)
@@ -28,7 +28,7 @@ module ApplicationHelper
       end
     rescue Timeout::Error => time_error
       Rails.logger.error(time_error.message)
-      Settings.shinka_disabled_until = 2.minutes.from_now # disable for 2 minutes
+      Settings.shinka_disabled_until = 1.minute.from_now # disable for 1 minute
       return result
     rescue Exception => e
       ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
