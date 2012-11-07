@@ -87,8 +87,6 @@ GEM
       activesupport (>= 3.0.0)
     launchy (2.1.2)
       addressable (~> 2.3)
-    ledermann-rails-settings (1.2.0)
-      activerecord (>= 2.3)
     libv8 (3.3.10.4)
     libwebsocket (0.1.5)
       addressable
@@ -141,6 +139,8 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     redis (3.0.2)
+    redis-settings (0.2.1)
+      redis
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rspec (2.11.0)
@@ -223,7 +223,6 @@ DEPENDENCIES
   json
   kaminari
   launchy
-  ledermann-rails-settings
   mock_redis
   mysql2
   newrelic_rpm
@@ -233,6 +232,7 @@ DEPENDENCIES
   pg
   rails (~> 3.2.1)
   redis
+  redis-settings
   rest-client
   rspec-rails
   simplecov
