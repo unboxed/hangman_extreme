@@ -63,4 +63,11 @@ describe 'Starting a new  game' do
     page.should have_content("kevin")
   end
 
+  it "must show ads" do
+    ENV['SHINKA_AUID'] = "1"
+    visit '/'
+    page.should have_content("Advertise on the Shinka network here!")
+    ENV.delete('SHINKA_AUID')
+  end
+
 end
