@@ -21,7 +21,7 @@
 <br/><br/>
 <%= shinka_ad if current_user && current_user.provider == "mxit" %>
 
-<% if current_user != "mxit" %>
+<% if !Rails.env.test? && current_user != "mxit" %>
     <script type="text/javascript">
         var uvOptions = {};
         (function() {

@@ -66,11 +66,11 @@ describe 'users' do
   it "must show stats" do
     stub_mxit_oauth
     MxitApi.any_instance.stub(:send_message).and_return(true)
-    users = create_list(:user,10)
+    users = create_list(:user,5)
     users.each do |user|
       14.times do |i|
         Timecop.freeze(i.days.ago) do
-          create_list(:won_game,rand(5) + 1, user: user)
+          create_list(:won_game,2, user: user)
         end
         create(:purchase_transaction, user: user)
       end
