@@ -13,8 +13,8 @@ describe 'winners' do
 
   it "must show the daily winners" do
     users = create_list(:user,10)
-    users.each do |user|
-      create_list(:won_game,rand(5) + 1, user: user)
+    users.each_with_index do |user,i|
+      create_list(:won_game,1 + i, user: user)
     end
     Winner.create_daily_winners
     visit '/'
@@ -35,8 +35,8 @@ describe 'winners' do
 
   it "must show the weekly winners" do
     users = create_list(:user,10)
-    users.each do |user|
-      create_list(:won_game,rand(5) + 1, user: user)
+    users.each_with_index do |user,i|
+      create_list(:won_game,1 + i, user: user)
     end
     Winner.create_weekly_winners
     visit '/'
