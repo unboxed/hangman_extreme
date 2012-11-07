@@ -8,6 +8,10 @@ describe ApplicationHelper do
       Settings.shinka_disabled_until = nil
     end
 
+    before :each do
+      Settings.shinka_disabled_until = nil
+    end
+
     it "wont work if shinka_auid is blank" do
       helper.should_not be_shinka_ads_enabled
     end
