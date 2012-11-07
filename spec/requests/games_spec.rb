@@ -63,11 +63,12 @@ describe 'Starting a new  game' do
     page.should have_content("kevin")
   end
 
-  it "must show ads" do
-    ENV['SHINKA_AUID'] = "1"
+  it "must show ads", :redis => true do
+    add_key = !ENV.has_key?('SHINKA_AUID')
+    ENV['SHINKA_AUID'] = "1" if add_key
     visit '/'
     page.should have_content("Advertise on the Shinka network here!")
-    ENV.delete('SHINKA_AUID')
+    ENV.delete('SHINKA_AUID') if add_key
   end
 
 end
