@@ -2,7 +2,11 @@ require 'spec_helper'
 
 describe ApplicationHelper do
 
-  context "shinka_ads_enabled?" do
+  context "shinka_ads_enabled?", :redis => true do
+
+    before :each do
+      Settings.shinka_disabled_until = nil
+    end
 
     it "wont work if shinka_auid is blank" do
       helper.should_not be_shinka_ads_enabled
@@ -15,7 +19,7 @@ describe ApplicationHelper do
 
   end
 
-  context "shinka_ad" do
+  context "shinka_ad", :redis => true do
 
     before :each do
       request = mock("request", env: {"HTTP_X_FORWARDED_FOR" => "127.0.0.1"})

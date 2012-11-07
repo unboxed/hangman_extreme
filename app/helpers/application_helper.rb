@@ -39,8 +39,8 @@ module ApplicationHelper
   end
 
   def shinka_ads_enabled?
-    (Settings.shinka_disabled_until.blank? || Time.current > Settings.shinka_disabled_until) &&
-      shinka_auid.present?
+    shinka_auid.present? &&
+    (Settings.shinka_disabled_until.blank? || Time.current > Settings.shinka_disabled_until)
   end
 
   def shinka_auid

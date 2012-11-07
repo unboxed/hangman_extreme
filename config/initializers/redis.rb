@@ -5,6 +5,12 @@ else
   REDIS = Redis.new(:host => 'localhost', :port => 6379)
 end
 Redis.current = REDIS
+
+Redis::Settings.configure do |config|
+  config.connection = Redis.current
+end
+APP_SETTINGS = Redis::Settings.new("app")
+
 class Redis
   def self.connect(options = {})
     current

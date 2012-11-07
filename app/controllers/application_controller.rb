@@ -112,8 +112,8 @@ class ApplicationController < ActionController::Base
   private
 
   def tracking_enabled?
-    (Settings.ga_tracking_disabled_until.blank? || Time.current > Settings.ga_tracking_disabled_until) &&
-      ENV['GA_TRACKING_CODE'].present?
+    tracking_code.present? &&
+    (Settings.ga_tracking_disabled_until.blank? || Time.current > Settings.ga_tracking_disabled_until)
   end
 
   def tracking_code
