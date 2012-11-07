@@ -25,7 +25,7 @@ class Winner < ActiveRecord::Base
   end
 
   def self.create_winners(period, winnings)
-    return if where(end_of_period_on: Date.today, period: period).any?
+    return if where(end_of_period_on: Date.current, period: period).any?
     WINNING_REASONS.each do |score_by|
       create_winners_for_category(score_by: score_by, winnings: winnings, period: period)
     end
@@ -47,7 +47,7 @@ class Winner < ActiveRecord::Base
         winners << Winner.create(user_id: user.id,
                               amount: (moola_total.to_f / users_count).round,
                               reason: options[:score_by],
-                              end_of_period_on: Date.today,
+                              end_of_period_on: Date.current,
                               period: options[:period])
       end
     end

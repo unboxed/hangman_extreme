@@ -10,7 +10,7 @@ namespace :scheduler do
     desc "what must be run at end of the day"
     task "end_of_day" => :environment do
       Winner.create_daily_winners
-      if Date.today == Date.today.end_of_week
+      if Date.current == Date.current.end_of_week
         Winner.create_weekly_winners
       end
       #if Date.today == Date.today.end_of_month

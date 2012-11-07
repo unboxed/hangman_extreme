@@ -9,13 +9,6 @@ describe ExplainController do
     end
   end
 
-  describe "GET 'wins'" do
-    it "returns http success" do
-      get 'wins'
-      response.should be_success
-    end
-  end
-
   describe "GET 'precision'" do
     it "returns http success" do
       get 'precision'

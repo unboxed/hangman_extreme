@@ -118,14 +118,14 @@ class User < ActiveRecord::Base
 
   def self.new_day_set_scores!
     User.update_all(daily_rating: 0, daily_precision: 0, daily_score: 0)
-    if Date.today == Date.today.beginning_of_week
+    if Date.current == Date.current.beginning_of_week
       User.update_all(weekly_rating: 0, weekly_precision: 0, weekly_score: 0)
     end
     user_ids = Game.since_yesterday.collect{|g|g.user_id}.uniq
     User.where('id IN (?)',user_ids).each do |user|
       begin
         user.update_daily_scores
-        if Date.today == Date.today.beginning_of_week
+        if Date.current == Date.current.beginning_of_week
           user.update_weekly_scores
         end
       rescue Exception => e
@@ -153,9 +153,8 @@ class User < ActiveRecord::Base
         end
       end
       active_users = competitive_users = 0
-      user_scope.where('users.created_at <= ?',start_of_week).
-        joins("LEFT JOIN games ON users.id = games.user_id").
-        where("(games.created_at >= ? AND games.created_at <= ?) OR games.created_at IS NULL",start_of_week,end_of_week).
+      user_scope.where('users.created_at <= ?',start_of_week).joins(:games).
+        where("games.created_at >= ? AND games.created_at <= ?",start_of_week,end_of_week).
         count("games.id",group: 'users.id').each do |user_id,count|
           if count > 35
             competitive_users += 1
