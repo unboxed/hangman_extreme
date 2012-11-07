@@ -136,7 +136,7 @@ class User < ActiveRecord::Base
 
   def self.cohort_array
     cohort = []
-    first_day = Game.minimum(:created_at).beginning_of_day
+    first_day = 49.days.ago
     end_of_week = Time.current.beginning_of_day - 1.day
     start_of_week = end_of_week - 7.days
     while(start_of_week >= first_day)
