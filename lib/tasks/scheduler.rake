@@ -5,6 +5,8 @@ namespace :scheduler do
     task "start_of_day" => :environment do
       User.new_day_set_scores!
       Game.purge_old!
+      # clear unused google tracking
+      User.where('updated_at < ?',4.days.ago).each{|u| u.google_tracking.delete }.size
     end
 
     desc "what must be run at end of the day"
@@ -13,9 +15,6 @@ namespace :scheduler do
       if Date.current == Date.current.end_of_week
         Winner.create_weekly_winners
       end
-      #if Date.today == Date.today.end_of_month
-      #  Winner.create_monthly_winners([0,0,0,0,0,0,0,0,0,0])
-      #end
       User.add_clue_point_to_active_players!
     end
   end
