@@ -17,6 +17,7 @@ gem 'rest-client', require: 'rest_client'
 gem 'redis'
 gem 'ohm'
 gem 'uservoice-ruby'
+gem 'mxit_api', git: "git@github.com:unboxed/mxit_api.git"
 
 # Gems used only for assets and not required
 # in production environments by default.

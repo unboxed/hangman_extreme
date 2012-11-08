@@ -35,9 +35,9 @@ class UsersController < ApplicationController
       redirect_to mxit_oauth_redirect_to_path, alert: "Authorisation failed: #{params[:error].to_s}"
     else
       begin
-        mxit_connection = MxitApi.connect(:grant_type => 'authorization_code',
-                                          :code => params[:code],
-                                          :redirect_uri => mxit_oauth_users_url(host: request.host))
+        mxit_connection = MxitApiWrapper.connect(:grant_type => 'authorization_code',
+                                                 :code => params[:code],
+                                                 :redirect_uri => mxit_oauth_users_url(host: request.host))
         if mxit_connection
           if mxit_connection.scope.include?("profile")
             mxit_user_profile = mxit_connection.profile

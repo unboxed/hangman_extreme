@@ -65,7 +65,7 @@ describe 'users' do
 
   it "must show stats" do
     stub_mxit_oauth
-    MxitApi.any_instance.stub(:send_message).and_return(true)
+    MxitApiWrapper.any_instance.stub(:send_message).and_return(true)
     users = create_list(:user,5)
     users.each do |user|
       14.times do |i|

@@ -361,14 +361,14 @@ describe User do
   context "send_message" do
 
     before :each do
-      MxitApi.should respond_to(:connect)
-      MxitApi.new(nil).should respond_to(:send_message)
+      MxitApiWrapper.should respond_to(:connect)
+      MxitApiWrapper.new(nil).should respond_to(:send_message)
       @mxit_connection = mock('Mxit Connection', :send_message => true)
-      MxitApi.stub(:connect).and_return(@mxit_connection)
+      MxitApiWrapper.stub(:connect).and_return(@mxit_connection)
     end
 
     it "must not connect if no users selected" do
-      MxitApi.should_not_receive(:connect)
+      MxitApiWrapper.should_not_receive(:connect)
       User.send_message("Nobody!!",[])
     end
 

@@ -90,7 +90,7 @@ class User < ActiveRecord::Base
 
   def self.send_message(msg, users = User.mxit)
     unless users.empty?
-      mxit_connection = MxitApi.connect
+      mxit_connection = MxitApiWrapper.connect
       if mxit_connection
         if users.kind_of?(ActiveRecord::Relation)
           page = 1

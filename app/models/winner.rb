@@ -55,7 +55,7 @@ class Winner < ActiveRecord::Base
       if amount > 0
         user.increment!(:prize_points,amount)
         user.send_message("Congratulations, you have won *#{amount} prize points* for _#{options[:period]} #{options[:score_by]}_.
-                           Check the $redeem$ section to see what you can trade them in for.")
+                           Check the $redeem$ section to see what you can trade them in for.".squish)
       end
     end
   end

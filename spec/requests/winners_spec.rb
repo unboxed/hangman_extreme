@@ -8,7 +8,7 @@ describe 'winners' do
     stub_shinka_request # stub shinka request
     stub_google_tracking # stub google tracking
     stub_mxit_oauth
-    MxitApi.any_instance.stub(:send_message).and_return(true)
+    MxitApiWrapper.any_instance.stub(:send_message).and_return(true)
   end
 
   it "must show the daily winners" do

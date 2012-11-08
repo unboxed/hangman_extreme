@@ -1,3 +1,13 @@
+GIT
+  remote: git@github.com:unboxed/mxit_api.git
+  revision: 973bb4bb121f9b40b3e9acf7c31ee57d10ea1241
+  specs:
+    mxit_api (0.1.0.pre)
+      activesupport (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      i18n (>= 0.5.0)
+      i18n (>= 0.5.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -224,6 +234,7 @@ DEPENDENCIES
   kaminari
   launchy
   mock_redis
+  mxit_api!
   mysql2
   newrelic_rpm
   nokogiri
