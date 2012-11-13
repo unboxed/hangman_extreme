@@ -44,6 +44,10 @@ class GamesController < ApplicationController
   def create
     @game.user = current_user
     @game.select_random_word
+    if @game.word == 'missing'
+      e = Exception.new("Dictionary not loaded")
+      ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
+    end
     if @game.save
       redirect_to @game, notice: 'Game was successfully created.'
     else
