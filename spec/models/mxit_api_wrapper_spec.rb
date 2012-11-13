@@ -43,13 +43,17 @@ describe MxitApiWrapper do
 
   context "send_message" do
 
-    before :each do
-      MxitApi.stub!(:new).and_return(nil)
-      @connection = MxitApiWrapper.new
-    end
-
     it "must be able to handle a exception" do
-      @connection.send_message(:to => "m123", :body => "Hello from the Mxit Api")
+      mxit_api = mock("MxitApi")
+      MxitApi.stub!(:new).and_return(mxit_api)
+      connection = MxitApiWrapper.new
+
+      ENV['MXIT_APP_NAME'], old =  "testname", ENV['MXIT_APP_NAME']
+      Timecop.freeze do
+        mxit_api.should_receive(:send_message).with(to: "m123", body: "Hello from the Mxit Api", from: "testname", spool_timeout: 23.hours)
+        connection.send_message(:to => "m123", :body => "Hello from the Mxit Api")
+      end
+      ENV['MXIT_APP_NAME'] = old
     end
 
   end

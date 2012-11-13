@@ -17,7 +17,7 @@ class MxitApiWrapper
 
   def send_message(params)
     begin
-      connection.send_message(params.reverse_merge(:spool_timeout => 23.hours))
+      connection.send_message(params.reverse_merge(from: app_name, spool_timeout: 23.hours))
     rescue Exception => e
       Rails.logger.error(e.message)
     end
@@ -34,6 +34,10 @@ class MxitApiWrapper
 
   def self.client_secret
     ENV['MXIT_CLIENT_SECRET']
+  end
+
+  def app_name
+    ENV['MXIT_APP_NAME']
   end
 
 end
