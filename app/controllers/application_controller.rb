@@ -81,7 +81,7 @@ class ApplicationController < ActionController::Base
       encoded_str += '=' while !(encoded_str.size % 4).zero?
       @data = ActiveSupport::JSON.decode(Base64.decode64(encoded_str))
       if @data.kind_of?(Hash) && @data['user_id']
-        self.current_user = User.find_or_create_from_auth_hash(provider: 'facebook_canvas',
+        self.current_user = User.find_or_create_from_auth_hash(provider: 'facebook',
                                                                     uid: @data['user_id'],
                                                                    info: { name: "user #{@data['user_id']}"})
       else
