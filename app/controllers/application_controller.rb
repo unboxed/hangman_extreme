@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
           g.set_custom_var(3, current_user_request_info.country || "unknown Country", current_user_request_info.area || "unknown", 1)
           g.set_custom_var(5, 'Provider', current_user.provider, 1)
           g.identify_user(current_user.utma(true))
-          g.ip_address = request.env['HTTP_X_FORWARDED_FOR'] || request.env['HTTP_CLIENT_IP'] || request.env['REMOTE_ADDR']
+          g.ip(request.env['HTTP_X_FORWARDED_FOR'] || request.env['HTTP_CLIENT_IP'] || request.env['REMOTE_ADDR'])
           g.page_view("#{params[:controller]} #{params[:action]}", request.fullpath,current_user.id)
         end
       rescue Exception => e
@@ -102,9 +102,9 @@ class ApplicationController < ActionController::Base
                                     scope: "contact/invite graph/read",
                                     state: "winnings"))
       when "profile"
-        redirect_to(profile_users_path)
+        redirect_to(profile_users_path) unless params[:action] == 'profile'
       when 'winners'
-        redirect_to(winners_path)
+        redirect_to(winners_path) unless params[:controller] == 'winners'
     end
     status != 302
   end

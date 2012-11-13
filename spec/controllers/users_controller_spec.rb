@@ -30,13 +30,13 @@ describe UsersController do
 
       before :each do
         @connection = mock('MxitApi', access_token: "123", profile: {}, scope: "profile")
-        MxitApi.stub(:new).and_return(@connection)
+        MxitApiWrapper.stub(:new).and_return(@connection)
       end
 
       it "must create a new mxit connection" do
-        MxitApi.should_receive(:connect).with(:grant_type => 'authorization_code',
-                                              :code => "123",
-                                              :redirect_uri => mxit_oauth_users_url(host: 'test.host')).and_return(@connection)
+        MxitApiWrapper.should_receive(:connect).with(:grant_type => 'authorization_code',
+                                                     :code => "123",
+                                                     :redirect_uri => mxit_oauth_users_url(host: 'test.host')).and_return(@connection)
         get 'mxit_oauth', code: "123"
       end
 

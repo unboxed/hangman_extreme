@@ -8,7 +8,7 @@ describe 'winners' do
     stub_shinka_request # stub shinka request
     stub_google_tracking # stub google tracking
     stub_mxit_oauth
-    MxitApi.any_instance.stub(:send_message).and_return(true)
+    MxitApiWrapper.any_instance.stub(:send_message).and_return(true)
   end
 
   it "must show the daily winners" do
@@ -54,6 +54,12 @@ describe 'winners' do
     users.each do |winner|
       page.should have_content(winner.name)
     end
+  end
+
+  it "must show the winners if user mxit input is winner" do
+    add_headers('X_MXIT_USER_INPUT' => 'winners')
+    visit '/'
+    page.current_path.should == winners_path
   end
 
 end
