@@ -31,9 +31,9 @@ describe GamesController do
       assigns(:current_game).should eq(game)
     end
 
-    it "renders the application layout" do
+    it "renders successfully" do
       do_get_index
-      response.should render_template("layouts/application")
+      response.should be_success
     end
 
   end

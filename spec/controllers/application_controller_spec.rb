@@ -15,9 +15,9 @@ describe ApplicationController do
       end
     end
 
-    it "must redirects to /auth/developer if not user_id" do
+    it "must redirects to /auth/facebook if not user_id" do
       get :index
-      response.should redirect_to("/auth/developer")
+      response.should redirect_to("/auth/facebook")
     end
 
     it "wont redirects to /auth/developer if logged_in" do

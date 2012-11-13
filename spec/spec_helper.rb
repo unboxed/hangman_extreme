@@ -41,6 +41,7 @@ Spork.prefork do
   require 'rspec/autorun'
   require 'webmock/rspec'
   require 'draper/test/rspec_integration'
+  require 'capybara/poltergeist'
 end
 
 Spork.each_run do
@@ -65,6 +66,8 @@ Spork.each_run do
 
   RSpec.configure do |config|
     config.include FactoryGirl::Syntax::Methods
+    Capybara.javascript_driver = :poltergeist
+
     config.filter_run_excluding :redis => true if ENV["EXCLUDE_REDIS_SPECS"]
 
     # Run specs in random order to surface order dependencies. If you find an

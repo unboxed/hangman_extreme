@@ -170,6 +170,22 @@ describe UsersController do
       it "sets an notice" do
         do_update
         flash[:notice].should  == 'Profile was successfully updated.'
+      it "renders successfully" do
+        do_get_index
+        response.should be_success
+      end
+
+    end
+
+    describe "GET stats" do
+
+      it "renders the application layout" do
+        User.stub(:cohort_array).and_return([[1,1,1,1,1,1]])
+        Game.stub(:cohort_array).and_return([[2,2,2,2,2]])
+        Winner.stub(:cohort_array).and_return([[2,2,2,2,2]])
+        PurchaseTransaction.stub(:cohort_array).and_return([[2,2,2,2,2]])
+        get :stats
+        response.should render_template("layouts/application")
       end
 
     end

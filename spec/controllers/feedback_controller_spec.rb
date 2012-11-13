@@ -14,9 +14,9 @@ describe FeedbackController do
       get :index
     end
 
-    it "renders the application layout" do
+    it "renders succesfully" do
       do_get_index
-      response.should render_template("layouts/application")
+      response.should be_success
     end
 
   end
@@ -29,7 +29,7 @@ describe FeedbackController do
 
     it "renders the application layout" do
       do_get_new
-      response.should render_template("layouts/application")
+      response.should be_success
     end
 
   end

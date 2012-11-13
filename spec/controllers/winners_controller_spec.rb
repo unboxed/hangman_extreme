@@ -24,9 +24,9 @@ describe WinnersController do
       assigns(:winners).should include(Winner.last)
     end
 
-    it "renders the application layout" do
+    it "renders succesfully" do
       do_get_index
-      response.should render_template("layouts/application")
+      response.should be_success
     end
 
   end

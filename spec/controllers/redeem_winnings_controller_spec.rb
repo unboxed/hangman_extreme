@@ -18,9 +18,9 @@ describe RedeemWinningsController do
       response.should be_success
     end
 
-    it "renders the application layout" do
+    it "renders successfully" do
       get 'index'
-      response.should render_template("layouts/application")
+      response.should be_success
     end
   end
 
