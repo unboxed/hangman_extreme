@@ -101,6 +101,16 @@ describe ApplicationHelper do
       helper.smart_link_to('hello world',"/hello_word").should == "#{link_to("hello","/hello_word")} world"
     end
 
+    it "should work like normal link" do
+      helper.stub(:mxit_request?).and_return(false)
+      helper.smart_link_to('new game', new_game_path, id: 'new_game').should == link_to('new game', new_game_path, id: 'new_game')
+    end
+
+    it "should optimize for mxit if mxit request" do
+      helper.stub(:mxit_request?).and_return(true)
+      helper.smart_link_to('new game', new_game_path, id: 'new_game').should == link_to('new', new_game_path, id: 'new_game') + " game"
+    end
+
   end
 
 end

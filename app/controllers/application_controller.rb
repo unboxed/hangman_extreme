@@ -18,7 +18,11 @@ class ApplicationController < ActionController::Base
     @current_user_request_info ||= UserRequestInfo.new
   end
 
-  helper_method :current_user, :current_user_request_info, :notify_airbrake
+  def mxit_request?
+    !request.env['HTTP_X_MXIT_USERID_R'].nil?
+  end
+
+  helper_method :current_user, :current_user_request_info, :notify_airbrake, :mxit_request?
 
   def login_required
     return true if current_user
@@ -74,7 +78,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_layout
-    request.env['HTTP_X_MXIT_USERID_R'] ? 'mxit' : 'mobile'
+    mxit_request? ? 'mxit' : 'mobile'
   end
 
   def load_facebook_user
