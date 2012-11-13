@@ -8,4 +8,4 @@ RAILS_ENV=test bundle exec rake log:clear db:drop db:create db:migrate
 rm -rf coverage
 RAILS_ENV=test bundle exec rake log:clear
 RAILS_ENV=test COVERAGE=on bundle exec rake spec:unit
-RAILS_ENV=test MXIT_CLIENT_ID=1 SHINKA_AUID=1 GA_TRACKING_CODE=1 bundle exec rspec -b spec/requests
+RAILS_ENV=test MXIT_CLIENT_ID=1 SHINKA_AUID=1 GA_TRACKING_CODE=1 bundle exec rake spec:views spec:requests
