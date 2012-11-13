@@ -56,4 +56,10 @@ describe 'winners' do
     end
   end
 
+  it "must show the winners if user mxit input is winner" do
+    add_headers('X_MXIT_USER_INPUT' => 'winners')
+    visit '/'
+    page.current_path.should == winners_path
+  end
+
 end

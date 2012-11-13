@@ -80,4 +80,10 @@ describe 'users' do
     page.should have_content("Date")
   end
 
+  it "must show the profile if user mxit input is profile" do
+    add_headers('X_MXIT_USER_INPUT' => 'profile')
+    visit '/'
+    page.current_path.should == profile_users_path
+  end
+
 end
