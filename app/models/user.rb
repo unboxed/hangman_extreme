@@ -112,7 +112,11 @@ class User < ActiveRecord::Base
   def self.add_clue_point_to_active_players!
     user_ids = Game.today.collect{|g|g.user_id}.uniq
     User.find(user_ids).each do |user|
-      user.increment!(:clue_points)
+      begin
+        user.increment!(:clue_points)
+      rescue ActiveRecord::StaleObjectError => e
+        Rails.logger.error(e.message)
+      end
     end
   end
 
