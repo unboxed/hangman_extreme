@@ -10,6 +10,7 @@ describe "games/show" do
                                           is_lost?: false))
     view.stub!(:current_user).and_return(stub_model(User, id: 50))
     view.stub!(:menu_item)
+    view.stub!(:mxit_request?).and_return(true)
   end
 
   it "must show the attempts left" do

@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   before_filter :login_required
-  load_and_authorize_resource
+  load_and_authorize_resource except: 'play'
 
   def index
     @current_game = current_user.current_game
@@ -9,6 +9,10 @@ class GamesController < ApplicationController
 
   def show
 
+  end
+
+  def play
+    redirect_to(current_user.incompleted_game_today || new_game_path)
   end
 
   def play_letter

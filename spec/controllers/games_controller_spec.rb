@@ -3,22 +3,22 @@ require 'spec_helper'
 describe GamesController do
 
 
-  before :each do
-    @current_user = create(:user)
-    @ability = Object.new
-    @ability.extend(CanCan::Ability)
-    @ability.can(:manage, :all)
-    controller.should_receive(:current_ability).at_least(:once).and_return(@ability)
-    controller.stub(:current_user).and_return(@current_user)
-    controller.stub(:send_stats)
-  end
+    before :each do
+      @current_user = create(:user)
+      @ability = Object.new
+      @ability.extend(CanCan::Ability)
+      @ability.can(:manage, :all)
+      controller.stub(:current_ability).and_return(@ability)
+      controller.stub(:current_user).and_return(@current_user)
+      controller.stub(:send_stats)
+    end
 
   describe "GET index" do
 
     def do_get_index
       get :index
     end
-
+      
     it "assigns all completed games as @games" do
       game = create(:won_game)
       do_get_index
@@ -106,6 +106,32 @@ describe GamesController do
     def do_get_new
       get :new
     end
+    
+     it "assigns a new game as @game" do
+        do_get_new
+        assigns(:game).should be_a_new(Game)
+      end
+
+    end
+
+    describe "GET play" do
+
+      def do_get_play
+        get :play
+      end
+
+      it "assigns redirects to new game path" do
+        do_get_play
+        response.should redirect_to(new_game_path)
+      end
+
+      it "assigns redirects to current game path" do
+        game = create(:game, user: @current_user)
+        do_get_play
+        response.should redirect_to(game)
+      end
+
+    end
 
     it "assigns a new game as @game" do
       do_get_new
@@ -170,6 +196,5 @@ describe GamesController do
       end
 
     end
-  end
 
 end

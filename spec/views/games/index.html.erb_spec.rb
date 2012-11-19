@@ -40,6 +40,7 @@ describe "games/index" do
     assign(:current_game, stub_model(Game, id: 111))
     view.should_receive(:menu_item).with(anything,game_path(111),id: 'continue_game')
     render
+    view.stub!(:mxit_request?).and_return(true)
   end
 
   it "wont add a new_game link to menu if current_game exists" do

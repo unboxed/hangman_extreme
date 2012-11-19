@@ -17,6 +17,8 @@
 <% end -%>
 
 <%= yield %>
+<% menu_item 'home', root_path, id: 'home' %>
+<% menu_item 'play', play_games_path, id: 'play_game', 'data-theme' =>"b" %>
 <%= menu %>
 <%= shinka_ad if current_user && current_user.provider == "mxit" %>
 </body>

@@ -11,6 +11,10 @@ describe GamesController do
       get("/games/new").should route_to("games#new")
     end
 
+    it "routes to #play" do
+      get("/games/play").should route_to("games#play")
+    end
+
     it "routes to #show" do
       get("/games/1").should route_to("games#show", :id => "1")
     end

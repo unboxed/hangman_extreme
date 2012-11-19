@@ -7,6 +7,9 @@ HangmanLeague::Application.routes.draw do
   get "airtime_vouchers", to: 'airtime_vouchers#index', as: 'airtime_vouchers'
 
   resources :games, :except => [:edit, :update, :destroy] do
+    collection do
+      get 'play', action: "play"
+    end
     get 'page/:page', :action => :index, :on => :collection
     member do
       get "letter/:letter", action: 'play_letter', as: 'play_letter'

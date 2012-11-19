@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :game do
     word "better"
-    choices "MyText"
+    choices ""
     user
     factory :won_game do
       choices{ word }

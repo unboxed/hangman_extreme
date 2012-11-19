@@ -78,7 +78,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_layout
-    mxit_request? ? 'mxit' : 'mobile'
+    if current_user.try(:provider) == 'developer'
+      current_user.uid == 'mxit' ? 'mxit' : 'mobile'
+    else
+      mxit_request? ? 'mxit' : 'mobile'
+    end
   end
 
   def load_facebook_user

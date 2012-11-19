@@ -66,6 +66,9 @@ Spork.each_run do
 
   RSpec.configure do |config|
     config.include FactoryGirl::Syntax::Methods
+    Capybara.register_driver :poltergeist do |app|
+      Capybara::Poltergeist::Driver.new(app, window_size: [320,480] )
+    end
     Capybara.javascript_driver = :poltergeist
 
     config.filter_run_excluding :redis => true if ENV["EXCLUDE_REDIS_SPECS"]
@@ -76,11 +79,7 @@ Spork.each_run do
     #     --seed 1234
     config.order = "random"
     config.before(:suite) do
-      if ENV["BROWSER"]
-        DatabaseCleaner.strategy = :transaction
-      else
-        DatabaseCleaner.strategy = :truncation
-      end
+      DatabaseCleaner.strategy = :transaction
       (@@headless = Headless.new).start if ENV['HEADLESS']
     end
 
@@ -93,11 +92,7 @@ Spork.each_run do
     end
 
     config.after(:all, :js => true) do
-      if ENV["BROWSER"]
-        DatabaseCleaner.strategy = :transaction
-      else
-        DatabaseCleaner.strategy = :truncation
-      end
+      DatabaseCleaner.strategy = :transaction
     end
 
     config.before(:each) do

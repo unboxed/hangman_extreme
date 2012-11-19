@@ -1,7 +1,7 @@
 <h1>Welcome to hangman extreme</h1>
 Have fun guessing the word.<br/>
 
-<ul data-role="listview">
+<ul>
   <%= content_tag_for(:li, @games) do |game| %>
       <span><%= game.hangman_text %></span> -
       <span><%= game.score %></span> -

@@ -21,7 +21,7 @@ shared_examples "a game player" do
     page.should have_content("You win")
     page.should have_content("b e t t e r")
     page.should have_link('new_game')
-    page.should have_link('games_index')
+    page.should have_link('home')
   end
 
   it "must allow you to start a new game and lose" do
@@ -35,14 +35,14 @@ shared_examples "a game player" do
     %W(a b c d f g h i k).each do |letter|
       click_link(letter)
       i-= 1
-      page.should have_content("_ _ _ _ _ _")
       page.should have_content("#{i} attempts left")
+      page.should have_content("_ _ _ _ _ _")
     end
     click_link 'j'
     page.should have_content("You lose")
     page.should have_content("t e s t e r")
     page.should have_link('new_game')
-    page.should have_link('games_index')
+    page.should have_link('home')
   end
 
   it "must allow you to use your clue points if reveal the clue" do
@@ -52,7 +52,7 @@ shared_examples "a game player" do
     visit '/'
     click_link('new_game')
     click_button 'start_game'
-    page.should_not have_content("kevin")
+    page.should have_no_content("kevin")
     click_link 'show_clue'
     page.should have_content("kevin")
     click_link 'j'
@@ -100,13 +100,12 @@ describe 'games', :shinka_vcr => true, :redis => true do
   context "as mobile user", :js => true do
     
     before :each do
-      @current_user = create(:user, uid: 'm2604100', provider: 'facebook')
+      @current_user = create(:user, uid: '1234567', provider: 'facebook')
       stub_google_tracking # stub google tracking
     end
 
     it_behaves_like "a game player"
 
   end
-
 
 end

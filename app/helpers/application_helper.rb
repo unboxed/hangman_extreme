@@ -96,4 +96,8 @@ module ApplicationHelper
     end
   end
 
+  def site_page_id(path = request.path)
+    "page#{path.gsub("/",'_')}_content"
+  end
+
 end
