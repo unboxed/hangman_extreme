@@ -23,12 +23,14 @@ You have <span><%= @game.attempts_left %></span> attempts left
     <% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
     <% menu_item 'define the word', define_word_path(word: @game.hangman_text), id: 'define_word' %>
 <% else %>
-    <% ("a".."z").to_a.in_groups_of(9,false).each do |letters| -%>
+  <p>
+    <% ("a".."z").to_a.in_groups_of((mxit_request? ? 9 : 100),false).each do |letters| -%>
         <% letters.each do |letter| -%>
-            <%= link_to_unless(@game.choices.to_s.include?(letter),letter, play_letter_game_path(@game,letter), id: letter) %>&nbsp;
+            <%= letter_link(@game,letter) %>>&nbsp;
         <% end -%>
         <br/>
     <% end -%>
+   </p>
 <% end %>
 <br/>
 <% menu_item 'leave game', games_path, id: 'games_index' %>

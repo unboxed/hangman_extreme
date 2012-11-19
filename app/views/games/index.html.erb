@@ -1,11 +1,11 @@
 <h1>Welcome to hangman extreme</h1>
 Have fun guessing the word.<br/>
 
-<ul>
+<ul data-role="listview">
   <%= content_tag_for(:li, @games) do |game| %>
       <span><%= game.hangman_text %></span> -
       <span><%= game.score %></span> -
-      <%= link_to('show', game, id: dom_id(game, 'show')) %>
+      <%= smart_link_to('show', game, id: dom_id(game, 'show')) %>
   <% end %>
 </ul>
 <%= shinka_ad if current_user && current_user.provider == "mxit" %>
