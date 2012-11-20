@@ -1,6 +1,4 @@
-<h1>Welcome to hangman extreme</h1>
-Have fun guessing the word.<br/>
-
+<p>Welcome to <b>Hangman Extreme</b>. Have fun guessing the word.</p>
 <ul>
   <%= content_tag_for(:li, @games) do |game| %>
       <span><%= game.hangman_text %></span> -
@@ -11,10 +9,14 @@ Have fun guessing the word.<br/>
 <%= shinka_ad if current_user && current_user.provider == "mxit" %>
 <% menu_item 'continue', game_path(@current_game), id: 'continue_game' if @current_game %>
 <% menu_item 'new game', new_game_path, id: 'new_game' unless @current_game %>
-<% menu_item 'Share with your <a href="mxit://[communityportal]/RecommendPage?ItemId=7297721" type="mxit/service-navigation">friends</a>' %>
+<% if mxit_request? %>
+  <% menu_item 'Share with your <a href="mxit://[communityportal]/RecommendPage?ItemId=7297721" type="mxit/service-navigation">friends</a>' %>
+<% end %>  
 <% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
 <% menu_item 'profile',mxit_auth_url(state: "profile"), id: 'authorise' %>
 <% menu_item 'feedback',mxit_auth_url(state: "feedback"), id: 'feedback' %>
 <% menu_item 'buy clue points', purchases_path, id: 'buy_clue_points' %>
 <% menu_item 'redeem prize points', redeem_winnings_path, id: 'redeem' %>
+<% menu_item 'Share with your <a href="mxit://[communityportal]/RecommendPage?ItemId=7297721" type="mxit/service-navigation">friends</a>' %>
+
 

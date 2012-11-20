@@ -9,6 +9,7 @@ describe "users/index" do
       stub_model(User, id: 100, name: "hello", daily_rating: "123"),
       stub_model(User, id: 101, name: "goodbye", daily_rating: "345")
     ])
+    view.stub!(:mxit_request?).and_return(true)
     view.stub!(:current_user).and_return(stub_model(User, id: 50))
     stub_template "_ranking_links.html.erb" => "<div>Ranking list</div>"
     assign(:send, "daily_rating")

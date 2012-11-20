@@ -11,25 +11,22 @@ shared_examples "a knowledge seeker" do
     visit '/'
     click_link('rank')
     page.should have_content("Your Ranking")
-    click_link('scoring')
-    page.should have_content("Your Ranking")
-
-    click_link('score')
-    click_link('scoring')
+    click_link('scoring_categories')
+    page.should have_content("Explaination")
     click_link('rating')
     page.should have_content("Rating Category")
-    click_link('scoring')
-    page.should have_content("We rank players on the following categories")
+    click_link('scoring_categories')
+    page.should have_content("Explaination")
     click_link('precision')
     page.should have_content("Precision Category")
-    click_link('scoring')
-    page.should have_content("We rank players on the following categories")
+    click_link('scoring_categories')
+    page.should have_content("Explaination")
     click_link('winning_streak')
     page.should have_content("Streak Category")
     click_link('scoring')
     click_link('winning_random')
     click_link('scoring')
-    page.should have_content("We rank players on the following categories")
+    page.should have_content("Explaination")
     click_link('payouts')
     page.should have_content("Daily Payouts")
     click_link('home')
@@ -55,7 +52,7 @@ describe 'explain', :shinka_vcr => true, :redis => true do
   context "as mobile user", :js => true do
 
     before :each do
-      @current_user = create(:user, uid: 'm2604100', provider: 'facebook')
+      @current_user = create(:user, uid: '1234567', provider: 'facebook')
       stub_google_tracking # stub google tracking
     end
 

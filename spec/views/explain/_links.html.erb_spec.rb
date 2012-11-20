@@ -4,6 +4,7 @@ describe "explain/_links.html.erb" do
   include ViewCapybaraRendered
 
   before(:each) do
+    view.stub!(:mxit_request?).and_return(true)
     view.stub!(:current_user).and_return(stub_model(User, id: 44))
     view.stub!(:menu_item)
   end

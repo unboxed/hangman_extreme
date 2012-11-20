@@ -93,4 +93,20 @@ describe "games/index" do
     render
   end
 
+  it "should have a share link if mxit request" do
+    render
+    rendered.should have_link("Share with your friends")
+  end
+
+  it "wont have a share link if not mxit request" do
+    view.stub!(:mxit_request?).and_return(false)
+    render
+    rendered.should_not have_link("Share with your friends")
+  end
+
+  it "should have a view winners link" do
+    render
+    rendered.should have_link("winners", href: winners_path)
+  end
+
 end

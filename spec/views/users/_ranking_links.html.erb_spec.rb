@@ -5,6 +5,7 @@ describe "users/_ranking_links.html.erb" do
 
   before(:each) do
     view.stub!(:menu_item)
+    view.stub!(:mxit_request?).and_return(true)
   end
 
   it "must have daily,weekly and monthly links" do

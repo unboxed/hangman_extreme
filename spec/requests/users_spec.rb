@@ -14,7 +14,7 @@ describe 'users', :shinka_vcr => true, :redis => true do
     page.should have_content("Your Ranking")
     page.should have_content("Entered")
     page.should have_content("25 more games")
-    click_link('root_page')
+    click_link('home')
     page.current_path.should == '/'
   end
 
@@ -28,7 +28,7 @@ describe 'users', :shinka_vcr => true, :redis => true do
     users.each do |user|
       page.should have_content(user.name)
     end
-    click_link('root_page')
+    click_link('home')
     page.current_path.should == '/'
     click_link('view_rank')
     ['daily'].product(['rating','precision','streak']).map{|x,y| "#{x}_#{y}"}.each do |link|

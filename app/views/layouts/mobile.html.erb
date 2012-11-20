@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<div data-role="page" data-url="<%= request.path %>">
+<div id="<%= site_page_id %>" data-role="page" data-url="<%= request.path %>">
 
   <div data-role="header">
     <% unless current_page?(root_path) %>
