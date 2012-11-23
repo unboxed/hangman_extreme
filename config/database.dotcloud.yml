@@ -1,8 +1,0 @@
-production:
-  adapter: postgresql
-  database: hangman_league
-  username: <%= ENV['DOTCLOUD_DB_SQL_LOGIN'] %>
-  password: <%= ENV['DOTCLOUD_DB_SQL_PASSWORD'] %>
-  port: <%= ENV['DOTCLOUD_DB_SQL_PORT'] %>
-  host: <%= ENV['DOTCLOUD_DB_SQL_HOST'] %>
-  pool: 5

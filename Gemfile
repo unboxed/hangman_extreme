@@ -2,7 +2,13 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 3.2.1'
 
-gem 'pg'
+# If running on JRuby, use the activerecord-jdbc-adapter
+platforms :jruby do
+  gem 'activerecord-jdbcpostgresql-adapter', :require => false
+end
+platforms :ruby do
+  gem 'pg'
+end
 gem 'newrelic_rpm'
 gem 'puma'
 gem 'cancan'
@@ -22,7 +28,12 @@ gem 'mxit_api', '>= 0.1.0.pre'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'therubyracer'
+  platforms :jruby do
+    gem 'therubyrhino'
+  end
+  platforms :ruby do
+    gem 'therubyracer'
+  end
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -35,8 +46,14 @@ group :development, :test do
 end
 
 group :test do
-  gem 'sqlite3'
-  gem 'mysql2'
+  platforms :jruby do
+    gem 'jdbc-mysql'
+    gem 'jdbc-sqlite3', :require => false
+  end
+  platforms :ruby do
+    gem 'mysql2'
+    gem 'sqlite3'
+  end
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
