@@ -4,7 +4,7 @@ gem 'rails', '~> 3.2.1'
 
 gem 'pg'
 gem 'newrelic_rpm'
-gem 'unicorn'
+gem 'puma'
 gem 'cancan'
 gem 'omniauth'
 gem 'kaminari'
