@@ -32,7 +32,7 @@ HangmanLeague::Application.configure do
 
   # See everything in the log (default is :info)
   # config.log_level = :debug
-  STDOUT.sync = true
+  # STDOUT.sync = true
   config.logger = Logger.new(STDOUT)
 
   # Prepend all log lines with the following tags
