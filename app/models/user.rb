@@ -17,12 +17,12 @@ class User < ActiveRecord::Base
     auth_hash.stringify_keys!
     logger.debug "Auth Login Attempt with: #{auth_hash.to_s}"
     return nil if auth_hash['uid'].blank? || auth_hash['provider'].blank?
-    user = find_or_initialize_by_uid_and_provider(auth_hash['uid'],auth_hash['provider'])
+    user = find_or_create_by_uid_and_provider(auth_hash['uid'],auth_hash['provider'])
     if auth_hash['info']
       auth_hash['info'].stringify_keys!
       user.name = auth_hash['info']['name']
       user.login = auth_hash['info']['login']
-      user.save!
+      user.save
     end
     return user
   end
