@@ -24,6 +24,7 @@ gem 'redis'
 gem 'ohm'
 gem 'uservoice-ruby'
 gem 'mxit_api', '>= 0.1.0.pre'
+gem 'whenever', :require => false
 
 # Gems used only for assets and not required
 # in production environments by default.
