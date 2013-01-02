@@ -17,12 +17,12 @@ class User < ActiveRecord::Base
     auth_hash.stringify_keys!
     logger.debug "Auth Login Attempt with: #{auth_hash.to_s}"
     return nil if auth_hash['uid'].blank? || auth_hash['provider'].blank?
-    user = find_or_initialize_by_uid_and_provider(auth_hash['uid'],auth_hash['provider'])
+    user = find_or_create_by_uid_and_provider(auth_hash['uid'],auth_hash['provider'])
     if auth_hash['info']
       auth_hash['info'].stringify_keys!
       user.name = auth_hash['info']['name']
       user.login = auth_hash['info']['login']
-      user.save!
+      user.save
     end
     return user
   end
@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   end
 
   def calculate_weekly_precision
-    calculate_precision(games.this_week)
+    calculate_precision(games.this_week,35)
   end
 
   def calculate_daily_rating
@@ -197,9 +197,9 @@ class User < ActiveRecord::Base
     end
   end
 
-  def calculate_precision(game_scope)
+  def calculate_precision(game_scope, game_count = 10)
     scope = game_scope.completed
-    return 0 if scope.count < 10
+    return 0 if scope.count < game_count
     (scope.inject(0){|sum,game| sum += game.attempts_left.to_i } * 10) / scope.count
   end
 

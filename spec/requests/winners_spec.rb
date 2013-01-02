@@ -11,10 +11,10 @@ describe 'winners' do
     MxitApiWrapper.any_instance.stub(:send_message).and_return(true)
   end
 
-  it "must show the daily winners" do
+  it "must show the daily and weekly winners" do
     users = create_list(:user,10).sort{|x,y| x.name <=> y.name }
     users.each_with_index do |user,i|
-      create_list(:won_game,10 + i, user: user) # need at least 10 wins for  precision
+      create_list(:won_game,35 + i, user: user)  # need at least 35 wins for  precision
     end
     Winner.create_daily_winners
     visit '/'
@@ -30,13 +30,6 @@ describe 'winners' do
     click_link('score')
     users.each do |winner|
       page.should have_content(winner.name)
-    end
-  end
-
-  it "must show the weekly winners" do
-    users = create_list(:user,10).sort{|x,y| x.name <=> y.name }
-    users.each_with_index do |user,i|
-      create_list(:won_game,10 + i, user: user)  # need at least 10 wins for  precision
     end
     Winner.create_weekly_winners
     visit '/'

@@ -15,7 +15,7 @@ class RedeemWinning < ActiveRecord::Base
   scope :pending, where('state = ?','pending')
 
   def self.pending_winnings_text
-    pending.collect{|rw| [rw.prize_type,rw.id,rw.user.uid,rw.user.login,rw.user.mobile_number,rw.prize_amount].join(" : ")}.join("\n")
+    pending.order('prize_type,user_id').collect{|rw| [rw.prize_type,rw.id,rw.user.uid,rw.user.login,rw.user.mobile_number,rw.prize_amount].join(" : ")}.join("\n")
   end
 
   def self.paid!(id)

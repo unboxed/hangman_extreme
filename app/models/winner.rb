@@ -53,7 +53,16 @@ class Winner < ActiveRecord::Base
     end
     winners.collect{|w|[w.user,w.amount]}.each do |user,amount|
       if amount > 0
-        user.increment!(:prize_points,amount)
+        begin
+          user.increment!(:prize_points,amount)
+        rescue
+          user.reload
+          begin
+            user.increment!(:prize_points,amount)
+          rescue
+            # ignore second time around
+          end
+        end
         user.send_message("Congratulations, you have won *#{amount} prize points* for _#{options[:period]} #{options[:score_by]}_.
                            Check the $redeem$ section to see what you can trade them in for.".squish)
       end
