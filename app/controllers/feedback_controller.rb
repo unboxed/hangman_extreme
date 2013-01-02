@@ -1,4 +1,5 @@
 class FeedbackController < ApplicationController
+  skip_filter :check_server_status, :only => 'server_status'
   before_filter :login_required
 
   def index

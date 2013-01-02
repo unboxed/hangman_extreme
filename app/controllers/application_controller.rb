@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :load_mxit_user, :load_facebook_user, :check_mxit_input_for_redirect
+  before_filter :check_server_status, :load_mxit_user, :load_facebook_user, :check_mxit_input_for_redirect
   after_filter :send_stats
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -106,6 +106,11 @@ class ApplicationController < ActionController::Base
       when 'winners'
         redirect_to(winners_path) unless params[:controller] == 'winners'
     end
+    status != 302
+  end
+
+  def check_server_status
+    redirect_to(server_status_path) if ENV['DATABASE_URL']
     status != 302
   end
 

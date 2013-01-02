@@ -41,7 +41,11 @@ describe 'feedback' do
     page.should have_content("Thank you")
   end
 
-
-
+  it "must show status moving page" do
+    old, ENV['DATABASE_URL'] = ENV['DATABASE_URL'], "test_data"
+    visit '/'
+    page.should have_content("We are currently moving servers, thank you for you patients.")
+    ENV['DATABASE_URL'] = old
+  end
 
 end

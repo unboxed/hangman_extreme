@@ -250,4 +250,26 @@ describe ApplicationController do
 
   end
 
+  describe "check_server_status, moving away from heroku" do
+
+    controller do
+      def index
+        render :text => "hello"
+      end
+    end
+
+    it "must render page" do
+      get :index
+      response.should be_success
+    end
+
+    it "must redirect to server status if DATABASE_URL exists" do
+      old, ENV['DATABASE_URL'] = ENV['DATABASE_URL'], "test_data"
+      get :index
+      response.should redirect_to('/server_status')
+      ENV['DATABASE_URL'] = old
+    end
+
+  end
+
 end

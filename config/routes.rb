@@ -28,6 +28,8 @@ HangmanLeague::Application.routes.draw do
   match '/facebook_oauth', to: 'users#facebook_oauth', as: 'facebook_oauth'
   match '/auth/:provider/callback', to: 'sessions#create'
   match '/authorize', to: 'users#mxit_authorise', as: 'mxit_authorise'
+  match '/server_status', to: 'feedback#server_status', as: 'server_status'
+
 
   root :to => 'games#index'
 end
