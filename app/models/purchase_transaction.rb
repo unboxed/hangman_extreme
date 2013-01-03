@@ -41,7 +41,7 @@ class PurchaseTransaction < ActiveRecord::Base
     day = maximum(:created_at).end_of_day
     first_day = 21.days.ago
     while(day >= first_day) do
-      scope = where('created_at < ?',day)
+      scope = where('created_at >= ? AND created_at <= ?',day.beginning_of_day,day)
       values = [day.strftime("%d-%m")]
       products.each do |product_id,product_details|
         values << scope.where(product_id: product_id).sum(:moola_amount)
