@@ -22,4 +22,8 @@ class Settings
     APP_SETTINGS[:cron_running] = Time.current.to_s
   end
 
+  def self.cron_running
+    APP_SETTINGS[:cron_running]
+  end
+
 end
