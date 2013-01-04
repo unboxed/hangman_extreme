@@ -100,6 +100,7 @@ GEM
       addressable (~> 2.3)
       ffi (~> 1.1.1)
       spoon (~> 0.0.1)
+    libv8 (3.11.8.4)
     libwebsocket (0.1.7.1)
       addressable
       websocket
@@ -258,6 +259,7 @@ DEPENDENCIES
   json
   kaminari
   launchy
+  libv8 (~> 3.11.8)
   mock_redis
   mxit_api (>= 0.1.0.pre)
   mysql2
