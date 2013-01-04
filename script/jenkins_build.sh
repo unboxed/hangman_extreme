@@ -1,6 +1,6 @@
 git clean -fd
 
-rvm use jruby@hangman_extreme
+rvm use 1.9.3@hangman_extreme
 bundle install --without development --frozen
 
 cp -f config/database_jenkins.yml config/database.yml
