@@ -109,6 +109,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.purge_tracking!
+    User.where('updated_at < ?',7.days.ago).each{|u| u.google_tracking.delete }.size
+  end
+
   def self.add_clue_point_to_active_players!
     user_ids = Game.today.collect{|g|g.user_id}.uniq
     User.find(user_ids).each do |user|

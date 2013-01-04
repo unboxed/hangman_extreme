@@ -20,6 +20,7 @@ set :rvm_install_ruby_params, '--with-opt-dir=/usr/local/rvm/usr'
 
 require "rvm/capistrano" # Load RVM's capistrano plugin.
 require "bundler/capistrano"
+require 'airbrake/capistrano'
 
 set :whenever_command, "bundle exec whenever"
 require "whenever/capistrano"
