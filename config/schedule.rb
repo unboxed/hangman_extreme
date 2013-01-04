@@ -18,14 +18,16 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every :day, :at => '11:45pm', :roles => [:app] do
+set :output, 'cron.log'
+
+every :day, :at => '11:45pm' do
   rake "daily:end_of_day"
 end
 
-every :day, :at => '12:01am', :roles => [:app] do
+every :day, :at => '12:01am' do
   rake "daily:start_of_day"
 end
 
 every :hour do
-  runner "Task.do_something_great"
+  runner "Settings.cron_running!"
 end
