@@ -31,9 +31,9 @@ HangmanLeague::Application.configure do
   # config.force_ssl = true
 
   # See everything in the log (default is :info)
-  # config.log_level = :debug
+  config.log_level = :warn
   # STDOUT.sync = true
-  config.logger = Logger.new(STDOUT)
+  # config.logger = Logger.new(STDOUT)
 
   # Prepend all log lines with the following tags
   # config.log_tags = [ :subdomain, :uuid ]
