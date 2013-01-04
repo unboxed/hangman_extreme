@@ -33,6 +33,7 @@ group :assets do
     gem 'therubyrhino'
   end
   platforms :ruby do
+    gem 'libv8', '~> 3.11.8'
     gem 'therubyracer'
   end
   gem 'uglifier', '>= 1.0.3'
