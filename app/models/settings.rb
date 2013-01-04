@@ -18,4 +18,8 @@ class Settings
     APP_SETTINGS[:ga_tracking_disabled_until] = v && v.to_i
   end
 
+  def self.cron_running!
+    APP_SETTINGS[:cron_running] = Time.current.to_s
+  end
+
 end

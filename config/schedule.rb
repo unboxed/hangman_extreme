@@ -25,3 +25,7 @@ end
 every :day, :at => '12:01am', :roles => [:app] do
   rake "daily:start_of_day"
 end
+
+every :hour do
+  runner "Task.do_something_great"
+end
