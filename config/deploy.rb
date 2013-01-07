@@ -12,7 +12,7 @@ role :db, "41.215.236.134", :primary => true # This is where Rails migrations wi
 
 after "deploy:restart", "deploy:cleanup"
 
-set :rvm_ruby_string, '1.9.3@hangman_extreme'
+set :rvm_ruby_string, 'jruby@hangman_extreme'
 set :rvm_install_type, :head
 set :rvm_type, :system
 set :rvm_install_pkgs, %w[libyaml openssl]
@@ -89,17 +89,22 @@ namespace :deploy do
 
   desc "Start the application"
   task :start, :roles => :app, :except => {:no_release => true} do
-    run "cd #{current_path} && RAILS_ENV=production bundle exec passenger start -p 8080 -e production --daemonize"
+    run "cd #{current_path} && NEWRELIC_DISPATCHER=puma RAILS_ENV=production bundle exec puma -e production -t 8:32 -b tcp://41.215.236.134:8080 -S #{shared_path}/sockets/puma.state --control tcp://127.0.0.1:9293 >> #{shared_path}/log/puma-production.log 2>&1 &", :pty => false
   end
 
   desc "Stop the application"
   task :stop, :roles => :app, :except => {:no_release => true} do
-    run "cd #{current_path} && RAILS_ENV=production bundle exec passenger stop -p 8080"
+    run "cd #{current_path} && NEWRELIC_DISPATCHER=puma RAILS_ENV=production bundle exec pumactl -S #{shared_path}/sockets/puma.state stop"
   end
 
   desc "Restart the application"
   task :restart, :roles => :app, :except => {:no_release => true} do
-    run "cd #{current_path} && touch tmp/restart.txt"
+    run "cd #{current_path} && NEWRELIC_DISPATCHER=puma RAILS_ENV=production bundle exec pumactl -S #{shared_path}/sockets/puma.state restart"
+  end
+
+  desc "Status of the application"
+  task :status, :roles => :app, :except => {:no_release => true} do
+    run "cd #{current_path} && NEWRELIC_DISPATCHER=puma RAILS_ENV=production bundle exec pumactl -S #{shared_path}/sockets/puma.state stats"
   end
 end
 

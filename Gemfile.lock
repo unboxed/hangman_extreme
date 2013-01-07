@@ -53,7 +53,6 @@ GEM
     chronic (0.9.0)
     connection_pool (0.9.3)
     crack (0.3.1)
-    daemon_controller (1.1.0)
     database_cleaner (0.9.1)
     diff-lcs (1.1.3)
     erubis (2.7.0)
@@ -66,7 +65,6 @@ GEM
     factory_girl_rails (4.1.0)
       factory_girl (~> 4.1.0)
       railties (>= 3.0.0)
-    fastthread (1.0.7)
     ffi (1.1.5)
     ffi (1.1.5-java)
     flog (3.2.1)
@@ -133,13 +131,10 @@ GEM
     omniauth (1.1.1)
       hashie (~> 1.2)
       rack
-    passenger (3.0.18)
-      daemon_controller (>= 1.0.0)
-      fastthread (>= 1.0.1)
-      rack
-      rake (>= 0.8.1)
     pg (0.14.1)
     polyglot (0.3.3)
+    puma (1.6.3)
+      rack (~> 1.2)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -270,8 +265,8 @@ DEPENDENCIES
   nokogiri
   ohm
   omniauth
-  passenger
   pg
+  puma
   rails (~> 3.2.1)
   redis
   redis-settings
