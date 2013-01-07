@@ -22,15 +22,15 @@ set :output, 'cron.log'
 
 
 every :day, :at => '11:45pm' do
-  rake "Winner.create_daily_winners"
-  rake "Winner.add_clue_point_to_active_players!"
+  runner "Winner.create_daily_winners"
+  runner "Winner.add_clue_point_to_active_players!"
 end
 every :sunday, :at => '11:45pm' do
-  rake "Winner.create_weekly_winners"
+  runner "Winner.create_weekly_winners"
 end
 
 every :day, :at => '12:01am' do
-  rake "User.new_day_set_scores!"
+  runner "User.new_day_set_scores!"
 end
 
 every :monday, :at => '12:01am' do
