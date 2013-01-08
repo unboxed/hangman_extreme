@@ -10,6 +10,7 @@ platforms :ruby do
   gem 'pg'
 end
 gem 'newrelic_rpm'
+gem 'newrelic-redis'
 gem 'puma'
 gem 'cancan'
 gem 'omniauth'
