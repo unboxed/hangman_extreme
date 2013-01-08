@@ -45,7 +45,9 @@ class Dictionary < SortedSet
   end
 
   def self.define(word)
-
+    r = Wordnik.word.get_definitions(word).try(:first)
+    return "" if r.blank?
+    r['text']
   end
 
   private
@@ -54,4 +56,12 @@ class Dictionary < SortedSet
     value.present? && (value.downcase! || true) && (value.gsub!(/\s/,"") || true) && value.size >= 4 && value =~ /^\p{Lower}*$/
   end
 
+end
+
+# load words
+File.readlines('db/words.csv').each do |line|
+  word,clue = line.split(",",2)
+  clue.squish!
+  Dictionary.set_clue(word,clue) unless clue.blank?
+  Dictionary.add(word)
 end

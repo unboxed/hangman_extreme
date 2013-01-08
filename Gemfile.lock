@@ -56,6 +56,9 @@ GEM
     database_cleaner (0.9.1)
     diff-lcs (1.1.3)
     erubis (2.7.0)
+    ethon (0.5.6)
+      ffi (~> 1.1.5)
+      mime-types (~> 1.18)
     excon (0.16.10)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -84,6 +87,7 @@ GEM
     heroku-api (0.3.7)
       excon (~> 0.16.10)
     hike (1.2.1)
+    htmlentities (4.3.1)
     i18n (0.6.1)
     jdbc-mysql (5.1.22)
     jdbc-postgres (9.2.1002)
@@ -224,6 +228,8 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
+    typhoeus (0.5.3)
+      ethon (~> 0.5.3)
     tzinfo (0.3.35)
     uglifier (1.3.0)
       execjs (>= 0.3.0)
@@ -239,6 +245,13 @@ GEM
     whenever (0.8.1)
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
+    wordnik (4.11)
+      activemodel (>= 3.0.3)
+      addressable (>= 2.2.4)
+      htmlentities (>= 4.2.4)
+      json (>= 1.4.6)
+      nokogiri (>= 1.4.4)
+      typhoeus (>= 0.2.1)
     xpath (0.1.4)
       nokogiri (~> 1.3)
 
@@ -289,3 +302,4 @@ DEPENDENCIES
   uservoice-ruby
   webmock
   whenever
+  wordnik
