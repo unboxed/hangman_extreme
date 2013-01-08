@@ -13,14 +13,14 @@ You can redeem your points for:
                     id: 'clue_points' %>
          <%= [current_user.prize_points,10].min %> clue points</li>
   <% end %>
-  <% if current_user.prize_points < 20 %>
-      <li>moola (<span style="color: red;"><%= 20 - current_user.prize_points %> more prize points</span>)</li>
-  <% else current_user.prize_points >= 20  %>
+  <% if current_user.prize_points < 50 %>
+      <li>moola (<span style="color: red;"><%= 50 - current_user.prize_points %> more prize points</span>)</li>
+  <% else current_user.prize_points >= 50  %>
       <li><%= link_to (index += 1).to_s,
                       new_redeem_winning_path(:prize_type => 'moola',
-                                              :prize_amount => [current_user.prize_points,100].min),
+                                              :prize_amount => [current_user.prize_points,250].min),
                       id: 'moola' %>
-        <%= [current_user.prize_points,100].min %> moola</li>
+        <%= [current_user.prize_points,250].min %> moola</li>
   <% end %>
   <% ['vodago','cell_c','mtn'].each do |provider| %>
       <li>

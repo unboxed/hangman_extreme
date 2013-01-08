@@ -54,26 +54,26 @@ describe "redeem_winnings/index.html.erb" do
   context "moola" do
 
     it "must have equal moola available to prize points" do
-      @current_user.prize_points = 25
+      @current_user.prize_points = 55
       render
       rendered.should have_content("#{@current_user.prize_points} moola")
     end
 
-    it "must have a maximum of 100 moola available" do
-      @current_user.prize_points = 115
+    it "must have a maximum of 250 moola available" do
+      @current_user.prize_points = 255
       render
-      rendered.should have_content("100 moola")
+      rendered.should have_content("250 moola")
     end
 
     it "must have a moola link" do
-      @current_user.prize_points = 22
+      @current_user.prize_points = 51
       render
       rendered.should have_link("moola", href: new_redeem_winning_path(:prize_type => 'moola',
-                                                                       :prize_amount => 22))
+                                                                       :prize_amount => 51))
     end
 
     it "wont have a moola link if not enough prize points" do
-      @current_user.prize_points = 19
+      @current_user.prize_points = 49
       render
       rendered.should_not have_link("moola")
     end
