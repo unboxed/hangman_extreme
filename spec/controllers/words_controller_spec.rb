@@ -21,7 +21,7 @@ describe WordsController do
     it "must get the definition" do
       Dictionary.should_receive(:define).with("dog").and_return("The Definition")
       get 'define', word: 'dog'
-      assigns(:definition).should == "Noun: The Definition"
+      assigns(:definition).should == "The Definition"
     end
 
   end
