@@ -22,6 +22,23 @@ class RedeemWinning < ActiveRecord::Base
     find(id).update_column(:state, 'paid')
   end
 
+  def self.cohort_array
+    cohort = []
+    day = maximum(:created_at).end_of_day
+    first_day = 21.days.ago
+    while(day >= first_day) do
+      scope = where('created_at >= ? AND created_at <= ?',day.beginning_of_day,day)
+      values = [day.strftime("%d-%m")]
+      PRIZE_TYPES.each do |prize_type|
+        values << scope.where(prize_type: prize_type).sum(:prize_amount)
+      end
+      cohort << values
+      day -= 1.day
+    end
+    cohort.reverse
+  end
+
+
   protected
 
   def check_user_prize_points

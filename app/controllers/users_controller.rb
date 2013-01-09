@@ -92,7 +92,7 @@ class UsersController < ApplicationController
     end.compact
     @winners_cohort = Winner.cohort_array
     @purchase_cohort = PurchaseTransaction.cohort_array
-
+    @redeem_cohort = RedeemWinning.cohort_array
   end
 
   private

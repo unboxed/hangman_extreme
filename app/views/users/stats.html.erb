@@ -102,6 +102,16 @@
 
         chart = new google.visualization.AreaChart(document.getElementById('purchases_cohort'));
         chart.draw(data, $.extend({isStacked: true }, defaultGraphStyles, { title:'Moola purchases' }));
+
+        data = new google.visualization.DataTable();
+        data.addColumn('string', 'Date');
+        <% RedeemWinning::PRIZE_TYPES.each do |prize_type| %>
+            data.addColumn('number', "<%= prize_type %>");
+        <% end %>
+        data.addRows(<%= raw @redeem_cohort.to_json %>);
+
+        chart = new google.visualization.AreaChart(document.getElementById('redeem_cohort'));
+        chart.draw(data, $.extend({isStacked: true }, defaultGraphStyles, { title:'Redeem Winning points' }));
     }
 
 </script>

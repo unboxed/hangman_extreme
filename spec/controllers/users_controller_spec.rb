@@ -146,6 +146,7 @@ describe UsersController do
         Game.stub(:cohort_array).and_return([[2,2,2,2,2]])
         Winner.stub(:cohort_array).and_return([[2,2,2,2,2]])
         PurchaseTransaction.stub(:cohort_array).and_return([[2,2,2,2,2]])
+        RedeemWinning.stub(:cohort_array).and_return([[2,2,2,2,2]])
         get :stats
         response.should render_template("layouts/application")
       end
