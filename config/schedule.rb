@@ -37,7 +37,3 @@ every :monday, :at => '12:01am' do
   runner "Game.purge_old!"
   runner "User.purge_tracking!"
 end
-
-every :hour do
-  runner "Settings.cron_running!"
-end
