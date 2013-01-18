@@ -24,7 +24,7 @@ gem 'rest-client', require: 'rest_client'
 gem 'redis'
 gem 'ohm'
 gem 'uservoice-ruby'
-gem 'mxit_api', '>= 0.1.0.pre'
+gem 'mxit_api', '>= 0.2.0.pre'
 gem 'wordnik'
 gem 'whenever', :require => false
 
