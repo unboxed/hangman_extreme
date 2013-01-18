@@ -33,4 +33,11 @@ describe "redeem_winnings/new.html.erb" do
     rendered.should have_link("cancel", href: redeem_winnings_path)
   end
 
+  it "should render with mxit money prize type" do
+    @redeem_winning.prize_amount = 101
+    @redeem_winning.prize_type = 'mxit_money'
+    render
+    rendered.should have_content("R1.01")
+  end
+
 end

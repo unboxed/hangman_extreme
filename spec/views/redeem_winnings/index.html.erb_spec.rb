@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "redeem_winnings/index.html.erb" do
 
   before(:each) do
-    @current_user = stub_model(User, id: 50)
+    @current_user = stub_model(User, id: 50, registered_on_mxit_money?: false)
     view.stub!(:current_user).and_return(@current_user)
   end
 
@@ -76,6 +76,40 @@ describe "redeem_winnings/index.html.erb" do
       @current_user.prize_points = 49
       render
       rendered.should_not have_link("moola")
+    end
+
+  end
+
+  context "mxit money" do
+
+    before :each do
+      @current_user.stub(:registered_on_mxit_money?).and_return(true)
+    end
+
+    it "must have equal mxit available to prize points" do
+      @current_user.prize_points = 1
+      render
+      rendered.should have_content("R0.0#{@current_user.prize_points} mxit money")
+    end
+
+    it "must have a mxit money link" do
+      @current_user.prize_points = 51
+      render
+      rendered.should have_link("mxit_money", href: new_redeem_winning_path(:prize_type => 'mxit_money',
+                                                                            :prize_amount => 51))
+    end
+
+    it "wont have a mxit_money link if not enough prize points" do
+      @current_user.prize_points = 0
+      render
+      rendered.should_not have_link("mxit_money")
+    end
+
+    it "wont have a mxit_money link not registered on mxit money" do
+      @current_user.prize_points = 100
+      @current_user.should_receive(:not_registered_on_mxit_money?).and_return(true)
+      render
+      rendered.should_not have_link("mxit_money")
     end
 
   end

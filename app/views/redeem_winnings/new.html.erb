@@ -3,17 +3,20 @@
     You about to redeem
     <b><%= @redeem_winning.prize_amount %> prize points</b>
     for
+    <i>
     <% if @redeem_winning.prize_type.include?('airtime') %>
         R5
         <%= "vodago" if @redeem_winning.prize_type.include?('vodago') %>
         <%= "mtn" if @redeem_winning.prize_type.include?('mtn') %>
         <%= "cell c" if @redeem_winning.prize_type.include?('cell') %>
         airtime
+    <% elsif @redeem_winning.prize_type.include?('mxit_money') %>
+        <%= number_to_currency(@redeem_winning.prize_amount.to_f / 100, :unit => "R") %> mxit money
     <% else %>
-        <i><%= @redeem_winning.prize_amount %>
+        <%= @redeem_winning.prize_amount %>
           <%= @redeem_winning.prize_type == 'moola' ? "moola" : "clue points" %>
-        </i>
     <% end %>
+    </i>
     <br/>
     <%= f.hidden_field :prize_type %>
     <%= f.hidden_field :prize_amount %>

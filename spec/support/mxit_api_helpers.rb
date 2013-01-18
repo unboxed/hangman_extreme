@@ -15,3 +15,12 @@ def stub_mxit_oauth(fields = {})
   stub_request(:put, /api\.mxit\.com\/user\/socialgraph\/contact\/.*/).
     to_return(:status => 200, :body => "", :headers => {})
 end
+
+def stub_mxit_money(user_info = {:is_registered => false})
+  stub_request(:get, "https://:mxit_money_api@m2api.fireid.com/paymentsplatform/rest/v3/push/").
+    with(:headers => {'Accept'=>'application/json', 'User-Agent'=>'Ruby'}).
+    to_return(:status => 200, :body => {:balance => 123}.to_json, :headers => {})
+  stub_request(:get, "https://:mxit_money_api@m2api.fireid.com/paymentsplatform/rest/v3/user/m2604100?idType=mxitId").
+    with(:headers => {'Accept'=>'application/json', 'User-Agent'=>'Ruby'}).
+    to_return(:status => 200, :body => user_info.to_json, :headers => {})
+end

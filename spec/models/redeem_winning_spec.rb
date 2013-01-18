@@ -9,7 +9,7 @@ describe RedeemWinning do
       RedeemWinning.new(prize_type: 'clue_points').should have(0).errors_on(:prize_type)
     end
 
-    ['clue_points','moola','vodago_airtime','cell_c_airtime','mtn_airtime'].each do |t|
+    ['clue_points','moola','vodago_airtime','cell_c_airtime','mtn_airtime','mxit_money'].each do |t|
       it "must accept #{t} as valid prize type" do
         RedeemWinning.new(prize_type: t).should have(0).errors_on(:prize_type)
       end

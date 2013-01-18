@@ -358,6 +358,30 @@ describe User do
 
   end
 
+  context "registered_on_mxit_money?" do
+
+    before :each do
+      @mxit_money_connection = mock("connection", :user_info => {:is_registered => false})
+      MxitMoneyApi.stub(:connect).and_return(@mxit_money_connection)
+      @user = stub_model(User, :uid => 'm111')
+    end
+
+    it "must connect to MxitMoneyApi" do
+      MxitMoneyApi.should_receive(:connect).with(ENV['MXIT_MONEY_API_KEY']).and_return(@mxit_money_connection)
+      @user.registered_on_mxit_money?
+    end
+
+    it "must check the user_info with uid" do
+      @mxit_money_connection.should_receive(:user_info).with(:id => 'm111').and_return({})
+      @user.registered_on_mxit_money?
+    end
+
+    it "wont be registered on mxit money if is_registered is false" do
+      @user.should_not be_registered_on_mxit_money
+    end
+
+  end
+
   context "send_message" do
 
     before :each do

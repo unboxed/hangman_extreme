@@ -88,6 +88,18 @@ class User < ActiveRecord::Base
     User.send_message(msg,[self])
   end
 
+  def registered_on_mxit_money?
+    connection = MxitMoneyApi.connect(ENV['MXIT_MONEY_API_KEY'])
+    if connection
+      result = connection.user_info(:id => uid)
+      result[:is_registered]
+    end
+  end
+
+  def not_registered_on_mxit_money?
+    !registered_on_mxit_money?
+  end
+
   def self.send_message(msg, users = User.mxit)
     unless users.empty?
       mxit_connection = MxitApiWrapper.connect
