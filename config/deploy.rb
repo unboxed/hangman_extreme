@@ -89,7 +89,7 @@ namespace :deploy do
 
   desc "Start the application"
   task :start, :roles => :app, :except => {:no_release => true} do
-    run "cd #{current_path} && NEWRELIC_DISPATCHER=puma RAILS_ENV=production bundle exec puma -e production -t 4:8 -b tcp://41.215.236.134:8080 -S #{shared_path}/sockets/puma.state --control tcp://127.0.0.1:9293 >> #{shared_path}/log/puma-production.log 2>&1 &", :pty => false
+    run "cd #{current_path} && NEWRELIC_DISPATCHER=puma RAILS_ENV=production bundle exec puma -e production -t 5:10 -b tcp://41.215.236.134:8080 -S #{shared_path}/sockets/puma.state --control tcp://127.0.0.1:9293 >> #{shared_path}/log/puma-production.log 2>&1 &", :pty => false
   end
 
   desc "Stop the application"
@@ -100,7 +100,7 @@ namespace :deploy do
   desc "Restart the application"
   task :restart, :roles => :app, :except => {:no_release => true} do
     run "cd #{current_path} && NEWRELIC_DISPATCHER=puma RAILS_ENV=production bundle exec pumactl -S #{shared_path}/sockets/puma.state stop"
-    run "cd #{current_path} && NEWRELIC_DISPATCHER=puma RAILS_ENV=production bundle exec puma -e production -t 4:8 -b tcp://41.215.236.134:8080 -S #{shared_path}/sockets/puma.state --control tcp://127.0.0.1:9293 >> #{shared_path}/log/puma-production.log 2>&1 &", :pty => false
+    run "cd #{current_path} && NEWRELIC_DISPATCHER=puma RAILS_ENV=production bundle exec puma -e production -t 5:10 -b tcp://41.215.236.134:8080 -S #{shared_path}/sockets/puma.state --control tcp://127.0.0.1:9293 >> #{shared_path}/log/puma-production.log 2>&1 &", :pty => false
 #    run "cd #{current_path} && NEWRELIC_DISPATCHER=puma RAILS_ENV=production bundle exec pumactl -S #{shared_path}/sockets/puma.state restart"
   end
 

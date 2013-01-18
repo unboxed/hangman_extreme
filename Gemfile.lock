@@ -115,7 +115,7 @@ GEM
     mime-types (1.19)
     mock_redis (0.6.2)
     multi_json (1.5.0)
-    mxit_api (0.2.0.pre)
+    mxit_api (0.2.1.pre)
       activesupport (>= 3.0.0)
       i18n (>= 0.5.0)
     mysql2 (0.3.11)
@@ -275,7 +275,7 @@ DEPENDENCIES
   launchy
   libv8 (~> 3.11.8)
   mock_redis
-  mxit_api (>= 0.2.0.pre)
+  mxit_api (>= 0.2.1.pre)
   mysql2
   newrelic-redis
   newrelic_rpm
