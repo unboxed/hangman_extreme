@@ -89,10 +89,19 @@ class User < ActiveRecord::Base
   end
 
   def registered_on_mxit_money?
-    connection = MxitMoneyApi.connect(ENV['MXIT_MONEY_API_KEY'])
-    if connection
-      result = connection.user_info(:id => uid)
-      result[:is_registered]
+    begin
+      connection = MxitMoneyApi.connect(ENV['MXIT_MONEY_API_KEY'])
+      if connection
+        result = connection.user_info(:id => uid)
+        result[:is_registered]
+      end
+    rescue Exception => e
+      Airbrake.notify_or_ignore(
+        e,
+        :parameters    => {:user => self},
+        :cgi_data      => ENV
+      )
+      false
     end
   end
 
