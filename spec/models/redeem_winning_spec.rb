@@ -49,6 +49,19 @@ describe RedeemWinning do
 
   end
 
+  context "scopes" do
+
+    describe "pending_mxit_money" do
+
+      it "must include a pending mxit money" do
+        winning = create(:redeem_winning, prize_amount: 10, prize_type: 'mxit_money', state: 'pending')
+        RedeemWinning.pending_mxit_money.should include(winning)
+      end
+
+    end
+
+  end
+
   context "update user" do
 
     it "must reduce user prize points after create" do
@@ -73,6 +86,77 @@ describe RedeemWinning do
         redeem_winning.save
       }.to change{user.reload;user.clue_points}.by(10)
     end
+
+  end
+
+  context "paid!" do
+
+    it "must update state to paid" do
+      winning = create(:redeem_winning, prize_amount: 10, prize_type: 'vodago_airtime', state: 'pending')
+      RedeemWinning.paid!(winning.id)
+      winning.reload
+      winning.state.should == 'paid'
+    end
+
+  end
+
+  context "issue_mxit_money_to_users" do
+
+    before :each do
+      @redeem_winning = stub_model(RedeemWinning, id: 333,
+                                                  prize_amount: 23,
+                                                  user: stub_model(User, prize_points: 1000,
+                                                                         uid: 'm221',
+                                                                         paid!: true))
+      RedeemWinning.stub!(:pending_mxit_money).and_return([@redeem_winning])
+      @mxit_money_connection = mock("connection",
+                                    :user_info => {is_registered: true, msisdn: '0713450987'},
+                                    :issue_money => {:m2_reference => "ref1"})
+      MxitMoneyApi.stub(:connect).and_return(@mxit_money_connection)
+    end
+
+    it "must get the mxit_money pending redeem winnings" do
+      RedeemWinning.should_receive(:pending_mxit_money).and_return([@redeem_winning])
+      RedeemWinning.issue_mxit_money_to_users
+    end
+
+    it "must connect to mxit money" do
+      MxitMoneyApi.should_receive(:connect).with(ENV['MXIT_MONEY_API_KEY']).and_return(@mxit_money_connection)
+      RedeemWinning.issue_mxit_money_to_users
+    end
+
+    it "must check the user_info with uid" do
+      @mxit_money_connection.should_receive(:user_info).with(:id => 'm221').and_return({})
+      RedeemWinning.issue_mxit_money_to_users
+    end
+
+    it "must issue money to user" do
+      @mxit_money_connection.should_receive(:issue_money).
+        with(:phone_number => '0713450987',
+             :merchant_reference => "RW333Y#{Time.current.yday}H#{Time.current.hour}",
+             :amount_in_cents => 23).and_return({})
+      RedeemWinning.issue_mxit_money_to_users
+    end
+
+    it "must update to paid!" do
+      @redeem_winning.should_receive(:update_attributes).with(:state => 'paid', :mxit_money_reference => "ref1")
+      RedeemWinning.issue_mxit_money_to_users
+    end
+
+    it "wont update to paid! if issue error" do
+      @mxit_money_connection.should_receive(:issue_money).and_return({})
+      @redeem_winning.should_not_receive(:update_attributes)
+      RedeemWinning.issue_mxit_money_to_users
+    end
+
+    it "must work even if error occurs" do
+      exception = Exception.new("error")
+      @mxit_money_connection.should_receive(:issue_money).and_raise(exception)
+      Airbrake.should_receive(:notify_or_ignore).
+        with(exception, :parameters => {:redeem_winning => @redeem_winning}, :cgi_data => ENV)
+      RedeemWinning.issue_mxit_money_to_users
+    end
+
 
   end
 

@@ -1,6 +1,6 @@
 class RedeemWinning < ActiveRecord::Base
   PRIZE_TYPES = ['clue_points','moola','vodago_airtime','cell_c_airtime','mtn_airtime','mxit_money']
-  attr_accessible :prize_amount, :prize_type, :state, :user_id
+  attr_accessible :prize_amount, :prize_type, :state, :user_id, :mxit_money_reference
 
   validates :user_id, presence: true
   validates :prize_type, inclusion: PRIZE_TYPES
@@ -11,15 +11,20 @@ class RedeemWinning < ActiveRecord::Base
   after_create :update_user_prize_points
 
   belongs_to :user
+  delegate :prize_points, :login, :mobile_number, :uid, :to => :user, :prefix => true
 
   scope :pending, where('state = ?','pending')
+  scope :pending_mxit_money, where('prize_type = ? AND state = ?','mxit_money','pending')
+
 
   def self.pending_winnings_text
-    pending.joins(:user).includes(:user).order('prize_type,uid').collect{|rw| [rw.prize_type,rw.id,rw.user.uid,rw.user.login,rw.user.mobile_number,rw.prize_amount].join(" : ")}.join("\n")
+    pending.joins(:user).includes(:user).order('prize_type,uid').collect{|rw| [rw.prize_type,rw.id,rw.user_uid,rw.user_login,rw.user_mobile_number,rw.prize_amount].join(" : ")}.join("\n")
   end
 
-  def self.paid!(id)
-    find(id).update_column(:state, 'paid')
+  def self.paid!(*ids)
+    ids.each do |id|
+      find(id).paid!
+    end
   end
 
   def self.cohort_array
@@ -38,11 +43,39 @@ class RedeemWinning < ActiveRecord::Base
     cohort.reverse
   end
 
+  def self.issue_mxit_money_to_users
+    connection = MxitMoneyApi.connect(ENV['MXIT_MONEY_API_KEY'])
+    if connection
+      pending_mxit_money.each do |winning|
+        begin
+          result = connection.user_info(:id => winning.user_uid)
+          if result[:is_registered]
+            result = connection.issue_money(:phone_number => result[:msisdn],
+                                            :merchant_reference => "RW#{winning.id}Y#{Time.current.yday}H#{Time.current.hour}",
+                                            :amount_in_cents => winning.prize_amount)
+            if result[:m2_reference]
+              winning.update_attributes(:state => 'paid', :mxit_money_reference => result[:m2_reference])
+            end
+          end
+        rescue Exception => e
+          Airbrake.notify_or_ignore(
+            e,
+            :parameters    => {:redeem_winning => winning},
+            :cgi_data      => ENV
+          )
+        end
+      end
+    end
+  end
+
+  def paid!
+    update_column(:state, 'paid')
+  end
 
   protected
 
   def check_user_prize_points
-    if user && prize_amount && user.prize_points < prize_amount
+    if user && prize_amount && user_prize_points < prize_amount
       errors.add(:user_id,"does not have enough prize points")
     end
   end
@@ -50,7 +83,7 @@ class RedeemWinning < ActiveRecord::Base
   def update_user_prize_points
     user.decrement!(:prize_points,prize_amount)
     if prize_type == 'clue_points'
-      update_column(:state, 'paid')
+      paid!
       user.increment!(:clue_points,prize_amount)
     end
   end

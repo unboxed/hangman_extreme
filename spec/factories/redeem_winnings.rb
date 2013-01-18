@@ -5,6 +5,6 @@ FactoryGirl.define do
     prize_amount 1
     prize_type "clue_points"
     state "pending"
-    user
+    user {create(:user, prize_points: 1000)}
   end
 end

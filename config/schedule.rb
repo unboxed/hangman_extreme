@@ -37,3 +37,7 @@ every :monday, :at => '12:01am' do
   runner "Game.purge_old!"
   runner "User.purge_tracking!"
 end
+
+every :hour do
+  runner "RedeemWinning.issue_mxit_money_to_users"
+end
