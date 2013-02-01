@@ -54,8 +54,8 @@ class RedeemWinning < ActiveRecord::Base
                                             :merchant_reference => "RW#{winning.id}Y#{Time.current.yday}H#{Time.current.hour}",
                                             :amount_in_cents => winning.prize_amount)
             if result[:m2_reference]
-              winning.update_attribute(:state,'paid')
-              winning.update_attribute(:mxit_money_reference,result[:m2_reference])
+              winning.update_column(:state,'paid')
+              winning.update_column(:mxit_money_reference,result[:m2_reference])
             end
           end
         rescue Exception => e

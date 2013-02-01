@@ -139,14 +139,14 @@ describe RedeemWinning do
     end
 
     it "must update to paid!" do
-      @redeem_winning.should_receive(:update_attribute).with(:state,'paid')
-      @redeem_winning.should_receive(:update_attribute).with(:mxit_money_reference,"ref1")
+      @redeem_winning.should_receive(:update_column).with(:state,'paid')
+      @redeem_winning.should_receive(:update_column).with(:mxit_money_reference,"ref1")
       RedeemWinning.issue_mxit_money_to_users
     end
 
     it "wont update to paid! if issue error" do
       @mxit_money_connection.should_receive(:issue_money).and_return({})
-      @redeem_winning.should_not_receive(:update_attribute)
+      @redeem_winning.should_not_receive(:update_column)
       RedeemWinning.issue_mxit_money_to_users
     end
 
