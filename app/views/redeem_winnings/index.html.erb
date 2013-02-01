@@ -26,16 +26,6 @@ You can redeem your points for:
     <%= number_to_currency(current_user.prize_points.to_f / 100, :unit => "R") %> mxit money</li>
   <% end %>
 
-  <% if current_user.prize_points < 50 %>
-      <li>moola (<span style="color: red;"><%= 50 - current_user.prize_points %> more prize points</span>)</li>
-  <% else # current_user.prize_points >= 50  %>
-      <li><%= link_to (index += 1).to_s,
-                      new_redeem_winning_path(:prize_type => 'moola',
-                                              :prize_amount => [current_user.prize_points,250].min),
-                      id: 'moola' %>
-        <%= [current_user.prize_points,250].min %> moola</li>
-  <% end %>
-
   <% ['vodago','cell_c','mtn'].each do |provider| %>
       <li>
       <% if current_user.prize_points < 500 %>

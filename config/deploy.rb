@@ -99,14 +99,31 @@ namespace :deploy do
 
   desc "Restart the application"
   task :restart, :roles => :app, :except => {:no_release => true} do
-    run "cd #{current_path} && NEWRELIC_DISPATCHER=puma RAILS_ENV=production bundle exec pumactl -S #{shared_path}/sockets/puma.state stop"
-    run "cd #{current_path} && NEWRELIC_DISPATCHER=puma RAILS_ENV=production bundle exec puma -e production -t 5:10 -b tcp://41.215.236.134:8080 -S #{shared_path}/sockets/puma.state --control tcp://127.0.0.1:9293 >> #{shared_path}/log/puma-production.log 2>&1 &", :pty => false
-#    run "cd #{current_path} && NEWRELIC_DISPATCHER=puma RAILS_ENV=production bundle exec pumactl -S #{shared_path}/sockets/puma.state restart"
+#    run "cd #{current_path} && NEWRELIC_DISPATCHER=puma RAILS_ENV=production bundle exec pumactl -S #{shared_path}/sockets/puma.state stop"
+#    run "cd #{current_path} && NEWRELIC_DISPATCHER=puma RAILS_ENV=production bundle exec puma -e production -t 5:10 -b tcp://41.215.236.134:8080 -S #{shared_path}/sockets/puma.state --control tcp://127.0.0.1:9293 >> #{shared_path}/log/puma-production.log 2>&1 &", :pty => false
+    run "cd #{current_path} && NEWRELIC_DISPATCHER=puma RAILS_ENV=production bundle exec pumactl -S #{shared_path}/sockets/puma.state restart"
   end
 
   desc "Status of the application"
   task :status, :roles => :app, :except => {:no_release => true} do
     run "cd #{current_path} && NEWRELIC_DISPATCHER=puma RAILS_ENV=production bundle exec pumactl -S #{shared_path}/sockets/puma.state stats"
   end
+end
+
+namespace :rails do
+  desc "Remote console"
+  task :console, :roles => :db do
+    run_interactively "cd #{current_path};ruby script/rails console production"
+  end
+
+  desc "Remote dbconsole"
+  task :dbconsole, :roles => :db do
+    run_interactively "cd #{current_path};ruby script/rails dbconsole production"
+  end
+end
+
+def run_interactively(command, server=nil)
+  server ||= find_servers_for_task(current_task).first
+  exec %Q(ssh #{user}@#{server.host} -t 'cd #{current_path} && #{command}')
 end
 

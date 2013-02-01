@@ -36,18 +36,6 @@ describe 'redeem winnings' do
     page.should have_content("20 clue points")
   end
 
-  it "must allow to redeem prize points for moola" do
-    stub_mxit_money
-    @current_user.update_attributes(:prize_points => 257)
-    visit '/'
-    click_link('redeem')
-    page.should have_content("257 prize points")
-    click_link('moola')
-    page.should have_content("250 moola")
-    click_button('redeem')
-    page.should have_content("7 prize points")
-  end
-
   it "must allow to redeem prize points for mxit_money" do
     stub_mxit_money(:is_registered => true)
     @current_user.update_attributes(:prize_points => 257)

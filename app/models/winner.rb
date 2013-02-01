@@ -38,14 +38,14 @@ class Winner < ActiveRecord::Base
     field = "#{options[:period]}_#{options[:score_by]}"
     winners = []
     User.top_scorers(field).group_by{|u| u.rank(field) }.each do |rank,users|
-      moola_total = 0
+      prize_total = 0
       users_count = users.size
       users.each_with_index do |user,index|
-        moola_total += (options[:winnings][rank - 1 + index]  || options[:winnings].last)
+        prize_total += (options[:winnings][rank - 1 + index]  || options[:winnings].last)
       end
       users.each do |user|
         winners << Winner.create(user_id: user.id,
-                              amount: (moola_total.to_f / users_count).round,
+                              amount: (prize_total.to_f / users_count).round,
                               reason: options[:score_by],
                               end_of_period_on: Date.current,
                               period: options[:period])

@@ -13,8 +13,7 @@
     <% elsif @redeem_winning.prize_type.include?('mxit_money') %>
         <%= number_to_currency(@redeem_winning.prize_amount.to_f / 100, :unit => "R") %> mxit money
     <% else %>
-        <%= @redeem_winning.prize_amount %>
-          <%= @redeem_winning.prize_type == 'moola' ? "moola" : "clue points" %>
+        <%= @redeem_winning.prize_amount %> <%= "clue points" %>
     <% end %>
     </i>
     <br/>

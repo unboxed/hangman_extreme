@@ -51,35 +51,6 @@ describe "redeem_winnings/index.html.erb" do
 
   end
 
-  context "moola" do
-
-    it "must have equal moola available to prize points" do
-      @current_user.prize_points = 55
-      render
-      rendered.should have_content("#{@current_user.prize_points} moola")
-    end
-
-    it "must have a maximum of 250 moola available" do
-      @current_user.prize_points = 255
-      render
-      rendered.should have_content("250 moola")
-    end
-
-    it "must have a moola link" do
-      @current_user.prize_points = 51
-      render
-      rendered.should have_link("moola", href: new_redeem_winning_path(:prize_type => 'moola',
-                                                                       :prize_amount => 51))
-    end
-
-    it "wont have a moola link if not enough prize points" do
-      @current_user.prize_points = 49
-      render
-      rendered.should_not have_link("moola")
-    end
-
-  end
-
   context "mxit money" do
 
     before :each do
@@ -118,7 +89,7 @@ describe "redeem_winnings/index.html.erb" do
 
     context "#{provider} airtime" do
 
-      it "must have R2 vodago airtime" do
+      it "must have R2 #{provider} airtime" do
         @current_user.prize_points = 500
         render
         rendered.should have_content("R5 #{provider.gsub("_"," ")} airtime")
@@ -130,7 +101,7 @@ describe "redeem_winnings/index.html.erb" do
         rendered.should have_content("R5 #{provider.gsub("_"," ")} airtime")
       end
 
-      it "must have a vodago airtime link" do
+      it "must have a #{provider} airtime link" do
         @current_user.prize_points = 520
         render
         rendered.should have_link("#{provider}_airtime",
@@ -138,7 +109,7 @@ describe "redeem_winnings/index.html.erb" do
                                                                 :prize_amount => 500))
       end
 
-      it "wont have a moola link if not enough prize points" do
+      it "wont have a #{provider} link if not enough prize points" do
         @current_user.prize_points = 499
         render
         rendered.should_not have_link("#{provider}_airtime")
