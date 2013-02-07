@@ -63,25 +63,6 @@ describe 'users' do
     page.current_path.should == '/'
   end
 
-  it "must show stats" do
-    stub_mxit_oauth
-    MxitApiWrapper.any_instance.stub(:send_message).and_return(true)
-
-    users = create_list(:user,5, prize_points: 14)
-    users.each do |user|
-      14.times do |i|
-        Timecop.freeze(i.days.ago) do
-          create_list(:won_game,2, user: user)
-          create(:purchase_transaction, user: user)
-          create(:redeem_winning, user: user)
-        end
-      end
-    end
-    Winner.create_daily_winners
-    visit '/users/stats'
-    page.should have_content("Date")
-  end
-
   it "must show the profile if user mxit input is profile" do
     add_headers('X_MXIT_USER_INPUT' => 'profile')
     visit '/'

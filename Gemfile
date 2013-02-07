@@ -28,6 +28,11 @@ gem 'mxit_api', '>= 0.2.1.pre'
 gem 'wordnik'
 gem 'whenever', :require => false
 
+gem 'activeadmin'
+gem 'sass-rails'
+gem "meta_search"
+
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -38,6 +43,7 @@ group :assets do
     gem 'libv8', '~> 3.11.8'
     gem 'therubyracer'
   end
+  gem 'coffee-rails'
   gem 'uglifier', '>= 1.0.3'
 end
 

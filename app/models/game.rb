@@ -88,6 +88,7 @@ class Game < ActiveRecord::Base
 
   def self.cohort_array
     cohort = []
+    return cohort unless Game.maximum(:created_at)
     day = Game.maximum(:created_at).beginning_of_day - 1.day
     first_day = day - 20.days
     while(day >= first_day) do

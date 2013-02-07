@@ -49,7 +49,7 @@
         data.addColumn('number', 'Inactive users');
         data.addColumn('number', 'Casual users');
         data.addColumn('number', 'Competitive users');
-        data.addRows(<%= raw @cohort_percentage.to_json %>);
+        data.addRows(<%= raw stats.cohort_percentage.to_json %>);
 
         var chart = new google.visualization.AreaChart(document.getElementById('chart'));
         chart.draw(data, $.extend({isStacked: true }, defaultGraphStyles, { title:'Cohort' }));
@@ -60,7 +60,7 @@
         data.addColumn('number', 'New Competitive users');
         data.addColumn('number', 'Casual users');
         data.addColumn('number', 'Competitive users');
-        data.addRows(<%= raw @cohort.collect{|v|[v[0], v[1],v[2],v[4],v[5]]}.to_json %>);
+        data.addRows(<%= raw stats.cohort.collect{|v|[v[0], v[1],v[2],v[4],v[5]]}.to_json %>);
 
         chart = new google.visualization.AreaChart(document.getElementById('growth'));
         chart.draw(data, $.extend({isStacked: true }, defaultGraphStyles, { title:'Active Growth' }));
@@ -71,7 +71,7 @@
         data.addColumn('number', 'no clue incompleted');
         data.addColumn('number', 'no clue completed');
         data.addColumn('number', 'clue completed');
-        data.addRows(<%= raw @games_cohort_percentage.to_json %>);
+        data.addRows(<%= raw stats.games_cohort_percentage.to_json %>);
 
         chart = new google.visualization.AreaChart(document.getElementById('games_cohort'));
         chart.draw(data, $.extend({isStacked: true }, defaultGraphStyles, { title:'Games cohort' }));
@@ -82,7 +82,7 @@
         data.addColumn('number', 'no clue incompleted');
         data.addColumn('number', 'no clue completed');
         data.addColumn('number', 'clue completed');
-        data.addRows(<%= raw @games_cohort.to_json %>);
+        data.addRows(<%= raw stats.games_cohort.to_json %>);
 
         chart = new google.visualization.AreaChart(document.getElementById('games_growth'));
         chart.draw(data, $.extend({isStacked: true }, defaultGraphStyles, { title:'Games growth' }));
@@ -92,7 +92,7 @@
         data.addColumn('number', 'In a row Winners');
         data.addColumn('number', 'Previous Winners');
         data.addColumn('number', 'First Time Winners');
-        data.addRows(<%= raw @winners_cohort.to_json %>);
+        data.addRows(<%= raw stats.winners_cohort.to_json %>);
 
         chart = new google.visualization.AreaChart(document.getElementById('winners_cohort'));
         chart.draw(data, $.extend({isStacked: true }, defaultGraphStyles, { title:'Winners cohort' }));
@@ -102,7 +102,7 @@
         <% PurchaseTransaction.products.each do |product_id,product_details| %>
             data.addColumn('number', "<%= product_id %>");
         <% end %>
-        data.addRows(<%= raw @purchase_cohort.to_json %>);
+        data.addRows(<%= raw stats.purchase_cohort.to_json %>);
 
         chart = new google.visualization.AreaChart(document.getElementById('purchases_cohort'));
         chart.draw(data, $.extend({isStacked: true }, defaultGraphStyles, { title:'Moola purchases' }));
@@ -112,7 +112,7 @@
         <% RedeemWinning::PRIZE_TYPES.each do |prize_type| %>
             data.addColumn('number', "<%= prize_type %>");
         <% end %>
-        data.addRows(<%= raw @redeem_cohort.to_json %>);
+        data.addRows(<%= raw stats.redeem_cohort.to_json %>);
 
         chart = new google.visualization.AreaChart(document.getElementById('redeem_cohort'));
         chart.draw(data, $.extend({isStacked: true }, defaultGraphStyles, { title:'Redeem Winning points' }));

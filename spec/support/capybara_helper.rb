@@ -1,15 +1,12 @@
 def visit_and_login(url,user = create(:admin_user))
   visit url
-  click_link 'login' if page.has_link?('login')
   login_admin_user(user)
 end
 
 def login_admin_user(user)
-  within("#new_admin_user") do
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    click_button 'Sign in'
-  end
+  fill_in 'Email', :with => user.email
+  fill_in 'Password', :with => user.password
+  click_button 'Login'
 end
 
 def click_link_and_confirm(link)

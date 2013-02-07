@@ -38,7 +38,8 @@ class PurchaseTransaction < ActiveRecord::Base
 
   def self.cohort_array
     cohort = []
-    day = maximum(:created_at).end_of_day
+    day = maximum(:created_at).try(:end_of_day)
+    return [] unless day
     first_day = 21.days.ago
     while(day >= first_day) do
       scope = where('created_at >= ? AND created_at <= ?',day.beginning_of_day,day)
