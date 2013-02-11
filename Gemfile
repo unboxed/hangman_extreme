@@ -9,13 +9,10 @@ end
 platforms :ruby do
   gem 'pg'
 end
-gem 'newrelic_rpm'
-gem 'newrelic-redis'
 gem 'puma'
 gem 'cancan'
 gem 'omniauth'
 gem 'kaminari'
-gem 'gabba'
 gem 'nokogiri'
 gem 'json'
 gem 'airbrake'
@@ -23,14 +20,18 @@ gem 'redis-settings'
 gem 'rest-client', require: 'rest_client'
 gem 'redis'
 gem 'ohm'
-gem 'uservoice-ruby'
 gem 'mxit_api', '>= 0.2.1.pre'
-gem 'wordnik'
 gem 'whenever', :require => false
-
 gem 'activeadmin'
 gem 'sass-rails'
 gem "meta_search"
+
+# third party
+gem 'uservoice-ruby'
+gem 'gabba' # google analytics
+gem 'newrelic_rpm'
+gem 'wordnik'
+gem 'remote_syslog'
 
 
 # Gems used only for assets and not required
