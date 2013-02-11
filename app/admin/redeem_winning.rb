@@ -8,7 +8,10 @@ ActiveAdmin.register RedeemWinning do
     column :user_login
     column :user_mobile_number
     column :prize_amount
-    default_actions
+    column :created_at
+    column "" do |resource|
+      link_to('Paid', paid_admin_redeem_winning_path(resource), :method => :put) unless resource.paid?
+    end
   end
 
   member_action :paid, :method => :put do

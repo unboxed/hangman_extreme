@@ -74,6 +74,10 @@ class RedeemWinning < ActiveRecord::Base
     update_column(:state, 'paid')
   end
 
+  def paid?
+    state == 'paid'
+  end
+
   protected
 
   def check_user_prize_points
