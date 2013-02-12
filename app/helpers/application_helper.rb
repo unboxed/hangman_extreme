@@ -67,4 +67,9 @@ module ApplicationHelper
             options)
   end
 
+  def smart_link_to(name,*args)
+    link_text, left_text = name.split(/\s/)
+    link_to(link_text,*args) + " #{left_text.to_s}"
+  end
+
 end
