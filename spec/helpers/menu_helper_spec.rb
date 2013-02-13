@@ -76,6 +76,14 @@ describe MenuHelper do
         end
       end
 
+      it "must work with text markup"  do
+        helper.menu_item '<a id="grant" href="/speelman">Hello</a>'
+        render_menu
+        within("li.item1") do
+          rendered.should have_css("a#grant[href='/speelman']")
+        end
+      end
+
     end
 
   end
