@@ -24,16 +24,7 @@ module MenuHelper
   end
 
   def menu
-    content_tag("ul", :class => "menu") do
-      item = 0
-      grouped_menu_items.collect do |menu_items|
-        content_tag("li", :class => "item#{item += 1}") do
-          menu_items.collect do |menu_item|
-            menu_item.size == 1 ? menu_item.first : smart_link_to(*menu_item)
-          end.join(" | ").html_safe
-        end
-      end.join("\n").html_safe
-    end
+    render :partial => "layouts/menu", :locals => {:grouped_menu_items => grouped_menu_items}
   end
 
 end

@@ -56,19 +56,20 @@ module ApplicationHelper
   end
 
   def mxit_authorise_link(name,url_options,options = {})
-    link_to(name,
-            mxit_authorise_url(url_options.reverse_merge(
-                                  response_type: 'code',
-                                  host: Rails.env.test? ? request.host : "auth.mxit.com",
-                                  protocol: Rails.env.test? ? 'http' : 'https',
-                                  client_id: ENV['MXIT_CLIENT_ID'],
-                                  redirect_uri: mxit_oauth_users_url(host: request.host),
-                                  scope: "profile/public profile/private")),
-            options)
+    link_to(name,*mxit_authorise_args(url_options),options)
+  end
+
+  def mxit_authorise_args(url_options)
+     url_options.reverse_merge(response_type: 'code',
+                               host: Rails.env.test? ? request.host : "auth.mxit.com",
+                               protocol: Rails.env.test? ? 'http' : 'https',
+                               client_id: ENV['MXIT_CLIENT_ID'],
+                               redirect_uri: mxit_oauth_users_url(host: request.host),
+                               scope: "profile/public profile/private")
   end
 
   def smart_link_to(name,*args)
-    link_text, left_text = name.split(/\s/)
+    link_text, left_text = name.split(/\s/,2)
     link_to(link_text,*args) + " #{left_text.to_s}"
   end
 

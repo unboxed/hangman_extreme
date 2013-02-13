@@ -11,6 +11,7 @@ describe "games/index" do
     ])
     @current_user = stub_model(User, id: 50)
     view.stub!(:current_user).and_return(@current_user)
+    view.stub!(:menu_item)
   end
 
   it "renders a list of games" do
@@ -35,44 +36,48 @@ describe "games/index" do
     end
   end
 
-  it "should have a new_game link" do
+  it "should add a new_game link to menu" do
+    view.should_receive(:menu_item).with(anything,new_game_path,id: 'new_game')
     render
-    rendered.should have_link("new_game", href: new_game_path)
   end
 
-  it "should have a view rank link" do
+  it "should have a view rank link on the menu" do
+    view.should_receive(:menu_item).with(anything,user_path(50),id: 'view_rank')
     render
-    rendered.should have_link("view_rank", href: user_path(50))
   end
 
-  it "should have a feedback link" do
+  it "should have a feedback link on the menu" do
+    args = {response_type: 'code',
+            host: "test.host",
+            protocol: 'http',
+            client_id: ENV['MXIT_CLIENT_ID'],
+            redirect_uri: mxit_oauth_users_url(host: "test.host"),
+            scope: "profile/public profile/private",
+            state: "feedback"}
+    view.should_receive(:menu_item).with(anything,args,id: 'feedback')
     render
-    rendered.should have_link("feedback", href: mxit_authorise_url(response_type: 'code',
-                                                                    host: "test.host",
-                                                                    client_id: ENV['MXIT_CLIENT_ID'],
-                                                                    redirect_uri: mxit_oauth_users_url(host: "test.host"),
-                                                                    scope: "profile/public profile/private",
-                                                                    state: "feedback"))
   end
 
   it "should have a authorise" do
+    args = {response_type: 'code',
+            host: "test.host",
+            protocol: 'http',
+            client_id: ENV['MXIT_CLIENT_ID'],
+            redirect_uri: mxit_oauth_users_url(host: "test.host"),
+            scope: "profile/public profile/private",
+            state: "profile"}
+    view.should_receive(:menu_item).with(anything,args,id: 'authorise')
     render
-    rendered.should have_link("authorise", href: mxit_authorise_url(response_type: 'code',
-                                                                    host: "test.host",
-                                                                    client_id: ENV['MXIT_CLIENT_ID'],
-                                                                    redirect_uri: mxit_oauth_users_url(host: "test.host"),
-                                                                    scope: "profile/public profile/private",
-                                                                    state: "profile"))
   end
 
   it "should have a buy more clue points link" do
+    view.should_receive(:menu_item).with(anything,purchases_path,id: 'buy_clue_points')
     render
-    rendered.should have_link("buy_clue_points", href: purchases_path)
   end
 
   it "should have a link to redeem winnings if user have prize points" do
+    view.should_receive(:menu_item).with(anything,redeem_winnings_path,id: 'redeem')
     render
-    rendered.should have_link("redeem", href: redeem_winnings_path)
   end
 
 end
