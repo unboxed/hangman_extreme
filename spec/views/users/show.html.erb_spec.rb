@@ -15,7 +15,7 @@ describe "users/show.html.erb" do
 
   it "renders a list of games" do
     render
-    rendered.should have_content("score")
+    rendered.should have_content("streak")
     rendered.should have_content("rating")
     rendered.should have_content("precision")
   end
@@ -23,8 +23,8 @@ describe "users/show.html.erb" do
   context "Today scores" do
 
     it "must show score scored" do
-      @user.should_receive(:daily_score).and_return("111")
-      @user.should_receive(:rank).with(:daily_score).and_return(1)
+      @user.should_receive(:daily_streak).and_return("111")
+      @user.should_receive(:rank).with(:daily_streak).and_return(1)
       render
       rendered.should have_content("111")
       rendered.should have_content("1st")
@@ -51,8 +51,8 @@ describe "users/show.html.erb" do
   context "Weeks scores" do
 
     it "must show score scored" do
-      @user.should_receive(:weekly_score).and_return("1111")
-      @user.should_receive(:rank).with(:weekly_score).and_return(1)
+      @user.should_receive(:weekly_streak).and_return("1111")
+      @user.should_receive(:rank).with(:weekly_streak).and_return(1)
       render
       rendered.should have_content("1111")
       rendered.should have_content("1st")

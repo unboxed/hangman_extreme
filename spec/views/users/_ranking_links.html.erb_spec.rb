@@ -13,9 +13,9 @@ describe "users/_ranking_links.html.erb" do
     rendered.should have_link("weekly_rating", :href => users_path(period: 'weekly'))
   end
 
-  it "must have points,rating and precision links" do
+  it "must have streak,rating and precision links" do
     render :partial => "users/ranking_links"
-    rendered.should have_link("daily_score", :href => users_path(rank_by: 'score'))
+    rendered.should have_link("daily_streak", :href => users_path(rank_by: 'streak'))
     rendered.should have_link("daily_rating", :href => users_path(rank_by: 'rating'))
     rendered.should have_link("daily_precision", :href => users_path(rank_by: 'precision'))
   end

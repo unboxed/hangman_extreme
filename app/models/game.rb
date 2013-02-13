@@ -16,12 +16,12 @@ class Game < ActiveRecord::Base
   scope :completed, where('completed = ?', true)
   scope :incompleted, where('completed = ?', false)
 
-  scope :today, lambda{ where('created_at > ?',Time.current.beginning_of_day) }
-  scope :since_yesterday, lambda{ where('created_at > ?',Time.current.beginning_of_day - 1.day) }
+  scope :today, lambda{ where('created_at >= ?',Time.current.beginning_of_day) }
+  scope :since_yesterday, lambda{ where('created_at >= ?',Time.current.beginning_of_day - 1.day) }
 
-  scope :this_week, lambda{ where('created_at > ?',Time.current.beginning_of_week) }
-  scope :this_month, lambda{ where('created_at > ?',Time.current.beginning_of_month) }
-  scope :this_year, lambda{ where('created_at > ?',Time.current.beginning_of_year) }
+  scope :this_week, lambda{ where('created_at >= ?',Time.current.beginning_of_week) }
+  scope :this_month, lambda{ where('created_at >= ?',Time.current.beginning_of_month) }
+  scope :this_year, lambda{ where('created_at >= ?',Time.current.beginning_of_year) }
   scope :top, lambda{ |amount| order('score DESC').limit(amount) }
 
   def select_random_word
@@ -118,8 +118,18 @@ class Game < ActiveRecord::Base
   end
 
   def update_user_score
-    user.update_ratings if completed?
+    if completed?
+      update_user_streak
+      user.update_ratings
+    end
   end
 
+  def update_user_streak
+    if is_won?
+      user.increment_streak
+    else
+      user.reset_streak
+    end
+  end
 
 end

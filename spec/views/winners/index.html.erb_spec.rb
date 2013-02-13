@@ -48,7 +48,7 @@ describe "winners/index.html.erb" do
 
   it "should have a score link" do
     render
-    rendered.should have_link("daily_score", href: winners_path(reason: 'score'))
+    rendered.should have_link("daily_streak", href: winners_path(reason: 'streak'))
   end
 
   it "should have a daily link" do

@@ -18,50 +18,6 @@ describe User do
     User.new(uid: 'xx', provider: "zz").should have(0).errors_on(:uid)
   end
 
-  context "calculate_daily_score" do
-
-    it "must use only won games" do
-      user = create(:user)
-      create_list(:won_game,5, user: user)
-      create(:lost_game, user: user)
-      create(:game, user: user)
-      user.calculate_daily_score.should == 27
-    end
-
-
-    it "must use games only from today" do
-      user = create(:user)
-      create_list(:won_game,2,user: user)
-      Timecop.freeze(1.day.ago) do
-        create_list(:won_game,2,user: user)
-      end
-      user.calculate_daily_score.should == 20
-    end
-
-  end
-
-  context "calculate_weekly_score" do
-
-    it "must use only won games" do
-      user = create(:user)
-      create_list(:won_game,5, user: user)
-      create(:lost_game, user: user)
-      create(:game, user: user)
-      user.calculate_weekly_score.should == 27
-    end
-
-
-    it "must use games only from this week" do
-      user = create(:user)
-      create_list(:won_game,2,user: user)
-      Timecop.freeze(1.week.ago - 1.day) do
-        create_list(:won_game,2,user: user)
-      end
-      user.calculate_weekly_score.should == 20
-    end
-
-  end
-
   context "calculate_daily_precision" do
 
     it "must use the attempts left per game" do
@@ -188,26 +144,20 @@ describe User do
       user.stub(:calculate_weekly_rating).and_return(20)
       user.stub(:calculate_daily_precision).and_return(75)
       user.stub(:calculate_weekly_precision).and_return(100)
-      user.stub(:calculate_daily_score).and_return(50)
-      user.stub(:calculate_weekly_score).and_return(200)
       user.update_ratings
       user.daily_rating.should == 10
       user.weekly_rating.should == 20
       user.daily_precision.should == 75
       user.weekly_precision.should == 100
-      user.daily_score.should == 50
-      user.weekly_score.should == 200
     end
 
     it "must update the daily scores" do
       user = stub_model(User)
       user.should_receive(:calculate_daily_rating).and_return(10)
       user.should_receive(:calculate_daily_precision).and_return(75)
-      user.should_receive(:calculate_daily_score).and_return(50)
       user.update_daily_scores
       user.daily_rating.should == 10
       user.daily_precision.should == 75
-      user.daily_score.should == 50
     end
 
     it "must update weekly scores" do
@@ -218,7 +168,6 @@ describe User do
       user.update_ratings
       user.weekly_rating.should == 20
       user.weekly_precision.should == 100
-      user.weekly_score.should == 200
     end
 
   end
@@ -247,50 +196,58 @@ describe User do
   context "new_day_set_scores!" do
 
     it "must set all daily scores to 0" do
-      user = create(:user,daily_rating: 11, daily_precision: 12, daily_score: 13)
+      user = create(:user,daily_rating: 11, daily_precision: 12, daily_streak: 13, current_daily_streak: 14)
       User.new_day_set_scores!
       user.reload
       user.daily_rating.should == 0
       user.daily_precision.should == 0
-      user.daily_score.should == 0
+      user.daily_streak.should == 0
+      user.current_daily_streak.should == 0
     end
 
     it "must set all weekly scores to 0 if beginning of week" do
-      user = create(:user,weekly_rating: 11, weekly_precision: 12, weekly_score: 13)
+      user = create(:user,weekly_rating: 11, weekly_precision: 12, weekly_streak: 13, current_weekly_streak: 14)
       Timecop.freeze(Time.current.beginning_of_week) do
         User.new_day_set_scores!
         user.reload
         user.weekly_rating.should == 0
         user.weekly_precision.should == 0
-        user.weekly_score.should == 0
+        user.weekly_streak.should == 0
+        user.current_weekly_streak.should == 0
       end
     end
 
     it "wont set all weekly scores to 0 if not beginning of week" do
-      user = create(:user,weekly_rating: 11, weekly_precision: 12, weekly_score: 13)
+      user = create(:user,weekly_rating: 11, weekly_precision: 12, weekly_streak: 13, current_weekly_streak: 14)
       Timecop.freeze(Time.current.beginning_of_week + 2.days) do
         User.new_day_set_scores!
         user.reload
         user.weekly_rating.should == 11
         user.weekly_precision.should == 12
-        user.weekly_score.should == 13
+        user.weekly_streak.should == 13
+        user.current_weekly_streak.should == 14
       end
     end
 
+  end
+
+  context "update_scores!" do
+
     it "must set all scores for players who have played today" do
+      scoring_fields = User.scoring_fields.delete_if{|s| s.to_s.include?('streak')}
       Timecop.freeze(2013, 4, 1,1) do # Monday 1st April
-        user = create(:won_game).user
+        user = create(:user)
         create_list(:won_game,20, user: user)
         user.update_ratings
-        scores = User.scoring_fields.collect{|field| [field,user.send(field.to_sym)] }
+        scores = scoring_fields.collect{|field| [field,user.send(field.to_sym)] }
         User.new_day_set_scores!
+        User.update_scores!
         user.reload
-        new_scores = User.scoring_fields.collect{|field| [field,user.send(field.to_sym)] }
+        new_scores = scoring_fields.collect{|field| [field,user.send(field.to_sym)] }
         scores.each do |score|
           new_scores.should include(score)
         end
       end
-
     end
 
   end
@@ -425,6 +382,158 @@ describe User do
         end
       end
       User.cohort_array.should be_kind_of(Array)
+    end
+
+  end
+
+  context "reset_current_daily_streak" do
+
+    it "must set current_daily_streak to 0" do
+      user = User.new
+      user.current_daily_streak = 2
+      lambda{
+        user.reset_streak
+      }.should change(user,:current_daily_streak).from(2).to(0)
+    end
+
+  end
+
+  context "increment_current_daily_streak" do
+
+    it "must set current_daily_streak to 3" do
+      user = User.new
+      user.current_daily_streak = 2
+      lambda{
+        user.increment_streak
+      }.should change(user,:current_daily_streak).from(2).to(3)
+    end
+
+    it "must set daily_streak to 3" do
+      user = User.new
+      user.current_daily_streak = 2
+      lambda{
+        user.increment_streak
+      }.should change(user,:daily_streak).to(3)
+    end
+
+    it "wont change daily_streak" do
+      user = User.new
+      user.daily_streak = 4
+      user.current_daily_streak = 2
+      lambda{
+        user.increment_streak
+      }.should_not change(user,:daily_streak)
+    end
+
+  end
+
+  context "daily_streak" do
+
+    before :each do
+      @user = create(:user)
+    end
+
+    it "starts at zero" do
+      @user.daily_streak.should == 0
+    end
+
+    it "should have a streak of 1 after 1 win" do
+      create(:won_game, :user => @user)
+      @user.daily_streak.should == 1
+    end
+
+    it "should have a streak of 2 after 2 wins" do
+      create_list(:won_game,2, :user => @user)
+      @user.daily_streak.should == 2
+    end
+
+    it "should have a streak of 1 after 1 win and 1 loss" do
+      create(:won_game, :user => @user)
+      create(:lost_game, :user => @user)
+      @user.daily_streak.should == 1
+    end
+
+    it "should have a streak of 2 after 1 win and 1 loss and 2 wins" do
+      create(:won_game, :user => @user)
+      create(:lost_game, :user => @user)
+      create_list(:won_game, 2, :user => @user)
+      @user.daily_streak.should == 2
+    end
+
+  end
+
+  context "reset_current_weekly_streak" do
+
+    it "must set current_weekly_streak to 0" do
+      user = User.new
+      user.current_weekly_streak = 2
+      lambda{
+        user.reset_streak
+      }.should change(user,:current_weekly_streak).from(2).to(0)
+    end
+
+  end
+
+  context "increment_current_weekly_streak" do
+
+    it "must set current_weekly_streak to 3" do
+      user = User.new
+      user.current_weekly_streak = 2
+      lambda{
+        user.increment_streak
+      }.should change(user,:current_weekly_streak).from(2).to(3)
+    end
+
+    it "must set daily_streak to 3" do
+      user = User.new
+      user.current_weekly_streak = 2
+      lambda{
+        user.increment_streak
+      }.should change(user,:weekly_streak).to(3)
+    end
+
+    it "wont change daily_streak" do
+      user = User.new
+      user.weekly_streak = 4
+      user.current_weekly_streak = 2
+      lambda{
+        user.increment_streak
+      }.should_not change(user,:weekly_streak)
+    end
+
+  end
+
+  context "weekly_streak" do
+
+    before :each do
+      @user = create(:user)
+    end
+
+    it "starts at zero" do
+      @user.weekly_streak.should == 0
+    end
+
+    it "should have a streak of 1 after 1 win" do
+      create(:won_game, :user => @user)
+      @user.weekly_streak.should == 1
+    end
+
+    it "should have a streak of 2 after 2 wins" do
+      create_list(:won_game,2, :user => @user)
+      @user.weekly_streak.should == 2
+    end
+
+    it "should have a streak of 1 after 1 win and 1 loss" do
+      create(:won_game, :user => @user)
+      create(:lost_game, :user => @user)
+      @user.weekly_streak.should == 1
+    end
+
+    it "should have a streak of 2 after 1 win and 1 loss and 2 wins" do
+      create(:won_game, :user => @user)
+      create(:lost_game, :user => @user)
+      create_list(:won_game, 2, :user => @user)
+      @user.weekly_streak.should == 2
     end
 
   end

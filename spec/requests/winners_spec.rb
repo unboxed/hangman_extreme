@@ -27,7 +27,7 @@ describe 'winners' do
     users.each do |winner|
       page.should have_content(winner.name)
     end
-    click_link('score')
+    click_link('streak')
     users.each do |winner|
       page.should have_content(winner.name)
     end
@@ -43,7 +43,7 @@ describe 'winners' do
     users.each do |winner|
       page.should have_content(winner.name)
     end
-    click_link('score')
+    click_link('streak')
     users.each do |winner|
       page.should have_content(winner.name)
     end

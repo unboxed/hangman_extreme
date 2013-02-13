@@ -27,14 +27,6 @@ class User < ActiveRecord::Base
     return user
   end
 
-  def calculate_daily_score
-    calculate_games_score(games.today)
-  end
-
-  def calculate_weekly_score
-    calculate_games_score(games.this_week)
-  end
-
   def calculate_daily_precision
     calculate_precision(games.today)
   end
@@ -59,14 +51,12 @@ class User < ActiveRecord::Base
   def update_daily_scores
     self.daily_rating = calculate_daily_rating
     self.daily_precision = calculate_daily_precision
-    self.daily_score = calculate_daily_score
     save
   end
 
   def update_weekly_scores
     self.weekly_rating = calculate_weekly_rating
     self.weekly_precision = calculate_weekly_precision
-    self.weekly_score = calculate_weekly_score
     save
   end
 
@@ -146,11 +136,14 @@ class User < ActiveRecord::Base
   end
 
   def self.new_day_set_scores!
-    User.update_all(daily_rating: 0, daily_precision: 0, daily_score: 0)
+    User.update_all(daily_rating: 0, daily_precision: 0, daily_streak: 0, current_daily_streak: 0)
     if Date.current == Date.current.beginning_of_week
-      User.update_all(weekly_rating: 0, weekly_precision: 0, weekly_score: 0)
+      User.update_all(weekly_rating: 0, weekly_precision: 0, weekly_streak: 0, current_weekly_streak: 0)
     end
-    user_ids = Game.since_yesterday.collect{|g|g.user_id}.uniq
+  end
+
+  def self.update_scores!
+    user_ids = Game.today.collect{|g|g.user_id}.uniq
     User.where('id IN (?)',user_ids).each do |user|
       begin
         user.update_daily_scores
@@ -208,23 +201,23 @@ class User < ActiveRecord::Base
     RANKING_FIELDS.clone
   end
 
+  def increment_streak
+    increment(:current_daily_streak)
+    self.daily_streak = current_daily_streak if (current_daily_streak > daily_streak)
+    increment(:current_weekly_streak)
+    self.weekly_streak = current_weekly_streak if (current_weekly_streak > weekly_streak)
+  end
+  
   def current_game
     games.incompleted.active_first.first
   end
 
-  private
-
-  def calculate_games_score(scope)
-    scope.all.inject(0) do |acc,game|
-      if game.is_won?
-        acc += 10
-      elsif game.is_lost?
-        acc -= 3
-      else
-        acc -= 20
-      end
-    end
+  def reset_streak
+    self.current_daily_streak = 0
+    self.current_weekly_streak = 0
   end
+
+  private
 
   def calculate_precision(game_scope, game_count = 10)
     scope = game_scope.completed

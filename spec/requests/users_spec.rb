@@ -24,20 +24,20 @@ describe 'users' do
     User.add_clue_point_to_active_players!
     visit '/'
     click_link('view_rank')
-    click_link('daily_score')
+    click_link('daily_streak')
     users.each do |user|
       page.should have_content(user.name)
     end
     click_link('root_page')
     page.current_path.should == '/'
     click_link('view_rank')
-    ['daily'].product(['rating','precision','score']).map{|x,y| "#{x}_#{y}"}.each do |link|
+    ['daily'].product(['rating','precision','streak']).map{|x,y| "#{x}_#{y}"}.each do |link|
       click_link(link)
       users.each do |user|
         page.should have_content(user.name)
       end
     end
-    ['weekly'].product(['score','rating','precision']).map{|x,y| "#{x}_#{y}"}.each do |link|
+    ['weekly'].product(['streak','rating','precision']).map{|x,y| "#{x}_#{y}"}.each do |link|
       click_link(link)
       users.each do |user|
         page.should have_content(user.name)
