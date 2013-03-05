@@ -9,7 +9,7 @@
 </ul>
 
 <br/>
-<%= link_to 'home', root_path, id: 'root_page' %> |
-view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %> |
+<% menu_item 'home', root_path, id: 'root_page' %>
+<% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
 <%= render :partial => "ranking_links" %>
 

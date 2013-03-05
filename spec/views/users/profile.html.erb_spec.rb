@@ -6,6 +6,7 @@ describe "users/profile.html.erb" do
   before(:each) do
     @user = stub_model(User, real_name: "Grant Petersen", mobile_number: "123", clue_points: 20)
     view.stub(:current_user).and_return(@user)
+    view.stub!(:menu_item)
   end
 
   it "must show real name and mobile number" do
@@ -16,8 +17,8 @@ describe "users/profile.html.erb" do
   end
 
   it "should have a home page link" do
+    view.should_receive(:menu_item).with(anything,root_path,id: 'root_page')
     render
-    rendered.should have_link("root_page", href: '/')
   end
 
   it "should have a modify real name link" do
@@ -31,8 +32,8 @@ describe "users/profile.html.erb" do
   end
 
   it "should have a buy more clue points link" do
+    view.should_receive(:menu_item).with(anything,purchases_path,id: 'buy_clue_points')
     render
-    rendered.should have_link("buy_clue_points", href: purchases_path)
   end
 
 end

@@ -63,6 +63,23 @@ describe 'Starting a new  game' do
     page.should have_content("kevin")
   end
 
+  it "must allow you to start a new game and leave and continue it later" do
+    Dictionary.clear
+    Dictionary.add("better")
+    visit '/'
+    click_link('new_game')
+    click_button 'start_game'
+    page.should have_content("_ _ _ _ _ _")
+    click_link('a')
+    page.should have_content("_ _ _ _ _ _")
+    click_link('b')
+    page.should have_content("b _ _ _ _ _")
+    click_link('leave')
+    page.should have_link("new_game")
+    click_link("continue")
+    page.should have_content("b _ _ _ _ _")
+  end
+
   it "must show ads", :redis => true do
     add_key = !ENV.has_key?('SHINKA_AUID')
     ENV['SHINKA_AUID'] = "1" if add_key

@@ -11,6 +11,7 @@ describe "winners/index.html.erb" do
       ])
     @current_user = stub_model(User, id: 33)
     view.stub!(:current_user).and_return(@current_user)
+    view.stub!(:menu_item)
   end
 
   it "renders a list of users" do
@@ -25,14 +26,14 @@ describe "winners/index.html.erb" do
     end
   end
 
-  it "should have a home page link" do
+  it "should have a home page link on menu" do
+    view.should_receive(:menu_item).with(anything,root_path,id: 'root_page')
     render
-    rendered.should have_link("root_page", href: '/')
   end
 
-  it "should have a view rank link" do
+  it "should have a rank link on menu" do
+    view.should_receive(:menu_item).with(anything,user_path(33),id: 'view_rank')
     render
-    rendered.should have_link("view_rank", href: user_path(33))
   end
 
   it "should have a rating link" do

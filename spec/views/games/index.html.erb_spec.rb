@@ -54,7 +54,7 @@ describe "games/index" do
             redirect_uri: mxit_oauth_users_url(host: "test.host"),
             scope: "profile/public profile/private",
             state: "feedback"}
-    view.should_receive(:menu_item).with(anything,args,id: 'feedback')
+    view.should_receive(:menu_item).with(anything,mxit_authorise_url(args),id: 'feedback')
     render
   end
 
@@ -66,7 +66,7 @@ describe "games/index" do
             redirect_uri: mxit_oauth_users_url(host: "test.host"),
             scope: "profile/public profile/private",
             state: "profile"}
-    view.should_receive(:menu_item).with(anything,args,id: 'authorise')
+    view.should_receive(:menu_item).with(anything,mxit_authorise_url(args),id: 'authorise')
     render
   end
 

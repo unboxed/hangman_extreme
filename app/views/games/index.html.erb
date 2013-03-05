@@ -11,10 +11,12 @@ Have fun guessing the word.<br/>
   <% end %>
 </ul>
 
-<ul>
-  <li><%= link_to 'new', new_game_path, id: 'new_game' %> game | <%= link_to 'rank', user_path(current_user), id: 'view_rank' %></li>
-  <li><%= mxit_authorise_link 'profile', {state: "profile"}, id: 'authorise' %> | <%= mxit_authorise_link 'feedback', {state: "feedback"}, id: 'feedback' %></li>
-  <li><%= link_to 'buy', purchases_path, id: 'buy_clue_points' %> clue points</li>
-  <li><%= link_to 'redeem', redeem_winnings_path, id: 'redeem' %> prize points</li>
-  <li>Share with your <a href="mxit://[communityportal]/RecommendPage?ItemId=7297721" type="mxit/service-navigation">friends</a></li>
-</ul>
+<% menu_item 'new game', new_game_path, id: 'new_game' %>
+<% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
+<% menu_item 'profile',mxit_auth_url(state: "profile"), id: 'authorise' %>
+<% menu_item 'feedback',mxit_auth_url(state: "feedback"), id: 'feedback' %>
+<% menu_item 'buy clue points', purchases_path, id: 'buy_clue_points' %>
+<% menu_item 'redeem prize points', redeem_winnings_path, id: 'redeem' %>
+<% menu_item 'Share with your <a href="mxit://[communityportal]/RecommendPage?ItemId=7297721" type="mxit/service-navigation">friends</a>' %>
+
+

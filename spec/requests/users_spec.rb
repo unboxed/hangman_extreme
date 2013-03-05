@@ -59,7 +59,7 @@ describe 'users' do
     click_button 'submit'
     page.should have_content("Joe Barber")
     page.should have_content("0821234561")
-    click_link('correct')
+    click_link('home')
     page.current_path.should == '/'
   end
 

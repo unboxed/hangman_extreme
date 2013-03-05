@@ -5,21 +5,22 @@ describe "redeem_winnings/index.html.erb" do
   before(:each) do
     @current_user = stub_model(User, id: 50, registered_on_mxit_money?: false)
     view.stub!(:current_user).and_return(@current_user)
+    view.stub!(:menu_item)
   end
 
-  it "should have a home page link" do
+  it "should have a home page link on menu" do
+    view.should_receive(:menu_item).with(anything,'/',id: 'root_page')
     render
-    rendered.should have_link("root_page", href: '/')
   end
 
-  it "should have a new_game link" do
+  it "should have a new_game link on menu" do
+    view.should_receive(:menu_item).with(anything,new_game_path,id: 'new_game')
     render
-    rendered.should have_link("new_game", href: new_game_path)
   end
 
-  it "should have a view rank link" do
+  it "should have a view rank link on menu" do
+    view.should_receive(:menu_item).with(anything,user_path(50),id: 'view_rank')
     render
-    rendered.should have_link("view_rank", href: user_path(50))
   end
 
   context "clue points" do

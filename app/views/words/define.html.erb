@@ -2,6 +2,6 @@
 <div style="color:green;"><%= @definition.split("\n").join("<br/>").html_safe %></div>
 <br/>
 
-<%= link_to 'home', root_path, id: 'root_page' %> |
-<%= link_to 'new', new_game_path, id: 'new_game' %> game |
-view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %>
+<% menu_item 'home', root_path, id: 'root_page' %>
+<% menu_item 'new game', new_game_path, id: 'new_game' %>
+<% menu_item 'rank', user_path(current_user), id: 'view_rank' %>

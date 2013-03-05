@@ -20,8 +20,8 @@ You will receive 1 free clue point every day that you play<br/>
 
 <br/>
 
-<%= link_to 'home', root_path, id: 'root_page' %> |
-<%= link_to 'profile', profile_users_path, id: 'profile' %>
-<% if game = current_user.games.incompleted.active_first.first %>
-| <%= link_to 'continue', game_path(game) %> game
+<% menu_item 'home', root_path, id: 'root_page' %>
+<% menu_item 'profile', profile_users_path, id: 'profile' %>
+<% if game = current_user.current_game %>
+  <% menu_item 'continue game', game_path(game), id: 'continue' %>
 <% end %>

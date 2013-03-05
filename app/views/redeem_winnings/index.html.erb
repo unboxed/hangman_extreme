@@ -43,7 +43,7 @@ You can redeem your points for:
 
 </ul>
 <br/>
-<%= link_to 'home', root_path, id: 'root_page' %> |
-<b><%= link_to 'new', new_game_path, id: 'new_game' %> game</b> |
-view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %> |
+<% menu_item 'home', root_path, id: 'root_page' %>
+<% menu_item 'new game', new_game_path, id: 'new_game' %>
+<% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
 

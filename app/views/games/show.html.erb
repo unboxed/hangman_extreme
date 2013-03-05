@@ -8,22 +8,20 @@ You have <span><%= @game.attempts_left %></span> attempts left
 <% end %>
 <div <% if @game.is_lost? %>style="color:red;"<% end %>><%= render partial: 'hangman' %></div>
 <% if clue  %>
-    (
     <% if @game.clue_revealed? %>
-        <i><%= clue %></i>
-    <% else %>
-        <%= link_to_unless @game.completed?, 'show', play_letter_game_path(@game,'show_clue'), id: 'show_clue' %> clue
+    (<i><%= clue %></i>)
+    <% elsif !@game.completed? %>
+      <% menu_item 'show clue', play_letter_game_path(@game,'show_clue'), id: 'show_clue' %>
     <% end %>
-    )
 <% end %>
 <br/>
 <b style="color:purple;"><%= @game.hangman_text.split("").join(" ") %></b>
 <br/>
+
 <% if @game.done? %>
-    <%= link_to 'new', new_game_path, id: "new_game" %> game |
-    <%= link_to 'define', define_word_path(word: @game.hangman_text), id: "define_word" %> word |
-    view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %>
-    <br/>
+    <% menu_item 'new game', new_game_path, id: 'new_game' %>
+    <% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
+    <% menu_item 'define the word', define_word_path(word: @game.hangman_text), id: 'define_word' %>
 <% else %>
     <% ("a".."z").to_a.in_groups_of(10,false).each do |letters| -%>
         <% letters.each do |letter| -%>
@@ -33,4 +31,4 @@ You have <span><%= @game.attempts_left %></span> attempts left
     <% end -%>
 <% end %>
 <br/>
-<%= link_to 'leave', games_path, id: "games_index" %> game
+<% menu_item 'leave game', games_path, id: 'games_index' %>

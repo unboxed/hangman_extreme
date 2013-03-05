@@ -9,6 +9,7 @@ describe "games/show" do
                                           is_won?: false,
                                           is_lost?: false))
     view.stub!(:current_user).and_return(stub_model(User, id: 50))
+    view.stub!(:menu_item)
   end
 
   it "must show the attempts left" do
@@ -17,9 +18,9 @@ describe "games/show" do
     rendered.should have_content("_ _ t _ _")
   end
 
-  it "must have a games index link" do
+  it "must have a games index link on menu" do
+    view.should_receive(:menu_item).with(anything,games_path,id: 'games_index')
     render
-    rendered.should have_link("games_index", href: games_path)
   end
 
   it "must have a letter link for each letter" do
@@ -44,28 +45,35 @@ describe "games/show" do
     end
   end
 
-  #it "must have link to the definition of the word when the game is done" do
-  #  @game.stub(:hangman_text).and_return("define")
-  #  @game.stub(:done?).and_return(true)
-  #  render
-  #  rendered.should have_link('define_word', href: define_word_path(word: 'define'))
-  #end
-
-  it "must have new game link if done" do
+  it "must have link to the definition of the word when the game is done on menu" do
+    @game.stub(:hangman_text).and_return("define")
     @game.stub(:done?).and_return(true)
+    view.should_receive(:menu_item).with(anything,define_word_path(word: 'define'),id: 'define_word')
     render
-    rendered.should have_link('new_game', href: new_game_path)
   end
 
-  it "should have a view rank link if done" do
+  it "must have new game link if done on menu" do
     @game.stub(:done?).and_return(true)
+    view.should_receive(:menu_item).with(anything,new_game_path,id: 'new_game')
     render
-    rendered.should have_link("view_rank", href: user_path(50))
   end
 
-  it "wont have new game link if not done" do
+  it "wont have new game link if not done on menu" do
+    @game.stub(:done?).and_return(false)
+    view.should_not_receive(:menu_item).with(anything,new_game_path,id: 'new_game')
     render
-    rendered.should_not have_link('new_game', href: new_game_path)
+  end
+
+  it "must have a view rank link if done" do
+    @game.stub(:done?).and_return(true)
+    view.should_receive(:menu_item).with(anything,user_path(50),id: 'view_rank')
+    render
+  end
+
+  it "wont have a view rank link if done" do
+    @game.stub(:done?).and_return(false)
+    view.should_not_receive(:menu_item).with(anything,user_path(50),id: 'view_rank')
+    render
   end
 
   it "must have correct text if you win" do
@@ -80,18 +88,18 @@ describe "games/show" do
     rendered.should have_content("You lose")
   end
 
-  it "must have a link to reveal the clue" do
+  it "must have a link to reveal the clue on menu" do
     Dictionary.should_receive(:clue).with(@game.word).and_return("Cluedo")
     @game.stub(:clue_revealed?).and_return(false)
+    view.should_receive(:menu_item).with(anything,play_letter_game_path(@game,'show_clue'),id: 'show_clue')
     render
-    rendered.should have_link('show_clue', href: play_letter_game_path(@game,'show_clue'))
   end
 
   it "must show the clue if it has been revealed" do
     Dictionary.should_receive(:clue).with(@game.word).and_return("Cluedo")
     @game.stub(:clue_revealed?).and_return(true)
+    view.should_not_receive(:menu_item).with(anything,play_letter_game_path(@game,'show_clue'),id: 'show_clue')
     render
-    rendered.should_not have_link('show_clue', href: play_letter_game_path(@game,'show_clue'))
     rendered.should have_content("Cluedo")
   end
 

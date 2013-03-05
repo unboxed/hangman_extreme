@@ -15,21 +15,25 @@
   </tbody>
 </table>
 <% end %>
-
-<%= link_to 'home', root_path, id: 'root_page' %> |
-view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %>
 <br/>
 <% Winner::WINNING_PERIODS.each do |time_period| %>
-    <%= link_to_unless params[:period] == time_period,
-                       time_period,
-                       {period: time_period, reason: params[:reason]},
-                       id: "#{time_period}_#{params[:reason] || 'rating'}" %> |
+  <%= link_to_unless params[:period] == time_period,
+                     time_period,
+                     {period: time_period, reason: params[:reason]},
+                     id: "#{time_period}_#{params[:reason] || 'rating'}" %> |
 <% end %>
 <br/>
 <% Winner::WINNING_REASONS.each do |reason| %>
-    <%= link_to_unless params[:reason] == reason,
-                       reason,
-                       {period: params[:period], reason: reason},
-                       id: "#{params[:period] || 'daily'}_#{reason}" %> |
+  <%= link_to_unless params[:reason] == reason,
+                     reason,
+                     {period: params[:period], reason: reason},
+                     id: "#{params[:period] || 'daily'}_#{reason}" %> |
 <% end %>
+<br/>
+
+<% menu_item 'home', root_path, id: 'root_page' %>
+<% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
+
+
+
 

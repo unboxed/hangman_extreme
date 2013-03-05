@@ -77,8 +77,8 @@ describe "users/show.html.erb" do
   end
 
   it "should have a home page link" do
+    view.should_receive(:menu_item).with(anything,root_path,id: 'root_page')
     render
-    rendered.should have_link("root_page", href: '/')
   end
 
 end

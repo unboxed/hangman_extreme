@@ -208,6 +208,10 @@ class User < ActiveRecord::Base
     RANKING_FIELDS.clone
   end
 
+  def current_game
+    games.incompleted.active_first.first
+  end
+
   private
 
   def calculate_games_score(scope)

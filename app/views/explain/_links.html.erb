@@ -1,4 +1,5 @@
-<%= link_to 'home', root_path, id: 'root_page' %>  |
-<%= link_to 'scoring', explain_path(action: 'scoring_categories'), id: 'scoring_categories' %>  categories |
-view <%= link_to 'rank', user_path(current_user), id: 'view_rank' %> |
-let us know what you <%= mxit_authorise_link 'think', {state: "feedback"}, id: 'feedback' %>
+<% menu_item 'home', root_path, id: 'root_page' %>
+<% menu_item 'scoring categories', explain_path(action: 'scoring_categories'), id: 'scoring_categories' %>
+<% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
+<% menu_item 'feedback',mxit_auth_url(state: "feedback"), id: 'feedback' %>
+
