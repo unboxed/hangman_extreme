@@ -205,10 +205,6 @@ GEM
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.3)
-    puma (1.6.3)
-      rack (~> 1.2)
-    puma (1.6.3-java)
-      rack (~> 1.2)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -267,8 +263,6 @@ GEM
     ruby_parser (3.1.1)
       sexp_processor (~> 4.1)
     rubyzip (0.9.9)
-    rvm-capistrano (1.2.7)
-      capistrano (>= 2.0.0)
     sass (3.2.5)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -309,6 +303,7 @@ GEM
     tilt (1.3.3)
     timecop (0.5.3)
     tins (0.7.0)
+    torquebox-capistrano-support (2.3.0)
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
@@ -374,14 +369,12 @@ DEPENDENCIES
   ohm
   omniauth
   pg
-  puma
   rails (~> 3.2.1)
   redis
   redis-settings
   remote_syslog
   rest-client
   rspec-rails
-  rvm-capistrano
   sass-rails
   simplecov
   simplecov-rcov
@@ -390,6 +383,7 @@ DEPENDENCIES
   therubyracer
   therubyrhino
   timecop
+  torquebox-capistrano-support
   uglifier (>= 1.0.3)
   uservoice-ruby
   webmock

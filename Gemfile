@@ -9,7 +9,6 @@ end
 platforms :ruby do
   gem 'pg'
 end
-gem 'puma'
 gem 'cancan'
 gem 'omniauth'
 gem 'kaminari'
@@ -50,7 +49,7 @@ end
 
 group :development do
   gem 'capistrano'
-  gem 'rvm-capistrano'
+  gem 'torquebox-capistrano-support'
 end
 
 group :development, :test do

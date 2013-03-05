@@ -12,21 +12,15 @@ role :db, "41.215.236.134", :primary => true # This is where Rails migrations wi
 
 after "deploy:restart", "deploy:cleanup"
 
-set :rvm_ruby_string, 'jruby@hangman_extreme'
-set :rvm_install_type, :head
-set :rvm_type, :system
-set :rvm_install_pkgs, %w[libyaml openssl]
-set :rvm_install_ruby_params, '--with-opt-dir=/usr/local/rvm/usr'
-
-require "rvm/capistrano" # Load RVM's capistrano plugin.
+set :torquebox_home,    '/opt/torquebox/current'
+set :jboss_control_style,    :binscripts
+set :app_ruby_version, "1.9"
+require 'torquebox-capistrano-support'
 require "bundler/capistrano"
 require 'airbrake/capistrano'
 
-set :whenever_command, "bundle exec whenever"
+set :whenever_command, "/opt/torquebox/current/jruby/bin/jruby --1.9 -S bundle exec whenever"
 require "whenever/capistrano"
-
-before 'deploy:setup', 'rvm:install_rvm'
-before 'deploy:setup', 'rvm:install_ruby'
 
 set :shared_children, shared_children << 'tmp/sockets'
 
@@ -82,30 +76,12 @@ after "deploy:finalize_update", "deploy:precompile_stylesheets"
 set :shared_children, shared_children << 'tmp/sockets'
 
 namespace :deploy do
+
   desc "compile stylesheets"
   task :precompile_stylesheets, :roles => :web, :except => {:no_release => true} do
-    run "cd #{release_path} && RAILS_ENV=production bundle exec rake assets:precompile"
+    run "cd #{release_path} && RAILS_ENV=production /opt/torquebox/current/jruby/bin/jruby --1.9 -S bundle exec rake assets:precompile"
   end
 
-  desc "Start the application"
-  task :start, :roles => :app, :except => {:no_release => true} do
-    run "cd #{current_path} && NEWRELIC_DISPATCHER=puma RAILS_ENV=production bundle exec puma -e production -t 5:10 -b tcp://41.215.236.134:8080 -S #{shared_path}/sockets/puma.state --control tcp://127.0.0.1:9293 >> #{shared_path}/log/puma-production.log 2>&1 &", :pty => false
-  end
-
-  desc "Stop the application"
-  task :stop, :roles => :app, :except => {:no_release => true} do
-    run "cd #{current_path} && NEWRELIC_DISPATCHER=puma RAILS_ENV=production bundle exec pumactl -S #{shared_path}/sockets/puma.state stop"
-  end
-
-  desc "Restart the application"
-  task :restart, :roles => :app, :except => {:no_release => true} do
-    run "cd #{current_path} && NEWRELIC_DISPATCHER=puma RAILS_ENV=production bundle exec pumactl -S #{shared_path}/sockets/puma.state restart"
-  end
-
-  desc "Status of the application"
-  task :status, :roles => :app, :except => {:no_release => true} do
-    run "cd #{current_path} && NEWRELIC_DISPATCHER=puma RAILS_ENV=production bundle exec pumactl -S #{shared_path}/sockets/puma.state stats"
-  end
 end
 
 namespace :rails do
