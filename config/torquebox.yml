@@ -1,11 +1,13 @@
 jobs:
   job.daily_winners:
     job: Job::CreateDailyWinners
-    cron: '45 23 * * *'
-    timeout: 50000 ms
+    cron: '* 45 23 * * *'
     description: Create Daily Winners
   job.add_clue_points_to_active_players:
       job: Job::AddCluePointsToActivePlayers
-      cron: '45 23 * * *'
-      timeout: 50000 ms
-      description: Create Daily Winners
+      cron: '* 45 23 * * *'
+      description: Add Clue points
+  job.test:
+        job: Job::TestJobs
+        cron: '* */5 * * *'
+        description: Test Jobs
