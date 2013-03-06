@@ -135,9 +135,9 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.new_day_set_scores!
+  def self.new_day_set_scores!(force_week = false)
     User.update_all(daily_rating: 0, daily_precision: 0, daily_streak: 0, current_daily_streak: 0)
-    if Date.current == Date.current.beginning_of_week
+    if Date.current == Date.current.beginning_of_week || force_week
       User.update_all(weekly_rating: 0, weekly_precision: 0, weekly_streak: 0, current_weekly_streak: 0)
     end
   end
@@ -209,7 +209,7 @@ class User < ActiveRecord::Base
   end
   
   def current_game
-    games.incompleted.active_first.first
+    games.incompleted.active_first.today.first
   end
 
   def reset_streak

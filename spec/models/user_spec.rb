@@ -229,6 +229,18 @@ describe User do
       end
     end
 
+    it "must set all weekly scores to 0 if week forced" do
+      user = create(:user,weekly_rating: 11, weekly_precision: 12, weekly_streak: 13, current_weekly_streak: 14)
+      Timecop.freeze(Time.current.beginning_of_week + 2.days) do
+        User.new_day_set_scores!(true)
+        user.reload
+        user.weekly_rating.should == 0
+        user.weekly_precision.should == 0
+        user.weekly_streak.should == 0
+        user.current_weekly_streak.should == 0
+      end
+    end
+
   end
 
   context "update_scores!" do
