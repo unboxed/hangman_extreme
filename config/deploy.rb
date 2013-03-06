@@ -1,4 +1,8 @@
+require 'torquebox-capistrano-support'
+require "bundler/capistrano"
+require 'airbrake/capistrano'
 default_run_options[:pty] = true # Must be set for the password prompt
+default_run_options[:shell] = '/bin/bash --login'
 
 set :application, "hangman_extreme"
 set :repository, "git@github.com:unboxed/hangman_extreme.git"
@@ -15,11 +19,8 @@ after "deploy:restart", "deploy:cleanup"
 set :torquebox_home,    '/opt/torquebox/current'
 set :jboss_control_style,    :binscripts
 set :app_ruby_version, "1.9"
-require 'torquebox-capistrano-support'
-require "bundler/capistrano"
-require 'airbrake/capistrano'
 
-set :whenever_command, "/opt/torquebox/current/jruby/bin/jruby --1.9 -S bundle exec whenever"
+set :whenever_command, "#{bundle_cmd} exec whenever"
 require "whenever/capistrano"
 
 set :shared_children, shared_children << 'tmp/sockets'
@@ -79,7 +80,7 @@ namespace :deploy do
 
   desc "compile stylesheets"
   task :precompile_stylesheets, :roles => :web, :except => {:no_release => true} do
-    run "cd #{release_path} && RAILS_ENV=production /opt/torquebox/current/jruby/bin/jruby --1.9 -S bundle exec rake assets:precompile"
+    run "cd #{release_path} && RAILS_ENV=production #{bundle_cmd} exec rake assets:precompile"
   end
 
 end
@@ -87,12 +88,12 @@ end
 namespace :rails do
   desc "Remote console"
   task :console, :roles => :db do
-    run_interactively "cd #{current_path};ruby script/rails console production"
+    run_interactively "cd #{current_path};#{jruby_bin} script/rails console production"
   end
 
   desc "Remote dbconsole"
   task :dbconsole, :roles => :db do
-    run_interactively "cd #{current_path};ruby script/rails dbconsole production"
+    run_interactively "cd #{current_path};#{jruby_bin} script/rails dbconsole production"
   end
 end
 
