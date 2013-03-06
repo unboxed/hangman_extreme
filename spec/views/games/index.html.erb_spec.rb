@@ -36,17 +36,29 @@ describe "games/index" do
     end
   end
 
-  it "should add a new_game link to menu" do
+  it "must add a continue_game link to menu" do
+    assign(:current_game, stub_model(Game, id: 111))
+    view.should_receive(:menu_item).with(anything,game_path(111),id: 'continue_game')
+    render
+  end
+
+  it "wont add a new_game link to menu if current_game exists" do
+    assign(:current_game, stub_model(Game, id: 111))
+    view.should_not_receive(:menu_item).with(anything,new_game_path,id: 'new_game')
+    render
+  end
+
+  it "must add a new_game link to menu" do
     view.should_receive(:menu_item).with(anything,new_game_path,id: 'new_game')
     render
   end
 
-  it "should have a view rank link on the menu" do
+  it "must have a view rank link on the menu" do
     view.should_receive(:menu_item).with(anything,user_path(50),id: 'view_rank')
     render
   end
 
-  it "should have a feedback link on the menu" do
+  it "must have a feedback link on the menu" do
     args = {response_type: 'code',
             host: "test.host",
             protocol: 'http',
@@ -58,7 +70,7 @@ describe "games/index" do
     render
   end
 
-  it "should have a authorise" do
+  it "must have a authorise" do
     args = {response_type: 'code',
             host: "test.host",
             protocol: 'http',
@@ -70,12 +82,12 @@ describe "games/index" do
     render
   end
 
-  it "should have a buy more clue points link" do
+  it "must have a buy more clue points link" do
     view.should_receive(:menu_item).with(anything,purchases_path,id: 'buy_clue_points')
     render
   end
 
-  it "should have a link to redeem winnings if user have prize points" do
+  it "must have a link to redeem winnings if user have prize points" do
     view.should_receive(:menu_item).with(anything,redeem_winnings_path,id: 'redeem')
     render
   end

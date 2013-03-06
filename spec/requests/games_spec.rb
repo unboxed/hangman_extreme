@@ -75,7 +75,6 @@ describe 'Starting a new  game' do
     click_link('b')
     page.should have_content("b _ _ _ _ _")
     click_link('leave')
-    page.should have_link("new_game")
     click_link("continue")
     page.should have_content("b _ _ _ _ _")
   end

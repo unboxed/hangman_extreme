@@ -19,10 +19,16 @@ describe GamesController do
         get :index
       end
 
-      it "assigns all games as @games" do
-        game = create(:game)
+      it "assigns all completed games as @games" do
+        game = create(:won_game)
         do_get_index
         assigns(:games).should eq([game])
+      end
+
+      it "assigns current game as @current_game" do
+        game = create(:game, :user => @current_user)
+        do_get_index
+        assigns(:current_game).should eq(game)
       end
 
       it "renders the application layout" do

@@ -1,17 +1,16 @@
 <b>Welcome to hangman extreme</b><br/>
 Have fun guessing the word.<br/>
-<p style="color:green;">We have been having problems with moola payouts,
-  all moola payouts have been cancelled until further notice</p>
 
 <ul>
   <%= content_tag_for(:li, @games) do |game| %>
       <span><%= game.hangman_text %></span> -
       <span><%= game.score %></span> -
-      <%= link_to(game.done? ? 'show' : 'continue', game, id: dom_id(game, 'show')) %>
+      <%= link_to('show', game, id: dom_id(game, 'show')) %>
   <% end %>
 </ul>
 
-<% menu_item 'new game', new_game_path, id: 'new_game' %>
+<% menu_item 'continue', game_path(@current_game), id: 'continue_game' if @current_game %>
+<% menu_item 'new game', new_game_path, id: 'new_game' unless @current_game %>
 <% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
 <% menu_item 'profile',mxit_auth_url(state: "profile"), id: 'authorise' %>
 <% menu_item 'feedback',mxit_auth_url(state: "feedback"), id: 'feedback' %>

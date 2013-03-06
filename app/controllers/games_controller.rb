@@ -3,7 +3,8 @@ class GamesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @games = @games.active_first.page(params[:page]).per(1)
+    @current_game = current_user.current_game
+    @games = @games.completed.active_first.page(params[:page]).per(1)
   end
 
   def show
