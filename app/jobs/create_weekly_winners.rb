@@ -2,11 +2,11 @@ module App
 
   module Jobs
 
-    class CreateDailyWinners
+    class CreateWeeklyWinners
 
       def run
         # perform work here
-        Winner.create_daily_winners
+        Winner.create_weekly_winners
       end
 
       def on_error(exception)

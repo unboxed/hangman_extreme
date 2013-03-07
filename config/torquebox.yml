@@ -1,5 +1,17 @@
 jobs:
-  job.test:
-    job: App::Jobs::TestJob
-    cron: '0 */5 * * * ?'
-    description: Test Job
+  winner.create_daily_winners:
+      job: App::Jobs::CreateDailyWinners
+      cron: '50 23 * * * ?'
+      description: Select the Daily Winners
+  user.add_clue_point_to_active_players:
+        job: App::Jobs::AddCluePointsToActivePlayers
+        cron: '55 23 * * * ?'
+        description: Give players there clue points for playing
+  winner.create_weekly_winners:
+        job: App::Jobs::CreateWeeklyWinners
+        cron: '50 23 * ? * SUN'
+        description: Select the Weekly Winners on sunday evening
+  redeem_winning.issue_mxit_money_to_users:
+          job: App::Jobs::IssueMxitMoneyToUsers
+          cron: '0 0 * * * ?'
+          description: Payout Mxit Money

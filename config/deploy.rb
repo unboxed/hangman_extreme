@@ -20,9 +20,6 @@ set :torquebox_home,    '/opt/torquebox/current'
 set :jboss_control_style,    :binscripts
 set :app_ruby_version, "1.9"
 
-set :whenever_command, "#{bundle_cmd} exec whenever"
-require "whenever/capistrano"
-
 set :shared_children, shared_children << 'tmp/sockets'
 
 namespace :db do

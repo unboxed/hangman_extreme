@@ -2,11 +2,11 @@ module App
 
   module Jobs
 
-    class CreateDailyWinners
+    class IssueMxitMoneyToUsers
 
       def run
         # perform work here
-        Winner.create_daily_winners
+        RedeemWinning.issue_mxit_money_to_users
       end
 
       def on_error(exception)

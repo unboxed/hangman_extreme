@@ -2,12 +2,11 @@ module App
 
   module Jobs
 
-    class TestJob
+    class NewDaySetScores
 
       def run
         # perform work here
-        APP_SETTINGS[:test_jobs_counter] ||= 0
-        APP_SETTINGS[:test_jobs_counter] += 1
+        User.new_day_set_scores!
       end
 
       def on_error(exception)
