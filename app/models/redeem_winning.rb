@@ -1,5 +1,5 @@
 class RedeemWinning < ActiveRecord::Base
-  PRIZE_TYPES = ['clue_points','vodago_airtime','cell_c_airtime','mtn_airtime','mxit_money']
+  PRIZE_TYPES = ['clue_points','mxit_money']
   attr_accessible :prize_amount, :prize_type, :state, :user_id, :mxit_money_reference
 
   validates :user_id, presence: true
@@ -19,12 +19,6 @@ class RedeemWinning < ActiveRecord::Base
 
   def self.pending_winnings_text
     pending.joins(:user).includes(:user).order('prize_type,uid').collect{|rw| [rw.prize_type,rw.id,rw.user_uid,rw.user_login,rw.user_mobile_number,rw.prize_amount].join(" : ")}.join("\n")
-  end
-
-  def self.paid!(*ids)
-    ids.each do |id|
-      find(id).paid!
-    end
   end
 
   def self.cohort_array

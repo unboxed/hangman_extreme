@@ -26,21 +26,6 @@ You can redeem your points for:
     <%= number_to_currency(current_user.prize_points.to_f / 100, :unit => "R") %> mxit money</li>
   <% end %>
 
-  <% ['vodago','cell_c','mtn'].each do |provider| %>
-      <li>
-      <% if current_user.prize_points < 500 %>
-          R5 <%= provider.gsub("_"," ") %> airtime
-            (<span style="color: red;"><%= 500 - current_user.prize_points %> more prize points</span>)
-      <% else # current_user.prize_points >= 500  %>
-          <%= link_to (index += 1).to_s,
-                          new_redeem_winning_path(:prize_type => "#{provider}_airtime",
-                                                  :prize_amount => 500),
-                          id: "#{provider}_airtime" %>
-            R5 <%= provider.gsub("_"," ") %> airtime
-      <% end %>
-      </li>
-  <% end %>
-
 </ul>
 <br/>
 <% menu_item 'home', root_path, id: 'root_page' %>

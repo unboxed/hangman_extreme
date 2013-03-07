@@ -9,7 +9,7 @@ describe RedeemWinning do
       RedeemWinning.new(prize_type: 'clue_points').should have(0).errors_on(:prize_type)
     end
 
-    ['clue_points','vodago_airtime','cell_c_airtime','mtn_airtime','mxit_money'].each do |t|
+    ['clue_points','mxit_money'].each do |t|
       it "must accept #{t} as valid prize type" do
         RedeemWinning.new(prize_type: t).should have(0).errors_on(:prize_type)
       end
@@ -85,17 +85,6 @@ describe RedeemWinning do
       expect {
         redeem_winning.save
       }.to change{user.reload;user.clue_points}.by(10)
-    end
-
-  end
-
-  context "paid!" do
-
-    it "must update state to paid" do
-      winning = create(:redeem_winning, prize_amount: 10, prize_type: 'vodago_airtime', state: 'pending')
-      RedeemWinning.paid!(winning.id)
-      winning.reload
-      winning.state.should == 'paid'
     end
 
   end

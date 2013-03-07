@@ -86,38 +86,4 @@ describe "redeem_winnings/index.html.erb" do
 
   end
 
-  ['vodago','cell_c','mtn'].each do |provider|
-
-    context "#{provider} airtime" do
-
-      it "must have R2 #{provider} airtime" do
-        @current_user.prize_points = 500
-        render
-        rendered.should have_content("R5 #{provider.gsub("_"," ")} airtime")
-      end
-
-      it "must have a text if not enough prize points" do
-        @current_user.prize_points = 499
-        render
-        rendered.should have_content("R5 #{provider.gsub("_"," ")} airtime")
-      end
-
-      it "must have a #{provider} airtime link" do
-        @current_user.prize_points = 520
-        render
-        rendered.should have_link("#{provider}_airtime",
-                                  href: new_redeem_winning_path(:prize_type => "#{provider}_airtime",
-                                                                :prize_amount => 500))
-      end
-
-      it "wont have a #{provider} link if not enough prize points" do
-        @current_user.prize_points = 499
-        render
-        rendered.should_not have_link("#{provider}_airtime")
-      end
-
-    end
-
-  end
-
 end
