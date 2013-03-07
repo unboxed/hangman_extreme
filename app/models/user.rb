@@ -86,6 +86,7 @@ class User < ActiveRecord::Base
         result[:is_registered]
       end
     rescue Exception => e
+      Rails.logger.error(e.message)
       Airbrake.notify_or_ignore(
         e,
         :parameters    => {:user => self},

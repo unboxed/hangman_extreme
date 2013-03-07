@@ -17,10 +17,10 @@ def stub_mxit_oauth(fields = {})
 end
 
 def stub_mxit_money(user_info = {:is_registered => false})
-  stub_request(:get, "https://:mxit_money_api@#{MxitMoneyApi::BASE_URL}/paymentsplatform/rest/v3/push/").
+  stub_request(:get, "https://:mxit_money_api@api.mxitmoney.co.za/paymentsplatform/rest/v3/push/").
     with(:headers => {'Accept'=>'application/json', 'User-Agent'=>'Ruby'}).
     to_return(:status => 200, :body => {:balance => 123}.to_json, :headers => {})
-  stub_request(:get, "https://:mxit_money_api@#{MxitMoneyApi::BASE_URL}/paymentsplatform/rest/v3/user/m2604100?idType=mxitId").
+  stub_request(:get, "https://:mxit_money_api@api.mxitmoney.co.za/paymentsplatform/rest/v3/user/m2604100?idType=mxitId").
     with(:headers => {'Accept'=>'application/json', 'User-Agent'=>'Ruby'}).
     to_return(:status => 200, :body => user_info.to_json, :headers => {})
 end
