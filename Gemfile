@@ -19,7 +19,7 @@ gem 'redis-settings'
 gem 'rest-client', require: 'rest_client'
 gem 'redis'
 gem 'ohm'
-gem 'mxit_api', '>= 0.2.1.pre'
+gem 'mxit_api', '>= 0.2.2.pre'
 gem 'whenever', :require => false
 gem 'activeadmin'
 gem 'sass-rails'

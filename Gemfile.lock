@@ -175,7 +175,7 @@ GEM
     mime-types (1.21)
     mock_redis (0.6.2)
     multi_json (1.5.1)
-    mxit_api (0.2.1.pre)
+    mxit_api (0.2.2.pre)
       activesupport (>= 3.0.0)
       i18n (>= 0.5.0)
     mysql2 (0.3.11)
@@ -362,7 +362,7 @@ DEPENDENCIES
   libv8 (~> 3.11.8)
   meta_search
   mock_redis
-  mxit_api (>= 0.2.1.pre)
+  mxit_api (>= 0.2.2.pre)
   mysql2
   newrelic_rpm
   nokogiri
