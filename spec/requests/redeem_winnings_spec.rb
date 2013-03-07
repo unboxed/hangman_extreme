@@ -48,4 +48,20 @@ describe 'redeem winnings' do
     page.should have_content("0 prize points")
   end
 
+  ['vodago','cell_c','mtn'].each do |provider|
+
+    it "must allow to redeem prize points for #{provider} airtime" do
+      stub_mxit_money
+      @current_user.update_attributes(:prize_points => 555)
+      visit '/'
+      click_link('redeem')
+      page.should have_content("555 prize points")
+      click_link("#{provider}_airtime")
+      page.should have_content("R5 #{provider.gsub("_"," ")} airtime")
+      click_button('redeem')
+      page.should have_content("55 prize points")
+    end
+
+  end
+
 end
