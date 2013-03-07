@@ -1,5 +1,5 @@
 jobs:
   job.test:
-    job: Job::TestJobs
-    cron: '* */5 * * * ?'
-    description: Test Jobs
+    job: App::Jobs::TestJob
+    cron: '0 */5 * * * ?'
+    description: Test Job
