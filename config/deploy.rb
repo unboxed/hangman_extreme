@@ -100,7 +100,7 @@ end
 namespace :remote_syslog do
   desc "start remote_syslog"
   task :start do
-    "cd #{current_path};bundle exec remote_syslog --configfile #{shared_path}/config/log_files.yml --pid-file #{shared_path}/pids/remote_syslog.pid"
+    "cd #{current_path};#{bundle_cmd} exec remote_syslog --configfile #{shared_path}/config/log_files.yml --pid-file #{shared_path}/pids/remote_syslog.pid"
   end
 end
 
