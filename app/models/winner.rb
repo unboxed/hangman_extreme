@@ -1,6 +1,6 @@
 class Winner < ActiveRecord::Base
-  WEEKLY_PRIZE_AMOUNTS = [400,200,125,75,75,50,50,50,50,50]
-  DAILY_PRIZE_AMOUNTS = [40,20,12,5,5,5,5,5,5,5]
+  WEEKLY_PRIZE_AMOUNTS = [300,200,100,50,50,50,50,50,50,50]
+  DAILY_PRIZE_AMOUNTS = [30,20,10,5,5,5,5,5,5,5]
   WINNING_PERIODS = ['daily','weekly']
   WINNING_REASONS = ['streak','rating','precision']
   belongs_to :user
