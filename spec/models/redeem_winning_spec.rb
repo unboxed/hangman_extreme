@@ -41,7 +41,7 @@ describe RedeemWinning do
       RedeemWinning.new.should have(1).errors_on(:state)
     end
 
-    ['pending','paid'].each do |t|
+    ['pending','cancelled','paid'].each do |t|
       it "must accept #{t} as valid state" do
         RedeemWinning.new(state: t).should have(0).errors_on(:state)
       end

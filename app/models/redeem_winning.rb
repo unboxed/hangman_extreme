@@ -4,7 +4,7 @@ class RedeemWinning < ActiveRecord::Base
 
   validates :user_id, presence: true
   validates :prize_type, inclusion: PRIZE_TYPES
-  validates :state, inclusion: ['pending','paid']
+  validates :state, inclusion: ['pending','cancelled','paid']
   validates_numericality_of :prize_amount, greater_than: 0
 
   validate :check_user_prize_points
@@ -68,8 +68,19 @@ class RedeemWinning < ActiveRecord::Base
     update_column(:state, 'paid')
   end
 
+  def cancel!
+    if pending?
+      update_column(:state, 'cancelled')
+      user.increment!(:prize_points,prize_amount)
+    end
+  end
+
   def paid?
     state == 'paid'
+  end
+
+  def pending?
+    state == 'pending'
   end
 
   protected
