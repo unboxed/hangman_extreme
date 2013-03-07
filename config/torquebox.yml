@@ -13,5 +13,5 @@ jobs:
         description: Select the Weekly Winners on sunday evening
   redeem_winning.issue_mxit_money_to_users:
           job: App::Jobs::IssueMxitMoneyToUsers
-          cron: '0 0 * * * ?'
+          cron: '0 */10 * * * ?'
           description: Payout Mxit Money
