@@ -7,7 +7,10 @@ class Game < ActiveRecord::Base
 
   after_validation do |record|
     record.completed = record.done?
-    set_score if record.completed?
+    if record.completed?
+      set_score
+      self.completed_attempts_left = attempts_left
+    end
   end
 
   after_save :update_user_score

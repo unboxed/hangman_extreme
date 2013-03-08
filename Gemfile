@@ -24,7 +24,9 @@ gem 'activeadmin'
 gem 'sass-rails'
 gem "meta_search"
 gem "savon"
-gem "torquebox"
+platforms :jruby do
+  gem "torquebox"
+end
 
 # third party
 gem 'uservoice-ruby'

@@ -223,7 +223,7 @@ class User < ActiveRecord::Base
   def calculate_precision(game_scope, game_count = 10)
     scope = game_scope.completed
     return 0 if scope.count < game_count
-    (scope.inject(0){|sum,game| sum += game.attempts_left.to_i } * 10) / scope.count
+    (scope.sum(:completed_attempts_left).to_i * 10) / scope.count
   end
 
   def calculate_rating(scope)

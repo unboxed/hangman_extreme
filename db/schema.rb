@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130212135554) do
+ActiveRecord::Schema.define(:version => 20130308073354) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -50,11 +50,12 @@ ActiveRecord::Schema.define(:version => 20130212135554) do
     t.string   "word"
     t.text     "choices"
     t.integer  "user_id"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
-    t.boolean  "completed",     :default => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+    t.boolean  "completed",               :default => false
     t.integer  "score"
-    t.boolean  "clue_revealed", :default => false, :null => false
+    t.boolean  "clue_revealed",           :default => false, :null => false
+    t.integer  "completed_attempts_left"
   end
 
   add_index "games", ["created_at"], :name => "index_games_on_created_at"

@@ -152,15 +152,40 @@ describe Game do
 
   end
 
-  context "is_done" do
+  context "when is_done" do
 
-    it "must set is_done" do
-      game = stub_model(Game, done?: true)
-      game.save
-      game.should be_completed
-      game = stub_model(Game, done?: false)
-      game.save
-      game.should_not be_completed
+    context "is true" do
+
+      before :each do
+        @game = stub_model(Game, done?: true, :attempts_left => 5)
+        @game.save
+      end
+
+      it "must set completed" do
+        @game.should be_completed
+      end
+
+      it "must set completed_attempts_left" do
+        @game.completed_attempts_left.should == 5
+      end
+
+    end
+
+    context "is false" do
+
+      before :each do
+        @game = stub_model(Game, done?: false, :attempts_left => 5)
+        @game.save
+      end
+
+      it "wont set completed" do
+        @game.should_not be_completed
+      end
+
+      it "wont set completed_attempts_left" do
+        @game.completed_attempts_left.should be_nil
+      end
+
     end
 
   end
