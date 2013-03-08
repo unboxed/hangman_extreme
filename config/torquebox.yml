@@ -16,6 +16,6 @@ jobs:
     cron: '0 0,30 * * * ?'
     description: Payout Mxit Money
   stats.record_new_game_stats:
-    job: App:Jobs::RecordNewGameStats
-    cron: '0 */5 * * * ?'
+    job: App::Jobs::RecordNewGameStats
+    cron: '0 10 * * * ?'
     description: Record weekly game count
