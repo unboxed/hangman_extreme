@@ -56,6 +56,9 @@ GEM
     arbre (1.0.1)
       activesupport (>= 3.0.0)
     arel (3.0.2)
+    atomic (1.0.1)
+    atomic (1.0.1-java)
+    avl_tree (1.1.3)
     bcrypt-ruby (3.0.1)
     bcrypt-ruby (3.0.1-java)
     blankslate (2.1.2.4)
@@ -143,6 +146,8 @@ GEM
       excon (~> 0.16.10)
     highline (1.6.15)
     hike (1.2.1)
+    hitimes (1.2.0)
+    hitimes (1.2.0-java)
     htmlentities (4.3.1)
     httpi (2.0.2)
       rack
@@ -181,6 +186,10 @@ GEM
       activerecord (~> 3.1)
       activesupport (~> 3.1)
       polyamorous (~> 0.5.0)
+    metriks (0.9.9.4)
+      atomic (~> 1.0)
+      avl_tree (~> 1.1.2)
+      hitimes (~> 1.1)
     mime-types (1.21)
     mock_redis (0.6.2)
     multi_json (1.5.1)
@@ -414,6 +423,7 @@ DEPENDENCIES
   launchy
   libv8 (~> 3.11.8)
   meta_search
+  metriks
   mock_redis
   mxit_api (>= 0.2.2.pre)
   mysql2

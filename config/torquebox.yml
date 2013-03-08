@@ -9,9 +9,9 @@ jobs:
         description: Give players there clue points for playing
   winner.create_weekly_winners:
         job: App::Jobs::CreateWeeklyWinners
-        cron: '50 23 * ? * SUN'
+        cron: '45 23 * ? * SUN'
         description: Select the Weekly Winners on sunday evening
   redeem_winning.issue_mxit_money_to_users:
           job: App::Jobs::IssueMxitMoneyToUsers
-          cron: '0 */10 * * * ?'
+          cron: '0 0,30 * * * ?'
           description: Payout Mxit Money
