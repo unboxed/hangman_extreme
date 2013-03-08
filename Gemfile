@@ -26,6 +26,7 @@ gem "meta_search"
 gem "savon"
 platforms :jruby do
   gem "torquebox"
+  gem "jruby-openssl"
 end
 
 # third party
@@ -34,7 +35,7 @@ gem 'gabba' # google analytics
 gem 'newrelic_rpm'
 gem 'wordnik'
 gem 'remote_syslog'
-gem 'metriks'
+gem 'librato-metrics', :require => 'librato/metrics'
 
 # Gems used only for assets and not required
 # in production environments by default.

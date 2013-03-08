@@ -1,17 +1,21 @@
 jobs:
   winner.create_daily_winners:
-      job: App::Jobs::CreateDailyWinners
-      cron: '50 23 * * * ?'
-      description: Select the Daily Winners
+    job: App::Jobs::CreateDailyWinners
+    cron: '50 23 * * * ?'
+    description: Select the Daily Winners
   user.add_clue_point_to_active_players:
-        job: App::Jobs::AddCluePointsToActivePlayers
-        cron: '55 23 * * * ?'
-        description: Give players there clue points for playing
+    job: App::Jobs::AddCluePointsToActivePlayers
+    cron: '55 23 * * * ?'
+    description: Give players there clue points for playing
   winner.create_weekly_winners:
-        job: App::Jobs::CreateWeeklyWinners
-        cron: '45 23 * ? * SUN'
-        description: Select the Weekly Winners on sunday evening
+    job: App::Jobs::CreateWeeklyWinners
+    cron: '45 23 * ? * SUN'
+    description: Select the Weekly Winners on sunday evening
   redeem_winning.issue_mxit_money_to_users:
-          job: App::Jobs::IssueMxitMoneyToUsers
-          cron: '0 0,30 * * * ?'
-          description: Payout Mxit Money
+    job: App::Jobs::IssueMxitMoneyToUsers
+    cron: '0 0,30 * * * ?'
+    description: Payout Mxit Money
+  stats.record_new_game_stats:
+    job: App:Jobs::RecordNewGameStats
+    cron: '0 0 * * * ?'
+    description: Record weekly game count
