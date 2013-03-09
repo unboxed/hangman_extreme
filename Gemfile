@@ -26,7 +26,7 @@ gem "meta_search"
 gem "savon"
 platforms :jruby do
   gem "torquebox"
-  gem "jruby-openssl"
+  # gem "jruby-openssl"
 end
 
 # third party
