@@ -69,6 +69,7 @@ end
 after "deploy:setup", "db:setup" unless fetch(:skip_db_setup, false)
 after "deploy:finalize_update", "db:symlink"
 after "deploy:finalize_update", "deploy:precompile_stylesheets"
+after "deploy", "librato:deploy"
 
 set :shared_children, shared_children << 'tmp/sockets'
 
@@ -77,6 +78,15 @@ namespace :deploy do
   desc "compile stylesheets"
   task :precompile_stylesheets, :roles => :web, :except => {:no_release => true} do
     run "cd #{release_path} && RAILS_ENV=production #{bundle_cmd} exec rake assets:precompile"
+  end
+
+end
+
+namespace :librato do
+
+  desc "annotate deployment on librato"
+  task :deploy, :except => {:no_release => true} do
+    run "cd #{release_path} && RAILS_ENV=production REVISION=#{current_revision} #{bundle_cmd} exec rake app:deploy:annotate"
   end
 
 end
