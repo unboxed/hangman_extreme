@@ -17,20 +17,25 @@ class Winner < ActiveRecord::Base
   delegate :name, to: :user
 
   def self.create_daily_winners(winnings = DAILY_PRIZE_AMOUNTS)
-    create_winners('daily',winnings)
+    if create_winners('daily',winnings)
+    User.send_message("We have selected our $winners$ for the daily prizes, Congratulations to those who have won.",
+                      User.mxit.where('updated_at > ?',2.day.ago))
+    end
   end
 
   def self.create_weekly_winners(winnings = WEEKLY_PRIZE_AMOUNTS)
-    create_winners('weekly',winnings)
+    if create_winners('weekly',winnings)
+      User.send_message("We have selected our $winners$ for the weekly prizes, Congratulations to those who have won.",
+                         User.mxit.where('updated_at > ?',7.day.ago))
+    end
   end
 
   def self.create_winners(period, winnings)
-    return if where(end_of_period_on: Date.current, period: period).any?
+    return false if where(end_of_period_on: Date.current, period: period).any? #don't create winners twice
     WINNING_REASONS.each do |score_by|
       create_winners_for_category(score_by: score_by, winnings: winnings, period: period)
     end
-    User.send_message("We have selected our $winners$ for the #{period} prizes, Congratulations to those who have won.",
-                      User.mxit.where('updated_at > ?',2.day.ago))
+    true
   end
 
   def self.create_winners_for_category(options)
