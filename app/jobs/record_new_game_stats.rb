@@ -6,7 +6,7 @@ module App
 
       def run
         # perform work here
-        Librato::Metrics.authenticate(ENV['LIBRATO_EMAIL'], ENV['522f32c9b4fc6a1e7efca4c0cb7391caa40583242a67e5428fc771226ff4503b'])
+        Librato::Metrics.authenticate(ENV['LIBRATO_EMAIL'], ENV['LIBRATO_API_KEY'])
         Librato::Metrics.submit :new_games => Game.this_week.count
       end
 
