@@ -15,7 +15,7 @@ class RedeemWinning < ActiveRecord::Base
 
   scope :pending, where('state = ?','pending')
   scope :pending_mxit_money, where('prize_type = ? AND state = ?','mxit_money','pending')
-
+  scope :pending_airtime, where('prize_type LIKE ? AND state = ?','%airtime','pending')
 
   def self.pending_winnings_text
     pending.joins(:user).includes(:user).order('prize_type,uid').collect{|rw| [rw.prize_type,rw.id,rw.user_uid,rw.user_login,rw.user_mobile_number,rw.prize_amount].join(" : ")}.join("\n")

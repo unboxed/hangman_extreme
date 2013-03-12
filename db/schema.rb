@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130308073354) do
+ActiveRecord::Schema.define(:version => 20130311080618) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -45,6 +45,22 @@ ActiveRecord::Schema.define(:version => 20130308073354) do
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
+
+  create_table "airtime_vouchers", :force => true do |t|
+    t.integer  "redeem_winning_id"
+    t.integer  "user_id"
+    t.string   "freepaid_refno"
+    t.string   "network"
+    t.string   "pin"
+    t.float    "sellvalue"
+    t.text     "response"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "airtime_vouchers", ["created_at"], :name => "index_airtime_vouchers_on_created_at"
+  add_index "airtime_vouchers", ["redeem_winning_id"], :name => "index_airtime_vouchers_on_redeem_winning_id"
+  add_index "airtime_vouchers", ["updated_at"], :name => "index_airtime_vouchers_on_updated_at"
 
   create_table "games", :force => true do |t|
     t.string   "word"

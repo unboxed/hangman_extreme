@@ -15,5 +15,7 @@ class Ability
 
     can :create, RedeemWinning
     can :read, RedeemWinning, user_id: user.id
+
+    can :read, AirtimeVoucher, user_id: user.id
   end
 end

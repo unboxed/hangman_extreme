@@ -54,6 +54,11 @@ Spork.each_run do
 
   Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
+  VCR.configure do |c|
+    c.cassette_library_dir = 'fixtures/vcr_cassettes'
+    c.hook_into :webmock # or :fakeweb
+  end
+
   RSpec.configure do |config|
     config.include FactoryGirl::Syntax::Methods
     config.filter_run_excluding :redis => true if ENV["EXCLUDE_REDIS_SPECS"]

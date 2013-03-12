@@ -1,4 +1,5 @@
 require 'spec_helper'
+require "#{Rails.root}/app/jobs/issue_airtime_to_users.rb"
 
 describe 'redeem winnings' do
 
@@ -8,6 +9,8 @@ describe 'redeem winnings' do
     stub_shinka_request # stub shinka request
     stub_google_tracking # stub google tracking
     stub_mxit_oauth
+    ENV['FREEPAID_USER'] ||= '3547132'
+    ENV['FREEPAID_PASS'] ||= 'hellounb0xed'
   end
 
   it "must show users redeem winnings link" do
@@ -60,6 +63,14 @@ describe 'redeem winnings' do
       page.should have_content("R5 #{provider.gsub("_"," ")} airtime")
       click_button('redeem')
       page.should have_content("55 prize points")
+      click_link('airtime_vouchers')
+      VCR.use_cassette("freepaid_requests_#{provider}") do
+        App::Jobs::IssueAirtimeToUsers.new.run
+      end
+      visit '/'
+      click_link('redeem')
+      click_link('airtime_vouchers')
+      page.should have_content("R5")
     end
 
   end

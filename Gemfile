@@ -81,5 +81,5 @@ group :test do
   gem 'flog'
   gem "spork-rails"
   gem 'webmock'
-  gem "mock_redis"
+  gem 'vcr'
 end

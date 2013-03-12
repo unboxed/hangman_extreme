@@ -15,6 +15,10 @@ jobs:
     job: App::Jobs::IssueMxitMoneyToUsers
     cron: '0 0,30 * * * ?'
     description: Payout Mxit Money
+  airtime_voucher.issue_airtime_to_users:
+      job: App::Jobs::IssueAirtimeToUsers
+      cron: '0 15,45 * * * ?'
+      description: Payout Mxit Money
   stats.record_new_game_stats:
     job: App::Jobs::RecordNewGameStats
     cron: '0 15 * * * ?'

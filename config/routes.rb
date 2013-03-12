@@ -1,5 +1,4 @@
 HangmanLeague::Application.routes.draw do
-
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -9,6 +8,7 @@ HangmanLeague::Application.routes.draw do
   match "purchase_transactions/create", to: 'purchase_transactions#create', as: 'create_purchase'
   match "Transaction/PaymentRequest", to: 'purchase_transactions#simulate_purchase', as: 'mxit_purchase'
   get "explain/:action", as: 'explain', controller: 'explain'
+  get "airtime_vouchers", to: 'airtime_vouchers#index', as: 'airtime_vouchers'
 
   resources :games, :except => [:edit, :update, :destroy] do
     get 'page/:page', :action => :index, :on => :collection

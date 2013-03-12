@@ -105,6 +105,8 @@ class ApplicationController < ActionController::Base
         redirect_to(profile_users_path) unless params[:action] == 'profile'
       when 'winners'
         redirect_to(winners_path) unless params[:controller] == 'winners'
+      when 'airtime vouchers'
+        redirect_to(winners_path) unless params[:controller] == 'airtime_vouchers'
     end
     status != 302
   end

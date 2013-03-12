@@ -13,13 +13,18 @@ describe "redeem_winnings/index.html.erb" do
     render
   end
 
-  it "should have a new_game link on menu" do
-    view.should_receive(:menu_item).with(anything,new_game_path,id: 'new_game')
+  it "should have a airtime vouchers link on menu" do
+    view.should_receive(:menu_item).with(anything,airtime_vouchers_path,id: 'airtime_vouchers')
     render
   end
 
   it "should have a view rank link on menu" do
     view.should_receive(:menu_item).with(anything,user_path(50),id: 'view_rank')
+    render
+  end
+
+  it "should have a home page link on menu" do
+    view.should_receive(:menu_item).with(anything,'/',id: 'root_page')
     render
   end
 

@@ -111,5 +111,23 @@ describe Ability do
 
   end
 
+  context "Airtime Vouchers" do
+
+    it "must be able to read airtime vouchers" do
+      @ability.should be_able_to(:read, AirtimeVoucher)
+    end
+
+    it "wont be able to read other users airtime vouchers" do
+      airtime_voucher = create(:airtime_voucher, user: create(:user))
+      @ability.should_not be_able_to(:read, airtime_voucher)
+    end
+
+    it "must be able to read own airtime vouchers" do
+      airtime_voucher = create(:airtime_voucher, user: @user)
+      @ability.should be_able_to(:read, airtime_voucher)
+    end
+
+  end
+
 
 end
