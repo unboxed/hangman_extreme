@@ -3,6 +3,10 @@ jobs:
     job: App::Jobs::CreateDailyWinners
     cron: '0 50 23 * * ?'
     description: Select the Daily Winners
+  user.new_day_set_scores:
+      job: App::Jobs::NewDaySetScores
+      cron: '0 1 0 * * ?'
+      description: Set players scores to zero
   user.add_clue_point_to_active_players:
     job: App::Jobs::AddCluePointsToActivePlayers
     cron: '0 55 23 * * ?'
