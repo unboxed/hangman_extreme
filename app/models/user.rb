@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   validates :provider, :uid, presence: true
   validates_uniqueness_of :uid, :scope => :provider
 
-  scope :top_scorers, lambda{ |field| order("#{field} DESC").limit(10) }
+  scope :top_scorers, lambda{ |field| order("#{field} DESC").limit(Winner::WEEKLY_PRIZE_AMOUNTS.size) }
   scope :mxit, where(provider: 'mxit')
 
   def self.find_or_create_from_auth_hash(auth_hash)
@@ -216,6 +216,10 @@ class User < ActiveRecord::Base
   def reset_streak
     self.current_daily_streak = 0
     self.current_weekly_streak = 0
+  end
+
+  def to_s
+    "<User id:#{id} name:#{name}>"
   end
 
   private

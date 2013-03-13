@@ -44,10 +44,10 @@ describe Winner do
 
         context "#{period} #{score_by}" do
 
-          it "must select the top 10 players" do
-            create_list(:user,10, "#{period}_#{score_by}" => 9)
-            top_players = create_list(:user,10, "#{period}_#{score_by}" => 10)
-            Winner.create_winners_for_category(period: period, score_by: score_by, winnings: [10] * 10)
+          it "must select the top 5 players" do
+            create_list(:user,5, "#{period}_#{score_by}" => 9)
+            top_players = create_list(:user,5, "#{period}_#{score_by}" => 10)
+            Winner.create_winners_for_category(period: period, score_by: score_by, winnings: [10] * 5)
             top_players.each do |user|
               user.winners.period(period).reason(score_by).count == 1
               winner = user.winners.period(period).reason(score_by).first
@@ -59,11 +59,10 @@ describe Winner do
           end
 
           it "must share point if players score the same" do
-            users_with_10 = create_list(:user,2, "#{period}_#{score_by}" => 10)
+            users_with_10 = create_list(:user,3, "#{period}_#{score_by}" => 10)
             users_with_9 = create_list(:user,3, "#{period}_#{score_by}" => 9)
-            users_with_8 = create_list(:user,5, "#{period}_#{score_by}" => 8)
-            Winner.create_winners_for_category(period: period, score_by: score_by, winnings:[20,18,16,14,12,5,4,3,2,1])
-            [[users_with_10,19],[users_with_9,14],[users_with_8,3]].each do |users,amount|
+            Winner.create_winners_for_category(period: period, score_by: score_by, winnings:[50,50,50,50,50])
+            [[users_with_10,50],[users_with_9,34]].each do |users,amount|
               users.each do |user|
                 user.winners.period(period).reason(score_by).count == 1
                 winner = user.winners.period(period).reason(score_by).first

@@ -1,6 +1,6 @@
 class Winner < ActiveRecord::Base
-  WEEKLY_PRIZE_AMOUNTS = [300,200,100,50,50,50,50,50,50,50]
-  DAILY_PRIZE_AMOUNTS = [30,20,10,5,5,5,5,5,5,5]
+  WEEKLY_PRIZE_AMOUNTS = [500,500,500,500,500]
+  DAILY_PRIZE_AMOUNTS  = [ 70, 70, 70, 70, 70]
   WINNING_PERIODS = ['daily','weekly']
   WINNING_REASONS = ['streak','rating','precision']
   belongs_to :user
@@ -13,8 +13,9 @@ class Winner < ActiveRecord::Base
   scope :reason, lambda{ |r| where("reason = ?",r) }
   scope :yesterday, lambda{ where(:end_of_period_on => Date.yesterday) }
 
-
   delegate :name, to: :user
+
+  after_create :increase_prize_points
 
   def self.create_daily_winners(winnings = DAILY_PRIZE_AMOUNTS)
     if create_winners('daily',winnings)
@@ -42,11 +43,12 @@ class Winner < ActiveRecord::Base
     options = HashWithIndifferentAccess.new(options)
     field = "#{options[:period]}_#{options[:score_by]}"
     winners = []
-    User.top_scorers(field).group_by{|u| u.rank(field) }.each do |rank,users|
+    min_score = User.top_scorers(field).minimum(field)
+    User.where("#{field} >= ?",min_score).group_by{|u| u.rank(field) }.each do |rank,users|
       prize_total = 0
       users_count = users.size
       users.each_with_index do |user,index|
-        prize_total += (options[:winnings][rank - 1 + index]  || options[:winnings].last)
+        prize_total += (options[:winnings][rank - 1 + index]  || 1)
       end
       users.each do |user|
         winners << Winner.create(user_id: user.id,
@@ -96,6 +98,12 @@ class Winner < ActiveRecord::Base
       day -= 1.day
     end
     cohort.reverse
+  end
+
+  protected
+
+  def increase_prize_points
+
   end
 
 

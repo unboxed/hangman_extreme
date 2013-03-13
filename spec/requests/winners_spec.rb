@@ -12,7 +12,7 @@ describe 'winners' do
   end
 
   it "must show the daily and weekly winners" do
-    users = create_list(:user,10).sort{|x,y| x.name <=> y.name }
+    users = create_list(:user,5).sort{|x,y| x.name <=> y.name }
     users.each_with_index do |user,i|
       create_list(:won_game,35 + i, user: user)  # need at least 35 wins for  precision
     end
