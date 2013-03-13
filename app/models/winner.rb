@@ -43,8 +43,10 @@ class Winner < ActiveRecord::Base
     options = HashWithIndifferentAccess.new(options)
     field = "#{options[:period]}_#{options[:score_by]}"
     winners = []
-    min_score = User.top_scorers(field).minimum(field)
-    User.where("#{field} >= ?",min_score).group_by{|u| u.rank(field) }.each do |rank,users|
+    previous_winners = period(options[:period]).reason(options[:score_by]).order('created_at DESC').limit(options[:winnings].size)
+    user_scope = User.where('id NOT IN (?)',previous_winners.map(&:user_id) + [0])
+    min_score = user_scope.top_scorers(field).all.last.send(field)
+    user_scope.where("#{field} >= ?",min_score).group_by{|u| u.rank(field) }.each do |rank,users|
       prize_total = 0
       users_count = users.size
       users.each_with_index do |user,index|
@@ -58,21 +60,9 @@ class Winner < ActiveRecord::Base
                               period: options[:period])
       end
     end
-    winners.collect{|w|[w.user,w.amount]}.each do |user,amount|
-      if amount > 0
-        begin
-          user.increment!(:prize_points,amount)
-        rescue
-          user.reload
-          begin
-            user.increment!(:prize_points,amount)
-          rescue
-            # ignore second time around
-          end
-        end
-        user.send_message("Congratulations, you have won *#{amount} prize points* for _#{options[:period]} #{options[:score_by]}_.
-                           Check the $redeem$ section to see what you can trade them in for.".squish)
-      end
+    winners.group_by{|w| w.amount }.each do |amount,winners_group|
+        User.send_message("Congratulations, you have won *#{amount} prize points* for _#{options[:period]} #{options[:score_by]}_.
+                           Check the $redeem$ section to see what you can trade them in for.".squish,winners_group.map{|info| info.user })
     end
   end
 
@@ -103,7 +93,18 @@ class Winner < ActiveRecord::Base
   protected
 
   def increase_prize_points
-
+    if amount > 0
+      begin
+        user.increment!(:prize_points,amount)
+      rescue
+        user.reload
+        begin
+          user.increment!(:prize_points,amount)
+        rescue
+          # ignore second time around
+        end
+      end
+    end
   end
 
 

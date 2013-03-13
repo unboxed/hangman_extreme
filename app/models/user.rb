@@ -222,6 +222,10 @@ class User < ActiveRecord::Base
     "<User id:#{id} name:#{name}>"
   end
 
+  def inspect
+    to_s
+  end
+
   private
 
   def calculate_precision(game_scope, game_count = 10)

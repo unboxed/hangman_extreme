@@ -1,5 +1,6 @@
 <b>Welcome to hangman extreme</b><br/>
 Have fun guessing the word.<br/>
+Less winners but bigger amounts, check out <%= link_to("payouts",explain_path(action: "payouts")) %>
 
 <ul>
   <%= content_tag_for(:li, @games) do |game| %>
