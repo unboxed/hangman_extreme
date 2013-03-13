@@ -23,7 +23,7 @@ jobs:
       job: App::Jobs::IssueAirtimeToUsers
       cron: '0 15,45 * * * ?'
       description: Payout Mxit Money
-  stats.record_new_game_stats:
-    job: App::Jobs::RecordNewGameStats
-    cron: '0 15 * * * ?'
-    description: Record weekly game count
+  stats.record_hourly_stats:
+    job: App::Jobs::RecordHourlyStats
+    cron: '0 0 * * * ?'
+    description: Record hourly stats

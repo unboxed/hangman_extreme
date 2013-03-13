@@ -6,6 +6,8 @@ class PurchaseTransaction < ActiveRecord::Base
   validates_numericality_of :moola_amount, only_integer: true, greater_than: 0
   after_create :update_user_clue_points
 
+  scope :last_hour, lambda{ where('created_at >= ?',1.hour.ago) }
+
   def generate_ref
     "R#{rand(8999) + 1000}T#{Time.now.strftime("%j%H%M")}U#{user_id}P#{product_id}M#{moola_amount}"
   end
@@ -34,23 +36,6 @@ class PurchaseTransaction < ActiveRecord::Base
                                                           clue_points: amount)
     end
     @p.freeze
-  end
-
-  def self.cohort_array
-    cohort = []
-    day = maximum(:created_at).try(:end_of_day)
-    return [] unless day
-    first_day = 21.days.ago
-    while(day >= first_day) do
-      scope = where('created_at >= ? AND created_at <= ?',day.beginning_of_day,day)
-      values = [day.strftime("%d-%m")]
-      products.each do |product_id,product_details|
-        values << scope.where(product_id: product_id).sum(:moola_amount)
-      end
-      cohort << values
-      day -= 1.day
-    end
-    cohort.reverse
   end
 
   protected

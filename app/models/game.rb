@@ -22,6 +22,7 @@ class Game < ActiveRecord::Base
   scope :today, lambda{ where('created_at >= ?',Time.current.beginning_of_day) }
   scope :since_yesterday, lambda{ where('created_at >= ?',Time.current.beginning_of_day - 1.day) }
 
+  scope :last_hour, lambda{ where('created_at >= ?',1.hour.ago) }
   scope :this_week, lambda{ where('created_at >= ?',Time.current.beginning_of_week) }
   scope :this_month, lambda{ where('created_at >= ?',Time.current.beginning_of_month) }
   scope :this_year, lambda{ where('created_at >= ?',Time.current.beginning_of_year) }
@@ -87,31 +88,6 @@ class Game < ActiveRecord::Base
 
   def self.purge_old!
     Game.where('created_at < ?',20.weeks.ago).delete_all
-  end
-
-  def self.cohort_array
-    cohort = []
-    return cohort unless Game.maximum(:created_at)
-    day = Game.maximum(:created_at).beginning_of_day - 1.day
-    first_day = day - 20.days
-    while(day >= first_day) do
-      game_scope = Game.where('games.created_at >= ? AND games.created_at < ?',day,day + 1.day)
-      completed_games = game_scope.completed
-      clue_completed_games = completed_games.where('clue_revealed = ?',true).count
-      no_clue_completed_games = completed_games.count - clue_completed_games
-
-      incompleted_games = game_scope.incompleted
-      clue_incompleted_games = incompleted_games.where('clue_revealed = ?',true).count
-      no_clue_incompleted_games = incompleted_games.count - clue_incompleted_games
-
-      cohort << [day.strftime("%d-%m"),
-                 clue_incompleted_games,
-                 no_clue_incompleted_games,
-                 no_clue_completed_games,
-                 clue_completed_games]
-      day -= 1.day
-    end
-    cohort.reverse
   end
 
   protected

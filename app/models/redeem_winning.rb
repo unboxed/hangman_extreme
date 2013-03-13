@@ -16,6 +16,7 @@ class RedeemWinning < ActiveRecord::Base
   scope :pending, where('state = ?','pending')
   scope :pending_mxit_money, where('prize_type = ? AND state = ?','mxit_money','pending')
   scope :pending_airtime, where('prize_type LIKE ? AND state = ?','%airtime','pending')
+  scope :last_hour, lambda{ where('created_at >= ?',1.hour.ago) }
 
   def self.pending_winnings_text
     pending.joins(:user).includes(:user).order('prize_type,uid').collect{|rw| [rw.prize_type,rw.id,rw.user_uid,rw.user_login,rw.user_mobile_number,rw.prize_amount].join(" : ")}.join("\n")
@@ -25,23 +26,6 @@ class RedeemWinning < ActiveRecord::Base
     ids.each do |id|
       find(id).paid!
     end
-  end
-
-  def self.cohort_array
-    cohort = []
-    day = maximum(:created_at).try(:end_of_day)
-    return [] unless day
-    first_day = 21.days.ago
-    while(day >= first_day) do
-      scope = where('created_at >= ? AND created_at <= ?',day.beginning_of_day,day)
-      values = [day.strftime("%d-%m")]
-      PRIZE_TYPES.each do |prize_type|
-        values << scope.where(prize_type: prize_type).sum(:prize_amount)
-      end
-      cohort << values
-      day -= 1.day
-    end
-    cohort.reverse
   end
 
   def self.issue_mxit_money_to_users

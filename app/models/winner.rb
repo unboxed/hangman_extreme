@@ -66,30 +66,6 @@ class Winner < ActiveRecord::Base
     end
   end
 
-  def self.cohort_array
-    cohort = []
-    first_day = minimum(:created_at).try(:beginning_of_day)
-    return [] unless first_day
-    day = maximum(:created_at).beginning_of_day
-    while(day >= first_day) do
-      winner_scope = where('winners.created_at >= ? AND winners.created_at < ?',day,day + 1.day)
-      user_ids = winner_scope.collect{|w| w.user_id }.uniq
-      win_earlier_user_ids = where('winners.created_at < ?',day).collect{|w| w.user_id }.uniq
-      first_time_user_ids = user_ids - win_earlier_user_ids
-      user_ids -= first_time_user_ids
-      won_yesterday_user_ids =  where('winners.created_at >= ? AND winners.created_at < ?',day - 1.day,day).collect{|w| w.user_id }.uniq
-      yesterday_user_ids = user_ids - won_yesterday_user_ids
-
-      cohort << [day.strftime("%d-%m"),
-                 user_ids.size - yesterday_user_ids.size,
-                 yesterday_user_ids.size,
-                 first_time_user_ids.size]
-
-      day -= 1.day
-    end
-    cohort.reverse
-  end
-
   protected
 
   def increase_prize_points

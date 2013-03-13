@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 
   scope :top_scorers, lambda{ |field| order("#{field} DESC").limit(Winner::WEEKLY_PRIZE_AMOUNTS.size) }
   scope :mxit, where(provider: 'mxit')
+  scope :active_last_hour, lambda{ where('updated_at >= ?',1.hour.ago) }
 
   def self.find_or_create_from_auth_hash(auth_hash)
     auth_hash.stringify_keys!
@@ -155,47 +156,6 @@ class User < ActiveRecord::Base
         raise if Rails.env.test?
       end
     end
-  end
-
-  def self.cohort_array
-    cohort = []
-    first_day = 49.days.ago
-    end_of_week = Time.current.beginning_of_day - 1.day
-    start_of_week = end_of_week - 7.days
-    while(start_of_week >= first_day)
-      user_scope = User.mxit.where('users.created_at <= ?',end_of_week )
-      all_users_count = user_scope.count
-      new_active_users = new_competitive_users = 0
-      user_scope.where('users.created_at >= ?',start_of_week).joins(:games).
-      where("games.created_at >= ? AND games.created_at <= ?",start_of_week,end_of_week).
-      count("games.id",group: 'users.id').each do |user_id,count|
-        if count > 35
-          new_competitive_users += 1
-        else
-          new_active_users += 1
-        end
-      end
-      active_users = competitive_users = 0
-      user_scope.where('users.created_at <= ?',start_of_week).joins(:games).
-        where("games.created_at >= ? AND games.created_at <= ?",start_of_week,end_of_week).
-        count("games.id",group: 'users.id').each do |user_id,count|
-          if count > 35
-            competitive_users += 1
-          else
-            active_users += 1
-          end
-      end
-      inactive_users = all_users_count - (new_active_users + new_competitive_users + active_users + competitive_users)
-      cohort << [end_of_week.strftime("%d-%m"),
-                new_active_users,
-                new_competitive_users,
-                inactive_users,
-                active_users,
-                competitive_users]
-      start_of_week -= 2.day
-      end_of_week -= 2.day
-    end
-    cohort.reverse
   end
 
   def self.scoring_fields
