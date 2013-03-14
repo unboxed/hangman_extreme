@@ -12,7 +12,7 @@ class GamesController < ApplicationController
   end
 
   def play
-    redirect_to(current_user.incompleted_game_today || new_game_path)
+    redirect_to(current_user.current_game || new_game_path)
   end
 
   def play_letter
