@@ -97,10 +97,6 @@ describe ApplicationHelper do
 
   context "smart_link_to" do
 
-    it "should link only to the first word" do
-      helper.smart_link_to('hello world',"/hello_word").should == "#{link_to("hello","/hello_word")} world"
-    end
-
     it "should work like normal link" do
       helper.stub(:mxit_request?).and_return(false)
       helper.smart_link_to('new game', new_game_path, id: 'new_game').should == link_to('new game', new_game_path, id: 'new_game')

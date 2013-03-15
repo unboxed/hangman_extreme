@@ -12,7 +12,7 @@ module MenuHelper
     items = menu_items.clone
     grouped_items = []
     while(!items.empty?)
-      if items.size == 1 || (items[0].first.size + items[1].first.size > 20)
+      if items.size == 1 || (items[0].first.size + items[1].first.size > 20) || !mxit_request?
         grouped_items << [items[0]]
         items.shift
       else
