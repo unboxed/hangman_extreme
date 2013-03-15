@@ -46,7 +46,7 @@ class Winner < ActiveRecord::Base
     previous_winners = period(options[:period]).reason(options[:score_by]).order('created_at DESC').limit(options[:winnings].size)
     user_scope = User.where('id NOT IN (?)',previous_winners.map(&:user_id) + [0])
     min_score = user_scope.top_scorers(field).all.last.send(field)
-    user_scope.where("#{field} >= ?",min_score).group_by{|u| u.rank(field) }.each do |rank,users|
+    user_scope.where("#{field} >= ?",min_score).group_by{|u| u.rank(field,user_scope) }.each do |rank,users|
       prize_total = 0
       users_count = users.size
       users.each_with_index do |user,index|

@@ -61,8 +61,8 @@ class User < ActiveRecord::Base
     save
   end
 
-  def rank(field)
-    User.where("#{field} > ?", send(field)).count + 1
+  def rank(field,user_scope = User)
+    user_scope.where("#{field} > ?", send(field)).count + 1
   end
 
   def utma(update_tracking = false)

@@ -112,6 +112,24 @@ describe Winner do
               end
             end
 
+            it "must share point if players score the same and has previous winners" do
+              (6..11).each{|i|create(:user, "#{period}_#{score_by}" => i)}
+              Timecop.freeze(Time.current + (period == 'daily' ? 2.day : 2.week)) do
+                Winner.create_winners_for_category(period: period, score_by: score_by, winnings: [10] * 5)
+                Winner.period(period).reason(score_by).count.should == 5
+              end
+              users_with_10 = create_list(:user, 3, "#{period}_#{score_by}" => 10)
+              users_with_9 = create_list(:user, 3, "#{period}_#{score_by}" => 9)
+              Winner.create_winners_for_category(period: period, score_by: score_by, winnings: [50, 50, 50, 50, 50])
+              [[users_with_10, 50], [users_with_9, 34]].each do |users, amount|
+                users.each do |user|
+                  user.winners.period(period).reason(score_by).count.should == 1
+                  winner = user.winners.period(period).reason(score_by).first
+                  winner.amount.should == amount
+                end
+              end
+            end
+
             it "must send the players a message" do
               create_list(:user, 5, "#{period}_#{score_by}" => 10)
               User.should_receive(:send_message).
