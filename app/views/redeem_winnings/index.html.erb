@@ -26,17 +26,22 @@ You can redeem your points for:
     <%= number_to_currency(current_user.prize_points.to_f / 100, :unit => "R") %> mxit money</li>
   <% end %>
 
-  <% ['vodago','cell_c','mtn'].each do |provider| %>
+  <% {vodago: [200,500,1000],
+      cell_c: [500,1000,2500],
+      mtn: [500,1000,1500],
+      virgin: [1000,1500,3500],
+      heita: [500,1000,2000]}.each do |provider,values| %>
       <li>
-      <% if current_user.prize_points < 500 %>
-          R5 <%= provider.gsub("_"," ") %> airtime
-            (<span style="color: red;"><%= 500 - current_user.prize_points %> more prize points</span>)
-      <% else # current_user.prize_points >= 500  %>
+      <% if current_user.prize_points < values.first %>
+          R<%= values.first / 100 %> <%= provider.to_s.gsub("_"," ") %> airtime
+            (<span style="color: red;"><%= values.first - current_user.prize_points %> more prize points</span>)
+      <% else %>
+          <% value = values.delete_if{|v| current_user.prize_points < v }.max %>
           <%= link_to (index += 1).to_s,
                           new_redeem_winning_path(:prize_type => "#{provider}_airtime",
-                                                  :prize_amount => 500),
+                                                  :prize_amount => value),
                           id: "#{provider}_airtime" %>
-            R5 <%= provider.gsub("_"," ") %> airtime
+            R<%= value / 100 %> <%= provider.to_s.gsub("_"," ") %> airtime
       <% end %>
       </li>
   <% end %>

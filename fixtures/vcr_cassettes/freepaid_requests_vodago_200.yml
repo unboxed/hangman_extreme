@@ -17,7 +17,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 12 Mar 2013 14:31:05 GMT
+      - Fri, 15 Mar 2013 14:46:56 GMT
       Server:
       - Apache
       Content-Length:
@@ -113,20 +113,20 @@ http_interactions:
         >\n    <soap:address location=\"http://pi.dynalias.net:3088/airtime/\"/>\n\
         \  </port>\n</service>\n</definitions>"
     http_version:
-  recorded_at: Tue, 12 Mar 2013 14:31:06 GMT
+  recorded_at: Fri, 15 Mar 2013 14:47:25 GMT
 - request:
     method: post
     uri: http://pi.dynalias.net:3088/airtime/
     body:
       encoding: US-ASCII
-      string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://pi.dynalias.net:3088/airtime/" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><tns:getVoucher><getVoucherIn><user>3547132</user><pass>hellounb0xed</pass><refno>RW1T20130312T1631</refno><network>cellc</network><sellvalue>5</sellvalue></getVoucherIn></tns:getVoucher></env:Body></env:Envelope>
+      string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://pi.dynalias.net:3088/airtime/" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><tns:getVoucher><getVoucherIn><user>3547132</user><pass>hellounb0xed</pass><refno>RW1T20130315T1646</refno><network>vodacom</network><sellvalue>2</sellvalue></getVoucherIn></tns:getVoucher></env:Body></env:Envelope>
     headers:
       Soapaction:
       - ! '"http://pi.dynalias.net:3088/airtime/getVoucher"'
       Content-Type:
       - text/xml;charset=UTF-8
       Content-Length:
-      - '477'
+      - '479'
       Accept:
       - ! '*/*'
       User-Agent:
@@ -137,18 +137,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 12 Mar 2013 14:31:06 GMT
+      - Fri, 15 Mar 2013 14:47:30 GMT
       Server:
       - Apache
       X-Soap-Server:
       - NuSOAP/0.7.3 (1.114)
       Content-Length:
-      - '799'
+      - '796'
       Content-Type:
       - text/xml; charset=ISO-8859-1
     body:
       encoding: US-ASCII
-      string: <?xml version="1.0" encoding="ISO-8859-1"?><SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://pi.dynalias.net:3088/airtime/"><SOAP-ENV:Body><ns1:getVoucherResponse xmlns:ns1="http://pi.dynalias.net:3088/airtime/"><reply xsi:type="tns:getVoucherOut"><status xsi:type="xsd:int">1</status><message xsi:type="xsd:string">success</message><balance xsi:type="xsd:float">499869.6</balance><pin xsi:type="xsd:string">2112384242207</pin><serial xsi:type="xsd:string">758469453817</serial><costprice xsi:type="xsd:float">4.53</costprice></reply></ns1:getVoucherResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
+      string: <?xml version="1.0" encoding="ISO-8859-1"?><SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://pi.dynalias.net:3088/airtime/"><SOAP-ENV:Body><ns1:getVoucherResponse xmlns:ns1="http://pi.dynalias.net:3088/airtime/"><reply xsi:type="tns:getVoucherOut"><status xsi:type="xsd:int">1</status><message xsi:type="xsd:string">success</message><balance xsi:type="xsd:float">499831.56</balance><pin xsi:type="xsd:string">145489490660</pin><serial xsi:type="xsd:string">235270408</serial><costprice xsi:type="xsd:float">1.81</costprice></reply></ns1:getVoucherResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
     http_version:
-  recorded_at: Tue, 12 Mar 2013 14:31:06 GMT
+  recorded_at: Fri, 15 Mar 2013 14:47:34 GMT
 recorded_with: VCR 2.4.0

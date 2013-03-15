@@ -51,26 +51,32 @@ describe 'redeem winnings' do
     page.should have_content("0 prize points")
   end
 
-  ['vodago','cell_c','mtn'].each do |provider|
+  {vodago: [200,500,1000],
+   cell_c: [500,1000,2500],
+   mtn: [500,1000,1500],
+   virgin: [1000,1500,3500],
+   heita: [500,1000,2000]}.each do |provider,values|
 
-    it "must allow to redeem prize points for #{provider} airtime" do
-      stub_mxit_money
-      @current_user.update_attributes(:prize_points => 555)
-      visit '/'
-      click_link('redeem')
-      page.should have_content("555 prize points")
-      click_link("#{provider}_airtime")
-      page.should have_content("R5 #{provider.gsub("_"," ")} airtime")
-      click_button('redeem')
-      page.should have_content("55 prize points")
-      click_link('airtime_vouchers')
-      VCR.use_cassette("freepaid_requests_#{provider}") do
-        App::Jobs::IssueAirtimeToUsers.new.run
+    values.each do |value|
+      it "must allow to redeem prize points for #{provider} R#{value / 100} airtime" do
+        stub_mxit_money
+        @current_user.update_attributes(:prize_points => value + 1)
+        visit '/'
+        click_link('redeem')
+        page.should have_content("#{value + 1} prize points")
+        click_link("#{provider}_airtime")
+        page.should have_content("R#{value / 100} #{provider.to_s.gsub("_"," ")} airtime")
+        click_button('redeem')
+        page.should have_content("1 prize points")
+        click_link('airtime_vouchers')
+        VCR.use_cassette("freepaid_requests_#{provider}_#{value}") do
+          App::Jobs::IssueAirtimeToUsers.new.run
+        end
+        visit '/'
+        click_link('redeem')
+        click_link('airtime_vouchers')
+        page.should have_content("R#{value / 100}")
       end
-      visit '/'
-      click_link('redeem')
-      click_link('airtime_vouchers')
-      page.should have_content("R5")
     end
 
   end

@@ -91,36 +91,217 @@ describe "redeem_winnings/index.html.erb" do
 
   end
 
-  ['vodago','cell_c','mtn'].each do |provider|
+  context "vodago airtime" do
 
-    context "#{provider} airtime" do
+    it "must have R2 airtime and link" do
+      @current_user.prize_points = 200
+      render
+      rendered.should have_content("R2 vodago airtime")
+      rendered.should have_link("vodago_airtime",
+                                href: new_redeem_winning_path(:prize_type => "vodago_airtime",
+                                                              :prize_amount => 200))
+    end
 
-      it "must have R2 #{provider} airtime" do
-        @current_user.prize_points = 500
-        render
-        rendered.should have_content("R5 #{provider.gsub("_"," ")} airtime")
-      end
+    it "must have R5 airtime and link" do
+      @current_user.prize_points = 500
+      render
+      rendered.should have_content("R5 vodago airtime")
+      rendered.should have_link("vodago_airtime",
+                               href: new_redeem_winning_path(:prize_type => "vodago_airtime",
+                                                             :prize_amount => 500))
+    end
 
-      it "must have a text if not enough prize points" do
-        @current_user.prize_points = 499
-        render
-        rendered.should have_content("R5 #{provider.gsub("_"," ")} airtime")
-      end
+    it "must have R10 airtime and link" do
+      @current_user.prize_points = 1000
+      render
+      rendered.should have_content("R10 vodago airtime")
+      rendered.should have_link("vodago_airtime",
+                               href: new_redeem_winning_path(:prize_type => "vodago_airtime",
+                                                             :prize_amount => 1000))
+    end
 
-      it "must have a #{provider} airtime link" do
-        @current_user.prize_points = 520
-        render
-        rendered.should have_link("#{provider}_airtime",
-                                  href: new_redeem_winning_path(:prize_type => "#{provider}_airtime",
-                                                                :prize_amount => 500))
-      end
+    it "must have a text if not enough prize points" do
+      @current_user.prize_points = 199
+      render
+      rendered.should have_content("R2 vodago airtime")
+    end
 
-      it "wont have a #{provider} link if not enough prize points" do
-        @current_user.prize_points = 499
-        render
-        rendered.should_not have_link("#{provider}_airtime")
-      end
+    it "wont have a link if not enough prize points" do
+      @current_user.prize_points = 199
+      render
+      rendered.should_not have_link("vodago_airtime")
+    end
 
+  end
+
+  context "mtn airtime" do
+
+    it "must have R5 airtime and link" do
+      @current_user.prize_points = 500
+      render
+      rendered.should have_content("R5 mtn airtime")
+      rendered.should have_link("mtn_airtime",
+                                href: new_redeem_winning_path(:prize_type => "mtn_airtime",
+                                                              :prize_amount => 500))
+    end
+
+    it "must have R10 airtime and link" do
+      @current_user.prize_points = 1000
+      render
+      rendered.should have_content("R10 mtn airtime")
+      rendered.should have_link("mtn_airtime",
+                                href: new_redeem_winning_path(:prize_type => "mtn_airtime",
+                                                              :prize_amount => 1000))
+    end
+
+    it "must have R15 airtime and link" do
+      @current_user.prize_points = 1500
+      render
+      rendered.should have_content("R15 mtn airtime")
+      rendered.should have_link("mtn_airtime",
+                                href: new_redeem_winning_path(:prize_type => "mtn_airtime",
+                                                              :prize_amount => 1500))
+    end
+
+    it "must have a text if not enough prize points" do
+      @current_user.prize_points = 499
+      render
+      rendered.should have_content("R5 mtn airtime")
+    end
+
+    it "wont have a link if not enough prize points" do
+      @current_user.prize_points = 499
+      render
+      rendered.should_not have_link("mtn_airtime")
+    end
+
+  end
+
+  context "cell_c airtime" do
+
+    it "must have R5 airtime and link" do
+      @current_user.prize_points = 500
+      render
+      rendered.should have_content("R5 cell c airtime")
+      rendered.should have_link("cell_c_airtime",
+                                href: new_redeem_winning_path(:prize_type => "cell_c_airtime",
+                                                              :prize_amount => 500))
+    end
+
+    it "must have R10 airtime and link" do
+      @current_user.prize_points = 1000
+      render
+      rendered.should have_content("R10 cell c airtime")
+      rendered.should have_link("cell_c_airtime",
+                                href: new_redeem_winning_path(:prize_type => "cell_c_airtime",
+                                                              :prize_amount => 1000))
+    end
+
+    it "must have R25 airtime and link" do
+      @current_user.prize_points = 2500
+      render
+      rendered.should have_content("R25 cell c airtime")
+      rendered.should have_link("cell_c_airtime",
+                                href: new_redeem_winning_path(:prize_type => "cell_c_airtime",
+                                                              :prize_amount => 2500))
+    end
+
+    it "must have a text if not enough prize points" do
+      @current_user.prize_points = 499
+      render
+      rendered.should have_content("R5 cell c airtime")
+    end
+
+    it "wont have a link if not enough prize points" do
+      @current_user.prize_points = 499
+      render
+      rendered.should_not have_link("cell_c_airtime")
+    end
+
+  end
+
+  context "virgin airtime" do
+
+    it "must have R10 airtime and link" do
+      @current_user.prize_points = 1000
+      render
+      rendered.should have_content("R10 virgin airtime")
+      rendered.should have_link("virgin_airtime",
+                                href: new_redeem_winning_path(:prize_type => "virgin_airtime",
+                                                              :prize_amount => 1000))
+    end
+
+    it "must have R15 airtime and link" do
+      @current_user.prize_points = 1500
+      render
+      rendered.should have_content("R15 virgin airtime")
+      rendered.should have_link("virgin_airtime",
+                                href: new_redeem_winning_path(:prize_type => "virgin_airtime",
+                                                              :prize_amount => 1500))
+    end
+
+    it "must have R35 airtime and link" do
+      @current_user.prize_points = 3500
+      render
+      rendered.should have_content("R35 virgin airtime")
+      rendered.should have_link("virgin_airtime",
+                                href: new_redeem_winning_path(:prize_type => "virgin_airtime",
+                                                              :prize_amount => 3500))
+    end
+
+    it "must have a text if not enough prize points" do
+      @current_user.prize_points = 999
+      render
+      rendered.should have_content("R10 virgin airtime")
+    end
+
+    it "wont have a link if not enough prize points" do
+      @current_user.prize_points = 999
+      render
+      rendered.should_not have_link("virgin_airtime")
+    end
+
+  end
+
+  context "heita airtime" do
+
+    it "must have R5 airtime and link" do
+      @current_user.prize_points = 500
+      render
+      rendered.should have_content("R5 heita airtime")
+      rendered.should have_link("heita_airtime",
+                                href: new_redeem_winning_path(:prize_type => "heita_airtime",
+                                                              :prize_amount => 500))
+    end
+
+    it "must have R10 airtime and link" do
+      @current_user.prize_points = 1000
+      render
+      rendered.should have_content("R10 heita airtime")
+      rendered.should have_link("heita_airtime",
+                                href: new_redeem_winning_path(:prize_type => "heita_airtime",
+                                                              :prize_amount => 1000))
+    end
+
+    it "must have R20 airtime and link" do
+      @current_user.prize_points = 2000
+      render
+      rendered.should have_content("R20 heita airtime")
+      rendered.should have_link("heita_airtime",
+                                href: new_redeem_winning_path(:prize_type => "heita_airtime",
+                                                              :prize_amount => 2000))
+    end
+
+    it "must have a text if not enough prize points" do
+      @current_user.prize_points = 499
+      render
+      rendered.should have_content("R5 heita airtime")
+    end
+
+    it "wont have a link if not enough prize points" do
+      @current_user.prize_points = 499
+      render
+      rendered.should_not have_link("heita_airtime")
     end
 
   end

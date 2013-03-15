@@ -28,9 +28,10 @@ describe "redeem_winnings/new.html.erb" do
   end
 
   it "should render with vodago_airtime prize type" do
+    @redeem_winning.prize_amount = 200
     @redeem_winning.prize_type = 'vodago_airtime'
     render
-    rendered.should have_link("cancel", href: redeem_winnings_path)
+    rendered.should have_content("R2")
   end
 
   it "should render with mxit money prize type" do
