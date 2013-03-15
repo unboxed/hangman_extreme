@@ -20,9 +20,6 @@ gem 'rest-client', require: 'rest_client'
 gem 'redis'
 gem 'ohm'
 gem 'mxit_api', '>= 0.2.2.pre'
-gem 'activeadmin'
-gem 'sass-rails'
-gem "meta_search"
 gem "savon"
 platforms :jruby do
   gem "torquebox"
@@ -47,7 +44,7 @@ group :assets do
     gem 'libv8', '~> 3.11.8'
     gem 'therubyracer'
   end
-  gem 'coffee-rails'
+#  gem 'coffee-rails'
   gem 'uglifier', '>= 1.0.3'
 end
 

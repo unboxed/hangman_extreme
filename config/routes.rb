@@ -1,8 +1,4 @@
 HangmanLeague::Application.routes.draw do
-  ActiveAdmin.routes(self)
-
-  devise_for :admin_users, ActiveAdmin::Devise.config
-
   get "purchase_transactions", to: 'purchase_transactions#index', as: 'purchases'
   get "purchase_transactions/new", as: 'new_purchase'
   match "purchase_transactions/create", to: 'purchase_transactions#create', as: 'create_purchase'
