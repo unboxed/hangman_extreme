@@ -3,7 +3,7 @@ begin
 
   desc "Run specs that are used for coverage"
   RSpec::Core::RakeTask.new('spec:unit') do |task|
-    task.pattern = ["**/controllers/*_spec.rb","**/models/*_spec.rb","**/helpers/*_spec.rb","**/routing/*_spec.rb","**/mailers/*_spec.rb","**/lib/*_spec.rb"]
+    task.pattern = ["**/controllers/*_spec.rb","**/models/*_spec.rb","**/helpers/*_spec.rb","**/routing/*_spec.rb","**/mailers/*_spec.rb","**/lib/*_spec.rb","**/jobs/*_spec.rb"]
     task.rspec_opts = Dir.glob("[0-9][0-9][0-9]_*").collect { |x| "-I#{x}" }.sort
   end
 
