@@ -1,6 +1,5 @@
-<b>Welcome to hangman extreme</b><br/>
+<h1>Welcome to hangman extreme</h1>
 Have fun guessing the word.<br/>
-We have added virgin and heita vouchers to the prize section
 <ul>
   <%= content_tag_for(:li, @games) do |game| %>
       <span><%= game.hangman_text %></span> -
@@ -8,7 +7,7 @@ We have added virgin and heita vouchers to the prize section
       <%= link_to('show', game, id: dom_id(game, 'show')) %>
   <% end %>
 </ul>
-
+<%= shinka_ad if current_user && current_user.provider == "mxit" %>
 <% menu_item 'continue', game_path(@current_game), id: 'continue_game' if @current_game %>
 <% menu_item 'new game', new_game_path, id: 'new_game' unless @current_game %>
 <% menu_item 'Share with your <a href="mxit://[communityportal]/RecommendPage?ItemId=7297721" type="mxit/service-navigation">friends</a>' %>
