@@ -62,6 +62,7 @@ namespace :db do
   DESC
   task :symlink, :except => {:no_release => true} do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    top.upload "db/words.csv", "#{release_path}/db/words.csv", :via => :scp
   end
 
 end
