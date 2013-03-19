@@ -2,10 +2,9 @@
 <p>We rank players on the following categories</p>
 <% index = 0 %>
 <ul>
-  <ol><%= link_to((index += 1),explain_path(action: 'score'),id: 'score') %> <b>score</b> (for hangman addicts)</ol>
-  <ol><%= link_to((index += 1),explain_path(action: 'rating'),id: 'rating') %> <b>rating</b> (for casual players)</ol>
-  <ol><%= link_to((index += 1),explain_path(action: 'precision'),id: 'precision') %> <b>precision</b> (will be replaced by streak)</ol>
-  <ol><%= link_to((index += 1),explain_path(action: 'winning_streak'),id: 'winning_streak') %> <b>streak</b> (soon)</ol>
+  <ol><%= link_to((index += 1),explain_path(action: 'rating'),id: 'rating') %> <b>rating</b></ol>
+  <ol><%= link_to((index += 1),explain_path(action: 'precision'),id: 'precision') %> <b>precision</b></ol>
+  <ol><%= link_to((index += 1),explain_path(action: 'winning_streak'),id: 'winning_streak') %> <b>streak</b></ol>
 </ul>
 <br/>
 

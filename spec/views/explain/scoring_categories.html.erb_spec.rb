@@ -7,11 +7,6 @@ describe "explain/scoring_categories.html.erb" do
     view.stub!(:menu_item)
   end
 
-  it "must have a link to score" do
-    render
-    rendered.should have_link("score", href: explain_path(action: 'score'))
-  end
-
   it "must have a link to rating" do
     render
     rendered.should have_link("rating", href: explain_path(action: 'rating'))

@@ -23,13 +23,6 @@ describe ExplainController do
     end
   end
 
-  describe "GET 'score'" do
-    it "returns http success" do
-      get 'score'
-      response.should be_success
-    end
-  end
-
   describe "GET 'winning_streak'" do
     it "returns http success" do
       get 'winning_streak'

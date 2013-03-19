@@ -10,10 +10,5 @@ describe "explain/precision.html.erb" do
     rendered.should have_content("Links")
   end
 
-  it "must have a link to streak" do
-    render
-    rendered.should have_link("winning_streak", href: explain_path(action: 'winning_streak'))
-  end
-
 
 end
