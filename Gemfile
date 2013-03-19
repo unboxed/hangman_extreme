@@ -64,6 +64,7 @@ end
 group :test do
   platforms :jruby do
     gem 'jdbc-mysql'
+    gem 'activerecord-jdbcmysql-adapter'
     gem 'jdbc-sqlite3', :require => false
   end
   platforms :ruby do

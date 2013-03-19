@@ -23,6 +23,9 @@ GEM
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
     activerecord-jdbc-adapter (1.2.5)
+    activerecord-jdbcmysql-adapter (1.2.5)
+      activerecord-jdbc-adapter (~> 1.2.5)
+      jdbc-mysql (~> 5.1.0)
     activerecord-jdbcpostgresql-adapter (1.2.5)
       activerecord-jdbc-adapter (~> 1.2.5)
       jdbc-postgres (>= 9.1, < 9.3)
@@ -344,6 +347,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-jdbcmysql-adapter
   activerecord-jdbcpostgresql-adapter
   airbrake
   annotate

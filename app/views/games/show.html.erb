@@ -25,7 +25,7 @@ You have <span><%= @game.attempts_left %></span> attempts left
 <% else %>
     <% ("a".."z").to_a.in_groups_of(10,false).each do |letters| -%>
         <% letters.each do |letter| -%>
-            <%= link_to_unless(@game.choices.to_s.include?(letter),letter, play_letter_game_path(@game,letter), id: letter) %>
+            <%= link_to_unless(@game.choices.to_s.include?(letter),letter, play_letter_game_path(@game,letter), id: letter) %>&nbps;
         <% end -%>
         <br/>
     <% end -%>
