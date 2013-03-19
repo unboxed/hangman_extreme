@@ -25,8 +25,6 @@ describe 'explain' do
     visit '/'
     click_link('rank')
     click_link('scoring')
-    click_link('score')
-    click_link('scoring')
     click_link('rating')
     click_link('scoring')
     click_link('precision')
