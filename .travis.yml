@@ -1,0 +1,8 @@
+language: ruby
+rvm:
+  - 1.9.3
+  - jruby
+  - 2.0.0
+script: bundle exec rspec spec
+env:
+  - MXIT_CLIENT_ID=1 SHINKA_AUID=1 GA_TRACKING_CODE=1
