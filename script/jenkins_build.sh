@@ -4,6 +4,7 @@ rvm use 1.9.3@hangman_extreme
 bundle install --without development --frozen
 
 cp -f config/database_jenkins.yml config/database.yml
+cp -f db/words.sample.csv db/words.csv
 RAILS_ENV=test bundle exec rake log:clear db:drop db:create db:migrate
 rm -rf coverage
 RAILS_ENV=test bundle exec rake log:clear

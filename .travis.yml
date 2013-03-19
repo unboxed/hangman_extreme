@@ -3,6 +3,7 @@ rvm:
   - 1.9.3
   - jruby
   - 2.0.0
+before_script: cp db/words.sample.csv db/words.csv
 script: bundle exec rspec spec
 env:
   - MXIT_CLIENT_ID=1 SHINKA_AUID=1 GA_TRACKING_CODE=1
