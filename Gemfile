@@ -14,7 +14,6 @@ gem 'omniauth'
 gem 'kaminari'
 gem 'nokogiri'
 gem 'json'
-gem 'airbrake'
 gem 'redis-settings'
 gem 'rest-client', require: 'rest_client'
 gem 'redis'
@@ -27,6 +26,7 @@ platforms :jruby do
 end
 
 # third party
+gem 'airbrake'
 gem 'uservoice-ruby'
 gem 'gabba' # google analytics
 gem 'newrelic_rpm'
