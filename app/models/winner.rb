@@ -25,6 +25,10 @@ class Winner < ActiveRecord::Base
     WINNING_REASONS
   end
 
+  def self.winning_ranking_reasons
+    WINNING_REASONS - %w(random)
+  end
+
   def self.daily_random_games_required
     10
   end
