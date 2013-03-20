@@ -31,6 +31,8 @@ describe 'explain' do
     click_link('scoring')
     click_link('winning_streak')
     click_link('scoring')
+    click_link('winning_random')
+    click_link('scoring')
     click_link('payouts')
     click_link('home')
   end

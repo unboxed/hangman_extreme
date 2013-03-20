@@ -8,11 +8,8 @@ describe ApplicationHelper do
       Settings.shinka_disabled_until = nil
     end
 
-    before :each do
-      Settings.shinka_disabled_until = nil
-    end
-
     it "wont work if shinka_auid is blank" do
+      helper.stub!(:shinka_auid).and_return(nil)
       helper.should_not be_shinka_ads_enabled
     end
 
@@ -98,7 +95,7 @@ describe ApplicationHelper do
 
     it "should work" do
       helper.mxit_authorise_link("name", state: "testing").should ==
-        "<a href=\"http://test.host/authorize?redirect_uri=http%3A%2F%2Ftest.host%2Fusers%2Fmxit_oauth&amp;response_type=code&amp;scope=profile%2Fpublic+profile%2Fprivate&amp;state=testing\">name</a>"
+        "<a href=\"http://test.host/authorize?client_id=1&amp;redirect_uri=http%3A%2F%2Ftest.host%2Fusers%2Fmxit_oauth&amp;response_type=code&amp;scope=profile%2Fpublic+profile%2Fprivate&amp;state=testing\">name</a>"
     end
 
   end

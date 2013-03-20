@@ -9,6 +9,7 @@ describe AirtimeVouchersController do
     @ability.can(:manage, :all)
     controller.should_receive(:current_ability).at_least(:once).and_return(@ability)
     controller.stub(:current_user).and_return(@current_user)
+    controller.stub(:send_stats)
   end
 
   describe "GET index" do

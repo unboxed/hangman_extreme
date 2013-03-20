@@ -98,17 +98,15 @@ class Game < ActiveRecord::Base
 
   def update_user_score
     if completed?
-      update_user_streak
+      if is_won?
+        user.increment_streak
+        user.increment_wins
+      else
+        user.reset_streak
+      end
       user.update_ratings
     end
   end
 
-  def update_user_streak
-    if is_won?
-      user.increment_streak
-    else
-      user.reset_streak
-    end
-  end
 
 end

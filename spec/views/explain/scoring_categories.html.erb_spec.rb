@@ -22,6 +22,11 @@ describe "explain/scoring_categories.html.erb" do
     rendered.should have_link("winning_streak", href: explain_path(action: 'winning_streak'))
   end
 
+  it "must have a link to random" do
+    render
+    rendered.should have_link("winning_random", href: explain_path(action: 'winning_random'))
+  end
+
   it "should have a home page link on menu" do
     view.should_receive(:menu_item).with(anything,'/',id: 'root_page')
     render

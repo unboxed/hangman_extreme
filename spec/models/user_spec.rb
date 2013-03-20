@@ -385,6 +385,50 @@ describe User do
 
   end
 
+  context "daily_wins" do
+
+    before :each do
+      @user = create(:user)
+    end
+
+    it "starts at zero" do
+      @user.daily_wins.should == 0
+    end
+
+    it "should have 1 after 1 win" do
+      create(:won_game, :user => @user)
+      @user.daily_wins.should == 1
+    end
+
+    it "should have 2 after 2 wins" do
+      create_list(:won_game,2, :user => @user)
+      @user.daily_wins.should == 2
+    end
+
+  end
+
+  context "weekly_wins" do
+
+    before :each do
+      @user = create(:user)
+    end
+
+    it "starts at zero" do
+      @user.weekly_wins.should == 0
+    end
+
+    it "should have 1 after 1 win" do
+      create(:won_game, :user => @user)
+      @user.weekly_wins.should == 1
+    end
+
+    it "should have 2 after 2 wins" do
+      create_list(:won_game,2, :user => @user)
+      @user.weekly_wins.should == 2
+    end
+
+  end
+
   context "reset_current_daily_streak" do
 
     it "must set current_daily_streak to 0" do
@@ -533,6 +577,50 @@ describe User do
       create(:lost_game, :user => @user)
       create_list(:won_game, 2, :user => @user)
       @user.weekly_streak.should == 2
+    end
+
+  end
+
+  describe "daily_wins_required_for_random" do
+
+    before :each do
+      @user = create(:user)
+    end
+
+    it "must return 10" do
+      @user.daily_wins_required_for_random.should == 10
+    end
+
+    it "must return 1" do
+      create_list(:won_game,9, :user => @user)
+      @user.daily_wins_required_for_random.should == 1
+    end
+
+    it "must return 0" do
+      create_list(:won_game,11, :user => @user)
+      @user.daily_wins_required_for_random.should == 0
+    end
+
+  end
+
+  describe "weekly_wins_required_for_random" do
+
+    before :each do
+      @user = create(:user)
+    end
+
+    it "must return 10" do
+      @user.weekly_wins_required_for_random.should == 35
+    end
+
+    it "must return 1" do
+      create_list(:won_game,9, :user => @user)
+      @user.weekly_wins_required_for_random.should == 26
+    end
+
+    it "must return 0" do
+      create_list(:won_game,36, :user => @user)
+      @user.weekly_wins_required_for_random.should == 0
     end
 
   end

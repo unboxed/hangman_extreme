@@ -1,8 +1,8 @@
 class Winner < ActiveRecord::Base
   WEEKLY_PRIZE_AMOUNTS = [250,250,250,250,250]
   DAILY_PRIZE_AMOUNTS  = [ 35, 35, 35, 35, 35]
-  WINNING_PERIODS = ['daily','weekly']
-  WINNING_REASONS = ['streak','rating','precision']
+  WINNING_PERIODS = %w(daily weekly)
+  WINNING_REASONS = %w(streak rating precision random)
   belongs_to :user
   attr_accessible :user_id, :amount, :reason, :period, :end_of_period_on
 
@@ -16,6 +16,22 @@ class Winner < ActiveRecord::Base
   delegate :name, to: :user
 
   after_create :increase_prize_points
+
+  def self.winning_periods
+    WINNING_PERIODS
+  end
+
+  def self.winning_reasons
+    WINNING_REASONS
+  end
+
+  def self.daily_random_games_required
+    10
+  end
+
+  def self.weekly_random_games_required
+    35
+  end
 
   def self.create_daily_winners(winnings = DAILY_PRIZE_AMOUNTS)
     if create_winners('daily',winnings)
@@ -41,16 +57,12 @@ class Winner < ActiveRecord::Base
 
   def self.create_winners_for_category(options)
     options = HashWithIndifferentAccess.new(options)
-    field = "#{options[:period]}_#{options[:score_by]}"
     winners = []
-    previous_winners = period(options[:period]).reason(options[:score_by]).order('created_at DESC').limit(options[:winnings].size)
-    user_scope = User.where('id NOT IN (?)',previous_winners.map(&:user_id) + [0])
-    min_score = user_scope.top_scorers(field).all.last.send(field)
-    user_scope.where("#{field} >= ?",min_score).group_by{|u| u.rank(field,user_scope) }.each do |rank,users|
+    select_winners(options).each do |rank,users|
       prize_total = 0
       users_count = users.size
       users.each_with_index do |user,index|
-        prize_total += (options[:winnings][rank - 1 + index]  || 1)
+        prize_total += (options[:winnings][rank - 1 + index] || 1)
       end
       users.each do |user|
         winners << Winner.create(user_id: user.id,
@@ -80,6 +92,24 @@ class Winner < ActiveRecord::Base
           # ignore second time around
         end
       end
+    end
+  end
+
+  private
+
+  def self.select_winners(options)
+    field = "#{options[:period]}_#{options[:score_by]}"
+    if options[:score_by] == 'random'
+      other_winners = winning_reasons.collect{|r| period(options[:period]).reason(r).order('created_at DESC').limit(options[:winnings].size).all}.flatten
+      user_scope = User.where('id NOT IN (?)',other_winners.map(&:user_id) + [0])
+      user_scope.where("#{options[:period]}_wins >= ?",
+                       options[:period] == 'daily' ? daily_random_games_required : weekly_random_games_required).
+                 order("RANDOM()").limit(options[:winnings].size).group_by{|u| u.rank("#{options[:period]}_wins",user_scope) }
+    else
+      previous_winners = period(options[:period]).reason(options[:score_by]).order('created_at DESC').limit(options[:winnings].size)
+      user_scope = User.where('id NOT IN (?)',previous_winners.map(&:user_id) + [0])
+      min_score = user_scope.top_scorers(field).limit(options[:winnings].size).all.last.send(field)
+      user_scope.where("#{field} >= ?",min_score).group_by{|u| u.rank(field,user_scope) }
     end
   end
 

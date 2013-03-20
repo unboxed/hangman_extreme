@@ -7,6 +7,7 @@ describe FeedbackController do
     before :each do
       @current_user = create(:user)
       controller.stub(:current_user).and_return(@current_user)
+      controller.stub(:send_stats)
     end
 
     describe "GET index" do

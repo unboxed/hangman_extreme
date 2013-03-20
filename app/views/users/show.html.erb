@@ -3,18 +3,19 @@
 <br/>
 <table>
   <tbody>
-  <% Winner::WINNING_PERIODS.each do |time_period| %>
+  <% Winner.winning_periods.each do |time_period| %>
       <tr>
         <td><b><%= time_period %></b></td>
         <td>Amount</td>
         <td>Rank</td>
       </tr>
-      <% Winner::WINNING_REASONS.each do |rank_by| %>
+      <% Winner.winning_reasons.each do |rank_by| %>
         <% field = "#{time_period}_#{rank_by}".to_sym %>
+        <% rank_field = "#{time_period}_#{rank_by}_rank".to_sym %>
           <tr>
             <td><%= rank_by %>:</td>
             <td><%= @user.send(field) %> |</td>
-            <td><%= @user.rank(field).ordinalize %></td>
+            <td><%= @user.send(rank_field) %></td>
           </tr>
       <% end %>
   <% end %>

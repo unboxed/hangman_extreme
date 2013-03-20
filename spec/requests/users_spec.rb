@@ -10,10 +10,12 @@ describe 'users' do
   end
 
   it "must show users rating" do
-    create(:won_game, user: @current_user)
+    create_list(:won_game, 10, user: @current_user)
     visit '/'
     click_link('view_rank')
     page.should have_content("Your Ranking")
+    page.should have_content("Entered")
+    page.should have_content("25 more games")
     click_link('root_page')
     page.current_path.should == '/'
   end

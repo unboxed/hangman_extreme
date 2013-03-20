@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :name, :provider, :uid, :clue_points, :prize_points
   attr_accessible :real_name, :mobile_number, as: 'user'
-  RANKING_FIELDS = Winner::WINNING_PERIODS.product(Winner::WINNING_REASONS).map{|x,y| "#{x}_#{y}"}
+  RANKING_FIELDS = Winner::WINNING_PERIODS.product(Winner::WINNING_REASONS - %w(random)).map{|x,y| "#{x}_#{y}"}
 
   has_many :games, :order => 'id ASC'
   has_many :winners
@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   validates :provider, :uid, presence: true
   validates_uniqueness_of :uid, :scope => :provider
 
-  scope :top_scorers, lambda{ |field| order("#{field} DESC").limit(Winner::WEEKLY_PRIZE_AMOUNTS.size) }
+  scope :top_scorers, lambda{ |field| order("#{field} DESC") }
   scope :mxit, where(provider: 'mxit')
   scope :active_last_hour, lambda{ where('updated_at >= ?',1.hour.ago) }
 
@@ -168,6 +168,11 @@ class User < ActiveRecord::Base
     increment(:current_weekly_streak)
     self.weekly_streak = current_weekly_streak if (current_weekly_streak > weekly_streak)
   end
+
+  def increment_wins
+    increment(:daily_wins)
+    increment(:weekly_wins)
+  end
   
   def current_game
     games.incompleted.active_first.today.first
@@ -185,6 +190,15 @@ class User < ActiveRecord::Base
   def inspect
     to_s
   end
+
+  def daily_wins_required_for_random
+    [Winner.daily_random_games_required - daily_wins,0].max
+  end
+
+  def weekly_wins_required_for_random
+    [Winner.weekly_random_games_required - weekly_wins,0].max
+  end
+
 
   private
 

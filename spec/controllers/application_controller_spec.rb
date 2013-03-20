@@ -4,6 +4,10 @@ describe ApplicationController do
 
   describe "login required" do
 
+    before :each do
+      controller.stub(:send_stats)
+    end
+
     controller do
       before_filter :login_required
       def index

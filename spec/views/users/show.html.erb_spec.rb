@@ -1,79 +1,37 @@
 require 'spec_helper'
 
 describe "users/show.html.erb" do
-  include ViewCapybaraRendered
 
   before(:each) do
-    @user = assign(:user, stub_model(User, rank: 99))
+    @user = mock("User", monthly_score: "a", monthly_score_rank: "a")
     stub_template "_ranking_links.html.erb" => "<div>Ranking list</div>"
+    Winner.stub!(:winning_periods).and_return(["monthly"])
+    Winner.stub!(:winning_reasons).and_return(["score"])
   end
 
-  it "renders the ranking list" do
+  it "renders the ranking list partial" do
     render
     rendered.should have_content("Ranking list")
   end
 
-  it "renders a list of games" do
+  it "renders a the periods" do
+    Winner.should_receive(:winning_periods).and_return(["monthly"])
     render
-    rendered.should have_content("streak")
-    rendered.should have_content("rating")
-    rendered.should have_content("precision")
+    rendered.should have_content("monthly")
   end
 
-  context "Today scores" do
-
-    it "must show score scored" do
-      @user.should_receive(:daily_streak).and_return("111")
-      @user.should_receive(:rank).with(:daily_streak).and_return(1)
-      render
-      rendered.should have_content("111")
-      rendered.should have_content("1st")
-    end
-
-    it "must show rating" do
-      @user.should_receive(:daily_rating).and_return("112")
-      @user.should_receive(:rank).with(:daily_rating).and_return(2)
-      render
-      rendered.should have_content("112")
-      rendered.should have_content("2nd")
-    end
-
-    it "must show precision" do
-      @user.should_receive(:daily_precision).and_return("113")
-      @user.should_receive(:rank).with(:daily_precision).and_return(3)
-      render
-      rendered.should have_content("113")
-      rendered.should have_content("3rd")
-    end
-
+  it "renders the reasons" do
+    Winner.should_receive(:winning_reasons).and_return(["score"])
+    render
+    rendered.should have_content("score")
   end
 
-  context "Weeks scores" do
-
-    it "must show score scored" do
-      @user.should_receive(:weekly_streak).and_return("1111")
-      @user.should_receive(:rank).with(:weekly_streak).and_return(1)
-      render
-      rendered.should have_content("1111")
-      rendered.should have_content("1st")
-    end
-
-    it "must show rating" do
-      @user.should_receive(:weekly_rating).and_return("1121")
-      @user.should_receive(:rank).with(:weekly_rating).and_return(2)
-      render
-      rendered.should have_content("1121")
-      rendered.should have_content("2nd")
-    end
-
-    it "must show precision" do
-      @user.should_receive(:weekly_precision).and_return("1131")
-      @user.should_receive(:rank).with(:weekly_precision).and_return(3)
-      render
-      rendered.should have_content("1131")
-      rendered.should have_content("3rd")
-    end
-
+  it "must show score and rank" do
+    @user.should_receive(:monthly_score).and_return("111")
+    @user.should_receive(:monthly_score_rank).and_return("1st")
+    render
+    rendered.should have_content("111")
+    rendered.should have_content("1st")
   end
 
   it "should have a home page link" do

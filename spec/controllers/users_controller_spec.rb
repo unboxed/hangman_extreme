@@ -22,6 +22,7 @@ describe UsersController do
       it "assigns the requested user as @user" do
         get 'show'
         assigns(:user).should eq(@current_user)
+        assigns(:user).should be_decorated
       end
 
     end

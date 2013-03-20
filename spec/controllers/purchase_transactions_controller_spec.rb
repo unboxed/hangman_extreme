@@ -9,6 +9,7 @@ describe PurchaseTransactionsController do
     @ability.can(:manage, :all)
     controller.stub(:current_ability).and_return(@ability)
     controller.stub(:current_user).and_return(@current_user)
+    controller.stub(:send_stats)
   end
 
   describe "GET index" do

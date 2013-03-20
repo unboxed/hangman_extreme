@@ -1,10 +1,12 @@
 <h1>Scoring Categories</h1>
-<p>We rank players on the following categories</p>
+We rank players on the following categories<br/>
+<b>You cannot win twice in a row in any category</b>
 <% index = 0 %>
 <ul>
   <ol><%= link_to((index += 1),explain_path(action: 'rating'),id: 'rating') %> <b>rating</b></ol>
   <ol><%= link_to((index += 1),explain_path(action: 'precision'),id: 'precision') %> <b>precision</b></ol>
   <ol><%= link_to((index += 1),explain_path(action: 'winning_streak'),id: 'winning_streak') %> <b>streak</b></ol>
+  <ol><%= link_to((index += 1),explain_path(action: 'winning_random'),id: 'winning_random') %> <b>random</b></ol>
 </ul>
 <br/>
 

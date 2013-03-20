@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user ||= current_user
+    @user = (@user || current_user).decorate
   end
 
   def mxit_authorise

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130311080618) do
+ActiveRecord::Schema.define(:version => 20130320095156) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -126,6 +126,8 @@ ActiveRecord::Schema.define(:version => 20130311080618) do
     t.integer  "lock_version",          :default => 0, :null => false
     t.integer  "current_daily_streak",  :default => 0, :null => false
     t.integer  "current_weekly_streak", :default => 0, :null => false
+    t.integer  "daily_wins",            :default => 0, :null => false
+    t.integer  "weekly_wins",           :default => 0, :null => false
   end
 
   add_index "users", ["created_at"], :name => "index_users_on_created_at"
