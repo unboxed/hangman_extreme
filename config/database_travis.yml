@@ -1,0 +1,5 @@
+test:
+  adapter: postgresql
+  database: hangnman_extreme
+  pool: 5
+  timeout: 5000
