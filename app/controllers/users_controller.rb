@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     params[:period] = 'daily' unless Winner::WINNING_PERIODS.include?(params[:period].to_s)
     params[:rank_by] = 'rating' unless Winner::WINNING_REASONS.include?(params[:rank_by].to_s)
     @send = "#{params[:period]}_#{params[:rank_by]}"
-    @users = @users.top_scorers(@send)
+    @users = @users.top_scorers(@send).limit(5)
   end
 
   def edit
