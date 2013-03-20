@@ -23,9 +23,6 @@ GEM
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
     activerecord-jdbc-adapter (1.2.8)
-    activerecord-jdbcmysql-adapter (1.2.5)
-      activerecord-jdbc-adapter (~> 1.2.5)
-      jdbc-mysql (~> 5.1.0)
     activerecord-jdbcpostgresql-adapter (1.2.7)
       activerecord-jdbc-adapter (~> 1.2.7)
       jdbc-postgres (>= 9.1, < 9.3)
@@ -115,7 +112,6 @@ GEM
     httpi (2.0.2)
       rack
     i18n (0.6.4)
-    jdbc-mysql (5.1.22)
     jdbc-postgres (9.2.1002.1)
     jdbc-sqlite3 (3.7.2)
     journey (1.0.4)
@@ -148,7 +144,6 @@ GEM
     mxit_api (0.2.2.pre)
       activesupport (>= 3.0.0)
       i18n (>= 0.5.0)
-    mysql2 (0.3.11)
     nest (1.1.2)
       redis
     net-scp (1.0.4)
@@ -340,7 +335,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-jdbcmysql-adapter
   activerecord-jdbcpostgresql-adapter
   airbrake
   annotate
@@ -352,17 +346,13 @@ DEPENDENCIES
   flog
   gabba
   heroku
-  jdbc-mysql
   jdbc-sqlite3
-  json
   kaminari
   launchy
   librato-metrics
   libv8 (~> 3.11.8)
   mxit_api (>= 0.2.2.pre)
-  mysql2
   newrelic_rpm
-  nokogiri
   ohm
   omniauth
   pg
@@ -370,7 +360,6 @@ DEPENDENCIES
   redis
   redis-settings
   remote_syslog
-  rest-client
   rspec-rails
   savon
   simplecov

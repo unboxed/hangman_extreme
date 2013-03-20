@@ -12,10 +12,7 @@ end
 gem 'cancan'
 gem 'omniauth'
 gem 'kaminari'
-gem 'nokogiri'
-gem 'json'
 gem 'redis-settings'
-gem 'rest-client', require: 'rest_client'
 gem 'redis'
 gem 'ohm'
 gem 'mxit_api', '>= 0.2.2.pre'
@@ -63,12 +60,9 @@ end
 
 group :test do
   platforms :jruby do
-    gem 'jdbc-mysql'
-    gem 'activerecord-jdbcmysql-adapter'
     gem 'jdbc-sqlite3', :require => false
   end
   platforms :ruby do
-    gem 'mysql2'
     gem 'sqlite3'
   end
   gem 'capybara'
