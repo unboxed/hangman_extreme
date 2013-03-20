@@ -17,6 +17,7 @@ gem 'redis'
 gem 'ohm'
 gem 'mxit_api', '>= 0.2.2.pre'
 gem "savon"
+gem 'draper'
 platforms :jruby do
   gem "torquebox"
   # gem "jruby-openssl"

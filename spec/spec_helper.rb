@@ -38,6 +38,7 @@ Spork.prefork do
   require 'rspec/rails'
   require 'rspec/autorun'
   require 'webmock/rspec'
+  require 'draper/test/rspec_integration'
 end
 
 Spork.each_run do
