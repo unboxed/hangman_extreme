@@ -31,6 +31,7 @@ describe ApplicationController do
 
   describe "handling CanCan AccessDenied exceptions" do
 
+
     controller do
       def index
         raise CanCan::AccessDenied
@@ -45,6 +46,10 @@ describe ApplicationController do
   end
 
   describe "it attempts to load the mxit user" do
+
+    before :each do
+      controller.stub(:send_stats)
+    end
 
     controller do
       def index
@@ -112,6 +117,10 @@ describe ApplicationController do
   end
 
   describe "it attempts to load the facebook user" do
+
+    before :each do
+      controller.stub(:send_stats)
+    end
 
     controller do
       def index
@@ -217,6 +226,10 @@ describe ApplicationController do
 
   describe "it captures mxit user input" do
 
+    before :each do
+      controller.stub(:send_stats)
+    end
+
     controller do
       def index
         render :text => "hello"
@@ -250,28 +263,6 @@ describe ApplicationController do
       request.env['HTTP_X_MXIT_USER_INPUT'] = "winners"
       get :index
       response.should redirect_to(winners_path)
-    end
-
-  end
-
-  describe "check_server_status, moving away from heroku" do
-
-    controller do
-      def index
-        render :text => "hello"
-      end
-    end
-
-    it "must render page" do
-      get :index
-      response.should be_success
-    end
-
-    it "must redirect to server status if DATABASE_URL exists" do
-      old, ENV['DATABASE_URL'] = ENV['DATABASE_URL'], "test_data"
-      get :index
-      response.should redirect_to('/server_status')
-      ENV['DATABASE_URL'] = old
     end
 
   end
