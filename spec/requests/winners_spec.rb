@@ -14,7 +14,9 @@ describe 'winners' do
   it "must show the daily winners" do
     users = create_list(:user,5, :daily_precision => 100, :daily_streak => 100, :daily_rating => 100)
     random_users = create_list(:user,5, :daily_wins => 10)
-    Winner.create_daily_winners
+    Timecop.freeze(Date.yesterday) do
+      Winner.create_daily_winners
+    end
     visit '/'
     click_link('rank')
     click_link('winners')
@@ -39,7 +41,9 @@ describe 'winners' do
   it "must show the weekly winners" do
     users = create_list(:user,5, :weekly_precision => 100, :weekly_streak => 100, :weekly_rating => 100)
     random_users = create_list(:user,5, :weekly_wins => 35)
-    Winner.create_weekly_winners
+    Timecop.freeze(Date.current.beginning_of_week.yesterday) do
+      Winner.create_weekly_winners
+    end
     visit '/'
     click_link('rank')
     click_link('winners')

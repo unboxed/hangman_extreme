@@ -12,17 +12,17 @@ class Winner < ActiveRecord::Base
   scope :period, lambda{ |p| where("period = ?",p) }
   scope :reason, lambda{ |r| where("reason = ?",r) }
   scope :yesterday, lambda{ where(:end_of_period_on => Date.yesterday) }
-  scope :last_week, lambda{ where(:end_of_period_on => Date.monday.yesterday) }
+  scope :last_week, lambda{ where(:end_of_period_on => Date.current.beginning_of_week.yesterday) }
 
 
   delegate :name, to: :user
 
   after_create :increase_prize_points
 
-  def winners_for(options = {})
+  def self.scope_for(winners,options = {})
     options[:reason] ||= 'rating'
     options[:period] ||= 'daily'
-    scope = @winners.period(params[:period]).reason(params[:reason]).order('created_at DESC')
+    scope = winners.period(options[:period]).reason(options[:reason]).order('created_at DESC')
     if options[:period] == 'daily'
       scope.yesterday
     else
