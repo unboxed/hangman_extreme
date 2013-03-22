@@ -92,6 +92,13 @@ namespace :librato do
 
 end
 
+namespace :remote_syslog do
+  desc "start remote_syslog"
+  task :start do
+    "cd #{current_path};#{bundle_cmd} exec remote_syslog --configfile #{shared_path}/config/log_files.yml --pid-file #{shared_path}/pids/remote_syslog.pid"
+  end
+end
+
 namespace :rails do
   desc "Remote console"
   task :console, :roles => :db do
@@ -102,13 +109,13 @@ namespace :rails do
   task :dbconsole, :roles => :db do
     run_interactively "cd #{current_path};#{jruby_bin} script/rails dbconsole production"
   end
-end
 
-namespace :remote_syslog do
-  desc "start remote_syslog"
-  task :start do
-    "cd #{current_path};#{bundle_cmd} exec remote_syslog --configfile #{shared_path}/config/log_files.yml --pid-file #{shared_path}/pids/remote_syslog.pid"
+  desc "Download schema.rb"
+  task :download_schema, :roles => :db do
+    "cd #{current_path};RAILS_ENV=production #{bundle_cmd} exec db:schema:dump"
+    download "#{current_path}/db/schema.rb", "db/schema.rb"
   end
+
 end
 
 def run_interactively(command, server=nil)
