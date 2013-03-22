@@ -106,9 +106,10 @@ class Winner < ActiveRecord::Base
     if options[:score_by] == 'random'
       other_winners = winning_reasons.collect{|r| period(options[:period]).reason(r).order('created_at DESC').limit(options[:winnings].size).all}.flatten
       user_scope = User.where('id NOT IN (?)',other_winners.map(&:user_id) + [0])
-      user_scope.where("#{options[:period]}_wins >= ?",
-                       options[:period] == 'daily' ? daily_random_games_required : weekly_random_games_required).
-                 order("RANDOM()").limit(options[:winnings].size).group_by{|u| u.id }
+      wins_required = options[:period] == 'daily' ? daily_random_games_required : weekly_random_games_required
+      random_winners = user_scope.where("#{options[:period]}_wins >= ?",wins_required).
+                                  order("RANDOM()").limit(options[:winnings].size)
+      { 1 => rand_winners  }
     else
       previous_winners = period(options[:period]).reason(options[:score_by]).order('created_at DESC').limit(options[:winnings].size)
       user_scope = User.where('id NOT IN (?)',previous_winners.map(&:user_id) + [0])
