@@ -18,12 +18,10 @@ describe WinnersController do
       get :index, params
     end
 
-    ['daily_rating','daily_precision', 'games_won_today'].each do |reason|
-      it "assigns all #{reason} winners as @winners" do
-        winner = create(:winner, reason: reason)
-        do_get_index :reason => reason
-        assigns(:winners).should include(winner)
-      end
+    it "assigns all winners as @winners" do
+      create(:winner, end_of_period_on: Date.yesterday, period: 'daily', reason: 'rating')
+      do_get_index
+      assigns(:winners).should include(Winner.last)
     end
 
     it "renders the application layout" do

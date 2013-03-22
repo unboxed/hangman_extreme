@@ -14,7 +14,6 @@ class Winner < ActiveRecord::Base
   scope :yesterday, lambda{ where(:end_of_period_on => Date.yesterday) }
   scope :last_week, lambda{ where(:end_of_period_on => Date.current.beginning_of_week.yesterday) }
 
-
   delegate :name, to: :user
 
   after_create :increase_prize_points
