@@ -1,0 +1,1023 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        :{\"Keys\":[{\"HashKeyElement\":{\"S\":\"1029.0\"}},{\"HashKeyElement\":{\"\
+        S\":\"1029.1\"}},{\"HashKeyElement\":{\"S\":\"1029.2\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.3\"}},{\"HashKeyElement\":{\"S\":\"1029.4\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.5\"}},{\"HashKeyElement\":{\"S\":\"1029.6\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.7\"}},{\"HashKeyElement\":{\"S\":\"1029.8\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.9\"}},{\"HashKeyElement\":{\"S\":\"1029.10\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.11\"}},{\"HashKeyElement\":{\"S\":\"1029.12\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.13\"}},{\"HashKeyElement\":{\"S\":\"1029.14\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.15\"}},{\"HashKeyElement\":{\"S\":\"1029.16\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.17\"}},{\"HashKeyElement\":{\"S\":\"1029.18\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.19\"}},{\"HashKeyElement\":{\"S\":\"1029.20\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.21\"}},{\"HashKeyElement\":{\"S\":\"1029.22\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.23\"}},{\"HashKeyElement\":{\"S\":\"1029.24\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.25\"}},{\"HashKeyElement\":{\"S\":\"1029.26\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.27\"}},{\"HashKeyElement\":{\"S\":\"1029.28\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.29\"}},{\"HashKeyElement\":{\"S\":\"1029.30\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.31\"}},{\"HashKeyElement\":{\"S\":\"1029.32\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.33\"}},{\"HashKeyElement\":{\"S\":\"1029.34\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.35\"}},{\"HashKeyElement\":{\"S\":\"1029.36\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.37\"}},{\"HashKeyElement\":{\"S\":\"1029.38\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.39\"}},{\"HashKeyElement\":{\"S\":\"1029.40\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.41\"}},{\"HashKeyElement\":{\"S\":\"1029.42\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.43\"}},{\"HashKeyElement\":{\"S\":\"1029.44\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.45\"}},{\"HashKeyElement\":{\"S\":\"1029.46\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.47\"}},{\"HashKeyElement\":{\"S\":\"1029.48\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.49\"}},{\"HashKeyElement\":{\"S\":\"1029.50\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.51\"}},{\"HashKeyElement\":{\"S\":\"1029.52\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.53\"}},{\"HashKeyElement\":{\"S\":\"1029.54\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.55\"}},{\"HashKeyElement\":{\"S\":\"1029.56\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.57\"}},{\"HashKeyElement\":{\"S\":\"1029.58\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.59\"}},{\"HashKeyElement\":{\"S\":\"1029.60\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.61\"}},{\"HashKeyElement\":{\"S\":\"1029.62\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.63\"}},{\"HashKeyElement\":{\"S\":\"1029.64\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.65\"}},{\"HashKeyElement\":{\"S\":\"1029.66\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.67\"}},{\"HashKeyElement\":{\"S\":\"1029.68\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.69\"}},{\"HashKeyElement\":{\"S\":\"1029.70\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.71\"}},{\"HashKeyElement\":{\"S\":\"1029.72\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.73\"}},{\"HashKeyElement\":{\"S\":\"1029.74\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.75\"}},{\"HashKeyElement\":{\"S\":\"1029.76\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.77\"}},{\"HashKeyElement\":{\"S\":\"1029.78\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.79\"}},{\"HashKeyElement\":{\"S\":\"1029.80\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.81\"}},{\"HashKeyElement\":{\"S\":\"1029.82\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.83\"}},{\"HashKeyElement\":{\"S\":\"1029.84\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.85\"}},{\"HashKeyElement\":{\"S\":\"1029.86\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.87\"}},{\"HashKeyElement\":{\"S\":\"1029.88\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.89\"}},{\"HashKeyElement\":{\"S\":\"1029.90\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.91\"}},{\"HashKeyElement\":{\"S\":\"1029.92\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.93\"}},{\"HashKeyElement\":{\"S\":\"1029.94\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.95\"}},{\"HashKeyElement\":{\"S\":\"1029.96\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.97\"}},{\"HashKeyElement\":{\"S\":\"1029.98\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.99\"}}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '3575'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152228Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        MjQ2Yjc1Njc2NTdhYjVjMzgxYTRjZjdjNThhZjQ1Mzg2NGEyYWRiZDM1MzY4
+        YzNlMDhmNTNiNWRmNWM5M2RkYQ==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=25bcdc294871a1472942d3986661f654dfa076020d17f83c1743b73779dd2db1
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '131'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:22:28 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        :{\"ConsumedCapacityUnits\":1,\"Items\":[]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:22:28 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        :{\"Keys\":[{\"HashKeyElement\":{\"S\":\"1029.100\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.101\"}},{\"HashKeyElement\":{\"S\":\"1029.102\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.103\"}},{\"HashKeyElement\":{\"S\":\"1029.104\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.105\"}},{\"HashKeyElement\":{\"S\":\"1029.106\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.107\"}},{\"HashKeyElement\":{\"S\":\"1029.108\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.109\"}},{\"HashKeyElement\":{\"S\":\"1029.110\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.111\"}},{\"HashKeyElement\":{\"S\":\"1029.112\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.113\"}},{\"HashKeyElement\":{\"S\":\"1029.114\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.115\"}},{\"HashKeyElement\":{\"S\":\"1029.116\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.117\"}},{\"HashKeyElement\":{\"S\":\"1029.118\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.119\"}},{\"HashKeyElement\":{\"S\":\"1029.120\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.121\"}},{\"HashKeyElement\":{\"S\":\"1029.122\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.123\"}},{\"HashKeyElement\":{\"S\":\"1029.124\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.125\"}},{\"HashKeyElement\":{\"S\":\"1029.126\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.127\"}},{\"HashKeyElement\":{\"S\":\"1029.128\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.129\"}},{\"HashKeyElement\":{\"S\":\"1029.130\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.131\"}},{\"HashKeyElement\":{\"S\":\"1029.132\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.133\"}},{\"HashKeyElement\":{\"S\":\"1029.134\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.135\"}},{\"HashKeyElement\":{\"S\":\"1029.136\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.137\"}},{\"HashKeyElement\":{\"S\":\"1029.138\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.139\"}},{\"HashKeyElement\":{\"S\":\"1029.140\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.141\"}},{\"HashKeyElement\":{\"S\":\"1029.142\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.143\"}},{\"HashKeyElement\":{\"S\":\"1029.144\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.145\"}},{\"HashKeyElement\":{\"S\":\"1029.146\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.147\"}},{\"HashKeyElement\":{\"S\":\"1029.148\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.149\"}},{\"HashKeyElement\":{\"S\":\"1029.150\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.151\"}},{\"HashKeyElement\":{\"S\":\"1029.152\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.153\"}},{\"HashKeyElement\":{\"S\":\"1029.154\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.155\"}},{\"HashKeyElement\":{\"S\":\"1029.156\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.157\"}},{\"HashKeyElement\":{\"S\":\"1029.158\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.159\"}},{\"HashKeyElement\":{\"S\":\"1029.160\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.161\"}},{\"HashKeyElement\":{\"S\":\"1029.162\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.163\"}},{\"HashKeyElement\":{\"S\":\"1029.164\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.165\"}},{\"HashKeyElement\":{\"S\":\"1029.166\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.167\"}},{\"HashKeyElement\":{\"S\":\"1029.168\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.169\"}},{\"HashKeyElement\":{\"S\":\"1029.170\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.171\"}},{\"HashKeyElement\":{\"S\":\"1029.172\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.173\"}},{\"HashKeyElement\":{\"S\":\"1029.174\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.175\"}},{\"HashKeyElement\":{\"S\":\"1029.176\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.177\"}},{\"HashKeyElement\":{\"S\":\"1029.178\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.179\"}},{\"HashKeyElement\":{\"S\":\"1029.180\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.181\"}},{\"HashKeyElement\":{\"S\":\"1029.182\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.183\"}},{\"HashKeyElement\":{\"S\":\"1029.184\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.185\"}},{\"HashKeyElement\":{\"S\":\"1029.186\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.187\"}},{\"HashKeyElement\":{\"S\":\"1029.188\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.189\"}},{\"HashKeyElement\":{\"S\":\"1029.190\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.191\"}},{\"HashKeyElement\":{\"S\":\"1029.192\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.193\"}},{\"HashKeyElement\":{\"S\":\"1029.194\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.195\"}},{\"HashKeyElement\":{\"S\":\"1029.196\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.197\"}},{\"HashKeyElement\":{\"S\":\"1029.198\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.199\"}}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '3685'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152228Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        MTcyMzQ2NWMwMzdjYzBjNmZlYTQxYjI5NDg0ZmYzMjkwYjg2NDIyZmNhYmI1
+        MDFjNGVjMjE4M2MzYjgzYjc2Ng==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=3d2ca72624fb0cedeaa5e750b233bfbb7e491af42b4cf8d05d398ca748ded69e
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '131'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:22:28 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        :{\"ConsumedCapacityUnits\":1,\"Items\":[]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:22:28 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"TableName\":\"hangmanextreme_app_test_googletrackings\",\"Item\"\
+        :{\"created_at\":{\"N\":\"1364397748.563\"},\"updated_at\":{\"N\":\"1364397748.572\"\
+        },\"user_id\":{\"S\":\"1029\"},\"initial_visit\":{\"S\":\"1364397748\"},\"\
+        previous_session\":{\"S\":\"1364397748\"},\"current_session\":{\"S\":\"1364397748\"\
+        },\"last_visit\":{\"S\":\"1364397748\"},\"id\":{\"S\":\"e2d1464c-0abb-4880-b25a-55a70b99d299.168\"\
+        }},\"Expected\":{\"id\":{\"Exists\":false}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.PutItem
+      Content-Length:
+      - '390'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152228Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        Mzc0MTQ2MzE4MjlkZjZkMzNkYTg5ODExODNhZDcwMTExNDUyOTMyZjQxMmM4
+        NWM4YWFhMGNlNzY2MjBjZjM2Zg==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=e37040954c879160c87e80c33d1c12a3ac67917f4869409e5825c1a4c140c754
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '27'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:22:28 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"ConsumedCapacityUnits\":1}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:22:28 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        :{\"Keys\":[{\"HashKeyElement\":{\"S\":\"1029.0\"}},{\"HashKeyElement\":{\"\
+        S\":\"1029.1\"}},{\"HashKeyElement\":{\"S\":\"1029.2\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.3\"}},{\"HashKeyElement\":{\"S\":\"1029.4\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.5\"}},{\"HashKeyElement\":{\"S\":\"1029.6\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.7\"}},{\"HashKeyElement\":{\"S\":\"1029.8\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.9\"}},{\"HashKeyElement\":{\"S\":\"1029.10\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.11\"}},{\"HashKeyElement\":{\"S\":\"1029.12\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.13\"}},{\"HashKeyElement\":{\"S\":\"1029.14\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.15\"}},{\"HashKeyElement\":{\"S\":\"1029.16\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.17\"}},{\"HashKeyElement\":{\"S\":\"1029.18\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.19\"}},{\"HashKeyElement\":{\"S\":\"1029.20\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.21\"}},{\"HashKeyElement\":{\"S\":\"1029.22\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.23\"}},{\"HashKeyElement\":{\"S\":\"1029.24\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.25\"}},{\"HashKeyElement\":{\"S\":\"1029.26\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.27\"}},{\"HashKeyElement\":{\"S\":\"1029.28\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.29\"}},{\"HashKeyElement\":{\"S\":\"1029.30\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.31\"}},{\"HashKeyElement\":{\"S\":\"1029.32\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.33\"}},{\"HashKeyElement\":{\"S\":\"1029.34\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.35\"}},{\"HashKeyElement\":{\"S\":\"1029.36\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.37\"}},{\"HashKeyElement\":{\"S\":\"1029.38\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.39\"}},{\"HashKeyElement\":{\"S\":\"1029.40\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.41\"}},{\"HashKeyElement\":{\"S\":\"1029.42\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.43\"}},{\"HashKeyElement\":{\"S\":\"1029.44\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.45\"}},{\"HashKeyElement\":{\"S\":\"1029.46\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.47\"}},{\"HashKeyElement\":{\"S\":\"1029.48\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.49\"}},{\"HashKeyElement\":{\"S\":\"1029.50\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.51\"}},{\"HashKeyElement\":{\"S\":\"1029.52\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.53\"}},{\"HashKeyElement\":{\"S\":\"1029.54\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.55\"}},{\"HashKeyElement\":{\"S\":\"1029.56\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.57\"}},{\"HashKeyElement\":{\"S\":\"1029.58\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.59\"}},{\"HashKeyElement\":{\"S\":\"1029.60\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.61\"}},{\"HashKeyElement\":{\"S\":\"1029.62\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.63\"}},{\"HashKeyElement\":{\"S\":\"1029.64\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.65\"}},{\"HashKeyElement\":{\"S\":\"1029.66\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.67\"}},{\"HashKeyElement\":{\"S\":\"1029.68\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.69\"}},{\"HashKeyElement\":{\"S\":\"1029.70\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.71\"}},{\"HashKeyElement\":{\"S\":\"1029.72\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.73\"}},{\"HashKeyElement\":{\"S\":\"1029.74\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.75\"}},{\"HashKeyElement\":{\"S\":\"1029.76\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.77\"}},{\"HashKeyElement\":{\"S\":\"1029.78\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.79\"}},{\"HashKeyElement\":{\"S\":\"1029.80\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.81\"}},{\"HashKeyElement\":{\"S\":\"1029.82\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.83\"}},{\"HashKeyElement\":{\"S\":\"1029.84\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.85\"}},{\"HashKeyElement\":{\"S\":\"1029.86\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.87\"}},{\"HashKeyElement\":{\"S\":\"1029.88\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.89\"}},{\"HashKeyElement\":{\"S\":\"1029.90\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.91\"}},{\"HashKeyElement\":{\"S\":\"1029.92\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.93\"}},{\"HashKeyElement\":{\"S\":\"1029.94\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.95\"}},{\"HashKeyElement\":{\"S\":\"1029.96\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.97\"}},{\"HashKeyElement\":{\"S\":\"1029.98\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.99\"}}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '3575'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152228Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        MjQ2Yjc1Njc2NTdhYjVjMzgxYTRjZjdjNThhZjQ1Mzg2NGEyYWRiZDM1MzY4
+        YzNlMDhmNTNiNWRmNWM5M2RkYQ==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=25bcdc294871a1472942d3986661f654dfa076020d17f83c1743b73779dd2db1
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '131'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:22:28 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        :{\"ConsumedCapacityUnits\":1,\"Items\":[]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:22:28 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        :{\"Keys\":[{\"HashKeyElement\":{\"S\":\"1029.100\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.101\"}},{\"HashKeyElement\":{\"S\":\"1029.102\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.103\"}},{\"HashKeyElement\":{\"S\":\"1029.104\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.105\"}},{\"HashKeyElement\":{\"S\":\"1029.106\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.107\"}},{\"HashKeyElement\":{\"S\":\"1029.108\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.109\"}},{\"HashKeyElement\":{\"S\":\"1029.110\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.111\"}},{\"HashKeyElement\":{\"S\":\"1029.112\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.113\"}},{\"HashKeyElement\":{\"S\":\"1029.114\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.115\"}},{\"HashKeyElement\":{\"S\":\"1029.116\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.117\"}},{\"HashKeyElement\":{\"S\":\"1029.118\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.119\"}},{\"HashKeyElement\":{\"S\":\"1029.120\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.121\"}},{\"HashKeyElement\":{\"S\":\"1029.122\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.123\"}},{\"HashKeyElement\":{\"S\":\"1029.124\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.125\"}},{\"HashKeyElement\":{\"S\":\"1029.126\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.127\"}},{\"HashKeyElement\":{\"S\":\"1029.128\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.129\"}},{\"HashKeyElement\":{\"S\":\"1029.130\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.131\"}},{\"HashKeyElement\":{\"S\":\"1029.132\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.133\"}},{\"HashKeyElement\":{\"S\":\"1029.134\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.135\"}},{\"HashKeyElement\":{\"S\":\"1029.136\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.137\"}},{\"HashKeyElement\":{\"S\":\"1029.138\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.139\"}},{\"HashKeyElement\":{\"S\":\"1029.140\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.141\"}},{\"HashKeyElement\":{\"S\":\"1029.142\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.143\"}},{\"HashKeyElement\":{\"S\":\"1029.144\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.145\"}},{\"HashKeyElement\":{\"S\":\"1029.146\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.147\"}},{\"HashKeyElement\":{\"S\":\"1029.148\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.149\"}},{\"HashKeyElement\":{\"S\":\"1029.150\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.151\"}},{\"HashKeyElement\":{\"S\":\"1029.152\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.153\"}},{\"HashKeyElement\":{\"S\":\"1029.154\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.155\"}},{\"HashKeyElement\":{\"S\":\"1029.156\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.157\"}},{\"HashKeyElement\":{\"S\":\"1029.158\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.159\"}},{\"HashKeyElement\":{\"S\":\"1029.160\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.161\"}},{\"HashKeyElement\":{\"S\":\"1029.162\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.163\"}},{\"HashKeyElement\":{\"S\":\"1029.164\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.165\"}},{\"HashKeyElement\":{\"S\":\"1029.166\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.167\"}},{\"HashKeyElement\":{\"S\":\"1029.168\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.169\"}},{\"HashKeyElement\":{\"S\":\"1029.170\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.171\"}},{\"HashKeyElement\":{\"S\":\"1029.172\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.173\"}},{\"HashKeyElement\":{\"S\":\"1029.174\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.175\"}},{\"HashKeyElement\":{\"S\":\"1029.176\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.177\"}},{\"HashKeyElement\":{\"S\":\"1029.178\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.179\"}},{\"HashKeyElement\":{\"S\":\"1029.180\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.181\"}},{\"HashKeyElement\":{\"S\":\"1029.182\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.183\"}},{\"HashKeyElement\":{\"S\":\"1029.184\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.185\"}},{\"HashKeyElement\":{\"S\":\"1029.186\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.187\"}},{\"HashKeyElement\":{\"S\":\"1029.188\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.189\"}},{\"HashKeyElement\":{\"S\":\"1029.190\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.191\"}},{\"HashKeyElement\":{\"S\":\"1029.192\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.193\"}},{\"HashKeyElement\":{\"S\":\"1029.194\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.195\"}},{\"HashKeyElement\":{\"S\":\"1029.196\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.197\"}},{\"HashKeyElement\":{\"S\":\"1029.198\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.199\"}}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '3685'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152228Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        MTcyMzQ2NWMwMzdjYzBjNmZlYTQxYjI5NDg0ZmYzMjkwYjg2NDIyZmNhYmI1
+        MDFjNGVjMjE4M2MzYjgzYjc2Ng==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=3d2ca72624fb0cedeaa5e750b233bfbb7e491af42b4cf8d05d398ca748ded69e
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '131'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:22:28 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        :{\"ConsumedCapacityUnits\":1,\"Items\":[]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:22:28 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        :{\"Keys\":[{\"HashKeyElement\":{\"S\":\"1029.0\"}},{\"HashKeyElement\":{\"\
+        S\":\"1029.1\"}},{\"HashKeyElement\":{\"S\":\"1029.2\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.3\"}},{\"HashKeyElement\":{\"S\":\"1029.4\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.5\"}},{\"HashKeyElement\":{\"S\":\"1029.6\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.7\"}},{\"HashKeyElement\":{\"S\":\"1029.8\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.9\"}},{\"HashKeyElement\":{\"S\":\"1029.10\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.11\"}},{\"HashKeyElement\":{\"S\":\"1029.12\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.13\"}},{\"HashKeyElement\":{\"S\":\"1029.14\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.15\"}},{\"HashKeyElement\":{\"S\":\"1029.16\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.17\"}},{\"HashKeyElement\":{\"S\":\"1029.18\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.19\"}},{\"HashKeyElement\":{\"S\":\"1029.20\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.21\"}},{\"HashKeyElement\":{\"S\":\"1029.22\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.23\"}},{\"HashKeyElement\":{\"S\":\"1029.24\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.25\"}},{\"HashKeyElement\":{\"S\":\"1029.26\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.27\"}},{\"HashKeyElement\":{\"S\":\"1029.28\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.29\"}},{\"HashKeyElement\":{\"S\":\"1029.30\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.31\"}},{\"HashKeyElement\":{\"S\":\"1029.32\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.33\"}},{\"HashKeyElement\":{\"S\":\"1029.34\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.35\"}},{\"HashKeyElement\":{\"S\":\"1029.36\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.37\"}},{\"HashKeyElement\":{\"S\":\"1029.38\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.39\"}},{\"HashKeyElement\":{\"S\":\"1029.40\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.41\"}},{\"HashKeyElement\":{\"S\":\"1029.42\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.43\"}},{\"HashKeyElement\":{\"S\":\"1029.44\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.45\"}},{\"HashKeyElement\":{\"S\":\"1029.46\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.47\"}},{\"HashKeyElement\":{\"S\":\"1029.48\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.49\"}},{\"HashKeyElement\":{\"S\":\"1029.50\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.51\"}},{\"HashKeyElement\":{\"S\":\"1029.52\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.53\"}},{\"HashKeyElement\":{\"S\":\"1029.54\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.55\"}},{\"HashKeyElement\":{\"S\":\"1029.56\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.57\"}},{\"HashKeyElement\":{\"S\":\"1029.58\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.59\"}},{\"HashKeyElement\":{\"S\":\"1029.60\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.61\"}},{\"HashKeyElement\":{\"S\":\"1029.62\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.63\"}},{\"HashKeyElement\":{\"S\":\"1029.64\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.65\"}},{\"HashKeyElement\":{\"S\":\"1029.66\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.67\"}},{\"HashKeyElement\":{\"S\":\"1029.68\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.69\"}},{\"HashKeyElement\":{\"S\":\"1029.70\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.71\"}},{\"HashKeyElement\":{\"S\":\"1029.72\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.73\"}},{\"HashKeyElement\":{\"S\":\"1029.74\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.75\"}},{\"HashKeyElement\":{\"S\":\"1029.76\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.77\"}},{\"HashKeyElement\":{\"S\":\"1029.78\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.79\"}},{\"HashKeyElement\":{\"S\":\"1029.80\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.81\"}},{\"HashKeyElement\":{\"S\":\"1029.82\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.83\"}},{\"HashKeyElement\":{\"S\":\"1029.84\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.85\"}},{\"HashKeyElement\":{\"S\":\"1029.86\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.87\"}},{\"HashKeyElement\":{\"S\":\"1029.88\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.89\"}},{\"HashKeyElement\":{\"S\":\"1029.90\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.91\"}},{\"HashKeyElement\":{\"S\":\"1029.92\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.93\"}},{\"HashKeyElement\":{\"S\":\"1029.94\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.95\"}},{\"HashKeyElement\":{\"S\":\"1029.96\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.97\"}},{\"HashKeyElement\":{\"S\":\"1029.98\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.99\"}}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '3575'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152228Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        MjQ2Yjc1Njc2NTdhYjVjMzgxYTRjZjdjNThhZjQ1Mzg2NGEyYWRiZDM1MzY4
+        YzNlMDhmNTNiNWRmNWM5M2RkYQ==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=25bcdc294871a1472942d3986661f654dfa076020d17f83c1743b73779dd2db1
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '131'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:22:29 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        :{\"ConsumedCapacityUnits\":1,\"Items\":[]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:22:29 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        :{\"Keys\":[{\"HashKeyElement\":{\"S\":\"1029.100\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.101\"}},{\"HashKeyElement\":{\"S\":\"1029.102\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.103\"}},{\"HashKeyElement\":{\"S\":\"1029.104\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.105\"}},{\"HashKeyElement\":{\"S\":\"1029.106\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.107\"}},{\"HashKeyElement\":{\"S\":\"1029.108\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.109\"}},{\"HashKeyElement\":{\"S\":\"1029.110\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.111\"}},{\"HashKeyElement\":{\"S\":\"1029.112\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.113\"}},{\"HashKeyElement\":{\"S\":\"1029.114\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.115\"}},{\"HashKeyElement\":{\"S\":\"1029.116\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.117\"}},{\"HashKeyElement\":{\"S\":\"1029.118\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.119\"}},{\"HashKeyElement\":{\"S\":\"1029.120\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.121\"}},{\"HashKeyElement\":{\"S\":\"1029.122\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.123\"}},{\"HashKeyElement\":{\"S\":\"1029.124\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.125\"}},{\"HashKeyElement\":{\"S\":\"1029.126\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.127\"}},{\"HashKeyElement\":{\"S\":\"1029.128\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.129\"}},{\"HashKeyElement\":{\"S\":\"1029.130\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.131\"}},{\"HashKeyElement\":{\"S\":\"1029.132\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.133\"}},{\"HashKeyElement\":{\"S\":\"1029.134\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.135\"}},{\"HashKeyElement\":{\"S\":\"1029.136\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.137\"}},{\"HashKeyElement\":{\"S\":\"1029.138\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.139\"}},{\"HashKeyElement\":{\"S\":\"1029.140\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.141\"}},{\"HashKeyElement\":{\"S\":\"1029.142\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.143\"}},{\"HashKeyElement\":{\"S\":\"1029.144\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.145\"}},{\"HashKeyElement\":{\"S\":\"1029.146\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.147\"}},{\"HashKeyElement\":{\"S\":\"1029.148\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.149\"}},{\"HashKeyElement\":{\"S\":\"1029.150\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.151\"}},{\"HashKeyElement\":{\"S\":\"1029.152\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.153\"}},{\"HashKeyElement\":{\"S\":\"1029.154\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.155\"}},{\"HashKeyElement\":{\"S\":\"1029.156\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.157\"}},{\"HashKeyElement\":{\"S\":\"1029.158\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.159\"}},{\"HashKeyElement\":{\"S\":\"1029.160\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.161\"}},{\"HashKeyElement\":{\"S\":\"1029.162\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.163\"}},{\"HashKeyElement\":{\"S\":\"1029.164\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.165\"}},{\"HashKeyElement\":{\"S\":\"1029.166\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.167\"}},{\"HashKeyElement\":{\"S\":\"1029.168\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.169\"}},{\"HashKeyElement\":{\"S\":\"1029.170\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.171\"}},{\"HashKeyElement\":{\"S\":\"1029.172\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.173\"}},{\"HashKeyElement\":{\"S\":\"1029.174\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.175\"}},{\"HashKeyElement\":{\"S\":\"1029.176\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.177\"}},{\"HashKeyElement\":{\"S\":\"1029.178\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.179\"}},{\"HashKeyElement\":{\"S\":\"1029.180\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.181\"}},{\"HashKeyElement\":{\"S\":\"1029.182\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.183\"}},{\"HashKeyElement\":{\"S\":\"1029.184\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.185\"}},{\"HashKeyElement\":{\"S\":\"1029.186\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.187\"}},{\"HashKeyElement\":{\"S\":\"1029.188\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.189\"}},{\"HashKeyElement\":{\"S\":\"1029.190\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.191\"}},{\"HashKeyElement\":{\"S\":\"1029.192\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.193\"}},{\"HashKeyElement\":{\"S\":\"1029.194\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.195\"}},{\"HashKeyElement\":{\"S\":\"1029.196\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.197\"}},{\"HashKeyElement\":{\"S\":\"1029.198\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.199\"}}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '3685'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152229Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        MTcyMzQ2NWMwMzdjYzBjNmZlYTQxYjI5NDg0ZmYzMjkwYjg2NDIyZmNhYmI1
+        MDFjNGVjMjE4M2MzYjgzYjc2Ng==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=cf3ba0520f99bacae2041d0c678e4ca968ae9665c7a1835f37d165cb2b96ed74
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '131'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:22:29 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        :{\"ConsumedCapacityUnits\":1,\"Items\":[]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:22:29 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"TableName\":\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        ,\"Item\":{\"id\":{\"S\":\"1029.66\"},\"ids\":{\"SS\":[\"e2d1464c-0abb-4880-b25a-55a70b99d299\"\
+        ]},\"updated_at\":{\"N\":\"1364397749.225\"}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.PutItem
+      Content-Length:
+      - '189'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152229Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        NDIxNzYyMzdiOTIwZGE2ZjdhOGVmNjNlNzQ4NWJkNzdiMjJmM2RlYzU5Y2Nj
+        MzgwYjcxZGFlZTY2NTJkMDcwYw==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=3667c964977c85573a97d7364285a21c7bea62b49a6148e17e1be985b0e1475f
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '27'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:22:29 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"ConsumedCapacityUnits\":1}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:22:29 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"TableName\":\"hangmanextreme_app_test_googletrackings\",\"Item\"\
+        :{\"created_at\":{\"N\":\"1364397748.563\"},\"updated_at\":{\"N\":\"1364397749.297\"\
+        },\"user_id\":{\"S\":\"1029\"},\"initial_visit\":{\"S\":\"1364397748\"},\"\
+        previous_session\":{\"S\":\"1364397748\"},\"current_session\":{\"S\":\"1364397748\"\
+        },\"last_visit\":{\"S\":\"1364397749\"},\"id\":{\"S\":\"e2d1464c-0abb-4880-b25a-55a70b99d299.159\"\
+        }}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.PutItem
+      Content-Length:
+      - '355'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152229Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        NDE1Nzk1ODI0YmU2YTIyNDM1ZmNlYjczZDQzYjNiOTFhNDU4NzU1NTc1ZDE0
+        ZjZhY2MxYmM5NGM0ZDM3MjMzMQ==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=21469ae78cd2f8c3316e2dded8e6ebca0726c3e8398cab7ccac19d9c662677de
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '27'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:22:29 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"ConsumedCapacityUnits\":1}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:22:29 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        :{\"Keys\":[{\"HashKeyElement\":{\"S\":\"1029.0\"}},{\"HashKeyElement\":{\"\
+        S\":\"1029.1\"}},{\"HashKeyElement\":{\"S\":\"1029.2\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.3\"}},{\"HashKeyElement\":{\"S\":\"1029.4\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.5\"}},{\"HashKeyElement\":{\"S\":\"1029.6\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.7\"}},{\"HashKeyElement\":{\"S\":\"1029.8\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.9\"}},{\"HashKeyElement\":{\"S\":\"1029.10\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.11\"}},{\"HashKeyElement\":{\"S\":\"1029.12\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.13\"}},{\"HashKeyElement\":{\"S\":\"1029.14\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.15\"}},{\"HashKeyElement\":{\"S\":\"1029.16\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.17\"}},{\"HashKeyElement\":{\"S\":\"1029.18\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.19\"}},{\"HashKeyElement\":{\"S\":\"1029.20\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.21\"}},{\"HashKeyElement\":{\"S\":\"1029.22\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.23\"}},{\"HashKeyElement\":{\"S\":\"1029.24\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.25\"}},{\"HashKeyElement\":{\"S\":\"1029.26\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.27\"}},{\"HashKeyElement\":{\"S\":\"1029.28\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.29\"}},{\"HashKeyElement\":{\"S\":\"1029.30\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.31\"}},{\"HashKeyElement\":{\"S\":\"1029.32\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.33\"}},{\"HashKeyElement\":{\"S\":\"1029.34\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.35\"}},{\"HashKeyElement\":{\"S\":\"1029.36\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.37\"}},{\"HashKeyElement\":{\"S\":\"1029.38\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.39\"}},{\"HashKeyElement\":{\"S\":\"1029.40\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.41\"}},{\"HashKeyElement\":{\"S\":\"1029.42\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.43\"}},{\"HashKeyElement\":{\"S\":\"1029.44\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.45\"}},{\"HashKeyElement\":{\"S\":\"1029.46\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.47\"}},{\"HashKeyElement\":{\"S\":\"1029.48\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.49\"}},{\"HashKeyElement\":{\"S\":\"1029.50\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.51\"}},{\"HashKeyElement\":{\"S\":\"1029.52\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.53\"}},{\"HashKeyElement\":{\"S\":\"1029.54\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.55\"}},{\"HashKeyElement\":{\"S\":\"1029.56\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.57\"}},{\"HashKeyElement\":{\"S\":\"1029.58\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.59\"}},{\"HashKeyElement\":{\"S\":\"1029.60\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.61\"}},{\"HashKeyElement\":{\"S\":\"1029.62\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.63\"}},{\"HashKeyElement\":{\"S\":\"1029.64\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.65\"}},{\"HashKeyElement\":{\"S\":\"1029.66\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.67\"}},{\"HashKeyElement\":{\"S\":\"1029.68\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.69\"}},{\"HashKeyElement\":{\"S\":\"1029.70\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.71\"}},{\"HashKeyElement\":{\"S\":\"1029.72\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.73\"}},{\"HashKeyElement\":{\"S\":\"1029.74\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.75\"}},{\"HashKeyElement\":{\"S\":\"1029.76\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.77\"}},{\"HashKeyElement\":{\"S\":\"1029.78\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.79\"}},{\"HashKeyElement\":{\"S\":\"1029.80\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.81\"}},{\"HashKeyElement\":{\"S\":\"1029.82\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.83\"}},{\"HashKeyElement\":{\"S\":\"1029.84\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.85\"}},{\"HashKeyElement\":{\"S\":\"1029.86\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.87\"}},{\"HashKeyElement\":{\"S\":\"1029.88\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.89\"}},{\"HashKeyElement\":{\"S\":\"1029.90\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.91\"}},{\"HashKeyElement\":{\"S\":\"1029.92\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.93\"}},{\"HashKeyElement\":{\"S\":\"1029.94\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.95\"}},{\"HashKeyElement\":{\"S\":\"1029.96\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.97\"}},{\"HashKeyElement\":{\"S\":\"1029.98\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.99\"}}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '3575'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152229Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        MjQ2Yjc1Njc2NTdhYjVjMzgxYTRjZjdjNThhZjQ1Mzg2NGEyYWRiZDM1MzY4
+        YzNlMDhmNTNiNWRmNWM5M2RkYQ==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=de98a889ebfe40225af8887f667540ec2b2d1b9bdfb4952a7045ee60dafee235
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '243'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:22:29 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        :{\"ConsumedCapacityUnits\":1,\"Items\":[{\"id\":{\"S\":\"1029.66\"},\"ids\"\
+        :{\"SS\":[\"e2d1464c-0abb-4880-b25a-55a70b99d299\"]},\"updated_at\":{\"N\"\
+        :\"1364397749.225\"}}]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:22:29 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        :{\"Keys\":[{\"HashKeyElement\":{\"S\":\"1029.100\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.101\"}},{\"HashKeyElement\":{\"S\":\"1029.102\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.103\"}},{\"HashKeyElement\":{\"S\":\"1029.104\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.105\"}},{\"HashKeyElement\":{\"S\":\"1029.106\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.107\"}},{\"HashKeyElement\":{\"S\":\"1029.108\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.109\"}},{\"HashKeyElement\":{\"S\":\"1029.110\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.111\"}},{\"HashKeyElement\":{\"S\":\"1029.112\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.113\"}},{\"HashKeyElement\":{\"S\":\"1029.114\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.115\"}},{\"HashKeyElement\":{\"S\":\"1029.116\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.117\"}},{\"HashKeyElement\":{\"S\":\"1029.118\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.119\"}},{\"HashKeyElement\":{\"S\":\"1029.120\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.121\"}},{\"HashKeyElement\":{\"S\":\"1029.122\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.123\"}},{\"HashKeyElement\":{\"S\":\"1029.124\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.125\"}},{\"HashKeyElement\":{\"S\":\"1029.126\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.127\"}},{\"HashKeyElement\":{\"S\":\"1029.128\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.129\"}},{\"HashKeyElement\":{\"S\":\"1029.130\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.131\"}},{\"HashKeyElement\":{\"S\":\"1029.132\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.133\"}},{\"HashKeyElement\":{\"S\":\"1029.134\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.135\"}},{\"HashKeyElement\":{\"S\":\"1029.136\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.137\"}},{\"HashKeyElement\":{\"S\":\"1029.138\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.139\"}},{\"HashKeyElement\":{\"S\":\"1029.140\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.141\"}},{\"HashKeyElement\":{\"S\":\"1029.142\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.143\"}},{\"HashKeyElement\":{\"S\":\"1029.144\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.145\"}},{\"HashKeyElement\":{\"S\":\"1029.146\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.147\"}},{\"HashKeyElement\":{\"S\":\"1029.148\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.149\"}},{\"HashKeyElement\":{\"S\":\"1029.150\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.151\"}},{\"HashKeyElement\":{\"S\":\"1029.152\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.153\"}},{\"HashKeyElement\":{\"S\":\"1029.154\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.155\"}},{\"HashKeyElement\":{\"S\":\"1029.156\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.157\"}},{\"HashKeyElement\":{\"S\":\"1029.158\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.159\"}},{\"HashKeyElement\":{\"S\":\"1029.160\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.161\"}},{\"HashKeyElement\":{\"S\":\"1029.162\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.163\"}},{\"HashKeyElement\":{\"S\":\"1029.164\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.165\"}},{\"HashKeyElement\":{\"S\":\"1029.166\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.167\"}},{\"HashKeyElement\":{\"S\":\"1029.168\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.169\"}},{\"HashKeyElement\":{\"S\":\"1029.170\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.171\"}},{\"HashKeyElement\":{\"S\":\"1029.172\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.173\"}},{\"HashKeyElement\":{\"S\":\"1029.174\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.175\"}},{\"HashKeyElement\":{\"S\":\"1029.176\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.177\"}},{\"HashKeyElement\":{\"S\":\"1029.178\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.179\"}},{\"HashKeyElement\":{\"S\":\"1029.180\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.181\"}},{\"HashKeyElement\":{\"S\":\"1029.182\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.183\"}},{\"HashKeyElement\":{\"S\":\"1029.184\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.185\"}},{\"HashKeyElement\":{\"S\":\"1029.186\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.187\"}},{\"HashKeyElement\":{\"S\":\"1029.188\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.189\"}},{\"HashKeyElement\":{\"S\":\"1029.190\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.191\"}},{\"HashKeyElement\":{\"S\":\"1029.192\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.193\"}},{\"HashKeyElement\":{\"S\":\"1029.194\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.195\"}},{\"HashKeyElement\":{\"S\":\"1029.196\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.197\"}},{\"HashKeyElement\":{\"S\":\"1029.198\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1029.199\"}}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '3685'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152229Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        MTcyMzQ2NWMwMzdjYzBjNmZlYTQxYjI5NDg0ZmYzMjkwYjg2NDIyZmNhYmI1
+        MDFjNGVjMjE4M2MzYjgzYjc2Ng==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=cf3ba0520f99bacae2041d0c678e4ca968ae9665c7a1835f37d165cb2b96ed74
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '131'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:22:29 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        :{\"ConsumedCapacityUnits\":1,\"Items\":[]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:22:29 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"TableName\":\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        ,\"Item\":{\"id\":{\"S\":\"1029.24\"},\"ids\":{\"SS\":[\"e2d1464c-0abb-4880-b25a-55a70b99d299\"\
+        ]},\"updated_at\":{\"N\":\"1364397749.616\"}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.PutItem
+      Content-Length:
+      - '189'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152229Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        YjY2YjE1YTRiY2JhMGM0MWRmNmY0ZTQ0MjVmZDViOGNlYmRlZTY0YTQ1M2M0
+        ZGJkMjNmYzg4OGZlYTI2MjdkMQ==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=0573a8025a3548840fc13f49c1fe23b261731241c66e0214a8e92de5a90b3f5c
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '27'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:22:29 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"ConsumedCapacityUnits\":1}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:22:29 GMT
+recorded_with: VCR 2.4.0

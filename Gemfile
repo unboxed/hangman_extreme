@@ -2,26 +2,23 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 3.2.1'
 
-# If running on JRuby, use the activerecord-jdbc-adapter
 platforms :jruby do
-  gem 'activerecord-jdbcpostgresql-adapter', :require => false
+  gem 'jdbc-mysql'
+  gem 'activerecord-jdbcmysql-adapter', :require => false
 end
 platforms :ruby do
-  gem 'pg'
+  gem 'mysql2'
 end
+gem 'aws-sdk'
+gem 'dynamoid'
+
 gem 'cancan'
 gem 'omniauth'
 gem 'kaminari'
-gem 'redis-settings'
-gem 'redis'
-gem 'ohm'
 gem 'mxit_api', '>= 0.2.2.pre'
 gem "savon"
 gem 'draper'
-platforms :jruby do
-  gem "torquebox"
-  # gem "jruby-openssl"
-end
+gem 'puma', '2.0.0.b7'
 
 # third party
 gem 'airbrake'
@@ -48,7 +45,6 @@ end
 
 group :development do
   gem 'capistrano'
-  gem 'torquebox-capistrano-support'
 end
 
 group :development, :test do
@@ -56,7 +52,7 @@ group :development, :test do
   gem 'annotate'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'heroku'
+  gem 'fake_dynamo'
 end
 
 group :test do

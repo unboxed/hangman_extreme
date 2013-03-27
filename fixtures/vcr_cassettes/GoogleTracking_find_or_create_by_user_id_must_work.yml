@@ -1,0 +1,627 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        :{\"Keys\":[{\"HashKeyElement\":{\"S\":\"1.0\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1.1\"}},{\"HashKeyElement\":{\"S\":\"1.2\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1.3\"}},{\"HashKeyElement\":{\"S\":\"1.4\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1.5\"}},{\"HashKeyElement\":{\"S\":\"1.6\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1.7\"}},{\"HashKeyElement\":{\"S\":\"1.8\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1.9\"}},{\"HashKeyElement\":{\"S\":\"1.10\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1.11\"}},{\"HashKeyElement\":{\"S\":\"1.12\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.13\"}},{\"HashKeyElement\":{\"S\":\"1.14\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.15\"}},{\"HashKeyElement\":{\"S\":\"1.16\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.17\"}},{\"HashKeyElement\":{\"S\":\"1.18\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.19\"}},{\"HashKeyElement\":{\"S\":\"1.20\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.21\"}},{\"HashKeyElement\":{\"S\":\"1.22\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.23\"}},{\"HashKeyElement\":{\"S\":\"1.24\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.25\"}},{\"HashKeyElement\":{\"S\":\"1.26\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.27\"}},{\"HashKeyElement\":{\"S\":\"1.28\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.29\"}},{\"HashKeyElement\":{\"S\":\"1.30\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.31\"}},{\"HashKeyElement\":{\"S\":\"1.32\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.33\"}},{\"HashKeyElement\":{\"S\":\"1.34\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.35\"}},{\"HashKeyElement\":{\"S\":\"1.36\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.37\"}},{\"HashKeyElement\":{\"S\":\"1.38\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.39\"}},{\"HashKeyElement\":{\"S\":\"1.40\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.41\"}},{\"HashKeyElement\":{\"S\":\"1.42\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.43\"}},{\"HashKeyElement\":{\"S\":\"1.44\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.45\"}},{\"HashKeyElement\":{\"S\":\"1.46\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.47\"}},{\"HashKeyElement\":{\"S\":\"1.48\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.49\"}},{\"HashKeyElement\":{\"S\":\"1.50\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.51\"}},{\"HashKeyElement\":{\"S\":\"1.52\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.53\"}},{\"HashKeyElement\":{\"S\":\"1.54\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.55\"}},{\"HashKeyElement\":{\"S\":\"1.56\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.57\"}},{\"HashKeyElement\":{\"S\":\"1.58\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.59\"}},{\"HashKeyElement\":{\"S\":\"1.60\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.61\"}},{\"HashKeyElement\":{\"S\":\"1.62\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.63\"}},{\"HashKeyElement\":{\"S\":\"1.64\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.65\"}},{\"HashKeyElement\":{\"S\":\"1.66\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.67\"}},{\"HashKeyElement\":{\"S\":\"1.68\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.69\"}},{\"HashKeyElement\":{\"S\":\"1.70\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.71\"}},{\"HashKeyElement\":{\"S\":\"1.72\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.73\"}},{\"HashKeyElement\":{\"S\":\"1.74\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.75\"}},{\"HashKeyElement\":{\"S\":\"1.76\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.77\"}},{\"HashKeyElement\":{\"S\":\"1.78\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.79\"}},{\"HashKeyElement\":{\"S\":\"1.80\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.81\"}},{\"HashKeyElement\":{\"S\":\"1.82\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.83\"}},{\"HashKeyElement\":{\"S\":\"1.84\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.85\"}},{\"HashKeyElement\":{\"S\":\"1.86\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.87\"}},{\"HashKeyElement\":{\"S\":\"1.88\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.89\"}},{\"HashKeyElement\":{\"S\":\"1.90\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.91\"}},{\"HashKeyElement\":{\"S\":\"1.92\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.93\"}},{\"HashKeyElement\":{\"S\":\"1.94\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.95\"}},{\"HashKeyElement\":{\"S\":\"1.96\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.97\"}},{\"HashKeyElement\":{\"S\":\"1.98\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.99\"}}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '3275'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T153049Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        ZjMwYzhhZGNjOTU3NzBlMjRlMTI4Mzc0NWMzOTA3ZDFmNzY0NGYwYTU1YmI5
+        MTg0NDlkNTU1OTRiYjZiMGE1NA==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=019b560932ad1e13e8de384443d188ee4d358e2dfbdc3b5191d430099b74b40a
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '350'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:30:49 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        :{\"ConsumedCapacityUnits\":1,\"Items\":[{\"id\":{\"S\":\"1.14\"},\"ids\"\
+        :{\"SS\":[\"117f91bf-5047-4e5a-bfd2-de5cae0cb054\"]},\"updated_at\":{\"N\"\
+        :\"1364390395.856\"}},{\"id\":{\"S\":\"1.86\"},\"ids\":{\"SS\":[\"117f91bf-5047-4e5a-bfd2-de5cae0cb054\"\
+        ]},\"updated_at\":{\"N\":\"1364390398.069\"}}]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:30:49 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        :{\"Keys\":[{\"HashKeyElement\":{\"S\":\"1.100\"}},{\"HashKeyElement\":{\"\
+        S\":\"1.101\"}},{\"HashKeyElement\":{\"S\":\"1.102\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.103\"}},{\"HashKeyElement\":{\"S\":\"1.104\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.105\"}},{\"HashKeyElement\":{\"S\":\"1.106\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.107\"}},{\"HashKeyElement\":{\"S\":\"1.108\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.109\"}},{\"HashKeyElement\":{\"S\":\"1.110\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.111\"}},{\"HashKeyElement\":{\"S\":\"1.112\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.113\"}},{\"HashKeyElement\":{\"S\":\"1.114\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.115\"}},{\"HashKeyElement\":{\"S\":\"1.116\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.117\"}},{\"HashKeyElement\":{\"S\":\"1.118\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.119\"}},{\"HashKeyElement\":{\"S\":\"1.120\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.121\"}},{\"HashKeyElement\":{\"S\":\"1.122\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.123\"}},{\"HashKeyElement\":{\"S\":\"1.124\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.125\"}},{\"HashKeyElement\":{\"S\":\"1.126\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.127\"}},{\"HashKeyElement\":{\"S\":\"1.128\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.129\"}},{\"HashKeyElement\":{\"S\":\"1.130\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.131\"}},{\"HashKeyElement\":{\"S\":\"1.132\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.133\"}},{\"HashKeyElement\":{\"S\":\"1.134\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.135\"}},{\"HashKeyElement\":{\"S\":\"1.136\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.137\"}},{\"HashKeyElement\":{\"S\":\"1.138\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.139\"}},{\"HashKeyElement\":{\"S\":\"1.140\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.141\"}},{\"HashKeyElement\":{\"S\":\"1.142\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.143\"}},{\"HashKeyElement\":{\"S\":\"1.144\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.145\"}},{\"HashKeyElement\":{\"S\":\"1.146\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.147\"}},{\"HashKeyElement\":{\"S\":\"1.148\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.149\"}},{\"HashKeyElement\":{\"S\":\"1.150\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.151\"}},{\"HashKeyElement\":{\"S\":\"1.152\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.153\"}},{\"HashKeyElement\":{\"S\":\"1.154\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.155\"}},{\"HashKeyElement\":{\"S\":\"1.156\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.157\"}},{\"HashKeyElement\":{\"S\":\"1.158\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.159\"}},{\"HashKeyElement\":{\"S\":\"1.160\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.161\"}},{\"HashKeyElement\":{\"S\":\"1.162\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.163\"}},{\"HashKeyElement\":{\"S\":\"1.164\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.165\"}},{\"HashKeyElement\":{\"S\":\"1.166\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.167\"}},{\"HashKeyElement\":{\"S\":\"1.168\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.169\"}},{\"HashKeyElement\":{\"S\":\"1.170\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.171\"}},{\"HashKeyElement\":{\"S\":\"1.172\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.173\"}},{\"HashKeyElement\":{\"S\":\"1.174\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.175\"}},{\"HashKeyElement\":{\"S\":\"1.176\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.177\"}},{\"HashKeyElement\":{\"S\":\"1.178\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.179\"}},{\"HashKeyElement\":{\"S\":\"1.180\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.181\"}},{\"HashKeyElement\":{\"S\":\"1.182\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.183\"}},{\"HashKeyElement\":{\"S\":\"1.184\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.185\"}},{\"HashKeyElement\":{\"S\":\"1.186\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.187\"}},{\"HashKeyElement\":{\"S\":\"1.188\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.189\"}},{\"HashKeyElement\":{\"S\":\"1.190\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.191\"}},{\"HashKeyElement\":{\"S\":\"1.192\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.193\"}},{\"HashKeyElement\":{\"S\":\"1.194\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.195\"}},{\"HashKeyElement\":{\"S\":\"1.196\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.197\"}},{\"HashKeyElement\":{\"S\":\"1.198\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1.199\"}}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '3385'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T153050Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        ZWY0MmEzY2UzYWEwZDIyMzRlN2FhYTE2NTAxZTJjOTRiNzg2NTY2MWY4NmU1
+        YWU5ODE1ZWRlODk4Zjg0OGE3MQ==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=b31a93f2a6ca00e263d9ead964d7172e3fbc53c1b1187376d4899390dc4fb750
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '241'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:30:50 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        :{\"ConsumedCapacityUnits\":1,\"Items\":[{\"id\":{\"S\":\"1.182\"},\"ids\"\
+        :{\"SS\":[\"117f91bf-5047-4e5a-bfd2-de5cae0cb054\"]},\"updated_at\":{\"N\"\
+        :\"1364390395.421\"}}]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:30:50 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"TableName\":\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        }"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.DescribeTable
+      Content-Length:
+      - '69'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T153050Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        ODg5MzI3NzQ4YWJlYzllYjkzNTM0M2I2OTI4ZjAyMmM0NWIwNDMxN2FhNjE2
+        YWZkYzc0MzY5ZjQzMGY1NjE3OA==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=d0e46bf97ebdbf731d04b76a923a8c8fbba64a118a715a78bdbeb0550ec28dfc
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '311'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:30:50 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Table\":{\"CreationDateTime\":1364385975,\"KeySchema\":{\"HashKeyElement\"\
+        :{\"AttributeName\":\"id\",\"AttributeType\":\"S\"}},\"ProvisionedThroughput\"\
+        :{\"ReadCapacityUnits\":5,\"WriteCapacityUnits\":2},\"TableName\":\"hangmanextreme_app_test_index_googletracking_user_ids\"\
+        ,\"TableStatus\":\"ACTIVE\"},\"ItemCount\":21,\"TableSizeBytes\":0}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:30:50 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_googletrackings\":{\"\
+        Keys\":[{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.0\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.1\"}},{\"\
+        HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.2\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.3\"}},{\"HashKeyElement\":{\"\
+        S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.4\"}},{\"HashKeyElement\":{\"S\"\
+        :\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.5\"}},{\"HashKeyElement\":{\"S\":\"\
+        117f91bf-5047-4e5a-bfd2-de5cae0cb054.6\"}},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.7\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.8\"}},{\"\
+        HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.9\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.10\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.11\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.12\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.13\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.14\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.15\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.16\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.17\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.18\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.19\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.20\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.21\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.22\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.23\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.24\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.25\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.26\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.27\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.28\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.29\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.30\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.31\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.32\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.33\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.34\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.35\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.36\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.37\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.38\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.39\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.40\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.41\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.42\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.43\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.44\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.45\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.46\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.47\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.48\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.49\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.50\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.51\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.52\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.53\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.54\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.55\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.56\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.57\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.58\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.59\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.60\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.61\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.62\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.63\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.64\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.65\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.66\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.67\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.68\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.69\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.70\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.71\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.72\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.73\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.74\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.75\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.76\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.77\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.78\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.79\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.80\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.81\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.82\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.83\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.84\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.85\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.86\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.87\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.88\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.89\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.90\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.91\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.92\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.93\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.94\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.95\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.96\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.97\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.98\"}},{\"HashKeyElement\"\
+        :{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.99\"}}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '6761'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T153050Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        OTQ0YTFlZGRiMzQ0NmZlNGM0ZDMyZGJlYjRkNzI5MDkyMWViNmYwOTViMjI5
+        NzJiMTllNGRiNzZjZjgwNDA4Mw==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=e64ffa12f9c82abd4041acc24af8d6a004cba9dc67a155e76ac1fe9ddfb6ed8e
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '117'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:30:50 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_googletrackings\":{\"ConsumedCapacityUnits\"\
+        :1,\"Items\":[]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:30:50 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_googletrackings\":{\"\
+        Keys\":[{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.100\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.101\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.102\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.103\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.104\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.105\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.106\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.107\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.108\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.109\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.110\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.111\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.112\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.113\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.114\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.115\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.116\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.117\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.118\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.119\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.120\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.121\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.122\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.123\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.124\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.125\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.126\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.127\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.128\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.129\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.130\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.131\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.132\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.133\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.134\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.135\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.136\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.137\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.138\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.139\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.140\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.141\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.142\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.143\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.144\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.145\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.146\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.147\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.148\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.149\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.150\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.151\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.152\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.153\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.154\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.155\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.156\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.157\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.158\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.159\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.160\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.161\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.162\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.163\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.164\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.165\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.166\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.167\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.168\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.169\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.170\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.171\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.172\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.173\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.174\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.175\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.176\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.177\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.178\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.179\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.180\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.181\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.182\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.183\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.184\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.185\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.186\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.187\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.188\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.189\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.190\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.191\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.192\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.193\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.194\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.195\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.196\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.197\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.198\"\
+        }},{\"HashKeyElement\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.199\"\
+        }}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '6871'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T153050Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        ZjYxZmY3NDg3YTFlNzhhZTlkZWQ2ODFmNzIzM2U2M2JhYjAwY2M4MWQwNDM1
+        ODE5YTExYTQ3NDJlY2NjOTk0Zg==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=6ebbd8856ce585d64b0be534104ec6cb0598a5735fd248f53728e78b877c0ed0
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '984'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:30:50 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_googletrackings\":{\"ConsumedCapacityUnits\"\
+        :1,\"Items\":[{\"id\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.106\"\
+        },\"created_at\":{\"N\":\"1364390394.444\"},\"updated_at\":{\"N\":\"1364390394.458\"\
+        },\"user_id\":{\"S\":\"1\"},\"initial_visit\":{\"S\":\"1364390394\"},\"previous_session\"\
+        :{\"S\":\"1364390394\"},\"current_session\":{\"S\":\"1364390394\"},\"last_visit\"\
+        :{\"S\":\"1364390394\"}},{\"id\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.142\"\
+        },\"created_at\":{\"N\":\"1364390394.0\"},\"updated_at\":{\"N\":\"1364390397.791\"\
+        },\"user_id\":{\"S\":\"1\"},\"initial_visit\":{\"S\":\"1364390394\"},\"previous_session\"\
+        :{\"S\":\"1364390394\"},\"current_session\":{\"S\":\"1364390394\"},\"last_visit\"\
+        :{\"S\":\"1364390397\"}},{\"id\":{\"S\":\"117f91bf-5047-4e5a-bfd2-de5cae0cb054.160\"\
+        },\"created_at\":{\"N\":\"1364390394.444\"},\"updated_at\":{\"N\":\"1364390395.486\"\
+        },\"user_id\":{\"S\":\"1\"},\"initial_visit\":{\"S\":\"1364390394\"},\"previous_session\"\
+        :{\"S\":\"1364390394\"},\"current_session\":{\"S\":\"1364390394\"},\"last_visit\"\
+        :{\"S\":\"1364390395\"}}]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:30:50 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"TableName\":\"hangmanextreme_app_test_googletrackings\"}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.DescribeTable
+      Content-Length:
+      - '55'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T153050Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        N2I2ZTgzNzg0OTFmMzg4NDdiMzI4YmVhYTk5YzNlMzNlNjhjYWE3ZjE2NTZm
+        N2FkN2E1NDdhYmY2YmJiZTcwMw==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=e1fe5716ea14cc5e7c581c37aa87e3b589974313251e01b2293c1c19fb00b24b
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '297'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:30:50 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Table\":{\"CreationDateTime\":1364386584,\"KeySchema\":{\"HashKeyElement\"\
+        :{\"AttributeName\":\"id\",\"AttributeType\":\"S\"}},\"ProvisionedThroughput\"\
+        :{\"ReadCapacityUnits\":5,\"WriteCapacityUnits\":2},\"TableName\":\"hangmanextreme_app_test_googletrackings\"\
+        ,\"TableStatus\":\"ACTIVE\"},\"ItemCount\":21,\"TableSizeBytes\":0}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:30:50 GMT
+recorded_with: VCR 2.4.0

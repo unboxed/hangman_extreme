@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'clues' do
+describe 'clues', :vcr => :once do
 
   before :each do
     @current_user = create(:user, uid: 'm2604100', provider: 'mxit')

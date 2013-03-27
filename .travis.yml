@@ -5,10 +5,11 @@ rvm:
   - 1.9.3
   - jruby
   - 2.0.0
+  - rbx
 before_script:
   - cp -f config/database_travis.yml config/database.yml
   - cp -f db/words.sample.csv db/words.csv
   - RAILS_ENV=test bundle exec rake db:setup
 script: bundle exec rspec spec
 env:
-  - RAILS_ENV=test MXIT_CLIENT_ID=1 SHINKA_AUID=1 GA_TRACKING_CODE=1
+  - RAILS_ENV=test MXIT_CLIENT_ID=1 SHINKA_AUID=1 GA_TRACKING_CODE=1 AWS_ACCESS_KEY_ID=1 AWS_SECRET_ACCESS_KEY=1

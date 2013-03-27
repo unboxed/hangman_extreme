@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe 'words' do
+describe 'words', :vcr => :once do
 
   before :each do
     @current_user = create(:user, uid: 'm2604100', provider: 'mxit')

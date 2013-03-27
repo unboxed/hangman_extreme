@@ -31,17 +31,21 @@ Spork.prefork do
   Spork.trap_method(Rails::Application, :eager_load!)
   Spork.trap_method(Rails::Application::RoutesReloader, :reload!)
 
+  require 'aws-sdk'
+  require 'webmock/rspec'
+  WebMock.allow_net_connect!
+  AWS.config(:dynamo_db_endpoint => 'localhost', :dynamo_db_port => '4567', :use_ssl => false)
   require File.expand_path("../../config/environment", __FILE__)
 
   # Load all railties files
   Rails.application.railties.all { |r| r.eager_load! }
   require 'rspec/rails'
   require 'rspec/autorun'
-  require 'webmock/rspec'
   require 'draper/test/rspec_integration'
 end
 
 Spork.each_run do
+  WebMock.disable_net_connect!
   def in_memory_database?
     Rails.configuration.database_configuration[ENV["RAILS_ENV"]]['database'] == ':memory:'
   end
@@ -57,12 +61,11 @@ Spork.each_run do
 
   VCR.configure do |c|
     c.cassette_library_dir = 'fixtures/vcr_cassettes'
-    c.hook_into :webmock # or :fakeweb
+    c.hook_into :webmock
   end
 
   RSpec.configure do |config|
     config.include FactoryGirl::Syntax::Methods
-    config.filter_run_excluding :redis => true if ENV["EXCLUDE_REDIS_SPECS"]
 
     # Run specs in random order to surface order dependencies. If you find an
     # order dependency and want to debug it, you can fix the order by providing
@@ -96,17 +99,25 @@ Spork.each_run do
 
     config.before(:each) do
       DatabaseCleaner.start
+      #begin
+      #  Dynamoid::Adapter.list_tables.each do |table|
+      #    if table =~ /^#{Dynamoid::Config.namespace}/
+      #      table = Dynamoid::Adapter.get_table(table)
+      #      table.items.each {|i| i.delete}
+      #    end
+      #  end
+      #rescue Exception => e
+      #  Rails.logger.warn(e.message)
+      #end
     end
 
     config.after(:each) do
       DatabaseCleaner.clean
     end
 
-    config.before(:each, :redis => true) do
-      begin
-        REDIS.flushall
-      rescue Redis::CannotConnectError => e
-        Rails.logger.error(e.message)
+    config.around(:each, :vcr => :once) do |example|
+      VCR.use_cassette(example.metadata[:full_description], :record => :once) do
+        example.call
       end
     end
 

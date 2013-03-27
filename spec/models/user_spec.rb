@@ -306,7 +306,7 @@ describe User do
 
   end
 
-  context "umta", :redis => true do
+  context "umta", :vcr => :once do
 
     it "must return proper encoded google umta" do
       user = stub_model(User)

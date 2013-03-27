@@ -1,0 +1,1690 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_index_setting_names\"\
+        :{\"Keys\":[{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.0\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.1\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.2\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.3\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.4\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.5\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.6\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.7\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.8\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.9\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.10\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.11\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.12\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.13\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.14\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.15\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.16\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.17\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.18\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.19\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.20\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.21\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.22\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.23\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.24\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.25\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.26\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.27\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.28\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.29\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.30\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.31\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.32\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.33\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.34\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.35\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.36\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.37\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.38\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.39\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.40\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.41\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.42\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.43\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.44\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.45\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.46\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.47\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.48\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.49\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.50\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.51\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.52\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.53\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.54\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.55\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.56\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.57\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.58\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.59\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.60\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.61\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.62\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.63\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.64\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.65\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.66\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.67\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.68\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.69\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.70\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.71\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.72\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.73\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.74\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.75\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.76\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.77\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.78\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.79\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.80\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.81\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.82\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.83\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.84\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.85\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.86\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.87\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.88\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.89\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.90\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.91\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.92\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.93\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.94\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.95\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.96\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.97\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.98\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.99\"}}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '5265'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152323Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        ZmUwM2Y1MjRhOGM4ZGE1OWE5NDJmODkzYjZmYWEzZGQ1YjJmN2UwN2NmYzM0
+        MTNhMDA4MGFlZWVmNGY5NmY0YQ==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=938866fe37efc5f525784ad797d704a8da591e5e75ce48394587852cf34e27ce
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '121'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:23:24 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_index_setting_names\":{\"\
+        ConsumedCapacityUnits\":1,\"Items\":[]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:23:24 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_index_setting_names\"\
+        :{\"Keys\":[{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.100\"}},{\"\
+        HashKeyElement\":{\"S\":\"shinka_disabled_until.101\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.102\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.103\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.104\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.105\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.106\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.107\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.108\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.109\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.110\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.111\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.112\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.113\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.114\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.115\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.116\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.117\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.118\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.119\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.120\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.121\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.122\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.123\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.124\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.125\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.126\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.127\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.128\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.129\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.130\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.131\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.132\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.133\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.134\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.135\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.136\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.137\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.138\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.139\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.140\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.141\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.142\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.143\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.144\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.145\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.146\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.147\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.148\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.149\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.150\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.151\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.152\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.153\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.154\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.155\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.156\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.157\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.158\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.159\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.160\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.161\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.162\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.163\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.164\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.165\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.166\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.167\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.168\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.169\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.170\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.171\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.172\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.173\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.174\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.175\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.176\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.177\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.178\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.179\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.180\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.181\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.182\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.183\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.184\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.185\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.186\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.187\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.188\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.189\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.190\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.191\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.192\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.193\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.194\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.195\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.196\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.197\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.198\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.199\"\
+        }}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '5375'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152324Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        ZGI1OGY1ZjBjYTU3MzE4NDM2YzY0ZjJjNjNiYTE5ZTAzODIyZmYwZTFjNTBi
+        ZTQ3ODVkZmI5ZTIzMjRlYTg2YQ==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=b180d1c7fef4d55b44aa0894963b72e9a755f7f97f2e7eaf9975afa09f09db56
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '121'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:23:24 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_index_setting_names\":{\"\
+        ConsumedCapacityUnits\":1,\"Items\":[]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:23:24 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"TableName\":\"hangmanextreme_app_test_index_setting_names\"}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.DescribeTable
+      Content-Length:
+      - '59'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152324Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        M2U2MTYxOWM1YWNjMjI5YTEzMmQ4NjJhOTdhZTU4ZTJhMDZhNzZjYTUzNWQy
+        NjQzNzAwYzg2ODUyYjE3OGI2ZA==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=99c0d041e7eab495d5e110758cc25d9e80088c2390f6e0623837fd97f7c95c2f
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '300'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:23:24 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Table\":{\"CreationDateTime\":1364389663,\"KeySchema\":{\"HashKeyElement\"\
+        :{\"AttributeName\":\"id\",\"AttributeType\":\"S\"}},\"ProvisionedThroughput\"\
+        :{\"ReadCapacityUnits\":5,\"WriteCapacityUnits\":2},\"TableName\":\"hangmanextreme_app_test_index_setting_names\"\
+        ,\"TableStatus\":\"ACTIVE\"},\"ItemCount\":0,\"TableSizeBytes\":0}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:23:24 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_index_setting_names\"\
+        :{\"Keys\":[{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.0\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.1\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.2\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.3\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.4\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.5\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.6\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.7\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.8\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.9\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.10\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.11\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.12\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.13\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.14\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.15\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.16\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.17\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.18\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.19\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.20\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.21\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.22\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.23\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.24\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.25\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.26\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.27\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.28\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.29\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.30\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.31\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.32\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.33\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.34\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.35\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.36\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.37\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.38\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.39\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.40\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.41\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.42\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.43\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.44\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.45\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.46\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.47\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.48\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.49\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.50\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.51\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.52\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.53\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.54\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.55\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.56\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.57\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.58\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.59\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.60\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.61\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.62\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.63\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.64\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.65\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.66\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.67\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.68\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.69\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.70\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.71\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.72\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.73\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.74\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.75\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.76\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.77\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.78\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.79\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.80\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.81\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.82\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.83\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.84\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.85\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.86\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.87\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.88\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.89\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.90\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.91\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.92\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.93\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.94\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.95\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.96\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.97\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.98\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.99\"}}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '5265'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152324Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        ZmUwM2Y1MjRhOGM4ZGE1OWE5NDJmODkzYjZmYWEzZGQ1YjJmN2UwN2NmYzM0
+        MTNhMDA4MGFlZWVmNGY5NmY0YQ==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=789e43d54489e44851a8822d0b736461236498c39c3f3d03dfe1cef6ff0320cc
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '121'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:23:24 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_index_setting_names\":{\"\
+        ConsumedCapacityUnits\":1,\"Items\":[]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:23:24 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_index_setting_names\"\
+        :{\"Keys\":[{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.100\"}},{\"\
+        HashKeyElement\":{\"S\":\"shinka_disabled_until.101\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.102\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.103\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.104\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.105\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.106\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.107\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.108\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.109\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.110\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.111\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.112\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.113\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.114\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.115\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.116\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.117\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.118\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.119\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.120\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.121\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.122\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.123\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.124\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.125\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.126\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.127\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.128\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.129\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.130\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.131\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.132\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.133\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.134\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.135\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.136\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.137\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.138\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.139\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.140\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.141\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.142\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.143\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.144\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.145\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.146\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.147\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.148\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.149\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.150\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.151\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.152\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.153\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.154\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.155\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.156\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.157\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.158\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.159\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.160\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.161\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.162\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.163\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.164\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.165\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.166\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.167\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.168\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.169\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.170\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.171\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.172\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.173\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.174\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.175\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.176\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.177\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.178\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.179\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.180\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.181\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.182\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.183\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.184\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.185\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.186\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.187\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.188\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.189\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.190\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.191\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.192\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.193\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.194\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.195\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.196\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.197\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.198\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.199\"\
+        }}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '5375'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152324Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        ZGI1OGY1ZjBjYTU3MzE4NDM2YzY0ZjJjNjNiYTE5ZTAzODIyZmYwZTFjNTBi
+        ZTQ3ODVkZmI5ZTIzMjRlYTg2YQ==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=b180d1c7fef4d55b44aa0894963b72e9a755f7f97f2e7eaf9975afa09f09db56
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '121'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:23:24 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_index_setting_names\":{\"\
+        ConsumedCapacityUnits\":1,\"Items\":[]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:23:24 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"TableName\":\"hangmanextreme_app_test_settings\"}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.DescribeTable
+      Content-Length:
+      - '48'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152324Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        MGNmOTk4YWRhMTQ3Mjc2MzUxYjEwYWZkYjFjNGI1NWZmODE4NWZlMjM1ZDQ5
+        OTMzYTk5MjBhZWQ0NjE2MjFiZg==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=b96d734f086424f7e02932af30459bafedccc75f8df3fd2448e1cb67d4743e59
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '289'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:23:24 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Table\":{\"CreationDateTime\":1364390022,\"KeySchema\":{\"HashKeyElement\"\
+        :{\"AttributeName\":\"id\",\"AttributeType\":\"S\"}},\"ProvisionedThroughput\"\
+        :{\"ReadCapacityUnits\":5,\"WriteCapacityUnits\":2},\"TableName\":\"hangmanextreme_app_test_settings\"\
+        ,\"TableStatus\":\"ACTIVE\"},\"ItemCount\":0,\"TableSizeBytes\":0}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:23:24 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"TableName\":\"hangmanextreme_app_test_settings\",\"Item\":{\"created_at\"\
+        :{\"N\":\"1364397804.497\"},\"updated_at\":{\"N\":\"1364397804.504\"},\"name\"\
+        :{\"S\":\"shinka_disabled_until\"},\"value\":{\"S\":\"1364397864\"},\"id\"\
+        :{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.112\"}},\"Expected\":{\"id\"\
+        :{\"Exists\":false}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.PutItem
+      Content-Length:
+      - '282'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152324Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        NWMzM2Q0MDI5NGVmM2IxYTc4NTQyYjM0NDg4MjRlNWQyZjg5YTg5MWFhMTA0
+        MDlhZDVkYjU1YzlhNTY0ZmQ1MA==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=5fb138e0461443051e8270407f2fe10377962dd4acfb7a57e40bc8ffdcd099d9
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '27'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:23:24 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"ConsumedCapacityUnits\":1}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:23:24 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_index_setting_names\"\
+        :{\"Keys\":[{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.0\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.1\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.2\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.3\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.4\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.5\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.6\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.7\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.8\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.9\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.10\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.11\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.12\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.13\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.14\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.15\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.16\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.17\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.18\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.19\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.20\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.21\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.22\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.23\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.24\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.25\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.26\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.27\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.28\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.29\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.30\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.31\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.32\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.33\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.34\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.35\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.36\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.37\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.38\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.39\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.40\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.41\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.42\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.43\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.44\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.45\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.46\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.47\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.48\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.49\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.50\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.51\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.52\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.53\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.54\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.55\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.56\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.57\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.58\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.59\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.60\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.61\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.62\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.63\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.64\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.65\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.66\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.67\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.68\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.69\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.70\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.71\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.72\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.73\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.74\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.75\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.76\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.77\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.78\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.79\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.80\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.81\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.82\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.83\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.84\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.85\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.86\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.87\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.88\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.89\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.90\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.91\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.92\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.93\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.94\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.95\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.96\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.97\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.98\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.99\"}}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '5265'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152324Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        ZmUwM2Y1MjRhOGM4ZGE1OWE5NDJmODkzYjZmYWEzZGQ1YjJmN2UwN2NmYzM0
+        MTNhMDA4MGFlZWVmNGY5NmY0YQ==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=789e43d54489e44851a8822d0b736461236498c39c3f3d03dfe1cef6ff0320cc
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '121'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:23:24 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_index_setting_names\":{\"\
+        ConsumedCapacityUnits\":1,\"Items\":[]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:23:24 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_index_setting_names\"\
+        :{\"Keys\":[{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.100\"}},{\"\
+        HashKeyElement\":{\"S\":\"shinka_disabled_until.101\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.102\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.103\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.104\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.105\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.106\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.107\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.108\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.109\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.110\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.111\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.112\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.113\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.114\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.115\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.116\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.117\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.118\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.119\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.120\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.121\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.122\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.123\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.124\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.125\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.126\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.127\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.128\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.129\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.130\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.131\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.132\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.133\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.134\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.135\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.136\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.137\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.138\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.139\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.140\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.141\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.142\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.143\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.144\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.145\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.146\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.147\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.148\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.149\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.150\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.151\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.152\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.153\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.154\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.155\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.156\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.157\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.158\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.159\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.160\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.161\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.162\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.163\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.164\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.165\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.166\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.167\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.168\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.169\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.170\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.171\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.172\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.173\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.174\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.175\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.176\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.177\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.178\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.179\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.180\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.181\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.182\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.183\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.184\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.185\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.186\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.187\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.188\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.189\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.190\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.191\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.192\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.193\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.194\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.195\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.196\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.197\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.198\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.199\"\
+        }}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '5375'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152324Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        ZGI1OGY1ZjBjYTU3MzE4NDM2YzY0ZjJjNjNiYTE5ZTAzODIyZmYwZTFjNTBi
+        ZTQ3ODVkZmI5ZTIzMjRlYTg2YQ==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=b180d1c7fef4d55b44aa0894963b72e9a755f7f97f2e7eaf9975afa09f09db56
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '121'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:23:24 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_index_setting_names\":{\"\
+        ConsumedCapacityUnits\":1,\"Items\":[]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:23:24 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_index_setting_names\"\
+        :{\"Keys\":[{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.0\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.1\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.2\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.3\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.4\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.5\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.6\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.7\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.8\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.9\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.10\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.11\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.12\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.13\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.14\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.15\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.16\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.17\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.18\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.19\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.20\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.21\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.22\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.23\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.24\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.25\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.26\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.27\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.28\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.29\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.30\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.31\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.32\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.33\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.34\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.35\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.36\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.37\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.38\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.39\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.40\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.41\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.42\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.43\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.44\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.45\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.46\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.47\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.48\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.49\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.50\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.51\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.52\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.53\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.54\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.55\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.56\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.57\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.58\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.59\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.60\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.61\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.62\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.63\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.64\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.65\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.66\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.67\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.68\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.69\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.70\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.71\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.72\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.73\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.74\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.75\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.76\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.77\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.78\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.79\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.80\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.81\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.82\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.83\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.84\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.85\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.86\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.87\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.88\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.89\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.90\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.91\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.92\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.93\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.94\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.95\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.96\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.97\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.98\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.99\"}}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '5265'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152324Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        ZmUwM2Y1MjRhOGM4ZGE1OWE5NDJmODkzYjZmYWEzZGQ1YjJmN2UwN2NmYzM0
+        MTNhMDA4MGFlZWVmNGY5NmY0YQ==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=789e43d54489e44851a8822d0b736461236498c39c3f3d03dfe1cef6ff0320cc
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '121'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:23:24 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_index_setting_names\":{\"\
+        ConsumedCapacityUnits\":1,\"Items\":[]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:23:24 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_index_setting_names\"\
+        :{\"Keys\":[{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.100\"}},{\"\
+        HashKeyElement\":{\"S\":\"shinka_disabled_until.101\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.102\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.103\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.104\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.105\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.106\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.107\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.108\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.109\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.110\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.111\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.112\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.113\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.114\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.115\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.116\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.117\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.118\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.119\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.120\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.121\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.122\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.123\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.124\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.125\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.126\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.127\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.128\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.129\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.130\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.131\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.132\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.133\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.134\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.135\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.136\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.137\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.138\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.139\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.140\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.141\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.142\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.143\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.144\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.145\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.146\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.147\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.148\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.149\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.150\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.151\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.152\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.153\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.154\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.155\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.156\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.157\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.158\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.159\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.160\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.161\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.162\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.163\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.164\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.165\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.166\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.167\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.168\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.169\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.170\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.171\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.172\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.173\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.174\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.175\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.176\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.177\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.178\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.179\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.180\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.181\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.182\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.183\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.184\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.185\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.186\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.187\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.188\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.189\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.190\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.191\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.192\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.193\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.194\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.195\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.196\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.197\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.198\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.199\"\
+        }}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '5375'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152325Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        ZGI1OGY1ZjBjYTU3MzE4NDM2YzY0ZjJjNjNiYTE5ZTAzODIyZmYwZTFjNTBi
+        ZTQ3ODVkZmI5ZTIzMjRlYTg2YQ==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=b142556832fce70f2ff9a421c8d2cbfeecde3dd9fd5ae06d8b272be2f05cea16
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '121'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:23:25 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_index_setting_names\":{\"\
+        ConsumedCapacityUnits\":1,\"Items\":[]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:23:25 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"TableName\":\"hangmanextreme_app_test_index_setting_names\",\"Item\"\
+        :{\"id\":{\"S\":\"shinka_disabled_until.16\"},\"ids\":{\"SS\":[\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c\"\
+        ]},\"updated_at\":{\"N\":\"1364397805.111\"}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.PutItem
+      Content-Length:
+      - '196'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152325Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        MzQ5YzVlMGIyOTBhNzEwODYzOWY1ZmRkZmY0YjUyNTI3N2I5NDRjMzZkNWYw
+        MTQzMjJhM2M0OWFkMjVhZjRlMw==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=9c93b6328bec072bf48b9e6f29039f2eb54c88b05a98e1e04174b6ae7b88da65
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '27'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:23:25 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"ConsumedCapacityUnits\":1}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:23:25 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_index_setting_names\"\
+        :{\"Keys\":[{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.0\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.1\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.2\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.3\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.4\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.5\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.6\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.7\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.8\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.9\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.10\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.11\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.12\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.13\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.14\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.15\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.16\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.17\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.18\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.19\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.20\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.21\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.22\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.23\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.24\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.25\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.26\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.27\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.28\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.29\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.30\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.31\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.32\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.33\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.34\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.35\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.36\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.37\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.38\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.39\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.40\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.41\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.42\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.43\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.44\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.45\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.46\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.47\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.48\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.49\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.50\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.51\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.52\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.53\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.54\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.55\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.56\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.57\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.58\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.59\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.60\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.61\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.62\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.63\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.64\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.65\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.66\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.67\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.68\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.69\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.70\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.71\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.72\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.73\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.74\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.75\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.76\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.77\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.78\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.79\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.80\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.81\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.82\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.83\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.84\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.85\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.86\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.87\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.88\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.89\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.90\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.91\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.92\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.93\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.94\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.95\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.96\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.97\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.98\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.99\"}}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '5265'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152325Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        ZmUwM2Y1MjRhOGM4ZGE1OWE5NDJmODkzYjZmYWEzZGQ1YjJmN2UwN2NmYzM0
+        MTNhMDA4MGFlZWVmNGY5NmY0YQ==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=3278b599b19f87ff2d692454ee4fa71cf07ab6dd59a589be18015c2d4df2a99f
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '250'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:23:25 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_index_setting_names\":{\"\
+        ConsumedCapacityUnits\":1,\"Items\":[{\"id\":{\"S\":\"shinka_disabled_until.16\"\
+        },\"ids\":{\"SS\":[\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c\"]},\"updated_at\"\
+        :{\"N\":\"1364397805.111\"}}]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:23:25 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_index_setting_names\"\
+        :{\"Keys\":[{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.100\"}},{\"\
+        HashKeyElement\":{\"S\":\"shinka_disabled_until.101\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.102\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.103\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.104\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.105\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.106\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.107\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.108\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.109\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.110\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.111\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.112\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.113\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.114\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.115\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.116\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.117\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.118\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.119\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.120\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.121\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.122\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.123\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.124\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.125\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.126\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.127\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.128\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.129\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.130\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.131\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.132\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.133\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.134\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.135\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.136\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.137\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.138\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.139\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.140\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.141\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.142\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.143\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.144\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.145\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.146\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.147\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.148\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.149\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.150\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.151\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.152\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.153\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.154\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.155\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.156\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.157\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.158\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.159\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.160\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.161\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.162\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.163\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.164\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.165\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.166\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.167\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.168\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.169\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.170\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.171\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.172\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.173\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.174\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.175\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.176\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.177\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.178\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.179\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.180\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.181\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.182\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.183\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.184\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.185\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.186\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.187\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.188\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.189\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.190\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.191\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.192\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.193\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.194\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.195\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.196\"\
+        }},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.197\"}},{\"HashKeyElement\"\
+        :{\"S\":\"shinka_disabled_until.198\"}},{\"HashKeyElement\":{\"S\":\"shinka_disabled_until.199\"\
+        }}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '5375'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152325Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        ZGI1OGY1ZjBjYTU3MzE4NDM2YzY0ZjJjNjNiYTE5ZTAzODIyZmYwZTFjNTBi
+        ZTQ3ODVkZmI5ZTIzMjRlYTg2YQ==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=b142556832fce70f2ff9a421c8d2cbfeecde3dd9fd5ae06d8b272be2f05cea16
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '121'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:23:25 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_index_setting_names\":{\"\
+        ConsumedCapacityUnits\":1,\"Items\":[]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:23:25 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_settings\":{\"Keys\":[{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.0\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.1\"}},{\"HashKeyElement\":{\"\
+        S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.2\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.3\"}},{\"HashKeyElement\":{\"S\":\"\
+        1542dcec-9a1b-4420-ac86-c55f3ec2a29c.4\"}},{\"HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.5\"\
+        }},{\"HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.6\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.7\"}},{\"HashKeyElement\"\
+        :{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.8\"}},{\"HashKeyElement\":{\"\
+        S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.9\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.10\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.11\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.12\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.13\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.14\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.15\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.16\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.17\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.18\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.19\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.20\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.21\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.22\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.23\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.24\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.25\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.26\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.27\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.28\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.29\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.30\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.31\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.32\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.33\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.34\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.35\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.36\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.37\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.38\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.39\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.40\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.41\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.42\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.43\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.44\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.45\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.46\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.47\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.48\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.49\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.50\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.51\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.52\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.53\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.54\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.55\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.56\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.57\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.58\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.59\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.60\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.61\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.62\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.63\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.64\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.65\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.66\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.67\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.68\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.69\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.70\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.71\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.72\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.73\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.74\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.75\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.76\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.77\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.78\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.79\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.80\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.81\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.82\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.83\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.84\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.85\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.86\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.87\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.88\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.89\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.90\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.91\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.92\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.93\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.94\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.95\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.96\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.97\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.98\"}},{\"HashKeyElement\":{\"S\"\
+        :\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.99\"}}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '6754'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152325Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        YTBkYjBiNDA3NjY0ZjMyYWM1ZjZmYjZmNGFkNDgxNGU5YjBhMmY3MmU3NmRj
+        NGY2NDU4MTcyYzcxZjk4ODJhNg==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=8fcfd0ebe1d7e76952f9e640478050dfe25c14cc89667049d5486660292eb929
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '110'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:23:25 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_settings\":{\"ConsumedCapacityUnits\"\
+        :1,\"Items\":[]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:23:25 GMT
+- request:
+    method: post
+    uri: http://localhost:4567/
+    body:
+      encoding: US-ASCII
+      string: "{\"RequestItems\":{\"hangmanextreme_app_test_settings\":{\"Keys\":[{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.100\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.101\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.102\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.103\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.104\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.105\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.106\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.107\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.108\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.109\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.110\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.111\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.112\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.113\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.114\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.115\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.116\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.117\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.118\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.119\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.120\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.121\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.122\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.123\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.124\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.125\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.126\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.127\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.128\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.129\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.130\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.131\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.132\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.133\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.134\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.135\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.136\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.137\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.138\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.139\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.140\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.141\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.142\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.143\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.144\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.145\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.146\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.147\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.148\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.149\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.150\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.151\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.152\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.153\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.154\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.155\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.156\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.157\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.158\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.159\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.160\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.161\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.162\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.163\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.164\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.165\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.166\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.167\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.168\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.169\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.170\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.171\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.172\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.173\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.174\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.175\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.176\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.177\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.178\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.179\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.180\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.181\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.182\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.183\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.184\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.185\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.186\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.187\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.188\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.189\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.190\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.191\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.192\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.193\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.194\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.195\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.196\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.197\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.198\"}},{\"\
+        HashKeyElement\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.199\"}}]}}}"
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20111205.BatchGetItem
+      Content-Length:
+      - '6864'
+      User-Agent:
+      - aws-sdk-ruby/1.8.5 jruby/1.9.3 java
+      Host:
+      - localhost
+      X-Amz-Date:
+      - 20130327T152325Z
+      X-Amz-Content-Sha256:
+      - !binary |-
+        Mzc2ZTg2MzU3ZDllMzVmODA1NjIwZTBkYTUyMGI4YWYxYjEwMzgyM2IxZTU2
+        MjI1ZTIwMDc2YTM3YzY3MDViNw==
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=1/20130327/us-east-1/dynamodb/aws4_request, SignedHeaders=content-length;content-type;host;user-agent;x-amz-content-sha256;x-amz-date;x-amz-target, Signature=3da095783dd4330baafd8ace9a43f88c5bc3bc46eab278d4ecf64ed2c714e5d7
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ! 'OK '
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '301'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - WEBrick/1.3.1 (Ruby/1.9.3/2013-02-21)
+      Date:
+      - Wed, 27 Mar 2013 15:23:25 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: US-ASCII
+      string: "{\"Responses\":{\"hangmanextreme_app_test_settings\":{\"ConsumedCapacityUnits\"\
+        :1,\"Items\":[{\"id\":{\"S\":\"1542dcec-9a1b-4420-ac86-c55f3ec2a29c.112\"\
+        },\"created_at\":{\"N\":\"1364397804.497\"},\"updated_at\":{\"N\":\"1364397804.504\"\
+        },\"name\":{\"S\":\"shinka_disabled_until\"},\"value\":{\"S\":\"1364397864\"\
+        }}]}},\"UnprocessedKeys\":{}}"
+    http_version:
+  recorded_at: Wed, 27 Mar 2013 15:23:25 GMT
+recorded_with: VCR 2.4.0

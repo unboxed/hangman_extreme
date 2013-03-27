@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Starting a new  game' do
+describe 'Starting a new  game', :vcr => :once do
 
   before :each do
     @current_user = create(:user, uid: 'm2604100', provider: 'mxit')
@@ -79,7 +79,7 @@ describe 'Starting a new  game' do
     page.should have_content("b _ _ _ _ _")
   end
 
-  it "must show ads", :redis => true do
+  it "must show ads" do
     add_key = !ENV.has_key?('SHINKA_AUID')
     ENV['SHINKA_AUID'] = "1" if add_key
     visit '/'

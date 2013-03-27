@@ -137,7 +137,7 @@ describe ApplicationController do
 
   end
 
-  describe "sending stats", :redis => true do
+  describe "sending stats", :vcr => :once do
 
     controller do
       def index

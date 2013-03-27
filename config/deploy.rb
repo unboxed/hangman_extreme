@@ -1,4 +1,3 @@
-require 'torquebox-capistrano-support'
 require "bundler/capistrano"
 require 'airbrake/capistrano'
 default_run_options[:pty] = true # Must be set for the password prompt
@@ -15,10 +14,6 @@ role :app, "41.215.236.134" # This may be the same as your `Web` server
 role :db, "41.215.236.134", :primary => true # This is where Rails migrations will run
 
 after "deploy:restart", "deploy:cleanup"
-
-set :torquebox_home,    '/opt/torquebox/current'
-set :jboss_control_style,    :binscripts
-set :app_ruby_version, "1.9"
 
 set :shared_children, shared_children << 'tmp/sockets'
 

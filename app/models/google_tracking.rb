@@ -1,11 +1,15 @@
-class GoogleTracking < Ohm::Model
-  attribute :user_id
+class GoogleTracking
+  include Dynamoid::Document
+
+  validates_presence_of :user_id
+
+  field :user_id
   index :user_id
-  unique :user_id
-  attribute :initial_visit
-  attribute :previous_session
-  attribute :current_session
-  attribute :last_visit
+  # unique :user_id
+  field :initial_visit
+  field :previous_session
+  field :current_session
+  field :last_visit
 
   def update_tracking
     now = Time.now.to_i
@@ -19,7 +23,7 @@ class GoogleTracking < Ohm::Model
 
   def self.find_or_create_by_user_id(user_id)
     now = Time.now.to_i
-    find(user_id: user_id.to_s).first ||
+    where(user_id: user_id.to_s).first ||
     create(user_id: user_id.to_s,
            current_session: now,
            previous_session: now,

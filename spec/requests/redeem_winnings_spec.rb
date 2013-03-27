@@ -1,7 +1,7 @@
 require 'spec_helper'
 require "#{Rails.root}/app/jobs/issue_airtime_to_users.rb"
 
-describe 'redeem winnings' do
+describe 'redeem winnings', :vcr => :once do
 
   before :each do
     @current_user = create(:user, uid: 'm2604100', provider: 'mxit', prize_points: 100)

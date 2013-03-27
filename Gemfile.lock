@@ -22,10 +22,10 @@ GEM
       activesupport (= 3.2.12)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
-    activerecord-jdbc-adapter (1.2.8)
-    activerecord-jdbcpostgresql-adapter (1.2.7)
-      activerecord-jdbc-adapter (~> 1.2.7)
-      jdbc-postgres (>= 9.1, < 9.3)
+    activerecord-jdbc-adapter (1.2.9)
+    activerecord-jdbcmysql-adapter (1.2.9)
+      activerecord-jdbc-adapter (~> 1.2.9)
+      jdbc-mysql (~> 5.1.0)
     activeresource (3.2.12)
       activemodel (= 3.2.12)
       activesupport (= 3.2.12)
@@ -34,7 +34,7 @@ GEM
       multi_json (~> 1.0)
     addressable (2.3.3)
     aggregate (0.2.2)
-    airbrake (3.1.8)
+    airbrake (3.1.9)
       activesupport
       builder
       json
@@ -44,7 +44,10 @@ GEM
     annotate (2.5.0)
       rake
     arel (3.0.2)
-    blankslate (2.1.2.4)
+    aws-sdk (1.8.5)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
+      uuidtools (~> 2.1)
     builder (3.0.4)
     cancan (1.6.9)
     capistrano (2.14.1)
@@ -69,8 +72,10 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       request_store (~> 1.0.3)
-    edn (1.0.0)
-      parslet (~> 1.4.0)
+    dynamoid (0.6.1)
+      activemodel
+      aws-sdk
+      tzinfo
     em-resolv-replace (1.1.3)
     erubis (2.7.0)
     ethon (0.5.6)
@@ -80,7 +85,6 @@ GEM
     eventmachine (1.0.3-java)
     eventmachine-tail (0.6.4)
       eventmachine
-    excon (0.16.10)
     execjs (1.4.0)
       multi_json (~> 1.0)
     ezcrypto (0.7.2)
@@ -89,7 +93,11 @@ GEM
     factory_girl_rails (4.1.0)
       factory_girl (~> 4.1.0)
       railties (>= 3.0.0)
-    faraday (0.8.6)
+    fake_dynamo (0.1.2)
+      activesupport
+      json
+      sinatra
+    faraday (0.8.7)
       multipart-post (~> 1.1)
     ffi (1.1.5)
     ffi (1.1.5-java)
@@ -102,21 +110,13 @@ GEM
     gyoku (1.0.0)
       builder (>= 2.1.2)
     hashie (1.2.0)
-    heroku (2.33.5)
-      heroku-api (~> 0.3.7)
-      launchy (>= 0.3.2)
-      netrc (~> 0.7.7)
-      rest-client (~> 1.6.1)
-      rubyzip
-    heroku-api (0.3.7)
-      excon (~> 0.16.10)
     highline (1.6.15)
     hike (1.2.1)
     htmlentities (4.3.1)
     httpi (2.0.2)
       rack
     i18n (0.6.4)
-    jdbc-postgres (9.2.1002.1)
+    jdbc-mysql (5.1.24)
     jdbc-sqlite3 (3.7.2)
     journey (1.0.4)
     json (1.7.7)
@@ -143,13 +143,12 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.21)
-    multi_json (1.7.1)
+    multi_json (1.7.2)
     multipart-post (1.2.0)
     mxit_api (0.2.2.pre)
       activesupport (>= 3.0.0)
       i18n (>= 0.5.0)
-    nest (1.1.2)
-      redis
+    mysql2 (0.3.11)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -157,26 +156,24 @@ GEM
     net-ssh (2.6.3)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
-    netrc (0.7.7)
-    newrelic_rpm (3.5.8.72)
-    nokogiri (1.5.7)
-    nokogiri (1.5.7-java)
+    newrelic_rpm (3.6.0.78)
+    nokogiri (1.5.9)
+    nokogiri (1.5.9-java)
     nori (2.0.4)
     oauth (0.4.7)
-    ohm (1.2.0)
-      nest (~> 1.0)
-      redis
-      scrivener (~> 0.0.3)
     omniauth (1.1.3)
       hashie (~> 1.2)
       rack
-    parslet (1.4.0)
-      blankslate (~> 2.0)
-    pg (0.14.1)
     polyglot (0.3.3)
+    puma (2.0.0.b7)
+      rack (>= 1.1, < 2.0)
+    puma (2.0.0.b7-java)
+      rack (>= 1.1, < 2.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
+    rack-protection (1.5.0)
+      rack
     rack-ssl (1.3.3)
       rack
     rack-test (0.6.2)
@@ -196,13 +193,10 @@ GEM
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
-    rake (10.0.3)
+    rake (10.0.4)
     rdoc (3.12.2)
       json (~> 1.4)
-    redis (3.0.3)
-    redis-settings (0.2.2)
-      redis
-    ref (1.0.2)
+    ref (1.0.4)
     remote_syslog (1.6.13)
       em-resolv-replace
       eventmachine (>= 0.12.10, < 1.1)
@@ -211,8 +205,6 @@ GEM
       servolux
       syslog_protocol (~> 0.9.2)
     request_store (1.0.5)
-    rest-client (1.6.7)
-      mime-types (>= 1.16)
     rspec-core (2.12.2)
     rspec-expectations (2.12.1)
       diff-lcs (~> 1.1.3)
@@ -235,7 +227,6 @@ GEM
       nokogiri (>= 1.4.0)
       nori (~> 2.0.3)
       wasabi (~> 3.0.0)
-    scrivener (0.0.3)
     selenium-webdriver (2.27.2)
       childprocess (>= 0.2.5)
       libwebsocket (~> 0.1.3)
@@ -249,6 +240,10 @@ GEM
     simplecov-html (0.7.1)
     simplecov-rcov (0.2.3)
       simplecov (>= 0.4.1)
+    sinatra (1.3.6)
+      rack (~> 1.4)
+      rack-protection (~> 1.3)
+      tilt (~> 1.3, >= 1.3.3)
     spoon (0.0.1)
     spork (1.0.0rc3)
     spork-rails (3.2.1)
@@ -266,44 +261,10 @@ GEM
     therubyrhino (2.0.2)
       therubyrhino_jar (>= 1.7.3)
     therubyrhino_jar (1.7.4)
-    thor (0.17.0)
+    thor (0.18.0)
     tilt (1.3.6)
     timecop (0.5.3)
     tins (0.7.2)
-    torquebox (2.3.0)
-      thor (>= 0.14.6)
-      torquebox-cache (= 2.3.0)
-      torquebox-configure (= 2.3.0)
-      torquebox-core (= 2.3.0)
-      torquebox-messaging (= 2.3.0)
-      torquebox-naming (= 2.3.0)
-      torquebox-rake-support (= 2.3.0)
-      torquebox-security (= 2.3.0)
-      torquebox-stomp (= 2.3.0)
-      torquebox-transactions (= 2.3.0)
-      torquebox-web (= 2.3.0)
-    torquebox-cache (2.3.0-java)
-      torquebox-core (= 2.3.0)
-      torquebox-transactions (= 2.3.0)
-    torquebox-capistrano-support (2.3.0)
-    torquebox-configure (2.3.0-java)
-      blankslate (= 2.1.2.4)
-    torquebox-core (2.3.0-java)
-    torquebox-messaging (2.3.0-java)
-      edn (= 1.0.0)
-      torquebox-core (= 2.3.0)
-      torquebox-transactions (= 2.3.0)
-    torquebox-naming (2.3.0-java)
-    torquebox-rake-support (2.3.0)
-      rake (>= 0.8.7)
-    torquebox-security (2.3.0-java)
-      torquebox-core (= 2.3.0)
-    torquebox-stomp (2.3.0)
-      torquebox-core (= 2.3.0)
-      torquebox-messaging (= 2.3.0)
-    torquebox-transactions (2.3.0)
-      torquebox-core (= 2.3.0)
-    torquebox-web (2.3.0-java)
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
@@ -317,6 +278,7 @@ GEM
       ezcrypto (>= 0.7.2)
       json (>= 1.7.5)
       oauth (>= 0.4.7)
+    uuidtools (2.1.3)
     vcr (2.4.0)
     wasabi (3.0.0)
       httpi (~> 2.0)
@@ -340,31 +302,32 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-jdbcpostgresql-adapter
+  activerecord-jdbcmysql-adapter
   airbrake
   annotate
+  aws-sdk
   cancan
   capistrano
   capybara
   database_cleaner
   draper
+  dynamoid
   factory_girl_rails
+  fake_dynamo
   flog
   gabba
-  heroku
+  jdbc-mysql
   jdbc-sqlite3
   kaminari
   launchy
   librato-metrics
   libv8 (~> 3.11.8)
   mxit_api (>= 0.2.2.pre)
+  mysql2
   newrelic_rpm
-  ohm
   omniauth
-  pg
+  puma (= 2.0.0.b7)
   rails (~> 3.2.1)
-  redis
-  redis-settings
   remote_syslog
   rspec-rails
   savon
@@ -375,8 +338,6 @@ DEPENDENCIES
   therubyracer
   therubyrhino
   timecop
-  torquebox
-  torquebox-capistrano-support
   uglifier (>= 1.0.3)
   uservoice-ruby
   vcr
