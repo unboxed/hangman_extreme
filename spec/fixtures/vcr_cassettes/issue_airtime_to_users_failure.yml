@@ -1,0 +1,181 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://pi.dynalias.net:3088/airtime/?wsdl
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 31 Mar 2013 11:24:42 GMT
+      Server:
+      - Apache
+      Content-Length:
+      - '6607'
+      Content-Type:
+      - text/xml; charset=ISO-8859-1
+    body:
+      encoding: US-ASCII
+      string: |-
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://pi.dynalias.net:3088/airtime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://pi.dynalias.net:3088/airtime/">
+        <types>
+        <xsd:schema targetNamespace="http://pi.dynalias.net:3088/airtime/"
+        >
+         <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+         <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+         <xsd:complexType name="getVoucherIn">
+          <xsd:all>
+           <xsd:element name="user" type="xsd:int" pattern="[1-9][0-9]+"/>
+           <xsd:element name="pass" type="xsd:string" pattern=".+"/>
+           <xsd:element name="refno" type="xsd:string" pattern=".+"/>
+           <xsd:element name="network" type="xsd:string" pattern="(vodacom|mtn|cellc|telkom|worldchat|branson|neotel|worldcall|heita|bela|eskom)"/>
+           <xsd:element name="sellvalue" type="xsd:int" pattern="[1-9][0-9]*"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="getVoucherOut">
+          <xsd:all>
+           <xsd:element name="status" type="xsd:int" pattern="(0|1)"/>
+           <xsd:element name="message" type="xsd:string"/>
+           <xsd:element name="balance" type="xsd:float"/>
+           <xsd:element name="pin" type="xsd:string"/>
+           <xsd:element name="serial" type="xsd:string"/>
+           <xsd:element name="costprice" type="xsd:float"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="voucher">
+          <xsd:all>
+           <xsd:element name="pin" type="xsd:string"/>
+           <xsd:element name="serial" type="xsd:string"/>
+           <xsd:element name="costprice" type="xsd:float"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="vouchers">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:voucher[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="getVouchersIn">
+          <xsd:all>
+           <xsd:element name="user" type="xsd:int" pattern="[1-9][0-9]+"/>
+           <xsd:element name="pass" type="xsd:string" pattern=".+"/>
+           <xsd:element name="refno" type="xsd:string" pattern=".+"/>
+           <xsd:element name="network" type="xsd:string" pattern="(vodacom|mtn|cellc|telkom|worldchat|branson|neotel|worldcall|heita|bela|eskom)"/>
+           <xsd:element name="sellvalue" type="xsd:int" pattern="[1-9][0-9]*"/>
+           <xsd:element name="count" type="xsd:int" pattern="[1-9][0-9]*"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="getVouchersOut">
+          <xsd:all>
+           <xsd:element name="status" type="xsd:int" pattern="(0|1)"/>
+           <xsd:element name="errorcode" type="xsd:string"/>
+           <xsd:element name="message" type="xsd:string"/>
+           <xsd:element name="balance" type="xsd:float"/>
+           <xsd:element name="vouchers" type="tns:vouchers"/>
+          </xsd:all>
+         </xsd:complexType>
+        </xsd:schema>
+        </types>
+        <message name="getVoucherRequest">
+          <part name="request" type="tns:getVoucherIn" /></message>
+        <message name="getVoucherResponse">
+          <part name="reply" type="tns:getVoucherOut" /></message>
+        <message name="getVouchersRequest">
+          <part name="request" type="tns:getVouchersIn" /></message>
+        <message name="getVouchersResponse">
+          <part name="reply" type="tns:getVouchersOut" /></message>
+        <portType name="airtimePortType">
+          <operation name="getVoucher">
+            <documentation>Returns one airtime voucher. 'user' is your user number and 'pass' is your password. 'refno' should be a unique reference number for the request. 'network' is the voucher network and should be one of the following: vodacom, mtn, cellc, telkom, worldchat, branson, neotel, worldcall, heita, bela, eskom. 'sellvalue' is the voucher sell value. 'status' will always contain the result of the request: 1 = success, 0 = failure. 'message' is an extended status message. 'balance' is the remaining balance after the voucher request, regardless of whether the request succeeded or not, assuming it got that far in the request. 'pin', 'serial' and 'costprice' refers to the issued voucher. For sample code, please visit http://pi.dynalias.net:3088/airtime/sample.html</documentation>
+            <input message="tns:getVoucherRequest"/>
+            <output message="tns:getVoucherResponse"/>
+          </operation>
+          <operation name="getVouchers">
+            <documentation>Returns multiple airtime vouchers. 'user' is your user number and 'pass' is your password. 'refno' should be a unique reference number for the request. 'network' is the voucher network and should be one of the following: vodacom, mtn, cellc, telkom, worldchat, branson, neotel, worldcall, heita, bela, eskom. 'sellvalue' is the voucher sell value. 'status' will always contain the result of the request: 1 = success, 0 = failure. 'message' is an extended status message. 'balance' is the remaining balance after the voucher request, regardless of whether the request succeeded or not, assuming it got that far in the request. 'errorcode' is a secondary code describing e.g. why a request failed. 'vouchers' refers to the issued vouchers. For sample code, please visit http://pi.dynalias.net:3088/airtime/sample.html</documentation>
+            <input message="tns:getVouchersRequest"/>
+            <output message="tns:getVouchersResponse"/>
+          </operation>
+        </portType>
+        <binding name="airtimeBinding" type="tns:airtimePortType">
+          <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+          <operation name="getVoucher">
+            <soap:operation soapAction="http://pi.dynalias.net:3088/airtime/getVoucher" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://pi.dynalias.net:3088/airtime/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://pi.dynalias.net:3088/airtime/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="getVouchers">
+            <soap:operation soapAction="http://pi.dynalias.net:3088/airtime/getVouchers" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://pi.dynalias.net:3088/airtime/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://pi.dynalias.net:3088/airtime/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+        </binding>
+        <service name="airtime">
+          <port name="airtimePort" binding="tns:airtimeBinding">
+            <soap:address location="http://pi.dynalias.net:3088/airtime/"/>
+          </port>
+        </service>
+        </definitions>
+    http_version:
+  recorded_at: Sun, 31 Mar 2013 11:24:42 GMT
+- request:
+    method: post
+    uri: http://pi.dynalias.net:3088/airtime/
+    body:
+      encoding: US-ASCII
+      string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?><env:Envelope xmlns:xsd=\"\
+        http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+        \ xmlns:tns=\"http://pi.dynalias.net:3088/airtime/\" xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+        ><env:Body><tns:getVoucher><getVoucherIn><user>3547132</user><pass xsi:nil=\"\
+        true\"/><refno>RW1T20130331T1324</refno><network>vodacom</network><sellvalue>5</sellvalue></getVoucherIn></tns:getVoucher></env:Body></env:Envelope>"
+    headers:
+      Soapaction:
+      - "\"http://pi.dynalias.net:3088/airtime/getVoucher\""
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Content-Length:
+      - '476'
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 31 Mar 2013 11:24:42 GMT
+      Server:
+      - Apache
+      X-Soap-Server:
+      - NuSOAP/0.7.3 (1.114)
+      Content-Length:
+      - '786'
+      Content-Type:
+      - text/xml; charset=ISO-8859-1
+    body:
+      encoding: US-ASCII
+      string: "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><SOAP-ENV:Envelope xmlns:SOAP-ENV=\"\
+        http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"\
+        \ xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:SOAP-ENC=\"\
+        http://schemas.xmlsoap.org/soap/encoding/\" xmlns:tns=\"http://pi.dynalias.net:3088/airtime/\"\
+        ><SOAP-ENV:Body><ns1:getVoucherResponse xmlns:ns1=\"http://pi.dynalias.net:3088/airtime/\"\
+        ><reply xsi:type=\"tns:getVoucherOut\"><status xsi:type=\"xsd:int\">0</status><message\
+        \ xsi:type=\"xsd:string\">pass not defined or invalid</message><balance xsi:type=\"\
+        xsd:float\">0</balance><pin xsi:type=\"xsd:string\">-</pin><serial xsi:type=\"\
+        xsd:string\">-</serial><costprice xsi:type=\"xsd:float\">0</costprice></reply></ns1:getVoucherResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>"
+    http_version:
+  recorded_at: Sun, 31 Mar 2013 11:24:43 GMT
+recorded_with: VCR 2.4.0
