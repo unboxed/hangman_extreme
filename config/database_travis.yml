@@ -1,5 +1,5 @@
 test:
-  adapter: <%= ENV['DB_ADAPTER'] || 'mysql' %>
+  adapter: <%= ENV['DB_ADAPTER'] || 'mysql2' %>
   database: hangnman_extreme
   pool: 5
   timeout: 5000

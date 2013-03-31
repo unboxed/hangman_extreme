@@ -11,6 +11,7 @@
 /.rspec
 /.powrc
 /.elasticbeanstalk
+/.ebextensions
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
