@@ -1,12 +1,19 @@
 require 'spec_helper'
 
-describe GoogleTracking, :vcr => :once do
+describe GoogleTracking do
 
   context "Validations" do
 
+    it "wont accept no user_id" do
+      tracking = GoogleTracking.new
+      tracking.should_not be_valid
+      tracking.errors[:user_id].should_not be_empty
+    end
+
     it "must have a user_id" do
-      GoogleTracking.new.should have(1).errors_on(:user_id)
-      GoogleTracking.new(user_id: 1).should have(0).errors_on(:user_id)
+      tracking = GoogleTracking.new(user_id: 1)
+      tracking.should be_valid
+      tracking.errors[:user_id].should be_empty
     end
 
   end
@@ -18,7 +25,22 @@ describe GoogleTracking, :vcr => :once do
     end
 
     it "must work" do
-      @tracking.update_tracking
+      Timecop.freeze(Time.current) do
+        @tracking.update_tracking.should be_true
+        @tracking.update_tracking.should be_false
+      end
+    end
+
+  end
+
+  describe "utma" do
+
+    before :each do
+      @tracking = GoogleTracking.new(user_id: rand(99))
+    end
+
+    it "must work" do
+      @tracking.utma
     end
 
   end

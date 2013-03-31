@@ -92,10 +92,10 @@ describe Winner do
           it "must not select from players that have already won in another category" do
             random_players = create_list(:user, 5,
                                          "#{period}_wins" => required_wins,
-                                         daily_streak: 0)
+                                         "#{period}_streak" => 0)
             create_list(:user, 5,
                         "#{period}_wins" => required_wins,
-                        daily_streak: 10 )
+                        "#{period}_streak" => 10 )
             Winner.create_winners_for_category(period: period, score_by: "streak", winnings: [10] * 5)
             Winner.create_winners_for_category(period: period, score_by: "random", winnings: [10] * 5)
             Winner.period(period).reason("random").count.should == 5

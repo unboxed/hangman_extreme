@@ -7,7 +7,8 @@ module App
       def run
         # perform work here
         if RedeemWinning.pending_airtime.any?
-          client = Savon.client(wsdl: api_url, open_timeout: 180, read_timeout: 180)
+          client = Savon.client(wsdl: api_url, open_timeout: 180, read_timeout: 180,
+                                logger: Rails.logger, log_level: Rails.configuration.log_level, log: false)
           RedeemWinning.pending_airtime.each do |redeem_winning|
             freepaid_refno = generate_refno(redeem_winning)
             response = client.call(:get_voucher, message: {get_voucher_in: {

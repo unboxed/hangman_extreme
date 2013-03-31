@@ -1,16 +1,12 @@
 require 'spec_helper'
 require "#{Rails.root}/app/jobs/issue_airtime_to_users.rb"
 
-describe 'redeem winnings', :vcr => :once do
+describe 'redeem winnings', :shinka_vcr => true, :redis => true do
 
   before :each do
     @current_user = create(:user, uid: 'm2604100', provider: 'mxit', prize_points: 100)
     set_mxit_headers('m2604100') # set mxit user
-    stub_shinka_request # stub shinka request
-    stub_google_tracking # stub google tracking
     stub_mxit_oauth
-    ENV['FREEPAID_USER'] ||= '3547132'
-    ENV['FREEPAID_PASS'] ||= 'hellounb0xed'
   end
 
   it "must show users redeem winnings link" do
@@ -59,23 +55,26 @@ describe 'redeem winnings', :vcr => :once do
 
     values.each do |value|
       it "must allow to redeem prize points for #{provider} R#{value / 100} airtime" do
-        stub_mxit_money
-        @current_user.update_attributes(:prize_points => value + 1)
-        visit '/'
-        click_link('redeem')
-        page.should have_content("#{value + 1} prize points")
-        click_link("#{provider}_airtime")
-        page.should have_content("R#{value / 100} #{provider.to_s.gsub("_"," ")} airtime")
-        click_button('redeem')
-        page.should have_content("1 prize points")
-        click_link('airtime_vouchers')
-        VCR.use_cassette("freepaid_requests_#{provider}_#{value}") do
+        VCR.use_cassette("redeem_prize_points#{provider}",
+                         :record => :once,
+                         :erb => true,
+                         :match_requests_on => [:uri,:method]) do
+          stub_mxit_money
+          @current_user.update_attributes(:prize_points => value + 1)
+          visit '/'
+          click_link('redeem')
+          page.should have_content("#{value + 1} prize points")
+          click_link("#{provider}_airtime")
+          page.should have_content("R#{value / 100} #{provider.to_s.gsub("_"," ")} airtime")
+          click_button('redeem')
+          page.should have_content("1 prize points")
+          click_link('airtime_vouchers')
           App::Jobs::IssueAirtimeToUsers.new.run
+          visit '/'
+          click_link('redeem')
+          click_link('airtime_vouchers')
+          page.should have_content("R#{value / 100}")
         end
-        visit '/'
-        click_link('redeem')
-        click_link('airtime_vouchers')
-        page.should have_content("R#{value / 100}")
       end
     end
 

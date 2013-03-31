@@ -1,0 +1,214 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://ox-d.shinka.sh/ma/1.0/arj?auid=<%= ENV['SHINKA_AUID'] || 0 %>&c.age=29&c.gender=male
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla Compatible/5.0
+      X-Forwarded-For:
+      - 127.0.0.1
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Vary:
+      - Accept
+      Set-Cookie:
+      - OX_u=226484af-3921-f198-abe0-8b465bd29771_a_1364635112; Version=1; Expires=Sun, 30-Mar-2014 09:18:33 GMT; Max-Age=31536000; Path=/
+      Server:
+      - MochiWeb/1.1 WebMachine/1.9.2 (someone had painted it blue)
+      Pragma:
+      - no-cache
+      P3p:
+      - CP="CUR ADM OUR NOR STA NID"
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Date:
+      - Sat, 30 Mar 2013 09:18:33 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '3009'
+      Cache-Control:
+      - private, max-age=0, no-cache
+      Access-Control-Allow-Origin:
+      - "*"
+      Connection:
+      - keep-alive
+    body:
+      encoding: US-ASCII
+      string: |
+        {"ads":
+         {
+          "version": 1,
+          "count": 1,
+          "ad": [
+                {
+                 "adunitid":245774,
+                 "adid":914031,
+                 "type":"image",
+                 "html":"<a href='http://ox-d.shinka.sh/ma/1.0/rc?ai=226484af-3921-f198-abe0-8b465bd29771&ts=1fHNpZD00ODQ5NnxyYWlkPTJlYjZkMDEwLWM5ZjYtNDllZS1iOWI4LWYwYTlmODY0MGUzOHxhdWlkPTI0NTc3NHxhaWQ9OTE0MDMxfHB1Yj0zNDM1OHxsaWQ9NTQzMzMwfHU9MXx0PTl8cmlkPTEzNTAyZTE0LWMyNWMtNGIwNy04YzhiLTM5YjE1MTc0NDdjY3xvaWQ9MTcxMDA1fGJtPUJVWUlORy5OT05HVUFSQU5URUVEfHBjPVpBUnxwPTEwMDB8YWM9WkFSfHBtPVBSSUNJTkcuQ1BNfHJ0PTEzNjQ2MzUxMTN8cHI9MTAwMHxhZHY9MjczMjI' target='_blank'><img src='http://mad-adz.com/pub_impression.php?u=121&c=69&cb=VUMxCDQJdB' height='50' width='320' border='0' alt='Click here to view!'></a><div id='beacon_34638019' style='position: absolute; left: 0px; top: 0px; visibility: hidden;'><img src='http://ox-d.shinka.sh/ma/1.0/ri?ai=226484af-3921-f198-abe0-8b465bd29771&ts=1fHNpZD00ODQ5NnxyYWlkPTJlYjZkMDEwLWM5ZjYtNDllZS1iOWI4LWYwYTlmODY0MGUzOHxhdWlkPTI0NTc3NHxhaWQ9OTE0MDMxfHB1Yj0zNDM1OHxsaWQ9NTQzMzMwfHU9MXx0PTl8cmlkPTEzNTAyZTE0LWMyNWMtNGIwNy04YzhiLTM5YjE1MTc0NDdjY3xvaWQ9MTcxMDA1fGJtPUJVWUlORy5OT05HVUFSQU5URUVEfHBjPVpBUnxwPTEwMDB8YWM9WkFSfHBtPVBSSUNJTkcuQ1BNfHJ0PTEzNjQ2MzUxMTN8cHI9MTAwMHxhZHY9MjczMjI&cb=34638019'/></div>\n",
+                 "is_fallback":0,
+                 "creative":[
+                   {
+                     "width":"320",
+                     "height":"50",
+                     "alt":"Click here to view!",
+                     "target":"_blank",
+                     "mime":"application/octet-stream",
+                     "media": "http://mad-adz.com/pub_impression.php?u=121&c=69&cb=VUMxCDQJdB",
+                     "tracking":{
+                       "impression":"http://ox-d.shinka.sh/ma/1.0/ri?ai=226484af-3921-f198-abe0-8b465bd29771&ts=1fHNpZD00ODQ5NnxyYWlkPTJlYjZkMDEwLWM5ZjYtNDllZS1iOWI4LWYwYTlmODY0MGUzOHxhdWlkPTI0NTc3NHxhaWQ9OTE0MDMxfHB1Yj0zNDM1OHxsaWQ9NTQzMzMwfHU9MXx0PTl8cmlkPTEzNTAyZTE0LWMyNWMtNGIwNy04YzhiLTM5YjE1MTc0NDdjY3xvaWQ9MTcxMDA1fGJtPUJVWUlORy5OT05HVUFSQU5URUVEfHBjPVpBUnxwPTEwMDB8YWM9WkFSfHBtPVBSSUNJTkcuQ1BNfHJ0PTEzNjQ2MzUxMTN8cHI9MTAwMHxhZHY9MjczMjI&cb=34638019",
+                       "inview":"http://ox-d.shinka.sh/ma/1.0/rvi?ai=226484af-3921-f198-abe0-8b465bd29771&ts=1fHNpZD00ODQ5NnxyYWlkPTJlYjZkMDEwLWM5ZjYtNDllZS1iOWI4LWYwYTlmODY0MGUzOHxhdWlkPTI0NTc3NHxhaWQ9OTE0MDMxfHB1Yj0zNDM1OHxsaWQ9NTQzMzMwfHU9MXx0PTl8cmlkPTEzNTAyZTE0LWMyNWMtNGIwNy04YzhiLTM5YjE1MTc0NDdjY3xvaWQ9MTcxMDA1fGJtPUJVWUlORy5OT05HVUFSQU5URUVEfHBjPVpBUnxwPTEwMDB8YWM9WkFSfHBtPVBSSUNJTkcuQ1BNfHJ0PTEzNjQ2MzUxMTN8cHI9MTAwMHxhZHY9MjczMjI&cb=34638019",
+                       "click":"http://ox-d.shinka.sh/ma/1.0/rc?ai=226484af-3921-f198-abe0-8b465bd29771&ts=1fHNpZD00ODQ5NnxyYWlkPTJlYjZkMDEwLWM5ZjYtNDllZS1iOWI4LWYwYTlmODY0MGUzOHxhdWlkPTI0NTc3NHxhaWQ9OTE0MDMxfHB1Yj0zNDM1OHxsaWQ9NTQzMzMwfHU9MXx0PTl8cmlkPTEzNTAyZTE0LWMyNWMtNGIwNy04YzhiLTM5YjE1MTc0NDdjY3xvaWQ9MTcxMDA1fGJtPUJVWUlORy5OT05HVUFSQU5URUVEfHBjPVpBUnxwPTEwMDB8YWM9WkFSfHBtPVBSSUNJTkcuQ1BNfHJ0PTEzNjQ2MzUxMTN8cHI9MTAwMHxhZHY9MjczMjI"
+                     }
+                   }
+                 ]
+                }
+          ]
+         }
+        }
+    http_version:
+  recorded_at: Sat, 30 Mar 2013 09:18:34 GMT
+- request:
+    method: get
+    uri: http://ox-d.shinka.sh/ma/1.0/arj?auid=<%= ENV['SHINKA_AUID'] || 0 %>&c.age=29&c.gender=male
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla Compatible/5.0
+      X-Forwarded-For:
+      - 127.0.0.1
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Vary:
+      - Accept
+      Set-Cookie:
+      - OX_u=550095f2-01f0-ef88-87a7-1e15c62361ed_a_1364635113; Version=1; Expires=Sun, 30-Mar-2014 09:18:34 GMT; Max-Age=31536000; Path=/
+      Server:
+      - MochiWeb/1.1 WebMachine/1.9.2 (someone had painted it blue)
+      Pragma:
+      - no-cache
+      P3p:
+      - CP="CUR ADM OUR NOR STA NID"
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Date:
+      - Sat, 30 Mar 2013 09:18:34 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '3009'
+      Cache-Control:
+      - private, max-age=0, no-cache
+      Access-Control-Allow-Origin:
+      - "*"
+      Connection:
+      - keep-alive
+    body:
+      encoding: US-ASCII
+      string: |
+        {"ads":
+         {
+          "version": 1,
+          "count": 1,
+          "ad": [
+                {
+                 "adunitid":245774,
+                 "adid":914031,
+                 "type":"image",
+                 "html":"<a href='http://ox-d.shinka.sh/ma/1.0/rc?ai=550095f2-01f0-ef88-87a7-1e15c62361ed&ts=1fHNpZD00ODQ5NnxyYWlkPWYxZGJjMmI4LWYyYzItNGE5NS1hYTljLTAyZGFjZjFhMmVmY3xhdWlkPTI0NTc3NHxhaWQ9OTE0MDMxfHB1Yj0zNDM1OHxsaWQ9NTQzMzMwfHU9MXx0PTl8cmlkPWQzM2JiNGRmLTM0Y2MtNGE5Ny04ZGNhLWZkMGE4NWVhMjhjMHxvaWQ9MTcxMDA1fGJtPUJVWUlORy5OT05HVUFSQU5URUVEfHBjPVpBUnxwPTEwMDB8YWM9WkFSfHBtPVBSSUNJTkcuQ1BNfHJ0PTEzNjQ2MzUxMTR8cHI9MTAwMHxhZHY9MjczMjI' target='_blank'><img src='http://mad-adz.com/pub_impression.php?u=121&c=69&cb=28oE35WzY2' height='50' width='320' border='0' alt='Click here to view!'></a><div id='beacon_71231466' style='position: absolute; left: 0px; top: 0px; visibility: hidden;'><img src='http://ox-d.shinka.sh/ma/1.0/ri?ai=550095f2-01f0-ef88-87a7-1e15c62361ed&ts=1fHNpZD00ODQ5NnxyYWlkPWYxZGJjMmI4LWYyYzItNGE5NS1hYTljLTAyZGFjZjFhMmVmY3xhdWlkPTI0NTc3NHxhaWQ9OTE0MDMxfHB1Yj0zNDM1OHxsaWQ9NTQzMzMwfHU9MXx0PTl8cmlkPWQzM2JiNGRmLTM0Y2MtNGE5Ny04ZGNhLWZkMGE4NWVhMjhjMHxvaWQ9MTcxMDA1fGJtPUJVWUlORy5OT05HVUFSQU5URUVEfHBjPVpBUnxwPTEwMDB8YWM9WkFSfHBtPVBSSUNJTkcuQ1BNfHJ0PTEzNjQ2MzUxMTR8cHI9MTAwMHxhZHY9MjczMjI&cb=71231466'/></div>\n",
+                 "is_fallback":0,
+                 "creative":[
+                   {
+                     "width":"320",
+                     "height":"50",
+                     "alt":"Click here to view!",
+                     "target":"_blank",
+                     "mime":"application/octet-stream",
+                     "media": "http://mad-adz.com/pub_impression.php?u=121&c=69&cb=28oE35WzY2",
+                     "tracking":{
+                       "impression":"http://ox-d.shinka.sh/ma/1.0/ri?ai=550095f2-01f0-ef88-87a7-1e15c62361ed&ts=1fHNpZD00ODQ5NnxyYWlkPWYxZGJjMmI4LWYyYzItNGE5NS1hYTljLTAyZGFjZjFhMmVmY3xhdWlkPTI0NTc3NHxhaWQ9OTE0MDMxfHB1Yj0zNDM1OHxsaWQ9NTQzMzMwfHU9MXx0PTl8cmlkPWQzM2JiNGRmLTM0Y2MtNGE5Ny04ZGNhLWZkMGE4NWVhMjhjMHxvaWQ9MTcxMDA1fGJtPUJVWUlORy5OT05HVUFSQU5URUVEfHBjPVpBUnxwPTEwMDB8YWM9WkFSfHBtPVBSSUNJTkcuQ1BNfHJ0PTEzNjQ2MzUxMTR8cHI9MTAwMHxhZHY9MjczMjI&cb=71231466",
+                       "inview":"http://ox-d.shinka.sh/ma/1.0/rvi?ai=550095f2-01f0-ef88-87a7-1e15c62361ed&ts=1fHNpZD00ODQ5NnxyYWlkPWYxZGJjMmI4LWYyYzItNGE5NS1hYTljLTAyZGFjZjFhMmVmY3xhdWlkPTI0NTc3NHxhaWQ9OTE0MDMxfHB1Yj0zNDM1OHxsaWQ9NTQzMzMwfHU9MXx0PTl8cmlkPWQzM2JiNGRmLTM0Y2MtNGE5Ny04ZGNhLWZkMGE4NWVhMjhjMHxvaWQ9MTcxMDA1fGJtPUJVWUlORy5OT05HVUFSQU5URUVEfHBjPVpBUnxwPTEwMDB8YWM9WkFSfHBtPVBSSUNJTkcuQ1BNfHJ0PTEzNjQ2MzUxMTR8cHI9MTAwMHxhZHY9MjczMjI&cb=71231466",
+                       "click":"http://ox-d.shinka.sh/ma/1.0/rc?ai=550095f2-01f0-ef88-87a7-1e15c62361ed&ts=1fHNpZD00ODQ5NnxyYWlkPWYxZGJjMmI4LWYyYzItNGE5NS1hYTljLTAyZGFjZjFhMmVmY3xhdWlkPTI0NTc3NHxhaWQ9OTE0MDMxfHB1Yj0zNDM1OHxsaWQ9NTQzMzMwfHU9MXx0PTl8cmlkPWQzM2JiNGRmLTM0Y2MtNGE5Ny04ZGNhLWZkMGE4NWVhMjhjMHxvaWQ9MTcxMDA1fGJtPUJVWUlORy5OT05HVUFSQU5URUVEfHBjPVpBUnxwPTEwMDB8YWM9WkFSfHBtPVBSSUNJTkcuQ1BNfHJ0PTEzNjQ2MzUxMTR8cHI9MTAwMHxhZHY9MjczMjI"
+                     }
+                   }
+                 ]
+                }
+          ]
+         }
+        }
+    http_version:
+  recorded_at: Sat, 30 Mar 2013 09:18:34 GMT
+- request:
+    method: get
+    uri: http://www.google-analytics.com/__utm.gif?utmac=<%= ENV['GA_TRACKING_CODE'] || 0  %>&utmcc=__utma=__utma=1.100145214523.1364635080.1364635080.1364635080.15;%2B__utmz=1.1364635080.1.1.utmcsr=(direct)%7Cutmccn=(direct)%7Cutmcmd=(none);;%2B__utmz=1.1364635115.1.1.utmcsr=(direct)%7Cutmccn=(direct)%7Cutmcmd=(none);&utmcs=UTF-8&utmdt=games%20index&utme=8(Gender*Age*South%20Africa*5!Provider)9(male*29*Kraaifontein*5!mxit)11(1*1*1*5!1)&utmhid=1&utmhn=www.example.com&utmip=127.0.0.0&utmn=3366284906&utmp=/&utmr=&utmul=en&utmwv=4.4sh
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Mxit%20iphone
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "RGF0ZQ==":
+      - !binary |-
+        VGh1LCAyOCBNYXIgMjAxMyAxOTowNjo1OCBHTVQ=
+      Content-Length:
+      - !binary |-
+        MzU=
+      X-Content-Type-Options:
+      - !binary |-
+        bm9zbmlmZg==
+      !binary "UHJhZ21h":
+      - !binary |-
+        bm8tY2FjaGU=
+      !binary "RXhwaXJlcw==":
+      - !binary |-
+        V2VkLCAxOSBBcHIgMjAwMCAxMTo0MzowMCBHTVQ=
+      Last-Modified:
+      - !binary |-
+        V2VkLCAyMSBKYW4gMjAwNCAxOTo1MTozMCBHTVQ=
+      Content-Type:
+      - !binary |-
+        aW1hZ2UvZ2lm
+      !binary "QWdl":
+      - !binary |-
+        MTM3NDk4
+      !binary "U2VydmVy":
+      - !binary |-
+        R0ZFLzIuMA==
+      Cache-Control:
+      - !binary |-
+        cHJpdmF0ZSwgbm8tY2FjaGUsIG5vLWNhY2hlPVNldC1Db29raWUsIHByb3h5
+        LXJldmFsaWRhdGU=
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        a2VlcC1hbGl2ZQ==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        R0lGODlhAQABAID/AP///wAAACwAAAAAAQABAAACAkQBADs=
+    http_version:
+  recorded_at: Sat, 30 Mar 2013 09:18:36 GMT
+recorded_with: VCR 2.4.0

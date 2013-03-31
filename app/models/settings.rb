@@ -1,15 +1,18 @@
-class Settings
-  include Dynamoid::Document
+class Settings < Ohm::Model
+  include Ohm::Timestamps
+  include Ohm::DataTypes
 
-  validates_presence_of :name
-
-  field :name
+  attribute :name
   index :name
-  field :value
+  unique :name
+  attribute :value
 
+  def validate
+    assert_present :name
+  end
 
   def self.shinka_disabled_until_setting
-    where(name: 'shinka_disabled_until').try(:first) || new(name: 'shinka_disabled_until', value: 0)
+    find(name: 'shinka_disabled_until').first || create(name: 'shinka_disabled_until', value: 0)
   end
 
   def self.shinka_disabled_until
@@ -17,11 +20,11 @@ class Settings
   end
 
   def self.shinka_disabled_until=(v)
-    shinka_disabled_until_setting.update_attribute(:value,v.to_i)
+    shinka_disabled_until_setting.update(:value => v.to_i)
   end
 
   def self.ga_tracking_disabled_untill_setting
-    where(name: 'ga_tracking_disabled_until').try(:first) || new(name: 'ga_tracking_disabled_until', value: 0)
+    find(name: 'ga_tracking_disabled_until').first || create(name: 'ga_tracking_disabled_until', value: 0)
   end
 
   def self.ga_tracking_disabled_until
@@ -29,7 +32,7 @@ class Settings
   end
 
   def self.ga_tracking_disabled_until=(v)
-    ga_tracking_disabled_untill_setting.update_attribute(:value,v.to_i)
+    ga_tracking_disabled_untill_setting.update(:value => v.to_i)
   end
 
 end

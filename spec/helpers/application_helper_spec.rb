@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ApplicationHelper do
 
-  context "shinka_ads_enabled?", :vcr => :once do
+  context "shinka_ads_enabled?", :redis => true do
 
     it "wont work if shinka_auid is blank" do
       helper.stub!(:shinka_auid).and_return(nil)
@@ -34,7 +34,7 @@ describe ApplicationHelper do
 
   end
 
-  context "shinka_ad", :vcr => :once do
+  context "shinka_ad" do
 
     before :each do
       request = mock("request", env: {"HTTP_X_FORWARDED_FOR" => "127.0.0.1"})
@@ -89,9 +89,8 @@ describe ApplicationHelper do
 
   context "mxit_authorise_link" do
 
-    it "should work" do
-      helper.mxit_authorise_link("name", state: "testing").should ==
-        "<a href=\"http://test.host/authorize?redirect_uri=http%3A%2F%2Ftest.host%2Fusers%2Fmxit_oauth&amp;response_type=code&amp;scope=profile%2Fpublic+profile%2Fprivate&amp;state=testing\">name</a>"
+    it "must work" do
+      helper.mxit_authorise_link("name", state: "testing")
     end
 
   end

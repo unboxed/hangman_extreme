@@ -1,12 +1,10 @@
 require 'spec_helper'
 
-describe 'users' do
+describe 'users', :shinka_vcr => true, :redis => true do
 
   before :each do
     @current_user = create(:user, uid: 'm2604100', provider: 'mxit')
     set_mxit_headers('m2604100') # set mxit user
-    stub_shinka_request # stub shinka request
-    stub_google_tracking # stub google tracking
   end
 
   it "must show users rating" do

@@ -12,13 +12,10 @@ describe App::Jobs::IssueAirtimeToUsers do
 
     context "success" do
 
-      before :all do
-        ENV['FREEPAID_USER'] ||= '3547132'
-        ENV['FREEPAID_PASS'] ||= 'hellounb0xed'
-      end
-
       before :each do
-        VCR.use_cassette('freepaid') do
+        VCR.use_cassette("issue_airtime_to_users",
+                         :record => :once,
+                         :erb => true) do
           App::Jobs::IssueAirtimeToUsers.new.run
         end
         @airtime_voucher = AirtimeVoucher.last
@@ -37,7 +34,7 @@ describe App::Jobs::IssueAirtimeToUsers do
       end
 
       it "must set the pin" do
-        @airtime_voucher.pin.should == "158293554197"
+        @airtime_voucher.pin.should match(/\A[0-9]{11,13}\z/)
       end
 
       it "must set redeem_winning" do
@@ -57,16 +54,16 @@ describe App::Jobs::IssueAirtimeToUsers do
 
     context "failure" do
 
-      before :all do
-        ENV['FREEPAID_USER'] ||= '3547132'
-        ENV['FREEPAID_PASS'] = nil
-      end
-
       before :each do
         Airbrake.should_receive(:notify_or_ignore).with(kind_of(Exception))
-        VCR.use_cassette('freepaid_fail') do
+        @old_pass, ENV['FREEPAID_PASS'] = ENV['FREEPAID_PASS'], nil
+        VCR.use_cassette("issue_airtime_to_users_failure",
+                        :record => :once,
+                        :erb => true,
+                        :match_requests_on => [:uri,:method]) do
           App::Jobs::IssueAirtimeToUsers.new.run
         end
+        ENV['FREEPAID_PASS'] = @old_pass
         @airtime_voucher = AirtimeVoucher.last
       end
 

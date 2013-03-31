@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :check_server_status, :load_mxit_user, :load_facebook_user, :check_mxit_input_for_redirect
+  before_filter :load_mxit_user, :load_facebook_user, :check_mxit_input_for_redirect
   after_filter :send_stats
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -46,9 +46,8 @@ class ApplicationController < ActionController::Base
         end
       rescue Exception => e
         ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
-        Settings.ga_tracking_disabled_until = 20.minutes.from_now # disable for a 20 minutes
-        # ignore errors
-        raise if Rails.env.test?
+        Settings.ga_tracking_disabled_until = 20.minutes.from_now# disable for a 20 minutes
+        raise e unless Rails.env.production?
       end
     end
   end
@@ -108,11 +107,6 @@ class ApplicationController < ActionController::Base
       when 'airtime vouchers'
         redirect_to(winners_path) unless params[:controller] == 'airtime_vouchers'
     end
-    status != 302
-  end
-
-  def check_server_status
-    redirect_to(server_status_path) if ENV['DATABASE_URL']
     status != 302
   end
 

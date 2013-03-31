@@ -8,7 +8,7 @@ module ApplicationHelper
     creative = ad["creative"].first
     tracking = creative["tracking"]
     alt = creative["alt"]
-    beacon = "<div style='position: absolute; left: 0px; top: 0px; visibility: hidden;'>"
+    beacon = "<div class='beacon' style='position: absolute; left: 0px; top: 0px; visibility: hidden;'>"
     beacon << "<img src='#{tracking['impression']}' alt=\"\" height=\"1\" width=\"1\"/>"
     beacon << "</div>"
     if alt.blank? || alt.include?("http")
@@ -30,6 +30,7 @@ module ApplicationHelper
 
   def get_shinka_ad
     begin
+      Rails.logger.info "Get Shinka Ad"
       Timeout::timeout(5) do
         headers = {"User-Agent" => "Mozilla Compatible/5.0 #{env['HTTP_USER_AGENT']}",
                    "X-FORWARDED-FOR" => request_ip_address}

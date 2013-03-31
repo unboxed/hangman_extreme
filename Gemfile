@@ -9,9 +9,12 @@ end
 platforms :ruby do
   gem 'mysql2'
 end
-gem 'aws-sdk'
-gem 'dynamoid'
+gem 'ohm'
+gem 'ohm-contrib', :require => 'ohm/contrib'
 
+platforms :jruby do
+  gem 'jruby-openssl'
+end
 gem 'cancan'
 gem 'omniauth'
 gem 'kaminari'
@@ -52,15 +55,16 @@ group :development, :test do
   gem 'annotate'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'fake_dynamo'
 end
 
 group :test do
   platforms :jruby do
     gem 'jdbc-sqlite3', :require => false
+    gem 'activerecord-jdbcpostgresql-adapter', :require => false
   end
   platforms :ruby do
     gem 'sqlite3'
+    gem 'pg'
   end
   gem 'capybara'
   gem 'database_cleaner'

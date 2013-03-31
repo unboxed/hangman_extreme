@@ -1,0 +1,251 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://uv.uservoice.com/api/v1/forums.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Client:
+      - uservoice-ruby-0.0.11
+      User-Agent:
+      - OAuth gem v0.4.7
+      Authorization:
+      - OAuth oauth_consumer_key="<%= ENV['UV_API_KEY'] || 0 %>", oauth_nonce="VkNSUvva06sfixc7roToqFGc09S5q25ETybb1kzY", oauth_signature="5%2BnBqRYEN%2BOVsyMLtdEUYgsstyU%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1364725127", oauth_version="1.0"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.2.1
+      Date:
+      - Sun, 31 Mar 2013 10:18:52 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '602'
+      Connection:
+      - keep-alive
+      Status:
+      - 200 OK
+      X-Runtime:
+      - '88'
+      Etag:
+      - "\"a2891ea6289a0ec3769aa468fedd7303\""
+      P3p:
+      - CP="ALL DSP COR CURa ADMa DEVa OUR IND COM NAV"
+      Cache-Control:
+      - must-revalidate, private, max-age=0
+      X-Rack-Cache:
+      - miss
+    body:
+      encoding: US-ASCII
+      string: "{\"response_data\":{\"page\":1,\"per_page\":10,\"total_records\":1,\"\
+        filter\":\"all\",\"sort\":\"newest\"},\"forums\":[{\"url\":\"http://uv.uservouce.com/forums/179656-general\"\
+        ,\"id\":179656,\"name\":\"General\",\"welcome\":null,\"topics\":[{\"id\":179656,\"\
+        prompt\":\"I suggest you ...\",\"example\":\"Enter your idea\",\"votes_allowed\"\
+        :10,\"suggestions_count\":238,\"open_suggestions_count\":23,\"closed_at\"\
+        :null,\"created_at\":\"2012/10/10 11:19:55 +0000\",\"updated_at\":\"2012/10/10\
+        \ 11:19:55 +0000\"}],\"private\":false,\"anonymous_access\":false,\"suggestions_count\"\
+        :23,\"created_at\":\"2012/10/10 11:19:55 +0000\",\"updated_at\":\"2012/10/10\
+        \ 11:19:55 +0000\"}]}"
+    http_version:
+  recorded_at: Sun, 31 Mar 2013 10:18:54 GMT
+- request:
+    method: post
+    uri: https://uv.uservoice.com/oauth/request_token
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept:
+      - application/json
+      Api-Client:
+      - uservoice-ruby-0.0.11
+      User-Agent:
+      - OAuth gem v0.4.7
+      Content-Length:
+      - '0'
+      Authorization:
+      - OAuth oauth_callback="oob", oauth_consumer_key="<%= ENV['UV_API_KEY'] || 0 %>", oauth_nonce="yrp0pVA99EvIAH6EXD8Z7s2W9JEMHXNaVr6YQcCSbLo", oauth_signature="aoU2vv6RWIShskyMeZTs%2FC%2FG840%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1364725134", oauth_version="1.0"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.2.1
+      Date:
+      - Sun, 31 Mar 2013 10:18:56 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Content-Length:
+      - '122'
+      Connection:
+      - keep-alive
+      Status:
+      - 200 OK
+      X-Runtime:
+      - '72'
+      Etag:
+      - "\"cf2aaea822b271de9b440aed4b6e2bd9\""
+      Cache-Control:
+      - private, max-age=0, must-revalidate
+      P3p:
+      - CP="ALL DSP COR CURa ADMa DEVa OUR IND COM NAV"
+      X-Rack-Cache:
+      - invalidate, pass
+    body:
+      encoding: US-ASCII
+      string: oauth_token=SQWJEX1FVq6tqUdanogWyQ&oauth_token_secret=ALq2lnR8nlt1Oti4tZ3XoWJRgEgxRgOOatNCfk&oauth_callback_confirmed=true
+    http_version:
+  recorded_at: Sun, 31 Mar 2013 10:18:58 GMT
+- request:
+    method: post
+    uri: https://uv.uservoice.com/api/v1/users/login_as.json
+    body:
+      encoding: US-ASCII
+      string: "{\"user\":{\"email\":\"m2604100@mxit.im\"},\"request_token\":\"SQWJEX1FVq6tqUdanogWyQ\"\
+        }"
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Client:
+      - uservoice-ruby-0.0.11
+      User-Agent:
+      - OAuth gem v0.4.7
+      Content-Length:
+      - '78'
+      Authorization:
+      - OAuth oauth_body_hash="KVWRbOvftET8HONQGxC1aLKbf5A%3D", oauth_consumer_key="<%= ENV['UV_API_KEY'] || 0 %>", oauth_nonce="j0MzGpdsmvDjW1LqDw8mbRBFCPTeGm80JLq33SW6BY", oauth_signature="B2ecoN170CWztNhfvGH0OJ0A8mU%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1364725138", oauth_version="1.0"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.2.1
+      Date:
+      - Sun, 31 Mar 2013 10:19:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '910'
+      Connection:
+      - keep-alive
+      Status:
+      - 200 OK
+      X-Runtime:
+      - '107'
+      Etag:
+      - "\"145e08980c0c4a5f7d5e4f98bab86343\""
+      Cache-Control:
+      - private, max-age=0, must-revalidate
+      Set-Cookie:
+      - _session_id=6d06f5b66cafc5b1de198e344eb8f5ef; path=/; HttpOnly
+      - _uservoice_uid=81722ba8e28fc770a4cca9cfa3886ef4566a3ddb; path=/; expires=Sun, 26-May-2013 10:19:00 GMT
+      P3p:
+      - CP="ALL DSP COR CURa ADMa DEVa OUR IND COM NAV"
+      X-Rack-Cache:
+      - invalidate, pass
+    body:
+      encoding: US-ASCII
+      string: "{\"user\":{\"url\":\"http://uv.uservouce.com/users/34520607-m2604100\"\
+        ,\"id\":34520607,\"name\":\"m2604100\",\"title\":null,\"guid\":null,\"anonymous\"\
+        :false,\"email\":\"m2604100@mxit.im\",\"email_confirmed\":false,\"authentication\"\
+        :{\"provider\":\"external\"},\"roles\":{\"owner\":false,\"admin\":false},\"\
+        avatar_url\":\"https://secure.gravatar.com/avatar/0a9512e6458528e89b825c613c749564?size=70\\\
+        u0026amp;default=https://cdn.uservoice.com/images/admin/icons/user_70.png\"\
+        ,\"karma_score\":0,\"created_at\":\"2013/03/28 13:24:24 +0000\",\"updated_at\"\
+        :\"2013/03/31 10:19:00 +0000\",\"supported_suggestions_count\":0,\"created_suggestions_count\"\
+        :0,\"visible_forums\":[{\"id\":179656,\"name\":\"General\",\"is_private\"\
+        :false,\"idea_count\":23,\"url\":\"/forums/179656-general\",\"max_votes\"\
+        :10,\"forum_activity\":{\"votes_available\":10,\"supported_suggestions\":[]}}]},\"\
+        token\":{\"oauth_token\":\"6iIoOzVt5gRiPhgy9rHo4w\",\"oauth_token_secret\"\
+        :\"jwTVtqpdILrzlVYz2EhVBFrRxVMbi7IMpIc6N5jFs\"}}"
+    http_version:
+  recorded_at: Sun, 31 Mar 2013 10:19:02 GMT
+- request:
+    method: post
+    uri: https://uv.uservouce.com/api/v1/forums/179656/suggestions.json
+    body:
+      encoding: US-ASCII
+      string: "{\"suggestion\":{\"title\":\"I have a suggestion issue for \",\"text\"\
+        :\"I have a suggestion issue for you\",\"votes\":0}}"
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Client:
+      - uservoice-ruby-0.0.11
+      User-Agent:
+      - OAuth gem v0.4.7
+      Content-Length:
+      - '110'
+      Authorization:
+      - OAuth oauth_body_hash="TZzPfjhBXRBszGzGyqqUcstaG5A%3D", oauth_consumer_key="<%= ENV['UV_API_KEY'] || 0 %>", oauth_nonce="KfepXIr6txICUVqVY0syH9QPDFCpJbXHujF3zp1cCY", oauth_signature="x5e6vjoCJWcdXqXq1eOhBzuk8cY%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1364725142", oauth_token="6iIoOzVt5gRiPhgy9rHo4w", oauth_version="1.0"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.2.1
+      Date:
+      - Sun, 31 Mar 2013 10:19:04 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1430'
+      Connection:
+      - keep-alive
+      Status:
+      - 200 OK
+      X-Runtime:
+      - '198'
+      Etag:
+      - "\"623c6fee5831e2ba0685648d3552e98f\""
+      Cache-Control:
+      - private, max-age=0, must-revalidate
+      P3p:
+      - CP="ALL DSP COR CURa ADMa DEVa OUR IND COM NAV"
+      X-Rack-Cache:
+      - invalidate, pass
+      Set-Cookie:
+      - _session_id=b3c58475bee63526cacf96e1905740fe; path=/; HttpOnly
+    body:
+      encoding: US-ASCII
+      string: "{\"suggestion\":{\"url\":\"http://uv.uservouce.com/forums/179656-general/suggestions/3800097-i-have-a-suggestion-issue-for\"\
+        ,\"id\":3800097,\"state\":\"new\",\"title\":\"I have a suggestion issue for\"\
+        ,\"text\":\"I have a suggestion issue for you\",\"formatted_text\":\"\\u003Cdiv\
+        \ class=\\\"typeset\\\"\\u003E\\u003Cp\\u003EI have a suggestion issue for\
+        \ you\\u003C/p\\u003E\\u003C/div\\u003E\",\"referrer\":null,\"vote_count\"\
+        :0,\"subscriber_count\":0,\"comments_count\":0,\"supporters_count\":0,\"votes_for\"\
+        :0,\"votes_remaining\":10,\"topic\":{\"id\":179656,\"prompt\":\"I suggest\
+        \ you ...\",\"example\":\"Enter your idea\",\"votes_allowed\":10,\"suggestions_count\"\
+        :239,\"open_suggestions_count\":23,\"votes_remaining\":10,\"closed\":false,\"\
+        anonymous_access\":false,\"unlimited_votes\":false,\"closed_at\":null,\"created_at\"\
+        :\"2012/10/10 11:19:55 +0000\",\"updated_at\":\"2012/10/10 11:19:55 +0000\"\
+        ,\"forum\":{\"id\":\"179656\",\"name\":\"General\"}},\"category\":null,\"\
+        closed_at\":null,\"status\":null,\"creator\":{\"id\":34520607,\"name\":\"\
+        m2604100\",\"email\":\"m2604100@mxit.im\",\"title\":null,\"url\":\"http://uv.uservouce.com/users/34520607-m2604100\"\
+        ,\"avatar_url\":\"https://secure.gravatar.com/avatar/0a9512e6458528e89b825c613c749564?size=70\\\
+        u0026amp;default=https://cdn.uservoice.com/images/admin/icons/user_70.png\"\
+        ,\"karma_score\":0,\"created_at\":\"2013/03/28 13:24:24 +0000\",\"updated_at\"\
+        :\"2013/03/31 10:19:00 +0000\"},\"response\":null,\"attachments\":[],\"created_at\"\
+        :\"2013/03/31 10:19:04 +0000\",\"updated_at\":\"2013/03/31 10:19:04 +0000\"\
+        }}"
+    http_version:
+  recorded_at: Sun, 31 Mar 2013 10:19:05 GMT
+recorded_with: VCR 2.4.0

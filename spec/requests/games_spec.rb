@@ -1,13 +1,11 @@
 require 'spec_helper'
 
-describe 'Starting a new  game', :vcr => :once do
+describe 'games', :shinka_vcr => true, :redis => true do
 
   before :each do
     @current_user = create(:user, uid: 'm2604100', provider: 'mxit')
     add_headers('X_MXIT_USERID_R' => 'm2604100')
     set_mxit_headers # set mxit user
-    stub_shinka_request # stub shinka request
-    stub_google_tracking # stub google tracking
   end
 
   it "must allow you to start a new game and win" do
@@ -80,11 +78,8 @@ describe 'Starting a new  game', :vcr => :once do
   end
 
   it "must show ads" do
-    add_key = !ENV.has_key?('SHINKA_AUID')
-    ENV['SHINKA_AUID'] = "1" if add_key
     visit '/'
-    page.should have_content("Advertise on the Shinka network here!")
-    ENV.delete('SHINKA_AUID') if add_key
+    page.should have_css("div.beacon")
   end
 
 end
