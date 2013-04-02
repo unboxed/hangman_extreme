@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   scope :top_scorers, lambda{ |field| order("#{field} DESC") }
   scope :mxit, where(provider: 'mxit')
   scope :active_last_hour, lambda{ where('updated_at >= ?',1.hour.ago) }
+  scope :random_order, order(connection.instance_values["config"][:adapter].include?("mysql") ? 'RAND()' : 'RANDOM()')
 
   def self.find_or_create_from_auth_hash(auth_hash)
     auth_hash.stringify_keys!
@@ -136,9 +137,9 @@ class User < ActiveRecord::Base
   end
 
   def self.new_day_set_scores!(force_week = false)
-    User.update_all(daily_rating: 0, daily_precision: 0, daily_streak: 0, current_daily_streak: 0)
+    User.update_all(daily_wins: 0, daily_rating: 0, daily_precision: 0, daily_streak: 0, current_daily_streak: 0)
     if Date.current == Date.current.beginning_of_week || force_week
-      User.update_all(weekly_rating: 0, weekly_precision: 0, weekly_streak: 0, current_weekly_streak: 0)
+      User.update_all(weekly_wins: 0, weekly_rating: 0, weekly_precision: 0, weekly_streak: 0, current_weekly_streak: 0)
     end
   end
 

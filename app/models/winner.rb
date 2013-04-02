@@ -120,7 +120,7 @@ class Winner < ActiveRecord::Base
       user_scope = User.where('id NOT IN (?)',other_winners.map(&:user_id) + [0])
       wins_required = options[:period] == 'daily' ? daily_random_games_required : weekly_random_games_required
       random_winners = user_scope.where("#{options[:period]}_wins >= ?",wins_required).
-                                  order("RAND()").limit(options[:winnings].size)
+                                  random_order.limit(options[:winnings].size)
       { 1 => random_winners  }
     else
       previous_winners = period(options[:period]).reason(options[:score_by]).order('created_at DESC').limit(options[:winnings].size)

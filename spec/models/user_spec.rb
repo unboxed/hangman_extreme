@@ -196,9 +196,10 @@ describe User do
   context "new_day_set_scores!" do
 
     it "must set all daily scores to 0" do
-      user = create(:user,daily_rating: 11, daily_precision: 12, daily_streak: 13, current_daily_streak: 14)
+      user = create(:user,daily_wins: 10, daily_rating: 11, daily_precision: 12, daily_streak: 13, current_daily_streak: 14)
       User.new_day_set_scores!
       user.reload
+      user.daily_wins.should == 0
       user.daily_rating.should == 0
       user.daily_precision.should == 0
       user.daily_streak.should == 0
@@ -206,10 +207,12 @@ describe User do
     end
 
     it "must set all weekly scores to 0 if beginning of week" do
-      user = create(:user,weekly_rating: 11, weekly_precision: 12, weekly_streak: 13, current_weekly_streak: 14)
+      user = create(:user,weekly_wins: 10, weekly_rating: 11, weekly_precision: 12,
+                    weekly_streak: 13, current_weekly_streak: 14)
       Timecop.freeze(Time.current.beginning_of_week) do
         User.new_day_set_scores!
         user.reload
+        user.weekly_wins.should == 0
         user.weekly_rating.should == 0
         user.weekly_precision.should == 0
         user.weekly_streak.should == 0
@@ -218,10 +221,12 @@ describe User do
     end
 
     it "wont set all weekly scores to 0 if not beginning of week" do
-      user = create(:user,weekly_rating: 11, weekly_precision: 12, weekly_streak: 13, current_weekly_streak: 14)
+      user = create(:user,weekly_wins: 10, weekly_rating: 11, weekly_precision: 12,
+                    weekly_streak: 13, current_weekly_streak: 14)
       Timecop.freeze(Time.current.beginning_of_week + 2.days) do
         User.new_day_set_scores!
         user.reload
+        user.weekly_wins.should == 10
         user.weekly_rating.should == 11
         user.weekly_precision.should == 12
         user.weekly_streak.should == 13
