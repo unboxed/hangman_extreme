@@ -1,0 +1,4 @@
+test:
+  adapter: %%adapter%%
+  database: hangnman_extreme
+  username: %%username%%

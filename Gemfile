@@ -59,7 +59,7 @@ end
 
 group :test do
   platforms :jruby do
-    gem 'jdbc-sqlite3', :require => false
+    gem 'activerecord-jdbcsqlite3-adapter', :require => false
     gem 'activerecord-jdbcpostgresql-adapter', :require => false
   end
   platforms :ruby do

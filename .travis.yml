@@ -7,11 +7,12 @@ rvm:
   - 2.0.0
   - rbx
 before_script:
-  - cp -f config/database_travis.yml config/database.yml
   - cp -f db/words.sample.csv db/words.csv
-  - RAILS_ENV=test bundle exec rake db:setup
+  - RAILS_ENV=test bundle exec rake travis:create:db
+  - cp -f config/database.travis.yml config/database.yml
+  - RAILS_ENV=test bundle exec rake db:migrate
 script: bundle exec rspec spec
 env:
-  - RAILS_ENV=test UV_SUBDOMAIN_NAME=uv UV_API_KEY=1 UV_API_SECRET=1 MXIT_CLIENT_ID=1 SHINKA_AUID=1 GA_TRACKING_CODE=UA-00000000-3 FREEPAID_USER=1 FREEPAID_PASS=1
+  - DB_ADAPTER=mysql RAILS_ENV=test UV_SUBDOMAIN_NAME=uv UV_API_KEY=1 UV_API_SECRET=1 MXIT_CLIENT_ID=1 SHINKA_AUID=1 GA_TRACKING_CODE=UA-00000000-3 FREEPAID_USER=1 FREEPAID_PASS=1
   - DB_ADAPTER=sqlite3 RAILS_ENV=test UV_SUBDOMAIN_NAME=uv UV_API_KEY=1 UV_API_SECRET=1 MXIT_CLIENT_ID=1 SHINKA_AUID=1 GA_TRACKING_CODE=UA-00000000-3 FREEPAID_USER=1 FREEPAID_PASS=1
   - DB_ADAPTER=postgresql RAILS_ENV=test UV_SUBDOMAIN_NAME=uv UV_API_KEY=1 UV_API_SECRET=1 MXIT_CLIENT_ID=1 SHINKA_AUID=1 GA_TRACKING_CODE=UA-00000000-3 FREEPAID_USER=1 FREEPAID_PASS=1
