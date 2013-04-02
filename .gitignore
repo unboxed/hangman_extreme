@@ -10,8 +10,6 @@
 /.rvmrc
 /.rspec
 /.powrc
-/.elasticbeanstalk
-/.ebextensions
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -19,5 +17,3 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
-/tmp
-.elasticbeanstalk/
