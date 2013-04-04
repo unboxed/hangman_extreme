@@ -1,7 +1,6 @@
 require 'spec_helper'
-require "#{Rails.root}/app/jobs/issue_airtime_to_users.rb"
 
-describe App::Jobs::IssueAirtimeToUsers do
+describe Jobs::IssueAirtimeToUsers do
 
   describe "run" do
 
@@ -16,7 +15,7 @@ describe App::Jobs::IssueAirtimeToUsers do
         VCR.use_cassette("issue_airtime_to_users",
                          :record => :once,
                          :erb => true) do
-          App::Jobs::IssueAirtimeToUsers.new.run
+          Jobs::IssueAirtimeToUsers.new.run
         end
         @airtime_voucher = AirtimeVoucher.last
       end
@@ -61,7 +60,7 @@ describe App::Jobs::IssueAirtimeToUsers do
                         :record => :once,
                         :erb => true,
                         :match_requests_on => [:uri,:method]) do
-          App::Jobs::IssueAirtimeToUsers.new.run
+          Jobs::IssueAirtimeToUsers.new.run
         end
         ENV['FREEPAID_PASS'] = @old_pass
         @airtime_voucher = AirtimeVoucher.last
@@ -83,8 +82,8 @@ describe App::Jobs::IssueAirtimeToUsers do
   describe "on_error" do
 
     it "must send the error to airbrake" do
-      Airbrake.should_receive(:notify_or_ignore).with("Error!")
-      App::Jobs::IssueAirtimeToUsers.new.on_error("Error!")
+      Airbrake.should_receive(:notify_or_ignore).with("Error!",anything())
+      Jobs::IssueAirtimeToUsers.new.on_error("Error!")
     end
 
   end

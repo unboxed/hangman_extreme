@@ -21,6 +21,7 @@ gem 'mxit_api', '>= 0.2.2.pre'
 gem "savon"
 gem 'draper'
 gem 'puma', '2.0.0.b7'
+gem 'whenever', :require => false
 
 # third party
 gem 'airbrake'

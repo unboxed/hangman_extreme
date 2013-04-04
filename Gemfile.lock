@@ -68,6 +68,7 @@ GEM
       xpath (~> 0.1.4)
     childprocess (0.3.6)
       ffi (~> 1.0, >= 1.0.6)
+    chronic (0.9.1)
     crack (0.3.1)
     database_cleaner (0.9.1)
     diff-lcs (1.2.1)
@@ -274,6 +275,9 @@ GEM
       addressable (>= 2.2.7)
       crack (>= 0.1.7)
     websocket (1.0.6)
+    whenever (0.8.2)
+      activesupport (>= 2.3.4)
+      chronic (>= 0.6.3)
     wordnik (4.12)
       activemodel (>= 3.0.3)
       addressable (>= 2.2.4)
@@ -331,4 +335,5 @@ DEPENDENCIES
   uservoice-ruby
   vcr
   webmock
+  whenever
   wordnik

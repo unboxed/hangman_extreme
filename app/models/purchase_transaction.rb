@@ -6,7 +6,8 @@ class PurchaseTransaction < ActiveRecord::Base
   validates_numericality_of :moola_amount, only_integer: true, greater_than: 0
   after_create :update_user_clue_points
 
-  scope :last_hour, lambda{ where('created_at >= ?',1.hour.ago) }
+  scope :last_day, lambda{ where('created_at >= ?',1.day.ago) }
+
 
   def generate_ref
     "R#{rand(8999) + 1000}T#{Time.now.strftime("%j%H%M")}U#{user_id}P#{product_id}M#{moola_amount}"
