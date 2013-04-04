@@ -1,5 +1,4 @@
 require 'spec_helper'
-require "#{Rails.root}/app/jobs/issue_airtime_to_users.rb"
 
 describe 'redeem winnings', :shinka_vcr => true, :redis => true do
 
@@ -69,7 +68,7 @@ describe 'redeem winnings', :shinka_vcr => true, :redis => true do
           click_button('redeem')
           page.should have_content("1 prize points")
           click_link('airtime_vouchers')
-          App::Jobs::IssueAirtimeToUsers.new.run
+          Jobs::IssueAirtimeToUsers.new.run
           visit '/'
           click_link('redeem')
           click_link('airtime_vouchers')
