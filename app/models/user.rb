@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   scope :top_scorers, lambda{ |field| order("#{field} DESC") }
   scope :mxit, where(provider: 'mxit')
   scope :active_last_hour, lambda{ where('updated_at >= ?',1.hour.ago) }
+  scope :active, lambda{ where('updated_at >= ?',1.month.ago) }
   scope :random_order, order(connection.instance_values["config"][:adapter].include?("mysql") ? 'RAND()' : 'RANDOM()')
 
   def self.find_or_create_from_auth_hash(auth_hash)

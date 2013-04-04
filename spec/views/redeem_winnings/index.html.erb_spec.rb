@@ -89,6 +89,13 @@ describe "redeem_winnings/index.html.erb" do
       rendered.should_not have_link("mxit_money")
     end
 
+    it "wont have a mxit_money link if disabled in settings" do
+      @current_user.prize_points = 100
+      Settings.should_receive(:mxit_money_disabled_until).and_return(2.hours.from_now)
+      render
+      rendered.should_not have_link("mxit_money")
+    end
+
   end
 
   context "vodago airtime" do

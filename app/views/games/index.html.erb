@@ -1,7 +1,5 @@
 <h1>Welcome to hangman extreme</h1>
 Have fun guessing the word.<br/>
-<span style="color:blue;">We have fixed the <%= link_to("random",explain_path(action: 'winning_random'),id: 'winning_random') %>
-  prize amount.</span>
 <ul>
   <%= content_tag_for(:li, @games) do |game| %>
       <span><%= game.hangman_text %></span> -

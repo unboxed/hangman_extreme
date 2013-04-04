@@ -23,16 +23,28 @@ class Settings < Ohm::Model
     shinka_disabled_until_setting.update(:value => v.to_i)
   end
 
-  def self.ga_tracking_disabled_untill_setting
+  def self.ga_tracking_disabled_until_setting
     find(name: 'ga_tracking_disabled_until').first || create(name: 'ga_tracking_disabled_until', value: 0)
   end
 
   def self.ga_tracking_disabled_until
-    Time.at(ga_tracking_disabled_untill_setting.value.to_i)
+    Time.at(ga_tracking_disabled_until_setting.value.to_i)
   end
 
   def self.ga_tracking_disabled_until=(v)
-    ga_tracking_disabled_untill_setting.update(:value => v.to_i)
+    ga_tracking_disabled_until_setting.update(:value => v.to_i)
+  end
+
+  def self.mxit_money_disabled_until_setting
+    find(name: 'mxit_money_disabled_until').first || create(name: 'mxit_money_disabled_until', value: 0)
+  end
+
+  def self.mxit_money_disabled_until
+    Time.at(mxit_money_disabled_until_setting.value.to_i)
+  end
+
+  def self.mxit_money_disabled_until=(v)
+    mxit_money_disabled_until_setting.update(:value => v.to_i)
   end
 
 end

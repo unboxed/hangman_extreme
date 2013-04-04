@@ -14,17 +14,20 @@ You can redeem your points for:
          <%= [current_user.prize_points,10].min %> clue points</li>
   <% end %>
 
+  <li>
   <% if current_user.not_registered_on_mxit_money? %>
-    <li>You not Registered on Mxit Money</li>
+    You not Registered on Mxit Money
   <% elsif current_user.prize_points == 0 %>
-    <li>Mxit Money</li>
+    Mxit Money
+  <% elsif Settings.mxit_money_disabled_until > Time.current %>
+    More Mxit Money Available on <%= Date.current.end_of_month.strftime("%d %b") %>
   <% else %>
-    <li><%= link_to (index += 1).to_s,
+    <%= link_to (index += 1).to_s,
                   new_redeem_winning_path(:prize_type => 'mxit_money',
                                           :prize_amount => current_user.prize_points),
                   id: 'mxit_money' %>
-    <%= number_to_currency(current_user.prize_points.to_f / 100, :unit => "R") %> mxit money</li>
-  <% end %>
+    <%= number_to_currency(current_user.prize_points.to_f / 100, :unit => "R") %> mxit money
+  <% end %></li>
 
   <% {vodago: [200,500,1000],
       cell_c: [500,1000,2500],
