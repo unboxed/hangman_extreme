@@ -3,11 +3,10 @@ source 'https://rubygems.org'
 gem 'rails', '~> 3.2.1'
 
 platforms :jruby do
-  gem 'jdbc-mysql'
-  gem 'activerecord-jdbcmysql-adapter', :require => false
+  gem 'activerecord-jdbcpostgresql-adapter', :require => false
 end
 platforms :ruby do
-  gem 'mysql2'
+  gem 'pg'
 end
 gem 'ohm'
 gem 'ohm-contrib', :require => 'ohm/contrib'
@@ -29,7 +28,6 @@ gem 'uservoice-ruby'
 gem 'gabba' # google analytics
 gem 'newrelic_rpm'
 gem 'wordnik'
-gem 'remote_syslog'
 gem 'librato-metrics', :require => 'librato/metrics'
 
 # Gems used only for assets and not required
@@ -47,7 +45,8 @@ group :assets do
 end
 
 group :development do
-  gem 'capistrano'
+  gem 'capistrano', :require => false
+  gem 'rvm-capistrano', :require => false
 end
 
 group :development, :test do
@@ -58,6 +57,13 @@ group :development, :test do
 end
 
 group :test do
+  platforms :jruby do
+    gem 'jdbc-mysql'
+    gem 'activerecord-jdbcmysql-adapter', :require => false
+  end
+  platforms :ruby do
+    gem 'mysql2'
+  end
   platforms :jruby do
     gem 'activerecord-jdbcsqlite3-adapter', :require => false
     gem 'activerecord-jdbcpostgresql-adapter', :require => false
