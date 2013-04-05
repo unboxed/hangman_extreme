@@ -15,9 +15,9 @@ if Rails.env.test?
     :info => {
       :nickname => 'jbloggs',
       :email => 'joe@bloggs.com',
-      :name => 'Joe Bloggs',
-      :first_name => 'Joe',
-      :last_name => 'Bloggs',
+      :name => 'Grant Speelman',
+      :first_name => 'Grant',
+      :last_name => 'Speelman',
       :image => 'http://graph.facebook.com/1234567/picture?type=square',
       :urls => { :Facebook => 'http://www.facebook.com/jbloggs' },
       :location => 'Palo Alto, California',
