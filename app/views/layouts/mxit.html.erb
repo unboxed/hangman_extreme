@@ -5,9 +5,6 @@
   <% if params[:action] == 'show' && params[:controller] == 'games' && @game && @game.choices.blank? %>
     <meta name="mxit" content="clearscreen" />
   <% end %>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
 </head>
 <body>
 <% if notice -%>
@@ -17,22 +14,7 @@
 <% end -%>
 
 <%= yield %>
-<% menu_item 'home', root_path, id: 'home' %>
-<% menu_item 'play', play_games_path, id: 'play_game', 'data-theme' =>"b" %>
 <%= menu %>
-
-<ul>
-  <li>
-  <% unless current_page?(root_path) %>
-    <%= link_to 'home', root_path, id: 'home' %>
-  <% end %>
-  <%= "|" if params[:action] == 'index' && !current_page?(root_path) %>
-  <% if params[:action] == 'index' %>
-  <b style="color:green;"><%= link_to 'play', play_games_path, id: 'play_game', 'data-theme' =>"b" %></b>
-  <% end %>
-  </li>
-</ul>
-<br/>
-<%= shinka_ad if current_user && current_user.provider == "mxit" %>
+<%= shinka_ad %>
 </body>
 </html>

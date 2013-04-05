@@ -26,11 +26,9 @@ You have <span><%= @game.attempts_left %></span> attempts left
   <p>
     <% ("a".."z").to_a.in_groups_of((mxit_request? ? 9 : 100),false).each do |letters| -%>
         <% letters.each do |letter| -%>
-            <%= letter_link(@game,letter) %>>&nbsp;
+            <%= letter_link(@game,letter) %>&nbsp;
         <% end -%>
         <br/>
     <% end -%>
    </p>
 <% end %>
-<br/>
-<% menu_item 'leave game', games_path, id: 'games_index' %>

@@ -2,6 +2,7 @@
     Enter your message or <%= link_to 'cancel', root_path, id: 'cancel' %>.<br/>
     Type in following format <b>Subject:Message</b>, example : <br/>
     <i>Fun Game:I really enjoy hangman extreme, keep up the good work!</i><br/>
+    <label for="textarea">Textarea:</label>
     <%= text_field_tag :feedback %>
     <%= submit_tag 'send', id: 'submit' %>
 <% end %>

@@ -2,8 +2,11 @@
   <title>Hangman Extreme</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" />
-  <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+  <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= csrf_meta_tags %>
 </head>
 <body>
 
@@ -26,14 +29,31 @@
         <div class="alert alert-block" style="color:#8b0000;"><%= alert %></div>
     <% end -%>
     <%= yield %>
-    <%= menu %>
+    <%= menu unless @dialog %>
   </div>
 
-  <div data-role="footer">
-    <h4>Page Footer</h4>
+  <% unless @dialog %>
+  <div data-role="footer" class="footer">
+    <%= smaato_ad %>
   </div><!-- /footer -->
+  <% end %>
 
 </div><!-- /page -->
 
+<% if ENV['GA_TRACKING_CODE'] %>
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', '<%= ENV['GA_TRACKING_CODE'] %>']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+<% end %>
 </body>
 </html>

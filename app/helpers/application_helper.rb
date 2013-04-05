@@ -1,3 +1,5 @@
+require 'open-uri'
+
 module ApplicationHelper
 
   def shinka_ad
@@ -26,6 +28,12 @@ module ApplicationHelper
     ad = get_shinka_ad
     return "" if ad.empty?
     ad["html"].gsub("href=","onclick='window.open(this.href); return false;' href=").html_safe
+  end
+
+  def smaato_ad
+    headers = {"User-Agent" => env['HTTP_USER_AGENT'] || "Ruby",
+               "X-FORWARDED-FOR" => request_ip_address}
+    open("http://soma.smaato.net/oapi/reqAd.jsp?apiver=413&response=HTML&adspace=#{ENV['SOMA_ADSPACE']}&pub=#{ENV['SOMA_PUB']}",headers).read.html_safe
   end
 
   def get_shinka_ad
@@ -65,7 +73,7 @@ module ApplicationHelper
   end
 
   def request_ip_address
-    Rails.env.test? ? (env["HTTP_X_FORWARDED_FOR"] || request.env['REMOTE_ADDR']) : env["HTTP_X_FORWARDED_FOR"]
+    env["HTTP_X_FORWARDED_FOR"] || request.env['REMOTE_ADDR']
   end
 
   def mxit_authorise_link(name,url_options,options = {})
@@ -89,11 +97,16 @@ module ApplicationHelper
 
   def smart_link_to(name,path,options = {})
     if mxit_request?
-      link_name, other = name.split(/\s/,2)
+      link_name, other = name.to_s.split(/\s/,2)
       link_to(link_name,path,options) + " #{other}"
     else
       link_to(name,path,options)
     end
+  end
+
+  def dialog_link_to(name,path,options = {})
+    options.reverse_merge!('data-rel' => "dialog", 'data-transition' => "pop")
+    smart_link_to(name,path,options)
   end
 
   def inline_button(name,path,options)

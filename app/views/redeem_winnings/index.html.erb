@@ -1,50 +1,52 @@
-<h1>Redeeming Winnings</h1>
-You have <%= current_user.prize_points %> prize points.
-<br/>
+<b>Redeeming Winnings</b><br/>
+You have <%= current_user.prize_points %> prize points.<br/>
 You can redeem your points for:
 <% index = 0 %>
-<ul>
+<ul data-role="listview" data-inset="true">
+  <li data-icon="check">
   <% if current_user.prize_points == 0 %>
-    <li>clue points</li>
+    clue points
   <% else # current_user.prize_points > 0  %>
-    <li><%= link_to (index += 1).to_s,
+    <%= smart_link_to "#{(index += 1)} #{[current_user.prize_points,10].min} clue points",
                     new_redeem_winning_path(:prize_type => 'clue_points',
                                             :prize_amount => [current_user.prize_points,10].min),
                     id: 'clue_points' %>
-         <%= [current_user.prize_points,10].min %> clue points</li>
   <% end %>
+  </li>
 
-  <li>
-  <% if current_user.not_registered_on_mxit_money? %>
-    You not Registered on Mxit Money
-  <% elsif current_user.prize_points == 0 %>
-    Mxit Money
-  <% elsif Settings.mxit_money_disabled_until > Time.current %>
-    More Mxit Money Available on <%= Date.current.end_of_month.strftime("%d %b") %>
-  <% else %>
-    <%= link_to (index += 1).to_s,
-                  new_redeem_winning_path(:prize_type => 'mxit_money',
-                                          :prize_amount => current_user.prize_points),
-                  id: 'mxit_money' %>
-    <%= number_to_currency(current_user.prize_points.to_f / 100, :unit => "R") %> mxit money
-  <% end %></li>
+  <% if mxit_request? %>
+    <li data-icon="check">
+      <% if current_user.not_registered_on_mxit_money? %>
+        You not Registered on Mxit Money
+      <% elsif current_user.prize_points == 0 %>
+        Mxit Money
+      <% elsif Settings.mxit_money_disabled_until > Time.current %>
+        More Mxit Money Available on <%= Date.current.end_of_month.strftime("%d %b") %>
+      <% else %>
+        <%= smart_link_to "#{(index += 1)} mxit money",
+                      new_redeem_winning_path(:prize_type => 'mxit_money',
+                                              :prize_amount => current_user.prize_points),
+                      id: 'mxit_money' %>
+        <%= number_to_currency(current_user.prize_points.to_f / 100, :unit => "R") %>
+      <% end %>
+    </li>
+  <% end %>
 
   <% {vodago: [200,500,1000],
       cell_c: [500,1000,2500],
       mtn: [500,1000,1500],
       virgin: [1000,1500,3500],
       heita: [500,1000,2000]}.each do |provider,values| %>
-      <li>
+      <li data-icon="check">
       <% if current_user.prize_points < values.first %>
           R<%= values.first / 100 %> <%= provider.to_s.gsub("_"," ") %> airtime
             (<span style="color: red;"><%= values.first - current_user.prize_points %> more prize points</span>)
       <% else %>
           <% value = values.delete_if{|v| current_user.prize_points < v }.max %>
-          <%= link_to (index += 1).to_s,
+          <%= smart_link_to "#{(index += 1)} R#{value / 100} #{provider.to_s.gsub("_"," ")}",
                           new_redeem_winning_path(:prize_type => "#{provider}_airtime",
                                                   :prize_amount => value),
                           id: "#{provider}_airtime" %>
-            R<%= value / 100 %> <%= provider.to_s.gsub("_"," ") %> airtime
       <% end %>
       </li>
   <% end %>
@@ -52,7 +54,6 @@ You can redeem your points for:
 </ul>
 <br/>
 
-<% menu_item 'home', root_path, id: 'root_page' %>
 <% menu_item 'airtime vouchers', airtime_vouchers_path, id: 'airtime_vouchers' %>
 <% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
 

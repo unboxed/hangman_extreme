@@ -7,7 +7,8 @@ shared_examples "a winner viewer" do
     random_users = create_list(:user,5, :daily_wins => 10)
     Timecop.freeze(Date.yesterday) do
       Winner.create_daily_winners
-    end    visit '/'
+    end
+    visit '/'
     click_link('winners')
     users.each do |winner|
       page.should have_content(winner.name)

@@ -36,4 +36,9 @@ describe "users/profile.html.erb" do
     render
   end
 
+  it "should have a buy more clue points link" do
+    view.should_receive(:menu_item).with(anything,purchases_path,id: 'buy_clue_points')
+    render
+  end
+
 end

@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
   end
 
   def send_stats
-    if tracking_enabled? && current_user && status != 302
+    if tracking_enabled? && mxit_request? && current_user && status != 302
       begin
         Timeout::timeout(15) do
           g = Gabba::Gabba.new(tracking_code, request.host)
@@ -62,7 +62,8 @@ class ApplicationController < ActionController::Base
       @current_user = User.find_or_create_from_auth_hash(provider: 'mxit',
                                                               uid: request.env['HTTP_X_MXIT_USERID_R'],
                                                              info: { name: request.env['HTTP_X_MXIT_NICK'],
-                                                                     login: request.env['HTTP_X_MXIT_LOGIN'] })
+                                                                     login: request.env['HTTP_X_MXIT_LOGIN'],
+                                                                     email: "#{request.env['HTTP_X_MXIT_LOGIN']}@mxit.im"})
       if request.env["HTTP_X_MXIT_PROFILE"]
         @mxit_profile = MxitProfile.new(request.env["HTTP_X_MXIT_PROFILE"])
         current_user_request_info.mxit_profile = @mxit_profile

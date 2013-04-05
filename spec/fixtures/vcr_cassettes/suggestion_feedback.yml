@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://uv.uservoice.com/api/v1/forums.json
+    uri: https://<%= ENV['UV_SUBDOMAIN_NAME'] %>.uservoice.com/api/v1/forums.json
     body:
       encoding: US-ASCII
       string: ''
@@ -59,7 +59,7 @@ http_interactions:
   recorded_at: Sun, 31 Mar 2013 10:18:54 GMT
 - request:
     method: post
-    uri: https://uv.uservoice.com/oauth/request_token
+    uri: https://<%= ENV['UV_SUBDOMAIN_NAME'] %>.uservoice.com/oauth/request_token
     body:
       encoding: US-ASCII
       string: ''
@@ -110,7 +110,7 @@ http_interactions:
   recorded_at: Sun, 31 Mar 2013 10:18:58 GMT
 - request:
     method: post
-    uri: https://uv.uservoice.com/api/v1/users/login_as.json
+    uri: https://<%= ENV['UV_SUBDOMAIN_NAME'] %>.uservoice.com/api/v1/users/login_as.json
     body:
       encoding: US-ASCII
       string: "{\"user\":{\"email\":\"m2604100@mxit.im\"},\"request_token\":\"SQWJEX1FVq6tqUdanogWyQ\"\
@@ -177,7 +177,7 @@ http_interactions:
   recorded_at: Sun, 31 Mar 2013 10:19:02 GMT
 - request:
     method: post
-    uri: https://uv.uservouce.com/api/v1/forums/179656/suggestions.json
+    uri: https://<%= ENV['UV_SUBDOMAIN_NAME'] %>.uservoice.com/api/v1/forums/179656/suggestions.json
     body:
       encoding: US-ASCII
       string: "{\"suggestion\":{\"title\":\"I have a suggestion issue for \",\"text\"\

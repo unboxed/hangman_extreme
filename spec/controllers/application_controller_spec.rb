@@ -149,6 +149,7 @@ describe ApplicationController do
       @user = stub_model(User)
       @user_request_info = UserRequestInfo.new
       controller.stub(:tracking_enabled?).and_return(true)
+      controller.stub(:mxit_request?).and_return(true)
       controller.stub(:current_user).and_return(@user)
       controller.stub(:current_user_request_info).and_return(@user_request_info)
       @gabba = mock('connection',
@@ -164,6 +165,12 @@ describe ApplicationController do
 
     it "wont create a new gabba connection if being redirected" do
       controller.stub(:status).and_return(302)
+      Gabba::Gabba.should_not_receive(:new)
+      get :index
+    end
+
+    it "wont create a new gabba connection if not mxit request" do
+      controller.stub(:mxit_request?).and_return(false)
       Gabba::Gabba.should_not_receive(:new)
       get :index
     end
@@ -283,6 +290,7 @@ describe ApplicationController do
     end
 
     it "must render mxit layout" do
+      controller.stub(:send_stats)
       request.env['HTTP_X_MXIT_USERID_R'] = "m123"
       get :index
       response.should render_template("layouts/mxit")

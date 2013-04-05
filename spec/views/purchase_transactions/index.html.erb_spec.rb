@@ -12,6 +12,7 @@ describe "purchase_transactions/index.html.erb" do
       ])
     view.stub!(:current_user).and_return(@current_user)
     view.stub!(:menu_item)
+    view.stub!(:mxit_request?).and_return(true)
   end
 
 
@@ -25,19 +26,16 @@ describe "purchase_transactions/index.html.erb" do
     end
   end
 
-  it "should have a home link on menu" do
-    view.should_receive(:menu_item).with(anything,'/',id: 'root_page')
+  it "wont list all the products that can be purchased if not mxit request" do
+    view.stub!(:mxit_request?).and_return(false)
     render
+    PurchaseTransaction.products.each do |product_id,hash|
+      rendered.should_not have_link("buy_#{product_id}", href: new_purchase_path(product_id: product_id))
+    end
   end
 
   it "should have a profile link on menu" do
     view.should_receive(:menu_item).with(anything,profile_users_path,id: 'profile')
-    render
-  end
-
-  it "should have a continue link on menu if there is a game to continue" do
-    @current_user.stub!(:current_game).and_return(stub_model(Game, id: 10))
-    view.should_receive(:menu_item).with(anything,game_path(10),id: 'continue')
     render
   end
 

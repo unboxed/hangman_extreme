@@ -1,7 +1,15 @@
 module MenuHelper
 
   def menu_items
-    @menu_items ||= []
+    return @menu_items if @menu_items
+    @menu_items = []
+    if mxit_request?
+      @menu_items << ['home', root_path, id: 'home'] unless current_page?(root_path)
+      if params[:action] == 'index' || params[:controller] != 'games'
+        @menu_items << ['play', play_games_path, id: 'play_game', style: 'color:green;']
+      end
+    end
+    @menu_items
   end
 
   def menu_item(*args)

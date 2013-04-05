@@ -115,8 +115,8 @@ describe UsersController do
       get :index, params
     end
 
-    ['daily','weekly'].each do |period|
-      ['streak','rating', 'precision'].each do |ranking|
+    ['daily', 'weekly'].each do |period|
+      ['streak', 'rating', 'precision'].each do |ranking|
         it "assigns all top #{period} #{ranking} users as @users" do
           user = create(:user)
           do_get_index :rank_by => ranking, :period => period
@@ -133,26 +133,13 @@ describe UsersController do
       assigns(:users).should include(user)
     end
 
-    it "renders the application layout" do
+    it "renders successfully" do
       do_get_index
-      response.should render_template("layouts/application")
+      response.should be_success
     end
 
   end
 
-  describe "GET stats" do
-
-    it "renders the application layout" do
-      User.stub(:cohort_array).and_return([[1,1,1,1,1,1]])
-      Game.stub(:cohort_array).and_return([[2,2,2,2,2]])
-      Winner.stub(:cohort_array).and_return([[2,2,2,2,2]])
-      PurchaseTransaction.stub(:cohort_array).and_return([[2,2,2,2,2]])
-      get :stats
-      response.should render_template("layouts/application")
-    end
-
-  end
-  
   describe "PUT update" do
 
     before :each do
@@ -163,7 +150,7 @@ describe UsersController do
       put :update, :user => {'real_name' => 'params'}, :id => @user.id
     end
 
-    describe "with valid params" do
+    context "with valid params" do
 
       it "updates the requested user" do
         User.any_instance.should_receive(:update_attributes).with({'real_name' => 'params'}, as: 'user').and_return(true)
@@ -182,37 +169,39 @@ describe UsersController do
 
       it "sets an notice" do
         do_update
-        flash[:notice].should  == 'Profile was successfully updated.'
+        flash[:notice].should == 'Profile was successfully updated.'
+      end
+
       it "renders successfully" do
         do_get_index
         response.should be_success
       end
 
+      context "with invalid params" do
+
+        before :each do
+          # Trigger the behavior that occurs when invalid params are submitted
+          User.any_instance.stub(:save).and_return(false)
+        end
+
+        it "sets an alert" do
+          do_update
+          flash[:alert].should_not be_blank
+        end
+
+        it "assigns the requested user as @user" do
+          do_update
+          assigns(:user).should eq(@user)
+        end
+
+        it "redirects to the profile page" do
+          do_update
+          response.should redirect_to(profile_users_path)
+        end
+
+      end
     end
 
-    describe "with invalid params" do
-
-      before :each do
-        # Trigger the behavior that occurs when invalid params are submitted
-        User.any_instance.stub(:save).and_return(false)
-      end
-
-      it "sets an alert" do
-        do_update
-        flash[:alert].should_not be_blank
-      end
-
-      it "assigns the requested user as @user" do
-        do_update
-        assigns(:user).should eq(@user)
-      end
-
-      it "redirects to the profile page" do
-        do_update
-        response.should redirect_to(profile_users_path)
-      end
-
-    end
   end
 
 end

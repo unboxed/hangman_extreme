@@ -45,7 +45,7 @@ Spork.prefork do
 end
 
 Spork.each_run do
-#  WebMock.disable_net_connect!
+  WebMock.disable_net_connect!(:allow_localhost => true)
   def in_memory_database?
     Rails.configuration.database_configuration[ENV["RAILS_ENV"]]['database'] == ':memory:'
   end
@@ -62,6 +62,7 @@ Spork.each_run do
   VCR.configure do |c|
     c.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
     c.hook_into :webmock
+    c.ignore_localhost = true
   end
 
   RSpec.configure do |config|
@@ -110,6 +111,16 @@ Spork.each_run do
 
     config.around(:each, :shinka_vcr => true) do |example|
       VCR.use_cassette('shinka',
+                       :record => :once,
+                       :erb => true,
+                       :allow_playback_repeats => true,
+                       :match_requests_on => [:method,:host]) do
+        example.call
+      end
+    end
+
+    config.around(:each, :smaato_vcr => true) do |example|
+      VCR.use_cassette('smaato',
                        :record => :once,
                        :erb => true,
                        :allow_playback_repeats => true,

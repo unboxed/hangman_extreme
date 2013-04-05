@@ -10,7 +10,7 @@ class FeedbackController < ApplicationController
 
   def create
     if params[:feedback].blank?
-      redirect_to(root_path)
+      redirect_to(root_path, notice: "Thank you for your feedback")
     else
       body, subject = params[:feedback].split(":",2).reverse
       send_options = {:email => current_user.email,
@@ -25,7 +25,10 @@ class FeedbackController < ApplicationController
         end
       rescue Exception => e
         ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
-        raise if Rails.env.test?
+        if Rails.env.test?
+          puts e.message
+          raise
+        end
       end
       redirect_to(root_path, notice: "Thank you for your feedback")
     end

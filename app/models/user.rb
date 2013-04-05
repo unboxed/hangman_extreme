@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
       auth_hash['info'].stringify_keys!
       user.name = auth_hash['info']['name']
       user.login = auth_hash['info']['login']
+      user.email = auth_hash['info']['email'] if user.email.blank?
       user.save
     end
     return user
@@ -76,7 +77,7 @@ class User < ActiveRecord::Base
   end
 
   def send_message(msg)
-    User.send_message(msg,[self])
+    User.send_message(msg,[self]) if provider == 'mxit'
   end
 
   def registered_on_mxit_money?
@@ -107,13 +108,13 @@ class User < ActiveRecord::Base
       if mxit_connection
         if users.kind_of?(ActiveRecord::Relation)
           page = 1
-          while((user_group = users.order(:id).page(page).per(100)).any?)
+          while((user_group = users.mxit.order(:id).page(page).per(100)).any?)
             to = user_group.collect(&:uid).join(",")
             mxit_connection.send_message(body: msg, to: to)
             page += 1
           end
         else
-          users.uniq.in_groups_of(100,false).each do |user_group|
+          users.delete_if{|u| u.provider != "mxit"}.uniq.in_groups_of(100,false).each do |user_group|
             to = user_group.collect(&:uid).join(",")
             mxit_connection.send_message(body: msg, to: to)
           end
@@ -184,7 +185,7 @@ class User < ActiveRecord::Base
   end
 
   def to_s
-    "<User id:#{id} name:#{name}>"
+    "<User id:#{id} name:#{name} email:#{email}>"
   end
 
   def inspect

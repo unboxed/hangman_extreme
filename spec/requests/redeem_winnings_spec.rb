@@ -1,26 +1,19 @@
 require 'spec_helper'
 
-describe 'redeem winnings', :shinka_vcr => true, :redis => true do
+shared_examples "a winner redeemer" do
 
-  before :each do
-    @current_user = create(:user, uid: 'm2604100', provider: 'mxit', prize_points: 100)
-    set_mxit_headers('m2604100') # set mxit user
-    stub_mxit_oauth
-  end
 
   it "must show users redeem winnings link" do
-    stub_mxit_money
-    create(:won_game, user: @current_user)
+    @current_user.update_attributes(:prize_points => 100)
     visit '/'
     click_link('redeem')
     page.should have_content("Redeeming Winnings")
     page.should have_content("100 prize points")
-    click_link('root_page')
+    click_link('home')
     page.current_path.should == '/'
   end
 
   it "must allow to redeem prize points for clues" do
-    stub_mxit_money
     @current_user.update_attributes(:prize_points => 57, :clue_points => 10)
     visit '/'
     click_link('redeem')
@@ -29,21 +22,9 @@ describe 'redeem winnings', :shinka_vcr => true, :redis => true do
     page.should have_content("10 clue points")
     click_button('redeem')
     page.should have_content("47 prize points")
-    click_link('root_page')
+    click_link('home')
     click_link('buy_clue_points')
     page.should have_content("20 clue points")
-  end
-
-  it "must allow to redeem prize points for mxit_money" do
-    stub_mxit_money(:is_registered => true)
-    @current_user.update_attributes(:prize_points => 257)
-    visit '/'
-    click_link('redeem')
-    page.should have_content("257 prize points")
-    click_link('mxit_money')
-    page.should have_content("R2.57 mxit money")
-    click_button('redeem')
-    page.should have_content("0 prize points")
   end
 
   {vodago: [200,500,1000],
@@ -58,7 +39,6 @@ describe 'redeem winnings', :shinka_vcr => true, :redis => true do
                          :record => :once,
                          :erb => true,
                          :match_requests_on => [:uri,:method]) do
-          stub_mxit_money
           @current_user.update_attributes(:prize_points => value + 1)
           visit '/'
           click_link('redeem')
@@ -76,6 +56,45 @@ describe 'redeem winnings', :shinka_vcr => true, :redis => true do
         end
       end
     end
+
+  end
+
+end
+
+describe 'redeem winnings', :redis => true do
+
+  context "as mxit user", :shinka_vcr => true do
+
+    before :each do
+      @current_user = create(:user, uid: 'm2604100', provider: 'mxit')
+      add_headers('X_MXIT_USERID_R' => 'm2604100')
+      set_mxit_headers # set mxit user
+      stub_mxit_oauth
+      stub_mxit_money(:is_registered => true)
+    end
+
+    it_behaves_like "a winner redeemer"
+
+    it "must allow to redeem prize points for mxit_money" do
+      @current_user.update_attributes(:prize_points => 257)
+      visit '/'
+      click_link('redeem')
+      page.should have_content("257 prize points")
+      click_link('mxit_money')
+      page.should have_content("R2.57 mxit money")
+      click_button('redeem')
+      page.should have_content("0 prize points")
+    end
+
+  end
+
+  context "as mobile user", :smaato_vcr => true do
+
+    before :each do
+      @current_user = create(:user, uid: '1234567', provider: 'facebook')
+    end
+
+    it_behaves_like "a winner redeemer"
 
   end
 

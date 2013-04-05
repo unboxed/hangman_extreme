@@ -2,10 +2,7 @@
 
 <p>What kind of feedback do you want to give?</p>
 
-<ul>
-  <li><%= link_to '1', new_feedback_path(:type => 'support'), id: 'support' %>) problems / support</li>
-  <li><%= link_to '2', new_feedback_path(:type => 'suggestion'), id: 'suggestion' %>) ideas / suggestions / other</li>
+<ul data-role="listview" data-inset="true">
+  <li><%= dialog_link_to '1 problems / support', new_feedback_path(:type => 'support'), id: 'support' %></li>
+  <li><%= dialog_link_to '2 ideas / suggestions / other', new_feedback_path(:type => 'suggestion'), id: 'suggestion' %></li>
 </ul>
-
-<br/>
-<% menu_item 'home', root_path, id: 'root_page' %>
