@@ -60,12 +60,8 @@ module ApplicationHelper
     ENV['SHINKA_AUID']
   end
 
-  def env
-    request.env
-  end
-
   def request_ip_address
-   env["HTTP_X_FORWARDED_FOR"] || env['REMOTE_ADDR']
+    request.remote_ip
   end
 
   def mxit_authorise_link(name,url_options,options = {})
