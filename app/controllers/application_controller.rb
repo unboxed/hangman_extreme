@@ -54,6 +54,8 @@ class ApplicationController < ActionController::Base
 
   def load_mxit_user
     Rails.logger.info(request.env.find_all{|key,value| key.include?("X_MXIT") }.inspect) # log mxit headers
+    Rails.logger.info request.remote_ip
+    Rails.logger.info "#{request.env["HTTP_X_FORWARDED_FOR"]} || #{env['REMOTE_ADDR']}"
     if request.env['HTTP_X_MXIT_USERID_R']
       @current_user = User.find_or_create_from_auth_hash(provider: 'mxit',
                                                               uid: request.env['HTTP_X_MXIT_USERID_R'],

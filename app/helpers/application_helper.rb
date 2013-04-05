@@ -65,7 +65,7 @@ module ApplicationHelper
   end
 
   def request_ip_address
-    Rails.env.test? ? (env["HTTP_X_FORWARDED_FOR"] || request.env['REMOTE_ADDR']) : env["HTTP_X_FORWARDED_FOR"]
+   env["HTTP_X_FORWARDED_FOR"] || env['REMOTE_ADDR']
   end
 
   def mxit_authorise_link(name,url_options,options = {})
