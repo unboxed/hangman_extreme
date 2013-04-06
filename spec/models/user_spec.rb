@@ -370,9 +370,15 @@ describe User do
       User.send_message("Nobody!!",[])
     end
 
-    it "must send a message to a user" do
-      user = stub_model(User, uid: 'm345')
+    it "must send a message to a user if mxit user" do
+      user = stub_model(User, uid: 'm345', provider: 'mxit')
       @mxit_connection.should_receive(:send_message).once.with(body: 'Single user', to: "m345")
+      User.send_message("Single user",[user])
+    end
+
+    it "wont send a message to a user if other user" do
+      user = stub_model(User, uid: 'm345', provider: 'other')
+      @mxit_connection.should_not_receive(:send_message)
       User.send_message("Single user",[user])
     end
 

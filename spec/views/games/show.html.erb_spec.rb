@@ -19,11 +19,6 @@ describe "games/show" do
     rendered.should have_content("_ _ t _ _")
   end
 
-  it "must have a games index link on menu" do
-    view.should_receive(:menu_item).with(anything,games_path,id: 'games_index')
-    render
-  end
-
   it "must have a letter link for each letter" do
     render
     ("a".."z").each do |letter|

@@ -1,14 +1,10 @@
-<b><%= "#{params[:period]} #{params[:rank_by]}".to_s.humanize %></b>
-<br/>
-
+<h1><%= "#{params[:period]} #{params[:rank_by]}".to_s.humanize %></h1>
 <ul>
   <%= content_tag_for(:li, @users) do |user| %>
       <%= display_user_name(user.name) %> -
       <%= user.send(@send.to_sym) %>
   <% end %>
 </ul>
-
-<br/>
-<% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
 <%= render :partial => "ranking_links" %>
+<% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
 

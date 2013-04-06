@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
                                                               uid: request.env['HTTP_X_MXIT_USERID_R'],
                                                              info: { name: request.env['HTTP_X_MXIT_NICK'],
                                                                      login: request.env['HTTP_X_MXIT_LOGIN'],
-                                                                     email: "#{request.env['HTTP_X_MXIT_LOGIN']}@mxit.im"})
+                                                                     email: request.env['HTTP_X_MXIT_LOGIN'] && "#{request.env['HTTP_X_MXIT_LOGIN']}@mxit.im"})
       if request.env["HTTP_X_MXIT_PROFILE"]
         @mxit_profile = MxitProfile.new(request.env["HTTP_X_MXIT_PROFILE"])
         current_user_request_info.mxit_profile = @mxit_profile
@@ -93,6 +93,7 @@ class ApplicationController < ActionController::Base
       encoded_str += '=' while !(encoded_str.size % 4).zero?
       @data = ActiveSupport::JSON.decode(Base64.decode64(encoded_str))
       if @data.kind_of?(Hash) && @data['user_id']
+        Rails.logger.info @data
         self.current_user = User.find_or_create_from_auth_hash(provider: 'facebook',
                                                                     uid: @data['user_id'],
                                                                    info: { name: "user #{@data['user_id']}"})
@@ -124,6 +125,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def current_user=(user)
+    session[:current_user_id] = user.try(:id)
+  end
 
   def tracking_enabled?
     tracking_code.present? &&

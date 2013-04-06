@@ -172,11 +172,6 @@ describe UsersController do
         flash[:notice].should == 'Profile was successfully updated.'
       end
 
-      it "renders successfully" do
-        do_get_index
-        response.should be_success
-      end
-
       context "with invalid params" do
 
         before :each do

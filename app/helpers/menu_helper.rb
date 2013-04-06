@@ -5,7 +5,7 @@ module MenuHelper
     @menu_items = []
     if mxit_request?
       @menu_items << ['home', root_path, id: 'home'] unless current_page?(root_path)
-      if params[:action] == 'index' || params[:controller] != 'games'
+      if params[:action] == 'index' || (params[:controller] != 'games' && params[:action] == 'new')
         @menu_items << ['play', play_games_path, id: 'play_game', style: 'color:green;']
       end
     end

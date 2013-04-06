@@ -10,27 +10,22 @@ describe "explain/scoring_categories.html.erb" do
 
   it "must have a link to rating" do
     render
-    rendered.should have_link("rating", href: explain_path(action: 'rating'))
+    rendered.should have_link('rating', href: explain_path(action: 'rating'))
   end
 
   it "must have a link to precision" do
     render
-    rendered.should have_link("precision", href: explain_path(action: 'precision'))
+    rendered.should have_link('precision', href: explain_path(action: 'precision'))
   end
 
   it "must have a link to streak" do
     render
-    rendered.should have_link("winning_streak", href: explain_path(action: 'winning_streak'))
+    rendered.should have_link('streak', href: explain_path(action: 'winning_streak'))
   end
 
   it "must have a link to random" do
     render
-    rendered.should have_link("winning_random", href: explain_path(action: 'winning_random'))
-  end
-
-  it "should have a home page link on menu" do
-    view.should_receive(:menu_item).with(anything,'/',id: 'root_page')
-    render
+    rendered.should have_link('random', href: explain_path(action: 'winning_random'))
   end
 
   it "should have a view rank link" do

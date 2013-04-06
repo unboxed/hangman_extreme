@@ -6,6 +6,7 @@ describe "users/profile.html.erb" do
   before(:each) do
     @user = stub_model(User, real_name: "Grant Petersen", mobile_number: "123", clue_points: 20)
     view.stub(:current_user).and_return(@user)
+    view.stub!(:mxit_request?).and_return(true)
     view.stub!(:menu_item)
   end
 
@@ -14,11 +15,6 @@ describe "users/profile.html.erb" do
     rendered.should have_content("Grant Petersen")
     rendered.should have_content("123")
     rendered.should have_content("20 clue points")
-  end
-
-  it "should have a home page link" do
-    view.should_receive(:menu_item).with(anything,root_path,id: 'root_page')
-    render
   end
 
   it "should have a modify real name link" do

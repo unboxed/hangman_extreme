@@ -33,15 +33,9 @@ describe "users/index" do
     end
   end
 
-  it "should have a home page link on menu" do
-    view.should_receive(:menu_item).with(anything,root_path,id: 'root_page')
-    render
-  end
-
   it "should have a view rank link" do
     view.should_receive(:menu_item).with(anything,user_path(50),id: 'view_rank')
     render
   end
-
 
 end

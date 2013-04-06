@@ -9,6 +9,7 @@ shared_examples "a winner viewer" do
       Winner.create_daily_winners
     end
     visit '/'
+    click_link('rank')
     click_link('winners')
     users.each do |winner|
       page.should have_content(winner.name)
@@ -35,6 +36,7 @@ shared_examples "a winner viewer" do
       Winner.create_weekly_winners
     end
     visit '/'
+    click_link('rank')
     click_link('winners')
     click_link('weekly')
     users.each do |winner|

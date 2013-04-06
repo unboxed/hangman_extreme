@@ -70,7 +70,18 @@ describe ApplicationController do
         User.should_receive(:find_or_create_from_auth_hash).with(uid: 'm2604100',
                                                                  provider: 'mxit',
                                                                  info: {name: 'grant',
-                                                                        login: nil})
+                                                                        login: nil,
+                                                                        email: nil})
+        get :index
+      end
+
+      it "loads the mxit user into current_user" do
+        request.env['HTTP_X_MXIT_LOGIN'] = 'gman'
+        User.should_receive(:find_or_create_from_auth_hash).with(uid: 'm2604100',
+                                                                 provider: 'mxit',
+                                                                 info: {name: 'grant',
+                                                                        login: "gman",
+                                                                        email: "gman@mxit.im"})
         get :index
       end
 

@@ -70,7 +70,7 @@ shared_examples "a game player" do
     page.should have_content("_ _ _ _ _ _")
     click_link('b')
     page.should have_content("b _ _ _ _ _")
-    click_link('leave')
+    click_link('home')
     click_link("play_game")
     page.should have_content("b _ _ _ _ _")
   end

@@ -23,11 +23,10 @@ You can redeem your points for:
       <% elsif Settings.mxit_money_disabled_until > Time.current %>
         More Mxit Money Available on <%= Date.current.end_of_month.strftime("%d %b") %>
       <% else %>
-        <%= smart_link_to "#{(index += 1)} mxit money",
+        <%= smart_link_to "#{(index += 1)} #{number_to_currency(current_user.prize_points.to_f / 100, :unit => "R")} mxit money",
                       new_redeem_winning_path(:prize_type => 'mxit_money',
                                               :prize_amount => current_user.prize_points),
                       id: 'mxit_money' %>
-        <%= number_to_currency(current_user.prize_points.to_f / 100, :unit => "R") %>
       <% end %>
     </li>
   <% end %>
@@ -39,7 +38,7 @@ You can redeem your points for:
       heita: [500,1000,2000]}.each do |provider,values| %>
       <li data-icon="check">
       <% if current_user.prize_points < values.first %>
-          R<%= values.first / 100 %> <%= provider.to_s.gsub("_"," ") %> airtime
+          R<%= values.first / 100 %> <%= provider.to_s.gsub("_"," ") %>
             (<span style="color: red;"><%= values.first - current_user.prize_points %> more prize points</span>)
       <% else %>
           <% value = values.delete_if{|v| current_user.prize_points < v }.max %>

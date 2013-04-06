@@ -11,6 +11,7 @@ describe "games/index" do
     ])
     @current_user = stub_model(User, id: 50)
     view.stub!(:current_user).and_return(@current_user)
+    view.stub!(:mxit_request?).and_return(true)
     view.stub!(:menu_item)
   end
 
@@ -36,24 +37,6 @@ describe "games/index" do
     end
   end
 
-  it "must add a continue_game link to menu" do
-    assign(:current_game, stub_model(Game, id: 111))
-    view.should_receive(:menu_item).with(anything,game_path(111),id: 'continue_game')
-    render
-    view.stub!(:mxit_request?).and_return(true)
-  end
-
-  it "wont add a new_game link to menu if current_game exists" do
-    assign(:current_game, stub_model(Game, id: 111))
-    view.should_not_receive(:menu_item).with(anything,new_game_path,id: 'new_game')
-    render
-  end
-
-  it "must add a new_game link to menu" do
-    view.should_receive(:menu_item).with(anything,new_game_path,id: 'new_game')
-    render
-  end
-
   it "must have a view rank link on the menu" do
     view.should_receive(:menu_item).with(anything,user_path(50),id: 'view_rank')
     render
@@ -71,6 +54,12 @@ describe "games/index" do
     render
   end
 
+  it "must have a ordinary feedback link on the menu if not mxit request" do
+    view.stub!(:mxit_request?).and_return(false)
+    view.should_receive(:menu_item).with(anything,feedback_index_path,id: 'feedback')
+    render
+  end
+
   it "must have a authorise" do
     args = {response_type: 'code',
             host: "test.host",
@@ -83,6 +72,12 @@ describe "games/index" do
     render
   end
 
+  it "must have a ordinary authorise link on the menu if not mxit request" do
+    view.stub!(:mxit_request?).and_return(false)
+    view.should_receive(:menu_item).with(anything,profile_users_path,id: 'authorise')
+    render
+  end
+
   it "must have a buy more clue points link" do
     view.should_receive(:menu_item).with(anything,purchases_path,id: 'buy_clue_points')
     render
@@ -91,22 +86,6 @@ describe "games/index" do
   it "must have a link to redeem winnings if user have prize points" do
     view.should_receive(:menu_item).with(anything,redeem_winnings_path,id: 'redeem')
     render
-  end
-
-  it "should have a share link if mxit request" do
-    render
-    rendered.should have_link("Share with your friends")
-  end
-
-  it "wont have a share link if not mxit request" do
-    view.stub!(:mxit_request?).and_return(false)
-    render
-    rendered.should_not have_link("Share with your friends")
-  end
-
-  it "should have a view winners link" do
-    render
-    rendered.should have_link("winners", href: winners_path)
   end
 
 end
