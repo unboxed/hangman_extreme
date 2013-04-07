@@ -11,13 +11,3 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require_self
-
-// jQuery( ".footer" ).on( "pageshow", function () {
-$(document).bind("pagechange", function( event, ui ) {
-  $(".footer .ad").replaceWith('<div id="smaatoad" style="padding: 0px"></div>' +
-    '<script type="text/javascript">var request = new SomaRequest();' +
-    'request.adSpaceID = 65768759;' +
-    'request.publisherID = 923864875;' +
-    'SomaTag.requestAd(request);' +
-    '</script>')
-});

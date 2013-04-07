@@ -58,14 +58,14 @@ shared_examples "a winner viewer" do
 
 end
 
-describe 'winners', :shinka_vcr => true, :redis => true do
+describe 'winners',  :redis => true do
 
   before :each do
     stub_google_tracking # stub google tracking
     stub_mxit_oauth
   end
 
-  context "as mxit user" do
+  context "as mxit user", :shinka_vcr => true do
 
     before :each do
       @current_user = create(:user, uid: 'm2604100', provider: 'mxit')
@@ -84,7 +84,7 @@ describe 'winners', :shinka_vcr => true, :redis => true do
 
   end
 
-  context "as mobile user", :js => true do
+  context "as mobile user", :smaato_vcr => true, :js => true do
 
     before :each do
       @current_user = create(:user, uid: '1234567', provider: 'facebook')
