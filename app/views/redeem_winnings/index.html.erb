@@ -1,18 +1,9 @@
 <b>Redeeming Winnings</b><br/>
-You have <%= current_user.prize_points %> prize points.<br/>
+<p>You have <%= current_user.prize_points %> prize points.
+<%= smart_link_to 'Read here', explain_path('scoring_categories') %> about winning more prize points.</p>
 You can redeem your points for:
 <% index = 0 %>
 <ul data-role="listview" data-inset="true">
-  <li data-icon="check">
-  <% if current_user.prize_points == 0 %>
-    clue points
-  <% else # current_user.prize_points > 0  %>
-    <%= smart_link_to "#{(index += 1)} #{[current_user.prize_points,10].min} clue points",
-                    new_redeem_winning_path(:prize_type => 'clue_points',
-                                            :prize_amount => [current_user.prize_points,10].min),
-                    id: 'clue_points' %>
-  <% end %>
-  </li>
 
   <% if mxit_request? %>
     <li data-icon="check">
