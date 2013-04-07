@@ -54,6 +54,7 @@ shared_examples "a game player" do
     click_button 'start_game'
     page.should have_no_content("kevin")
     click_link 'show_clue'
+    save_and_open_page
     click_link 'yes'
     page.should have_content("kevin")
     click_link 'j'

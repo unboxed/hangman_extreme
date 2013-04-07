@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     if user
       can :create, Game
-      can [:read,:play_letter], Game, user_id: user.id
+      can [:read,:play_letter,:show_clue,:reveal_clue], Game, user_id: user.id
 
       can :read, User
       can :update, user
