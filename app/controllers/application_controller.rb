@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :load_mxit_user, :load_facebook_user, :check_mxit_input_for_redirect
+  before_filter :load_mxit_user, :check_mxit_input_for_redirect
   after_filter :send_stats
   layout :set_layout
 
@@ -83,24 +83,6 @@ class ApplicationController < ActionController::Base
       current_user.uid == 'mxit' ? 'mxit' : 'mobile'
     else
       mxit_request? ? 'mxit' : 'mobile'
-    end
-  end
-
-  def load_facebook_user
-    if params[:signed_request]
-      encoded_sig, payload = params[:signed_request].split('.')
-      encoded_str = payload.gsub('-','+').gsub('_','/')
-      encoded_str += '=' while !(encoded_str.size % 4).zero?
-      @data = ActiveSupport::JSON.decode(Base64.decode64(encoded_str))
-      if @data.kind_of?(Hash) && @data['user_id']
-        Rails.logger.info @data
-        self.current_user = User.find_or_create_from_auth_hash(provider: 'facebook',
-                                                                    uid: @data['user_id'],
-                                                                   info: { name: "user #{@data['user_id']}"})
-      else
-        redirect_to facebook_oauth_path
-        false
-      end
     end
   end
 

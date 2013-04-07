@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   scope :top_scorers, lambda{ |field| order("#{field} DESC") }
   scope :mxit, where(provider: 'mxit')
   scope :active_last_hour, lambda{ where('updated_at >= ?',1.hour.ago) }
-  scope :active, lambda{ where('updated_at >= ?',1.month.ago) }
+  scope :active, lambda{ where('updated_at >= ?',10.days.ago) }
   scope :random_order, order(connection.instance_values["config"][:adapter].include?("mysql") ? 'RAND()' : 'RANDOM()')
 
   def self.find_or_create_from_auth_hash(auth_hash)
@@ -124,7 +124,7 @@ class User < ActiveRecord::Base
   end
 
   def self.purge_tracking!
-    User.where('updated_at < ?',7.days.ago).each{|u| u.google_tracking.delete }.size
+    User.where('updated_at < ?',20.days.ago).each{|u| u.google_tracking.delete }.size
   end
 
   def self.add_clue_point_to_active_players!
@@ -142,20 +142,6 @@ class User < ActiveRecord::Base
     User.update_all(daily_wins: 0, daily_rating: 0, daily_precision: 0, daily_streak: 0, current_daily_streak: 0)
     if Date.current == Date.current.beginning_of_week || force_week
       User.update_all(weekly_wins: 0, weekly_rating: 0, weekly_precision: 0, weekly_streak: 0, current_weekly_streak: 0)
-    end
-  end
-
-  def self.update_scores!
-    user_ids = Game.today.collect{|g|g.user_id}.uniq
-    User.where('id IN (?)',user_ids).each do |user|
-      begin
-        user.update_daily_scores
-        if Date.current == Date.current.beginning_of_week
-          user.update_weekly_scores
-        end
-      rescue Exception => e
-        raise if Rails.env.test?
-      end
     end
   end
 

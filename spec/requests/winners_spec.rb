@@ -6,7 +6,7 @@ shared_examples "a winner viewer" do
     users = create_list(:user,5, :daily_precision => 100, :daily_streak => 100, :daily_rating => 100)
     random_users = create_list(:user,5, :daily_wins => 10)
     Timecop.freeze(Date.yesterday) do
-      Winner.create_daily_winners
+      Jobs::CreateDailyWinners.execute
     end
     visit '/'
     click_link('rank')
@@ -33,7 +33,7 @@ shared_examples "a winner viewer" do
     users = create_list(:user,5, :weekly_precision => 100, :weekly_streak => 100, :weekly_rating => 100)
     random_users = create_list(:user,5, :weekly_wins => 35)
     Timecop.freeze(Date.current.beginning_of_week.yesterday) do
-      Winner.create_weekly_winners
+      Jobs::CreateWeeklyWinners.execute
     end
     visit '/'
     click_link('rank')

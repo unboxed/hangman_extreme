@@ -2,20 +2,21 @@
 <% if @winners.empty? %>
     <p><b>Coming Soon</b></p>
 <% else %>
-<table>
+<table data-role="table" class="ui-responsive table-stroke">
+  <thead>
+    <tr>
+      <th>points<%= mxit_dash %></th>
+      <th>name</th>
+    </tr>
+  </thead>
   <tbody>
-  <tr>
-    <td><b>points</b> | </td>
-    <td><b>name</b></td>
-  </tr>
   <%= content_tag_for(:tr, @winners.sort{|x,y| y.amount <=> x.amount}) do |winner| %>
-      <td><%= winner.amount %> | </td>
+      <td><%= winner.amount %><%= mxit_dash %></td>
       <td><%= display_user_name(winner.name) %></td>
   <% end %>
   </tbody>
 </table>
 <% end %>
-<br/>
 <% Winner::WINNING_PERIODS.each do |time_period| %>
   <%= link_to_unless params[:period] == time_period,
                      time_period,
@@ -29,9 +30,6 @@
                      {period: params[:period], reason: reason},
                      id: "#{params[:period] || 'daily'}_#{reason}" %> |
 <% end %>
-<br/>
-
-<% menu_item 'home', root_path, id: 'root_page' %>
 <% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
 
 

@@ -127,27 +127,6 @@ describe ApplicationController do
 
   end
 
-  describe "it attempts to load the facebook user" do
-
-    before :each do
-      controller.stub(:send_stats)
-    end
-
-    controller do
-      def index
-        render :text => "hello"
-      end
-    end
-
-    it "wont load mxit user if no userid" do
-      text = "vlXgu64BQGFSQrY0ZcJBZASMvYvTHu9GQ0YM9rjPSso.eyJhbGdvcml0aG0iOiJITUFDLVNIQTI1NiIsIjAiOiJwYXlsb2FkIn0"
-      User.should_not_receive(:find_or_create_from_auth_hash)
-      get :index, signed_request: text
-      assigns(:data).should == {"algorithm"=>"HMAC-SHA256", "0"=>"payload"}
-    end
-
-  end
-
   describe "sending stats" do
 
     controller do

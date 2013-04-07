@@ -26,11 +26,6 @@ describe "winners/index.html.erb" do
     end
   end
 
-  it "should have a home page link on menu" do
-    view.should_receive(:menu_item).with(anything,root_path,id: 'root_page')
-    render
-  end
-
   it "should have a rank link on menu" do
     view.should_receive(:menu_item).with(anything,user_path(33),id: 'view_rank')
     render

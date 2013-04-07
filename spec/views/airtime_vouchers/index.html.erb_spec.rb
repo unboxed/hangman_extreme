@@ -28,11 +28,6 @@ describe "airtime_vouchers/index.html.erb" do
     rendered.should have_content("You have not redeem prize points for any vouchers")
   end
 
-  it "should have a home page link on menu" do
-    view.should_receive(:menu_item).with(anything,'/',id: 'root_page')
-    render
-  end
-
   it "must have a link to redeem winnings if user have prize points" do
     view.should_receive(:menu_item).with(anything,redeem_winnings_path,id: 'redeem')
     render
