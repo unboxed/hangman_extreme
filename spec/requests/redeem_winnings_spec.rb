@@ -13,20 +13,6 @@ shared_examples "a winner redeemer" do
     page.current_path.should == '/'
   end
 
-  it "must allow to redeem prize points for clues" do
-    @current_user.update_attributes(:prize_points => 57, :clue_points => 10)
-    visit '/'
-    click_link('redeem')
-    page.should have_content("57 prize points")
-    click_link('clue_points')
-    page.should have_content("10 clue points")
-    click_button('redeem')
-    page.should have_content("47 prize points")
-    click_link('home')
-    click_link('buy_clue_points')
-    page.should have_content("20 clue points")
-  end
-
   {vodago: [200,500,1000],
    cell_c: [500,1000,2500],
    mtn: [500,1000,1500],
