@@ -5,7 +5,7 @@ describe "redeem_winnings/new.html.erb" do
 
   before(:each) do
     @redeem_winning = assign(:redeem_winning,stub_model(RedeemWinning))
-    @redeem_winning.prize_type = 'clue_points'
+    @redeem_winning.prize_type = 'mxit_money'
   end
 
   it "renders should have correct fields" do

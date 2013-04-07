@@ -26,11 +26,8 @@ end
 
 every :day, :at => '00:00 am', :roles => [:db] do
   runner "Jobs::NewDaySetScores.execute"
+  runner "Jobs::SetUserCredits.execute"
   runner "Jobs::RecordDailyStats.execute"
-end
-
-every :day, :at => '11:58 pm', :roles => [:db] do
-  runner "Jobs::AddCluePointsToActivePlayers.execute"
 end
 
 every :sunday, :at => '11:55 pm', :roles => [:db] do

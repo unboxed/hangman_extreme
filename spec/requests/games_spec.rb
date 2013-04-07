@@ -45,7 +45,7 @@ shared_examples "a game player" do
     page.should have_link('home')
   end
 
-  it "must allow you to use your clue points if reveal the clue" do
+  it "must allow you to use your credits to reveal the clue" do
     Dictionary.clear
     Dictionary.add("tester")
     Dictionary.set_clue("tester", "kevin")
@@ -54,6 +54,7 @@ shared_examples "a game player" do
     click_button 'start_game'
     page.should have_no_content("kevin")
     click_link 'show_clue'
+    click_link 'yes'
     page.should have_content("kevin")
     click_link 'j'
     page.should have_content("kevin")

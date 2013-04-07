@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'clues', :redis => true do
+describe 'purchases', :redis => true do
 
   context "as mxit user", :shinka_vcr => true do
 
@@ -10,26 +10,26 @@ describe 'clues', :redis => true do
       stub_mxit_oauth # stub mixt profile auth
     end
 
-    it "must allow user to purchase clue points" do
+    it "must allow user to purchase credits" do
       visit '/'
       click_link('profile')
-      page.should have_content("2 clue points")
-      click_link('buy_clue_points')
-      click_link('buy_clue11')
+      page.should have_content("2 credits")
+      click_link('buy_credits')
+      click_link('buy_credits11')
       click_link('submit')
       click_link('profile')
-      page.should have_content("13 clue points")
+      page.should have_content("13 credits")
     end
 
     it "must allow user to cancel purchase of clue points" do
       visit '/'
       click_link('profile')
-      page.should have_content("2 clue points")
-      click_link('buy_clue_points')
-      click_link('buy_clue11')
+      page.should have_content("2 credits")
+      click_link('buy_credits')
+      click_link('buy_credits11')
       click_link('cancel')
       click_link('profile')
-      page.should have_content("2 clue points")
+      page.should have_content("2 credits")
     end
 
   end
@@ -43,9 +43,9 @@ describe 'clues', :redis => true do
     it "must not allow user to purchase of clue points" do
       visit '/'
       click_link('profile')
-      page.should have_content("2 clue points")
+      page.should have_content("2 credits")
       click_link('buy_clue_points')
-      page.should have_content("Coming soon, clue point purchases")
+      page.should have_content("Coming soon, credits purchases")
     end
 
   end

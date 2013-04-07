@@ -92,7 +92,7 @@ class RedeemWinning < ActiveRecord::Base
     user.decrement!(:prize_points,prize_amount)
     if prize_type == 'clue_points'
       paid!
-      user.increment!(:clue_points,prize_amount)
+      user.increment!(:credits,prize_amount)
     end
   end
 

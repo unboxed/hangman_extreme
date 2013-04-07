@@ -10,12 +10,9 @@ describe 'jobs' do
     Jobs::RecordDailyStats.execute
   end
 
-  it "must record daily stats" do
-    Jobs::RecordDailyStats.execute
-  end
-
-  it "must record daily stats" do
-    Jobs::AddCluePointsToActivePlayers.execute
+  it "must update user credits" do
+    create(:user, :credits => 0)
+    Jobs::SetUserCredits.execute
   end
 
 end

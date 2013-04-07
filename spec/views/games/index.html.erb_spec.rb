@@ -78,8 +78,8 @@ describe "games/index" do
     render
   end
 
-  it "must have a buy more clue points link" do
-    view.should_receive(:menu_item).with(anything,purchases_path,id: 'buy_clue_points')
+  it "must have a buy more credits link" do
+    view.should_receive(:menu_item).with(anything,purchases_path,id: 'buy_credits')
     render
   end
 

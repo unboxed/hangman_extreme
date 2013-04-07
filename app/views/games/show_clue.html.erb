@@ -1,0 +1,6 @@
+<%= shinka_img_ad if current_user && current_user.provider == "mxit" %>
+This will cost you 1 credit, you have <%= current_user.credits %> credits left.
+<%= smart_link_to 'cancel', purchases_path, id: 'cancel' %> Purchase<br/> |
+<%= form_for(game_show_clue_path(@game)) do |f| %>
+  <%= f.submit 'show clue', id: 'yes' %>
+<% end %>

@@ -31,11 +31,11 @@ describe RedeemWinningsController do
       response.should redirect_to(action: 'index')
     end
 
-    it "assigns a new clue_points redeem_winning as @redeem_winning" do
+    it "assigns a new mxit_money redeem_winning as @redeem_winning" do
       @current_user.prize_points = 9
-      get :new, :prize_type => "clue_points", :prize_amount => "9"
+      get :new, :prize_type => "mxit_money", :prize_amount => "9"
       assigns(:redeem_winning).should be_a_new(RedeemWinning)
-      assigns(:redeem_winning).prize_type.should == "clue_points"
+      assigns(:redeem_winning).prize_type.should == "mxit_money"
       assigns(:redeem_winning).prize_amount.should == 9
       assigns(:redeem_winning).state.should == 'pending'
     end
@@ -44,7 +44,7 @@ describe RedeemWinningsController do
 
   # update the return value of this method accordingly.
   def valid_attributes
-    {prize_type: 'clue_points', state: 'paid', prize_amount: 10}
+    {prize_type: 'mxit_money', state: 'paid', prize_amount: 10}
   end
 
   describe "POST create" do

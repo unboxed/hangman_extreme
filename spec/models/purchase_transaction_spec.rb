@@ -6,7 +6,7 @@ describe PurchaseTransaction do
 
     it "must have a product id" do
       PurchaseTransaction.new.should have(1).errors_on(:product_id)
-      PurchaseTransaction.new(product_id: 'clue1').should have(0).errors_on(:product_id)
+      PurchaseTransaction.new(product_id: 'credits1').should have(0).errors_on(:product_id)
     end
 
     it "must have a ref" do
@@ -37,7 +37,7 @@ describe PurchaseTransaction do
 
     it "must have a product_name" do
       PurchaseTransaction.new.should have(1).errors_on(:product_name)
-      PurchaseTransaction.new(product_name: '1 clue point').should have(0).errors_on(:product_name)
+      PurchaseTransaction.new(product_name: '1 credits').should have(0).errors_on(:product_name)
     end
 
   end

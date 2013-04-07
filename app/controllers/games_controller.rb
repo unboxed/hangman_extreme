@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
   before_filter :login_required
+  before_filter :check_credits, :only => ['new','create','show_clue','reveal_clue']
   load_and_authorize_resource except: 'play'
 
   def index
@@ -15,17 +16,17 @@ class GamesController < ApplicationController
     redirect_to(current_user.current_game || new_game_path)
   end
 
+  def show_clue
+
+  end
+
+  def reveal_clue
+    @game.reveal_clue
+    play
+  end
+
   def play_letter
-    if params[:letter] == 'show_clue'
-      if current_user.clue_points < 1
-        redirect_to  purchases_path, alert: "No more clue points left"
-        return
-      end
-      @game.reveal_clue
-      @notice = "Clue revealed"
-    else
-      @game.add_choice(params[:letter])
-    end
+    @game.add_choice(params[:letter])
     ranks = {}
     User::RANKING_FIELDS.each do |rank_by|
       ranks[rank_by] = current_user.rank(rank_by)
@@ -54,9 +55,19 @@ class GamesController < ApplicationController
       ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
     end
     if @game.save
+      current_user.decrement!(:credits)
       redirect_to @game, notice: 'Game was successfully created.'
     else
       redirect_to({action: 'index'}, alert: 'Failed to create new game.')
+    end
+  end
+
+  def check_credits
+    if current_user.credits > 0
+      true
+    else
+      redirect_to purchases_path, alert: "No more credits points left"
+      false
     end
   end
 

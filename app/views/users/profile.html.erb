@@ -9,9 +9,9 @@ change full <%= dialog_link_to 'real name', edit_user_path(current_user, :field 
 change <%= dialog_link_to 'mobile number', edit_user_path(current_user, :field => 'mobile_number'), id: 'edit_mobile_number' %>:
 <%= current_user.mobile_number %><br/>
 <br/>
-<%= current_user.clue_points %> clue points left
+<%= current_user.credits %> credits left
 
-<% menu_item 'buy clue points', purchases_path, id: 'buy_clue_points' %>
+<% menu_item 'buy credits', purchases_path, id: 'buy_credits' %>
 
 
 

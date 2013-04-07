@@ -42,7 +42,7 @@ class Winner < ActiveRecord::Base
   end
 
   def self.daily_random_games_required
-    10
+    5
   end
 
   def self.weekly_random_games_required

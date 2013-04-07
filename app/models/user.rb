@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :provider, :uid, :clue_points, :prize_points
+  attr_accessible :name, :provider, :uid, :credits, :prize_points
   attr_accessible :real_name, :mobile_number, as: 'user'
   RANKING_FIELDS = Winner::WINNING_PERIODS.product(Winner::WINNING_REASONS - %w(random)).map{|x,y| "#{x}_#{y}"}
 
@@ -125,17 +125,6 @@ class User < ActiveRecord::Base
 
   def self.purge_tracking!
     User.where('updated_at < ?',20.days.ago).each{|u| u.google_tracking.delete }.size
-  end
-
-  def self.add_clue_point_to_active_players!
-    user_ids = Game.today.collect{|g|g.user_id}.uniq
-    User.find(user_ids).each do |user|
-      begin
-        user.increment!(:clue_points)
-      rescue ActiveRecord::StaleObjectError => e
-        Rails.logger.error(e.message)
-      end
-    end
   end
 
   def self.new_day_set_scores!(force_week = false)

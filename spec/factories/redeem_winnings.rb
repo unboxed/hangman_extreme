@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :redeem_winning do
     prize_amount 1
-    prize_type "clue_points"
+    prize_type "mxit_money"
     state "pending"
     user {create(:user, prize_points: 1000)}
   end

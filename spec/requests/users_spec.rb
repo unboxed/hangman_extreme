@@ -15,7 +15,6 @@ shared_examples "a user browser" do
   it "must the show the current top players" do
     users = create_list(:user,4).each{|user| create(:won_game, user: user) }
     User.new_day_set_scores!
-    User.add_clue_point_to_active_players!
     visit '/'
     click_link('view_rank')
     click_link('leaderboard')

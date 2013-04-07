@@ -14,7 +14,7 @@ describe "users/profile.html.erb" do
     render
     rendered.should have_content("Grant Petersen")
     rendered.should have_content("123")
-    rendered.should have_content("20 clue points")
+    rendered.should have_content("20 credits")
   end
 
   it "should have a modify real name link" do
@@ -28,12 +28,12 @@ describe "users/profile.html.erb" do
   end
 
   it "should have a buy more clue points link" do
-    view.should_receive(:menu_item).with(anything,purchases_path,id: 'buy_clue_points')
+    view.should_receive(:menu_item).with(anything,purchases_path,id: 'buy_credits')
     render
   end
 
   it "should have a buy more clue points link" do
-    view.should_receive(:menu_item).with(anything,purchases_path,id: 'buy_clue_points')
+    view.should_receive(:menu_item).with(anything,purchases_path,id: 'buy_credits')
     render
   end
 

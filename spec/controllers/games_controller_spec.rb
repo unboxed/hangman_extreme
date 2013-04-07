@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe GamesController do
 
-
   before :each do
     @current_user = create(:user)
     @ability = Object.new
@@ -86,14 +85,14 @@ describe GamesController do
     end
 
     it "must show clue" do
-      @current_user.update_attribute(:clue_points, 1)
+      @current_user.update_attribute(:credits, 1)
       expect {
         get :play_letter, :id => @game.to_param, :letter => "show_clue"
       }.to change { @game.reload; @game.clue_revealed }
     end
 
-    it "must show clue" do
-      @current_user.update_attribute(:clue_points, 0)
+    it "wont show clue" do
+      @current_user.update_attribute(:credits, 0)
       get :play_letter, :id => @game.to_param, :letter => "show_clue"
       response.should redirect_to(purchases_path)
       flash[:alert].should_not be_blank
@@ -110,6 +109,18 @@ describe GamesController do
     it "assigns a new game as @game" do
       do_get_new
       assigns(:game).should be_a_new(Game)
+    end
+
+    it "must be successful" do
+      do_get_new
+      response.should be_success
+    end
+
+    it "redirects to purchase_transaction_path if no more credits" do
+      @current_user.update_attribute(:credits,0)
+      do_get_new
+      response.should redirect_to(purchases_path)
+      flash[:alert].should_not be_blank
     end
 
   end
@@ -151,6 +162,12 @@ describe GamesController do
         expect {
           do_create
         }.to change(Game, :count).by(1)
+      end
+
+      it "reduces the users credits" do
+        expect {
+          do_create
+        }.to change{@current_user.reload; @current_user.credits}.by(1)
       end
 
       it "assigns a newly created game as @game" do
