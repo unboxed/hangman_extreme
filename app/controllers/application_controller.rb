@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   end
 
   def access_denied
-    Rails.env.development? ? redirect_to('/auth/developer') : redirect_to('/auth/facebook')
+    Rails.env.test? ? redirect_to('/auth/facebook') : redirect_to('/about')
     false
   end
 

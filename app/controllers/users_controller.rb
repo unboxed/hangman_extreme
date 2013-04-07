@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :login_required, :except => :facebook_oauth
+  before_filter :login_required
   load_and_authorize_resource :except => [:mxit_authorise,:mxit_oauth,:profile, :stats]
 
   def index

@@ -13,12 +13,19 @@
 <div id="<%= site_page_id %>" data-role="page" data-url="<%= request.path %>">
 
   <div data-role="header">
-    <% unless current_page?(root_path) %>
-        <%= link_to 'Home', root_path, id: 'home' %>
-    <% end %>
-    <h1>Hangman Extreme</h1>
     <% if params[:action] == 'index' %>
-        <%= link_to 'Play', play_games_path, id: 'play_game', 'data-theme' =>"b" %>
+      <%= link_to 'Play', play_games_path, id: 'play_game', 'data-theme' =>"b" %>
+    <% elsif current_page?(about_path)  %>
+      <%= link_to 'Login', Rails.env.development? ? '/auth/developer' : '/auth/facebook', id: 'login', 'data-ajax' =>"false", 'data-theme' =>"b" %>
+    <% end %>
+
+    <h1>Hangman Extreme</h1>
+    <% if current_user %>
+      <% if current_page?(root_path) %>
+        <%= link_to 'Logout', logout_path, id: 'logout' %>
+      <% else %>
+        <%= link_to 'Home', root_path, id: 'home' %>
+      <% end %>
     <% end %>
   </div>
 
@@ -39,21 +46,40 @@
   <% end %>
 
 </div><!-- /page -->
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '<%= ENV['FACEBOOK_KEY'] %>', // App ID
+      channelUrl : '//<%= request.protocol + request.host %>/channel', // Channel File
+      status     : true, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      xfbml      : true  // parse XFBML
+    });
+  };
 
-<% if ENV['GA_TRACKING_CODE'] %>
-  <script type="text/javascript">
+  // Load the SDK Asynchronously
+  (function(d){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all.js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document));
+</script>
 
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', '<%= ENV['GA_TRACKING_CODE'] %>']);
-    _gaq.push(['_trackPageview']);
+<script type="text/javascript">
 
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '<%= ENV['GA_TRACKING_CODE'] %>']);
+  _gaq.push(['_trackPageview']);
 
-  </script>
-<% end %>
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
 </body>
 </html>

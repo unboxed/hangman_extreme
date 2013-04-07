@@ -28,10 +28,12 @@ HangmanLeague::Application.routes.draw do
   resources :redeem_winnings, :except => [:edit, :update, :destroy]
 
   match '/define/:word', to: 'words#define', as: 'define_word'
-  match '/facebook_oauth', to: 'users#facebook_oauth', as: 'facebook_oauth'
   match '/auth/:provider/callback', to: 'sessions#create'
+  match '/auth/:provider/failure', to: 'sessions#failure'
   match '/authorize', to: 'users#mxit_authorise', as: 'mxit_authorise'
   match '/server_status', to: 'feedback#server_status', as: 'server_status'
+  match '/about', to: 'explain#about', as: 'about'
+  match '/logout', to: 'sessions#destroy', as: 'logout'
 
 
   root :to => 'games#index'

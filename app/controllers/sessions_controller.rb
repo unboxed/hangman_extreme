@@ -4,6 +4,15 @@ class SessionsController < ApplicationController
     redirect_to '/'
   end
 
+  def destroy
+    self.current_user = nil
+    redirect_to '/'
+  end
+
+  def failure
+    redirect_to '/'
+  end
+
   protected
 
   def auth_hash
