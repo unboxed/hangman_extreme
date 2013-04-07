@@ -43,7 +43,7 @@ class PurchaseTransaction < ActiveRecord::Base
   protected
 
   def update_user_credits
-    user.increment!(:credits,credits)
+    user.decrement!(:credits,credits)
   end
 
 

@@ -11,7 +11,7 @@ You have <span><%= @game.attempts_left %></span> attempts left
     <% if @game.clue_revealed? %>
     (<i><%= clue %></i>)
     <% elsif !@game.completed? %>
-      <% menu_item 'show clue', play_letter_game_path(@game,'show_clue'), id: 'show_clue' %>
+      <% menu_item 'show clue', show_clue_game_path(@game), id: 'show_clue' %>
     <% end %>
 <% end %>
 <br/>

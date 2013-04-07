@@ -12,7 +12,7 @@ HangmanLeague::Application.routes.draw do
     end
     get 'page/:page', :action => :index, :on => :collection
     member do
-      get 'show_clue', action: "show_clue", as: 'game_show_clue'
+      get 'show_clue', action: "show_clue", as: 'show_clue'
       post 'show_clue', action: "reveal_clue"
       get "letter/:letter", action: 'play_letter', as: 'play_letter'
     end

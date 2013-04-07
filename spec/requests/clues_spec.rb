@@ -13,23 +13,23 @@ describe 'purchases', :redis => true do
     it "must allow user to purchase credits" do
       visit '/'
       click_link('profile')
-      page.should have_content("2 credits")
+      page.should have_content("70 credits")
       click_link('buy_credits')
       click_link('buy_credits11')
       click_link('submit')
       click_link('profile')
-      page.should have_content("13 credits")
+      page.should have_content("60 credits")
     end
 
     it "must allow user to cancel purchase of clue points" do
       visit '/'
       click_link('profile')
-      page.should have_content("2 credits")
+      page.should have_content("70 credits")
       click_link('buy_credits')
       click_link('buy_credits11')
       click_link('cancel')
       click_link('profile')
-      page.should have_content("2 credits")
+      page.should have_content("70 credits")
     end
 
   end
@@ -43,7 +43,7 @@ describe 'purchases', :redis => true do
     it "must not allow user to purchase of clue points" do
       visit '/'
       click_link('profile')
-      page.should have_content("2 credits")
+      page.should have_content("70 credits")
       click_link('buy_clue_points')
       page.should have_content("Coming soon, credits purchases")
     end
