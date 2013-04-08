@@ -3,7 +3,7 @@
     <thead>
     <tr>
       <th><%= time_period.capitalize %></th>
-      <th data-priority="1">Amount</th>
+      <th data-priority="1">Amount <%= mxit_only("|") %> </th>
       <th data-priority="2">Rank</th>
     </tr>
     </thead>
@@ -13,7 +13,7 @@
       <% rank_field = "#{time_period}_#{rank_by}_rank".to_sym %>
       <tr>
         <th><%= rank_by %>:</th>
-        <td><%= @user.send(field) %><%= "|" if mxit_request? %></td>
+        <td><%= @user.send(field) %> <%= mxit_only("|") %> </td>
         <td><%= @user.send(rank_field) %></td>
       </tr>
     <% end %>

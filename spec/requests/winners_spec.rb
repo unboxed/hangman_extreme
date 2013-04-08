@@ -4,7 +4,7 @@ shared_examples "a winner viewer" do
 
   it "must show the daily and weekly winners" do
     users = create_list(:user,5, :daily_precision => 100, :daily_streak => 100, :daily_rating => 100)
-    random_users = create_list(:user,5, :daily_wins => 10)
+    random_users = create_list(:user,5, :daily_wins => Winner.daily_random_games_required)
     Timecop.freeze(Date.yesterday) do
       Jobs::CreateDailyWinners.execute
     end
@@ -31,7 +31,7 @@ shared_examples "a winner viewer" do
 
   it "must show the weekly winners" do
     users = create_list(:user,5, :weekly_precision => 100, :weekly_streak => 100, :weekly_rating => 100)
-    random_users = create_list(:user,5, :weekly_wins => 35)
+    random_users = create_list(:user,5, :weekly_wins => Winner.weekly_random_games_required)
     Timecop.freeze(Date.current.beginning_of_week.yesterday) do
       Jobs::CreateWeeklyWinners.execute
     end

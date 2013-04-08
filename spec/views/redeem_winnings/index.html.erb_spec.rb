@@ -21,7 +21,7 @@ describe "redeem_winnings/index.html.erb" do
 
   it "must have a link to scoring categories" do
     render
-    rendered.should have_link("read",href: explain_path('scoring_categories'))
+    rendered.should have_link("Read",href: explain_path('scoring_categories'))
   end
 
   context "mxit money" do

@@ -227,27 +227,6 @@ describe User do
 
   end
 
-  context "update_scores!" do
-
-    it "must set all scores for players who have played today" do
-      scoring_fields = User.scoring_fields.delete_if{|s| s.to_s.include?('streak')}
-      Timecop.freeze(2013, 4, 1,1) do # Monday 1st April
-        user = create(:user)
-        create_list(:won_game,20, user: user)
-        user.update_ratings
-        scores = scoring_fields.collect{|field| [field,user.send(field.to_sym)] }
-        User.new_day_set_scores!
-        User.update_scores!
-        user.reload
-        new_scores = scoring_fields.collect{|field| [field,user.send(field.to_sym)] }
-        scores.each do |score|
-          new_scores.should include(score)
-        end
-      end
-    end
-
-  end
-
   context "rank" do
 
     it "should return correct rankings" do
@@ -577,12 +556,12 @@ describe User do
       @user = create(:user)
     end
 
-    it "must return 10" do
-      @user.daily_wins_required_for_random.should == 10
+    it "must return 5" do
+      @user.daily_wins_required_for_random.should == 5
     end
 
     it "must return 1" do
-      create_list(:won_game,9, :user => @user)
+      create_list(:won_game,4, :user => @user)
       @user.daily_wins_required_for_random.should == 1
     end
 
@@ -599,11 +578,11 @@ describe User do
       @user = create(:user)
     end
 
-    it "must return 10" do
+    it "must return 35" do
       @user.weekly_wins_required_for_random.should == 35
     end
 
-    it "must return 1" do
+    it "must return 26" do
       create_list(:won_game,9, :user => @user)
       @user.weekly_wins_required_for_random.should == 26
     end

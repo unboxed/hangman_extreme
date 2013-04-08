@@ -11,6 +11,7 @@ describe "winners/index.html.erb" do
       ])
     @current_user = stub_model(User, id: 33)
     view.stub!(:current_user).and_return(@current_user)
+    view.stub!(:mxit_request?).and_return(true)
     view.stub!(:menu_item)
   end
 

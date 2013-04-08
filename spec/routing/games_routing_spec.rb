@@ -28,11 +28,11 @@ describe GamesController do
     end
 
     it "routes to #show_clue" do
-      get("/games/1/show_clue").should route_to("games#show_clue")
+      get("/games/1/show_clue").should route_to("games#show_clue", id: "1")
     end
 
     it "routes to #show_clue" do
-      post("/games/1/show_clue").should route_to("games#reveal_clue")
+      post("/games/1/show_clue").should route_to("games#reveal_clue", id: "1")
     end
 
   end

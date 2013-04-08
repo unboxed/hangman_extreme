@@ -80,7 +80,7 @@ describe RedeemWinning do
       redeem_winning = RedeemWinning.new(user_id: user.id, prize_amount: 10, prize_type: 'clue_points', state: 'pending')
       expect {
         redeem_winning.save
-      }.to change{user.reload;user.clue_points}.by(10)
+      }.to change{user.reload;user.credits}.by(10)
     end
 
   end

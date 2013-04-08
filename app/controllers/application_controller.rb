@@ -22,7 +22,11 @@ class ApplicationController < ActionController::Base
     !request.env['HTTP_X_MXIT_USERID_R'].nil?
   end
 
-  helper_method :current_user, :current_user_request_info, :notify_airbrake, :mxit_request?
+  def facebook_user?
+    current_user.provider == 'facebook'
+  end
+
+  helper_method :current_user, :current_user_request_info, :notify_airbrake, :mxit_request? , :facebook_user?
 
   def login_required
     return true if current_user

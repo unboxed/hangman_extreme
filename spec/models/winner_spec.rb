@@ -47,7 +47,7 @@ describe Winner do
 
         context "random" do
 
-          let(:required_wins){period == 'daily' ? 10 : 35}
+          let(:required_wins){period == 'daily' ? 5 : 35}
 
           it "wont allow players to win 2 randoms in a row" do
             day1 = Time.current.end_of_week

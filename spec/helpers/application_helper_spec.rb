@@ -2,14 +2,6 @@ require 'spec_helper'
 
 describe ApplicationHelper do
 
-  context "mxit_authorise_link" do
-
-    it "must work" do
-      helper.mxit_authorise_link("name", state: "testing")
-    end
-
-  end
-
   context "smart_link_to" do
 
     it "should work like normal link" do

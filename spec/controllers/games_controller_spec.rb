@@ -51,6 +51,65 @@ describe GamesController do
       do_get_show
       assigns(:game).should eq(@game)
     end
+
+    it "renders successfully" do
+      do_get_show
+      response.should be_success
+    end
+
+  end
+
+  describe "GET show_clue" do
+
+    before :each do
+      @game = create(:game)
+      get :show_clue, {:id => @game.to_param}
+    end
+
+    it "assigns the requested game as @game" do
+      assigns(:game).should eq(@game)
+    end
+
+    it "renders successfully" do
+      response.should be_success
+    end
+
+  end
+
+  describe "POST reveal_clue" do
+
+    before :each do
+      @game = create(:game, user: @current_user)
+    end
+
+    def do_post_reveal_clue
+      post :reveal_clue, {:id => @game.to_param}
+    end
+
+    it "must show clue" do
+      @current_user.update_attribute(:credits, 1)
+      expect {
+        do_post_reveal_clue
+      }.to change { @game.reload; @game.clue_revealed }
+    end
+
+    it "wont show clue" do
+      @current_user.update_attribute(:credits, 0)
+      do_post_reveal_clue
+      response.should redirect_to(purchases_path)
+      flash[:alert].should_not be_blank
+    end
+
+    it "assigns the requested game as @game" do
+      do_post_reveal_clue
+      assigns(:game).should eq(@game)
+    end
+
+    it "redirect to show" do
+      do_post_reveal_clue
+      response.should redirect_to(action: 'show')
+    end
+
   end
 
   describe "GET play_letter" do
@@ -82,20 +141,6 @@ describe GamesController do
         do_get_play_letter
       }.to change { @current_user.reload; @current_user.daily_rating }
       flash[:notice].should_not be_blank
-    end
-
-    it "must show clue" do
-      @current_user.update_attribute(:credits, 1)
-      expect {
-        get :play_letter, :id => @game.to_param, :letter => "show_clue"
-      }.to change { @game.reload; @game.clue_revealed }
-    end
-
-    it "wont show clue" do
-      @current_user.update_attribute(:credits, 0)
-      get :play_letter, :id => @game.to_param, :letter => "show_clue"
-      response.should redirect_to(purchases_path)
-      flash[:alert].should_not be_blank
     end
 
   end
@@ -167,7 +212,7 @@ describe GamesController do
       it "reduces the users credits" do
         expect {
           do_create
-        }.to change{@current_user.reload; @current_user.credits}.by(1)
+        }.to change{@current_user.reload; @current_user.credits}.by(-1)
       end
 
       it "assigns a newly created game as @game" do

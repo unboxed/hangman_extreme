@@ -18,7 +18,7 @@ describe 'purchases', :redis => true do
       click_link('buy_credits11')
       click_link('submit')
       click_link('profile')
-      page.should have_content("60 credits")
+      page.should have_content("81 credits")
     end
 
     it "must allow user to cancel purchase of clue points" do
@@ -44,7 +44,7 @@ describe 'purchases', :redis => true do
       visit '/'
       click_link('profile')
       page.should have_content("70 credits")
-      click_link('buy_clue_points')
+      click_link('buy_credits')
       page.should have_content("Coming soon, credits purchases")
     end
 
