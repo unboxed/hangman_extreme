@@ -87,14 +87,14 @@ describe "games/show" do
   it "must have a link to reveal the clue on menu" do
     Dictionary.should_receive(:clue).with(@game.word).and_return("Cluedo")
     @game.stub(:clue_revealed?).and_return(false)
-    view.should_receive(:menu_item).with(anything,show_clue_game_path(@game,'show_clue'),id: 'show_clue')
+    view.should_receive(:menu_item).with(anything,show_clue_game_path(@game),id: 'show_clue')
     render
   end
 
   it "must show the clue if it has been revealed" do
     Dictionary.should_receive(:clue).with(@game.word).and_return("Cluedo")
     @game.stub(:clue_revealed?).and_return(true)
-    view.should_not_receive(:menu_item).with(anything,play_letter_game_path(@game,'show_clue'),id: 'show_clue')
+    view.should_not_receive(:menu_item).with(anything,show_clue_game_path(@game),id: 'show_clue')
     render
     rendered.should have_content("Cluedo")
   end
