@@ -1,9 +1,9 @@
-<h1>Buy Clues</h1>
+<h1>Buy Credits</h1>
 
-You have currently have <b><%= current_user.clue_points %></b> clue points<br/>
-You will receive 1 free clue point every day that you play<br/>
+<p>You have currently have <b><%= current_user.credits %></b> credits.
+All Players will be updated to 20 credits a day unless you have more</p>
 
-<% if Rails.env.test? || ENV['MXIT_VENDOR_ID'] %>
+<% if mxit_request? && ENV['MXIT_VENDOR_ID'] %>
 <ul>
     <% PurchaseTransaction.products.each_with_index do |product,index| %>
         <% product_id, hash = product %>
@@ -15,13 +15,9 @@ You will receive 1 free clue point every day that you play<br/>
     <% end %>
 </ul>
 <% else %>
-    <br/><b>Coming soon, clue point purchases</b><br/>
+    <br/><b>Coming soon, credits purchases</b><br/>
 <% end %>
 
 <br/>
 
-<% menu_item 'home', root_path, id: 'root_page' %>
 <% menu_item 'profile', profile_users_path, id: 'profile' %>
-<% if game = current_user.current_game %>
-  <% menu_item 'continue game', game_path(game), id: 'continue' %>
-<% end %>

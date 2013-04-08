@@ -1,7 +1,15 @@
 module MenuHelper
 
   def menu_items
-    @menu_items ||= []
+    return @menu_items if @menu_items
+    @menu_items = []
+    if mxit_request?
+      @menu_items << ['home', root_path, id: 'home'] unless current_page?(root_path)
+      if params[:action] == 'index' || (params[:controller] != 'games'  && params[:action] != 'new')
+        @menu_items << ['play', play_games_path, id: 'play_game', style: 'color:green;']
+      end
+    end
+    @menu_items
   end
 
   def menu_item(*args)
@@ -12,7 +20,7 @@ module MenuHelper
     items = menu_items.clone
     grouped_items = []
     while(!items.empty?)
-      if items.size == 1 || (items[0].first.size + items[1].first.size > 20)
+      if items.size == 1 || (items[0].first.size + items[1].first.size > 20) || !mxit_request?
         grouped_items << [items[0]]
         items.shift
       else

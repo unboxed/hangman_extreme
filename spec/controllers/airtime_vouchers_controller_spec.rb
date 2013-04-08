@@ -24,9 +24,9 @@ describe AirtimeVouchersController do
       assigns(:airtime_vouchers).should eq([airtime_voucher])
     end
 
-    it "renders the application layout" do
+    it "renders the index" do
       do_get_index
-      response.should render_template("layouts/application")
+      response.should render_template("airtime_vouchers/index")
     end
 
   end

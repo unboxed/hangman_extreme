@@ -10,17 +10,13 @@ describe "games/show" do
                                           is_lost?: false))
     view.stub!(:current_user).and_return(stub_model(User, id: 50))
     view.stub!(:menu_item)
+    view.stub!(:mxit_request?).and_return(true)
   end
 
   it "must show the attempts left" do
     render
     rendered.should have_content("5")
     rendered.should have_content("_ _ t _ _")
-  end
-
-  it "must have a games index link on menu" do
-    view.should_receive(:menu_item).with(anything,games_path,id: 'games_index')
-    render
   end
 
   it "must have a letter link for each letter" do
@@ -91,7 +87,7 @@ describe "games/show" do
   it "must have a link to reveal the clue on menu" do
     Dictionary.should_receive(:clue).with(@game.word).and_return("Cluedo")
     @game.stub(:clue_revealed?).and_return(false)
-    view.should_receive(:menu_item).with(anything,play_letter_game_path(@game,'show_clue'),id: 'show_clue')
+    view.should_receive(:menu_item).with(anything,show_clue_game_path(@game,'show_clue'),id: 'show_clue')
     render
   end
 

@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :provider, :uid, :clue_points, :prize_points
+  attr_accessible :name, :provider, :uid, :credits, :prize_points
   attr_accessible :real_name, :mobile_number, as: 'user'
   RANKING_FIELDS = Winner::WINNING_PERIODS.product(Winner::WINNING_REASONS - %w(random)).map{|x,y| "#{x}_#{y}"}
 
@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   scope :top_scorers, lambda{ |field| order("#{field} DESC") }
   scope :mxit, where(provider: 'mxit')
   scope :active_last_hour, lambda{ where('updated_at >= ?',1.hour.ago) }
-  scope :active, lambda{ where('updated_at >= ?',1.month.ago) }
+  scope :active, lambda{ where('updated_at >= ?',10.days.ago) }
   scope :random_order, order(connection.instance_values["config"][:adapter].include?("mysql") ? 'RAND()' : 'RANDOM()')
 
   def self.find_or_create_from_auth_hash(auth_hash)
@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
       auth_hash['info'].stringify_keys!
       user.name = auth_hash['info']['name']
       user.login = auth_hash['info']['login']
+      user.email = auth_hash['info']['email'] if user.email.blank?
       user.save
     end
     return user
@@ -76,7 +77,7 @@ class User < ActiveRecord::Base
   end
 
   def send_message(msg)
-    User.send_message(msg,[self])
+    User.send_message(msg,[self]) if provider == 'mxit'
   end
 
   def registered_on_mxit_money?
@@ -107,13 +108,13 @@ class User < ActiveRecord::Base
       if mxit_connection
         if users.kind_of?(ActiveRecord::Relation)
           page = 1
-          while((user_group = users.order(:id).page(page).per(100)).any?)
+          while((user_group = users.mxit.order(:id).page(page).per(100)).any?)
             to = user_group.collect(&:uid).join(",")
             mxit_connection.send_message(body: msg, to: to)
             page += 1
           end
         else
-          users.uniq.in_groups_of(100,false).each do |user_group|
+          users.delete_if{|u| u.provider != "mxit"}.uniq.in_groups_of(100,false).each do |user_group|
             to = user_group.collect(&:uid).join(",")
             mxit_connection.send_message(body: msg, to: to)
           end
@@ -123,38 +124,13 @@ class User < ActiveRecord::Base
   end
 
   def self.purge_tracking!
-    User.where('updated_at < ?',7.days.ago).each{|u| u.google_tracking.delete }.size
-  end
-
-  def self.add_clue_point_to_active_players!
-    user_ids = Game.today.collect{|g|g.user_id}.uniq
-    User.find(user_ids).each do |user|
-      begin
-        user.increment!(:clue_points)
-      rescue ActiveRecord::StaleObjectError => e
-        Rails.logger.error(e.message)
-      end
-    end
+    User.where('updated_at < ?',20.days.ago).each{|u| u.google_tracking.delete }.size
   end
 
   def self.new_day_set_scores!(force_week = false)
     User.update_all(daily_wins: 0, daily_rating: 0, daily_precision: 0, daily_streak: 0, current_daily_streak: 0)
     if Date.current == Date.current.beginning_of_week || force_week
       User.update_all(weekly_wins: 0, weekly_rating: 0, weekly_precision: 0, weekly_streak: 0, current_weekly_streak: 0)
-    end
-  end
-
-  def self.update_scores!
-    user_ids = Game.today.collect{|g|g.user_id}.uniq
-    User.where('id IN (?)',user_ids).each do |user|
-      begin
-        user.update_daily_scores
-        if Date.current == Date.current.beginning_of_week
-          user.update_weekly_scores
-        end
-      rescue Exception => e
-        raise if Rails.env.test?
-      end
     end
   end
 
@@ -184,7 +160,7 @@ class User < ActiveRecord::Base
   end
 
   def to_s
-    "<User id:#{id} name:#{name}>"
+    "<User id:#{id} name:#{name} email:#{email}>"
   end
 
   def inspect

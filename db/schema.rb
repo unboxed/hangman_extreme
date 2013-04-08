@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130320095156) do
+ActiveRecord::Schema.define(:version => 20130407052802) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -108,8 +108,8 @@ ActiveRecord::Schema.define(:version => 20130320095156) do
     t.text     "name"
     t.string   "uid"
     t.string   "provider"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.integer  "weekly_rating",         :default => 0
     t.integer  "yearly_rating",         :default => 0
     t.integer  "weekly_precision",      :default => 0
@@ -120,14 +120,14 @@ ActiveRecord::Schema.define(:version => 20130320095156) do
     t.string   "real_name"
     t.string   "mobile_number"
     t.string   "email"
-    t.integer  "clue_points",           :default => 2, :null => false
-    t.integer  "prize_points",          :default => 0, :null => false
+    t.integer  "credits",               :default => 70, :null => false
+    t.integer  "prize_points",          :default => 0,  :null => false
     t.string   "login"
-    t.integer  "lock_version",          :default => 0, :null => false
-    t.integer  "current_daily_streak",  :default => 0, :null => false
-    t.integer  "current_weekly_streak", :default => 0, :null => false
-    t.integer  "daily_wins",            :default => 0, :null => false
-    t.integer  "weekly_wins",           :default => 0, :null => false
+    t.integer  "lock_version",          :default => 0,  :null => false
+    t.integer  "current_daily_streak",  :default => 0,  :null => false
+    t.integer  "current_weekly_streak", :default => 0,  :null => false
+    t.integer  "daily_wins",            :default => 0,  :null => false
+    t.integer  "weekly_wins",           :default => 0,  :null => false
   end
 
   add_index "users", ["created_at"], :name => "index_users_on_created_at"

@@ -1,0 +1,85 @@
+<head>
+  <title>Hangman Extreme</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+  <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div id="<%= site_page_id %>" data-role="page" data-url="<%= request.path %>">
+
+  <div data-role="header">
+    <% if params[:action] == 'index' %>
+      <%= link_to 'Play', play_games_path, id: 'play_game', 'data-theme' =>"b" %>
+    <% elsif current_page?(about_path)  %>
+      <%= link_to 'Login', Rails.env.development? ? '/auth/developer' : '/auth/facebook', id: 'login', 'data-ajax' =>"false", 'data-theme' =>"b" %>
+    <% end %>
+
+    <h1>Hangman Extreme</h1>
+    <% if current_user %>
+      <% if current_page?(root_path) %>
+        <%= link_to 'Logout', logout_path, id: 'logout' %>
+      <% else %>
+        <%= link_to 'Home', root_path, id: 'home' %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div data-role="content">
+    <% if notice -%>
+        <div class="alert alert-info" style="color:#00008b;"><%= notice %></div>
+    <% elsif alert -%>
+        <div class="alert alert-block" style="color:#8b0000;"><%= alert %></div>
+    <% end -%>
+    <%= yield %>
+    <%= menu unless @dialog %>
+  </div>
+
+  <% unless @dialog %>
+  <div data-role="footer" class="footer">
+    <%= smaato_ad %>
+  </div><!-- /footer -->
+  <% end %>
+
+</div><!-- /page -->
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '<%= ENV['FACEBOOK_KEY'] %>', // App ID
+      channelUrl : '//<%= request.protocol + request.host %>/channel', // Channel File
+      status     : true, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      xfbml      : true  // parse XFBML
+    });
+  };
+
+  // Load the SDK Asynchronously
+  (function(d){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all.js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document));
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '<%= ENV['GA_TRACKING_CODE'] %>']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

@@ -16,6 +16,7 @@ platforms :jruby do
 end
 gem 'cancan'
 gem 'omniauth'
+gem 'omniauth-facebook'
 gem 'kaminari'
 gem 'mxit_api', '>= 0.2.2.pre'
 gem "savon"
@@ -73,6 +74,7 @@ group :test do
     gem 'sqlite3'
     gem 'pg'
   end
+  gem 'poltergeist'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'

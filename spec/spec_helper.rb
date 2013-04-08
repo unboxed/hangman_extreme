@@ -41,10 +41,11 @@ Spork.prefork do
   require 'rspec/autorun'
   require 'webmock/rspec'
   require 'draper/test/rspec_integration'
+  require 'capybara/poltergeist'
 end
 
 Spork.each_run do
-#  WebMock.disable_net_connect!
+  WebMock.disable_net_connect!(:allow_localhost => true)
   def in_memory_database?
     Rails.configuration.database_configuration[ENV["RAILS_ENV"]]['database'] == ':memory:'
   end
@@ -61,10 +62,16 @@ Spork.each_run do
   VCR.configure do |c|
     c.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
     c.hook_into :webmock
+    c.ignore_localhost = true
   end
 
   RSpec.configure do |config|
     config.include FactoryGirl::Syntax::Methods
+    Capybara.register_driver :poltergeist do |app|
+      Capybara::Poltergeist::Driver.new(app, window_size: [320,480] )
+    end
+    Capybara.javascript_driver = :poltergeist
+
     config.filter_run_excluding :redis => true if ENV["EXCLUDE_REDIS_SPECS"]
 
     # Run specs in random order to surface order dependencies. If you find an
@@ -73,11 +80,7 @@ Spork.each_run do
     #     --seed 1234
     config.order = "random"
     config.before(:suite) do
-      if ENV["BROWSER"]
-        DatabaseCleaner.strategy = :transaction
-      else
-        DatabaseCleaner.strategy = :truncation
-      end
+      DatabaseCleaner.strategy = :transaction
       (@@headless = Headless.new).start if ENV['HEADLESS']
     end
 
@@ -90,11 +93,7 @@ Spork.each_run do
     end
 
     config.after(:all, :js => true) do
-      if ENV["BROWSER"]
-        DatabaseCleaner.strategy = :transaction
-      else
-        DatabaseCleaner.strategy = :truncation
-      end
+      DatabaseCleaner.strategy = :transaction
     end
 
     config.before(:each) do
@@ -112,6 +111,16 @@ Spork.each_run do
 
     config.around(:each, :shinka_vcr => true) do |example|
       VCR.use_cassette('shinka',
+                       :record => :once,
+                       :erb => true,
+                       :allow_playback_repeats => true,
+                       :match_requests_on => [:method,:host]) do
+        example.call
+      end
+    end
+
+    config.around(:each, :smaato_vcr => true) do |example|
+      VCR.use_cassette('smaato',
                        :record => :once,
                        :erb => true,
                        :allow_playback_repeats => true,

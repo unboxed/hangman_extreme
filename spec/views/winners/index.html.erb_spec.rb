@@ -11,6 +11,7 @@ describe "winners/index.html.erb" do
       ])
     @current_user = stub_model(User, id: 33)
     view.stub!(:current_user).and_return(@current_user)
+    view.stub!(:mxit_request?).and_return(true)
     view.stub!(:menu_item)
   end
 
@@ -24,11 +25,6 @@ describe "winners/index.html.erb" do
       rendered.should have_content("goodbye")
       rendered.should have_content("124")
     end
-  end
-
-  it "should have a home page link on menu" do
-    view.should_receive(:menu_item).with(anything,root_path,id: 'root_page')
-    render
   end
 
   it "should have a rank link on menu" do

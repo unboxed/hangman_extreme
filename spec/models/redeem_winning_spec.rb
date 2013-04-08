@@ -4,11 +4,6 @@ describe RedeemWinning do
 
   context "Validation" do
 
-    it "must have a prize type" do
-      RedeemWinning.new.should have(1).errors_on(:prize_type)
-      RedeemWinning.new(prize_type: 'clue_points').should have(0).errors_on(:prize_type)
-    end
-
     ['clue_points','vodago_airtime','cell_c_airtime','mtn_airtime',
      'mxit_money','virgin_airtime','heita_airtime'].each do |t|
       it "must accept #{t} as valid prize type" do
@@ -85,7 +80,7 @@ describe RedeemWinning do
       redeem_winning = RedeemWinning.new(user_id: user.id, prize_amount: 10, prize_type: 'clue_points', state: 'pending')
       expect {
         redeem_winning.save
-      }.to change{user.reload;user.clue_points}.by(10)
+      }.to change{user.reload;user.credits}.by(10)
     end
 
   end

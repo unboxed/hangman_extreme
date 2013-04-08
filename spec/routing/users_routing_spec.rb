@@ -4,10 +4,6 @@ describe UsersController do
 
   describe "routing" do
 
-    it "routes to #index" do
-      get("/facebook_oauth").should route_to("users#facebook_oauth")
-    end
-
     it "builds mxit authorise" do
       url = mxit_authorise_url(response_type: 'code',
                                host: "auth.mxit.com",

@@ -11,3 +11,13 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require_self
+function fb_invite_friends() {
+  FB.ui({
+      method: 'apprequests',
+      message: 'invites you to play hangman extreme and win airtime!',
+    },
+    function(response) {
+      console.log('sendRequest response: ', response);
+    });
+}
+

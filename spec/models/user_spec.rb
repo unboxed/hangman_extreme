@@ -172,27 +172,6 @@ describe User do
 
   end
 
-  context "add_clue_point_to_active_players!" do
-
-    it "must increases users clue_points who played today by one" do
-      user = create(:game, user: create(:user, clue_points: 2)).user
-      User.add_clue_point_to_active_players!
-      user.reload
-      user.clue_points.should == 3
-    end
-
-    it "wont increases users clue_points who did not play today" do
-      user = create(:user, clue_points: 2)
-      Timecop.freeze(1.day.ago) do
-        create(:game, user: user)
-      end
-      User.add_clue_point_to_active_players!
-      user.reload
-      user.clue_points.should == 2
-    end
-
-  end
-
   context "new_day_set_scores!" do
 
     it "must set all daily scores to 0" do
@@ -243,27 +222,6 @@ describe User do
         user.weekly_precision.should == 0
         user.weekly_streak.should == 0
         user.current_weekly_streak.should == 0
-      end
-    end
-
-  end
-
-  context "update_scores!" do
-
-    it "must set all scores for players who have played today" do
-      scoring_fields = User.scoring_fields.delete_if{|s| s.to_s.include?('streak')}
-      Timecop.freeze(2013, 4, 1,1) do # Monday 1st April
-        user = create(:user)
-        create_list(:won_game,20, user: user)
-        user.update_ratings
-        scores = scoring_fields.collect{|field| [field,user.send(field.to_sym)] }
-        User.new_day_set_scores!
-        User.update_scores!
-        user.reload
-        new_scores = scoring_fields.collect{|field| [field,user.send(field.to_sym)] }
-        scores.each do |score|
-          new_scores.should include(score)
-        end
       end
     end
 
@@ -370,9 +328,15 @@ describe User do
       User.send_message("Nobody!!",[])
     end
 
-    it "must send a message to a user" do
-      user = stub_model(User, uid: 'm345')
+    it "must send a message to a user if mxit user" do
+      user = stub_model(User, uid: 'm345', provider: 'mxit')
       @mxit_connection.should_receive(:send_message).once.with(body: 'Single user', to: "m345")
+      User.send_message("Single user",[user])
+    end
+
+    it "wont send a message to a user if other user" do
+      user = stub_model(User, uid: 'm345', provider: 'other')
+      @mxit_connection.should_not_receive(:send_message)
       User.send_message("Single user",[user])
     end
 
@@ -592,12 +556,12 @@ describe User do
       @user = create(:user)
     end
 
-    it "must return 10" do
-      @user.daily_wins_required_for_random.should == 10
+    it "must return 5" do
+      @user.daily_wins_required_for_random.should == 5
     end
 
     it "must return 1" do
-      create_list(:won_game,9, :user => @user)
+      create_list(:won_game,4, :user => @user)
       @user.daily_wins_required_for_random.should == 1
     end
 
@@ -614,11 +578,11 @@ describe User do
       @user = create(:user)
     end
 
-    it "must return 10" do
+    it "must return 35" do
       @user.weekly_wins_required_for_random.should == 35
     end
 
-    it "must return 1" do
+    it "must return 26" do
       create_list(:won_game,9, :user => @user)
       @user.weekly_wins_required_for_random.should == 26
     end

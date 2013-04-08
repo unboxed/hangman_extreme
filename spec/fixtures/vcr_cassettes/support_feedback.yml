@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://uv.uservoice.com/api/v1/tickets.json
+    uri: https://<%= ENV['UV_SUBDOMAIN_NAME'] %>.uservoice.com/api/v1/tickets.json
     body:
       encoding: US-ASCII
       string: "{\"email\":\"m2604100@mxit.im\",\"name\":\" \",\"ticket\":{\"subject\"\

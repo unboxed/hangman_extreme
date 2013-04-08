@@ -1,5 +1,6 @@
 export REDIS_URL="redis://localhost"
-export FB_CANVAS_PAGE=""
+export FACEBOOK_KEY=""
+export FACEBOOK_SECRET=""
 export GA_TRACKING_CODE=""
 export MXIT_APP_NAME=""
 export MXIT_CLIENT_ID=""

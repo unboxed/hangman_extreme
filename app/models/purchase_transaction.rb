@@ -1,10 +1,11 @@
 class PurchaseTransaction < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :currency_amount, :moola_amount, :product_description, :product_id, :product_name, :user_id, :ref
+  attr_accessible :currency_amount, :moola_amount, :product_description, :product_id,
+                  :product_name, :user_id, :ref
 
   validates :product_id, :user_id, :currency_amount, :product_name, :ref, presence: true
   validates_numericality_of :moola_amount, only_integer: true, greater_than: 0
-  after_create :update_user_clue_points
+  after_create :update_user_credits
 
   scope :last_day, lambda{ where('created_at >= ?',1.day.ago) }
 
@@ -23,26 +24,26 @@ class PurchaseTransaction < ActiveRecord::Base
     end
   end
 
-  def clue_points
-    PurchaseTransaction.products[product_id][:clue_points]
+  def credits
+    PurchaseTransaction.products[product_id][:credits]
   end
 
   def self.products
     return @p if @p
     @p = {}
-    [[1,1],[10,11],[20,23],[50,59],[100,120]].each do |moola,amount|
-      @p["clue#{amount}"] = HashWithIndifferentAccess.new(currency_amount: "#{moola} cents",
-                                                          moola_amount: moola,
-                                                          product_name: "#{amount} clue points",
-                                                          clue_points: amount)
+    [[1,1],[10,11],[20,23],[50,59],[100,120],[200,250]].each do |moola,amount|
+      @p["credits#{amount}"] = HashWithIndifferentAccess.new(currency_amount: "#{moola} cents",
+                                                                moola_amount: moola,
+                                                                product_name: "#{amount} credits",
+                                                                    credits: amount)
     end
     @p.freeze
   end
 
   protected
 
-  def update_user_clue_points
-    user.update_attribute(:clue_points,user.clue_points + clue_points)
+  def update_user_credits
+    user.increment!(:credits,credits)
   end
 
 

@@ -12,6 +12,5 @@
                        users_path(period: params[:period], rank_by: rank),
                        id: "#{params[:period] || 'daily'}_#{rank}" %> |
 <% end %>
-<br/>
 <% menu_item 'scoring explained', explain_path(action: 'scoring_categories'), id: 'scoring_categories' %>
 <% menu_item 'winners view', winners_path(period: params[:period], reason: params[:rank_by]), id: 'winners' %>

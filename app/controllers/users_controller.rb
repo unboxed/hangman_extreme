@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :login_required, :except => :facebook_oauth
+  before_filter :login_required
   load_and_authorize_resource :except => [:mxit_authorise,:mxit_oauth,:profile, :stats]
-  caches_action :stats, expires_in: 1.day, :cache_path => proc{ {date: Date.current} }
 
   def index
     params[:period] = 'daily' unless Winner::WINNING_PERIODS.include?(params[:period].to_s)

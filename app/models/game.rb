@@ -40,9 +40,11 @@ class Game < ActiveRecord::Base
   end
 
   def reveal_clue
-    if user.clue_points > 0 && !clue_revealed?
-      user.decrement!(:clue_points)
-      toggle(:clue_revealed)
+    if user.credits > 0 && !clue_revealed?
+      Game.transaction do
+        user.decrement!(:credits)
+        toggle!(:clue_revealed)
+      end
     end
   end
 

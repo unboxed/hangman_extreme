@@ -24,11 +24,6 @@ describe PurchaseTransactionsController do
       assigns(:purchase_transactions).should eq([trans])
     end
 
-    it "renders the application layout" do
-      do_get_index
-      response.should render_template("layouts/application")
-    end
-
   end
 
   describe "GET new" do

@@ -15,9 +15,9 @@ describe ApplicationController do
       end
     end
 
-    it "must redirects to /auth/developer if not user_id" do
+    it "must redirects to /auth/facebook if not user_id" do
       get :index
-      response.should redirect_to("/auth/developer")
+      response.should redirect_to("/auth/facebook")
     end
 
     it "wont redirects to /auth/developer if logged_in" do
@@ -70,7 +70,18 @@ describe ApplicationController do
         User.should_receive(:find_or_create_from_auth_hash).with(uid: 'm2604100',
                                                                  provider: 'mxit',
                                                                  info: {name: 'grant',
-                                                                        login: nil})
+                                                                        login: nil,
+                                                                        email: nil})
+        get :index
+      end
+
+      it "loads the mxit user into current_user" do
+        request.env['HTTP_X_MXIT_LOGIN'] = 'gman'
+        User.should_receive(:find_or_create_from_auth_hash).with(uid: 'm2604100',
+                                                                 provider: 'mxit',
+                                                                 info: {name: 'grant',
+                                                                        login: "gman",
+                                                                        email: "gman@mxit.im"})
         get :index
       end
 
@@ -116,27 +127,6 @@ describe ApplicationController do
 
   end
 
-  describe "it attempts to load the facebook user" do
-
-    before :each do
-      controller.stub(:send_stats)
-    end
-
-    controller do
-      def index
-        render :text => "hello"
-      end
-    end
-
-    it "wont load mxit user if no userid" do
-      text = "vlXgu64BQGFSQrY0ZcJBZASMvYvTHu9GQ0YM9rjPSso.eyJhbGdvcml0aG0iOiJITUFDLVNIQTI1NiIsIjAiOiJwYXlsb2FkIn0"
-      User.should_not_receive(:find_or_create_from_auth_hash)
-      get :index, signed_request: text
-      assigns(:data).should == {"algorithm"=>"HMAC-SHA256", "0"=>"payload"}
-    end
-
-  end
-
   describe "sending stats" do
 
     controller do
@@ -149,6 +139,7 @@ describe ApplicationController do
       @user = stub_model(User)
       @user_request_info = UserRequestInfo.new
       controller.stub(:tracking_enabled?).and_return(true)
+      controller.stub(:mxit_request?).and_return(true)
       controller.stub(:current_user).and_return(@user)
       controller.stub(:current_user_request_info).and_return(@user_request_info)
       @gabba = mock('connection',
@@ -164,6 +155,12 @@ describe ApplicationController do
 
     it "wont create a new gabba connection if being redirected" do
       controller.stub(:status).and_return(302)
+      Gabba::Gabba.should_not_receive(:new)
+      get :index
+    end
+
+    it "wont create a new gabba connection if not mxit request" do
+      controller.stub(:mxit_request?).and_return(false)
       Gabba::Gabba.should_not_receive(:new)
       get :index
     end
@@ -263,6 +260,30 @@ describe ApplicationController do
       request.env['HTTP_X_MXIT_USER_INPUT'] = "winners"
       get :index
       response.should redirect_to(winners_path)
+    end
+
+  end
+
+  describe "it uses correct layout" do
+
+    controller do
+      layout :set_layout
+
+      def index
+        render "games/index", layout: true
+      end
+    end
+
+    it "must render mobile layout" do
+      get :index
+      response.should render_template("layouts/mobile")
+    end
+
+    it "must render mxit layout" do
+      controller.stub(:send_stats)
+      request.env['HTTP_X_MXIT_USERID_R'] = "m123"
+      get :index
+      response.should render_template("layouts/mxit")
     end
 
   end
