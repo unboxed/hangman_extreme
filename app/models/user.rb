@@ -12,9 +12,18 @@ class User < ActiveRecord::Base
 
   scope :top_scorers, lambda{ |field| order("#{field} DESC") }
   scope :mxit, where(provider: 'mxit')
+  scope :facebook, where(provider: 'facebook')
   scope :active_last_hour, lambda{ where('updated_at >= ?',1.hour.ago) }
   scope :active, lambda{ where('updated_at >= ?',10.days.ago) }
   scope :random_order, order(connection.instance_values["config"][:adapter].include?("mysql") ? 'RAND()' : 'RANDOM()')
+
+  def self.active_mxit
+    active.mxit
+  end
+
+  def self.active_facebook
+    active.facebook
+  end
 
   def self.find_or_create_from_auth_hash(auth_hash)
     auth_hash.stringify_keys!
