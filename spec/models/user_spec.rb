@@ -86,10 +86,10 @@ describe User do
 
   context "calculate_daily_rating" do
 
-    it "must use 10 games in the last day" do
+    it "must use 12 games in the last day" do
       user = create(:user)
-      create_list(:game, 11,  score: 1, user: user)
-      user.calculate_daily_rating.should == 10
+      create_list(:game, 13,  score: 1, user: user)
+      user.calculate_daily_rating.should == 12
     end
 
     it "must use games only from today" do
@@ -103,19 +103,19 @@ describe User do
 
     it "must use first scoring games in the last day" do
       user = create(:user)
-      create_list(:game, 10,  score: 1, user: user)
+      create_list(:game, 12,  score: 1, user: user)
       create(:game, score: 21, user: user)
-      user.calculate_daily_rating.should == 10
+      user.calculate_daily_rating.should == 12
     end
 
   end
 
   context "calculate_weekly_rating" do
 
-    it "must use 35 games in the last week" do
+    it "must use 75 games in the last week" do
       user = create(:user)
-      create_list(:game, 36,  score: 1, user: user)
-      user.calculate_weekly_rating.should == 35
+      create_list(:game, 76,  score: 1, user: user)
+      user.calculate_weekly_rating.should == 75
     end
 
     it "must use games only from this week" do
@@ -129,9 +129,9 @@ describe User do
 
     it "must use first scoring games in the last week" do
       user = create(:user)
-      create_list(:game, 35,  score: 1, user: user)
+      create_list(:game, 75,  score: 1, user: user)
       create(:game, score: 21, user: user)
-      user.calculate_weekly_rating.should == 35
+      user.calculate_weekly_rating.should == 75
     end
 
   end

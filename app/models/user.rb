@@ -49,11 +49,11 @@ class User < ActiveRecord::Base
   end
 
   def calculate_daily_rating
-    calculate_rating(games.today.first(10))
+    calculate_rating(games.today.first(12))
   end
 
   def calculate_weekly_rating
-    calculate_rating(games.this_week.first(35))
+    calculate_rating(games.this_week.first(75))
   end
 
   def update_ratings
