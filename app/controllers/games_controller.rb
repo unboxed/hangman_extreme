@@ -26,18 +26,22 @@ class GamesController < ApplicationController
   end
 
   def play_letter
-    @game.add_choice(params[:letter])
     ranks = {}
-    User::RANKING_FIELDS.each do |rank_by|
-      ranks[rank_by] = current_user.rank(rank_by)
+    if @game.possible_last_guess?
+      User.scoring_fields.each do |rank_by|
+        ranks[rank_by] = current_user.rank(rank_by)
+      end
     end
+    @game.add_choice(params[:letter])
     @game.save
     if @game.completed?
       current_user.reload
       @notice ||= ""
-      User::RANKING_FIELDS.each do |rank_by|
-        rank = current_user.rank(rank_by)
-        @notice << "#{rank_by.gsub("_"," ")}: #{rank.ordinalize}. "  if rank < ranks[rank_by]
+      unless ranks.empty?
+        User.scoring_fields.each do |rank_by|
+          rank = current_user.rank(rank_by)
+          @notice << "#{rank_by.gsub("_"," ")}: #{rank.ordinalize}. "  if rank < ranks[rank_by]
+        end
       end
     end
     redirect_to @game, notice: @notice

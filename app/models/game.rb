@@ -53,7 +53,7 @@ class Game < ActiveRecord::Base
   end
 
   def attempts
-    (choices.to_s.split("") - word.to_s.split("")).size
+    (choice_letters - word_letters).size
   end
 
   def has_attempts_left?
@@ -63,7 +63,7 @@ class Game < ActiveRecord::Base
   def hangman_text
     return word if done?
     text = word
-    word.split("").each{|letter| text.gsub!(letter,"_") unless choices.to_s.include?(letter)}
+    word_letters.each{|letter| text.gsub!(letter,"_") unless choices.to_s.include?(letter)}
     text
   end
 
@@ -72,7 +72,7 @@ class Game < ActiveRecord::Base
   end
 
   def is_won?
-    (word.to_s.split("") - choices.to_s.split("")).empty?
+    (word_letters - choice_letters).empty?
   end
 
   def is_lost?
@@ -80,7 +80,11 @@ class Game < ActiveRecord::Base
   end
 
   def correct_choices
-    word.to_s.split("") & choices.to_s.split("")
+    word_letters & choice_letters
+  end
+
+  def possible_last_guess?
+    (word_letters - choice_letters).uniq.size == 1
   end
 
   def time_score
@@ -93,6 +97,15 @@ class Game < ActiveRecord::Base
   end
 
   protected
+
+  def word_letters
+    word.to_s.split("")
+  end
+
+  def choice_letters
+    choices.to_s.split("")
+  end
+
 
   def set_score
     self.score ||= correct_choices.size + attempts_left + time_score
