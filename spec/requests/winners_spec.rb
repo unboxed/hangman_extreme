@@ -3,7 +3,7 @@ require 'spec_helper'
 shared_examples "a winner viewer" do
 
   it "must show the daily and weekly winners" do
-    users = create_list(:user,5, :daily_precision => 100, :daily_streak => 100, :daily_rating => 100)
+    users = create_list(:user,5, :daily_precision => 100, :daily_streak => 100, :daily_rating => 100, :daily_wins => Winner.daily_random_games_required)
     random_users = create_list(:user,5, :daily_wins => Winner.daily_random_games_required)
     Timecop.freeze(Date.yesterday) do
       Jobs::CreateDailyWinners.execute
