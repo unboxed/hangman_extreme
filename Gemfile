@@ -22,6 +22,7 @@ gem 'mxit_api', '>= 0.2.2.pre'
 gem "savon"
 gem 'draper'
 gem 'puma', '2.0.0.b7'
+gem "passenger", "~> 4.0.0.rc4"
 gem 'whenever', :require => false
 
 # third party

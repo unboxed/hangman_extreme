@@ -70,6 +70,7 @@ GEM
       ffi (~> 1.0, >= 1.0.6)
     chronic (0.9.1)
     crack (0.3.1)
+    daemon_controller (1.1.2)
     database_cleaner (0.9.1)
     diff-lcs (1.2.1)
     draper (1.2.0)
@@ -186,6 +187,10 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
+    passenger (4.0.0.rc4)
+      daemon_controller (>= 1.1.0)
+      rack
+      rake (>= 0.8.1)
     pg (0.15.0)
     poltergeist (1.0.2)
       capybara (~> 1.1)
@@ -347,6 +352,7 @@ DEPENDENCIES
   ohm-contrib
   omniauth
   omniauth-facebook
+  passenger (~> 4.0.0.rc4)
   pg
   poltergeist
   puma (= 2.0.0.b7)
