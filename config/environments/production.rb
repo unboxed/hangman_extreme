@@ -32,7 +32,7 @@ HangmanLeague::Application.configure do
   # config.force_ssl = true
 
   # See everything in the log (default is :info)
-  config.log_level = :info
+  config.log_level = :warn
   # STDOUT.sync = true
   # config.logger = Logger.new(STDOUT)
 
