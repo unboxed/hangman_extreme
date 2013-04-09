@@ -1,56 +1,67 @@
-require 'rvm/capistrano'
-require 'airbrake/capistrano'
-require "bundler/capistrano"
-require 'puma/capistrano'
-require 'new_relic/recipes'
 default_run_options[:pty] = true # Must be set for the password prompt
 default_run_options[:shell] = 'bash --login'
 
 ssh_options[:forward_agent] = true
 
-set :rvm_ruby_string, 'jruby@hmx'
-set :rvm_install_ruby_params, '--1.9'      # for jruby/rbx default to 1.9 mode
+set :rvm_ruby_string, 'jruby@user'
 set :rvm_type, :user
+require 'rvm/capistrano'
+require 'airbrake/capistrano'
+require "bundler/capistrano"
+require 'puma/capistrano'
+set :whenever_command, "bundle exec whenever"
+require "whenever/capistrano"
+require 'new_relic/recipes'
 
 set :application, "hangman_extreme"
 set :repository, "git@github.com:unboxed/hangman_extreme.git"
 
 set :scm, :git
-set :user, 'hmx'
+set :user, 'user'
 set :use_sudo, false
-set :deploy_to, '/home/hmx'
+set :deploy_to, '/home/user'
 
 role :web, "" # Your HTTP server, Apache/etc
 role :app, "" # This may be the same as your `Web` server
 role :db, "", :primary => true # This is where Rails migrations will run
 
-set :shared_children, shared_children << 'tmp/sockets'
+set :shared_children, shared_children + ['tmp/sockets']
 
 after "deploy:restart", "deploy:cleanup"
 after "deploy:finalize_update", "app:symlink"
-                                 # after "deploy:finalize_update", "deploy:precompile_stylesheets"
+after "deploy:finalize_update", "deploy:precompile_stylesheets"
 after "deploy", "librato:deploy"
-after "deploy", "rvm:trust_rvmrc"
 after "deploy:update", "newrelic:notice_deployment"
 
 before 'deploy:setup', 'rvm:install_rvm'   # install RVM
 before 'deploy:setup', 'rvm:install_ruby'  # install Ruby and create gemset, or:
 before 'deploy:setup', 'rvm:create_gemset' # only create gemset
 after "deploy:setup", "app:setup"
+after "app:setup", "app:upload_appenv"
+
+# before 'deploy:migrate', 'app:createdb'
 
 namespace :app do
 
-  desc "Creates the database.yml configuration file in shared path."
+  #desc "Create the database"
+  #task :createdb, :except => {:no_release => true} do
+  #  run "cd #{release_path} && bundle exec rake RAILS_ENV=production db:create; true"
+  #end
+
+  desc "upload database.yml"
   task :setup, :except => {:no_release => true} do
-    run "rvm default #{rvm_ruby_string} && rvm use #{rvm_ruby_string} && gem install bundler"
-    run "rm -f #{deploy_to}/.bashrc"
-    upload "config/deploy_bashrc", "#{deploy_to}/.bashrc", :via => :scp
+    # upload "config/appenv", "#{deploy_to}/appenv", :via => :scp
+    # run "cat #{deploy_to}/appenv >> #{deploy_to}/.bash_profile"
     upload "config/database.yml", "#{shared_path}/database.yml", :via => :scp
+    run "rvm --default use #{rvm_ruby_string}"
   end
 
-  desc <<-DESC
-      [internal] Updates the symlink for database.yml file to the just deployed release.
-  DESC
+  desc "load appenv"
+  task :upload_appenv, :except => {:no_release => true} do
+    upload "config/appenv", "#{deploy_to}/appenv", :via => :scp
+  end
+
+  desc "Updates the symlink for database.yml file to the just deployed release."
   task :symlink, :except => {:no_release => true} do
     run "ln -nfs #{shared_path}/database.yml #{release_path}/config/database.yml"
     upload "./db/words.csv", "#{release_path}/db/words.csv", :via => :scp
@@ -76,50 +87,95 @@ namespace :librato do
 
 end
 
-namespace :puma do
-  desc 'Start puma'
-  task :start, :roles => lambda { fetch(:puma_role) }, :on_no_matching_servers => :continue do
-    puma_env = fetch(:rack_env, fetch(:rails_env, 'production'))
-    run "cd #{current_path} && #{fetch(:puma_cmd)} -q -d -t 8:32 -e #{puma_env} -b 'tcp://0.0.0.0:9292' -S #{fetch(:puma_state)} --control 'unix://#{shared_path}/sockets/pumactl.sock'", :pty => false
-  end
-end
+namespace :pull do
 
-namespace :rails do
-  desc "Remote console"
-  task :console, :roles => :db do
-    run_interactively "cd #{current_path};#{jruby_bin} script/rails console production"
-  end
-
-  desc "Remote dbconsole"
-  task :dbconsole, :roles => :db do
-    run_interactively "cd #{current_path};#{jruby_bin} script/rails dbconsole production"
+  desc "annotate deployment on librato"
+  task :logs, :except => {:no_release => true} do
+    download "#{shared_path}/log/production.log", "log/production.log", :via => :scp
+    download "#{shared_path}/log/puma.log", "log/puma.log", :via => :scp
+    download "#{shared_path}/log/twopuma.log", "log/twopuma.log", :via => :scp
+    download "#{shared_path}/log/cron_log.log", "log/cron_log.log", :via => :scp
   end
 
   desc "Download schema.rb"
-  task :download_schema, :roles => :db do
+  task :schema, :roles => :db do
     "cd #{current_path};RAILS_ENV=production bundle exec db:schema:dump"
     download "#{current_path}/db/schema.rb", "db/schema.rb"
   end
 
 end
 
-namespace :rvm do
-  task :trust_rvmrc do
-    run "rvm rvmrc trust #{release_path}"
+after 'puma:force_start', 'puma:start'
+
+
+namespace :puma do
+  desc 'Force start puma'
+  task :force_start, :roles => lambda { fetch(:puma_role) }, :on_no_matching_servers => :continue do
+    run "cd #{current_path} && #{fetch(:pumactl_cmd)} -S #{fetch(:puma_state)} stop; true"
+    run "rm -f #{shared_path}/sockets/puma*"
+  end
+
+  desc 'Start puma'
+  task :start, :roles => lambda { fetch(:puma_role) }, :on_no_matching_servers => :continue do
+    puma_env = fetch(:rack_env, fetch(:rails_env, 'production'))
+    run "cd #{current_path} && nohup #{fetch(:puma_cmd)} -q -t 8:32 -e #{puma_env} -b 'tcp://0.0.0.0:9292' -S #{fetch(:puma_state)} --control 'unix://#{shared_path}/sockets/pumactl.sock' >> #{shared_path}/log/puma.log 2>&1 &", :pty => false
+  end
+
+  desc 'Stop puma'
+  task :stop, :roles => lambda { fetch(:puma_role) }, :on_no_matching_servers => :continue do
+    run "cd #{current_path} && #{fetch(:pumactl_cmd)} -S #{fetch(:puma_state)} stop"
+  end
+
+  desc 'Restart puma'
+  task :restart, :roles => lambda { fetch(:puma_role) }, :on_no_matching_servers => :continue do
+    run "cd #{current_path} && #{fetch(:pumactl_cmd)} -S #{fetch(:puma_state)} restart"
   end
 end
 
-namespace :ec2 do
-  task :get_public_key do
-    host = find_servers_for_task(current_task).last.host
-    privkey = ssh_options[:keys][0]
-    pubkey = "#{privkey}.pub"
-    `scp -i '#{privkey}' ec2-user@#{host}:.ssh/authorized_keys #{pubkey}`
+after 'puma2:force_start', 'puma2:start'
+after 'deploy:stop', 'puma2:stop'
+after 'deploy:start', 'puma2:start'
+after 'deploy:restart', 'puma2:restart'
+_cset(:puma2_state) { "#{shared_path}/sockets/twopuma.state" }
+
+namespace :puma2 do
+  desc 'Force start puma'
+  task :force_start, :roles => lambda { fetch(:puma_role) }, :on_no_matching_servers => :continue do
+    run "cd #{current_path} && #{fetch(:pumactl_cmd)} -S #{fetch(:puma2_state)} stop; true"
+    run "rm -f #{shared_path}/sockets/twopuma*"
   end
+
+  desc 'Start puma'
+  task :start, :roles => lambda { fetch(:puma_role) }, :on_no_matching_servers => :continue do
+    puma_env = fetch(:rack_env, fetch(:rails_env, 'production'))
+    run "cd #{current_path} && nohup #{fetch(:puma_cmd)} -q -t 8:32 -e #{puma_env} -b 'tcp://0.0.0.0:9293' -S #{fetch(:puma2_state)} --control 'unix://#{shared_path}/sockets/twopumactl.sock' >> #{shared_path}/log/twopuma.log 2>&1 &", :pty => false
+  end
+
+  desc 'Stop puma'
+  task :stop, :roles => lambda { fetch(:puma_role) }, :on_no_matching_servers => :continue do
+    run "cd #{current_path} && #{fetch(:pumactl_cmd)} -S #{fetch(:puma2_state)} stop"
+  end
+
+  desc 'Restart puma'
+  task :restart, :roles => lambda { fetch(:puma_role) }, :on_no_matching_servers => :continue do
+    run "cd #{current_path} && #{fetch(:pumactl_cmd)} -S #{fetch(:puma2_state)} restart"
+  end
+end
+
+namespace :rails do
+  desc "Remote console"
+  task :console, :roles => :db do
+    run_interactively "cd #{current_path};script/rails console production"
+  end
+
+  desc "Remote dbconsole"
+  task :dbconsole, :roles => :db do
+    run_interactively "cd #{current_path};script/rails dbconsole production"
+  end
+
 end
 
 def run_interactively(command, server=nil)
   server ||= find_servers_for_task(current_task).first
   exec %Q(ssh #{user}@#{server.host} -t 'bash --login -c "cd #{current_path} && #{command}"')
 end
-
