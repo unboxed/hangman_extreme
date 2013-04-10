@@ -13,7 +13,7 @@ shared_examples "a user geek" do
     click_link 'define_word'
     page.should have_content("Defining: today")
     page.should have_content("today is tomorrow")
-    page.should have_link('new_game')
+    page.should have_link('play')
   end
 
 end
