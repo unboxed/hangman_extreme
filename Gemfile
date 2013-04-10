@@ -14,6 +14,7 @@ gem 'ohm-contrib', :require => 'ohm/contrib'
 platforms :jruby do
   gem 'jruby-openssl'
   gem 'torquebox-lite'
+  gem "trinidad", :require => nil
 end
 gem 'cancan'
 gem 'omniauth'
@@ -23,7 +24,6 @@ gem 'mxit_api', '>= 0.2.2.pre'
 gem "savon"
 gem 'draper'
 gem 'puma', '2.0.0.b7'
-gem "passenger", "~> 4.0.0.rc6"
 gem 'whenever', :require => false
 
 # third party

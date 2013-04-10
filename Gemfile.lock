@@ -71,7 +71,6 @@ GEM
       ffi (~> 1.0, >= 1.0.6)
     chronic (0.9.1)
     crack (0.3.1)
-    daemon_controller (1.1.2)
     database_cleaner (0.9.1)
     diff-lcs (1.2.1)
     draper (1.2.0)
@@ -122,6 +121,7 @@ GEM
     journey (1.0.4)
     jruby-openssl (0.8.7)
       bouncy-castle-java (>= 1.5.0147)
+    jruby-rack (1.1.13.2)
     json (1.7.7)
     json (1.7.7-java)
     jwt (0.1.8)
@@ -188,10 +188,6 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
-    passenger (4.0.0.rc6)
-      daemon_controller (>= 1.1.0)
-      rack
-      rake (>= 0.8.1)
     pg (0.15.0)
     poltergeist (1.0.2)
       capybara (~> 1.1)
@@ -303,6 +299,10 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
+    trinidad (1.4.4)
+      jruby-rack (>= 1.1.10)
+      trinidad_jars (>= 1.1.0)
+    trinidad_jars (1.2.2)
     typhoeus (0.5.3)
       ethon (~> 0.5.3)
     tzinfo (0.3.37)
@@ -365,7 +365,6 @@ DEPENDENCIES
   ohm-contrib
   omniauth
   omniauth-facebook
-  passenger (~> 4.0.0.rc6)
   pg
   poltergeist
   puma (= 2.0.0.b7)
@@ -381,6 +380,7 @@ DEPENDENCIES
   therubyrhino
   timecop
   torquebox-lite
+  trinidad
   uglifier (>= 1.0.3)
   uservoice-ruby
   vcr
