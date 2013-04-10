@@ -46,6 +46,7 @@ group :assets do
   end
 #  gem 'coffee-rails'
   gem 'uglifier', '>= 1.0.3'
+  gem "jquery-rails"
 end
 
 group :development do
