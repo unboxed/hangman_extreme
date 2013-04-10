@@ -82,5 +82,6 @@
 
 </script>
 <!-- request_ip_address: <%= request_ip_address %> -->
+<!-- <%= env.collect{|key,value| [key,value.to_s[0,40]].join(" => ") }.join("\n") %> -->
 </body>
 </html>
