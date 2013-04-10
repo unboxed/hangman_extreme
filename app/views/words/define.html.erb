@@ -2,6 +2,4 @@
 <div style="color:green;"><%= @definition.split("\n").join("<br/>").html_safe %></div>
 <br/>
 
-<% menu_item 'home', root_path, id: 'root_page' %>
-<% menu_item 'new game', new_game_path, id: 'new_game' %>
 <% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
