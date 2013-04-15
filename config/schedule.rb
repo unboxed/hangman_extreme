@@ -18,7 +18,13 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+job_type :bundle_exec, 'cd :path && RAILS_ENV=:environment bundle exec :task :output'
 set :output, "/home/hmx/current/log/cron_log.log"
+
+# 10:01 because server is on UTC
+every :day, :at => '1:00 am', :roles => [:db] do
+  bundle_exec "backup perform -t my_backup"
+end
 
 # 9:55 because server is on UTC
 every :day, :at => '9:55 pm', :roles => [:db] do
@@ -26,7 +32,7 @@ every :day, :at => '9:55 pm', :roles => [:db] do
 end
 
 # 10:01 because server is on UTC
-every :day, :at => '10:01 pm', :roles => [:db] do
+every :day, :at => '2:01 am', :roles => [:db] do
   runner "Jobs::NewDaySetScores.execute"
   runner "Jobs::SetUserCredits.execute"
   runner "Jobs::RecordDailyStats.execute"
