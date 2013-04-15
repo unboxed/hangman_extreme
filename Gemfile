@@ -23,8 +23,8 @@ gem "savon"
 gem 'draper'
 gem 'puma', '2.0.0.b7'
 gem 'whenever', :require => false
-gem 'backup'
-gem 'httparty'
+gem 'backup', :require => false
+gem 'httparty', :require => false
 
 # third party
 gem 'airbrake'
