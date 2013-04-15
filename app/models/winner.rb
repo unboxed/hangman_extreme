@@ -21,12 +21,12 @@ class Winner < ActiveRecord::Base
   def self.scope_for(winners,options = {})
     options[:reason] ||= 'rating'
     options[:period] ||= 'daily'
-    scope = winners.period(options[:period]).reason(options[:reason]).order('created_at DESC')
-    if options[:period] == 'daily'
-      scope.yesterday
-    else
-      scope.last_week
-    end
+    scope = winners.period(options[:period]).reason(options[:reason]).order('created_at DESC').last(5)
+    #if options[:period] == 'daily'
+    #  scope.yesterday
+    #else
+    #  scope.last_week
+    #end
   end
 
   def self.winning_periods
