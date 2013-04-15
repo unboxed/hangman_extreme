@@ -13,8 +13,6 @@ gem 'ohm-contrib', :require => 'ohm/contrib'
 
 platforms :jruby do
   gem 'jruby-openssl'
-  gem 'torquebox-lite'
-  gem "trinidad", :require => nil
 end
 gem 'cancan'
 gem 'omniauth'
