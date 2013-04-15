@@ -39,14 +39,18 @@ class User < ActiveRecord::Base
     logger.debug "Auth Login Attempt with: #{auth_hash.to_s}"
     return nil if auth_hash['uid'].blank? || auth_hash['provider'].blank?
     user = find_or_create_by_uid_and_provider(auth_hash['uid'],auth_hash['provider'])
-    if auth_hash['info']
-      auth_hash['info'].stringify_keys!
-      user.name = auth_hash['info']['name']
-      user.login = auth_hash['info']['login']
-      user.email = auth_hash['info']['email'] if user.email.blank?
-      user.save
-    end
+    user.set_user_info(auth_hash['info'])
     return user
+  end
+
+  def set_user_info(info)
+    if info
+      info.stringify_keys!
+      self.name = info['name']
+      self.login = info['login']
+      self.email = info['email'] if email.blank?
+      save
+    end
   end
 
   def calculate_daily_precision
@@ -121,24 +125,7 @@ class User < ActiveRecord::Base
   end
 
   def self.send_message(msg, users = User.mxit)
-    unless users.empty?
-      mxit_connection = MxitApiWrapper.connect
-      if mxit_connection
-        if users.kind_of?(ActiveRecord::Relation)
-          page = 1
-          while((user_group = users.mxit.order(:id).page(page).per(100)).any?)
-            to = user_group.collect(&:uid).join(",")
-            mxit_connection.send_message(body: msg, to: to)
-            page += 1
-          end
-        else
-          users.delete_if{|u| u.provider != "mxit"}.uniq.in_groups_of(100,false).each do |user_group|
-            to = user_group.collect(&:uid).join(",")
-            mxit_connection.send_message(body: msg, to: to)
-          end
-        end
-      end
-    end
+    UserSendMessage.new(msg,users).send_all
   end
 
   def self.purge_tracking!

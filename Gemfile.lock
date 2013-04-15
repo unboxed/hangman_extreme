@@ -79,6 +79,8 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       request_store (~> 1.0.3)
+    dropbox-sdk (1.5.1)
+      json
     erubis (2.7.0)
     ethon (0.5.6)
       ffi (~> 1.1.5)
@@ -339,6 +341,7 @@ DEPENDENCIES
   capybara
   database_cleaner
   draper
+  dropbox-sdk
   factory_girl_rails
   flog
   gabba

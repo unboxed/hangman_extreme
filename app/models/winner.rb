@@ -51,8 +51,8 @@ class Winner < ActiveRecord::Base
 
   def self.create_daily_winners(winnings = DAILY_PRIZE_AMOUNTS)
     if create_winners('daily',winnings)
-    User.send_message("We have selected our $winners$ for the daily prizes, Congratulations to those who have won.",
-                      User.mxit.where('updated_at > ?',2.day.ago))
+      User.send_message("We have selected our $winners$ for the daily prizes, Congratulations to those who have won.",
+                        User.mxit.where('updated_at > ?',2.day.ago))
     end
   end
 
