@@ -21,7 +21,7 @@ class Winner < ActiveRecord::Base
   def self.scope_for(winners,options = {})
     options[:reason] ||= 'rating'
     options[:period] ||= 'daily'
-    scope = winners.period(options[:period]).reason(options[:reason]).order('created_at DESC').last(5)
+    scope = winners.period(options[:period]).reason(options[:reason]).order('created_at DESC').first(5)
     #if options[:period] == 'daily'
     #  scope.yesterday
     #else
