@@ -20,17 +20,17 @@
 # Learn more: http://github.com/javan/whenever
 set :output, "/home/hmx/current/log/cron_log.log"
 
-every :day, :at => Time.zone.parse('11:55 pm').utc, :roles => [:db] do
+every :day, :at => '9:55 pm', :roles => [:db] do
   runner "Jobs::CreateDailyWinners.execute"
 end
 
-every :day, :at => Time.zone.parse('00:00 am').utc, :roles => [:db] do
+every :day, :at => '10:01 pm', :roles => [:db] do
   runner "Jobs::NewDaySetScores.execute"
   runner "Jobs::SetUserCredits.execute"
   runner "Jobs::RecordDailyStats.execute"
 end
 
-every :sunday, :at => Time.zone.parse('11:55 pm').utc, :roles => [:db] do
+every :sunday, :at => '9:55 pm', :roles => [:db] do
   runner "Jobs::CreateWeeklyWinners.execute"
 end
 
