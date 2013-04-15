@@ -20,16 +20,19 @@
 # Learn more: http://github.com/javan/whenever
 set :output, "/home/hmx/current/log/cron_log.log"
 
+# 9:55 because server is on UTC
 every :day, :at => '9:55 pm', :roles => [:db] do
   runner "Jobs::CreateDailyWinners.execute"
 end
 
+# 10:01 because server is on UTC
 every :day, :at => '10:01 pm', :roles => [:db] do
   runner "Jobs::NewDaySetScores.execute"
   runner "Jobs::SetUserCredits.execute"
   runner "Jobs::RecordDailyStats.execute"
 end
 
+# 9:55 because server is on UTC
 every :sunday, :at => '9:55 pm', :roles => [:db] do
   runner "Jobs::CreateWeeklyWinners.execute"
 end
