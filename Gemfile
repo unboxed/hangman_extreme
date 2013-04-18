@@ -23,17 +23,19 @@ gem "savon"
 gem 'draper'
 gem 'puma', '2.0.0.b7'
 gem 'whenever', :require => false
-gem 'backup', :require => false
-gem 'httparty', :require => false
+
+#gem 'backup', :require => false
+#gem 'httparty', :require => false # for backup
+#gem 'dropbox-sdk', :require => false  # for backup
 
 # third party
-gem 'airbrake_user_attributes'
+gem 'airbrake'
 gem 'uservoice-ruby'
 gem 'gabba' # google analytics
 gem 'newrelic_rpm'
 gem 'wordnik'
 gem 'librato-metrics', :require => 'librato/metrics'
-gem 'dropbox-sdk'
+
 
 # Gems used only for assets and not required
 # in production environments by default.
