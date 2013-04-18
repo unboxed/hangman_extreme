@@ -44,6 +44,8 @@ GEM
       activesupport
       builder
       json
+    airbrake_user_attributes (0.1.6)
+      airbrake (~> 3.1.0)
     akami (1.2.0)
       gyoku (>= 0.4.0)
       nokogiri (>= 1.4.0)
@@ -337,7 +339,7 @@ DEPENDENCIES
   activerecord-jdbcmysql-adapter
   activerecord-jdbcpostgresql-adapter
   activerecord-jdbcsqlite3-adapter
-  airbrake
+  airbrake_user_attributes
   annotate
   backup
   cancan

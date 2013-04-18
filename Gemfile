@@ -27,7 +27,7 @@ gem 'backup', :require => false
 gem 'httparty', :require => false
 
 # third party
-gem 'airbrake'
+gem 'airbrake_user_attributes'
 gem 'uservoice-ruby'
 gem 'gabba' # google analytics
 gem 'newrelic_rpm'
