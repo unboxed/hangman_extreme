@@ -41,10 +41,10 @@ class RedeemWinning < ActiveRecord::Base
             if result[:m2_reference]
               winning.update_column(:state,'paid')
               winning.update_column(:mxit_money_reference,result[:m2_reference])
-            else
+            elsif result[:error_type]
               Airbrake.notify_or_ignore(
-                Exception.new("Mxit Money Payout failed"),
-                :parameters    => result,
+                Exception.new("#{result[:error_type]}: #{result[:message]}"),
+                :parameters    => {:redeem_winning => winning},
                 :cgi_data      => ENV
               )
               Settings.mxit_money_disabled_until = 2.hours.from_now
