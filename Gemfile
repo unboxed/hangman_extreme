@@ -23,6 +23,7 @@ gem "savon"
 gem 'draper'
 gem 'puma', '2.0.0.b7'
 gem 'whenever', :require => false
+gem 'sidekiq'
 
 #gem 'backup', :require => false
 #gem 'httparty', :require => false # for backup
@@ -55,6 +56,8 @@ end
 group :development do
   gem 'capistrano', :require => false
   gem 'rvm-capistrano', :require => false
+  gem 'sinatra', '>= 1.3.0', :require => nil
+  gem 'slim'
 end
 
 group :development, :test do
@@ -80,6 +83,7 @@ group :test do
     gem 'sqlite3'
     gem 'pg'
   end
+  gem 'test_after_commit'
   gem 'poltergeist'
   gem 'capybara'
   gem 'database_cleaner'

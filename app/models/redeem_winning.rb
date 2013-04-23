@@ -9,6 +9,7 @@ class RedeemWinning < ActiveRecord::Base
 
   validate :check_user_prize_points
   after_create :update_user_prize_points
+  after_commit :issue_mxit_money, :issue_airtime, :on => :create
 
   belongs_to :user
   delegate :prize_points, :login, :mobile_number, :uid, :to => :user, :prefix => true
@@ -28,47 +29,16 @@ class RedeemWinning < ActiveRecord::Base
     end
   end
 
-  def self.issue_mxit_money_to_users
-    connection = MxitMoneyApi.connect(ENV['MXIT_MONEY_API_KEY'])
-    if connection
-      pending_mxit_money.each do |winning|
-        begin
-          result = connection.user_info(:id => winning.user_uid)
-          if result[:is_registered]
-            result = connection.issue_money(:phone_number => result[:msisdn],
-                                            :merchant_reference => "RW#{winning.id}Y#{Time.current.yday}H#{Time.current.hour}",
-                                            :amount_in_cents => winning.prize_amount)
-            if result[:m2_reference]
-              winning.update_column(:state,'paid')
-              winning.update_column(:mxit_money_reference,result[:m2_reference])
-            elsif result[:error_type]
-              Airbrake.notify_or_ignore(
-                Exception.new("#{result[:error_type]}: #{result[:message]}"),
-                :parameters    => {:redeem_winning => winning},
-                :cgi_data      => ENV
-              )
-              Settings.mxit_money_disabled_until = 2.hours.from_now
-            end
-          end
-        rescue Exception => e
-          Airbrake.notify_or_ignore(
-            e,
-            :parameters    => {:redeem_winning => winning},
-            :cgi_data      => ENV
-          )
-        end
-      end
-    end
-  end
-
   def paid!
     update_column(:state, 'paid')
   end
 
   def cancel!
     if pending?
-      update_column(:state, 'cancelled')
-      user.increment!(:prize_points,prize_amount)
+      self.class.transaction do
+        update_column(:state, 'cancelled')
+        user.increment!(:prize_points,prize_amount)
+      end
     end
   end
 
@@ -78,6 +48,14 @@ class RedeemWinning < ActiveRecord::Base
 
   def pending?
     state == 'pending'
+  end
+
+  def mxit_money?
+    prize_type == 'mxit_money'
+  end
+
+  def airtime?
+    prize_type.include?("airtime")
   end
 
   protected
@@ -90,10 +68,14 @@ class RedeemWinning < ActiveRecord::Base
 
   def update_user_prize_points
     user.decrement!(:prize_points,prize_amount)
-    if prize_type == 'clue_points'
-      paid!
-      user.increment!(:credits,prize_amount)
-    end
+  end
+
+  def issue_mxit_money
+    IssueMxitMoneyToUsers.perform_async(self.id) if mxit_money?
+  end
+
+  def issue_airtime
+    IssueAirtimeToUsers.perform_async(self.id) if airtime?
   end
 
 end

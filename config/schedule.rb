@@ -53,12 +53,6 @@ every :day, :at => '2:20 am', :roles => [:db] do
   runner "Jobs::SetUserCredits.execute"
 end
 
-
-every 30.minutes, :roles => [:db] do
-  runner "Jobs::IssueMxitMoneyToUsers.execute"
-  runner "Jobs::IssueAirtimeToUsers.execute"
-end
-
 every :hour, :roles => [:db] do
   runner "Jobs::RecordHourlyStats.execute"
 end

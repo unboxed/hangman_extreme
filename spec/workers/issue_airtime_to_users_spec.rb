@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Jobs::IssueAirtimeToUsers do
+describe IssueAirtimeToUsers do
 
-  describe "run" do
+  describe "perform" do
 
     before :each do
       @redeem_winning = create(:redeem_winning, prize_type: 'vodago_airtime', prize_amount: "500")
@@ -15,7 +15,7 @@ describe Jobs::IssueAirtimeToUsers do
         VCR.use_cassette("issue_airtime_to_users",
                          :record => :once,
                          :erb => true) do
-          Jobs::IssueAirtimeToUsers.new.run
+          IssueAirtimeToUsers.new.perform(@redeem_winning.id)
         end
         @airtime_voucher = AirtimeVoucher.last
       end
@@ -54,13 +54,13 @@ describe Jobs::IssueAirtimeToUsers do
     context "failure" do
 
       before :each do
-        Airbrake.should_receive(:notify_or_ignore).with(kind_of(Exception))
+        Airbrake.should_receive(:notify_or_ignore).with(kind_of(Exception),anything)
         @old_pass, ENV['FREEPAID_PASS'] = ENV['FREEPAID_PASS'], nil
         VCR.use_cassette("issue_airtime_to_users_failure",
                         :record => :once,
                         :erb => true,
                         :match_requests_on => [:uri,:method]) do
-          Jobs::IssueAirtimeToUsers.new.run
+          IssueAirtimeToUsers.new.perform(@redeem_winning.id)
         end
         ENV['FREEPAID_PASS'] = @old_pass
         @airtime_voucher = AirtimeVoucher.last
@@ -75,15 +75,6 @@ describe Jobs::IssueAirtimeToUsers do
         @redeem_winning.should_not be_paid
       end
 
-    end
-
-  end
-
-  describe "on_error" do
-
-    it "must send the error to airbrake" do
-      Airbrake.should_receive(:notify_or_ignore).with("Error!",anything())
-      Jobs::IssueAirtimeToUsers.new.on_error("Error!")
     end
 
   end

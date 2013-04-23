@@ -67,22 +67,6 @@ describe RedeemWinning do
       user.prize_points.should == 1
     end
 
-    it "must change the status to paid" do
-      user = create(:user, prize_points: 11)
-      redeem_winning = RedeemWinning.new(user_id: user.id, prize_amount: 10, prize_type: 'clue_points', state: 'pending')
-      expect {
-        redeem_winning.save
-      }.to change(redeem_winning,:state).from('pending').to('paid')
-    end
-
-    it "must change the status to paid" do
-      user = create(:user, prize_points: 11)
-      redeem_winning = RedeemWinning.new(user_id: user.id, prize_amount: 10, prize_type: 'clue_points', state: 'pending')
-      expect {
-        redeem_winning.save
-      }.to change{user.reload;user.credits}.by(10)
-    end
-
   end
 
   context "paid!" do
@@ -91,69 +75,54 @@ describe RedeemWinning do
       winning = create(:redeem_winning, prize_amount: 10, prize_type: 'vodago_airtime', state: 'pending')
       RedeemWinning.paid!(winning.id)
       winning.reload
-      winning.state.should == 'paid'
+      winning.should be_paid
     end
 
   end
 
-  context "issue_mxit_money_to_users" do
+  context "issue_mxit_money" do
 
-    before :each do
-      @redeem_winning = stub_model(RedeemWinning, id: 333,
-                                                  prize_amount: 23,
-                                                  user: stub_model(User, prize_points: 1000,
-                                                                         uid: 'm221',
-                                                                         paid!: true))
-      RedeemWinning.stub!(:pending_mxit_money).and_return([@redeem_winning])
-      @mxit_money_connection = mock("connection",
-                                    :user_info => {is_registered: true, msisdn: '0713450987'},
-                                    :issue_money => {:m2_reference => "ref1"})
-      MxitMoneyApi.stub(:connect).and_return(@mxit_money_connection)
+    after :each do
+      IssueMxitMoneyToUsers.jobs.clear
     end
 
-    it "must get the mxit_money pending redeem winnings" do
-      RedeemWinning.should_receive(:pending_mxit_money).and_return([@redeem_winning])
-      RedeemWinning.issue_mxit_money_to_users
+    it "must create background job to issue the money" do
+      expect {
+        create(:redeem_winning, prize_amount: 10, prize_type: 'mxit_money', state: 'pending')
+      }.to change(IssueMxitMoneyToUsers.jobs, :size).by(1)
     end
 
-    it "must connect to mxit money" do
-      MxitMoneyApi.should_receive(:connect).with(ENV['MXIT_MONEY_API_KEY']).and_return(@mxit_money_connection)
-      RedeemWinning.issue_mxit_money_to_users
+    it "wont create background job to issue mxit money for other jobs" do
+      expect {
+        create(:redeem_winning, prize_amount: 10, prize_type: 'vodago_airtime', state: 'pending')
+      }.to_not change(IssueMxitMoneyToUsers.jobs, :size)
     end
 
-    it "must check the user_info with uid" do
-      @mxit_money_connection.should_receive(:user_info).with(:id => 'm221').and_return({})
-      RedeemWinning.issue_mxit_money_to_users
+  end
+
+  context "issue_airtime" do
+
+    after :each do
+      IssueAirtimeToUsers.jobs.clear
     end
 
-    it "must issue money to user" do
-      @mxit_money_connection.should_receive(:issue_money).
-        with(:phone_number => '0713450987',
-             :merchant_reference => "RW333Y#{Time.current.yday}H#{Time.current.hour}",
-             :amount_in_cents => 23).and_return({})
-      RedeemWinning.issue_mxit_money_to_users
+    it "wont create background job to issue mxit money" do
+      expect {
+        create(:redeem_winning, prize_amount: 10, prize_type: 'mxit_money', state: 'pending')
+      }.to_not change(IssueAirtimeToUsers.jobs, :size).by(1)
     end
 
-    it "must update to paid!" do
-      @redeem_winning.should_receive(:update_column).with(:state,'paid')
-      @redeem_winning.should_receive(:update_column).with(:mxit_money_reference,"ref1")
-      RedeemWinning.issue_mxit_money_to_users
+    it "must create background job to issue vodago airtime" do
+      expect {
+        create(:redeem_winning, prize_amount: 10, prize_type: 'vodago_airtime', state: 'pending')
+      }.to change(IssueAirtimeToUsers.jobs, :size).by(1)
     end
 
-    it "wont update to paid! if issue error" do
-      @mxit_money_connection.should_receive(:issue_money).and_return({})
-      @redeem_winning.should_not_receive(:update_column)
-      RedeemWinning.issue_mxit_money_to_users
+    it "must create background job to issue mtn airtime" do
+      expect {
+        create(:redeem_winning, prize_amount: 10, prize_type: 'mtn_airtime', state: 'pending')
+      }.to change(IssueAirtimeToUsers.jobs, :size).by(1)
     end
-
-    it "must work even if error occurs" do
-      exception = Exception.new("error")
-      @mxit_money_connection.should_receive(:issue_money).and_raise(exception)
-      Airbrake.should_receive(:notify_or_ignore).
-        with(exception, :parameters => {:redeem_winning => @redeem_winning}, :cgi_data => ENV)
-      RedeemWinning.issue_mxit_money_to_users
-    end
-
 
   end
 

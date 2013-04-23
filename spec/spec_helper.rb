@@ -42,6 +42,7 @@ Spork.prefork do
   require 'webmock/rspec'
   require 'draper/test/rspec_integration'
   require 'capybara/poltergeist'
+  require 'sidekiq/testing'
 end
 
 Spork.each_run do
