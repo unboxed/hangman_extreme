@@ -2,7 +2,7 @@
 require 'sidekiq'
 
 Sidekiq.configure_client do |config|
-  config.redis = { :size => 1 }
+  config.redis = { :url => ENV['SIDEKIQ_REDIS_URL'], :namespace => 'sidekiq' }
 end
 
 require 'sidekiq/web'
