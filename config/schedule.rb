@@ -43,12 +43,16 @@ end
 
 every :day, :at => '2:10 am', :roles => [:db] do
   runner "Jobs::NewDaySetScores.execute"
-  runner "Jobs::RecordDailyStats.execute"
 end
 
 every :day, :at => '2:15 am', :roles => [:db] do
   runner "Jobs::RecordDailyStats.execute"
 end
+
+every :day, :at => '2:20 am', :roles => [:db] do
+  runner "Jobs::SetUserCredits.execute"
+end
+
 
 every 30.minutes, :roles => [:db] do
   runner "Jobs::IssueMxitMoneyToUsers.execute"

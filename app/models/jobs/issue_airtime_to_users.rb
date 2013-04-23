@@ -22,7 +22,9 @@ class Jobs::IssueAirtimeToUsers < Jobs::Base
                                  response: response.body, user: redeem_winning.user)
           redeem_winning.user.send_message("Your airtime voucher is available in the $airtime vouchers$ section.")
         else
-          Airbrake.notify_or_ignore(Exception.new(reply[:message]))
+          Airbrake.notify_or_ignore(Exception.new(reply[:message]),
+                                    :parameters    => {:redeem_winning => winning},
+                                    :cgi_data      => ENV)
         end
       end
     end

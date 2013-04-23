@@ -1,6 +1,6 @@
 class Winner < ActiveRecord::Base
-  WEEKLY_PRIZE_AMOUNTS = [350,350,350,350,350]
-  DAILY_PRIZE_AMOUNTS  = [ 50, 50, 50, 50, 50]
+  WEEKLY_PRIZE_AMOUNTS = [500,500,500,500,500]
+  DAILY_PRIZE_AMOUNTS  = [ 25, 25, 25, 25, 25]
   WINNING_PERIODS = %w(daily weekly)
   WINNING_REASONS = %w(streak rating precision random)
   belongs_to :user
@@ -21,12 +21,12 @@ class Winner < ActiveRecord::Base
   def self.scope_for(winners,options = {})
     options[:reason] ||= 'rating'
     options[:period] ||= 'daily'
-    scope = winners.period(options[:period]).reason(options[:reason]).order('created_at DESC').first(5)
-    #if options[:period] == 'daily'
-    #  scope.yesterday
-    #else
-    #  scope.last_week
-    #end
+    # scope = winners.period(options[:period]).reason(options[:reason]).order('created_at DESC').first(5)
+    if options[:period] == 'daily'
+      scope.yesterday
+    else
+      scope.last_week
+    end
   end
 
   def self.winning_periods
