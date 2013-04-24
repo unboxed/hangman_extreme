@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130407052802) do
+ActiveRecord::Schema.define(:version => 20130424114048) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -61,6 +61,17 @@ ActiveRecord::Schema.define(:version => 20130407052802) do
   add_index "airtime_vouchers", ["created_at"], :name => "index_airtime_vouchers_on_created_at"
   add_index "airtime_vouchers", ["redeem_winning_id"], :name => "index_airtime_vouchers_on_redeem_winning_id"
   add_index "airtime_vouchers", ["updated_at"], :name => "index_airtime_vouchers_on_updated_at"
+
+  create_table "feedback", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "subject"
+    t.text     "message"
+    t.string   "support_type", :default => "suggestion"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  add_index "feedback", ["user_id"], :name => "index_feedback_on_user_id"
 
   create_table "games", :force => true do |t|
     t.string   "word"

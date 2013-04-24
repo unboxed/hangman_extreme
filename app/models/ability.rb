@@ -12,11 +12,13 @@ class Ability
     can :read, PurchaseTransaction, user_id: user.id
     can :read, RedeemWinning, user_id: user.id
     can :read, AirtimeVoucher, user_id: user.id
+    can :read, Feedback, user_id: user.id
 
     unless user.guest?
       can :create, PurchaseTransaction
       can :create, RedeemWinning
       can :create, Game
+      can :create, Feedback
     end
   end
 end

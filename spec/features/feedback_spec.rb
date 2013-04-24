@@ -10,9 +10,9 @@ shared_examples "a feedbacker" do
       visit_home
       click_link('feedback')
       click_link('support')
-      fill_in 'feedback', with: "I have a support issue for you"
-      click_button 'submit'
-      page.should have_css("div.alert")
+      fill_in 'feedback_full_message', with: "I have a support issue for you"
+      click_button 'send'
+      page.should have_css("div.alert-info")
     end
   end
 
@@ -24,9 +24,9 @@ shared_examples "a feedbacker" do
       visit_home
       click_link('feedback')
       click_link('suggestion')
-      fill_in 'feedback', with: "I have a suggestion issue for you"
-      click_button 'submit'
-      page.should have_css("div.alert")
+      fill_in 'feedback_full_message', with: "I have a suggestion issue for you"
+      click_button 'send'
+      page.should have_css("div.alert-info")
     end
   end
 
@@ -63,6 +63,7 @@ describe 'explain', :redis => true do
       visit_home
       click_link('feedback')
       click_link('support')
+      page.should have_css("div.alert")
       page.current_path.should == "/"
     end
 

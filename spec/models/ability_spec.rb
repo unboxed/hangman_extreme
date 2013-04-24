@@ -42,6 +42,28 @@ describe Ability do
 
     end
 
+    context "Feedback" do
+
+      it "must be able to view" do
+        @ability.should be_able_to(:read, Feedback)
+      end
+
+      it "wont be able to read other users" do
+        game = create(:feedback, user: create(:user))
+        @ability.should_not be_able_to(:read, game)
+      end
+
+      it "must be able to read own" do
+        game = create(:feedback, user: @user)
+        @ability.should be_able_to(:read, game)
+      end
+
+      it "must be able to create" do
+        @ability.should be_able_to(:create, Feedback)
+      end
+
+    end
+
     context "Users" do
 
       it "must be able to read users" do
@@ -167,6 +189,28 @@ describe Ability do
       it "must be able to play letters on own users games" do
         game = create(:game, user: @user)
         @ability.should be_able_to(:play_letter, game)
+      end
+
+    end
+
+    context "Feedback" do
+
+      it "must be able to view" do
+        @ability.should be_able_to(:read, Feedback)
+      end
+
+      it "wont be able to read other users" do
+        game = create(:feedback, user: create(:user))
+        @ability.should_not be_able_to(:read, game)
+      end
+
+      it "must be able to read own" do
+        game = create(:feedback, user: @user)
+        @ability.should be_able_to(:read, game)
+      end
+
+      it "wont be able to create" do
+        @ability.should_not be_able_to(:create, Feedback)
       end
 
     end

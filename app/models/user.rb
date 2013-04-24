@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :winners
   has_many :redeem_winnings
   has_many :airtime_vouchers
+  has_many :feedback
 
   validates :provider, :uid, presence: true
   validates_uniqueness_of :uid, :scope => :provider

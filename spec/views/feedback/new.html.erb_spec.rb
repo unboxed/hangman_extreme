@@ -3,17 +3,21 @@ require 'spec_helper'
 describe "feedback/new.html.erb" do
   include ViewCapybaraRendered
 
+  before(:each) do
+    assign(:feedback, stub_model(Feedback).as_new_record)
+  end
+
   it "renders a submit button" do
     render
     within('form') do
-      rendered.should have_button('submit')
+      rendered.should have_button('send')
     end
   end
 
-  it "renders feedback field" do
+  it "renders full_message field" do
     render
     within('form') do
-      rendered.should have_field('feedback')
+      rendered.should have_field('feedback_full_message')
     end
   end
 
