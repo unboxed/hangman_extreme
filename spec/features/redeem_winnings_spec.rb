@@ -5,7 +5,7 @@ shared_examples "a winner redeemer" do
 
   it "must show users redeem winnings link" do
     @current_user.update_attributes(:prize_points => 100)
-    visit '/'
+    visit_home
     click_link('redeem')
     page.should have_content("Redeeming Winnings")
     page.should have_content("100 prize points")
@@ -26,7 +26,7 @@ shared_examples "a winner redeemer" do
                          :erb => true,
                          :match_requests_on => [:uri,:method]) do
           @current_user.update_attributes(:prize_points => value + 1)
-          visit '/'
+          visit_home
           click_link('redeem')
           page.should have_content("#{value + 1} prize points")
           click_link("#{provider}_airtime")
@@ -35,7 +35,7 @@ shared_examples "a winner redeemer" do
           page.should have_content("1 prize points")
           click_link('airtime_vouchers')
           IssueAirtimeToUsers.drain
-          visit '/'
+          visit_home
           click_link('redeem')
           click_link('airtime_vouchers')
           page.should have_content("R#{value / 100}")
@@ -63,7 +63,7 @@ describe 'redeem winnings', :redis => true do
 
     it "must allow to redeem prize points for mxit_money" do
       @current_user.update_attributes(:prize_points => 257)
-      visit '/'
+      visit_home
       click_link('redeem')
       page.should have_content("257 prize points")
       click_link('mxit_money')

@@ -8,7 +8,7 @@ shared_examples "a winner viewer" do
     Timecop.freeze(Date.yesterday) do
       Jobs::CreateDailyWinners.execute
     end
-    visit '/'
+    visit_home
     click_link('rank')
     click_link('winners')
     users.each do |winner|
@@ -35,7 +35,7 @@ shared_examples "a winner viewer" do
     Timecop.freeze(Date.current.beginning_of_week.yesterday) do
       Jobs::CreateWeeklyWinners.execute
     end
-    visit '/'
+    visit_home
     click_link('rank')
     click_link('winners')
     click_link('weekly')
@@ -76,7 +76,7 @@ describe 'winners',  :redis => true do
 
     it "must show the winners if user mxit input is winner" do
       add_headers('X_MXIT_USER_INPUT' => 'winners')
-      visit '/'
+      visit_home
       page.current_path.should == winners_path
     end
 

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :load_mxit_user, :check_mxit_input_for_redirect
+  before_filter :load_user, :check_mxit_input_for_redirect
   after_filter :send_stats
   layout :set_layout
 
@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def current_user
-    @current_user ||= User.find_by_id(session[:current_user_id])
+    @current_user
   end
 
   def current_user_request_info
@@ -19,27 +19,31 @@ class ApplicationController < ActionController::Base
   end
 
   def mxit_request?
-    !request.env['HTTP_X_MXIT_USERID_R'].nil?
+    current_user.mxit?
   end
 
   def facebook_user?
-    current_user.provider == 'facebook'
+    current_user.facebook?
   end
 
-  helper_method :current_user, :current_user_request_info, :notify_airbrake, :mxit_request? , :facebook_user?
+  def guest?
+    current_user.guest?
+  end
+
+  helper_method :current_user, :current_user_request_info, :notify_airbrake, :mxit_request?, :facebook_user?, :guest?
 
   def login_required
-    return true if current_user
+    return true if current_user && !guest?
     access_denied
   end
 
   def access_denied
-    Rails.env.test? ? redirect_to('/auth/facebook') : redirect_to('/about')
+    redirect_to('/', :alert => "You are required to be logged")
     false
   end
 
   def send_stats
-    if tracking_enabled? && mxit_request? && current_user && status != 302
+    if tracking_enabled? && current_user && mxit_request? && status != 302
       begin
         Timeout::timeout(15) do
           g = Gabba::Gabba.new(tracking_code, request.host)
@@ -82,6 +86,43 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def load_user
+    if request.env['HTTP_X_MXIT_USERID_R'] # load mxit user
+      @current_user = User.find_or_create_from_auth_hash(provider: 'mxit',
+                                                         uid: request.env['HTTP_X_MXIT_USERID_R'],
+                                                         info: { name: request.env['HTTP_X_MXIT_NICK'],
+                                                                 login: request.env['HTTP_X_MXIT_LOGIN'],
+                                                                 email: request.env['HTTP_X_MXIT_LOGIN'] && "#{request.env['HTTP_X_MXIT_LOGIN']}@mxit.im"})
+      if request.env["HTTP_X_MXIT_PROFILE"]
+        @mxit_profile = MxitProfile.new(request.env["HTTP_X_MXIT_PROFILE"])
+        current_user_request_info.mxit_profile = @mxit_profile
+      end
+      if request.env['HTTP_X_DEVICE_USER_AGENT']
+        current_user_request_info.user_agent = "Mxit #{request.env['HTTP_X_DEVICE_USER_AGENT']}"
+      end
+      if request.env["HTTP_X_MXIT_LOCATION"]
+        @mxit_location = MxitLocation.new(request.env["HTTP_X_MXIT_LOCATION"])
+        current_user_request_info.mxit_location = @mxit_location
+      end
+    elsif params[:signed_request]
+      encoded_sig, payload = params[:signed_request].split('.')
+      encoded_str = payload.gsub('-','+').gsub('_','/')
+      encoded_str += '=' while !(encoded_str.size % 4).zero?
+      @data = ActiveSupport::JSON.decode(Base64.decode64(encoded_str))
+      Rails.logger.info "signed_request: #{@data.inspect}"
+      if @data.kind_of?(Hash) && @data['user_id']
+        self.current_user = User.find_or_create_from_auth_hash(provider: 'facebook',
+                                                               uid: @data['user_id'],
+                                                               info: { name: "user #{@data['user_id']}"})
+      else
+        redirect_to facebook_oauth_path
+        false
+      end
+    else # load browser user
+      @current_user = User.find_by_id(session[:current_user_id]) || User.new(provider: "guest")
+    end
+  end
+
   def set_layout
     if current_user.try(:provider) == 'developer'
       current_user.uid == 'mxit' ? 'mxit' : 'mobile'
@@ -113,6 +154,7 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user=(user)
+    @current_user = user
     session[:current_user_id] = user.try(:id)
   end
 

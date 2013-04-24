@@ -8,7 +8,7 @@ shared_examples "a user geek" do
     stub_request(:get, "http://api.wordnik.com/v4/word.json/today/definitions").
       to_return(:status => 200, :body => body, :headers => {})
     create(:won_game, word: "today", user: @current_user)
-    visit '/'
+    visit_home
     click_link 'show'
     click_link 'define_word'
     page.should have_content("Defining: today")

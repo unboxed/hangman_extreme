@@ -4,7 +4,7 @@ shared_examples "a user browser" do
 
   it "must show users rating" do
     create_list(:won_game, 10, user: @current_user)
-    visit '/'
+    visit_home
     click_link('view_rank')
     page.should have_content("Entered")
     page.should have_content("25 more games")
@@ -15,7 +15,7 @@ shared_examples "a user browser" do
   it "must the show the current top players" do
     users = create_list(:user,4).each{|user| create(:won_game, user: user) }
     User.new_day_set_scores!
-    visit '/'
+    visit_home
     click_link('view_rank')
     click_link('leaderboard')
     ['daily'].product(['precision','rating','streak']).map{|x,y| "#{x}_#{y}"}.each do |link|
@@ -33,7 +33,7 @@ shared_examples "a user browser" do
   end
 
   it "must have a fill in profile information" do
-    visit '/'
+    visit_home
     click_link('authorise')
     page.should have_content("Grant Speelman")
     page.should have_content("0821234567")
@@ -66,7 +66,7 @@ describe 'users', :redis => true do
 
     it "must show the profile if user mxit input is profile" do
       add_headers('X_MXIT_USER_INPUT' => 'profile')
-      visit '/'
+      visit_home
       page.current_path.should == profile_users_path
     end
 

@@ -1,6 +1,6 @@
 class FeedbackController < ApplicationController
-  skip_filter :check_server_status, :only => 'server_status'
   before_filter :login_required
+  load_and_authorize_resource except: 'play'
 
   def index
   end

@@ -1,6 +1,6 @@
 class PurchaseTransactionsController < ApplicationController
-  before_filter :login_required, :except => :simulate_purchase
-  load_and_authorize_resource :except => [:simulate_purchase]
+  before_filter :login_required, :except => ['simulate_purchase','index']
+  load_and_authorize_resource :except => ['simulate_purchase']
 
   def index
     @purchase_transactions = @purchase_transactions.page(params[:page])

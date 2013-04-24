@@ -9,5 +9,5 @@
 </ul>
 
 <% menu_item 'payouts', explain_path(action: 'payouts'), id: 'payouts' %>
-<% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
+<% menu_item 'rank', user_path(current_user), id: 'view_rank' unless guest? %>
 

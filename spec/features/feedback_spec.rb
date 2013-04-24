@@ -7,7 +7,7 @@ shared_examples "a feedbacker" do
                      :record => :once,
                      :erb => true,
                      :match_requests_on => [:method,:uri]) do
-      visit '/'
+      visit_home
       click_link('feedback')
       click_link('support')
       fill_in 'feedback', with: "I have a support issue for you"
@@ -21,7 +21,7 @@ shared_examples "a feedbacker" do
                      :record => :once,
                      :erb => true,
                      :match_requests_on => [:method,:uri]) do
-      visit '/'
+      visit_home
       click_link('feedback')
       click_link('suggestion')
       fill_in 'feedback', with: "I have a suggestion issue for you"
@@ -50,9 +50,21 @@ describe 'explain', :redis => true do
 
     before :each do
       @current_user = create(:user, uid: '1234567', provider: 'facebook')
+      using_facebook_omniauth{visit '/auth/facebook'}
     end
 
     it_behaves_like "a feedbacker"
+
+  end
+
+  context "as guest user", :smaato_vcr => true, :js => true do
+
+    it "wont allow you to give feedback" do
+      visit_home
+      click_link('feedback')
+      click_link('support')
+      page.current_path.should == "/"
+    end
 
   end
 
