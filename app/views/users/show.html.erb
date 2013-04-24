@@ -1,5 +1,5 @@
 <% Winner.winning_periods.each do |time_period| %>
-  <table data-role="table" id="<%= time_period %>-table" data-mode="columntoggle" class="ui-responsive table-stroke">
+  <table class="table table-bordered table-hover table-condensed" id="<%= time_period %>-table">
     <thead>
     <tr>
       <th><%= time_period.capitalize %></th>

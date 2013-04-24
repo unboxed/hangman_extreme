@@ -1,16 +1,18 @@
-<br/>
+<div class="btn-group">
 <% Winner.winning_periods.each do |time_period| %>
     <%= link_to_unless params[:period] == time_period,
                        time_period,
                        users_path(period: time_period, rank_by: params[:rank_by]),
-                       id: "#{time_period}_#{params[:rank_by] || 'rating'}" %> |
+                       id: "#{time_period}_#{params[:rank_by] || 'rating'}", class: "btn" %><% mxit_only("|") %>
 <% end %>
-<br/>
+</div>
+<div class="btn-group">
 <% Winner.winning_ranking_reasons.each do |rank| %>
     <%= link_to_unless params[:rank_by] == rank,
                        rank,
                        users_path(period: params[:period], rank_by: rank),
-                       id: "#{params[:period] || 'daily'}_#{rank}" %> |
+                       id: "#{params[:period] || 'daily'}_#{rank}", class: "btn" %><% mxit_only("|") %>
 <% end %>
+</div>
 <% menu_item 'scoring explained', explain_path(action: 'scoring_categories'), id: 'scoring_categories' %>
 <% menu_item 'winners view', winners_path(period: params[:period], reason: params[:rank_by]), id: 'winners' %>

@@ -42,21 +42,30 @@
 
   <div class="container">
     <% if notice -%>
-        <div class="alert alert-info" style="color:#00008b;"><%= notice %></div>
+        <div class="alert alert-info" style="color:#00008b;">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= notice %>
+        </div>
     <% elsif alert -%>
-        <div class="alert alert-block" style="color:#8b0000;"><%= alert %></div>
+        <div class="alert alert-block" style="color:#8b0000;">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= alert %>
+        </div>
     <% end -%>
-    <%= yield %>
-    <%= menu unless @dialog %>
+    <div class="row">
+      <div class="span6"><%= yield %></div>
+      <div class="span6"><%= menu %></div>
+    </div>
   </div>
 
-    <div id="footer">
-      <div class="container">
-        <%= smaato_ad %>
-      </div>
-    </div>
+</div>
 
-</div><!-- /page -->
+  <div id="footer">
+    <div class="container">
+      <%= smaato_ad %>
+    </div>
+  </div>
+
 <div id="fb-root"></div>
 <script>
   window.fbAsyncInit = function() {
@@ -93,5 +102,6 @@
 
 </script>
 <!-- <%= current_user.try(:provider) %>: <%= request_ip_address %> -->
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

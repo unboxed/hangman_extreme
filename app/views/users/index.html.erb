@@ -1,4 +1,4 @@
-<h1><%= "#{params[:period]} #{params[:rank_by]}".to_s.humanize %></h1>
+<h4><%= "#{params[:period]} #{params[:rank_by]}".to_s.humanize %></h4>
 <ul>
   <%= content_tag_for(:li, @users) do |user| %>
       <%= display_user_name(user.name) %> -

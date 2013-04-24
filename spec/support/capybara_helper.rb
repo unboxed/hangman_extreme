@@ -2,18 +2,6 @@ def visit_home
   visit '/' unless page.current_path == '/'
 end
 
-def active_page_click_link(id_text)
-  within('.ui-page-active') do
-    click_link(id_text)
-  end
-end
-
-def in_active_page(&block)
-  within('.ui-page-active') do
-    block.call
-  end
-end
-
 def setup_sessions(options = {})
   options.reverse_merge!(facebook: '1234567', mxit: 'm2604100')
   using_session(:mxit) do
