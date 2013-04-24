@@ -11,7 +11,7 @@ You have <span><%= @game.attempts_left %></span> attempts left
     <% if @game.clue_revealed? %>
     (<i><%= clue %></i>)
     <% elsif !@game.completed? %>
-      <% menu_item 'show clue', show_clue_game_path(@game), id: 'show_clue' %>
+      <% menu_item 'show clue', show_clue_game_path(@game) %>
     <% end %>
 <% end %>
 <br/>
@@ -19,9 +19,9 @@ You have <span><%= @game.attempts_left %></span> attempts left
 <br/>
 
 <% if @game.done? %>
-    <% menu_item 'new game', new_game_path, id: 'new_game' %>
-    <% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
-    <% menu_item 'define the word', define_word_path(word: @game.hangman_text), id: 'define_word' %>
+    <% menu_item 'new game', new_game_path %>
+    <% menu_item 'rank', user_path(current_user) %>
+    <% menu_item 'define the word', define_word_path(word: @game.hangman_text) %>
 <% else %>
   <p>
     <% ("a".."z").to_a.in_groups_of((mxit_request? ? 9 : 100),false).each do |letters| -%>

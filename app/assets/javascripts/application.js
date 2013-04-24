@@ -11,7 +11,6 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery.mobile-1.3.0.js
 //= require_self
 
 function fb_invite_friends() {

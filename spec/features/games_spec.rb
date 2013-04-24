@@ -2,29 +2,26 @@ require 'spec_helper'
 
 shared_examples "a game player" do
 
-  def click_letter(letter)
-    click_link("#{letter}_game")
-  end
-
   it "must allow you to start a new game and lose" do
     Dictionary.clear
     Dictionary.add("tester")
     visit_home
-    click_link('play_game')
+    click_link('Play')
     click_button 'start_game'
     i = 10
     page.should have_content("#{i} attempts left")
     %W(a b c d f g h i k).each do |letter|
-      click_letter(letter)
+      save_and_open_page if letter == 'c'
+      active_page_click_link(letter)
       i-= 1
       page.should have_content("#{i} attempts left")
       page.should have_content("_ _ _ _ _ _")
     end
-    click_link 'j'
+    active_page_click_link 'j'
     page.should have_content("You lose")
     page.should have_content("t e s t e r")
-    page.should have_link('new_game')
-    page.should have_link('home')
+    page.should have_link('new game')
+    page.should have_link('Home')
   end
 
   it "must allow you to use your credits to reveal the clue" do
@@ -32,13 +29,13 @@ shared_examples "a game player" do
     Dictionary.add("tester")
     Dictionary.set_clue("tester", "kevin")
     visit_home
-    click_link('play_game')
+    click_link('Play')
     click_button 'start_game'
     page.should have_no_content("kevin")
-    click_link 'show_clue'
+    active_page_click_link 'show_clue'
     click_button 'yes'
     page.should have_content("kevin")
-    click_letter 'j'
+    active_page_click_link 'j'
     page.should have_content("9 attempts left")
     page.should have_content("kevin")
   end
@@ -47,16 +44,16 @@ shared_examples "a game player" do
     Dictionary.clear
     Dictionary.add("better")
     visit_home
-    click_link('play_game')
+    click_link('Play')
     click_button 'start_game'
     page.should have_content("_ _ _ _ _ _")
-    click_letter('a')
+    active_page_click_link('a')
     page.should have_content("9 attempts left")
     page.should have_content("_ _ _ _ _ _")
-    click_letter('b')
+    active_page_click_link('b')
     page.should have_content("b _ _ _ _ _")
-    click_link('home')
-    click_link("play_game")
+    click_link('Home')
+    click_link("Play")
     page.should have_content("b _ _ _ _ _")
   end
 
@@ -64,18 +61,18 @@ shared_examples "a game player" do
     Dictionary.clear
     Dictionary.add("better")
     visit_home
-    click_link('play_game')
+    click_link('Play')
     click_button 'start_game'
     page.should have_content("_ _ _ _ _ _")
-    click_letter('a')
+    active_page_click_link('a')
     page.should have_content("_ _ _ _ _ _")
-    click_letter('b')
+    active_page_click_link('b')
     page.should have_content("b _ _ _ _ _")
-    click_letter('e')
+    active_page_click_link('e')
     page.should have_content("b e _ _ e _") # better
-    click_letter('t')
+    active_page_click_link('t')
     page.should have_content("b e t t e _")
-    click_letter('r')
+    active_page_click_link('r')
     page.should have_content("You win")
     page.should have_content("b e t t e r")
     click_link 'new_game'
@@ -124,7 +121,7 @@ describe 'games', :redis => true do
 
     it "wont allow you to start a new game" do
       visit_home
-      click_link('play_game')
+      click_link('Play')
       page.current_path.should == "/"
     end
 

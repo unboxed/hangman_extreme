@@ -64,7 +64,6 @@ describe 'explain', :redis => true do
       click_link('feedback')
       click_link('support')
       page.should have_css("div.alert")
-      page.current_path.should == "/"
     end
 
   end

@@ -1,5 +1,7 @@
 <head lang="en">
   <title>Hangman Extreme</title>
+  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= javascript_include_tag "application" %>
   <%= stylesheet_link_tag    "application", :media => "all" %>
@@ -8,26 +10,37 @@
 </head>
 <body>
 
-<div id="<%= site_page_id %>" data-role="page" data-url="<%= request.path %>">
+  <div class="wrap">
 
-  <div data-role="header" data-position="fixed">
-    <% if params[:action] == 'index' %>
-      <%= link_to 'Play', play_games_path, class: 'play_game', 'data-theme' =>"b" %>
-    <% elsif current_user.guest?  %>
-      <%= link_to 'Login', Rails.env.development? ? '/auth/developer' : '/auth/facebook', class: 'login', 'data-ajax' =>"false", 'data-theme' =>"b" %>
-    <% else  %>
-      <%= link_to 'Home', root_path, class: 'home' %>
-    <% end %>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <a class="brand" href="#">Hangman Extreme</a>
+        <ul class="nav">
+          <% if current_user.guest?  %>
+            <li>
+              <%= link_to 'Login', Rails.env.development? ? '/auth/developer' : '/auth/facebook', class: 'login', 'data-ajax' =>"false", 'data-theme' =>"b" %>
+            </li>
+          <% end %>
+          <% if params[:action] == 'index'  %>
+            <li>
+              <%= link_to 'Play', play_games_path, class: 'play_game' %>
+            </li>
+          <% end %>
+          <% unless current_page?(root_path)  %>
+            <li>
+              <%= link_to 'Home', root_path, class: 'home' %>
+            </li>
+          <% end %>
+          <% unless current_user.guest?  %>
+            <li>
+              <%= link_to 'Logout', logout_path, class: 'logout' %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
 
-    <h1>Hangman Extreme</h1>
-    <% if current_user.guest?  %>
-      <%= link_to 'Login', Rails.env.development? ? '/auth/developer' : '/auth/facebook', class: 'login', 'data-ajax' =>"false", 'data-theme' =>"b" %>
-    <% else %>
-      <%= link_to 'Logout', logout_path, class: 'logout' %>
-    <% end %>
-  </div>
-
-  <div data-role="content">
+  <div class="container">
     <% if notice -%>
         <div class="alert alert-info" style="color:#00008b;"><%= notice %></div>
     <% elsif alert -%>
@@ -37,11 +50,11 @@
     <%= menu unless @dialog %>
   </div>
 
-  <% unless @dialog %>
-  <div data-role="footer" class="footer" data-position="fixed">
-    <%= smaato_ad %>
-  </div><!-- /footer -->
-  <% end %>
+    <div id="footer">
+      <div class="container">
+        <%= smaato_ad %>
+      </div>
+    </div>
 
 </div><!-- /page -->
 <div id="fb-root"></div>

@@ -23,7 +23,7 @@ module ApplicationHelper
   end
 
   def site_page_id(path = request.path)
-    "page#{path.gsub("/",'_')}_content"
+    path == root_path ? "main_page" : "sub_page"
   end
 
 end
