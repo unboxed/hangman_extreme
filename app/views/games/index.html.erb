@@ -16,6 +16,7 @@
   <% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
 <% end %>
 <% menu_item 'leaderboard', users_path, id: 'leaderboard' %>
+<% menu_item 'winners', winners_path, id: 'winners' %>
 <% menu_item 'scoring', explain_path(action: 'scoring_categories'), id: 'scoring_categories' %>
 <% menu_item 'profile',mxit_request? ? mxit_auth_url(state: "profile") : profile_users_path, id: 'authorise' %>
 <% menu_item 'feedback',mxit_request? ? mxit_auth_url(state: "feedback") : feedback_index_path, id: 'feedback' %>

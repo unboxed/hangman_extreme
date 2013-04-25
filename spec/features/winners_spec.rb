@@ -9,7 +9,6 @@ shared_examples "a winner viewer" do
       Jobs::CreateDailyWinners.execute
     end
     visit_home
-    click_link('rank')
     click_link('winners')
     users.each do |winner|
       page.should have_content(winner.name)
@@ -36,7 +35,6 @@ shared_examples "a winner viewer" do
       Jobs::CreateWeeklyWinners.execute
     end
     visit_home
-    click_link('rank')
     click_link('winners')
     click_link('weekly')
     users.each do |winner|
@@ -84,11 +82,18 @@ describe 'winners',  :redis => true do
 
   end
 
-  context "as mobile user", :smaato_vcr => true, :js => true do
+  context "as mobile user", :facebook => true, :smaato_vcr => true, :js => true do
 
     before :each do
       @current_user = create(:user, uid: '1234567', provider: 'facebook')
+      visit '/auth/facebook'
     end
+
+    it_behaves_like "a winner viewer"
+
+  end
+
+  context "as guest user", :smaato_vcr => true, :js => true do
 
     it_behaves_like "a winner viewer"
 
