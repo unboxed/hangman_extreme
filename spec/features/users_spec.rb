@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-shared_examples "a user browser" do
+shared_examples "a registered user" do
 
   it "must show users rating" do
     create_list(:won_game, 10, user: @current_user)
@@ -8,28 +8,8 @@ shared_examples "a user browser" do
     click_link('view_rank')
     page.should have_content("Entered")
     page.should have_content("25 more games")
-    click_link('home')
+    click_link('Home')
     page.current_path.should == '/'
-  end
-
-  it "must the show the current top players" do
-    users = create_list(:user,4).each{|user| create(:won_game, user: user) }
-    User.new_day_set_scores!
-    visit_home
-    click_link('view_rank')
-    click_link('leaderboard')
-    ['daily'].product(['precision','rating','streak']).map{|x,y| "#{x}_#{y}"}.each do |link|
-      click_link(link)
-      users.each do |user|
-        page.should have_content(user.name)
-      end
-    end
-    ['weekly'].product(['streak','rating','precision']).map{|x,y| "#{x}_#{y}"}.each do |link|
-      click_link(link)
-      users.each do |user|
-        page.should have_content(user.name)
-      end
-    end
   end
 
   it "must have a fill in profile information" do
@@ -45,8 +25,31 @@ shared_examples "a user browser" do
     click_button 'submit'
     page.should have_content("Joe Barber")
     page.should have_content("0821234561")
-    click_link('home')
+    click_link('Home')
     page.current_path.should == '/'
+  end
+
+end
+
+shared_examples "a user browser" do
+
+  it "must the show the current top players" do
+    users = create_list(:user,4).each{|user| create(:won_game, user: user) }
+    User.new_day_set_scores!
+    visit_home
+    click_link('leaderboard')
+    ['daily'].product(['precision','rating','streak']).map{|x,y| "#{x}_#{y}"}.each do |link|
+      click_link(link)
+      users.each do |user|
+        page.should have_content(user.name)
+      end
+    end
+    ['weekly'].product(['streak','rating','precision']).map{|x,y| "#{x}_#{y}"}.each do |link|
+      click_link(link)
+      users.each do |user|
+        page.should have_content(user.name)
+      end
+    end
   end
 
 end
@@ -63,6 +66,7 @@ describe 'users', :redis => true do
     end
 
     it_behaves_like "a user browser"
+    it_behaves_like "a registered user"
 
     it "must show the profile if user mxit input is profile" do
       add_headers('X_MXIT_USER_INPUT' => 'profile')
@@ -72,11 +76,20 @@ describe 'users', :redis => true do
 
   end
 
-  context "as mobile user", :smaato_vcr => true do
+  context "as mobile user", :facebook => true, :smaato_vcr => true, :js => true do
 
     before :each do
       @current_user = create(:user, uid: '1234567', provider: 'facebook', mobile_number: '0821234567', real_name: 'Grant Speelman')
+      visit '/auth/facebook'
+      @current_user.reload
     end
+
+    it_behaves_like "a user browser"
+    it_behaves_like "a registered user"
+
+  end
+
+  context "as guest user", :smaato_vcr => true, :js => true do
 
     it_behaves_like "a user browser"
 

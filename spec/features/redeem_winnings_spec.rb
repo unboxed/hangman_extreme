@@ -2,14 +2,13 @@ require 'spec_helper'
 
 shared_examples "a winner redeemer" do
 
-
   it "must show users redeem winnings link" do
     @current_user.update_attributes(:prize_points => 100)
     visit_home
     click_link('redeem')
     page.should have_content("Redeeming Winnings")
     page.should have_content("100 prize points")
-    click_link('home')
+    click_link('Home')
     page.current_path.should == '/'
   end
 
@@ -74,13 +73,27 @@ describe 'redeem winnings', :redis => true do
 
   end
 
-  context "as mobile user", :smaato_vcr => true do
+  context "as mobile user",:facebook => true, :smaato_vcr => true, :js => true do
 
     before :each do
       @current_user = create(:user, uid: '1234567', provider: 'facebook')
+      visit '/auth/facebook'
+      @current_user.reload
     end
 
     it_behaves_like "a winner redeemer"
+
+  end
+
+  context "as guest user", :smaato_vcr => true, :js => true do
+
+    it "must show users redeem winnings link" do
+      visit_home
+      click_link('redeem')
+      page.should have_content("Redeeming Winnings")
+      click_link('Home')
+      page.current_path.should == '/'
+    end
 
   end
 
