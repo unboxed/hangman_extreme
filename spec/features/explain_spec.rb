@@ -33,11 +33,11 @@ describe 'explain', :redis => true do
 
   end
 
-  context "as mobile user", :smaato_vcr => true, :js => true do
+  context "as mobile user", :facebook => true, :smaato_vcr => true, :js => true do
 
     before :each do
       @current_user = create(:user, uid: '1234567', provider: 'facebook')
-      using_facebook_omniauth{visit '/auth/facebook'}
+      visit '/auth/facebook'
     end
 
     it_behaves_like "a knowledge seeker"

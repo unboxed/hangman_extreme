@@ -10,7 +10,7 @@ describe "layouts/_menu" do
   it "must build ul menu"  do
     grouped_menu_items = [[[ 'new game', new_game_path, id: 'new_game']]]
     render :partial => "layouts/menu", :locals => {:grouped_menu_items => grouped_menu_items}
-    within("ul.menu") do
+    within("ul.nav") do
       rendered.should have_css("a#new_game[href='#{new_game_path}']")
     end
   end

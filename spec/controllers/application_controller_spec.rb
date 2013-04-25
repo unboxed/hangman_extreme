@@ -15,12 +15,12 @@ describe ApplicationController do
       end
     end
 
-    it "must redirects to /auth/facebook if not user_id" do
+    it "must redirects to root_path if not user_id" do
       get :index
-      response.should redirect_to("/auth/facebook")
+      response.should redirect_to(root_path)
     end
 
-    it "wont redirects to /auth/developer if logged_in" do
+    it "wont redirects to root_path if logged_in" do
       user = stub_model(User)
       User.should_receive(:find_by_id).with(nil).and_return(user)
       get :index

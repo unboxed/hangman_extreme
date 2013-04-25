@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   end
 
   def self.find_facebook_user_by_uid(uid)
-    facebook
+    facebook.find_by_uid(uid)
   end
 
   def self.find_mxit_user(i)

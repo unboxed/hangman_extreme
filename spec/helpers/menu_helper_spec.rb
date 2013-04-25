@@ -14,7 +14,7 @@ describe MenuHelper do
     end
 
     it "must start with home menu items if mxit request?" do
-      helper.menu_items.should include(['home', root_path, id: 'home'])
+      helper.menu_items.should include(['Home', root_path, id: 'home'])
     end
 
     it "must add a item to menu items" do

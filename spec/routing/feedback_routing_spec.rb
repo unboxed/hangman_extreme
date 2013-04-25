@@ -15,10 +15,6 @@ describe FeedbackController do
       post("/feedback").should route_to("feedback#create")
     end
 
-    it "routes to #create" do
-      get("/server_status").should route_to("feedback#server_status")
-    end
-
   end
 
 end

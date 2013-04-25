@@ -3,7 +3,7 @@
 <p>You have currently have <b><%= current_user.credits %></b> credits.
 All Players will be updated to 20 credits a day unless you have more</p>
 
-<% if mxit_request? && ENV['MXIT_VENDOR_ID'] %>
+<% if mxit_request? && PurchaseTransaction.purchases_enabled? %>
 <ul>
     <% PurchaseTransaction.products.each_with_index do |product,index| %>
         <% product_id, hash = product %>
@@ -20,4 +20,4 @@ All Players will be updated to 20 credits a day unless you have more</p>
 
 <br/>
 
-<% menu_item 'profile', profile_users_path, id: 'profile' %>
+<% menu_item 'profile', profile_users_path, id: 'profile' unless guest? %>

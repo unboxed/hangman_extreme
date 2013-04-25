@@ -12,27 +12,13 @@ describe "layouts/mobile" do
   end
 
   it "should have a home link" do
-    view.should_receive(:current_page?).with(root_path).and_return(false)
     render
-    rendered.should have_link("home", href: root_path)
-  end
-
-  it "wont have a home link if current_page" do
-    view.should_receive(:current_page?).with(root_path).and_return(true)
-    render
-    rendered.should_not have_link("home", href: root_path)
+    rendered.should have_link("Home", href: root_path)
   end
 
   it "should have a play game link" do
-    view.stub!(:params).and_return(action: 'index')
     render
-    rendered.should have_link("play_game", href: play_games_path)
-  end
-
-  it "wont have a new game link if not index page" do
-    view.stub!(:params).and_return(action: 'other')
-    render
-    rendered.should_not have_link("play_game", href: play_games_path)
+    rendered.should have_link("Play", href: play_games_path)
   end
 
 end
