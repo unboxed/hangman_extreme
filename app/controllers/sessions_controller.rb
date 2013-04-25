@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
   end
 
   def failure
-    redirect_to '/'
+    redirect_to '/', alert: params[:message]
   end
 
   protected

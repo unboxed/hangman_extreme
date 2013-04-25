@@ -7,6 +7,6 @@ class CreateFeedbacks < ActiveRecord::Migration
       t.string :support_type, :default => 'suggestion'
       t.timestamps
     end
-    add_index :feedbacks, :user_id
+    add_index :feedback, :user_id
   end
 end
