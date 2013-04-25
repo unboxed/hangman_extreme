@@ -1,4 +1,9 @@
-<p>Welcome to <b>Hangman Extreme</b>. Have fun guessing the word.</p>
+<% if guest? %>
+  <p>Welcome to hangman extreme south africa.</p>
+  <p>Here you can play hangman on your mobile and you could also win airtime</p>
+<% else %>
+  <p>Welcome to <b>Hangman Extreme</b>. Have fun guessing the word.</p>
+<% end %>
 <ul>
   <%= content_tag_for(:li, @games) do |game| %>
       <span><%= game.hangman_text %></span> -
