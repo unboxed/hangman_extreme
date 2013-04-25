@@ -8,7 +8,7 @@ shared_examples "a user geek" do
     stub_request(:get, "http://api.wordnik.com/v4/word.json/today/definitions").
       to_return(:status => 200, :body => body, :headers => {})
     create(:won_game, word: "today", user: @current_user)
-    visit_home
+    visit '/'
     click_link 'show'
     click_link 'define_word'
     page.should have_content("Defining: today")
@@ -31,13 +31,20 @@ describe 'users', :redis => true do
 
   end
 
-  context "as mobile user", :smaato_vcr => true do
+  context "as mobile user", :facebook => true, :smaato_vcr => true, :js => true do
 
     before :each do
       @current_user = create(:user, uid: '1234567', provider: 'facebook', mobile_number: '0821234567', real_name: 'Grant Speelman')
+      visit '/auth/facebook'
+      @current_user.reload
     end
 
     it_behaves_like "a user geek"
+
+  end
+
+  # can't play games
+  context "as guest user", :smaato_vcr => true, :js => true do
 
   end
 

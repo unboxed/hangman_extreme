@@ -46,6 +46,10 @@ class User < ActiveRecord::Base
     return user
   end
 
+  def self.find_facebook_user_by_uid(uid)
+    facebook
+  end
+
   def self.find_mxit_user(i)
     mxit.find_by_uid(i)
   end
