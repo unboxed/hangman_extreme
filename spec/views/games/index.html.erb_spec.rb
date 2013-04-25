@@ -13,6 +13,7 @@ describe "games/index" do
     view.stub!(:current_user).and_return(@current_user)
     view.stub!(:mxit_request?).and_return(true)
     view.stub!(:facebook_user?).and_return(false)
+    view.stub!(:guest?).and_return(false)
     view.stub!(:menu_item)
   end
 
@@ -40,6 +41,17 @@ describe "games/index" do
 
   it "must have a view rank link on the menu" do
     view.should_receive(:menu_item).with(anything,user_path(50),id: 'view_rank')
+    render
+  end
+
+  it "wont have a view rank link on the menu if guest" do
+    view.stub!(:guest?).and_return(true)
+    view.should_not_receive(:menu_item).with(anything,user_path(50),anything)
+    render
+  end
+
+  it "should have a leaderboard link on menu" do
+    view.should_receive(:menu_item).with(anything,users_path,id: 'leaderboard')
     render
   end
 

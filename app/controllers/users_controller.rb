@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :login_required
-  load_and_authorize_resource :except => [:mxit_authorise,:mxit_oauth,:profile, :stats]
+  load_and_authorize_resource :except => [:mxit_authorise,:mxit_oauth,:profile]
 
   def index
     params[:period] = 'daily' unless Winner::WINNING_PERIODS.include?(params[:period].to_s)

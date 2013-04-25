@@ -2,38 +2,22 @@ require 'spec_helper'
 
 shared_examples "a game player" do
 
-  it "must allow you to start a new game and win" do
-    Dictionary.clear
-    Dictionary.add("better")
-    visit '/'
-    click_link('play_game')
-    click_button 'start_game'
-    page.should have_content("_ _ _ _ _ _")
-    click_link('a')
-    page.should have_content("_ _ _ _ _ _")
-    click_link('b')
-    page.should have_content("b _ _ _ _ _")
-    click_link('e')
-    page.should have_content("b e _ _ e _") # better
-    click_link('t')
-    page.should have_content("b e t t e _")
-    click_link('r')
-    page.should have_content("You win")
-    page.should have_content("b e t t e r")
-    page.should have_link('new_game')
-    page.should have_link('home')
+  def click_letter(l)
+    within(".letters") do
+      click_link(l)
+    end
   end
 
   it "must allow you to start a new game and lose" do
     Dictionary.clear
     Dictionary.add("tester")
-    visit '/'
-    click_link('play_game')
+    visit_home
+    click_link('Play')
     click_button 'start_game'
     i = 10
     page.should have_content("#{i} attempts left")
     %W(a b c d f g h i k).each do |letter|
-      click_link(letter)
+      click_letter(letter)
       i-= 1
       page.should have_content("#{i} attempts left")
       page.should have_content("_ _ _ _ _ _")
@@ -42,56 +26,58 @@ shared_examples "a game player" do
     page.should have_content("You lose")
     page.should have_content("t e s t e r")
     page.should have_link('new_game')
-    page.should have_link('home')
+    page.should have_link('Home')
   end
 
   it "must allow you to use your credits to reveal the clue" do
     Dictionary.clear
     Dictionary.add("tester")
     Dictionary.set_clue("tester", "kevin")
-    visit '/'
-    click_link('play_game')
+    visit_home
+    click_link('Play')
     click_button 'start_game'
     page.should have_no_content("kevin")
     click_link 'show_clue'
     click_button 'yes'
     page.should have_content("kevin")
-    click_link 'j'
+    click_letter 'j'
+    page.should have_content("9 attempts left")
     page.should have_content("kevin")
   end
 
   it "must allow you to start a new game and leave and continue it later" do
     Dictionary.clear
     Dictionary.add("better")
-    visit '/'
-    click_link('play_game')
+    visit_home
+    click_link('Play')
     click_button 'start_game'
     page.should have_content("_ _ _ _ _ _")
-    click_link('a')
+    click_letter('a')
+    page.should have_content("9 attempts left")
     page.should have_content("_ _ _ _ _ _")
-    click_link('b')
+    click_letter('b')
     page.should have_content("b _ _ _ _ _")
-    click_link('home')
-    click_link("play_game")
+    click_link('Home')
+    click_link("Play")
     page.should have_content("b _ _ _ _ _")
   end
 
   it "must allow you to play multiple games" do
     Dictionary.clear
     Dictionary.add("better")
-    visit '/'
-    click_link('play_game')
+    visit_home
+    click_link('Play')
     click_button 'start_game'
     page.should have_content("_ _ _ _ _ _")
-    click_link('a')
+    click_letter('a')
     page.should have_content("_ _ _ _ _ _")
-    click_link('b')
+    click_letter('b')
     page.should have_content("b _ _ _ _ _")
-    click_link('e')
+    click_letter('e')
     page.should have_content("b e _ _ e _") # better
-    click_link('t')
+    click_letter('t')
     page.should have_content("b e t t e _")
-    click_link('r')
+    click_letter('r')
     page.should have_content("You win")
     page.should have_content("b e t t e r")
     click_link 'new_game'
@@ -114,23 +100,39 @@ describe 'games', :redis => true do
     it_behaves_like "a game player"
 
     it "must show ads" do
-      visit '/'
+      visit_home
       page.should have_css("div.beacon")
     end
 
   end
 
-  context "as mobile user", :smaato_vcr => true do
+  context "as mobile user", :facebook => true, :smaato_vcr => true, :js => true do
 
     before :each do
       @current_user = create(:user, uid: '1234567', provider: 'facebook')
+      visit '/auth/facebook'
     end
 
     it_behaves_like "a game player"
 
     it "must show ads" do
-      visit '/'
-      page.should have_css("div.footer img")
+      visit_home
+      page.should have_css("div#footer .container img")
+    end
+
+  end
+
+  context "as guest user", :smaato_vcr => true, :js => true do
+
+    it "wont allow you to start a new game" do
+      visit_home
+      click_link('Play')
+      page.current_path.should == "/"
+    end
+
+    it "must show ads" do
+      visit_home
+      page.should have_css("div#footer .container img")
     end
 
   end

@@ -2,14 +2,13 @@ require 'spec_helper'
 
 shared_examples "a winner redeemer" do
 
-
   it "must show users redeem winnings link" do
     @current_user.update_attributes(:prize_points => 100)
-    visit '/'
+    visit_home
     click_link('redeem')
     page.should have_content("Redeeming Winnings")
     page.should have_content("100 prize points")
-    click_link('home')
+    click_link('Home')
     page.current_path.should == '/'
   end
 
@@ -26,7 +25,7 @@ shared_examples "a winner redeemer" do
                          :erb => true,
                          :match_requests_on => [:uri,:method]) do
           @current_user.update_attributes(:prize_points => value + 1)
-          visit '/'
+          visit_home
           click_link('redeem')
           page.should have_content("#{value + 1} prize points")
           click_link("#{provider}_airtime")
@@ -35,7 +34,7 @@ shared_examples "a winner redeemer" do
           page.should have_content("1 prize points")
           click_link('airtime_vouchers')
           IssueAirtimeToUsers.drain
-          visit '/'
+          visit_home
           click_link('redeem')
           click_link('airtime_vouchers')
           page.should have_content("R#{value / 100}")
@@ -63,7 +62,7 @@ describe 'redeem winnings', :redis => true do
 
     it "must allow to redeem prize points for mxit_money" do
       @current_user.update_attributes(:prize_points => 257)
-      visit '/'
+      visit_home
       click_link('redeem')
       page.should have_content("257 prize points")
       click_link('mxit_money')
@@ -74,13 +73,27 @@ describe 'redeem winnings', :redis => true do
 
   end
 
-  context "as mobile user", :smaato_vcr => true do
+  context "as mobile user",:facebook => true, :smaato_vcr => true, :js => true do
 
     before :each do
       @current_user = create(:user, uid: '1234567', provider: 'facebook')
+      visit '/auth/facebook'
+      @current_user.reload
     end
 
     it_behaves_like "a winner redeemer"
+
+  end
+
+  context "as guest user", :smaato_vcr => true, :js => true do
+
+    it "must show users redeem winnings link" do
+      visit_home
+      click_link('redeem')
+      page.should have_content("Redeeming Winnings")
+      click_link('Home')
+      page.current_path.should == '/'
+    end
 
   end
 

@@ -1,8 +1,9 @@
-<%= form_tag(feedback_index_path(:type => params[:type])) do %>
-    Enter your message or <%= link_to 'cancel', root_path, id: 'cancel' %>.<br/>
+<%= form_for(@feedback) do |f| %>
+    Enter your message or <%= link_to 'cancel', root_path %>.<br/>
     Type in following format <b>Subject:Message</b>, example : <br/>
     <i>Fun Game:I really enjoy hangman extreme, keep up the good work!</i><br/>
     <label for="textarea">Textarea:</label>
-    <%= text_field_tag :feedback %>
-    <%= submit_tag 'send', id: 'submit' %>
+    <%= f.text_field :full_message %>
+    <%= f.hidden_field :support_type %>
+    <%= f.submit 'send' %>
 <% end %>

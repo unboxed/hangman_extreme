@@ -1,8 +1,8 @@
-<b><%= params[:period] %> <i><%= params[:reason] %></i> Winners</b><br/>
+<h4><%= params[:period] %> <i><%= params[:reason] %></i> Winners</h4>
 <% if @winners.empty? %>
     <p><b>Coming Soon</b></p>
 <% else %>
-<table data-role="table" class="ui-responsive table-stroke">
+<table class="table table-bordered table-hover table-condensed">
   <thead>
     <tr>
       <th>points<%= mxit_dash %></th>
@@ -17,21 +17,26 @@
   </tbody>
 </table>
 <% end %>
+<div class="btn-group">
 <% Winner::WINNING_PERIODS.each do |time_period| %>
   <%= link_to_unless params[:period] == time_period,
                      time_period,
                      {period: time_period, reason: params[:reason]},
-                     id: "#{time_period}_#{params[:reason] || 'rating'}" %> |
+                     id: "#{time_period}_#{params[:reason] || 'rating'}", class: "btn" %><% mxit_only("|") %>
 <% end %>
-<br/>
+</div>
+<div class="btn-group">
 <% Winner::WINNING_REASONS.each do |reason| %>
   <%= link_to_unless params[:reason] == reason,
                      reason,
                      {period: params[:period], reason: reason},
-                     id: "#{params[:period] || 'daily'}_#{reason}" %> |
+                     id: "#{params[:period] || 'daily'}_#{reason}", class: "btn" %><% mxit_only("|") %>
 <% end %>
-<% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
+</div>
 
+<% unless guest? %>
+  <% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
+<% end %>
 
 
 

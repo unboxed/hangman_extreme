@@ -1,36 +1,24 @@
-class Feedback
+class Feedback < ActiveRecord::Base
+  validates :message, presence: true
 
-  cattr_accessor :subdomain_name, :api_key, :api_secret
+  belongs_to :user
+  delegate :email, :real_name, :name, to: :user, prefix: true
 
-  def self.send_suggestion(options = {})
-    client = UserVoice::Client.new(subdomain_name, api_key, api_secret)
-    forum = client.get("/api/v1/forums.json")['forums'].first
-    forum_id = forum['id']
-    client.login_as(options[:email]) do |access_token|
-      access_token.post("/api/v1/forums/#{forum_id}/suggestions.json", {
-        :suggestion => {
-          :title => options[:subject],
-          :text => options[:message],
-          :votes => 0
-        }
-      })
-    end
+  after_commit :send_to_uservoice, :on => :create
+
+  def full_message=(v)
+    self.message, self.subject = v.split(":",2).reverse
   end
 
-  def self.send_support(options = {})
-    client = UserVoice::Client.new(subdomain_name, api_key, api_secret)
-    client.post("/api/v1/tickets.json", {
-      :email => options[:email],
-      :name => options[:name],
-      :ticket => {
-        :subject => options[:subject],
-        :message => options[:message]
-      }
-    })
+  def full_message
+    "#{subject}:#{message}"
+  end
+
+  protected
+
+  def send_to_uservoice
+    SendFeedbackToUservoice.perform_async(id)
   end
 
 end
 
-Feedback.subdomain_name = ENV['UV_SUBDOMAIN_NAME']
-Feedback.api_key = ENV['UV_API_KEY'] || ''
-Feedback.api_secret = ENV['UV_API_SECRET']  || ''

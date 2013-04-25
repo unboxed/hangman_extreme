@@ -40,6 +40,10 @@ class PurchaseTransaction < ActiveRecord::Base
     @p.freeze
   end
 
+  def self.purchases_enabled?
+    ENV['MXIT_VENDOR_ID'].present?
+  end
+
   protected
 
   def update_user_credits

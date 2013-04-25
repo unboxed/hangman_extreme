@@ -15,16 +15,42 @@ describe ApplicationController do
       end
     end
 
-    it "must redirects to /auth/facebook if not user_id" do
+    it "must redirects to root_path if not user_id" do
       get :index
-      response.should redirect_to("/auth/facebook")
+      response.should redirect_to(root_path)
     end
 
-    it "wont redirects to /auth/developer if logged_in" do
+    it "wont redirects to root_path if logged_in" do
       user = stub_model(User)
       User.should_receive(:find_by_id).with(nil).and_return(user)
       get :index
       response.should be_success
+    end
+
+  end
+
+  describe "load_guest_user" do
+
+    before :each do
+      controller.stub(:send_stats)
+    end
+
+    controller do
+      def index
+        render :text => "hello"
+      end
+    end
+
+    it "must assign a guest current_user" do
+      get :index
+      assigns(:current_user).should be_kind_of(User)
+      assigns(:current_user).should be_a_guest
+    end
+
+    it "wont assign a guest current_user if already a user" do
+      request.env['HTTP_X_MXIT_USERID_R'] = 'm2604100'
+      get :index
+      assigns(:current_user).should_not be_a_guest
     end
 
   end
@@ -122,7 +148,7 @@ describe ApplicationController do
     it "wont load mxit user if no userid" do
       User.should_not_receive(:find_or_create_from_auth_hash)
       get :index
-      assigns(:current_user).should be_nil
+      assigns(:current_user).should be_a_guest
     end
 
   end

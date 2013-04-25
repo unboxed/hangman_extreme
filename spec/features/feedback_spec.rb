@@ -7,12 +7,12 @@ shared_examples "a feedbacker" do
                      :record => :once,
                      :erb => true,
                      :match_requests_on => [:method,:uri]) do
-      visit '/'
+      visit_home
       click_link('feedback')
       click_link('support')
-      fill_in 'feedback', with: "I have a support issue for you"
-      click_button 'submit'
-      page.should have_css("div.alert")
+      fill_in 'feedback_full_message', with: "I have a support issue for you"
+      click_button 'send'
+      page.should have_css("div.alert-info")
     end
   end
 
@@ -21,12 +21,12 @@ shared_examples "a feedbacker" do
                      :record => :once,
                      :erb => true,
                      :match_requests_on => [:method,:uri]) do
-      visit '/'
+      visit_home
       click_link('feedback')
       click_link('suggestion')
-      fill_in 'feedback', with: "I have a suggestion issue for you"
-      click_button 'submit'
-      page.should have_css("div.alert")
+      fill_in 'feedback_full_message', with: "I have a suggestion issue for you"
+      click_button 'send'
+      page.should have_css("div.alert-info")
     end
   end
 
@@ -50,9 +50,21 @@ describe 'explain', :redis => true do
 
     before :each do
       @current_user = create(:user, uid: '1234567', provider: 'facebook')
+      using_facebook_omniauth{visit '/auth/facebook'}
     end
 
     it_behaves_like "a feedbacker"
+
+  end
+
+  context "as guest user", :smaato_vcr => true, :js => true do
+
+    it "wont allow you to give feedback" do
+      visit_home
+      click_link('feedback')
+      click_link('support')
+      page.should have_css("div.alert")
+    end
 
   end
 

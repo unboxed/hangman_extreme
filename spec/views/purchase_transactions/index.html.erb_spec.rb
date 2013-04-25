@@ -13,6 +13,8 @@ describe "purchase_transactions/index.html.erb" do
     view.stub!(:current_user).and_return(@current_user)
     view.stub!(:menu_item)
     view.stub!(:mxit_request?).and_return(true)
+    view.stub!(:guest?)
+    PurchaseTransaction.stub!(:purchases_enabled?).and_return(true)
   end
 
 
@@ -34,8 +36,15 @@ describe "purchase_transactions/index.html.erb" do
     end
   end
 
-  it "should have a profile link on menu" do
+  it "should have a profile link on menu unless guest" do
+    view.stub!(:guest?).and_return(false)
     view.should_receive(:menu_item).with(anything,profile_users_path,id: 'profile')
+    render
+  end
+
+  it "wont have a profile link on menu if guest" do
+    view.stub!(:guest?).and_return(true)
+    view.should_not_receive(:menu_item).with(anything,profile_users_path,id: 'profile')
     render
   end
 

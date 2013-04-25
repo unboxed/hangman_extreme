@@ -11,7 +11,7 @@ describe 'purchases', :redis => true do
     end
 
     it "must allow user to purchase credits" do
-      visit '/'
+      visit_home
       click_link('profile')
       page.should have_content("70 credits")
       click_link('buy_credits')
@@ -22,7 +22,7 @@ describe 'purchases', :redis => true do
     end
 
     it "must allow user to cancel purchase of clue points" do
-      visit '/'
+      visit_home
       click_link('profile')
       page.should have_content("70 credits")
       click_link('buy_credits')
@@ -34,16 +34,25 @@ describe 'purchases', :redis => true do
 
   end
 
-  context "as mobile user", :smaato_vcr => true, :js => true do
+  context "as mobile user", :facebook => true, :smaato_vcr => true, :js => true do
 
     before :each do
       @current_user = create(:user, uid: '1234567', provider: 'facebook')
+      visit '/auth/facebook'
     end
 
     it "must not allow user to purchase of clue points" do
-      visit '/'
-      click_link('profile')
-      page.should have_content("70 credits")
+      visit_home
+      click_link('buy_credits')
+      page.should have_content("Coming soon, credits purchases")
+    end
+
+  end
+
+  context "as guest user", :smaato_vcr => true, :js => true do
+
+    it "must not allow user to purchase of clue points" do
+      visit_home
       click_link('buy_credits')
       page.should have_content("Coming soon, credits purchases")
     end

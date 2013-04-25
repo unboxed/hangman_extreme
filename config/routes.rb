@@ -34,7 +34,6 @@ HangmanLeague::Application.routes.draw do
   match '/auth/:provider/failure', to: 'sessions#failure'
   match '/auth/failure', to: 'sessions#failure'
   match '/authorize', to: 'users#mxit_authorise', as: 'mxit_authorise'
-  match '/server_status', to: 'feedback#server_status', as: 'server_status'
   match '/about', to: 'explain#about', as: 'about'
   match '/terms', to: 'explain#terms', as: 'terms'
   match '/privacy', to: 'explain#privacy', as: 'privacy'

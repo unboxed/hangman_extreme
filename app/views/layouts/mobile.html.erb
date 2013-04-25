@@ -8,42 +8,57 @@
 </head>
 <body>
 
-<div id="<%= site_page_id %>" data-role="page" data-url="<%= request.path %>">
+  <div class="wrap">
 
-  <div data-role="header">
-    <% if params[:action] == 'index' %>
-      <%= link_to 'Play', play_games_path, id: 'play_game', 'data-theme' =>"b" %>
-    <% elsif current_page?(about_path)  %>
-      <%= link_to 'Login', Rails.env.development? ? '/auth/developer' : '/auth/facebook', id: 'login', 'data-ajax' =>"false", 'data-theme' =>"b" %>
-    <% end %>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <a class="brand" href="#">Hangman Extreme</a>
+        <ul class="nav">
+          <li <% if @game %>class="active"<% end %>>
+            <%= link_to 'Play', play_games_path, class: 'play_game' %>
+          </li>
+          <li <% if current_page?(root_path) %>class="active"<% end %>>
+            <%= link_to 'Home', root_path, class: 'home' %>
+          </li>
+          <% if current_user.guest?  %>
+            <li>
+              <%= link_to 'Login', Rails.env.development? ? '/auth/developer' : '/auth/facebook', class: 'login', 'data-ajax' =>"false", 'data-theme' =>"b" %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to 'Logout', logout_path, class: 'logout' %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
 
-    <h1>Hangman Extreme</h1>
-    <% if current_user %>
-      <% if current_page?(root_path) %>
-        <%= link_to 'Logout', logout_path, id: 'logout' %>
-      <% else %>
-        <%= link_to 'Home', root_path, id: 'home' %>
-      <% end %>
-    <% end %>
-  </div>
-
-  <div data-role="content">
+  <div class="container">
     <% if notice -%>
-        <div class="alert alert-info" style="color:#00008b;"><%= notice %></div>
+        <div class="alert alert-info" style="color:#00008b;">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= notice %>
+        </div>
     <% elsif alert -%>
-        <div class="alert alert-block" style="color:#8b0000;"><%= alert %></div>
+        <div class="alert alert-block" style="color:#8b0000;">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= alert %>
+        </div>
     <% end -%>
-    <%= yield %>
-    <%= menu unless @dialog %>
+    <div class="row">
+      <div class="span6"><%= yield %></div>
+      <div class="span6"><%= menu %></div>
+    </div>
   </div>
 
-  <% unless @dialog %>
-  <div data-role="footer" class="footer">
-    <%= smaato_ad %>
-  </div><!-- /footer -->
-  <% end %>
+</div>
 
-</div><!-- /page -->
+  <div id="footer">
+    <div class="container">
+      <%= smaato_ad %>
+    </div>
+  </div>
+
 <div id="fb-root"></div>
 <script>
   window.fbAsyncInit = function() {
@@ -79,6 +94,7 @@
   })();
 
 </script>
-<!-- request_ip_address: <%= request_ip_address %> -->
+<!-- <%= current_user.try(:provider) %>: <%= request_ip_address %> -->
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

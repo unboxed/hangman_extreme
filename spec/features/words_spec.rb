@@ -31,13 +31,20 @@ describe 'users', :redis => true do
 
   end
 
-  context "as mobile user", :smaato_vcr => true do
+  context "as mobile user", :facebook => true, :smaato_vcr => true, :js => true do
 
     before :each do
       @current_user = create(:user, uid: '1234567', provider: 'facebook', mobile_number: '0821234567', real_name: 'Grant Speelman')
+      visit '/auth/facebook'
+      @current_user.reload
     end
 
     it_behaves_like "a user geek"
+
+  end
+
+  # can't play games
+  context "as guest user", :smaato_vcr => true, :js => true do
 
   end
 

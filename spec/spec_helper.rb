@@ -41,6 +41,8 @@ Spork.prefork do
   require 'rspec/autorun'
   require 'webmock/rspec'
   require 'draper/test/rspec_integration'
+  require 'capybara/rails'
+  require 'capybara/rspec'
   require 'capybara/poltergeist'
   require 'sidekiq/testing'
 end
@@ -72,6 +74,7 @@ Spork.each_run do
       Capybara::Poltergeist::Driver.new(app, window_size: [320,480] )
     end
     Capybara.javascript_driver = :poltergeist
+    Capybara.default_wait_time = 10
 
     config.filter_run_excluding :redis => true if ENV["EXCLUDE_REDIS_SPECS"]
 
@@ -108,6 +111,10 @@ Spork.each_run do
 
     config.before(:each, :redis => true) do
       Ohm.flush
+    end
+
+    config.around(:each, :facebook => true) do |example|
+      using_facebook_omniauth(&example)
     end
 
     config.around(:each, :shinka_vcr => true) do |example|

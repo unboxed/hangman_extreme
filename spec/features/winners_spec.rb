@@ -8,8 +8,7 @@ shared_examples "a winner viewer" do
     Timecop.freeze(Date.yesterday) do
       Jobs::CreateDailyWinners.execute
     end
-    visit '/'
-    click_link('rank')
+    visit_home
     click_link('winners')
     users.each do |winner|
       page.should have_content(winner.name)
@@ -35,8 +34,7 @@ shared_examples "a winner viewer" do
     Timecop.freeze(Date.current.beginning_of_week.yesterday) do
       Jobs::CreateWeeklyWinners.execute
     end
-    visit '/'
-    click_link('rank')
+    visit_home
     click_link('winners')
     click_link('weekly')
     users.each do |winner|
@@ -76,7 +74,7 @@ describe 'winners',  :redis => true do
 
     it "must show the winners if user mxit input is winner" do
       add_headers('X_MXIT_USER_INPUT' => 'winners')
-      visit '/'
+      visit_home
       page.current_path.should == winners_path
     end
 
@@ -84,11 +82,18 @@ describe 'winners',  :redis => true do
 
   end
 
-  context "as mobile user", :smaato_vcr => true, :js => true do
+  context "as mobile user", :facebook => true, :smaato_vcr => true, :js => true do
 
     before :each do
       @current_user = create(:user, uid: '1234567', provider: 'facebook')
+      visit '/auth/facebook'
     end
+
+    it_behaves_like "a winner viewer"
+
+  end
+
+  context "as guest user", :smaato_vcr => true, :js => true do
 
     it_behaves_like "a winner viewer"
 

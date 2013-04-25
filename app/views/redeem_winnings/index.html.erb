@@ -45,5 +45,8 @@ You can redeem your points for:
 <br/>
 
 <% menu_item 'airtime vouchers', airtime_vouchers_path, id: 'airtime_vouchers' %>
-<% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
+<% unless guest? %>
+  <% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
+<% end %>
+<% menu_item 'leaderboard', users_path, id: 'leaderboard' %>
 

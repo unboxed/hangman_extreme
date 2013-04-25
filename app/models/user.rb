@@ -7,12 +7,14 @@ class User < ActiveRecord::Base
   has_many :winners
   has_many :redeem_winnings
   has_many :airtime_vouchers
+  has_many :feedback
 
   validates :provider, :uid, presence: true
   validates_uniqueness_of :uid, :scope => :provider
 
   scope :top_scorers, lambda{ |field| order("#{field} DESC") }
   scope :mxit, where(provider: 'mxit')
+  scope :facebook, where(provider: 'facebook')
   scope :non_mxit, where('provider <> ?','mxit')
   scope :active_last_hour, lambda{ where('updated_at >= ?',1.hour.ago) }
   scope :active, lambda{ where('updated_at >= ?',7.days.ago) }
@@ -42,6 +44,18 @@ class User < ActiveRecord::Base
     user = find_or_create_by_uid_and_provider(auth_hash['uid'],auth_hash['provider'])
     user.set_user_info(auth_hash['info'])
     return user
+  end
+
+  def self.find_facebook_user_by_uid(uid)
+    facebook.find_by_uid(uid)
+  end
+
+  def self.find_mxit_user(i)
+    mxit.find_by_uid(i)
+  end
+
+  def self.find_facebook_user(i)
+    facebook.find_by_uid(i)
   end
 
   def set_user_info(info)
@@ -165,7 +179,7 @@ class User < ActiveRecord::Base
   end
 
   def to_s
-    "<User id:#{id} name:#{name} email:#{email}>"
+    "<User id:#{id} uid:#{name} provider:#{provider}>"
   end
 
   def inspect
@@ -180,6 +194,17 @@ class User < ActiveRecord::Base
     [Winner.weekly_random_games_required - weekly_wins,0].max
   end
 
+  def mxit?
+    provider == "mxit"
+  end
+
+  def facebook?
+    provider == "facebook"
+  end
+
+  def guest?
+    provider == "guest"
+  end
 
   private
 

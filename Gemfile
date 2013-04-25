@@ -85,7 +85,8 @@ group :test do
   end
   gem 'test_after_commit'
   gem 'poltergeist'
-  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'capybara', '~> 2.0.0'
   gem 'database_cleaner'
   gem 'launchy'
   gem 'simplecov', :require => false
