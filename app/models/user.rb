@@ -179,7 +179,7 @@ class User < ActiveRecord::Base
   end
 
   def to_s
-    "<User id:#{id} uid:#{name} provider:#{provider}>"
+    "<User id:#{id} uid:#{uid} provider:#{provider}>"
   end
 
   def inspect

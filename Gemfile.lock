@@ -260,7 +260,7 @@ GEM
       rubyzip
       websocket (~> 1.0.4)
     sexp_processor (4.2.1)
-    sidekiq (2.11.0)
+    sidekiq (2.11.1)
       celluloid (~> 0.13.0)
       connection_pool (~> 1.0)
       multi_json (~> 1)
