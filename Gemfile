@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2.1'
+gem "rails", "~> 3.2.13"
 
 platforms :jruby do
   gem 'activerecord-jdbcpostgresql-adapter', :require => false
