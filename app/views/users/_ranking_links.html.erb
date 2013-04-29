@@ -14,5 +14,5 @@
                        id: "#{params[:period] || 'daily'}_#{rank}", class: "btn" %><% mxit_only("|") %>
 <% end %>
 </div>
-<% menu_item 'scoring explained', explain_path(action: 'scoring_categories'), id: 'scoring_categories' %>
+<% menu_item 'scoring/rules', explain_path(action: 'scoring_categories'), id: 'scoring_categories' %>
 <% menu_item 'winners view', winners_path(period: params[:period], reason: params[:rank_by]), id: 'winners' %>

@@ -1,4 +1,5 @@
 <h4><%= "#{params[:period]} #{params[:rank_by]}".to_s.humanize %></h4>
+<p><b>Please note:</b>You cannot win twice in a row in any category</p>
 <ul class="nav nav-pills nav-stacked">
   <%= content_tag_for(:li, @users) do |user| %>
       <%= display_user_name(user.name) %> -

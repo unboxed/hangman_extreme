@@ -57,6 +57,9 @@ class ApplicationController < ActionController::Base
           g.ip(request.remote_ip)
           g.page_view("#{params[:controller]} #{params[:action]}", request.fullpath,current_user.id)
         end
+      rescue Timeout::Error => te
+        Rails.logger.warn(te.message)
+        Settings.ga_tracking_disabled_until = 1.minute.from_now # disable for a 1 minute
       rescue Exception => e
         ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
         Settings.ga_tracking_disabled_until = 20.minutes.from_now# disable for a 20 minutes

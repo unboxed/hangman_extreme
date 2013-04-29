@@ -31,14 +31,24 @@ module AdHelper
   end
 
   def smaato_ad
-    headers = {"User-Agent" => env['HTTP_USER_AGENT'] || "Ruby",
-               "X-FORWARDED-FOR" => request_ip_address}
-    open("http://soma.smaato.net/oapi/reqAd.jsp?apiver=413&response=HTML&adspace=#{ENV['SOMA_ADSPACE']}&pub=#{ENV['SOMA_PUB']}",headers).read.html_safe
+    begin
+      Timeout::timeout(5) do
+        headers = {"User-Agent" => env['HTTP_USER_AGENT'] || "Ruby",
+                   "X-FORWARDED-FOR" => request_ip_address}
+        open("http://soma.smaato.net/oapi/reqAd.jsp?apiver=413&response=HTML&adspace=#{ENV['SOMA_ADSPACE']}&pub=#{ENV['SOMA_PUB']}",headers).read.html_safe
+      end
+    rescue Errno::ECONNREFUSED => refuse_error
+      Rails.logger.error(refuse_error.message)
+      return ""
+    rescue Exception => e
+      ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
+      raise unless Rails.env.production?
+      return ""
+    end
   end
 
   def get_shinka_ad
     begin
-      Rails.logger.info "Get Shinka Ad"
       Timeout::timeout(5) do
         headers = {"User-Agent" => "Mozilla Compatible/5.0 #{env['HTTP_USER_AGENT']}",
                    "X-FORWARDED-FOR" => request_ip_address}
