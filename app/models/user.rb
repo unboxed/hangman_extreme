@@ -73,7 +73,7 @@ class User < ActiveRecord::Base
   end
 
   def calculate_weekly_precision
-    calculate_precision(games.this_week,35)
+    calculate_precision(games.this_week,50)
   end
 
   def calculate_daily_rating
