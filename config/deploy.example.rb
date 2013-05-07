@@ -12,14 +12,15 @@ require 'puma/capistrano'
 set :whenever_command, "bundle exec whenever"
 require "whenever/capistrano"
 require 'new_relic/recipes'
+require 'sidekiq/capistrano'
 
 set :application, "hangman_extreme"
 set :repository, "git@github.com:unboxed/hangman_extreme.git"
 
 set :scm, :git
-set :user, 'user'
+# set :user, 'user'
 set :use_sudo, false
-set :deploy_to, '/home/user'
+# set :deploy_to, '/home/user'
 
 role :web, "" # Your HTTP server, Apache/etc
 role :app, "" # This may be the same as your `Web` server
@@ -31,7 +32,7 @@ after "deploy:restart", "deploy:cleanup"
 after "deploy:finalize_update", "app:symlink"
 after "deploy:finalize_update", "deploy:precompile_stylesheets"
 after "deploy", "librato:deploy"
-after "deploy:update", "newrelic:notice_deployment"
+# after "deploy:update", "newrelic:notice_deployment"
 
 before 'deploy:setup', 'rvm:install_rvm'   # install RVM
 before 'deploy:setup', 'rvm:install_ruby'  # install Ruby and create gemset, or:
@@ -118,7 +119,7 @@ namespace :puma do
   desc 'Start puma'
   task :start, :roles => lambda { fetch(:puma_role) }, :on_no_matching_servers => :continue do
     puma_env = fetch(:rack_env, fetch(:rails_env, 'production'))
-    run "cd #{current_path} && nohup #{fetch(:puma_cmd)} -q -t 8:32 -e #{puma_env} -b 'tcp://0.0.0.0:9292' -S #{fetch(:puma_state)} --control 'unix://#{shared_path}/sockets/pumactl.sock' >> #{shared_path}/log/puma.log 2>&1 &", :pty => false
+    run "cd #{current_path} && nohup #{fetch(:puma_cmd)} -q -t 4:32 -e #{puma_env} -b 'tcp://0.0.0.0:9292' -S #{fetch(:puma_state)} --control 'unix://#{shared_path}/sockets/pumactl.sock' >> #{shared_path}/log/puma.log 2>&1 &", :pty => false
   end
 
   desc 'Stop puma'
@@ -132,34 +133,44 @@ namespace :puma do
   end
 end
 
-after 'puma2:force_start', 'puma2:start'
-after 'deploy:stop', 'puma2:stop'
-after 'deploy:start', 'puma2:start'
-after 'deploy:restart', 'puma2:restart'
-_cset(:puma2_state) { "#{shared_path}/sockets/twopuma.state" }
+after 'deploy:stop', 'twopuma:stop'
+after 'deploy:start', 'twopuma:start'
+after 'deploy:restart', 'twopuma:restart'
+after 'twopuma:force_start', 'twopuma:start'
+_cset(:twopuma_state) { "#{shared_path}/sockets/twopuma.state" }
 
-namespace :puma2 do
+namespace :twopuma do
   desc 'Force start puma'
   task :force_start, :roles => lambda { fetch(:puma_role) }, :on_no_matching_servers => :continue do
-    run "cd #{current_path} && #{fetch(:pumactl_cmd)} -S #{fetch(:puma2_state)} stop; true"
+    run "cd #{current_path} && #{fetch(:pumactl_cmd)} -S #{fetch(:twopuma_state)} stop; true"
     run "rm -f #{shared_path}/sockets/twopuma*"
   end
 
   desc 'Start puma'
   task :start, :roles => lambda { fetch(:puma_role) }, :on_no_matching_servers => :continue do
     puma_env = fetch(:rack_env, fetch(:rails_env, 'production'))
-    run "cd #{current_path} && nohup #{fetch(:puma_cmd)} -q -t 8:32 -e #{puma_env} -b 'tcp://0.0.0.0:9293' -S #{fetch(:puma2_state)} --control 'unix://#{shared_path}/sockets/twopumactl.sock' >> #{shared_path}/log/twopuma.log 2>&1 &", :pty => false
+    run "cd #{current_path} && nohup #{fetch(:puma_cmd)} -q -t 4:32 -e #{puma_env} -b 'tcp://0.0.0.0:9293' -S #{fetch(:twopuma_state)} --control 'unix://#{shared_path}/sockets/twopumactl.sock' >> #{shared_path}/log/twopuma.log 2>&1 &", :pty => false
   end
 
   desc 'Stop puma'
   task :stop, :roles => lambda { fetch(:puma_role) }, :on_no_matching_servers => :continue do
-    run "cd #{current_path} && #{fetch(:pumactl_cmd)} -S #{fetch(:puma2_state)} stop"
+    run "cd #{current_path} && #{fetch(:pumactl_cmd)} -S #{fetch(:twopuma_state)} stop"
   end
 
   desc 'Restart puma'
   task :restart, :roles => lambda { fetch(:puma_role) }, :on_no_matching_servers => :continue do
-    run "cd #{current_path} && #{fetch(:pumactl_cmd)} -S #{fetch(:puma2_state)} restart"
+    run "cd #{current_path} && #{fetch(:pumactl_cmd)} -S #{fetch(:twopuma_state)} restart"
   end
+end
+
+namespace :sidekiq do
+
+  desc 'start server'
+  task :web_server, :roles => lambda { fetch(:puma_role) }, :on_no_matching_servers => :continue do
+    run "cd #{current_path} && bundle exec puma sidekiq.ru -b 'tcp://0.0.0.0:8080'"
+    run "rm -f #{shared_path}/sockets/twopuma*"
+  end
+
 end
 
 namespace :rails do
