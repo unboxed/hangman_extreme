@@ -37,6 +37,14 @@ describe SendFeedbackToUservoice do
       @send_feedback_to_uservoice.perform(123)
     end
 
+    it "must use the message as subject if not subject" do
+      @feedback.support_type = 'support'
+      @feedback.subject = nil
+      @send_feedback_to_uservoice.should_receive(:send_support).
+        with(email: 'm123_mxit@noreply.io', subject: 'long part', message: "long part", name: "Grant")
+      @send_feedback_to_uservoice.perform(123)
+    end
+
   end
 
   describe "send_support" do
