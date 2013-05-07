@@ -21,8 +21,9 @@ gem 'kaminari'
 gem 'mxit_api', '>= 0.2.2.pre'
 gem "savon"
 gem 'draper'
-gem 'puma', '2.0.0.b7'
+gem 'puma'
 gem 'whenever', :require => false
+
 gem 'sidekiq'
 gem 'sinatra', '>= 1.3.0', :require => nil # for sidekiq
 gem 'slim', :require => nil # for sidekiq

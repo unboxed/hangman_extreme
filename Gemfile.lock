@@ -193,9 +193,9 @@ GEM
       faye-websocket (~> 0.4, >= 0.4.4)
       http_parser.rb (~> 0.5.3)
     polyglot (0.3.3)
-    puma (2.0.0.b7)
+    puma (2.0.1)
       rack (>= 1.1, < 2.0)
-    puma (2.0.0.b7-java)
+    puma (2.0.1-java)
       rack (>= 1.1, < 2.0)
     rack (1.4.5)
     rack-cache (1.2)
@@ -369,7 +369,7 @@ DEPENDENCIES
   omniauth-facebook
   pg
   poltergeist
-  puma (= 2.0.0.b7)
+  puma
   rails (~> 3.2.13)
   rspec-rails
   rvm-capistrano
