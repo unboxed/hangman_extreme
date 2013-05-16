@@ -6,6 +6,7 @@ describe 'purchases', :redis => true do
 
     before :each do
       @current_user = create(:user, uid: 'm2604100', provider: 'mxit')
+      @credits = @current_user.credits
       set_mxit_headers('m2604100') # set mxit user
       stub_mxit_oauth # stub mixt profile auth
     end
@@ -13,23 +14,23 @@ describe 'purchases', :redis => true do
     it "must allow user to purchase credits" do
       visit_home
       click_link('profile')
-      page.should have_content("70 credits")
+      page.should have_content("#{@credits} credits")
       click_link('buy_credits')
       click_link('buy_credits11')
       click_link('submit')
       click_link('profile')
-      page.should have_content("81 credits")
+      page.should have_content("#{@credits + 11} credits")
     end
 
     it "must allow user to cancel purchase of clue points" do
       visit_home
       click_link('profile')
-      page.should have_content("70 credits")
+      page.should have_content("#{@credits} credits")
       click_link('buy_credits')
       click_link('buy_credits11')
       click_link('cancel')
       click_link('profile')
-      page.should have_content("70 credits")
+      page.should have_content("#{@credits} credits")
     end
 
   end
