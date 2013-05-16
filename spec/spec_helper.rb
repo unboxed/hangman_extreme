@@ -74,7 +74,7 @@ Spork.each_run do
       Capybara::Poltergeist::Driver.new(app, window_size: [320,480] )
     end
     Capybara.javascript_driver = :poltergeist
-    Capybara.default_wait_time = 10
+    Capybara.default_wait_time = 20
 
     config.filter_run_excluding :redis => true if ENV["EXCLUDE_REDIS_SPECS"]
 
