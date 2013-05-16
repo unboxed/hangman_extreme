@@ -4,6 +4,10 @@ describe User do
 
   describe "Validation" do
 
+    it "must start with a default of 24 credits" do
+      User.new.credits.should == 24
+    end
+
     it "must have a provider" do
       User.new.should have(1).errors_on(:provider)
       User.new(provider: 'xx').should have(0).errors_on(:provider)
@@ -59,30 +63,30 @@ describe User do
 
     it "must use the attempts left per game" do
       user = create(:user)
-      create_list(:won_game,34, word: "test", choices: "tes", user: user)
+      create_list(:won_game,49, word: "test", choices: "tes", user: user)
       create(:won_game, word: "test", choices: "ters", user: user)
       user.calculate_weekly_precision.should == 99
     end
 
     it "must use only completed games" do
       user = create(:user)
-      create_list(:won_game,35, word: "test", choices: "tes", user: user)
+      create_list(:won_game,50, word: "test", choices: "tes", user: user)
       create(:game, word: "test", choices: "ter", user: user)
       user.calculate_weekly_precision.should == 100
     end
 
     it "must use games only from this week" do
       user = create(:user)
-      create_list(:won_game,35, word: "test", choices: "tes", user: user)
+      create_list(:won_game,50, word: "test", choices: "tes", user: user)
       Timecop.freeze(1.week.ago - 1.day) do
         create(:won_game, word: "test", choices: "ters", user: user)
       end
       user.calculate_weekly_precision.should == 100
     end
 
-    it "must return 0 if less than 35 games played" do
+    it "must return 0 if less than 50 games played" do
       user = create(:user)
-      create_list(:won_game,34, word: "test", choices: "tes", user: user)
+      create_list(:won_game,49, word: "test", choices: "tes", user: user)
       user.calculate_weekly_precision.should == 0
     end
 
