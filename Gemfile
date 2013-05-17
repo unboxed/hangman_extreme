@@ -96,4 +96,5 @@ group :test do
   gem "spork-rails"
   gem 'webmock'
   gem 'vcr'
+  gem 'coveralls', require: false
 end

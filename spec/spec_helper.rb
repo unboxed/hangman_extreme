@@ -45,9 +45,12 @@ Spork.prefork do
   require 'capybara/rspec'
   require 'capybara/poltergeist'
   require 'sidekiq/testing'
+  require 'coveralls'
 end
 
 Spork.each_run do
+  Coveralls.wear!
+
   WebMock.disable_net_connect!(:allow_localhost => true)
   def in_memory_database?
     Rails.configuration.database_configuration[ENV["RAILS_ENV"]]['database'] == ':memory:'
