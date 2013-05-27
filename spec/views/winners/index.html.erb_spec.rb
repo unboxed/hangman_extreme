@@ -45,11 +45,6 @@ describe "winners/index.html.erb" do
     rendered.should have_link("daily_rating", href: winners_path(reason: 'rating'))
   end
 
-  it "should have a precision link" do
-    render
-    rendered.should have_link("daily_precision", href: winners_path(reason: 'precision'))
-  end
-
   it "should have a score link" do
     render
     rendered.should have_link("daily_streak", href: winners_path(reason: 'streak'))

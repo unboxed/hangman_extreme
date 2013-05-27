@@ -3,17 +3,13 @@ require 'spec_helper'
 shared_examples "a winner viewer" do
 
   it "must show the daily and weekly winners" do
-    users = create_list(:user,5, :daily_precision => 100, :daily_streak => 100, :daily_rating => 100, :daily_wins => Winner.daily_random_games_required)
+    users = create_list(:user,5, :daily_streak => 100, :daily_rating => 100, :daily_wins => Winner.daily_random_games_required)
     random_users = create_list(:user,5, :daily_wins => Winner.daily_random_games_required)
     Timecop.freeze(Date.yesterday) do
       Jobs::CreateDailyWinners.execute
     end
     visit_home
     click_link('winners')
-    users.each do |winner|
-      page.should have_content(winner.name)
-    end
-    click_link('precision')
     users.each do |winner|
       page.should have_content(winner.name)
     end
@@ -29,7 +25,7 @@ shared_examples "a winner viewer" do
   end
 
   it "must show the weekly winners" do
-    users = create_list(:user,5, weekly_precision: 100, weekly_streak: 100, weekly_rating: 100, weekly_wins: 100)
+    users = create_list(:user,5, weekly_streak: 100, weekly_rating: 100, weekly_wins: 100)
     random_users = create_list(:user,5, :weekly_wins => Winner.weekly_random_games_required)
     Timecop.freeze(Date.current.beginning_of_week.yesterday) do
       Jobs::CreateWeeklyWinners.execute
@@ -37,10 +33,6 @@ shared_examples "a winner viewer" do
     visit_home
     click_link('winners')
     click_link('weekly')
-    users.each do |winner|
-      page.should have_content(winner.name)
-    end
-    click_link('precision')
     users.each do |winner|
       page.should have_content(winner.name)
     end

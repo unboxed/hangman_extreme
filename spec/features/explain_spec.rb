@@ -55,7 +55,7 @@ describe 'explain', :redis => true do
 
     it "must allow to browse explain all sections" do
       setup_sessions
-      ['rating', 'precision', 'streak', 'random', 'payouts'].each do |seek|
+      ['rating', 'streak', 'random', 'payouts'].each do |seek|
         using_facebook_session do
           browse_section(seek)
           click_link('Home')

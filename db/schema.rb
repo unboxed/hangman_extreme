@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130516080531) do
+ActiveRecord::Schema.define(:version => 20130527082033) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -119,35 +119,35 @@ ActiveRecord::Schema.define(:version => 20130516080531) do
     t.text     "name"
     t.string   "uid"
     t.string   "provider"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
-    t.integer  "weekly_rating",         :default => 0
-    t.integer  "yearly_rating",         :default => 0
-    t.integer  "weekly_precision",      :default => 0
-    t.integer  "weekly_streak",         :default => 0
-    t.integer  "daily_rating",          :default => 0
-    t.integer  "daily_precision",       :default => 0
-    t.integer  "daily_streak",          :default => 0
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+    t.integer  "weekly_rating",                :default => 0
+    t.integer  "yearly_rating",                :default => 0
+    t.integer  "_deprecated_weekly_precision", :default => 0
+    t.integer  "weekly_streak",                :default => 0
+    t.integer  "daily_rating",                 :default => 0
+    t.integer  "_deprecated_daily_precision",  :default => 0
+    t.integer  "daily_streak",                 :default => 0
     t.string   "real_name"
     t.string   "mobile_number"
     t.string   "email"
-    t.integer  "credits",               :default => 24, :null => false
-    t.integer  "prize_points",          :default => 0,  :null => false
+    t.integer  "credits",                      :default => 24, :null => false
+    t.integer  "prize_points",                 :default => 0,  :null => false
     t.string   "login"
-    t.integer  "lock_version",          :default => 0,  :null => false
-    t.integer  "current_daily_streak",  :default => 0,  :null => false
-    t.integer  "current_weekly_streak", :default => 0,  :null => false
-    t.integer  "daily_wins",            :default => 0,  :null => false
-    t.integer  "weekly_wins",           :default => 0,  :null => false
+    t.integer  "lock_version",                 :default => 0,  :null => false
+    t.integer  "current_daily_streak",         :default => 0,  :null => false
+    t.integer  "current_weekly_streak",        :default => 0,  :null => false
+    t.integer  "daily_wins",                   :default => 0,  :null => false
+    t.integer  "weekly_wins",                  :default => 0,  :null => false
   end
 
+  add_index "users", ["_deprecated_daily_precision"], :name => "index_users_on_daily_precision"
+  add_index "users", ["_deprecated_weekly_precision"], :name => "index_users_on_weekly_precision"
   add_index "users", ["created_at"], :name => "index_users_on_created_at"
-  add_index "users", ["daily_precision"], :name => "index_users_on_daily_precision"
   add_index "users", ["daily_rating"], :name => "index_users_on_daily_rating"
   add_index "users", ["daily_streak"], :name => "index_users_on_games_won_today"
   add_index "users", ["uid", "provider"], :name => "index_users_on_uid_and_provider"
   add_index "users", ["updated_at"], :name => "index_users_on_updated_at"
-  add_index "users", ["weekly_precision"], :name => "index_users_on_weekly_precision"
   add_index "users", ["weekly_rating"], :name => "index_users_on_weekly_rating"
   add_index "users", ["weekly_streak"], :name => "index_users_on_games_won_this_week"
   add_index "users", ["yearly_rating"], :name => "index_users_on_yearly_rating"

@@ -123,7 +123,7 @@ describe Winner do
 
         end
 
-        ['rating', 'precision', 'streak'].each do |score_by|
+        ['rating', 'streak'].each do |score_by|
 
           context "#{score_by}" do
 
@@ -236,7 +236,7 @@ describe Winner do
   context "create_winners" do
 
     before :each do
-      create_list(:user, 10, daily_rating: 0, daily_precision: 0, daily_streak: 0)
+      create_list(:user, 10, daily_rating: 0, daily_streak: 0)
       Winner.should respond_to(:create_winners_for_category)
       Winner.stub(:create_winners_for_category)
       User.should respond_to(:send_message)
@@ -246,11 +246,6 @@ describe Winner do
     it "must create the rating winner" do
       Winner.should_receive(:create_winners_for_category).with(period: 'daily', score_by: 'rating', winnings: [10] * 10)
       Winner.create_daily_winners([10] * 10)
-    end
-
-    it "must create the precision winner" do
-      Winner.should_receive(:create_winners_for_category).with(period: 'daily', score_by: 'precision', winnings: (1..10).to_a.reverse)
-      Winner.create_daily_winners((1..10).to_a.reverse)
     end
 
     it "must create the streak winner" do

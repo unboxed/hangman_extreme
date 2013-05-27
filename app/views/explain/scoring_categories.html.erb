@@ -3,7 +3,6 @@
 <% index = 0 %>
 <ul class="nav nav-pills nav-stacked">
   <li data-icon="info"><%= smart_link_to("#{(index += 1)} rating",explain_path(action: 'rating'),id: 'rating' ) %></li>
-  <li data-icon="info"><%= smart_link_to("#{(index += 1)} precision",explain_path(action: 'precision'),id: 'precision') %></li>
   <li data-icon="info"><%= smart_link_to("#{(index += 1)} streak",explain_path(action: 'winning_streak'),id: 'streak') %></li>
   <li data-icon="info"><%= smart_link_to("#{(index += 1)} random",explain_path(action: 'winning_random'),id: 'random') %></li>
 </ul>

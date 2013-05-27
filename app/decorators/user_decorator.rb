@@ -18,7 +18,7 @@ class UserDecorator < Draper::Decorator
   end
 
   def method_missing(m, *args, &block)
-    if /^(daily|weekly)_(streak|rating|precision)_rank\z/.match(m.to_s)
+    if /^(daily|weekly)_(streak|rating)_rank\z/.match(m.to_s)
       rank(m.to_s.gsub("_rank","")).ordinalize
     else
       super(m, *args, &block)

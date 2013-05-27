@@ -38,13 +38,13 @@ shared_examples "a user browser" do
     User.new_day_set_scores!
     visit_home
     click_link('leaderboard')
-    ['daily'].product(['precision','rating','streak']).map{|x,y| "#{x}_#{y}"}.each do |link|
+    ['daily'].product(['streak','rating']).map{|x,y| "#{x}_#{y}"}.each do |link|
       click_link(link)
       users.each do |user|
         page.should have_content(user.name)
       end
     end
-    ['weekly'].product(['streak','rating','precision']).map{|x,y| "#{x}_#{y}"}.each do |link|
+    ['weekly'].product(['rating','streak']).map{|x,y| "#{x}_#{y}"}.each do |link|
       click_link(link)
       users.each do |user|
         page.should have_content(user.name)

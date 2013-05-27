@@ -8,17 +8,16 @@ describe "users/_ranking_links.html.erb" do
     view.stub!(:mxit_request?).and_return(true)
   end
 
-  it "must have daily,weekly and monthly links" do
+  it "must have daily and weekly links" do
     render :partial => "users/ranking_links"
     rendered.should have_link("daily_rating", :href => users_path(period: 'daily'))
     rendered.should have_link("weekly_rating", :href => users_path(period: 'weekly'))
   end
 
-  it "must have streak,rating and precision links" do
+  it "must have streak and rating links" do
     render :partial => "users/ranking_links"
     rendered.should have_link("daily_streak", :href => users_path(rank_by: 'streak'))
     rendered.should have_link("daily_rating", :href => users_path(rank_by: 'rating'))
-    rendered.should have_link("daily_precision", :href => users_path(rank_by: 'precision'))
   end
 
   it "must have a link to explain the scoring on menu" do

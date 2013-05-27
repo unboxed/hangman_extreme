@@ -68,14 +68,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def calculate_daily_precision
-    calculate_precision(games.today)
-  end
-
-  def calculate_weekly_precision
-    calculate_precision(games.this_week,50)
-  end
-
   def calculate_daily_rating
     calculate_rating(games.today.first(12))
   end
@@ -91,13 +83,11 @@ class User < ActiveRecord::Base
 
   def update_daily_scores
     self.daily_rating = calculate_daily_rating
-    self.daily_precision = calculate_daily_precision
     save
   end
 
   def update_weekly_scores
     self.weekly_rating = calculate_weekly_rating
-    self.weekly_precision = calculate_weekly_precision
     save
   end
 
@@ -147,9 +137,9 @@ class User < ActiveRecord::Base
   end
 
   def self.new_day_set_scores!(force_week = false)
-    User.update_all(daily_wins: 0, daily_rating: 0, daily_precision: 0, daily_streak: 0, current_daily_streak: 0)
+    User.update_all(daily_wins: 0, daily_rating: 0, daily_streak: 0, current_daily_streak: 0)
     if Date.current == Date.current.beginning_of_week || force_week
-      User.update_all(weekly_wins: 0, weekly_rating: 0, weekly_precision: 0, weekly_streak: 0, current_weekly_streak: 0)
+      User.update_all(weekly_wins: 0, weekly_rating: 0, weekly_streak: 0, current_weekly_streak: 0)
     end
   end
 
@@ -207,12 +197,6 @@ class User < ActiveRecord::Base
   end
 
   private
-
-  def calculate_precision(game_scope, game_count = 10)
-    scope = game_scope.completed
-    return 0 if scope.count < game_count
-    (scope.sum(:completed_attempts_left).to_i * 10) / scope.count
-  end
 
   def calculate_rating(scope)
     scope.inject(0){|sum,game| sum += game.score.to_i }

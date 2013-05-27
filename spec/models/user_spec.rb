@@ -26,72 +26,6 @@ describe User do
 
   end
 
-  context "calculate_daily_precision" do
-
-    it "must use the attempts left per game" do
-      user = create(:user)
-      create_list(:won_game,9, word: "test", choices: "tes", user: user)
-      create(:won_game, word: "test", choices: "ters", user: user)
-      user.calculate_daily_precision.should == 99
-    end
-
-    it "must use only completed games" do
-      user = create(:user)
-      create_list(:won_game,10, word: "test", choices: "tes", user: user)
-      create(:game, word: "test", choices: "ter", user: user)
-      user.calculate_daily_precision.should == 100
-    end
-
-    it "must use games only from today" do
-      user = create(:user)
-      create_list(:won_game,10, word: "test", choices: "tes", user: user)
-      Timecop.freeze(1.day.ago) do
-        create(:won_game, word: "test", choices: "ters", user: user)
-      end
-      user.calculate_daily_precision.should == 100
-    end
-
-    it "must return 0 if less than 10 games played" do
-      user = create(:user)
-      create_list(:won_game,9, word: "test", choices: "tes", user: user)
-      user.calculate_daily_precision.should == 0
-    end
-
-  end
-
-  context "calculate_weekly_precision" do
-
-    it "must use the attempts left per game" do
-      user = create(:user)
-      create_list(:won_game,49, word: "test", choices: "tes", user: user)
-      create(:won_game, word: "test", choices: "ters", user: user)
-      user.calculate_weekly_precision.should == 99
-    end
-
-    it "must use only completed games" do
-      user = create(:user)
-      create_list(:won_game,50, word: "test", choices: "tes", user: user)
-      create(:game, word: "test", choices: "ter", user: user)
-      user.calculate_weekly_precision.should == 100
-    end
-
-    it "must use games only from this week" do
-      user = create(:user)
-      create_list(:won_game,50, word: "test", choices: "tes", user: user)
-      Timecop.freeze(1.week.ago - 1.day) do
-        create(:won_game, word: "test", choices: "ters", user: user)
-      end
-      user.calculate_weekly_precision.should == 100
-    end
-
-    it "must return 0 if less than 50 games played" do
-      user = create(:user)
-      create_list(:won_game,49, word: "test", choices: "tes", user: user)
-      user.calculate_weekly_precision.should == 0
-    end
-
-  end
-
   context "calculate_daily_rating" do
 
     it "must use 12 games in the last day" do
@@ -150,32 +84,24 @@ describe User do
       user = stub_model(User)
       user.stub(:calculate_daily_rating).and_return(10)
       user.stub(:calculate_weekly_rating).and_return(20)
-      user.stub(:calculate_daily_precision).and_return(75)
-      user.stub(:calculate_weekly_precision).and_return(100)
       user.update_ratings
       user.daily_rating.should == 10
       user.weekly_rating.should == 20
-      user.daily_precision.should == 75
-      user.weekly_precision.should == 100
     end
 
     it "must update the daily scores" do
       user = stub_model(User)
       user.should_receive(:calculate_daily_rating).and_return(10)
-      user.should_receive(:calculate_daily_precision).and_return(75)
       user.update_daily_scores
       user.daily_rating.should == 10
-      user.daily_precision.should == 75
     end
 
     it "must update weekly scores" do
       user = stub_model(User)
       user.stub(:calculate_weekly_rating).and_return(20)
-      user.stub(:calculate_weekly_precision).and_return(100)
       user.stub(:calculate_weekly_score).and_return(200)
       user.update_ratings
       user.weekly_rating.should == 20
-      user.weekly_precision.should == 100
     end
 
   end
@@ -183,51 +109,47 @@ describe User do
   context "new_day_set_scores!" do
 
     it "must set all daily scores to 0" do
-      user = create(:user,daily_wins: 10, daily_rating: 11, daily_precision: 12, daily_streak: 13, current_daily_streak: 14)
+      user = create(:user,daily_wins: 10, daily_rating: 11, daily_streak: 13, current_daily_streak: 14)
       User.new_day_set_scores!
       user.reload
       user.daily_wins.should == 0
       user.daily_rating.should == 0
-      user.daily_precision.should == 0
       user.daily_streak.should == 0
       user.current_daily_streak.should == 0
     end
 
     it "must set all weekly scores to 0 if beginning of week" do
-      user = create(:user,weekly_wins: 10, weekly_rating: 11, weekly_precision: 12,
+      user = create(:user,weekly_wins: 10, weekly_rating: 11,
                     weekly_streak: 13, current_weekly_streak: 14)
       Timecop.freeze(Time.current.beginning_of_week) do
         User.new_day_set_scores!
         user.reload
         user.weekly_wins.should == 0
         user.weekly_rating.should == 0
-        user.weekly_precision.should == 0
         user.weekly_streak.should == 0
         user.current_weekly_streak.should == 0
       end
     end
 
     it "wont set all weekly scores to 0 if not beginning of week" do
-      user = create(:user,weekly_wins: 10, weekly_rating: 11, weekly_precision: 12,
+      user = create(:user,weekly_wins: 10, weekly_rating: 11,
                     weekly_streak: 13, current_weekly_streak: 14)
       Timecop.freeze(Time.current.beginning_of_week + 2.days) do
         User.new_day_set_scores!
         user.reload
         user.weekly_wins.should == 10
         user.weekly_rating.should == 11
-        user.weekly_precision.should == 12
         user.weekly_streak.should == 13
         user.current_weekly_streak.should == 14
       end
     end
 
     it "must set all weekly scores to 0 if week forced" do
-      user = create(:user,weekly_rating: 11, weekly_precision: 12, weekly_streak: 13, current_weekly_streak: 14)
+      user = create(:user,weekly_rating: 11, weekly_streak: 13, current_weekly_streak: 14)
       Timecop.freeze(Time.current.beginning_of_week + 2.days) do
         User.new_day_set_scores!(true)
         user.reload
         user.weekly_rating.should == 0
-        user.weekly_precision.should == 0
         user.weekly_streak.should == 0
         user.current_weekly_streak.should == 0
       end

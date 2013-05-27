@@ -13,13 +13,6 @@ describe ExplainController do
     end
   end
 
-  describe "GET 'precision'" do
-    it "returns http success" do
-      get 'precision'
-      response.should be_success
-    end
-  end
-
   describe "GET 'rating'" do
     it "returns http success" do
       get 'rating'

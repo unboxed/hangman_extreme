@@ -85,20 +85,6 @@ describe UserDecorator do
 
   end
 
-  describe "daily_precision_rank" do
-
-    it "must be 1st" do
-      @user.should_receive(:rank).with("daily_precision").and_return(1)
-      decorator.daily_precision_rank.should == "1st"
-    end
-
-    it "must be 3rd" do
-      @user.should_receive(:rank).with("daily_precision").and_return(3)
-      decorator.daily_precision_rank.should == "3rd"
-    end
-
-  end
-
   describe "daily_random_rank" do
 
     it "must be empty" do
@@ -131,20 +117,6 @@ describe UserDecorator do
     it "must be 3rd" do
       @user.should_receive(:rank).with("weekly_rating").and_return(3)
       decorator.weekly_rating_rank.should == "3rd"
-    end
-
-  end
-
-  describe "weekly_precision_rank" do
-
-    it "must be 1st" do
-      @user.should_receive(:rank).with("weekly_precision").and_return(1)
-      decorator.weekly_precision_rank.should == "1st"
-    end
-
-    it "must be 3rd" do
-      @user.should_receive(:rank).with("weekly_precision").and_return(3)
-      decorator.weekly_precision_rank.should == "3rd"
     end
 
   end

@@ -2,7 +2,7 @@ class Winner < ActiveRecord::Base
   WEEKLY_PRIZE_AMOUNTS = [500,500,500,500,500]
   DAILY_PRIZE_AMOUNTS  = [ 25, 25, 25, 25, 25]
   WINNING_PERIODS = %w(daily weekly)
-  WINNING_REASONS = %w(streak rating precision random)
+  WINNING_REASONS = %w(streak rating random)
   belongs_to :user
   attr_accessible :user_id, :amount, :reason, :period, :end_of_period_on
 

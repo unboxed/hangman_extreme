@@ -14,11 +14,6 @@ describe "explain/scoring_categories.html.erb" do
     rendered.should have_link('rating', href: explain_path(action: 'rating'))
   end
 
-  it "must have a link to precision" do
-    render
-    rendered.should have_link('precision', href: explain_path(action: 'precision'))
-  end
-
   it "must have a link to streak" do
     render
     rendered.should have_link('streak', href: explain_path(action: 'winning_streak'))
