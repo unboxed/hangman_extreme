@@ -60,6 +60,7 @@
   </div>
 
 <div id="fb-root"></div>
+<% unless Rails.env.test? %>
 <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -80,6 +81,7 @@
     ref.parentNode.insertBefore(js, ref);
   }(document));
 </script>
+<% end %>
 
 <script type="text/javascript">
 
