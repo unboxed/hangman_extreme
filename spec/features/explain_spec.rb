@@ -10,7 +10,7 @@ end
 
 shared_examples "a knowledge seeker" do
 
-  ['rating', 'precision', 'streak', 'random', 'payouts'].each do |seek|
+  ['rating', 'streak', 'random', 'payouts'].each do |seek|
 
     it "must allow to browse explain #{seek} section" do
       browse_section(seek)
