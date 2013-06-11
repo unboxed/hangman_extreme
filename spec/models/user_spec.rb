@@ -480,12 +480,12 @@ describe User do
     end
 
     it "must return 35" do
-      @user.weekly_wins_required_for_random.should == 35
+      @user.weekly_wins_required_for_random.should == 15
     end
 
     it "must return 26" do
       create_list(:won_game,9, :user => @user)
-      @user.weekly_wins_required_for_random.should == 26
+      @user.weekly_wins_required_for_random.should == 6
     end
 
     it "must return 0" do

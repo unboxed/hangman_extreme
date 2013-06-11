@@ -46,7 +46,7 @@ class Winner < ActiveRecord::Base
   end
 
   def self.weekly_random_games_required
-    35
+    15
   end
 
   def self.create_daily_winners(winnings = DAILY_PRIZE_AMOUNTS)
