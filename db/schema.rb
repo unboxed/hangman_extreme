@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130527082033) do
+ActiveRecord::Schema.define(:version => 20130611082448) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -61,6 +61,27 @@ ActiveRecord::Schema.define(:version => 20130527082033) do
   add_index "airtime_vouchers", ["created_at"], :name => "index_airtime_vouchers_on_created_at"
   add_index "airtime_vouchers", ["redeem_winning_id"], :name => "index_airtime_vouchers_on_redeem_winning_id"
   add_index "airtime_vouchers", ["updated_at"], :name => "index_airtime_vouchers_on_updated_at"
+
+  create_table "challenge_game_players", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "challenge_game_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "active",            :default => false, :null => false
+  end
+
+  add_index "challenge_game_players", ["challenge_game_id"], :name => "index_challenge_game_players_on_challenge_game_id"
+  add_index "challenge_game_players", ["user_id"], :name => "index_challenge_game_players_on_user_id"
+
+  create_table "challenge_games", :force => true do |t|
+    t.string   "word"
+    t.text     "choices"
+    t.integer  "active_participant_id"
+    t.integer  "participants_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "state"
+  end
 
   create_table "feedback", :force => true do |t|
     t.integer  "user_id"
@@ -119,30 +140,26 @@ ActiveRecord::Schema.define(:version => 20130527082033) do
     t.text     "name"
     t.string   "uid"
     t.string   "provider"
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
-    t.integer  "weekly_rating",                :default => 0
-    t.integer  "yearly_rating",                :default => 0
-    t.integer  "_deprecated_weekly_precision", :default => 0
-    t.integer  "weekly_streak",                :default => 0
-    t.integer  "daily_rating",                 :default => 0
-    t.integer  "_deprecated_daily_precision",  :default => 0
-    t.integer  "daily_streak",                 :default => 0
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.integer  "weekly_rating",         :default => 0
+    t.integer  "yearly_rating",         :default => 0
+    t.integer  "weekly_streak",         :default => 0
+    t.integer  "daily_rating",          :default => 0
+    t.integer  "daily_streak",          :default => 0
     t.string   "real_name"
     t.string   "mobile_number"
     t.string   "email"
-    t.integer  "credits",                      :default => 24, :null => false
-    t.integer  "prize_points",                 :default => 0,  :null => false
+    t.integer  "credits",               :default => 24, :null => false
+    t.integer  "prize_points",          :default => 0,  :null => false
     t.string   "login"
-    t.integer  "lock_version",                 :default => 0,  :null => false
-    t.integer  "current_daily_streak",         :default => 0,  :null => false
-    t.integer  "current_weekly_streak",        :default => 0,  :null => false
-    t.integer  "daily_wins",                   :default => 0,  :null => false
-    t.integer  "weekly_wins",                  :default => 0,  :null => false
+    t.integer  "lock_version",          :default => 0,  :null => false
+    t.integer  "current_daily_streak",  :default => 0,  :null => false
+    t.integer  "current_weekly_streak", :default => 0,  :null => false
+    t.integer  "daily_wins",            :default => 0,  :null => false
+    t.integer  "weekly_wins",           :default => 0,  :null => false
   end
 
-  add_index "users", ["_deprecated_daily_precision"], :name => "index_users_on_daily_precision"
-  add_index "users", ["_deprecated_weekly_precision"], :name => "index_users_on_weekly_precision"
   add_index "users", ["created_at"], :name => "index_users_on_created_at"
   add_index "users", ["daily_rating"], :name => "index_users_on_daily_rating"
   add_index "users", ["daily_streak"], :name => "index_users_on_games_won_today"
