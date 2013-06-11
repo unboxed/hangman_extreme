@@ -1,8 +1,9 @@
-def using_facebook_omniauth
+def using_facebook_omniauth(uid = nil)
+  uid ||= (@current_user.try(:uid) || '1234567')
   OmniAuth.config.test_mode = true
   OmniAuth.config.mock_auth[:facebook] = {
     :provider => 'facebook',
-    :uid => '1234567',
+    :uid => uid,
     :info => {
       :nickname => 'jbloggs',
       :email => 'joe@bloggs.com',
@@ -40,4 +41,9 @@ def using_facebook_omniauth
   yield
 ensure
   OmniAuth.config.test_mode = false
+end
+
+def login_facebook_user(user)
+  using_facebook_omniauth(user.uid){visit '/auth/facebook'}
+  user.reload
 end

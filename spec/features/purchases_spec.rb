@@ -5,7 +5,7 @@ describe 'purchases', :redis => true do
   context "as mxit user", :shinka_vcr => true do
 
     before :each do
-      @current_user = create(:user, uid: 'm2604100', provider: 'mxit')
+      @current_user = mxit_user('m2604100')
       @credits = @current_user.credits
       set_mxit_headers('m2604100') # set mxit user
       stub_mxit_oauth # stub mixt profile auth
@@ -38,8 +38,8 @@ describe 'purchases', :redis => true do
   context "as mobile user", :facebook => true, :smaato_vcr => true, :js => true do
 
     before :each do
-      @current_user = create(:user, uid: '1234567', provider: 'facebook')
-      visit '/auth/facebook'
+      @current_user = facebook_user
+      login_facebook_user(@current_user)
     end
 
     it "must not allow user to purchase of clue points" do

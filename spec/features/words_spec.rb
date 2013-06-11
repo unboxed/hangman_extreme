@@ -22,9 +22,8 @@ describe 'users', :redis => true do
   context "as mxit user", :shinka_vcr => true do
 
     before :each do
-      @current_user = create(:user, uid: 'm2604100', provider: 'mxit')
-      add_headers('X_MXIT_USERID_R' => 'm2604100')
-      set_mxit_headers # set mxit user
+      @current_user = mxit_user('m2604100')
+      set_mxit_headers('m2604100') # set mxit user
     end
 
     it_behaves_like "a user geek"
@@ -34,9 +33,8 @@ describe 'users', :redis => true do
   context "as mobile user", :facebook => true, :smaato_vcr => true, :js => true do
 
     before :each do
-      @current_user = create(:user, uid: '1234567', provider: 'facebook', mobile_number: '0821234567', real_name: 'Grant Speelman')
-      visit '/auth/facebook'
-      @current_user.reload
+      @current_user = facebook_user
+      login_facebook_user(@current_user)
     end
 
     it_behaves_like "a user geek"

@@ -7,7 +7,7 @@ shared_examples "a registered user" do
     visit_home
     click_link('view_rank')
     page.should have_content("Entered")
-    page.should have_content("25 more games")
+    page.should have_content("5 more games")
     click_link('Home')
     page.current_path.should == '/'
   end
@@ -59,9 +59,8 @@ describe 'users', :redis => true do
   context "as mxit user", :shinka_vcr => true do
 
     before :each do
-      @current_user = create(:user, uid: 'm2604100', provider: 'mxit')
-      add_headers('X_MXIT_USERID_R' => 'm2604100')
-      set_mxit_headers # set mxit user
+      @current_user = mxit_user('m2604100')
+      set_mxit_headers('m2604100') # set mxit user
       stub_mxit_oauth :first_name => "Grant", :last_name => "Speelman", :mobile_number => "0821234567"
     end
 
@@ -79,9 +78,8 @@ describe 'users', :redis => true do
   context "as mobile user", :facebook => true, :smaato_vcr => true, :js => true do
 
     before :each do
-      @current_user = create(:user, uid: '1234567', provider: 'facebook', mobile_number: '0821234567', real_name: 'Grant Speelman')
-      visit '/auth/facebook'
-      @current_user.reload
+      @current_user = facebook_user(:real_name => "Grant Speelman", :mobile_number => "0821234567")
+      login_facebook_user(@current_user)
     end
 
     it_behaves_like "a user browser"
