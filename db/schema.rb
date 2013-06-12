@@ -62,27 +62,6 @@ ActiveRecord::Schema.define(:version => 20130611082448) do
   add_index "airtime_vouchers", ["redeem_winning_id"], :name => "index_airtime_vouchers_on_redeem_winning_id"
   add_index "airtime_vouchers", ["updated_at"], :name => "index_airtime_vouchers_on_updated_at"
 
-  create_table "challenge_game_players", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "challenge_game_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "active",            :default => false, :null => false
-  end
-
-  add_index "challenge_game_players", ["challenge_game_id"], :name => "index_challenge_game_players_on_challenge_game_id"
-  add_index "challenge_game_players", ["user_id"], :name => "index_challenge_game_players_on_user_id"
-
-  create_table "challenge_games", :force => true do |t|
-    t.string   "word"
-    t.text     "choices"
-    t.integer  "active_participant_id"
-    t.integer  "participants_count"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "state"
-  end
-
   create_table "feedback", :force => true do |t|
     t.integer  "user_id"
     t.string   "subject"
