@@ -6,6 +6,7 @@ require 'spork'
 
 Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
+  ENV['DB_CLEANER_STRATEGY'] ||= 'transaction'
 
   if ENV['HEADLESS']
     require 'headless'
@@ -71,6 +72,12 @@ Spork.each_run do
     c.ignore_localhost = true
   end
 
+  Capybara.server do |app, port|
+    Puma::Server.new(app).tap do |s|
+      s.add_tcp_listener '127.0.0.1', port
+    end.run.join
+  end
+
   RSpec.configure do |config|
     config.include FactoryGirl::Syntax::Methods
     Capybara.register_driver :poltergeist do |app|
@@ -87,7 +94,7 @@ Spork.each_run do
     #     --seed 1234
     config.order = "random"
     config.before(:suite) do
-      DatabaseCleaner.strategy = :transaction
+      DatabaseCleaner.strategy = ENV['DB_CLEANER_STRATEGY'].to_sym
       (@@headless = Headless.new).start if ENV['HEADLESS']
     end
 
@@ -100,7 +107,7 @@ Spork.each_run do
     end
 
     config.after(:all, :js => true) do
-      DatabaseCleaner.strategy = :transaction
+      DatabaseCleaner.strategy = ENV['DB_CLEANER_STRATEGY'].to_sym
     end
 
     config.before(:each) do

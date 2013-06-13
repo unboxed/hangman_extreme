@@ -116,12 +116,22 @@ class Winner < ActiveRecord::Base
   def self.select_winners(options)
     field = "#{options[:period]}_#{options[:score_by]}"
     if options[:score_by] == 'random'
-      other_winners = winning_reasons.collect{|r| period(options[:period]).reason(r).order('created_at DESC').limit(options[:winnings].size).all}.flatten
-      user_scope = User.where('id NOT IN (?)',other_winners.map(&:user_id) + [0])
       wins_required = options[:period] == 'daily' ? daily_random_games_required : weekly_random_games_required
-      random_winners = user_scope.where("#{options[:period]}_wins >= ?",wins_required).
-                                  random_order.limit(options[:winnings].size)
-      { 1 => random_winners  }
+      user_scope = User.joins("LEFT JOIN winners ON winners.user_id = users.id").where("users.#{options[:period]}_wins >= ?",wins_required)
+      random_winners = user_scope.where('winners.user_id IS NULL').random_order.limit(options[:winnings].size) # prefer players who have never won before
+      if random_winners.count >= options[:winnings].size
+        { 1 => random_winners  }
+      else
+        other_winners = winning_reasons.collect{|r| period(options[:period]).reason(r).order('created_at DESC').limit(options[:winnings].size).all}.flatten
+        # then prefer players who have not won in another category
+        second_random_winners = user_scope.where('users.id NOT IN (?)',other_winners.map(&:user_id) + random_winners.map(&:user_id)).random_order.limit(options[:winnings].size - random_winners.count)
+        if second_random_winners.count + random_winners.count >= options[:winnings].size
+          { 1 => random_winners, 2 => second_random_winners }
+        else
+          third_random_winners = user_scope.where('users.id NOT IN (?)',second_random_winners.map(&:user_id) + random_winners.map(&:user_id)).random_order.limit(options[:winnings].size - random_winners.count)
+          { 1 => random_winners, 2 => second_random_winners, 3 => third_random_winners}
+        end
+      end
     else
       previous_winners = period(options[:period]).reason(options[:score_by]).order('created_at DESC').limit(options[:winnings].size)
       user_scope = User.where('id NOT IN (?)',previous_winners.map(&:user_id) + [0])

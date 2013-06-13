@@ -47,7 +47,7 @@ describe Winner do
 
         context "random" do
 
-          let(:required_wins){period == 'daily' ? 5 : 35}
+          let(:required_wins){period == 'daily' ? 5 : 15}
 
           it "wont allow players to win 2 randoms in a row" do
             day1 = Time.current.end_of_week
@@ -75,7 +75,7 @@ describe Winner do
             end
           end
 
-          it "must select players that have won at least #{period == 'daily' ? 10 : 35} games" do
+          it "must select players that have won at least #{period == 'daily' ? 5 : 15} games" do
             create_list(:user, 5, "#{period}_wins" => required_wins - 1)
             top_players = create_list(:user, 5, "#{period}_wins" => required_wins)
             Winner.create_winners_for_category(period: period, score_by: "random", winnings: [10] * 5)
