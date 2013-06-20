@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130611082448) do
+ActiveRecord::Schema.define(:version => 20130613141007) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20130611082448) do
   add_index "airtime_vouchers", ["created_at"], :name => "index_airtime_vouchers_on_created_at"
   add_index "airtime_vouchers", ["redeem_winning_id"], :name => "index_airtime_vouchers_on_redeem_winning_id"
   add_index "airtime_vouchers", ["updated_at"], :name => "index_airtime_vouchers_on_updated_at"
+  add_index "airtime_vouchers", ["user_id"], :name => "index_airtime_vouchers_on_user_id"
 
   create_table "feedback", :force => true do |t|
     t.integer  "user_id"
@@ -119,8 +120,8 @@ ActiveRecord::Schema.define(:version => 20130611082448) do
     t.text     "name"
     t.string   "uid"
     t.string   "provider"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
     t.integer  "weekly_rating",         :default => 0
     t.integer  "yearly_rating",         :default => 0
     t.integer  "weekly_streak",         :default => 0
@@ -129,14 +130,15 @@ ActiveRecord::Schema.define(:version => 20130611082448) do
     t.string   "real_name"
     t.string   "mobile_number"
     t.string   "email"
-    t.integer  "credits",               :default => 24, :null => false
-    t.integer  "prize_points",          :default => 0,  :null => false
+    t.integer  "credits",               :default => 24,   :null => false
+    t.integer  "prize_points",          :default => 0,    :null => false
     t.string   "login"
-    t.integer  "lock_version",          :default => 0,  :null => false
-    t.integer  "current_daily_streak",  :default => 0,  :null => false
-    t.integer  "current_weekly_streak", :default => 0,  :null => false
-    t.integer  "daily_wins",            :default => 0,  :null => false
-    t.integer  "weekly_wins",           :default => 0,  :null => false
+    t.integer  "lock_version",          :default => 0,    :null => false
+    t.integer  "current_daily_streak",  :default => 0,    :null => false
+    t.integer  "current_weekly_streak", :default => 0,    :null => false
+    t.integer  "daily_wins",            :default => 0,    :null => false
+    t.integer  "weekly_wins",           :default => 0,    :null => false
+    t.boolean  "show_hangman",          :default => true
   end
 
   add_index "users", ["created_at"], :name => "index_users_on_created_at"

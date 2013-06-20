@@ -23,6 +23,8 @@ HangmanLeague::Application.routes.draw do
       get 'my_rank', action: "show"
       get 'mxit_oauth', action: 'mxit_oauth', as: 'mxit_oauth'
       get 'profile', action: 'profile', as: 'profile'
+      get 'hide_hangman', action: 'hide_hangman', as: 'hide_hangman'
+      get 'show_hangman', action: 'show_hangman', as: 'show_hangman'
     end
   end
   resources :feedback, :except => [:show, :edit, :update, :destroy]

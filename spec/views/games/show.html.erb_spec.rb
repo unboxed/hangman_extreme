@@ -8,9 +8,10 @@ describe "games/show" do
                                           done?: false,
                                           is_won?: false,
                                           is_lost?: false))
-    view.stub!(:current_user).and_return(stub_model(User, id: 50))
+    @user = stub_model(User, id: 50)
+    view.stub!(:current_user).and_return(@user)
     view.stub!(:menu_item)
-    view.stub!(:mxit_request?).and_return(true)
+    view.stub!(:mxit_request?).and_return(true) 
   end
 
   it "must show the attempts left" do
@@ -97,6 +98,18 @@ describe "games/show" do
     view.should_not_receive(:menu_item).with(anything,show_clue_game_path(@game),id: 'show_clue')
     render
     rendered.should have_content("Cluedo")
+  end
+
+  it "must show the hangman if show hangman link was enabeled" do
+    @user.show_hangman = true
+    render
+    rendered.should have_content('.|......O') 
+  end
+
+  it "wont show the hangman if hide hangman link was enabeled" do
+    @user.show_hangman = false
+    render
+    rendered.should_not have_content('.|......O')
   end
 
 end

@@ -1,0 +1,7 @@
+<% if current_user.show_hangman %>
+	<b>Yes</b> 
+	<%= link_to "No", hide_hangman_users_path %>
+<% else %>
+	<%= link_to "Yes", show_hangman_users_path %>
+	<b>No</b>
+<% end %>

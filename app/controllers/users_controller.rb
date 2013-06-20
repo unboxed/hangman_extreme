@@ -24,6 +24,18 @@ class UsersController < ApplicationController
     @user = (@user || current_user).decorate
   end
 
+  def hide_hangman
+    current_user.show_hangman = false 
+    current_user.save
+    redirect_to profile_users_path, notice: 'Profile was successfully updated.'
+  end
+
+  def show_hangman
+    current_user.show_hangman = true
+    current_user.save
+    redirect_to profile_users_path, notice: 'Profie was successfully updated'
+  end
+
   def mxit_authorise
     redirect_to action: 'mxit_oauth', code: "MXITAUTH", state: params[:state]
   end
