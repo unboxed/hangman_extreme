@@ -29,6 +29,29 @@ shared_examples "a registered user" do
     page.current_path.should == '/'
   end
 
+  it "must allow to show and hide the hangman" do
+    visit_home
+    click_link('Play')
+    click_button 'start_game'
+    within('.letters') do
+      click_link 'z'
+    end
+    page.should have_content(".---------")
+    click_link('Home')
+    click_link('authorise')
+    click_link('No')
+
+    click_link('Play')
+    page.should_not have_content(".---------")
+
+    click_link('Home')
+    click_link('authorise')
+    click_link('Yes')
+
+    click_link('Play')
+    page.should have_content(".---------")
+  end
+
 end
 
 shared_examples "a user browser" do

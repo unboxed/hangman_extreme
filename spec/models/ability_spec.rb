@@ -83,15 +83,6 @@ describe Ability do
         @ability.should be_able_to(:hide_hangman, @user)
       end
 
-      it "must be able to deactivate hide hangman" do
-        @ability.should be_able_to(:show_hangman, @user)
-      end
-
-      it "wont be able to enable other users hide hangman" do
-        other_user = create(:user)
-        @ability.should_not be_able_to(:hide_hangman, other_user)
-      end
-
     end
 
     context "Winners" do
@@ -241,14 +232,6 @@ describe Ability do
       it "wont be able update other users" do
         user = create(:user)
         @ability.should_not be_able_to(:update, user)
-      end
-
-      it "must be able to enable hide hangman" do
-        @ability.should be_able_to(:hide_hangman, @user)
-      end
-
-      it "must be able to deactivate hide hangman" do
-        @ability.should be_able_to(:show_hangman, @user)
       end
 
     end
