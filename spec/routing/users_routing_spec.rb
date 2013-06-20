@@ -41,5 +41,13 @@ describe UsersController do
       put("/users/11").should route_to("users#update", :id => "11")
     end
 
+    it "routes to #hide_hangman when hide hangman enabled" do
+      get("/users/hide_hangman").should route_to("users#hide_hangman")
+    end
+
+    it "routes to #show_hangman when hide hangman deactivated" do
+      get("/users/show_hangman").should route_to("users#show_hangman")
+    end
+
   end
 end

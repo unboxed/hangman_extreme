@@ -9,6 +9,11 @@ change full <%= smart_link_to 'real name', edit_user_path(current_user, :field =
 change <%= smart_link_to 'mobile number', edit_user_path(current_user, :field => 'mobile_number'), id: 'edit_mobile_number' %>:
 <%= current_user.mobile_number %><br/>
 <br/>
+
+Show Hangman: 
+<%= render 'show_hangman' %>
+
+<br/>
 <%= current_user.credits %> credits left
 
 <% menu_item 'buy credits', purchases_path, id: 'buy_credits' %>

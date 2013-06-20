@@ -6,7 +6,7 @@
 <% else %>
 You have <span><%= @game.attempts_left %></span> attempts left
 <% end %>
-<div <% if @game.is_lost? %>style="color:red;"<% end %>><%= render partial: 'hangman' %></div>
+<div <% if @game.is_lost? %>style="color:red;"<% end %>><%= render 'hangman' if current_user.show_hangman %></div>
 <% if clue  %>
     <% if @game.clue_revealed? %>
     (<i><%= clue %></i>)

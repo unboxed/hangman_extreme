@@ -8,6 +8,8 @@ class Ability
     can :read, User
 
     can :update, user
+    can :hide_hangman, user
+    can :show_hangman, user
 
     can :read, PurchaseTransaction, user_id: user.id
     can :read, RedeemWinning, user_id: user.id
