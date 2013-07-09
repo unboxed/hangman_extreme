@@ -139,7 +139,7 @@ class ApplicationController < ActionController::Base
     if current_user
       true
     else
-      redirect_to facebook_oauth_path
+      redirect_to '/auth/facebook'
       false
     end
   end
