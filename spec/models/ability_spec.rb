@@ -79,10 +79,6 @@ describe Ability do
         @ability.should_not be_able_to(:update, other_user)
       end
 
-      it "must be able to enable hide hangman" do
-        @ability.should be_able_to(:hide_hangman, @user)
-      end
-
     end
 
     context "Winners" do
