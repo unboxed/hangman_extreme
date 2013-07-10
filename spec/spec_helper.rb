@@ -5,6 +5,7 @@ require 'spork'
 #require 'spork/ext/ruby-debug'
 
 Spork.prefork do
+  ENV['SESSION_TOKEN'] ||= '0000000000000000000000000000001'
   ENV["RAILS_ENV"] ||= 'test'
   ENV['DB_CLEANER_STRATEGY'] ||= 'transaction'
 

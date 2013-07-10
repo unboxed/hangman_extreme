@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  load_and_authorize_resource :except => [:mxit_authorise,:mxit_oauth,:profile, :hide_hangman, :show_hangman]
+  load_and_authorize_resource :except => [:mxit_authorise,:mxit_oauth,:profile, :hide_hangman, :show_hangman, :badges]
 
   def index
     params[:period] = 'daily' unless Winner::WINNING_PERIODS.include?(params[:period].to_s)
@@ -34,6 +34,10 @@ class UsersController < ApplicationController
     current_user.show_hangman = true
     current_user.save
     redirect_to profile_users_path, notice: 'Profie was successfully updated'
+  end
+
+  def badges
+
   end
 
   def mxit_authorise

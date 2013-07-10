@@ -25,6 +25,7 @@ HangmanLeague::Application.routes.draw do
       get 'profile', action: 'profile', as: 'profile'
       get 'hide_hangman', action: 'hide_hangman', as: 'hide_hangman'
       get 'show_hangman', action: 'show_hangman', as: 'show_hangman'
+      get 'badges', action: 'badges', as: 'badges'
     end
   end
   resources :feedback, :except => [:show, :edit, :update, :destroy]

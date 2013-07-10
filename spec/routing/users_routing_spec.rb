@@ -49,5 +49,9 @@ describe UsersController do
       get("/users/show_hangman").should route_to("users#show_hangman")
     end
 
+    it "routes to #badges" do
+      get("/users/badges").should route_to("users#badges")
+    end
+
   end
 end

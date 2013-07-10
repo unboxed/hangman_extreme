@@ -102,4 +102,9 @@ describe "games/index" do
     render
   end
 
+  it "must have a badges link" do
+    view.should_receive(:menu_item).with(anything,badges_users_path,id: 'badges')
+    render
+  end
+
 end

@@ -46,7 +46,7 @@ module AdHelper
       return ""
     rescue Exception => e
       ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
-      raise unless Rails.env.production?
+      raise if Rails.env.test?
       return ""
     end
   end
