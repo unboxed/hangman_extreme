@@ -7,6 +7,16 @@ require 'spork'
 Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
   ENV['DB_CLEANER_STRATEGY'] ||= 'transaction'
+  ENV['UV_SUBDOMAIN_NAME'] ||= 'uv'
+  ENV['UV_API_KEY'] ||= '1'
+  ENV['UV_API_SECRET'] ||= '1'
+  ENV['MXIT_CLIENT_ID'] ||= '1'
+  ENV['SHINKA_AUID'] ||= '1'
+  ENV['GA_TRACKING_CODE'] ||= 'UA-00000000-3'
+  ENV['FREEPAID_USER'] ||= '1'
+  ENV['FREEPAID_PASS'] ||= '1'
+  ENV['MXIT_VENDOR_ID'] ||= '1'
+  ENV['SESSION_TOKEN'] ||= ('a' * 31)
 
   if ENV['HEADLESS']
     require 'headless'
