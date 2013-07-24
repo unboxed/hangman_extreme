@@ -1,0 +1,60 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://www.google-analytics.com/__utm.gif?utmac=<%= ENV['GA_TRACKING_CODE'] || 0  %>&utmcc=__utma=__utma=1.100145214523.1364635080.1364635080.1364635080.15;%2B__utmz=1.1364635080.1.1.utmcsr=(direct)%7Cutmccn=(direct)%7Cutmcmd=(none);;%2B__utmz=1.1364635115.1.1.utmcsr=(direct)%7Cutmccn=(direct)%7Cutmcmd=(none);&utmcs=UTF-8&utmdt=games%20index&utme=8(Gender*Age*South%20Africa*5!Provider)9(male*29*Kraaifontein*5!mxit)11(1*1*1*5!1)&utmhid=1&utmhn=www.example.com&utmip=127.0.0.0&utmn=3366284906&utmp=/&utmr=&utmul=en&utmwv=4.4sh
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Mxit%20iphone
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "RGF0ZQ==":
+      - !binary |-
+        VGh1LCAyOCBNYXIgMjAxMyAxOTowNjo1OCBHTVQ=
+      Content-Length:
+      - !binary |-
+        MzU=
+      X-Content-Type-Options:
+      - !binary |-
+        bm9zbmlmZg==
+      !binary "UHJhZ21h":
+      - !binary |-
+        bm8tY2FjaGU=
+      !binary "RXhwaXJlcw==":
+      - !binary |-
+        V2VkLCAxOSBBcHIgMjAwMCAxMTo0MzowMCBHTVQ=
+      Last-Modified:
+      - !binary |-
+        V2VkLCAyMSBKYW4gMjAwNCAxOTo1MTozMCBHTVQ=
+      Content-Type:
+      - !binary |-
+        aW1hZ2UvZ2lm
+      !binary "QWdl":
+      - !binary |-
+        MTM3NDk4
+      !binary "U2VydmVy":
+      - !binary |-
+        R0ZFLzIuMA==
+      Cache-Control:
+      - !binary |-
+        cHJpdmF0ZSwgbm8tY2FjaGUsIG5vLWNhY2hlPVNldC1Db29raWUsIHByb3h5
+        LXJldmFsaWRhdGU=
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        a2VlcC1hbGl2ZQ==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        R0lGODlhAQABAID/AP///wAAACwAAAAAAQABAAACAkQBADs=
+    http_version:
+  recorded_at: Sat, 30 Mar 2013 09:18:36 GMT
+recorded_with: VCR 2.4.0

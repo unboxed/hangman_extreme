@@ -19,7 +19,7 @@ end
 
 describe 'users', :redis => true do
 
-  context "as mxit user", :shinka_vcr => true do
+  context "as mxit user", :google_analytics_vcr => true do
 
     before :each do
       @current_user = mxit_user('m2604100')

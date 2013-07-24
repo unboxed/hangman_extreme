@@ -19,9 +19,9 @@ describe "layouts/mxit" do
   end
 
   it "should a ad" do
-    view.stub!(:shinka_ad).and_return("--MENU--")
+    view.stub!(:shinka_ad).and_return("--AD--")
     render
-    rendered.should have_content("--MENU--")
+    rendered.should have_content("--AD--")
   end
 
 end

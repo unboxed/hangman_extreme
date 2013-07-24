@@ -137,8 +137,8 @@ Spork.each_run do
       using_facebook_omniauth(&example)
     end
 
-    config.around(:each, :shinka_vcr => true) do |example|
-      VCR.use_cassette('shinka',
+    config.around(:each, :google_analytics_vcr => true) do |example|
+      VCR.use_cassette('google_analytics',
                        :record => :once,
                        :erb => true,
                        :allow_playback_repeats => true,
