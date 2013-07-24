@@ -4,7 +4,7 @@ module AdHelper
 
   def shinka_ad
     if shinka_ads_enabled?
-      "<mxit:advert auid=\"#{shinka_auid}\"/>"
+      "<mxit:advert auid=\"#{shinka_auid}\"/>".html_safe
     else
       ""
     end
