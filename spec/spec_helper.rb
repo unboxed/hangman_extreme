@@ -37,6 +37,12 @@ Spork.prefork do
     end
   end
 
+  if ENV['COVERALLS']
+    require 'coveralls'
+    Coveralls.wear!('rails')
+  end
+
+
   require "rails/application"
   # Prevent main application to eager_load in the prefork block (do not load files in autoload_paths)
   Spork.trap_method(Rails::Application, :eager_load!)
@@ -56,11 +62,9 @@ Spork.prefork do
   require 'capybara/rspec'
   require 'capybara/poltergeist'
   require 'sidekiq/testing'
-  require 'coveralls' if ENV['COVERALLS']
 end
 
 Spork.each_run do
-  Coveralls.wear! if ENV['COVERALLS']
 
   WebMock.disable_net_connect!(:allow_localhost => true)
   def in_memory_database?
