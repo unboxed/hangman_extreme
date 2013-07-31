@@ -55,32 +55,46 @@
 
   <div id="footer">
     <div class="container">
-      <%= smaato_ad %>
+      <% if smaato_ads_enabled? %>
+        <div id="smaatoad" style="padding: 0px"></div>
+        <script id="smaatoAdDisplay" language="javascript" type="text/javascript"
+                src="http://soma.smaato.net/oapi/js/smaatoAdDisplay.js">
+        </script>
+        <script>
+          (function() {
+            var request = new SomaRequest();
+            request.adSpaceID = <%= smaato_adspace %>;
+            request.publisherID = <%= smaato_pub %>;
+            /*insert additional targeting data here */
+            SomaTag.requestAd(request);
+          })();
+        </script>
+      <% end %>
     </div>
   </div>
 
 <div id="fb-root"></div>
 <% unless Rails.env.test? %>
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '<%= ENV['FACEBOOK_KEY'] %>', // App ID
-      channelUrl : '//<%= request.protocol + request.host %>/channel', // Channel File
-      status     : true, // check login status
-      cookie     : true, // enable cookies to allow the server to access the session
-      xfbml      : true  // parse XFBML
-    });
-  };
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '<%= ENV['FACEBOOK_KEY'] %>', // App ID
+        channelUrl : '//<%= request.protocol + request.host %>/channel', // Channel File
+        status     : true, // check login status
+        cookie     : true, // enable cookies to allow the server to access the session
+        xfbml      : true  // parse XFBML
+      });
+    };
 
-  // Load the SDK Asynchronously
-  (function(d){
-    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement('script'); js.id = id; js.async = true;
-    js.src = "//connect.facebook.net/en_US/all.js";
-    ref.parentNode.insertBefore(js, ref);
-  }(document));
-</script>
+    // Load the SDK Asynchronously
+    (function(d){
+      var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement('script'); js.id = id; js.async = true;
+      js.src = "//connect.facebook.net/en_US/all.js";
+      ref.parentNode.insertBefore(js, ref);
+    }(document));
+  </script>
 <% end %>
 
 <script type="text/javascript">

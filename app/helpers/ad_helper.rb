@@ -10,21 +10,8 @@ module AdHelper
     end
   end
 
-  def smaato_ad(extra = "")
-    begin
-      Timeout::timeout(5) do
-        headers = {"User-Agent" => env['HTTP_USER_AGENT'] || "Ruby",
-                   "X-FORWARDED-FOR" => request_ip_address}
-        open("http://soma.smaato.net/oapi/reqAd.jsp?apiver=413&response=HTML&adspace=#{ENV['SOMA_ADSPACE']}&pub=#{ENV['SOMA_PUB']}#{extra.to_s}",headers).read.html_safe
-      end
-    rescue Errno::ECONNREFUSED => refuse_error
-      Rails.logger.error(refuse_error.message)
-      return ""
-    rescue Exception => e
-      ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
-      raise unless Rails.env.production?
-      return ""
-    end
+  def smaato_ads_enabled?
+    smaato_pub.present? && smaato_adspace.present? && !Rails.env.test?
   end
 
   def shinka_ads_enabled?
@@ -33,6 +20,14 @@ module AdHelper
 
   def shinka_auid
     ENV['SHINKA_AUID']
+  end
+
+  def smaato_adspace
+    ENV['SOMA_ADSPACE']
+  end
+
+  def smaato_pub
+    ENV['SOMA_PUB']
   end
 
   def env
