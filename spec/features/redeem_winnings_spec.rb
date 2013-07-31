@@ -34,6 +34,7 @@ shared_examples "a winner redeemer" do
           page.should have_content("1 prize points")
           click_link('airtime_vouchers')
           page.should_not have_content("R#{value / 100}")
+          sleep 1
           IssueAirtimeToUsers.drain
           visit_home
           click_link('redeem')

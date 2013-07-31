@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :provider, :uid, :credits, :prize_points
+  attr_accessible :name, :real_name, :mobile_number, :provider, :uid, :credits, :prize_points
   attr_accessible :real_name, :mobile_number, as: 'user'
   RANKING_FIELDS = Winner::WINNING_PERIODS.product(Winner::WINNING_REASONS - %w(random)).map{|x,y| "#{x}_#{y}"}
 
