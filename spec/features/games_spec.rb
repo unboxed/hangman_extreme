@@ -109,11 +109,6 @@ describe 'games', :redis => true do
 
     it_behaves_like "a game player"
 
-    it "must show ads" do
-      visit_home
-      page.should have_css("div#footer .container img")
-    end
-
   end
 
   context "as guest user", :smaato_vcr => true, :js => true do
@@ -122,11 +117,6 @@ describe 'games', :redis => true do
       visit_home
       click_link('Play')
       page.current_path.should == "/"
-    end
-
-    it "must show ads" do
-      visit_home
-      page.should have_css("div#footer .container img")
     end
 
   end
