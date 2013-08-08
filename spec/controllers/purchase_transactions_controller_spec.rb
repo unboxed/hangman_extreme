@@ -63,6 +63,17 @@ describe PurchaseTransactionsController do
       response.should redirect_to(action: 'index', mxit_transaction_res: 0)
     end
 
+    it "first purchase_transaction receives badge Mr. Loader" do
+      do_get_create
+      flash[:notice].should have_content "Congratulations"
+    end
+
+    it "must show right message after second purchase_transaction" do 
+      create(:purchase_transaction, user: @current_user)
+      do_get_create 
+      flash[:notice].should_not have_content "Congratulations"
+    end 
+
     context "failed" do
 
       it "wont create if response != 0" do

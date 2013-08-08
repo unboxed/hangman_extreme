@@ -1,6 +1,14 @@
 <b>Mr. Loader</b>
 <div>
-	You have bought 10 credits to obtain this badge
+	Buy some credits to obtain this badge
 </div>
 
+<% if Badge.where(user_id: current_user.id, name: 'Mr. Loader').count == 1  %>
+	<b style="color:green">Badge Achieved</b>
+<% else %>
+	<b style="color:blue">Still to achieve</b>
+<% end %>
+
+
 <% menu_item 'badges', badges_users_path, id: 'badges' %>
+

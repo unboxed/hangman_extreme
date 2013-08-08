@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130613141007) do
+ActiveRecord::Schema.define(:version => 20130710124110) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -61,27 +61,16 @@ ActiveRecord::Schema.define(:version => 20130613141007) do
   add_index "airtime_vouchers", ["created_at"], :name => "index_airtime_vouchers_on_created_at"
   add_index "airtime_vouchers", ["redeem_winning_id"], :name => "index_airtime_vouchers_on_redeem_winning_id"
   add_index "airtime_vouchers", ["updated_at"], :name => "index_airtime_vouchers_on_updated_at"
+  add_index "airtime_vouchers", ["user_id"], :name => "index_airtime_vouchers_on_user_id"
 
-  create_table "challenge_game_participants", :force => true do |t|
+  create_table "badges", :force => true do |t|
+    t.string   "name"
     t.integer  "user_id"
-    t.integer  "challenge_game_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "active",            :default => false, :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  add_index "challenge_game_participants", ["challenge_game_id"], :name => "index_challenge_game_participants_on_challenge_game_id"
-  add_index "challenge_game_participants", ["user_id"], :name => "index_challenge_game_participants_on_user_id"
-
-  create_table "challenge_games", :force => true do |t|
-    t.string   "word"
-    t.text     "choices"
-    t.integer  "active_participant_id"
-    t.integer  "participants_count"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "state"
-  end
+  add_index "badges", ["user_id"], :name => "index_badges_on_user_id"
 
   create_table "feedback", :force => true do |t|
     t.integer  "user_id"

@@ -50,6 +50,25 @@ describe 'users', :redis => true do
 
     it_behaves_like "badger"
 
+    it "Mr_Loader badge is received after credits purchased" do
+      ENV['MXIT_VENDOR_ID'] ||= '1'
+      visit_home
+      click_link('buy_credits')
+      click_link('buy_credits11')
+      click_link('submit')
+      page.should have_content("Mr. Loader")
+      click_link 'Mr. Loader'
+      page.should have_content("bought credits")
+      page.should have_content("Achieved")
+
+      # Should not give the badge twice 
+      visit_home
+      click_link('buy_credits')
+      click_link('buy_credits11')
+      click_link('submit')
+      page.should have_no_content("Mr. Loader")
+    end
+
   end
 
   context "as mobile user", :facebook => true, :smaato_vcr => true, :js => true do
