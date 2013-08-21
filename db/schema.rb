@@ -126,28 +126,28 @@ ActiveRecord::Schema.define(:version => 20130710124110) do
   add_index "redeem_winnings", ["user_id"], :name => "index_redeem_winnings_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.text     "name"
+    t.text     "name",                  :limit => 255
     t.string   "uid"
     t.string   "provider"
-    t.datetime "created_at",                              :null => false
-    t.datetime "updated_at",                              :null => false
-    t.integer  "weekly_rating",         :default => 0
-    t.integer  "yearly_rating",         :default => 0
-    t.integer  "weekly_streak",         :default => 0
-    t.integer  "daily_rating",          :default => 0
-    t.integer  "daily_streak",          :default => 0
+    t.datetime "created_at",                                             :null => false
+    t.datetime "updated_at",                                             :null => false
+    t.integer  "weekly_rating",                        :default => 0
+    t.integer  "yearly_rating",                        :default => 0
+    t.integer  "weekly_streak",                        :default => 0
+    t.integer  "daily_rating",                         :default => 0
+    t.integer  "daily_streak",                         :default => 0
     t.string   "real_name"
     t.string   "mobile_number"
     t.string   "email"
-    t.integer  "credits",               :default => 24,   :null => false
-    t.integer  "prize_points",          :default => 0,    :null => false
+    t.integer  "credits",                              :default => 24,   :null => false
+    t.integer  "prize_points",                         :default => 0,    :null => false
     t.string   "login"
-    t.integer  "lock_version",          :default => 0,    :null => false
-    t.integer  "current_daily_streak",  :default => 0,    :null => false
-    t.integer  "current_weekly_streak", :default => 0,    :null => false
-    t.integer  "daily_wins",            :default => 0,    :null => false
-    t.integer  "weekly_wins",           :default => 0,    :null => false
-    t.boolean  "show_hangman",          :default => true
+    t.integer  "lock_version",                         :default => 0,    :null => false
+    t.integer  "current_daily_streak",                 :default => 0,    :null => false
+    t.integer  "current_weekly_streak",                :default => 0,    :null => false
+    t.integer  "daily_wins",                           :default => 0,    :null => false
+    t.integer  "weekly_wins",                          :default => 0,    :null => false
+    t.boolean  "show_hangman",                         :default => true
   end
 
   add_index "users", ["created_at"], :name => "index_users_on_created_at"

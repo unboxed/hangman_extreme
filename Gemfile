@@ -3,13 +3,13 @@ source 'https://rubygems.org'
 gem "rails", "~> 3.2.13"
 
 platforms :jruby do
-  gem 'activerecord-jdbcpostgresql-adapter', :require => false
+  gem 'activerecord-jdbcpostgresql-adapter', require: false
 end
 platforms :ruby do
   gem 'pg'
 end
 gem 'ohm'
-gem 'ohm-contrib', :require => 'ohm/contrib'
+gem 'ohm-contrib', require: 'ohm/contrib'
 
 platforms :jruby do
   gem 'jruby-openssl'
@@ -22,11 +22,11 @@ gem 'mxit_api', '>= 0.2.2.pre'
 gem "savon"
 gem 'draper'
 gem 'puma'
-gem 'whenever', :require => false
+gem 'whenever', require: false
 
 gem 'sidekiq'
-gem 'sinatra', '>= 1.3.0', :require => nil # for sidekiq
-gem 'slim', :require => nil # for sidekiq
+gem 'sinatra', '>= 1.3.0', require: false # for sidekiq
+gem 'slim', require: false # for sidekiq
 
 #gem 'backup', :require => false
 #gem 'httparty', :require => false # for backup
@@ -38,7 +38,7 @@ gem 'uservoice-ruby'
 gem 'gabba' # google analytics
 gem 'newrelic_rpm'
 gem 'wordnik'
-gem 'librato-metrics', :require => 'librato/metrics'
+gem 'librato-metrics', require: 'librato/metrics'
 
 
 # Gems used only for assets and not required
@@ -57,8 +57,8 @@ group :assets do
 end
 
 group :development do
-  gem 'capistrano', :require => false
-  gem 'rvm-capistrano', :require => false
+  gem 'capistrano', require: false
+  gem 'rvm-capistrano', require: false
 end
 
 group :development, :test do
@@ -71,16 +71,12 @@ end
 group :test do
   platforms :jruby do
     gem 'jdbc-mysql'
-    gem 'activerecord-jdbcmysql-adapter', :require => false
+    gem 'activerecord-jdbcmysql-adapter', require: false
+    gem 'activerecord-jdbcsqlite3-adapter', require: false
+    gem 'activerecord-jdbcpostgresql-adapter', require: false
   end
   platforms :ruby do
     gem 'mysql2'
-  end
-  platforms :jruby do
-    gem 'activerecord-jdbcsqlite3-adapter', :require => false
-    gem 'activerecord-jdbcpostgresql-adapter', :require => false
-  end
-  platforms :ruby do
     gem 'sqlite3'
     gem 'pg'
   end
@@ -90,8 +86,8 @@ group :test do
   gem 'capybara', '~> 2.0.0'
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'simplecov', :require => false
-  gem 'simplecov-rcov', :require => false
+  gem 'simplecov', require: false
+  gem 'simplecov-rcov', require: false
   gem 'flog'
   gem "spork-rails"
   gem 'webmock'

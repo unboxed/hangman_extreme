@@ -55,12 +55,11 @@ describe 'winners',  :redis => true do
     stub_mxit_oauth
   end
 
-  context "as mxit user", :shinka_vcr => true do
+  context "as mxit user", :google_analytics_vcr => true do
 
     before :each do
       @current_user = mxit_user('m2604100')
       set_mxit_headers('m2604100') # set mxit user
-      stub_shinka_request # stub shinka request
       MxitApiWrapper.any_instance.stub(:send_message).and_return(true)
     end
 

@@ -21,11 +21,6 @@
 job_type :bundle_exec, 'cd :path && RAILS_ENV=:environment bundle exec :task :output'
 set :output, "/home/hmx/current/log/cron_log.log"
 
-# 10:01 because server is on UTC
-#every :day, :at => '1:00 am', :roles => [:db] do
-#  bundle_exec "backup perform -t my_backup"
-#end
-
 # 9:50 because server is on UTC
 every :sunday, :at => '9:50 pm', :roles => [:db] do
   runner "Jobs::CreateWeeklyWinners.execute"
@@ -36,20 +31,16 @@ every :day, :at => '9:55 pm', :roles => [:db] do
   runner "Jobs::CreateDailyWinners.execute"
 end
 
-# 10:01 because server is on UTC
-every :day, :at => '2:05 am', :roles => [:db] do
+# 2:05 because server is on UTC
+every :day, :at => '10:05 pm', :roles => [:db] do
   runner "Jobs::NewDaySetScores.execute"
 end
 
-every :day, :at => '2:10 am', :roles => [:db] do
-  runner "Jobs::NewDaySetScores.execute"
-end
-
-every :day, :at => '2:15 am', :roles => [:db] do
+every :day, :at => '10:10 pm', :roles => [:db] do
   runner "Jobs::RecordDailyStats.execute"
 end
 
-every :day, :at => '2:20 am', :roles => [:db] do
+every :day, :at => '10:15 pm', :roles => [:db] do
   runner "Jobs::SetUserCredits.execute"
 end
 

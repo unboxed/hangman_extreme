@@ -89,7 +89,7 @@ end
 
 describe 'games', :redis => true do
 
-  context "as mxit user", :shinka_vcr => true do
+  context "as mxit user", :google_analytics_vcr => true do
 
     before :each do
       @current_user = mxit_user('m2604100')
@@ -97,11 +97,6 @@ describe 'games', :redis => true do
     end
 
     it_behaves_like "a game player"
-
-    it "must show ads" do
-      visit_home
-      page.should have_css("div.beacon")
-    end
 
   end
 
@@ -114,11 +109,6 @@ describe 'games', :redis => true do
 
     it_behaves_like "a game player"
 
-    it "must show ads" do
-      visit_home
-      page.should have_css("div#footer .container img")
-    end
-
   end
 
   context "as guest user", :smaato_vcr => true, :js => true do
@@ -127,11 +117,6 @@ describe 'games', :redis => true do
       visit_home
       click_link('Play')
       page.current_path.should == "/"
-    end
-
-    it "must show ads" do
-      visit_home
-      page.should have_css("div#footer .container img")
     end
 
   end

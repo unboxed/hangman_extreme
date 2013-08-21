@@ -22,7 +22,7 @@ end
 
 describe 'explain', :redis => true do
 
-  context "as mxit user", :shinka_vcr => true  do
+  context "as mxit user", :google_analytics_vcr => true  do
 
     before :each do
       @current_user = mxit_user('m2604100')
@@ -51,7 +51,7 @@ describe 'explain', :redis => true do
   end
 
   # used to test cache
-  context "multiple users", :shinka_vcr => true, :smaato_vcr => true  do
+  context "multiple users", :google_analytics_vcr => true, :smaato_vcr => true  do
 
     it "must allow to browse explain all sections" do
       setup_sessions

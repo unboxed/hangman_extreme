@@ -34,6 +34,7 @@ shared_examples "a winner redeemer" do
           page.should have_content("1 prize points")
           click_link('airtime_vouchers')
           page.should_not have_content("R#{value / 100}")
+          sleep 1
           IssueAirtimeToUsers.drain
           visit_home
           click_link('redeem')
@@ -49,7 +50,7 @@ end
 
 describe 'redeem winnings', :redis => true do
 
-  context "as mxit user", :shinka_vcr => true do
+  context "as mxit user", :google_analytics_vcr => true do
 
     before :each do
       @current_user = mxit_user('m2604100')
