@@ -4,7 +4,7 @@
 </div>
 
 <% if Badge.where(user_id: current_user.id, name: 'Mr. Loader').count == 1  %>
-	<b style="color:green">Badge Achieved</b>
+	<b style="color:green">You have bought credits and Achieved this Badge</b>
 <% else %>
 	<b style="color:blue">Still to achieve</b>
 <% end %>
