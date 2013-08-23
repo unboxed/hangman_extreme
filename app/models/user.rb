@@ -114,12 +114,7 @@ class User < ActiveRecord::Base
         result[:is_registered]
       end
     rescue Exception => e
-      Rails.logger.error(e.message)
-      Airbrake.notify_or_ignore(
-        e,
-        :parameters    => {:user => self},
-        :cgi_data      => ENV
-      )
+      Airbrake.notify_or_ignore(e,:parameters    => {:user => self, :connection => connection})
       false
     end
   end

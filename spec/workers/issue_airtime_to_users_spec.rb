@@ -54,13 +54,14 @@ describe IssueAirtimeToUsers do
     context "failure" do
 
       before :each do
-        Airbrake.should_receive(:notify_or_ignore).with(kind_of(Exception),anything)
         @old_pass, ENV['FREEPAID_PASS'] = ENV['FREEPAID_PASS'], nil
         VCR.use_cassette("issue_airtime_to_users_failure",
                         :record => :once,
                         :erb => true,
                         :match_requests_on => [:uri,:method]) do
-          IssueAirtimeToUsers.new.perform(@redeem_winning.id)
+          lambda do
+            IssueAirtimeToUsers.new.perform(@redeem_winning.id)
+          end.should raise_error
         end
         ENV['FREEPAID_PASS'] = @old_pass
         @airtime_voucher = AirtimeVoucher.last
