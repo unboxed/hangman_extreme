@@ -61,7 +61,7 @@ describe SendFeedbackToUservoice do
   describe "send_suggestion" do
 
     it "must send the support" do
-      voice = mock('Voice')
+      voice = double('Voice')
       UserVoice::Client.should_receive(:new).and_return(voice)
       voice.should_receive(:get).with("/api/v1/forums.json").and_return("{\"forums\":[{\"id\":123}]}")
       voice.should_receive(:login_as).with("test@mail.com")

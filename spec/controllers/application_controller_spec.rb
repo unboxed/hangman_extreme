@@ -168,7 +168,7 @@ describe ApplicationController do
       controller.stub(:mxit_request?).and_return(true)
       controller.stub(:current_user).and_return(@user)
       controller.stub(:current_user_request_info).and_return(@user_request_info)
-      @gabba = mock('connection',
+      @gabba = double('connection',
                     :ip => '',
                     :user_agent= => '',
                     :utmul= => '',

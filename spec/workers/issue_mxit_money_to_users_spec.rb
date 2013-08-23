@@ -49,7 +49,7 @@ describe IssueMxitMoneyToUsers do
       context "Succesfull Connection" do
 
         before :each do
-          @mxit_money_connection = mock("connection",
+          @mxit_money_connection = double("connection",
                                         :user_info => {is_registered: true, msisdn: '0713450987'},
                                         :issue_money => {:m2_reference => "ref1"})
           MxitMoneyApi.stub(:connect).and_return(@mxit_money_connection)

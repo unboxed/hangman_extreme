@@ -30,7 +30,7 @@ describe UsersController do
   describe "GET 'mxit_oauth'" do
 
     before :each do
-      @connection = mock('MxitApi', access_token: "123", profile: {}, scope: "profile")
+      @connection = double('MxitApi', access_token: "123", profile: {}, scope: "profile")
       MxitApiWrapper.stub(:new).and_return(@connection)
     end
 

@@ -65,7 +65,7 @@ describe Dictionary do
   end
 
   it "must define the word" do
-   word_stub = mock("Wordnik.word")
+   word_stub = double("Wordnik.word")
    Wordnik.should_receive(:word).and_return(word_stub)
    word_stub.should_receive(:get_definitions).with('word').and_return([{'text' => "hello word"}])
    Dictionary.define("word").should == "hello word"
