@@ -84,7 +84,7 @@ group :test do
   gem 'poltergeist'
   gem 'selenium-webdriver'
   gem 'capybara', '~> 2.0.0'
-  gem 'database_cleaner'
+  gem 'database_cleaner', '~> 1.0.1'
   gem 'launchy'
   gem 'simplecov', require: false
   gem 'simplecov-rcov', require: false
