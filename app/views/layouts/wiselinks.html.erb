@@ -1,0 +1,45 @@
+<div id="wrap" class="wrap">
+
+  <div class="navbar">
+    <div class="navbar-inner">
+      <a class="brand" href="#">Hangman Extreme</a>
+      <ul class="nav">
+        <li <% if @game %>class="active"<% end %>>
+          <%= link_to 'Play', play_games_path, class: 'play_game' %>
+        </li>
+        <li <% if current_page?(root_path) %>class="active"<% end %>>
+          <%= link_to 'Home', root_path, class: 'home' %>
+        </li>
+        <% if current_user.guest?  %>
+            <li>
+              <%= link_to 'Login', Rails.env.development? ? '/auth/developer' : '/auth/facebook', class: 'login', 'data-ajax' =>"false", 'data-theme' =>"b" %>
+            </li>
+        <% else %>
+            <li>
+              <%= link_to 'Logout', logout_path, class: 'logout' %>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container">
+    <% if notice -%>
+        <div class="alert alert-info" style="color:#00008b;">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= notice %>
+        </div>
+    <% elsif alert -%>
+        <div class="alert alert-block" style="color:#8b0000;">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= alert %>
+        </div>
+    <% end -%>
+    <div class="row">
+      <div class="span6"><%= yield %></div>
+      <div class="span6"><%= menu %></div>
+    </div>
+  </div>
+
+</div>
+
