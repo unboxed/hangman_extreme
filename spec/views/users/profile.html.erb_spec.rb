@@ -6,8 +6,8 @@ describe "users/profile.html.erb" do
   before(:each) do
     @user = stub_model(User, real_name: "Grant Petersen", mobile_number: "123", credits: 20)
     view.stub(:current_user).and_return(@user)
-    view.stub!(:mxit_request?).and_return(true)
-    view.stub!(:menu_item)
+    view.stub(:mxit_request?).and_return(true)
+    view.stub(:menu_item)
   end
 
   it "must show real name and mobile number" do

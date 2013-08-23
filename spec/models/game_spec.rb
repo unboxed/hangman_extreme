@@ -23,7 +23,7 @@ describe Game do
 
     before :each do
       @game = Game.new
-      @game.stub!(:attempts_left).and_return(1)
+      @game.stub(:attempts_left).and_return(1)
     end
 
     it "must allow to add choices if there are still attempts left" do
@@ -219,15 +219,15 @@ describe Game do
     end
 
     it "wont set score if not done?" do
-      @game.stub!(:done?).and_return(false)
+      @game.stub(:done?).and_return(false)
       @game.save
       @game.score.should be_nil
     end
 
     it "must set score to correct choices + attempts left + time_score" do
-      @game.stub!(:attempts_left).and_return(2)
-      @game.stub!(:correct_choices).and_return(['a','b'])
-      @game.stub!(:time_score).and_return(2)
+      @game.stub(:attempts_left).and_return(2)
+      @game.stub(:correct_choices).and_return(['a','b'])
+      @game.stub(:time_score).and_return(2)
       @game.save
       @game.score.should == 6
     end

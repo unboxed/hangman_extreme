@@ -4,10 +4,10 @@ describe "users/show.html.erb" do
 
   before(:each) do
     @user = mock("User", monthly_score: "a", monthly_score_rank: "a")
-    Winner.stub!(:winning_periods).and_return(["monthly"])
-    Winner.stub!(:winning_reasons).and_return(["score"])
-    view.stub!(:mxit_request?).and_return(true)
-    view.stub!(:menu_item)
+    Winner.stub(:winning_periods).and_return(["monthly"])
+    Winner.stub(:winning_reasons).and_return(["score"])
+    view.stub(:mxit_request?).and_return(true)
+    view.stub(:menu_item)
   end
 
   it "renders a the periods" do

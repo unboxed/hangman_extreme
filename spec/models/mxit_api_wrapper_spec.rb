@@ -45,7 +45,7 @@ describe MxitApiWrapper do
 
     it "must be able to handle a exception" do
       mxit_api = mock("MxitApi")
-      MxitApi.stub!(:new).and_return(mxit_api)
+      MxitApi.stub(:new).and_return(mxit_api)
       connection = MxitApiWrapper.new
 
       ENV['MXIT_APP_NAME'], old =  "testname", ENV['MXIT_APP_NAME']

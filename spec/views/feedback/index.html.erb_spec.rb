@@ -3,8 +3,8 @@ require 'spec_helper'
 describe "feedback/index.html.erb" do
 
   before(:each) do
-    view.stub!(:mxit_request?).and_return(true)
-    view.stub!(:menu_item)
+    view.stub(:mxit_request?).and_return(true)
+    view.stub(:menu_item)
   end
 
   it "should have a support link" do

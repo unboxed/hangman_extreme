@@ -67,7 +67,7 @@ describe UserRequestInfo do
 
       before :each do
         @mxit_profile = MxitProfile.new("afr,ZA,1983-01-18,Female,2")
-        @mxit_profile.stub!(:age).and_return(29)
+        @mxit_profile.stub(:age).and_return(29)
         @request.mxit_profile = @mxit_profile
       end
 

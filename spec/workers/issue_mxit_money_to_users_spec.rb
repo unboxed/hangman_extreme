@@ -10,7 +10,7 @@ describe IssueMxitMoneyToUsers do
                                    user_uid: 'm221',
                                    state: 'paid',
                                    cancel!: true)
-      RedeemWinning.stub!(:find).and_return(@redeem_winning)
+      RedeemWinning.stub(:find).and_return(@redeem_winning)
     end
 
     def issue_money

@@ -5,10 +5,10 @@ describe "layouts/mobile" do
 
   before(:each) do
     @current_user = stub_model(User, id: 50)
-    view.stub!(:current_user).and_return(@current_user)
-    view.stub!(:current_page?).and_return(false)
-    view.stub!(:smaato_ad).and_return(false)
-    view.stub!(:mxit_request?).and_return(false)
+    view.stub(:current_user).and_return(@current_user)
+    view.stub(:current_page?).and_return(false)
+    view.stub(:smaato_ad).and_return(false)
+    view.stub(:mxit_request?).and_return(false)
   end
 
   it "should have a home link" do
