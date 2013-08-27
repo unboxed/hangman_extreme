@@ -68,9 +68,16 @@ describe PurchaseTransactionsController do
       flash[:notice].should have_content "Congratulations"
     end
 
-    it "must show right message after second purchase_transaction" do 
+    it "must show right message after second purchase_transaction if no badge previously received" do 
       create(:purchase_transaction, user: @current_user)
       do_get_create 
+      flash[:notice].should have_content "Congratulations"
+    end 
+
+    it "must not give the Badge twice" do 
+      create(:badge, name: 'Mr. Loader', user: @current_user)
+      create(:purchase_transaction, user: @current_user)
+      do_get_create
       flash[:notice].should_not have_content "Congratulations"
     end 
 

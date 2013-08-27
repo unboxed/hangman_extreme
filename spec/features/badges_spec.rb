@@ -37,6 +37,69 @@ shared_examples "badger" do
     page.should have_content("Badges")
   end
 
+  def click_letter(l)
+    within(".letters") do 
+      click_link(l)
+    end 
+  end 
+
+  it "Bookworm is received after win of 10 letter word with no clues used" do 
+  
+  # Should not give badge if clues were used
+    Dictionary.clear
+    Dictionary.add("television")
+    Dictionary.set_clue("television","tv")
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _ _ _ _ _ _")
+    click_link 'show_clue'
+    click_button 'yes'
+    %W(t e l v i s o n).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Bookworm")
+
+  # 10 letter win completed with no clues
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _ _ _ _ _ _")
+    %W(t e l v i s o n).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_content("Bookworm")
+    click_link 'Bookworm'
+    page.should have_content("Achieved")
+
+  #should not give the badge twice
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _ _ _ _ _ _")
+    %W(t e l v i s o n).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win") 
+    page.should have_no_content("Bookworm")
+  end 
+
+  it "should not give badge if word is less than 10" do 
+    Dictionary.clear
+    Dictionary.add("airport")
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _ _ _")
+    %W(a i r p o t).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win") 
+    page.should have_no_content("Bookworm")
+  end
+
 end
 
 describe 'users', :redis => true do

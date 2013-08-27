@@ -143,6 +143,33 @@ describe GamesController do
       flash[:notice].should_not be_blank
     end
 
+    it "Should not get Bookworm Badge if a 10 letter word won and used a clue" do 
+      @game = create(:game, word: "television", choices: "telviso", user: @current_user)
+      get :show_clue, {:id => @game.to_param}
+      post :reveal_clue, {:id => @game.to_param}
+      get :play_letter, :id => @game.to_param, :letter => "n"
+      flash[:notice].should_not have_content "Congratulations"
+    end 
+
+    it "First 10 letter word won with no clue receives Bookworm Badge" do 
+      @game = create(:game, word: "television", choices: "telviso", user: @current_user)
+      get :play_letter, :id => @game.to_param, :letter => "n"
+      flash[:notice].should have_content "Congratulations"
+    end 
+
+    it "Should not get Bookworm Badge for <9 letter word won" do
+      @game = create(:game, word:"airport", choices: "airpo", user: @current_user)
+      get :play_letter, :id => @game.to_param, :letter => "t"
+      flash[:notice].should_not have_content "Congratulations"
+    end 
+
+    it "Should not receive Bookworm Badge twice" do
+      create(:badge, name: 'Bookworm', user: @current_user)
+      @game = create(:game, word: "television", choices: "telviso", user: @current_user)
+      get :play_letter, :id => @game.to_param, :letter => "n"
+      flash[:notice].should_not have_content "Congratulations"
+    end 
+
   end
 
   describe "GET new" do

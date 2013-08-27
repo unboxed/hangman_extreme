@@ -4,7 +4,7 @@ class Badge < ActiveRecord::Base
   attr_accessible :name, :user_id
   validates :name, :user_id,  presence: true 
   
-  VALID_NAME = ["Mr. Loader"]
+  VALID_NAME = ["Mr. Loader", "Bookworm"]
   validates_inclusion_of :name, :in => VALID_NAME
 
   validates_uniqueness_of :name, :scope => :user_id

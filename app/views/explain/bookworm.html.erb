@@ -3,4 +3,10 @@
 	Win a 10 letter word without using any clues 
 </div>
 
+<% if Badge.where(user_id: current_user.id, name: 'Bookworm').count == 1 %>
+	<b style="color:green">You have Achieved this Badge<b/>
+<%else%>
+	<b style="color:blue">Still to Achieve<b/>
+<%end%>
+
 <% menu_item 'badges', badges_users_path, id: 'badges' %>

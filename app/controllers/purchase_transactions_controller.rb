@@ -19,7 +19,7 @@ class PurchaseTransactionsController < ApplicationController
       @purchase_transaction.product_id = params[:product_id]
       @purchase_transaction.ref = params[:ref]
       @purchase_transaction.save!
-        if current_user.purchase_transactions.count == 1
+        if current_user.purchase_transactions.count >= 1 && current_user.badges(name: 'Mr. Loader', user_id:current_user.id).count == 0
           Badge.create(name: 'Mr. Loader', user_id:current_user.id)
           redirect_to({ action: 'index', mxit_transaction_res: params[:mxit_transaction_res]}, notice: "Purchase successful, Congratulations you received the #{view_context.link_to 'Mr. Loader', explain_path(action: 'mr_loader', id: 'mr_loader')} Badge".html_safe)
         else
