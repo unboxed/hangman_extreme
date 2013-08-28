@@ -4,7 +4,6 @@ class Winner < ActiveRecord::Base
   WINNING_PERIODS = %w(daily weekly)
   WINNING_REASONS = %w(streak rating random)
   belongs_to :user
-  attr_accessible :user_id, :amount, :reason, :period, :end_of_period_on
 
   validates :user_id, :amount, :reason, :end_of_period_on, presence: true
   validates :period, inclusion: %w(daily weekly)

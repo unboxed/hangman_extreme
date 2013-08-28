@@ -23,6 +23,7 @@ gem "savon"
 gem 'draper'
 gem 'puma'
 gem 'whenever', require: false
+gem 'strong_parameters'
 
 gem 'sidekiq'
 gem 'sinatra', '>= 1.3.0', require: false # for sidekiq

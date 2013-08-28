@@ -1,7 +1,5 @@
 class PurchaseTransaction < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :currency_amount, :moola_amount, :product_description, :product_id,
-                  :product_name, :user_id, :ref
 
   validates :product_id, :user_id, :currency_amount, :product_name, :ref, presence: true
   validates_numericality_of :moola_amount, only_integer: true, greater_than: 0
