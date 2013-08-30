@@ -81,7 +81,7 @@ group :test do
   gem 'poltergeist'
   gem 'selenium-webdriver'
   gem 'capybara', '~> 2.0.0'
-  gem 'database_cleaner', '~> 1.0.1'
+  gem 'database_cleaner', "~> 1.1.1", :git => 'https://github.com/tommeier/database_cleaner', ref: 'b0c666e'
   gem 'launchy'
   gem 'simplecov', require: false
   gem 'simplecov-rcov', require: false

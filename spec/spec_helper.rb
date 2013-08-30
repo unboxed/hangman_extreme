@@ -62,6 +62,8 @@ require 'rubygems'
   require 'capybara/rspec'
   require 'capybara/poltergeist'
   require 'sidekiq/testing'
+  require 'database_cleaner'
+
 # end
 
 # Spork.each_run do
