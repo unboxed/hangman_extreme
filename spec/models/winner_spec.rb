@@ -76,10 +76,15 @@ describe Winner do
           end
 
           it "must select players that have won at least #{period == 'daily' ? 5 : 15} games" do
+            Rails.logger.warn("\n\n\n\ncreate_list-----------------------")
             create_list(:user, 5, "#{period}_wins" => required_wins - 1)
+            Rails.logger.warn("top_players-----------------------")
             top_players = create_list(:user, 5, "#{period}_wins" => required_wins)
+            Rails.logger.warn("create_winners_for_category-----------------------")
             Winner.create_winners_for_category(period: period, score_by: "random", winnings: [10] * 5)
+            Rails.logger.warn("top_players.each-----------------------")
             top_players.each do |user|
+              Rails.logger.warn("    #{user}-----------------------")
               user.winners.period(period).reason("random").count.should == 1
               winner = user.winners.period(period).reason("random").first
               winner.period.should == period
@@ -87,6 +92,7 @@ describe Winner do
               winner.amount.should == 10
               winner.reason.should == "random"
             end
+            Rails.logger.warn("-----------------------\n\n\n\n")
           end
 
           it "must not select from players that have already won in another category" do

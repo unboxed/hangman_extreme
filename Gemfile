@@ -1,19 +1,15 @@
 source 'http://rubygems.org'
 
-gem "rails", "~> 3.2.13"
+gem 'rails', '~> 4.0.0'
 
 platforms :jruby do
-  gem 'activerecord-jdbcpostgresql-adapter', require: false
+  gem 'activerecord-jdbcpostgresql-adapter', '>= 1.3.0', require: false
 end
 platforms :ruby do
   gem 'pg'
 end
 gem 'ohm'
 gem 'ohm-contrib', require: 'ohm/contrib'
-
-platforms :jruby do
-  gem 'jruby-openssl'
-end
 gem 'cancan'
 gem 'omniauth'
 gem 'omniauth-facebook'
@@ -23,7 +19,6 @@ gem "savon"
 gem 'draper'
 gem 'puma'
 gem 'whenever', require: false
-gem 'strong_parameters'
 
 gem 'sidekiq'
 gem 'sinatra', '>= 1.3.0', require: false # for sidekiq
@@ -41,10 +36,7 @@ gem 'newrelic_rpm'
 gem 'wordnik'
 gem 'librato-metrics', require: 'librato/metrics'
 
-
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
+#group :assets do
   platforms :jruby do
     gem 'therubyrhino'
   end
@@ -53,14 +45,17 @@ group :assets do
     gem 'therubyracer'
   end
   gem 'wiselinks'
-  gem 'coffee-rails', '~> 3.2.0'
-  gem 'uglifier', '>= 1.0.3'
-  gem "jquery-rails"
-end
+  gem 'uglifier', '>= 1.3.0'
+  gem 'coffee-rails', '~> 4.0.0'
+  gem 'jquery-rails'
+#end
 
 group :development do
   gem 'capistrano', require: false
   gem 'rvm-capistrano', require: false
+  gem 'better_errors'
+  gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]
+  gem 'quiet_assets'
 end
 
 group :development, :test do
@@ -73,9 +68,9 @@ end
 group :test do
   platforms :jruby do
     gem 'jdbc-mysql'
-    gem 'activerecord-jdbcmysql-adapter', require: false
-    gem 'activerecord-jdbcsqlite3-adapter', require: false
-    gem 'activerecord-jdbcpostgresql-adapter', require: false
+    gem 'activerecord-jdbcmysql-adapter', '>= 1.3.0', require: false
+    gem 'activerecord-jdbcsqlite3-adapter', '>= 1.3.0', require: false
+    gem 'activerecord-jdbcpostgresql-adapter', '>= 1.3.0', require: false
   end
   platforms :ruby do
     gem 'mysql2'
@@ -91,7 +86,7 @@ group :test do
   gem 'simplecov', require: false
   gem 'simplecov-rcov', require: false
   gem 'flog'
-  gem "spork-rails"
+#  gem 'spork-rails'
   gem 'webmock'
   gem 'vcr'
   gem 'coveralls', require: false

@@ -1,10 +1,10 @@
 require 'rubygems'
-require 'spork'
+#require 'spork'
 
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
-Spork.prefork do
+#Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
   ENV['DB_CLEANER_STRATEGY'] ||= 'transaction'
   ENV['UV_SUBDOMAIN_NAME'] ||= 'uv'
@@ -43,17 +43,17 @@ Spork.prefork do
   end
 
 
-  require "rails/application"
-  # Prevent main application to eager_load in the prefork block (do not load files in autoload_paths)
-  Spork.trap_method(Rails::Application, :eager_load!)
-  Spork.trap_method(Rails::Application::RoutesReloader, :reload!)
-
-#  require 'webmock/rspec'
-#  WebMock.allow_net_connect!
+#  require "rails/application"
+#  # Prevent main application to eager_load in the prefork block (do not load files in autoload_paths)
+#  Spork.trap_method(Rails::Application, :eager_load!)
+#  Spork.trap_method(Rails::Application::RoutesReloader, :reload!)
+#
+  #  require 'webmock/rspec'
+  #  WebMock.allow_net_connect!
   require File.expand_path("../../config/environment", __FILE__)
-
-  # Load all railties files
-  Rails.application.railties.all { |r| r.eager_load! }
+#
+#  # Load all railties files
+#  Rails.application.railties.all { |r| r.eager_load! }
   require 'rspec/rails'
   require 'rspec/autorun'
   require 'webmock/rspec'
@@ -62,9 +62,9 @@ Spork.prefork do
   require 'capybara/rspec'
   require 'capybara/poltergeist'
   require 'sidekiq/testing'
-end
+# end
 
-Spork.each_run do
+# Spork.each_run do
 
   WebMock.disable_net_connect!(:allow_localhost => true)
   def in_memory_database?
@@ -163,4 +163,4 @@ Spork.each_run do
 
   end
 
-end
+# end

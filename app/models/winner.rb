@@ -17,17 +17,6 @@ class Winner < ActiveRecord::Base
 
   after_create :increase_prize_points
 
-  def self.scope_for(winners,options = {})
-    options[:reason] ||= 'rating'
-    options[:period] ||= 'daily'
-    scope = winners.period(options[:period]).reason(options[:reason]).order('created_at DESC')
-    if options[:period] == 'daily'
-      scope.yesterday
-    else
-      scope.last_week
-    end
-  end
-
   def self.winning_periods
     WINNING_PERIODS
   end
@@ -118,10 +107,12 @@ class Winner < ActiveRecord::Base
       wins_required = options[:period] == 'daily' ? daily_random_games_required : weekly_random_games_required
       user_scope = User.joins("LEFT JOIN winners ON winners.user_id = users.id").where("users.#{options[:period]}_wins >= ?",wins_required)
       random_winners = user_scope.where('winners.user_id IS NULL').random_order.limit(options[:winnings].size) # prefer players who have never won before
+      Rails.logger.warn("  random_winners.count-----------------------")
       if random_winners.count >= options[:winnings].size
+        Rails.logger.warn("    #{random_winners.count} => #{options[:winnings].size}-----------------------")
         { 1 => random_winners  }
       else
-        other_winners = winning_reasons.collect{|r| period(options[:period]).reason(r).order('created_at DESC').limit(options[:winnings].size).all}.flatten
+        other_winners = winning_reasons.collect{|r| period(options[:period]).reason(r).order('created_at DESC').limit(options[:winnings].size).all }.flatten
         # then prefer players who have not won in another category
         second_random_winners = user_scope.where('users.id NOT IN (?)',other_winners.map(&:user_id) + random_winners.map(&:user_id)).random_order.limit(options[:winnings].size - random_winners.count)
         if second_random_winners.count + random_winners.count >= options[:winnings].size
@@ -134,7 +125,7 @@ class Winner < ActiveRecord::Base
     else
       previous_winners = period(options[:period]).reason(options[:score_by]).order('created_at DESC').limit(options[:winnings].size)
       user_scope = User.where('id NOT IN (?)',previous_winners.map(&:user_id) + [0])
-      min_score = user_scope.top_scorers(field).limit(options[:winnings].size).all.last.send(field)
+      min_score = user_scope.top_scorers(field).offset(options[:winnings].size - 1).first.send(field)
       user_scope.where("#{field} >= ?",min_score).group_by{|u| u.rank(field,user_scope) }
     end
   end

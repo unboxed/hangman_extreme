@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   scope :active_last_hour, lambda{ where('updated_at >= ?',1.hour.ago) }
   scope :active, lambda{ where('updated_at >= ?',7.days.ago) }
   scope :last_day, lambda{ where('created_at >= ?',1.day.ago) }
-  scope :random_order, order(connection.instance_values["config"][:adapter].include?("mysql") ? 'RAND()' : 'RANDOM()')
+  scope :random_order, lambda{ order(connection.instance_values["config"][:adapter].include?("mysql") ? 'RAND()' : 'RANDOM()') }
 
   def self.active_mxit
     active.mxit

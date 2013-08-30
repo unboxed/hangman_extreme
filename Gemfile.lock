@@ -1,43 +1,41 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    actionmailer (3.2.14)
-      actionpack (= 3.2.14)
-      mail (~> 2.5.4)
-    actionpack (3.2.14)
-      activemodel (= 3.2.14)
-      activesupport (= 3.2.14)
-      builder (~> 3.0.0)
+    actionmailer (4.0.0)
+      actionpack (= 4.0.0)
+      mail (~> 2.5.3)
+    actionpack (4.0.0)
+      activesupport (= 4.0.0)
+      builder (~> 3.1.0)
       erubis (~> 2.7.0)
-      journey (~> 1.0.4)
-      rack (~> 1.4.5)
-      rack-cache (~> 1.2)
-      rack-test (~> 0.6.1)
-      sprockets (~> 2.2.1)
-    activemodel (3.2.14)
-      activesupport (= 3.2.14)
-      builder (~> 3.0.0)
-    activerecord (3.2.14)
-      activemodel (= 3.2.14)
-      activesupport (= 3.2.14)
-      arel (~> 3.0.2)
-      tzinfo (~> 0.3.29)
-    activerecord-jdbc-adapter (1.2.9.1)
-    activerecord-jdbcmysql-adapter (1.2.9)
-      activerecord-jdbc-adapter (~> 1.2.9)
+      rack (~> 1.5.2)
+      rack-test (~> 0.6.2)
+    activemodel (4.0.0)
+      activesupport (= 4.0.0)
+      builder (~> 3.1.0)
+    activerecord (4.0.0)
+      activemodel (= 4.0.0)
+      activerecord-deprecated_finders (~> 1.0.2)
+      activesupport (= 4.0.0)
+      arel (~> 4.0.0)
+    activerecord-deprecated_finders (1.0.3)
+    activerecord-jdbc-adapter (1.3.0)
+      activerecord (>= 2.2)
+    activerecord-jdbcmysql-adapter (1.3.0)
+      activerecord-jdbc-adapter (~> 1.3.0)
       jdbc-mysql (~> 5.1.0)
-    activerecord-jdbcpostgresql-adapter (1.2.9)
-      activerecord-jdbc-adapter (~> 1.2.9)
+    activerecord-jdbcpostgresql-adapter (1.3.0)
+      activerecord-jdbc-adapter (~> 1.3.0)
       jdbc-postgres (>= 9.1, < 9.3)
-    activerecord-jdbcsqlite3-adapter (1.2.9)
-      activerecord-jdbc-adapter (~> 1.2.9)
+    activerecord-jdbcsqlite3-adapter (1.3.0)
+      activerecord-jdbc-adapter (~> 1.3.0)
       jdbc-sqlite3 (~> 3.7.2)
-    activeresource (3.2.14)
-      activemodel (= 3.2.14)
-      activesupport (= 3.2.14)
-    activesupport (3.2.14)
+    activesupport (4.0.0)
       i18n (~> 0.6, >= 0.6.4)
-      multi_json (~> 1.0)
+      minitest (~> 4.2)
+      multi_json (~> 1.3)
+      thread_safe (~> 0.1)
+      tzinfo (~> 0.3.37)
     addressable (2.3.5)
     aggregate (0.2.2)
     airbrake (3.1.14)
@@ -48,9 +46,15 @@ GEM
       nokogiri (>= 1.4.0)
     annotate (2.5.0)
       rake
-    arel (3.0.2)
-    bouncy-castle-java (1.5.0147)
-    builder (3.0.4)
+    arel (4.0.0)
+    atomic (1.1.13)
+    atomic (1.1.13-java)
+    better_errors (0.9.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
+    builder (3.1.4)
     cancan (1.6.10)
     capistrano (2.15.5)
       highline
@@ -69,10 +73,11 @@ GEM
       timers (>= 1.0.0)
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
-    chronic (0.9.1)
-    coffee-rails (3.2.2)
+    chronic (0.10.1)
+    coderay (1.0.9)
+    coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
-      railties (~> 3.2.0)
+      railties (>= 4.0.0.beta, < 5.0)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
@@ -88,18 +93,19 @@ GEM
     crack (0.4.1)
       safe_yaml (~> 0.9.0)
     database_cleaner (1.0.1)
+    debug_inspector (0.0.2)
     diff-lcs (1.2.4)
     draper (1.2.1)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       request_store (~> 1.0.3)
     erubis (2.7.0)
-    ethon (0.6.0)
+    ethon (0.6.1)
       ffi (>= 1.3.0)
       mime-types (~> 1.18)
     eventmachine (1.0.3)
     eventmachine (1.0.3-java)
-    execjs (2.0.0)
+    execjs (2.0.1)
     ezcrypto (0.7.2)
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
@@ -133,12 +139,9 @@ GEM
     jdbc-mysql (5.1.25)
     jdbc-postgres (9.2.1002.1)
     jdbc-sqlite3 (3.7.2.1)
-    journey (1.0.4)
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
-    jruby-openssl (0.8.8)
-      bouncy-castle-java (>= 1.5.0147)
     json (1.8.0)
     json (1.8.0-java)
     jwt (0.1.8)
@@ -148,7 +151,7 @@ GEM
       activesupport (>= 3.0.0)
     launchy (2.3.0)
       addressable (~> 2.3)
-    librato-metrics (1.1.0)
+    librato-metrics (1.1.1)
       aggregate (~> 0.2.2)
       faraday (~> 0.7)
       multi_json
@@ -158,6 +161,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.24)
     mini_portile (0.5.1)
+    minitest (4.7.5)
     multi_json (1.7.9)
     multipart-post (1.2.0)
     mxit_api (0.2.2.pre)
@@ -212,33 +216,27 @@ GEM
       rack (>= 1.1, < 2.0)
     puma (2.5.1-java)
       rack (>= 1.1, < 2.0)
-    rack (1.4.5)
-    rack-cache (1.2)
-      rack (>= 0.4)
+    quiet_assets (1.0.2)
+      railties (>= 3.1, < 5.0)
+    rack (1.5.2)
     rack-protection (1.5.0)
-      rack
-    rack-ssl (1.3.3)
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
-    rails (3.2.14)
-      actionmailer (= 3.2.14)
-      actionpack (= 3.2.14)
-      activerecord (= 3.2.14)
-      activeresource (= 3.2.14)
-      activesupport (= 3.2.14)
-      bundler (~> 1.0)
-      railties (= 3.2.14)
-    railties (3.2.14)
-      actionpack (= 3.2.14)
-      activesupport (= 3.2.14)
-      rack-ssl (~> 1.3.2)
+    rails (4.0.0)
+      actionmailer (= 4.0.0)
+      actionpack (= 4.0.0)
+      activerecord (= 4.0.0)
+      activesupport (= 4.0.0)
+      bundler (>= 1.3.0, < 2.0)
+      railties (= 4.0.0)
+      sprockets-rails (~> 2.0.0)
+    railties (4.0.0)
+      actionpack (= 4.0.0)
+      activesupport (= 4.0.0)
       rake (>= 0.8.7)
-      rdoc (~> 3.4)
-      thor (>= 0.14.6, < 2.0)
+      thor (>= 0.18.1, < 2.0)
     rake (10.1.0)
-    rdoc (3.12.2)
-      json (~> 1.4)
     redis (3.0.4)
     redis-namespace (1.3.1)
       redis (~> 3.0.0)
@@ -272,17 +270,17 @@ GEM
       nori (~> 2.1.0)
       wasabi (~> 3.1.0)
     scrivener (0.0.3)
-    selenium-webdriver (2.35.0)
+    selenium-webdriver (2.35.1)
       childprocess (>= 0.2.5)
       multi_json (~> 1.0)
-      rubyzip
+      rubyzip (< 1.0.0)
       websocket (~> 1.0.4)
     sexp_processor (4.3.0)
-    sidekiq (2.13.1)
+    sidekiq (2.14.0)
       celluloid (>= 0.14.1)
       connection_pool (>= 1.0.0)
       json
-      redis (>= 3.0)
+      redis (>= 3.0.4)
       redis-namespace
     simplecov (0.7.1)
       multi_json (~> 1.0)
@@ -297,22 +295,18 @@ GEM
     slim (2.0.1)
       temple (~> 0.6.6)
       tilt (>= 1.3.3, < 2.1)
-    spork (1.0.0rc3)
-    spork-rails (3.2.1)
-      rails (>= 3.0.0, < 3.3.0)
-      spork (>= 1.0rc0)
-    sprockets (2.2.2)
+    sprockets (2.10.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    sprockets-rails (2.0.0)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      sprockets (~> 2.8)
     sqlite3 (1.3.8)
-    strong_parameters (0.2.1)
-      actionpack (~> 3.0)
-      activemodel (~> 3.0)
-      railties (~> 3.0)
     temple (0.6.6)
-    test_after_commit (0.2.0)
+    test_after_commit (0.2.1)
     therubyracer (0.11.4)
       libv8 (~> 3.11.8.12)
       ref
@@ -320,16 +314,20 @@ GEM
       therubyrhino_jar (>= 1.7.3)
     therubyrhino_jar (1.7.4)
     thor (0.18.1)
+    thread_safe (0.1.2)
+      atomic
+    thread_safe (0.1.2-java)
+      atomic
     tilt (1.4.1)
     timecop (0.6.3)
     timers (1.1.0)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    typhoeus (0.6.4)
-      ethon (~> 0.6.0)
+    typhoeus (0.6.5)
+      ethon (~> 0.6.1)
     tzinfo (0.3.37)
-    uglifier (2.1.2)
+    uglifier (2.2.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
     uservoice-ruby (0.0.11)
@@ -363,15 +361,17 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-jdbcmysql-adapter
-  activerecord-jdbcpostgresql-adapter
-  activerecord-jdbcsqlite3-adapter
+  activerecord-jdbcmysql-adapter (>= 1.3.0)
+  activerecord-jdbcpostgresql-adapter (>= 1.3.0)
+  activerecord-jdbcsqlite3-adapter (>= 1.3.0)
   airbrake
   annotate
+  better_errors
+  binding_of_caller
   cancan
   capistrano
   capybara (~> 2.0.0)
-  coffee-rails (~> 3.2.0)
+  coffee-rails (~> 4.0.0)
   coveralls
   database_cleaner (~> 1.0.1)
   draper
@@ -380,7 +380,6 @@ DEPENDENCIES
   gabba
   jdbc-mysql
   jquery-rails
-  jruby-openssl
   kaminari
   launchy
   librato-metrics
@@ -395,7 +394,8 @@ DEPENDENCIES
   pg
   poltergeist
   puma
-  rails (~> 3.2.13)
+  quiet_assets
+  rails (~> 4.0.0)
   rspec-rails
   rvm-capistrano
   savon
@@ -405,14 +405,12 @@ DEPENDENCIES
   simplecov-rcov
   sinatra (>= 1.3.0)
   slim
-  spork-rails
   sqlite3
-  strong_parameters
   test_after_commit
   therubyracer
   therubyrhino
   timecop
-  uglifier (>= 1.0.3)
+  uglifier (>= 1.3.0)
   uservoice-ruby
   vcr
   webmock

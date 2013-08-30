@@ -1,3 +1,4 @@
+<% cache ["scoring_categories_v1"] do %>
 <p>We rank players and award prize points on the following categories.
 <b>You cannot win twice in a row in any category</b></p>
 <% index = 0 %>
@@ -6,7 +7,9 @@
   <li data-icon="info"><%= smart_link_to("#{(index += 1)} streak",explain_path(action: 'winning_streak'),id: 'streak') %></li>
   <li data-icon="info"><%= smart_link_to("#{(index += 1)} random",explain_path(action: 'winning_random'),id: 'random') %></li>
 </ul>
+<% end %>
 
 <% menu_item 'payouts', explain_path(action: 'payouts'), id: 'payouts' %>
 <% menu_item 'rank', user_path(current_user), id: 'view_rank' unless guest? %>
+
 

@@ -1,9 +1,11 @@
-<h1>Random Category</h1>
-<div>
-  This category is a random prize draw for players that
-  have won at least <%= Winner.daily_random_games_required %> games for daily
-  and <%= Winner.weekly_random_games_required %> games for weekly
-  and have not won in any other category
-</div>
+<% cache ["winning_random_v1",Winner.daily_random_games_required, Winner.weekly_random_games_required ] do %>
+    <h1>Random Category</h1>
+    <div>
+      This category is a random prize draw for players that
+      have won at least <%= Winner.daily_random_games_required %> games for daily
+      and <%= Winner.weekly_random_games_required %> games for weekly
+      and have not won in any other category
+    </div>
+<% end %>
 
 <%= render partial: 'links' %>

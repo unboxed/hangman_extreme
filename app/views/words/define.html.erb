@@ -1,5 +1,7 @@
-<h1>Defining: <%= params[:word] %></h1>
-<div style="color:green;"><%= @definition.split("\n").join("<br/>").html_safe %></div>
-<br/>
+<% cache ["define_v1", params[:word] ] do %>
+    <h1>Defining: <%= params[:word] %></h1>
+    <div style="color:green;"><%= define_word(params[:word]) %></div>
+    <br/>
+<% end %>
 
 <% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
