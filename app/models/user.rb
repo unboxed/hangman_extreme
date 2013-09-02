@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   RANKING_FIELDS = Winner::WINNING_PERIODS.product(Winner::WINNING_REASONS - %w(random)).map{|x,y| "#{x}_#{y}"}
 
-  has_many :games, :order => 'id ASC'
+  has_many :games, -> { order('id ASC') }
   has_many :winners
   has_many :redeem_winnings
   has_many :airtime_vouchers
@@ -11,13 +11,13 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :uid, :scope => :provider
 
   scope :top_scorers, lambda{ |field| order("#{field} DESC") }
-  scope :mxit, where(provider: 'mxit')
-  scope :facebook, where(provider: 'facebook')
-  scope :non_mxit, where('provider <> ?','mxit')
-  scope :active_last_hour, lambda{ where('updated_at >= ?',1.hour.ago) }
-  scope :active, lambda{ where('updated_at >= ?',7.days.ago) }
-  scope :last_day, lambda{ where('created_at >= ?',1.day.ago) }
-  scope :random_order, lambda{ order(connection.instance_values["config"][:adapter].include?("mysql") ? 'RAND()' : 'RANDOM()') }
+  scope :mxit, -> { where(provider: 'mxit') }
+  scope :facebook, -> { where(provider: 'facebook') }
+  scope :non_mxit, -> { where('provider <> ?','mxit') }
+  scope :active_last_hour, -> { where('updated_at >= ?',1.hour.ago) }
+  scope :active, -> { where('updated_at >= ?',7.days.ago) }
+  scope :last_day, -> { where('created_at >= ?',1.day.ago) }
+  scope :random_order, -> { order(connection.instance_values["config"][:adapter].include?("mysql") ? 'RAND()' : 'RANDOM()') }
 
   def self.active_mxit
     active.mxit
@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
     auth_hash.stringify_keys!
     logger.debug "Auth Login Attempt with: #{auth_hash.to_s}"
     return nil if auth_hash['uid'].blank? || auth_hash['provider'].blank?
-    user = find_or_create_by_uid_and_provider(auth_hash['uid'],auth_hash['provider'])
+    user = find_or_create_by(uid: auth_hash['uid'],provider: auth_hash['provider'])
     user.set_user_info(auth_hash['info'])
     return user
   end
@@ -163,6 +163,10 @@ class User < ActiveRecord::Base
 
   def to_s
     "<User id:#{id} uid:#{uid} provider:#{provider}>"
+  end
+
+  def inspect
+    to_s
   end
 
   def daily_wins_required_for_random

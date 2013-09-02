@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130613141007) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20130902071231) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "resource_id",   null: false
@@ -142,6 +139,7 @@ ActiveRecord::Schema.define(version: 20130613141007) do
     t.integer  "daily_wins",            default: 0,    null: false
     t.integer  "weekly_wins",           default: 0,    null: false
     t.boolean  "show_hangman",          default: true
+    t.integer  "winners_count",         default: 0,    null: false
   end
 
   add_index "users", ["created_at"], name: "index_users_on_created_at", using: :btree

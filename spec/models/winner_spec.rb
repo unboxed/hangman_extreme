@@ -51,40 +51,42 @@ describe Winner do
 
           it "wont allow players to win 2 randoms in a row" do
             day1 = Time.current.end_of_week
-            players = create_list(:user, 10, "#{period}_wins" => required_wins)
+            first_group_of_players = create_list(:user, 5, "#{period}_wins" => required_wins)
             Timecop.freeze(day1) do
               Winner.create_winners_for_category(period: period, score_by: "random", winnings: [10] * 5)
               Winner.period(period).reason("random").count.should == 5
-              players.each do |user|
-                [0,1].should include(user.winners.period(period).reason("random").count)
-              end
-            end
-            Timecop.freeze(day1 + (period == 'daily' ? 1.day : 1.week)) do
-              Winner.create_winners_for_category(period: period, score_by: "random", winnings: [10] * 5)
-              Winner.period(period).reason("random").count.should == 10
-              players.each do |user|
+              first_group_of_players.each do |user|
                 user.winners.period(period).reason("random").count.should == 1
               end
             end
-            Timecop.freeze(day1 + (period == 'daily' ? 2.day : 2.week)) do
+            second_group_of_players = create_list(:user, 5, "#{period}_wins" => required_wins)
+            Timecop.freeze(day1 + (period == 'daily' ? 1.day : 1.week)) do
+              Winner.create_winners_for_category(period: period, score_by: "random", winnings: [10] * 5)
+              Winner.period(period).reason("random").count.should == 10
+              first_group_of_players.each do |user|
+                user.winners.period(period).reason("random").count.should == 1
+              end
+              second_group_of_players.each do |user|
+                user.winners.period(period).reason("random").count.should == 1
+              end
+            end
+            Timecop.freeze(day1 + (period == 'daily' ? 2.days : 2.weeks)) do
               Winner.create_winners_for_category(period: period, score_by: "random", winnings: [10] * 5)
               Winner.period(period).reason("random").count.should == 15
-              players.each do |user|
-                [1,2].should include(user.winners.period(period).reason("random").count)
+              first_group_of_players.each do |user|
+                user.winners.period(period).reason("random").count.should == 2
+              end
+              second_group_of_players.each do |user|
+                user.winners.period(period).reason("random").count.should == 1
               end
             end
           end
 
           it "must select players that have won at least #{period == 'daily' ? 5 : 15} games" do
-            Rails.logger.warn("\n\n\n\ncreate_list-----------------------")
             create_list(:user, 5, "#{period}_wins" => required_wins - 1)
-            Rails.logger.warn("top_players-----------------------")
             top_players = create_list(:user, 5, "#{period}_wins" => required_wins)
-            Rails.logger.warn("create_winners_for_category-----------------------")
             Winner.create_winners_for_category(period: period, score_by: "random", winnings: [10] * 5)
-            Rails.logger.warn("top_players.each-----------------------")
             top_players.each do |user|
-              Rails.logger.warn("    #{user}-----------------------")
               user.winners.period(period).reason("random").count.should == 1
               winner = user.winners.period(period).reason("random").first
               winner.period.should == period
@@ -92,7 +94,6 @@ describe Winner do
               winner.amount.should == 10
               winner.reason.should == "random"
             end
-            Rails.logger.warn("-----------------------\n\n\n\n")
           end
 
           it "must not select from players that have already won in another category" do
@@ -106,6 +107,26 @@ describe Winner do
             Winner.create_winners_for_category(period: period, score_by: "random", winnings: [10] * 5)
             Winner.period(period).reason("random").count.should == 5
             random_players.each do |user|
+              user.winners.period(period).reason("random").count.should == 1
+              winner = user.winners.period(period).reason("random").first
+              winner.amount.should == 10
+            end
+          end
+
+          it "must prefer players who have not won this week" do
+            last_week_winners_players = create_list(:user, 5,
+                                                    "#{period}_wins" => required_wins,
+                                                    "#{period}_streak" => 10)
+            Timecop.freeze(1.week.ago) do
+              Winner.create_winners_for_category(period: period, score_by: "streak", winnings: [10] * 5)
+            end
+            create_list(:user, 5,
+                        "#{period}_wins" => required_wins,
+                        "#{period}_streak" => 10 )
+            Winner.create_winners_for_category(period: period, score_by: "streak", winnings: [10] * 5)
+            Winner.create_winners_for_category(period: period, score_by: "random", winnings: [10] * 5)
+            Winner.period(period).reason("random").count.should == 5
+            last_week_winners_players.each do |user|
               user.winners.period(period).reason("random").count.should == 1
               winner = user.winners.period(period).reason("random").first
               winner.amount.should == 10

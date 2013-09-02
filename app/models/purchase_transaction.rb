@@ -5,7 +5,7 @@ class PurchaseTransaction < ActiveRecord::Base
   validates_numericality_of :moola_amount, only_integer: true, greater_than: 0
   after_create :update_user_credits
 
-  scope :last_day, lambda{ where('created_at >= ?',1.day.ago) }
+  scope :last_day, -> { where('created_at >= ?',1.day.ago) }
 
 
   def generate_ref
