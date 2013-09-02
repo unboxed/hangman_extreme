@@ -61,7 +61,7 @@ end
 group :development, :test do
   gem 'timecop'
   gem 'annotate'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 2.13.0'
   gem 'factory_girl_rails'
 end
 
