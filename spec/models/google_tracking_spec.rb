@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe GoogleTracking do
+describe GoogleTracking, :redis => true do
 
   context "Validations" do
 
