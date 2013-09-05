@@ -165,10 +165,6 @@ class User < ActiveRecord::Base
     "<User id:#{id} uid:#{uid} provider:#{provider}>"
   end
 
-  def inspect
-    to_s
-  end
-
   def daily_wins_required_for_random
     [Winner.daily_random_games_required - daily_wins,0].max
   end
