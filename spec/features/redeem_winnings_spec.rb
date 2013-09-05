@@ -19,7 +19,7 @@ shared_examples "a winner redeemer" do
    heita: [500,1000,2000]}.each do |provider,values|
 
     values.each do |value|
-      it "must allow to redeem prize points for #{provider} R#{value / 100} airtime" do
+      it "must allow to redeem prize points for #{provider} R#{value / 100} airtime", :inconsistent => true do
         VCR.use_cassette("redeem_prize_points#{provider}",
                          :record => :once,
                          :erb => true,

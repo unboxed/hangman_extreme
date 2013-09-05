@@ -102,7 +102,7 @@ require 'rubygems'
     Capybara.javascript_driver = :poltergeist
     Capybara.default_wait_time = 20
 
-    config.filter_run_excluding :redis => true if ENV["EXCLUDE_REDIS_SPECS"]
+    config.filter_run_excluding :inconsistent => true if ENV["EXCLUDE_INCONSISTENT"]
 
     # Run specs in random order to surface order dependencies. If you find an
     # order dependency and want to debug it, you can fix the order by providing
