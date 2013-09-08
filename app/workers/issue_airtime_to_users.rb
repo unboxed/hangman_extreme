@@ -1,3 +1,6 @@
+require 'sidekiq'
+require 'savon'
+
 class IssueAirtimeToUsers < IssueWinningToUser
 
   def redeem(redeem_winning)

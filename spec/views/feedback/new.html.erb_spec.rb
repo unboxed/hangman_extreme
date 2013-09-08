@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "feedback/new.html.erb" do
-  include ViewCapybaraRendered
 
   before(:each) do
     assign(:feedback, stub_model(Feedback).as_new_record)

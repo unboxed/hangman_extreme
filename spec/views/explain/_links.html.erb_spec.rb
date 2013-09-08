@@ -1,7 +1,6 @@
-require 'spec_helper'
+require 'view_spec_helper'
 
 describe "explain/_links.html.erb" do
-  include ViewCapybaraRendered
 
   before(:each) do
     view.stub(:mxit_request?).and_return(true)

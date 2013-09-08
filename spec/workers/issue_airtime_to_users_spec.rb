@@ -1,4 +1,6 @@
 require 'spec_helper'
+require 'support/requests_mxit_api_helpers'
+require 'support/vcr_helper'
 
 describe IssueAirtimeToUsers do
 

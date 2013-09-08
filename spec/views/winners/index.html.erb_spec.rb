@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "winners/index.html.erb" do
-  include ViewCapybaraRendered
 
   before(:each) do
     @winners =

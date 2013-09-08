@@ -1,4 +1,5 @@
-require 'spec_helper'
+require 'features_helper'
+require 'support/vcr_helper'
 
 def browse_section(seek)
   visit_home

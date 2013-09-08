@@ -1,3 +1,4 @@
+require 'mxit_api'
 class UserSendMessage
   attr_accessor :msg, :users
 

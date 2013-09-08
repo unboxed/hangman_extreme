@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "purchase_transactions/new.html.erb" do
-  include ViewCapybaraRendered
 
   before(:each) do
     @purchase_transaction = assign(:purchase_transaction,

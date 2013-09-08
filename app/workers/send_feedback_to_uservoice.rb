@@ -1,3 +1,6 @@
+require 'sidekiq'
+require 'uservoice-ruby'
+
 class SendFeedbackToUservoice
   include Sidekiq::Worker
   sidekiq_options :backtrace => true

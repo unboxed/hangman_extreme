@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "users/index" do
-  include ViewCapybaraRendered
 
   before(:each) do
     @users =

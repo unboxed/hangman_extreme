@@ -1,3 +1,4 @@
+require 'cancan'
 class Ability
   include CanCan::Ability
 

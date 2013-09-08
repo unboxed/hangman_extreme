@@ -9,18 +9,18 @@ platforms :ruby do
   gem 'pg'
 end
 gem 'ohm'
-gem 'ohm-contrib', require: 'ohm/contrib'
-gem 'cancan'
+gem 'ohm-contrib', require: false
+gem 'cancan', require: false
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'kaminari'
-gem 'mxit_api', '>= 0.2.2.pre'
-gem "savon"
+gem 'mxit_api', '>= 0.2.2.pre', require: false
+gem 'savon', require: false
 gem 'draper'
-gem 'puma'
+gem 'puma', require: false
 gem 'whenever', require: false
 
-gem 'sidekiq'
+gem 'sidekiq', require: false
 gem 'sinatra', '>= 1.3.0', require: false # for sidekiq
 gem 'slim', require: false # for sidekiq
 
@@ -30,19 +30,19 @@ gem 'slim', require: false # for sidekiq
 
 # third party
 gem 'airbrake'
-gem 'uservoice-ruby'
-gem 'gabba' # google analytics
-gem 'newrelic_rpm'
-gem 'wordnik'
-gem 'librato-metrics', require: 'librato/metrics'
+gem 'uservoice-ruby', require: false
+gem 'gabba', require: false # google analytics
+gem 'newrelic_rpm', require: false
+gem 'wordnik', require: false
+gem 'librato-metrics', require: false
 
 #group :assets do
   platforms :jruby do
-    gem 'therubyrhino'
+    gem 'therubyrhino', require: false
   end
   platforms :ruby do
-    gem 'libv8', '~> 3.11.8'
-    gem 'therubyracer'
+    gem 'libv8', '~> 3.11.8', require: false
+    gem 'therubyracer', require: false
   end
   gem 'wiselinks'
   gem 'uglifier', '>= 1.3.0'
@@ -59,8 +59,8 @@ group :development do
 end
 
 group :development, :test do
-  gem 'timecop'
-  gem 'annotate'
+  gem 'timecop', require: false
+  gem 'annotate', require: false
   gem 'rspec-rails', '~> 2.13.0'
   gem 'factory_girl_rails'
 end
@@ -78,16 +78,16 @@ group :test do
     gem 'pg'
   end
   gem 'test_after_commit'
-  gem 'poltergeist'
-  gem 'selenium-webdriver'
-  gem 'capybara', '~> 2.0.0'
+  gem 'poltergeist', require: false
+  gem 'selenium-webdriver', require: false
+  gem 'capybara', '~> 2.0.0', require: false
   gem 'database_cleaner', "~> 1.1.1", :git => 'https://github.com/tommeier/database_cleaner', ref: 'b0c666e'
-  gem 'launchy'
+  gem 'launchy', require: false
   gem 'simplecov', require: false
   gem 'simplecov-rcov', require: false
-  gem 'flog'
+  gem 'flog', require: false
 #  gem 'spork-rails'
-  gem 'webmock'
-  gem 'vcr'
+  gem 'webmock', require: false
+  gem 'vcr', require: false
   gem 'coveralls', require: false
 end

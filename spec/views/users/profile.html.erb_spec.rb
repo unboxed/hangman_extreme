@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "users/profile.html.erb" do
-  include ViewCapybaraRendered
 
   before(:each) do
     @user = stub_model(User, real_name: "Grant Petersen", mobile_number: "123", credits: 20)

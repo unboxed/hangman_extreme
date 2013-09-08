@@ -1,4 +1,5 @@
-require 'spec_helper'
+require 'features_helper'
+require 'sidekiq/testing'
 
 shared_examples "a winner redeemer" do
 

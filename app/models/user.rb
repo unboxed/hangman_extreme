@@ -1,3 +1,5 @@
+require 'mxit_api'
+
 class User < ActiveRecord::Base
   RANKING_FIELDS = Winner::WINNING_PERIODS.product(Winner::WINNING_REASONS - %w(random)).map{|x,y| "#{x}_#{y}"}
 

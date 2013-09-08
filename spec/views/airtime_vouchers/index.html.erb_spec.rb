@@ -1,7 +1,6 @@
-require 'spec_helper'
+require 'view_spec_helper'
 
 describe "airtime_vouchers/index.html.erb" do
-  include ViewCapybaraRendered
 
   before(:each) do
     @airtime_vouchers =

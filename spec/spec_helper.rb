@@ -57,11 +57,8 @@ require 'rubygems'
   require 'rspec/rails'
   require 'rspec/autorun'
   require 'webmock/rspec'
-  require 'draper/test/rspec_integration'
-  require 'capybara/rails'
-  require 'capybara/rspec'
-  require 'capybara/poltergeist'
-  require 'sidekiq/testing'
+  #require 'draper/test/rspec_integration'
+  #require 'sidekiq/testing'
   require 'database_cleaner'
 
 # end
@@ -80,13 +77,7 @@ require 'rubygems'
   FactoryGirl.reload
   DatabaseCleaner.clean_with :truncation
 
-  Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
-
-  VCR.configure do |c|
-    c.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
-    c.hook_into :webmock
-    c.ignore_localhost = true
-  end
+#  Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
   #Capybara.server do |app, port|
   #  Puma::Server.new(app).tap do |s|
@@ -96,13 +87,9 @@ require 'rubygems'
 
   RSpec.configure do |config|
     config.include FactoryGirl::Syntax::Methods
-    Capybara.register_driver :poltergeist do |app|
-      Capybara::Poltergeist::Driver.new(app, window_size: [320,480] )
-    end
-    Capybara.javascript_driver = :poltergeist
-    Capybara.default_wait_time = 20
 
     config.filter_run_excluding :inconsistent => true if ENV["EXCLUDE_INCONSISTENT"]
+
 
     # Run specs in random order to surface order dependencies. If you find an
     # order dependency and want to debug it, you can fix the order by providing
@@ -137,30 +124,6 @@ require 'rubygems'
 
     config.before(:each, :redis => true) do
       Ohm.flush
-    end
-
-    config.around(:each, :facebook => true) do |example|
-      using_facebook_omniauth(&example)
-    end
-
-    config.around(:each, :google_analytics_vcr => true) do |example|
-      VCR.use_cassette('google_analytics',
-                       :record => :once,
-                       :erb => true,
-                       :allow_playback_repeats => true,
-                       :match_requests_on => [:method,:host]) do
-        example.call
-      end
-    end
-
-    config.around(:each, :smaato_vcr => true) do |example|
-      VCR.use_cassette('smaato',
-                       :record => :once,
-                       :erb => true,
-                       :allow_playback_repeats => true,
-                       :match_requests_on => [:method,:host]) do
-        example.call
-      end
     end
 
   end

@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "users/_ranking_links.html.erb" do
-  include ViewCapybaraRendered
 
   before(:each) do
     view.stub(:menu_item)

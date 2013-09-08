@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "games/index" do
-  include ViewCapybaraRendered
 
   before(:each) do
     @games =

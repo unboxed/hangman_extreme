@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "layouts/mobile" do
-  include ViewCapybaraRendered
 
   before(:each) do
     @current_user = stub_model(User, id: 50)

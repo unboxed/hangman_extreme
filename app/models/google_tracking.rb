@@ -1,3 +1,4 @@
+require 'ohm/contrib'
 class GoogleTracking < Ohm::Model
   include Ohm::Timestamps
   include Ohm::DataTypes

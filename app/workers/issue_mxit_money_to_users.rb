@@ -1,3 +1,5 @@
+require 'mxit_api'
+
 class IssueMxitMoneyToUsers < IssueWinningToUser
 
   def redeem(redeem_winning)

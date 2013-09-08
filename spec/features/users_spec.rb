@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'features_helper'
 
 shared_examples "a registered user" do
 

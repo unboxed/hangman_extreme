@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "users/edit" do
-  include ViewCapybaraRendered
 
   before(:each) do
     assign(:user, stub_model(User))
