@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :feedback
   has_many :badges
   has_many :purchase_transactions
+  has_many :show_clue
 
   validates :provider, :uid, presence: true
   validates_uniqueness_of :uid, :scope => :provider

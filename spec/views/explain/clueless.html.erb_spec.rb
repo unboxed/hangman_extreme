@@ -3,7 +3,9 @@ require 'spec_helper'
 describe "explain/clueless.html.erb" do 
 
 	before(:each) do
+		@user = create(:user)
 		view.stub!(:menu_item)
+		view.stub!(:current_user).and_return(@user)
 	end
 
 	it "must have a link to badges" do
@@ -16,4 +18,14 @@ describe "explain/clueless.html.erb" do
 		rendered.should have_content('5 clues')
 	end 
 
+	it "must show badge if 5 clues were used in a row" do
+		create(:badge, user: @user, name: 'Clueless')
+		render 
+		rendered.should have_content('Achieved this Badge')
+	end 
+
+	it "must not create Clueless Badge if <5 clues used and not in a row" do
+		render
+		rendered.should have_content('Still to Achieve')
+	end 
 end 

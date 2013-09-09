@@ -1,6 +1,12 @@
 <b>Clueless</b>
 <div>
-	Use more than 5 clues to solve the word
+	Use more than 5 clues in a row 
 </div>
+
+<% if Badge.where(user_id: current_user.id, name: 'Clueless').count == 1 %>
+	<b style="color:green">You have Achieved this Badge<b/>
+<% else %>
+	<b style="color:blue">Still to Achieve<b/>		
+<% end %>
 
 <% menu_item 'badges', badges_users_path, id: 'badges' %>

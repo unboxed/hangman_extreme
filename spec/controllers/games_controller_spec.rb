@@ -170,6 +170,18 @@ describe GamesController do
       flash[:notice].should_not have_content "Congratulations"
     end 
 
+    it "Should give Clueless Badge if 5 clues where used" do
+      create(:won_game, word: "duck", clue_revealed: true, user: @current_user)
+      create(:won_game, word: "duck", clue_revealed: true, user: @current_user)
+      create(:won_game, word: "duck", clue_revealed: true, user: @current_user)
+      create(:won_game, word: "duck", clue_revealed: true, user: @current_user)
+      @game = create(:game, word: "duck", choices: "duc", clue_revealed: true, user: @current_user)
+
+      get :play_letter, :id => @game.to_param, :letter => "k"
+
+      flash[:notice].should have_content "Congratulations"
+    end
+
   end
 
   describe "GET new" do
