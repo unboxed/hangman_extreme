@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe UsersController do
 
-
   before :each do
     @current_user = create(:user)
     @ability = Object.new
@@ -30,7 +29,7 @@ describe UsersController do
   describe "GET 'mxit_oauth'" do
 
     before :each do
-      @connection = mock('MxitApi', access_token: "123", profile: {}, scope: "profile")
+      @connection = double('MxitApi', access_token: "123", profile: {}, scope: "profile")
       MxitApiWrapper.stub(:new).and_return(@connection)
     end
 
@@ -153,7 +152,7 @@ describe UsersController do
     context "with valid params" do
 
       it "updates the requested user" do
-        User.any_instance.should_receive(:update_attributes).with({'real_name' => 'params'}, as: 'user').and_return(true)
+        User.any_instance.should_receive(:update_attributes).with({'real_name' => 'params'}).and_return(true)
         do_update
       end
 

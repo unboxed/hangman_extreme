@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update_attributes(params[:user], as: 'user')
+    if @user.update_attributes(user_params)
       redirect_to profile_users_path, notice: 'Profile was successfully updated.'
     else
       redirect_to profile_users_path, alert: @user.errors.inspect
@@ -84,6 +84,10 @@ class UsersController < ApplicationController
     else
       profile_users_path
     end
+  end
+
+  def user_params
+    params[:user].permit(:real_name, :mobile_number)
   end
 
 end

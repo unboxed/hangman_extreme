@@ -1,4 +1,5 @@
-require 'spec_helper'
+require 'features_helper'
+require 'timecop'
 
 shared_examples "a winner viewer" do
 
@@ -51,7 +52,6 @@ end
 describe 'winners',  :redis => true do
 
   before :each do
-    stub_google_tracking # stub google tracking
     stub_mxit_oauth
   end
 

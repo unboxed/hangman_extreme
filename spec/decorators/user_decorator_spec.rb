@@ -16,17 +16,17 @@ describe UserDecorator do
     end
 
     it "must show text 5 more games" do
-      @user.stub!(:daily_wins_required_for_random).and_return(5)
+      @user.stub(:daily_wins_required_for_random).and_return(5)
       decorator.daily_random.should == "5 more games"
     end
 
     it "must show text 1 more game" do
-      @user.stub!(:daily_wins_required_for_random).and_return(1)
+      @user.stub(:daily_wins_required_for_random).and_return(1)
       decorator.daily_random.should == "1 more game"
     end
 
     it "must show text entered" do
-      @user.stub!(:daily_wins_required_for_random).and_return(0)
+      @user.stub(:daily_wins_required_for_random).and_return(0)
       decorator.daily_random.should == "Entered"
     end
 
@@ -41,17 +41,17 @@ describe UserDecorator do
     end
 
     it "must show text 5 more games" do
-      @user.stub!(:weekly_wins_required_for_random).and_return(5)
+      @user.stub(:weekly_wins_required_for_random).and_return(5)
       decorator.weekly_random.should == "5 more games"
     end
 
     it "must show text 1 more game" do
-      @user.stub!(:weekly_wins_required_for_random).and_return(1)
+      @user.stub(:weekly_wins_required_for_random).and_return(1)
       decorator.weekly_random.should == "1 more game"
     end
 
     it "must show text entered" do
-      @user.stub!(:weekly_wins_required_for_random).and_return(0)
+      @user.stub(:weekly_wins_required_for_random).and_return(0)
       decorator.weekly_random.should == "Entered"
     end
 

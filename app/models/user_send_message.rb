@@ -1,3 +1,4 @@
+require 'mxit_api'
 class UserSendMessage
   attr_accessor :msg, :users
 
@@ -7,7 +8,10 @@ class UserSendMessage
   end
 
   def mxit_connection
-    @mxit_connection ||= MxitApiWrapper.connect
+    return @mxit_connection if @mxit_connection
+    @mxit_connection = MxitApiWrapper.connect
+    raise "Could not connect to mxit to send messages" unless @mxit_connection
+    @mxit_connection
   end
 
   def connected?
@@ -16,23 +20,17 @@ class UserSendMessage
 
   def send_all
     return false if users.empty?
-    if connected?
-      if users.kind_of?(ActiveRecord::Relation)
-        users.mxit.find_in_batches(:batch_size => 100) do |user_batch|
-          send_message_to_array(user_batch)
-        end
-      else
-        users.uniq.in_groups_of(100,false).each do |user_batch|
-          send_message_to_array(user_batch)
-        end
+    if users.kind_of?(ActiveRecord::Relation)
+      users.mxit.find_in_batches(:batch_size => 100) do |user_batch|
+        send_message_to_array(user_batch)
       end
     else
-      Airbrake.notify_or_ignore(
-        Exception.new("Could not connect to mxit to send messages"),
-        :parameters    => {:msg => msg, :users => users},
-        :cgi_data      => ENV
-      )
+      users.uniq.in_groups_of(100,false).each do |user_batch|
+        send_message_to_array(user_batch)
+      end
     end
+  rescue Exception => e
+    Airbrake.notify_or_ignore(e, :parameters => {:msg => msg, :users => users})
   end
 
   private

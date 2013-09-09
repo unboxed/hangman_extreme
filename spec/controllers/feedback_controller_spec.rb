@@ -40,23 +40,25 @@ describe FeedbackController do
 
   describe "POST create" do
 
+    let(:last_feedback){Feedback.last}
+
     def do_create(type = nil)
       post :create, feedback:{ support_type: type, full_message: "The message:The very long part of the message"}
     end
 
     it "must send support feedback" do
       do_create
-      Feedback.last.support_type == 'support'
+      last_feedback.support_type == 'support'
     end
 
     it "must send suggestion feedback" do
       do_create 'suggestion'
-      Feedback.last.support_type == 'suggestion'
+      last_feedback.support_type == 'suggestion'
     end
 
     it "must set feedback to current user" do
       do_create
-      Feedback.last.user == @current_user
+      last_feedback.user == @current_user
     end
 
     it "redirects to home" do

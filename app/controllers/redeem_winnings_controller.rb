@@ -1,4 +1,5 @@
 class RedeemWinningsController < ApplicationController
+  before_filter :safe_redeem_winning_params, :only => [:new,:create]
   load_and_authorize_resource
 
   def index
@@ -30,6 +31,14 @@ class RedeemWinningsController < ApplicationController
     rescue Exception => e
       ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
       redirect_to({action: 'index'}, alert: 'prize failed.')
+    end
+  end
+
+  protected
+
+  def safe_redeem_winning_params
+    if params[:redeem_winning]
+      params[:redeem_winning] = params[:redeem_winning].permit(:prize_amount, :prize_type, :state)
     end
   end
 

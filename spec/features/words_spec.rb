@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'spec_helper'
+require 'features_helper'
 
 shared_examples "a user geek" do
 

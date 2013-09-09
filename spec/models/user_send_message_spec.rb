@@ -7,7 +7,7 @@ describe UserSendMessage do
     before :each do
       MxitApiWrapper.should respond_to(:connect)
       MxitApiWrapper.new(nil).should respond_to(:send_message)
-      @mxit_connection = mock('Mxit Connection', :send_message => true)
+      @mxit_connection = double('Mxit Connection', :send_message => true)
       MxitApiWrapper.stub(:connect).and_return(@mxit_connection)
     end
 

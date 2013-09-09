@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require bootstrap.js
+//= require wiselinks
+//= require wiselinks_config
 //= require_self
 
 function fb_invite_friends() {

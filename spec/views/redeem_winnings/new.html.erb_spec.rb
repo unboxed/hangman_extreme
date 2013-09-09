@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "redeem_winnings/new.html.erb" do
-  include ViewCapybaraRendered
 
   before(:each) do
     @redeem_winning = assign(:redeem_winning,stub_model(RedeemWinning))

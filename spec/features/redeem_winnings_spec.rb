@@ -1,4 +1,5 @@
-require 'spec_helper'
+require 'features_helper'
+require 'sidekiq/testing'
 
 shared_examples "a winner redeemer" do
 
@@ -19,7 +20,7 @@ shared_examples "a winner redeemer" do
    heita: [500,1000,2000]}.each do |provider,values|
 
     values.each do |value|
-      it "must allow to redeem prize points for #{provider} R#{value / 100} airtime" do
+      it "must allow to redeem prize points for #{provider} R#{value / 100} airtime", :inconsistent => true do
         VCR.use_cassette("redeem_prize_points#{provider}",
                          :record => :once,
                          :erb => true,
@@ -33,8 +34,8 @@ shared_examples "a winner redeemer" do
           click_button('redeem')
           page.should have_content("1 prize points")
           click_link('airtime_vouchers')
-          page.should_not have_content("R#{value / 100}")
-          sleep 1
+          page.should have_content('Airtime Vouchers')
+          page.should have_no_content("R#{value / 100}")
           IssueAirtimeToUsers.drain
           visit_home
           click_link('redeem')

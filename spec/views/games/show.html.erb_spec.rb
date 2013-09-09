@@ -9,9 +9,9 @@ describe "games/show" do
                                           is_won?: false,
                                           is_lost?: false))
     @user = stub_model(User, id: 50)
-    view.stub!(:current_user).and_return(@user)
-    view.stub!(:menu_item)
-    view.stub!(:mxit_request?).and_return(true) 
+    view.stub(:current_user).and_return(@user)
+    view.stub(:menu_item)
+    view.stub(:mxit_request?).and_return(true)
   end
 
   it "must show the attempts left" do
@@ -28,7 +28,7 @@ describe "games/show" do
   end
 
   it "wont letter links that are already chosen" do
-    @game.stub!(:choices).and_return("cz")
+    @game.stub(:choices).and_return("cz")
     render
     rendered.should_not have_link('c', href: play_letter_game_path(@game,'c'))
     rendered.should_not have_link('z', href: play_letter_game_path(@game,'c'))

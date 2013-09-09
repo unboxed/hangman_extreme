@@ -1,6 +1,7 @@
 require 'spec_helper'
+require 'timecop'
 
-describe GoogleTracking do
+describe GoogleTracking, :redis => true do
 
   context "Validations" do
 

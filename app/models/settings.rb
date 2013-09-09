@@ -1,3 +1,5 @@
+require 'ohm/contrib'
+
 class Settings < Ohm::Model
   include Ohm::Timestamps
   include Ohm::DataTypes

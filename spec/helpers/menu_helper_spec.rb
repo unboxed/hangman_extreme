@@ -5,11 +5,11 @@ describe MenuHelper do
   context "Menu" do
 
     before :each do
-      view.stub!(:mxit_request?).and_return(true)
+      view.stub(:mxit_request?).and_return(true)
     end
 
     it "must start with empty menu items if not mxit request?" do
-      view.stub!(:mxit_request?).and_return(false)
+      view.stub(:mxit_request?).and_return(false)
       helper.menu_items.should be_empty
     end
 
@@ -26,7 +26,7 @@ describe MenuHelper do
 
       context "mobile" do
         before :each do
-          helper.stub!(:mxit_request?).and_return(false)
+          helper.stub(:mxit_request?).and_return(false)
         end
 
         it "returns links in there own items" do
@@ -42,7 +42,7 @@ describe MenuHelper do
       context "mxit" do
 
         before :each do
-          helper.stub!(:mxit_request?).and_return(true)
+          helper.stub(:mxit_request?).and_return(true)
         end
 
         it "returns 2 links in separate items if they are longer 20 chars" do

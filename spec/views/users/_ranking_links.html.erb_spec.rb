@@ -1,11 +1,10 @@
 require 'spec_helper'
 
 describe "users/_ranking_links.html.erb" do
-  include ViewCapybaraRendered
 
   before(:each) do
-    view.stub!(:menu_item)
-    view.stub!(:mxit_request?).and_return(true)
+    view.stub(:menu_item)
+    view.stub(:mxit_request?).and_return(true)
   end
 
   it "must have daily and weekly links" do

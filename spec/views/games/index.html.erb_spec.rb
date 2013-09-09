@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "games/index" do
-  include ViewCapybaraRendered
 
   before(:each) do
     @games =
@@ -10,11 +9,11 @@ describe "games/index" do
       stub_model(Game, id: 101, done?: false, hangman_text: "goodbye", score: 500)
     ])
     @current_user = stub_model(User, id: 50)
-    view.stub!(:current_user).and_return(@current_user)
-    view.stub!(:mxit_request?).and_return(true)
-    view.stub!(:facebook_user?).and_return(false)
-    view.stub!(:guest?).and_return(false)
-    view.stub!(:menu_item)
+    view.stub(:current_user).and_return(@current_user)
+    view.stub(:mxit_request?).and_return(true)
+    view.stub(:facebook_user?).and_return(false)
+    view.stub(:guest?).and_return(false)
+    view.stub(:menu_item)
   end
 
   it "renders a list of games" do
@@ -45,7 +44,7 @@ describe "games/index" do
   end
 
   it "wont have a view rank link on the menu if guest" do
-    view.stub!(:guest?).and_return(true)
+    view.stub(:guest?).and_return(true)
     view.should_not_receive(:menu_item).with(anything,user_path(50),anything)
     render
   end
@@ -68,8 +67,8 @@ describe "games/index" do
   end
 
   it "must have a ordinary feedback link on the menu if not mxit request" do
-    view.stub!(:mxit_request?).and_return(false)
-    view.stub!(:mxit_request?).and_return(false)
+    view.stub(:mxit_request?).and_return(false)
+    view.stub(:mxit_request?).and_return(false)
     view.should_receive(:menu_item).with(anything,feedback_index_path,id: 'feedback')
     render
   end
@@ -87,7 +86,7 @@ describe "games/index" do
   end
 
   it "must have a ordinary authorise link on the menu if not mxit request" do
-    view.stub!(:mxit_request?).and_return(false)
+    view.stub(:mxit_request?).and_return(false)
     view.should_receive(:menu_item).with(anything,profile_users_path,id: 'authorise')
     render
   end

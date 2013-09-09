@@ -1,11 +1,10 @@
 require 'rubygems'
-require 'spork'
+#require 'spork'
 
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
-Spork.prefork do
-  ENV['SESSION_TOKEN'] ||= '0000000000000000000000000000001'
+#Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
   ENV['DB_CLEANER_STRATEGY'] ||= 'transaction'
   ENV['UV_SUBDOMAIN_NAME'] ||= 'uv'
@@ -44,28 +43,27 @@ Spork.prefork do
   end
 
 
-  require "rails/application"
-  # Prevent main application to eager_load in the prefork block (do not load files in autoload_paths)
-  Spork.trap_method(Rails::Application, :eager_load!)
-  Spork.trap_method(Rails::Application::RoutesReloader, :reload!)
-
-#  require 'webmock/rspec'
-#  WebMock.allow_net_connect!
+#  require "rails/application"
+#  # Prevent main application to eager_load in the prefork block (do not load files in autoload_paths)
+#  Spork.trap_method(Rails::Application, :eager_load!)
+#  Spork.trap_method(Rails::Application::RoutesReloader, :reload!)
+#
+  #  require 'webmock/rspec'
+  #  WebMock.allow_net_connect!
   require File.expand_path("../../config/environment", __FILE__)
-
-  # Load all railties files
-  Rails.application.railties.all { |r| r.eager_load! }
+#
+#  # Load all railties files
+#  Rails.application.railties.all { |r| r.eager_load! }
   require 'rspec/rails'
   require 'rspec/autorun'
   require 'webmock/rspec'
-  require 'draper/test/rspec_integration'
-  require 'capybara/rails'
-  require 'capybara/rspec'
-  require 'capybara/poltergeist'
-  require 'sidekiq/testing'
-end
+  #require 'draper/test/rspec_integration'
+  #require 'sidekiq/testing'
+  require 'database_cleaner'
 
-Spork.each_run do
+# end
+
+# Spork.each_run do
 
   WebMock.disable_net_connect!(:allow_localhost => true)
   def in_memory_database?
@@ -79,29 +77,19 @@ Spork.each_run do
   FactoryGirl.reload
   DatabaseCleaner.clean_with :truncation
 
-  Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+#  Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
-  VCR.configure do |c|
-    c.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
-    c.hook_into :webmock
-    c.ignore_localhost = true
-  end
-
-  Capybara.server do |app, port|
-    Puma::Server.new(app).tap do |s|
-      s.add_tcp_listener '127.0.0.1', port
-    end.run.join
-  end
+  #Capybara.server do |app, port|
+  #  Puma::Server.new(app).tap do |s|
+  #    s.add_tcp_listener '127.0.0.1', port
+  #  end.run.join
+  #end
 
   RSpec.configure do |config|
     config.include FactoryGirl::Syntax::Methods
-    Capybara.register_driver :poltergeist do |app|
-      Capybara::Poltergeist::Driver.new(app, window_size: [320,480] )
-    end
-    Capybara.javascript_driver = :poltergeist
-    Capybara.default_wait_time = 20
 
-    config.filter_run_excluding :redis => true if ENV["EXCLUDE_REDIS_SPECS"]
+    config.filter_run_excluding :inconsistent => true if ENV["EXCLUDE_INCONSISTENT"]
+
 
     # Run specs in random order to surface order dependencies. If you find an
     # order dependency and want to debug it, you can fix the order by providing
@@ -138,30 +126,6 @@ Spork.each_run do
       Ohm.flush
     end
 
-    config.around(:each, :facebook => true) do |example|
-      using_facebook_omniauth(&example)
-    end
-
-    config.around(:each, :google_analytics_vcr => true) do |example|
-      VCR.use_cassette('google_analytics',
-                       :record => :once,
-                       :erb => true,
-                       :allow_playback_repeats => true,
-                       :match_requests_on => [:method,:host]) do
-        example.call
-      end
-    end
-
-    config.around(:each, :smaato_vcr => true) do |example|
-      VCR.use_cassette('smaato',
-                       :record => :once,
-                       :erb => true,
-                       :allow_playback_repeats => true,
-                       :match_requests_on => [:method,:host]) do
-        example.call
-      end
-    end
-
   end
 
-end
+# end

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'features_helper'
 
 describe 'purchases', :redis => true do
 

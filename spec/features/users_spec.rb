@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'features_helper'
 
 shared_examples "a registered user" do
 
@@ -30,6 +30,8 @@ shared_examples "a registered user" do
   end
 
   it "must allow to show and hide the hangman" do
+    Dictionary.clear
+    Dictionary.add("example")
     visit_home
     click_link('Play')
     click_button 'start_game'
@@ -42,7 +44,7 @@ shared_examples "a registered user" do
     click_link('No')
 
     click_link('Play')
-    page.should_not have_content(".---------")
+    page.should have_no_content(".---------")
 
     click_link('Home')
     click_link('authorise')

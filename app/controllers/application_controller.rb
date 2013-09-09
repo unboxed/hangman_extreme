@@ -1,3 +1,5 @@
+require 'cancan'
+require 'gabba'
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :load_user, :check_mxit_input_for_redirect

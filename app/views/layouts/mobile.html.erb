@@ -1,37 +1,43 @@
 <head lang="en">
   <title>Hangman Extreme</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="<%= image_path("favicon.ico") %>" rel="shortcut icon" />
   <%= javascript_include_tag "application" %>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
   <%= airbrake_javascript_notifier %>
   <%= csrf_meta_tags %>
+  <%= wiselinks_meta_tag %>
 </head>
 <body>
 
-  <div class="wrap">
+<div id="wrap" class="wrap">
 
-    <div class="navbar">
-      <div class="navbar-inner">
-        <a class="brand" href="#">Hangman Extreme</a>
-        <ul class="nav">
-          <li <% if @game %>class="active"<% end %>>
-            <%= link_to 'Play', play_games_path, class: 'play_game' %>
-          </li>
-          <li <% if current_page?(root_path) %>class="active"<% end %>>
-            <%= link_to 'Home', root_path, class: 'home' %>
-          </li>
-          <% if current_user.guest?  %>
+  <div class="navbar">
+    <div class="navbar-inner">
+      <a class="brand" href="#">Hangman Extreme</a>
+      <ul class="nav">
+        <li
+        <% if @game %>class="active"
+        <% end %>>
+          <%= link_to 'Play', play_games_path, class: 'play_game' %>
+        </li>
+        <li
+        <% if current_page?(root_path) %>class="active"
+        <% end %>>
+          <%= link_to 'Home', root_path, class: 'home' %>
+        </li>
+        <% if current_user.guest? %>
             <li>
-              <%= link_to 'Login', Rails.env.development? ? '/auth/developer' : '/auth/facebook', class: 'login', 'data-ajax' =>"false", 'data-theme' =>"b" %>
+              <%= link_to 'Login', Rails.env.development? ? '/auth/developer' : '/auth/facebook', class: 'login', 'data-ajax' => "false", 'data-theme' => "b" %>
             </li>
-          <% else %>
+        <% else %>
             <li>
               <%= link_to 'Logout', logout_path, class: 'logout' %>
             </li>
-          <% end %>
-        </ul>
-      </div>
+        <% end %>
+      </ul>
     </div>
+  </div>
 
   <div class="container">
     <% if notice -%>
@@ -53,61 +59,68 @@
 
 </div>
 
-  <div id="footer">
-    <div class="container">
-      <% if smaato_ads_enabled? %>
+<div id="footer">
+  <div class="container">
+    <% if smaato_ads_enabled? %>
         <div id="smaatoad" style="padding: 0px"></div>
         <script id="smaatoAdDisplay" language="javascript" type="text/javascript"
                 src="http://soma.smaato.net/oapi/js/smaatoAdDisplay.js">
         </script>
         <script>
-          (function() {
-            var request = new SomaRequest();
-            request.adSpaceID = <%= smaato_adspace %>;
-            request.publisherID = <%= smaato_pub %>;
-            /*insert additional targeting data here */
-            SomaTag.requestAd(request);
-          })();
+            (function () {
+                var request = new SomaRequest();
+                request.adSpaceID = <%= smaato_adspace %>;
+                request.publisherID = <%= smaato_pub %>;
+                /*insert additional targeting data here */
+                SomaTag.requestAd(request);
+            })();
         </script>
-      <% end %>
-    </div>
+    <% end %>
   </div>
+</div>
 
 <div id="fb-root"></div>
 <% unless Rails.env.test? %>
-  <script>
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '<%= ENV['FACEBOOK_KEY'] %>', // App ID
-        channelUrl : '//<%= request.protocol + request.host %>/channel', // Channel File
-        status     : true, // check login status
-        cookie     : true, // enable cookies to allow the server to access the session
-        xfbml      : true  // parse XFBML
-      });
-    };
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '<%= ENV['FACEBOOK_KEY'] %>', // App ID
+                channelUrl: '//<%= request.protocol + request.host %>/channel', // Channel File
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                xfbml: true  // parse XFBML
+            });
+        };
 
-    // Load the SDK Asynchronously
-    (function(d){
-      var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-      if (d.getElementById(id)) {return;}
-      js = d.createElement('script'); js.id = id; js.async = true;
-      js.src = "//connect.facebook.net/en_US/all.js";
-      ref.parentNode.insertBefore(js, ref);
-    }(document));
-  </script>
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            ref.parentNode.insertBefore(js, ref);
+        }(document));
+    </script>
 <% end %>
 
 <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', '<%= ENV['GA_TRACKING_CODE'] %>']);
-  _gaq.push(['_trackPageview']);
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', '<%= ENV['GA_TRACKING_CODE'] %>']);
+    _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+    (function () {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
 
 </script>
 <!-- <%= current_user.try(:provider) %>: <%= request_ip_address %> -->

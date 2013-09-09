@@ -1,3 +1,4 @@
+require 'mxit_api'
 class MxitApiWrapper
 
   attr_reader :connection

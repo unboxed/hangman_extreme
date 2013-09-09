@@ -5,6 +5,7 @@ rvm:
   - 1.9.3
   - jruby
   - 2.0.0
+  - rbx-19mode
 before_script:
   - mkdir -p tmp/cache
   - cp -f db/words.sample.csv db/words.csv
@@ -13,6 +14,6 @@ before_script:
   - RAILS_ENV=test bundle exec rake db:migrate
 script: bundle exec rspec spec
 env:
-  - DB_ADAPTER=mysql RAILS_ENV=test COVERALLS=yes
-  - DB_ADAPTER=sqlite3 RAILS_ENV=test DB_CLEANER_STRATEGY=truncation COVERALLS=yes
-  - DB_ADAPTER=postgresql RAILS_ENV=test COVERALLS=yes
+  - DB_ADAPTER=mysql RAILS_ENV=test COVERALLS=yes EXCLUDE_INCONSISTENT=yes
+  - DB_ADAPTER=sqlite3 RAILS_ENV=test DB_CLEANER_STRATEGY=truncation COVERALLS=yes EXCLUDE_INCONSISTENT=yes
+  - DB_ADAPTER=postgresql RAILS_ENV=test COVERALLS=yes EXCLUDE_INCONSISTENT=yes

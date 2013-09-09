@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'timecop'
 
 describe User do
 
@@ -223,7 +224,7 @@ describe User do
   context "registered_on_mxit_money?" do
 
     before :each do
-      @mxit_money_connection = mock("connection", :user_info => {:is_registered => false})
+      @mxit_money_connection = double("connection", :user_info => {:is_registered => false})
       MxitMoneyApi.stub(:connect).and_return(@mxit_money_connection)
       @user = stub_model(User, :uid => 'm111')
     end
@@ -247,7 +248,7 @@ describe User do
   context "send_message" do
 
     it "must use message sender" do
-      sender = mock("send")
+      sender = double("send")
       UserSendMessage.should_receive(:new).with("Nobody!!",[]).and_return(sender)
       sender.should_receive(:send_all)
       User.send_message("Nobody!!",[])

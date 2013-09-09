@@ -1,6 +1,5 @@
 class RedeemWinning < ActiveRecord::Base
   PRIZE_TYPES = %W(clue_points vodago_airtime cell_c_airtime mtn_airtime mxit_money virgin_airtime heita_airtime).freeze
-  attr_accessible :prize_amount, :prize_type, :state, :user_id, :mxit_money_reference
 
   validates :user_id, presence: true
   validates :prize_type, inclusion: PRIZE_TYPES
@@ -14,10 +13,10 @@ class RedeemWinning < ActiveRecord::Base
   belongs_to :user
   delegate :prize_points, :login, :mobile_number, :uid, :to => :user, :prefix => true
 
-  scope :pending, where('state = ?','pending')
-  scope :pending_mxit_money, where('prize_type = ? AND state = ?','mxit_money','pending')
-  scope :pending_airtime, where('prize_type LIKE ? AND state = ?','%airtime','pending')
-  scope :last_day, lambda{ where('created_at >= ?',1.day.ago) }
+  scope :pending, -> { where('state = ?','pending') }
+  scope :pending_mxit_money, -> { where('prize_type = ? AND state = ?','mxit_money','pending') }
+  scope :pending_airtime, -> { where('prize_type LIKE ? AND state = ?','%airtime','pending') }
+  scope :last_day, -> { where('created_at >= ?',1.day.ago) }
 
   def self.pending_winnings_text
     pending.joins(:user).includes(:user).order('prize_type,uid').collect{|rw| [rw.prize_type,rw.id,rw.user_uid,rw.user_login,rw.user_mobile_number,rw.prize_amount].join(" : ")}.join("\n")

@@ -19,12 +19,6 @@ describe WordsController do
       response.should be_success
     end
 
-    it "must get the definition" do
-      Dictionary.should_receive(:define).with("dog").and_return("The Definition")
-      get 'define', word: 'dog'
-      assigns(:definition).should == "The Definition"
-    end
-
   end
 
 end

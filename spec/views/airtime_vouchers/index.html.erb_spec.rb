@@ -1,7 +1,6 @@
-require 'spec_helper'
+require 'view_spec_helper'
 
 describe "airtime_vouchers/index.html.erb" do
-  include ViewCapybaraRendered
 
   before(:each) do
     @airtime_vouchers =
@@ -9,7 +8,7 @@ describe "airtime_vouchers/index.html.erb" do
       stub_model(AirtimeVoucher, id: 100, pin: "hello", sellvalue: "5", network: "cellc"),
       stub_model(AirtimeVoucher, id: 101, pin: "aaaaa", sellvalue: "10", network: "vodacam")
     ])
-    view.stub!(:menu_item)
+    view.stub(:menu_item)
   end
 
   it "renders a list of airtime_vouchers" do

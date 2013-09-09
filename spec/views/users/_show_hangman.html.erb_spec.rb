@@ -4,7 +4,7 @@ describe "users/_show_hangman.html.erb" do
 
   before(:each) do
     @user = stub_model(User, id: 50)
-    view.stub!(:current_user).and_return(@user)
+    view.stub(:current_user).and_return(@user)
   end
 
   it "renders no link when show hangman enabled" do

@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "winners/index.html.erb" do
-  include ViewCapybaraRendered
 
   before(:each) do
     @winners =
@@ -10,10 +9,10 @@ describe "winners/index.html.erb" do
         stub_model(Winner, id: 101, name: "goodbye", amount: "124")
       ])
     @current_user = stub_model(User, id: 33)
-    view.stub!(:current_user).and_return(@current_user)
-    view.stub!(:mxit_request?).and_return(true)
-    view.stub!(:menu_item)
-    view.stub!(:guest?)
+    view.stub(:current_user).and_return(@current_user)
+    view.stub(:mxit_request?).and_return(true)
+    view.stub(:menu_item)
+    view.stub(:guest?)
   end
 
   it "renders a list of users" do
@@ -29,13 +28,13 @@ describe "winners/index.html.erb" do
   end
 
   it "should have a view rank link if not guest" do
-    view.stub!(:guest?).and_return(false)
+    view.stub(:guest?).and_return(false)
     view.should_receive(:menu_item).with(anything,user_path(33),id: 'view_rank')
     render
   end
 
   it "wont have a view rank link if guest" do
-    view.stub!(:guest?).and_return(true)
+    view.stub(:guest?).and_return(true)
     view.should_not_receive(:menu_item).with(anything,user_path(33),id: 'view_rank')
     render
   end

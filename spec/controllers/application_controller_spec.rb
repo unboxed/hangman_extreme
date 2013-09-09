@@ -89,7 +89,7 @@ describe ApplicationController do
         request.env['HTTP_X_MXIT_USERID_R'] = 'm2604100'
         request.env['HTTP_X_MXIT_NICK'] = 'grant'
         @user_request_info = UserRequestInfo.new
-        UserRequestInfo.stub!(:new).and_return(@user_request_info)
+        UserRequestInfo.stub(:new).and_return(@user_request_info)
       end
 
       it "loads the mxit user into current_user" do
@@ -112,7 +112,7 @@ describe ApplicationController do
       end
 
       it "must assign the mxit user" do
-        User.stub!(:find_or_create_from_auth_hash).and_return('mxit_user')
+        User.stub(:find_or_create_from_auth_hash).and_return('mxit_user')
         get :index
         assigns(:current_user).should == 'mxit_user'
       end
@@ -168,7 +168,7 @@ describe ApplicationController do
       controller.stub(:mxit_request?).and_return(true)
       controller.stub(:current_user).and_return(@user)
       controller.stub(:current_user_request_info).and_return(@user_request_info)
-      @gabba = mock('connection',
+      @gabba = double('connection',
                     :ip => '',
                     :user_agent= => '',
                     :utmul= => '',

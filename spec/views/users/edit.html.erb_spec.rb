@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "users/edit" do
-  include ViewCapybaraRendered
 
   before(:each) do
     assign(:user, stub_model(User))
@@ -15,7 +14,7 @@ describe "users/edit" do
   end
 
   it "renders real name only" do
-    view.stub!(:params).and_return(field: 'real_name')
+    view.stub(:params).and_return(field: 'real_name')
     render
     within('form') do
       rendered.should have_field('user_real_name')
@@ -24,7 +23,7 @@ describe "users/edit" do
   end
 
   it "renders mobile number only" do
-    view.stub!(:params).and_return(field: 'mobile_number')
+    view.stub(:params).and_return(field: 'mobile_number')
     render
     within('form') do
       rendered.should_not have_field('user_real_name')

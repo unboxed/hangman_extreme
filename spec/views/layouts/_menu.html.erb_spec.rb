@@ -1,10 +1,9 @@
 require 'spec_helper'
 
 describe "layouts/_menu" do
-  include ViewCapybaraRendered
 
   before(:each) do
-    view.stub!(:mxit_request?).and_return(false)
+    view.stub(:mxit_request?).and_return(false)
   end
 
   it "must build ul menu"  do

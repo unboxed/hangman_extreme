@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'timecop'
 
 describe MxitApiWrapper do
 
@@ -20,7 +21,7 @@ describe MxitApiWrapper do
   context "connect" do
 
     it "must return connection if has access_token" do
-      connection = mock('MxitApi', access_token: "123")
+      connection = double('MxitApi', access_token: "123")
       MxitApiWrapper.should_receive(:new).with(:grant_type => 'authorization_code',
                                         :code => "456",
                                         :redirect_uri => "/").and_return(connection)
@@ -30,7 +31,7 @@ describe MxitApiWrapper do
     end
 
     it "wont return connection if not access_token" do
-      connection = mock('MxitApi', access_token: nil)
+      connection = double('MxitApi', access_token: nil)
       MxitApiWrapper.should_receive(:new).with(:grant_type => 'authorization_code',
                                         :code => "456",
                                         :redirect_uri => "/").and_return(connection)
@@ -44,8 +45,8 @@ describe MxitApiWrapper do
   context "send_message" do
 
     it "must be able to handle a exception" do
-      mxit_api = mock("MxitApi")
-      MxitApi.stub!(:new).and_return(mxit_api)
+      mxit_api = double("MxitApi")
+      MxitApi.stub(:new).and_return(mxit_api)
       connection = MxitApiWrapper.new
 
       ENV['MXIT_APP_NAME'], old =  "testname", ENV['MXIT_APP_NAME']
