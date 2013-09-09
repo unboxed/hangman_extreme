@@ -1,8 +1,6 @@
 class Badge < ActiveRecord::Base
- 
   belongs_to :user
-  attr_accessible :name, :user_id
-  validates :name, :user_id,  presence: true 
+  validates :name, :user_id,  presence: true
   
   VALID_NAME = ["Mr. Loader", "Bookworm", "Clueless"]
   validates_inclusion_of :name, :in => VALID_NAME
