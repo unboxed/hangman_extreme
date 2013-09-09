@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130906132758) do
+ActiveRecord::Schema.define(version: 20130902071231) do
+
+  # These are extensions that must be enabled in order to support this database
+  # enable_extension "plpgsql"
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "resource_id",   null: false
@@ -19,14 +22,14 @@ ActiveRecord::Schema.define(version: 20130906132758) do
     t.integer  "author_id"
     t.string   "author_type"
     t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.string   "namespace"
   end
 
   add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_admin_notes_on_resource_type_and_resource_id", using: :btree
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -39,8 +42,8 @@ ActiveRecord::Schema.define(version: 20130906132758) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
@@ -54,8 +57,8 @@ ActiveRecord::Schema.define(version: 20130906132758) do
     t.string   "pin"
     t.float    "sellvalue"
     t.text     "response"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   add_index "airtime_vouchers", ["created_at"], name: "index_airtime_vouchers_on_created_at", using: :btree
@@ -63,22 +66,22 @@ ActiveRecord::Schema.define(version: 20130906132758) do
   add_index "airtime_vouchers", ["updated_at"], name: "index_airtime_vouchers_on_updated_at", using: :btree
   add_index "airtime_vouchers", ["user_id"], name: "index_airtime_vouchers_on_user_id", using: :btree
 
-  create_table "badges", :force => true do |t|
+  create_table "badges", force: true do |t|
     t.string   "name"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "badges", ["user_id"], :name => "index_badges_on_user_id"
-  
+  add_index "badges", ["user_id"], name: "index_badges_on_user_id", using: :btree
+
   create_table "feedback", force: true do |t|
     t.integer  "user_id"
     t.string   "subject"
     t.text     "message"
     t.string   "support_type", default: "suggestion"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   add_index "feedback", ["user_id"], name: "index_feedback_on_user_id", using: :btree
@@ -87,8 +90,8 @@ ActiveRecord::Schema.define(version: 20130906132758) do
     t.string   "word"
     t.text     "choices"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.boolean  "completed",               default: false
     t.integer  "score"
     t.boolean  "clue_revealed",           default: false, null: false
@@ -107,8 +110,8 @@ ActiveRecord::Schema.define(version: 20130906132758) do
     t.integer  "moola_amount",        null: false
     t.string   "currency_amount",     null: false
     t.string   "ref"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   add_index "purchase_transactions", ["user_id"], name: "index_purchase_transactions_on_user_id", using: :btree
@@ -118,8 +121,8 @@ ActiveRecord::Schema.define(version: 20130906132758) do
     t.integer  "prize_amount"
     t.string   "prize_type"
     t.string   "state"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.text     "mxit_money_reference"
   end
 
@@ -129,8 +132,8 @@ ActiveRecord::Schema.define(version: 20130906132758) do
     t.text     "name"
     t.string   "uid"
     t.string   "provider"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.integer  "weekly_rating",         default: 0
     t.integer  "yearly_rating",         default: 0
     t.integer  "weekly_streak",         default: 0
@@ -153,11 +156,11 @@ ActiveRecord::Schema.define(version: 20130906132758) do
 
   add_index "users", ["created_at"], name: "index_users_on_created_at", using: :btree
   add_index "users", ["daily_rating"], name: "index_users_on_daily_rating", using: :btree
-  add_index "users", ["daily_streak"], name: "index_users_on_daily_streak", using: :btree
+  add_index "users", ["daily_streak"], name: "index_users_on_games_won_today", using: :btree
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", using: :btree
   add_index "users", ["updated_at"], name: "index_users_on_updated_at", using: :btree
   add_index "users", ["weekly_rating"], name: "index_users_on_weekly_rating", using: :btree
-  add_index "users", ["weekly_streak"], name: "index_users_on_weekly_streak", using: :btree
+  add_index "users", ["weekly_streak"], name: "index_users_on_games_won_this_week", using: :btree
   add_index "users", ["yearly_rating"], name: "index_users_on_yearly_rating", using: :btree
 
   create_table "winners", force: true do |t|
@@ -166,8 +169,8 @@ ActiveRecord::Schema.define(version: 20130906132758) do
     t.integer  "amount"
     t.string   "period"
     t.date     "end_of_period_on"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   add_index "winners", ["user_id"], name: "index_winners_on_user_id", using: :btree
