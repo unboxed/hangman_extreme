@@ -31,7 +31,6 @@ set :shared_children, shared_children + ['tmp/sockets']
 after "deploy:restart", "deploy:cleanup"
 after "deploy:finalize_update", "app:symlink"
 after "deploy:finalize_update", "deploy:precompile_stylesheets"
-after "deploy", "librato:deploy"
 # after "deploy:update", "newrelic:notice_deployment"
 
 before 'deploy:setup', 'rvm:install_rvm'   # install RVM
@@ -79,18 +78,9 @@ namespace :deploy do
 
 end
 
-namespace :librato do
-
-  desc "annotate deployment on librato"
-  task :deploy, :except => {:no_release => true} do
-    run "cd #{release_path} && RAILS_ENV=production REVISION=#{current_revision} bundle exec rake app:deploy:annotate"
-  end
-
-end
-
 namespace :pull do
 
-  desc "annotate deployment on librato"
+  desc "pull down the log files"
   task :logs, :except => {:no_release => true} do
     download "#{shared_path}/log/production.log", "log/production.log", :via => :scp
     download "#{shared_path}/log/puma.log", "log/puma.log", :via => :scp

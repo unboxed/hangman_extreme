@@ -6,7 +6,6 @@ describe Jobs::CreateDailyWinners do
 
     it "must run" do
       Winner.should_receive(:create_daily_winners)
-      Librato::Metrics.should_receive(:annotate)
       Jobs::CreateDailyWinners.new.run
     end
 

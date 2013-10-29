@@ -44,7 +44,6 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     addressable (2.3.5)
-    aggregate (0.2.2)
     airbrake (3.1.14)
       builder
       json
@@ -157,10 +156,6 @@ GEM
       activesupport (>= 3.0.0)
     launchy (2.3.0)
       addressable (~> 2.3)
-    librato-metrics (1.1.1)
-      aggregate (~> 0.2.2)
-      faraday (~> 0.7)
-      multi_json
     libv8 (3.11.8.17)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -388,7 +383,6 @@ DEPENDENCIES
   jquery-rails
   kaminari
   launchy
-  librato-metrics
   libv8 (~> 3.11.8)
   mxit_api (>= 0.2.2.pre)
   mysql2
