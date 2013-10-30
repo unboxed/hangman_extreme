@@ -27,12 +27,13 @@ HangmanLeague::Application.routes.draw do
       get 'show_hangman', action: 'show_hangman', as: 'show_hangman'
     end
   end
-  resources :feedback, :except => [:show, :edit, :update, :destroy]
+  resources :feedback, path: "user/feedback", :except => [:show, :edit, :update, :destroy]
   resources :winners, :except => [:edit, :update, :create, :new, :destroy]
   resources :redeem_winnings, :except => [:edit, :update, :destroy]
 
   get '/define/:word', to: 'words#define', as: 'define_word'
   get '/auth/:provider/callback', to: 'sessions#create'
+  post '/auth/:provider/callback', to: 'sessions#create'
   get '/auth/:provider/failure', to: 'sessions#failure'
   get '/auth/failure', to: 'sessions#failure'
   get '/authorize', to: 'users#mxit_authorise', as: 'mxit_authorise'
