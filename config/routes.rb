@@ -27,7 +27,7 @@ HangmanLeague::Application.routes.draw do
       get 'show_hangman', action: 'show_hangman', as: 'show_hangman'
     end
   end
-  resources :feedback, path: "user/feedback", :except => [:show, :edit, :update, :destroy]
+  resources :feedback, path: "user_comments", :except => [:show, :edit, :update, :destroy]
   resources :winners, :except => [:edit, :update, :create, :new, :destroy]
   resources :redeem_winnings, :except => [:edit, :update, :destroy]
 
