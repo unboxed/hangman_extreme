@@ -14,7 +14,7 @@ class IssueMxitMoneyToUsers < IssueWinningToUser
         redeem_winning.update_column(:mxit_money_reference,result[:m2_reference])
       else
         exception_msg = "Invalid Result from Mxit Api: #{result.inspect}"
-        exception_msg = "#{result[:error_type]}: #{result[:message]}" if result[:error_type]
+        exception_msg = "#{result[:error_type]}: #{result[:message]}" if result && result[:error_type]
         raise(exception_msg)
       end
     else
