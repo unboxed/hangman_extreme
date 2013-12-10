@@ -9,7 +9,7 @@ class IssueMxitMoneyToUsers < IssueWinningToUser
       result = connection.issue_money(:phone_number => user_mxit_info[:msisdn],
                                       :merchant_reference => "RW#{redeem_winning.id}Y#{Time.current.yday}H#{Time.current.hour}",
                                       :amount_in_cents => redeem_winning.prize_amount)
-      if result[:m2_reference]
+      if result && result[:m2_reference]
         redeem_winning.paid!
         redeem_winning.update_column(:mxit_money_reference,result[:m2_reference])
       else
