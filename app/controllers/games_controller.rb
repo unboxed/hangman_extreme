@@ -51,10 +51,10 @@ class GamesController < ApplicationController
         current_user.badges.create(name: 'Clueless', user_id:current_user.id)
         @notice << "<br/>Congratulations you have received th #{view_context.link_to 'Clueless', explain_path(action: 'clueless', id: 'clueless')} Badge"
       end
-      # if @game >= 10 && @game.clue_revealed == false
-      #   current_user.badges.create(name: 'Brainey', user_id:current_user.id)
-      #   @notice << "<br/>Congratulations you have received the #{view_context.link_to 'Brainey', explain_path(action: 'brainey', id: 'brainey')} Badge" 
-      # end 
+      if current_user.has_ten_games_in_sequence && @game.clue_revealed == false
+        current_user.badges.create(name: 'Brainey', user_id:current_user.id)
+        @notice << "<br/>Congratulations you have received the #{view_context.link_to 'Brainey', explain_path(action: 'brainey', id: 'brainey')} Badge" 
+      end 
     end
     redirect_to @game, notice: @notice.to_s.html_safe
   end
