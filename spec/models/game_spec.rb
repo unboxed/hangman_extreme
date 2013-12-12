@@ -236,3 +236,25 @@ describe Game do
   end
 
 end
+
+describe "has_five_clues_in_sequence" do
+
+  it "does not count if a clue was not revealed in sequence" do 
+    create(:game, :clue_revealed => true)
+    create(:game, :clue_revealed => true)
+    create(:game, :clue_revealed => true)
+    create(:game)
+    create(:game, :clue_revealed => true)
+    create(:game, :clue_revealed => true)
+    Game.has_five_clues_in_sequence.should == false 
+  end 
+
+  it "counts 5 clues_revealed in sequence" do 
+    create(:game, :clue_revealed => true)
+    create(:game, :clue_revealed => true)
+    create(:game, :clue_revealed => true) 
+    create(:game, :clue_revealed => true)
+    create(:game, :clue_revealed => true)
+    Game.has_five_clues_in_sequence.should == true     
+  end 
+end 
