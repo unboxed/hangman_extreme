@@ -88,6 +88,21 @@ class User < ActiveRecord::Base
     false 
   end 
 
+  def has_ten_games_in_sequence
+    games_in_sequence = 0
+    games.each do |game|
+      if game.clue_revealed
+        games_in_sequence = 0
+      else 
+        games_in_sequence += 1
+      end 
+      if games_in_sequence == 10
+        return true
+      end 
+    end 
+    false 
+  end 
+
   def calculate_daily_rating
     calculate_rating(games.today.first(12))
   end

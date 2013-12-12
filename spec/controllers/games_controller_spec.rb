@@ -197,6 +197,21 @@ describe GamesController do
       get :play_letter, :id => @game.to_param, :letter => "k"
       flash[:notice].should_not have_content "Congratulations" 
     end
+
+    it "Should give Brainey Badge if 10 words were played in a row without using clues" do 
+      create(:won_game, word: "meaow", user: @current_user)
+      create(:won_game, word: "meaow", user: @current_user)
+      create(:won_game, word: "meaow", user: @current_user)
+      create(:won_game, word: "meaow", user: @current_user)
+      create(:won_game, word: "meaow", user: @current_user)
+      create(:won_game, word: "meaow", user: @current_user)
+      create(:won_game, word: "meaow", user: @current_user)
+      create(:won_game, word: "meaow", user: @current_user)
+      create(:won_game, word: "meaow", user: @current_user)
+      @game = create(:game, word: "meaow", choices: "meao", user: @current_user)
+      get :play_letter, :id => @game.to_param, :letter => "w"
+      flash[:notice].should have_content "Congratulations" 
+    end 
   end
 
   describe "GET new" do

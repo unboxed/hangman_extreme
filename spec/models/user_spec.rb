@@ -531,3 +531,37 @@ describe "has_five_game_clues_in_sequence" do
   end 
 end 
 
+describe "counting winning games in a row" do 
+
+  it "same user counts 10 games in sequence" do
+    @user = create(:user)
+    create(:game,user: @user)
+    create(:game,user: @user)
+    create(:game,user: @user)
+    create(:game,user: @user)
+    create(:game,user: @user)
+    create(:game,user: @user)
+    create(:game,user: @user)
+    create(:game,user: @user)
+    create(:game,user: @user)
+    create(:game,user: @user)
+    @user.has_ten_games_in_sequence.should == true 
+  end 
+
+  it "does not count if a clue was revealed" do
+    @user = create(:user)
+    create(:game,user: @user)
+    create(:game,user: @user)
+    create(:game,user: @user)
+    create(:game,user: @user)
+    create(:game,user: @user)
+    create(:game,user: @user)
+    create(:game,user: @user)
+    create(:game,user: @user)
+    create(:game,user: @user)
+    create(:game, :clue_revealed => true, user: @user)
+    create(:game,user: @user)    
+    @user.has_ten_games_in_sequence.should == false
+  end 
+end 
+

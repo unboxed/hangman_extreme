@@ -47,12 +47,6 @@ class Game < ActiveRecord::Base
     end
   end
 
-  def tracking_clues_revealed
-    if clue_revealed 
-      user.badge_tracker(:clues_revealed)
-    end
-  end
-
   def attempts_left
     Game::ATTEMPTS - attempts
   end
