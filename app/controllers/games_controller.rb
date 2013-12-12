@@ -48,7 +48,7 @@ class GamesController < ApplicationController
         @notice << "<br/>Congratulations you have received the #{view_context.link_to 'Bookworm', explain_path(action: 'bookworm', id: 'bookworm')} Badge" 
       end 
         @game.tracking_clues_revealed
-      if Game.has_five_clues_in_sequence && current_user.badges(name: 'Clueless', user_id:current_user.id).count == 0
+      if current_user.has_five_game_clues_in_sequence && current_user.badges(name: 'Clueless', user_id:current_user.id).count == 0
         current_user.badges.create(name: 'Clueless', user_id:current_user.id)
         @notice << "<br/>Congratulations you have received th #{view_context.link_to 'Clueless', explain_path(action: 'clueless', id: 'clueless')} Badge"
       end

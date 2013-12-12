@@ -73,6 +73,21 @@ class User < ActiveRecord::Base
     end
   end
 
+  def has_five_game_clues_in_sequence
+    clues_in_sequence = 0
+    games.each do |game|
+      if game.clue_revealed
+        clues_in_sequence += 1
+      else
+        clues_in_sequence = 0
+      end
+      if clues_in_sequence == 5
+        return true 
+      end 
+    end 
+    false 
+  end 
+
   def calculate_daily_rating
     calculate_rating(games.today.first(12))
   end

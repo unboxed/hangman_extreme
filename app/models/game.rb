@@ -53,21 +53,6 @@ class Game < ActiveRecord::Base
     end
   end
 
-  def self.has_five_clues_in_sequence
-    in_sequence = 0
-    Game.all.each do |game|
-      if game.clue_revealed
-        in_sequence += 1
-      else
-        in_sequence = 0
-      end
-      if in_sequence >= 5
-        return true 
-      end 
-    end 
-    false 
-  end 
-
   def attempts_left
     Game::ATTEMPTS - attempts
   end

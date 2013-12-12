@@ -497,3 +497,37 @@ describe User do
   end
 
 end
+
+describe "has_five_game_clues_in_sequence" do
+
+  it "does not count if a clue was not revealed in sequence" do 
+    @user = create(:user)
+    create(:game, :clue_revealed => true, user: @user)
+    create(:game, :clue_revealed => true, user: @user)
+    create(:game, :clue_revealed => false, user: @user)
+    create(:game, :clue_revealed => true, user: @user)
+    create(:game, :clue_revealed => true, user: @user)
+    @user.has_five_game_clues_in_sequence.should == false 
+  end 
+
+  it "same user counts 5 clues_revealed in sequence" do 
+    @user = create(:user)
+    create(:game, :clue_revealed => true, user: @user)
+    create(:game, :clue_revealed => true, user: @user)
+    create(:game, :clue_revealed => true, user: @user)
+    create(:game, :clue_revealed => true, user: @user)
+    create(:game, :clue_revealed => true, user: @user)
+    @user.has_five_game_clues_in_sequence.should == true     
+  end 
+
+  it "does not count 5 clues_revealed if different user" do 
+    @user = create(:user)
+    create(:game, :clue_revealed => true, user: @user)
+    create(:game, :clue_revealed => true, user: @user)
+    create(:game, :clue_revealed => true)
+    create(:game, :clue_revealed => true, user: @user)
+    create(:game, :clue_revealed => true, user: @user)
+    @user.has_five_game_clues_in_sequence.should == false   
+  end 
+end 
+

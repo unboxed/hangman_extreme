@@ -196,8 +196,7 @@ describe GamesController do
       @game = create(:game, word: "duck", choices: "duc", clue_revealed: true, user: @current_user)
       get :play_letter, :id => @game.to_param, :letter => "k"
       flash[:notice].should_not have_content "Congratulations" 
-    end 
-
+    end
   end
 
   describe "GET new" do
