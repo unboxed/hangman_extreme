@@ -346,8 +346,6 @@ shared_examples "badger" do
     click_link 'Brainey'
     page.should have_content("Achieved")
   end 
-
-
 end
 
 describe 'users', :redis => true do
