@@ -176,11 +176,27 @@ describe GamesController do
       create(:won_game, word: "duck", clue_revealed: true, user: @current_user)
       create(:won_game, word: "duck", clue_revealed: true, user: @current_user)
       @game = create(:game, word: "duck", choices: "duc", clue_revealed: true, user: @current_user)
-
       get :play_letter, :id => @game.to_param, :letter => "k"
-
       flash[:notice].should have_content "Congratulations"
     end
+
+    it "Should not give Clueless Badge twice" do
+      create(:badge, name: 'Clueless', user: @current_user)
+      @game = create(:game, word: "duck", choices: "duc", clue_revealed: true, user: @current_user)
+      get :play_letter, :id => @game.to_param, :letter => "k"
+      flash[:notice].should_not have_content "Congratulations"
+    end 
+
+    it "Should not give Clueless Badge if 5 clues were not used in a row" do
+      create(:won_game, word: "duck", clue_revealed: true, user: @current_user)
+      create(:won_game, word: "duck", clue_revealed: true, user: @current_user)
+      create(:won_game, word: "duck", clue_revealed: true, user: @current_user)
+      create(:won_game, word: "duck", user: @current_user)
+      create(:won_game, word: "duck", clue_revealed: true, user: @current_user)
+      @game = create(:game, word: "duck", choices: "duc", clue_revealed: true, user: @current_user)
+      get :play_letter, :id => @game.to_param, :letter => "k"
+      flash[:notice].should_not have_content "Congratulations" 
+    end 
 
   end
 

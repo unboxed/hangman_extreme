@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   has_many :purchase_transactions
   has_many :show_clue
 
+  has_one  :badge_tracker
+
   validates :provider, :uid, presence: true
   validates_uniqueness_of :uid, :scope => :provider
 

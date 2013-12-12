@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130902071231) do
-
-  # These are extensions that must be enabled in order to support this database
-  # enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20130910114013) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "resource_id",   null: false
@@ -66,11 +63,18 @@ ActiveRecord::Schema.define(version: 20130902071231) do
   add_index "airtime_vouchers", ["updated_at"], name: "index_airtime_vouchers_on_updated_at", using: :btree
   add_index "airtime_vouchers", ["user_id"], name: "index_airtime_vouchers_on_user_id", using: :btree
 
+  create_table "badge_trackers", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "clues_revealed", default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "badges", force: true do |t|
     t.string   "name"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "badges", ["user_id"], name: "index_badges_on_user_id", using: :btree

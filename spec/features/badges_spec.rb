@@ -166,7 +166,70 @@ shared_examples "badger" do
     page.should have_content("Clueless")
     click_link 'Clueless'
     page.should have_content("Achieved")
-  end 
+  
+  #should not give the badge twice
+#first play with clue
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _")
+    click_link 'show_clue'
+    click_button 'yes'
+    %w(d u c k).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Clueless")
+#second play with clue
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _")
+    click_link 'show_clue'
+    click_button 'yes'
+    %w(d u c k).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Clueless")    
+#third play with clue
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _")
+    click_link 'show_clue'
+    click_button 'yes'
+    %w(d u c k).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Clueless")    
+#forth play with clue
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _")
+    click_link 'show_clue'
+    click_button 'yes'
+    %w(d u c k).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Clueless")    
+#fifth play with clue 
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _")
+    click_link 'show_clue'
+    click_button 'yes'
+    %w(d u c k).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should_not have_content("Clueless")
+  end
+
 end
 
 describe 'users', :redis => true do
