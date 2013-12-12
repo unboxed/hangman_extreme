@@ -6,5 +6,6 @@ FactoryGirl.define do
     sequence(:uid) {|n| "uid#{n}" }
     provider "mxit"
     show_hangman true
+    credits 100
   end
 end

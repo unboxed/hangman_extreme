@@ -563,5 +563,20 @@ describe "counting winning games in a row" do
     create(:game,user: @user)    
     @user.has_ten_games_in_sequence.should == false
   end 
+
+  it "does not count different users for 10 games in sequence" do 
+    @user = create(:user)
+    create(:game,user: @user)
+    create(:game,user: @user)
+    create(:game,user: @user)
+    create(:game,user: @user)
+    create(:game,user: @user)
+    create(:game,user: @user)
+    create(:game,user: @user)
+    create(:game) 
+    create(:game,user: @user)
+    create(:game,user: @user)    
+    @user.has_ten_games_in_sequence.should == false
+  end 
 end 
 

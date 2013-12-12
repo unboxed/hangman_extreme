@@ -228,6 +228,22 @@ describe GamesController do
       get :play_letter, :id => @game.to_param, :letter => "w"
       flash[:notice].should_not have_content "Congratulations"
     end 
+
+    it "Should not give Brainey Badge if 10 words were played but clue used" do 
+      create(:badge, name: 'Brainey', user: @current_user)
+      create(:won_game, word: "meaow", user: @current_user)
+      create(:won_game, word: "meaow", user: @current_user)
+      create(:won_game, word: "meaow", user: @current_user)
+      create(:won_game, word: "meaow", user: @current_user)
+      create(:won_game, word: "meaow", user: @current_user)
+      create(:won_game, word: "meaow", user: @current_user)
+      create(:won_game, word: "meaow", user: @current_user)
+      create(:won_game, word: "meaow", user: @current_user)
+      create(:won_game, word: "meaow", user: @current_user)
+      @game = create(:game, word: "meaow", choices: "meao", user: @current_user)
+      get :play_letter, :id => @game.to_param, :letter => "w"
+      flash[:notice].should_not have_content "Congratulations"
+    end 
   end
 
   describe "GET new" do

@@ -234,6 +234,119 @@ shared_examples "badger" do
     Dictionary.clear
     Dictionary.add("meaow")
     Dictionary.set_clue("meaow","cat")
+#should not give badge if clues were used
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _")
+    %w(m e a o w).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Brainey")
+
+    #2nd play with win
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _")
+    %w(m e a o w).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Brainey")
+
+    #3rd play with win
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _")
+    %w(m e a o w).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Brainey")
+
+    #4th play with win
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _")
+    %w(m e a o w).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Brainey")
+
+    #5th play with win
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _")
+    %w(m e a o w).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Brainey")
+
+    #6th play with win
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _")
+    %w(m e a o w).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Brainey")
+
+    #7th play with win
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _")
+    %w(m e a o w).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Brainey")
+
+    #8th play with win
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _")
+    %w(m e a o w).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Brainey")
+
+    #9th play with win
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _")
+    %w(m e a o w).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Brainey")
+
+    #10th play with win
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _")
+    click_link 'show_clue'
+    click_button 'yes'
+    %w(m e a o w).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Brainey")
+
+#should give badge if no clues were used
     #1st play with win
     visit_home
     click_link('Play')
@@ -345,7 +458,118 @@ shared_examples "badger" do
     page.should have_content("Brainey")
     click_link 'Brainey'
     page.should have_content("Achieved")
-  end 
+  # does not give the badge twice 
+   #1st play with win
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _")
+    %w(m e a o w).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Brainey")
+
+    #2nd play with win
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _")
+    %w(m e a o w).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Brainey")
+
+    #3rd play with win
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _")
+    %w(m e a o w).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Brainey")
+
+    #4th play with win
+    visit_home
+    click_link('Play')
+    save_and_open_page
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _")
+    %w(m e a o w).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Brainey")
+
+    #5th play with win
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _")
+    %w(m e a o w).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Brainey")
+
+    #6th play with win
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _")
+    %w(m e a o w).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Brainey")
+
+    #7th play with win
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _")
+    %w(m e a o w).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Brainey")
+
+    #8th play with win
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _")
+    %w(m e a o w).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Brainey")
+
+    #9th play with win
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _")
+    %w(m e a o w).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Brainey")
+
+    #10th play with win
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _")
+    %w(m e a o w).each do |letter|
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Brainey")
+    end 
 end
 
 describe 'users', :redis => true do
