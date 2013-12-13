@@ -1,4 +1,5 @@
 source 'http://rubygems.org'
+puts ENV.inspect
 ruby ENV['USE_RUBY'] if ENV['USE_RUBY']
 
 gem 'rails', '~> 4.0.0'
