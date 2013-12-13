@@ -31,11 +31,10 @@ gem 'slim', require: false # for sidekiq
 
 # third party
 gem 'airbrake'
+gem 'newrelic_rpm'
 gem 'uservoice-ruby', require: false
 gem 'gabba', require: false # google analytics
-gem 'newrelic_rpm', require: false
 gem 'wordnik', require: false
-gem 'librato-metrics', require: false
 
 #group :assets do
   platforms :jruby do

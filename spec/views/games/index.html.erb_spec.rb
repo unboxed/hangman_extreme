@@ -55,6 +55,7 @@ describe "games/index" do
   end
 
   it "must have a feedback link on the menu" do
+    pending
     args = {response_type: 'code',
             host: "test.host",
             protocol: 'http',
