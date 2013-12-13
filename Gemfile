@@ -1,6 +1,5 @@
 source 'http://rubygems.org'
-puts ENV.inspect
-ruby ENV['USE_RUBY'] if ENV['USE_RUBY']
+ruby '2.0.0' if ENV['STACK'] == 'cedar'
 
 gem 'rails', '~> 4.0.0'
 
