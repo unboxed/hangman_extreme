@@ -1,4 +1,5 @@
 source 'http://rubygems.org'
+ruby '2.0.0' if ENV['STACK'] == 'cedar'
 
 gem 'rails', '~> 4.0.0'
 
