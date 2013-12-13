@@ -495,7 +495,6 @@ shared_examples "badger" do
     #4th play with win
     visit_home
     click_link('Play')
-    save_and_open_page
     click_button('start_game')
     page.should have_content("_ _ _ _ _")
     %w(m e a o w).each do |letter|
@@ -570,6 +569,71 @@ shared_examples "badger" do
     page.should have_content("You win")
     page.should have_no_content("Brainey")
     end 
+
+  it "Should not give the Quickster Badge if game played longer than 30s" do 
+    Dictionary.clear
+    Dictionary.add("cattle")
+    Dictionary.set_clue("cattle","ranch")
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _ _")
+    sleep(35)
+    %w(c a t l e).each do |letter|
+      page.should have_content("10 attempts")
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Quickster")
+  end 
+
+  it "should not give the Quickster Badge if game played under 30s and a clue was used" do 
+    Dictionary.clear
+    Dictionary.add("cattle")
+    Dictionary.set_clue("cattle","ranch")
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _ _")
+    sleep(5)
+    click_link 'show_clue'
+    click_button 'yes'
+    %w(c a t l e).each do |letter|
+      page.should have_content("10 attempts")
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Quickster")
+  end 
+
+  it "should give the Quickster Badge if game played under 30s and a clue was not used" do 
+    Dictionary.clear
+    Dictionary.add("cattle")
+    Dictionary.set_clue("cattle","ranch")
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _ _")
+    sleep(5)
+    %w(c a t l e).each do |letter|
+      page.should have_content("10 attempts")
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_content("Quickster")
+#should not give badge twice
+    visit_home
+    click_link('Play')
+    click_button('start_game')
+    page.should have_content("_ _ _ _ _ _")
+    sleep(5)
+    %w(c a t l e).each do |letter|
+      page.should have_content("10 attempts")
+      click_letter(letter)
+    end 
+    page.should have_content("You win")
+    page.should have_no_content("Quickster")  
+  end 
 end
 
 describe 'users', :redis => true do
