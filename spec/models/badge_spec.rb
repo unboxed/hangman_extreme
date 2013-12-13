@@ -12,6 +12,7 @@ describe Badge do
     Badge.new(name: "Bookworm").should have(0).errors_on(:name)
     Badge.new(name:"Clueless").should have(0).errors_on(:name)
     Badge.new(name: "Brainey").should have(0).errors_on(:name)
+    Badge.new(name: "Quickster").should have(0).errors_on(:name)
     Badge.new(name: "xx").should have(1).errors_on(:name)
   end
 
@@ -38,6 +39,11 @@ describe Badge do
   it "must have one Brainey badge per user" do
     Badge.create!(name: "Brainey", user_id:1)
     Badge.new(name: "Brainey", user_id:1).should have(1).errors_on(:name)
+  end 
+
+  it "must have one Quickster badge per user" do
+    Badge.create!(name: "Quickster", user_id:1)
+    Badge.new(name: "Quickster", user_id:1).should have(1).errors_on(:name)
   end 
 
 end
