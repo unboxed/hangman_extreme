@@ -25,6 +25,10 @@ class GamesController < ApplicationController
     play
   end
 
+  def time_tracker
+    Time.current - @game.created_at
+  end 
+
   def play_letter
     ranks = {}
     if @game.possible_last_guess?
@@ -42,20 +46,24 @@ class GamesController < ApplicationController
           rank = current_user.rank(rank_by)
           @notice << "#{rank_by.gsub("_"," ")}: #{rank.ordinalize}. "  if rank < ranks[rank_by]
         end 
-      end
-      if @game.word.length >= 10 && current_user.badges(name: 'Bookworm', user_id:current_user.id).count == 0 && @game.clue_revealed == false
-        current_user.badges.create(name: 'Bookworm', user_id:current_user.id)
+      end   
+      if @game.word.length >= 10 && current_user.badges.where(name: 'Bookworm').count == 0 && @game.clue_revealed == false
+        current_user.badges.create(name: 'Bookworm')
         @notice << "<br/>Congratulations you have received the #{view_context.link_to 'Bookworm', explain_path(action: 'bookworm', id: 'bookworm')} Badge" 
       end 
-      if current_user.has_five_game_clues_in_sequence && current_user.badges(name: 'Clueless', user_id:current_user.id).count == 0
-        current_user.badges.create(name: 'Clueless', user_id:current_user.id)
-        @notice << "<br/>Congratulations you have received th #{view_context.link_to 'Clueless', explain_path(action: 'clueless', id: 'clueless')} Badge"
+      if current_user.has_five_game_clues_in_sequence && current_user.badges.where(name: 'Clueless').count == 0
+        current_user.badges.create(name: 'Clueless')
+        @notice << "<br/>Congratulations you have received the #{view_context.link_to 'Clueless', explain_path(action: 'clueless', id: 'clueless')} Badge"
       end
-      if current_user.has_ten_games_in_sequence && current_user.badges(name: 'Brainey', user_id:current_user.id).count == 0 && @game.clue_revealed == false
-        current_user.badges.create(name: 'Brainey', user_id:current_user.id)
+      if time_tracker <= 30 && current_user.badges.where(name: 'Quickster').count == 0 && @game.clue_revealed == false 
+        current_user.badges.create(name: 'Quickster')
+        @notice << "<br/>Congratulations you have received the #{view_context.link_to 'Quickster', explain_path(action: 'quickster', id: 'quickster')} Badge"
+      end      
+      if current_user.has_ten_games_in_sequence && current_user.badges.where(name: 'Brainey').count == 0 && @game.clue_revealed == false
+        current_user.badges.create(name: 'Brainey')
         @notice << "<br/>Congratulations you have received the #{view_context.link_to 'Brainey', explain_path(action: 'brainey', id: 'brainey')} Badge" 
       end 
-    end
+   end
     redirect_to @game, notice: @notice.to_s.html_safe
   end
 
@@ -77,6 +85,8 @@ class GamesController < ApplicationController
       redirect_to({action: 'index'}, alert: 'Failed to create new game.')
     end
   end
+
+  private 
 
   def check_credits
     if current_user.credits > 0

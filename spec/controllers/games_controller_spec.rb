@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'timecop'
 
 describe GamesController do
 
@@ -147,6 +148,7 @@ describe GamesController do
       @game = create(:game, word: "television", choices: "telviso", user: @current_user)
       get :show_clue, {:id => @game.to_param}
       post :reveal_clue, {:id => @game.to_param}
+      Timecop.freeze(Time.current + 31.seconds)
       get :play_letter, :id => @game.to_param, :letter => "n"
       flash[:notice].should_not have_content "Congratulations"
     end 
@@ -159,6 +161,7 @@ describe GamesController do
 
     it "Should not get Bookworm Badge for <9 letter word won" do
       @game = create(:game, word:"airport", choices: "airpo", user: @current_user)
+      Timecop.freeze(Time.current + 31.seconds)
       get :play_letter, :id => @game.to_param, :letter => "t"
       flash[:notice].should_not have_content "Congratulations"
     end 
@@ -166,6 +169,7 @@ describe GamesController do
     it "Should not receive Bookworm Badge twice" do
       create(:badge, name: 'Bookworm', user: @current_user)
       @game = create(:game, word: "television", choices: "telviso", user: @current_user)
+      Timecop.freeze(Time.current + 31.seconds)
       get :play_letter, :id => @game.to_param, :letter => "n"
       flash[:notice].should_not have_content "Congratulations"
     end 
@@ -183,6 +187,7 @@ describe GamesController do
     it "Should not give Clueless Badge twice" do
       create(:badge, name: 'Clueless', user: @current_user)
       @game = create(:game, word: "duck", choices: "duc", clue_revealed: true, user: @current_user)
+      Timecop.freeze(Time.current + 31.seconds)
       get :play_letter, :id => @game.to_param, :letter => "k"
       flash[:notice].should_not have_content "Congratulations"
     end 
@@ -225,8 +230,10 @@ describe GamesController do
       create(:won_game, word: "meaow", user: @current_user)
       create(:won_game, word: "meaow", user: @current_user)
       @game = create(:game, word: "meaow", choices: "meao", user: @current_user)
+      Timecop.freeze(Time.current + 31.seconds)    
       get :play_letter, :id => @game.to_param, :letter => "w"
       flash[:notice].should_not have_content "Congratulations"
+      Timecop.return 
     end 
 
     it "Should not give Brainey Badge if 10 words were played but clue used" do 
@@ -241,7 +248,63 @@ describe GamesController do
       create(:won_game, word: "meaow", user: @current_user)
       create(:won_game, word: "meaow", user: @current_user)
       @game = create(:game, word: "meaow", choices: "meao", user: @current_user)
+      Timecop.freeze(Time.current + 31.seconds)
       get :play_letter, :id => @game.to_param, :letter => "w"
+      flash[:notice].should_not have_content "Congratulations"
+      Timecop.return
+    end 
+
+    it "Should give both badges" do 
+      @game = create(:game, word:"cattle", choices: "cale", user: @current_user)
+      get :play_letter, :id => @game.to_param, :letter => "t"
+      @game = create(:game, word:"cattle", choices: "cale", user: @current_user)
+      get :play_letter, :id => @game.to_param, :letter => "t"
+      @game = create(:game, word:"cattle", choices: "cale", user: @current_user)
+      get :play_letter, :id => @game.to_param, :letter => "t"
+      @game = create(:game, word:"cattle", choices: "cale", user: @current_user)
+      get :play_letter, :id => @game.to_param, :letter => "t"
+      @game = create(:game, word:"cattle", choices: "cale", user: @current_user)
+      get :play_letter, :id => @game.to_param, :letter => "t"
+      @game = create(:game, word:"cattle", choices: "cale", user: @current_user)
+      get :play_letter, :id => @game.to_param, :letter => "t"
+      @game = create(:game, word:"cattle", choices: "cale", user: @current_user)
+      get :play_letter, :id => @game.to_param, :letter => "t"
+      @game = create(:game, word:"cattle", choices: "cale", user: @current_user)
+      get :play_letter, :id => @game.to_param, :letter => "t" 
+      @game = create(:game, word:"cattle", choices: "cale", user: @current_user)
+      get :play_letter, :id => @game.to_param, :letter => "t"
+      @game = create(:game, word:"cattle", choices: "cale", user: @current_user)
+      get :play_letter, :id => @game.to_param, :letter => "t"
+      flash[:notice].should have_content "Quickster"
+      flash[:notice].should have_content "Brainey"
+    end 
+
+    it "Should give Quickster Badge if game was won under 30s" do 
+      @game = create(:game, word:"cattle", choices: "cale", user: @current_user)
+      get :play_letter, :id => @game.to_param, :letter => "t"
+      flash[:notice].should have_content "Congratulations"     
+    end 
+
+    it "Should not give Quickster Badge if game a clue was used" do 
+      @game = create(:game, word: "cattle", choices: "cale", user: @current_user)
+      get :show_clue, {:id => @game.to_param}
+      post :reveal_clue, {:id => @game.to_param}
+      get :play_letter, :id => @game.to_param, :letter => "t"
+      flash[:notice].should_not have_content "Congratulations"
+    end 
+
+    it "Should not give Quickster Badge if game was won over 30s" do 
+      @game = create(:game, word:"cattle", choices: "cale", user: @current_user)
+      Timecop.freeze(Time.current + 31.seconds)
+      get :play_letter, :id => @game.to_param, :letter => "t"
+      flash[:notice].should_not have_content "Congratulations"     
+      Timecop.return 
+    end 
+
+    it "Should not give the Quickster Badge twice" do 
+      create(:badge, name: 'Quickster', user: @current_user)
+      @game = create(:game, word:"cattle", choices: "cale", user: @current_user)
+      get :play_letter, :id => @game.to_param, :letter => "t"
       flash[:notice].should_not have_content "Congratulations"
     end 
   end

@@ -75,7 +75,7 @@ class User < ActiveRecord::Base
 
   def has_five_game_clues_in_sequence
     clues_in_sequence = 0
-    games.each do |game|
+    games.order(:created_at).each do |game|
       if game.clue_revealed
         clues_in_sequence += 1
       else
@@ -90,7 +90,7 @@ class User < ActiveRecord::Base
 
   def has_ten_games_in_sequence
     games_in_sequence = 0
-    games.each do |game|
+    games.order(:created_at).each do |game|
       if game.clue_revealed
         games_in_sequence = 0
       else 

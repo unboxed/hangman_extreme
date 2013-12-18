@@ -23,8 +23,8 @@ shared_examples "badger" do
     page.should have_content("letter")
     click_link 'badges'
     page.should have_content("Badges")
-    click_link 'Snailing It'
-    page.should have_content("time")
+    click_link 'Quickster'
+    page.should have_content("seconds")
     click_link 'badges'
     page.should have_content("Badges")
     click_link 'Gladiator'
@@ -568,7 +568,7 @@ shared_examples "badger" do
     end 
     page.should have_content("You win")
     page.should have_no_content("Brainey")
-    end 
+  end 
 
   it "Should not give the Quickster Badge if game played longer than 30s" do 
     Dictionary.clear
@@ -578,7 +578,7 @@ shared_examples "badger" do
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _ _ _")
-    sleep(35)
+    sleep(31)
     %w(c a t l e).each do |letter|
       page.should have_content("10 attempts")
       click_letter(letter)
@@ -634,7 +634,7 @@ shared_examples "badger" do
     page.should have_content("You win")
     page.should have_no_content("Quickster")  
   end 
-end
+end 
 
 describe 'users', :redis => true do
 
