@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'view_spec_helper'
 
 describe "redeem_winnings/index.html.erb" do
 

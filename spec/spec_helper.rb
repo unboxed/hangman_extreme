@@ -13,10 +13,6 @@ ENV['FREEPAID_PASS'] ||= '1'
 ENV['MXIT_VENDOR_ID'] ||= '1'
 ENV['SESSION_TOKEN'] ||= ('a' * 31)
 
-if ENV['HEADLESS']
-  require 'headless'
-end
-
 if (ENV['COVERAGE'] == 'on')
   require 'simplecov'
   require 'simplecov-rcov'
@@ -65,7 +61,6 @@ DatabaseCleaner.clean_with :truncation
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
-
   config.filter_run_excluding :inconsistent => true if ENV["EXCLUDE_INCONSISTENT"]
 
 
@@ -76,11 +71,6 @@ RSpec.configure do |config|
   config.order = "random"
   config.before(:suite) do
     DatabaseCleaner.strategy = ENV['DB_CLEANER_STRATEGY'].to_sym
-    (@@headless = Headless.new).start if ENV['HEADLESS']
-  end
-
-  config.after(:suite) do
-    @@headless.destroy if ENV['HEADLESS']
   end
 
   config.before(:all, :js => true) do
@@ -103,5 +93,4 @@ RSpec.configure do |config|
   config.before(:each, :redis => true) do
     Ohm.flush
   end
-
 end

@@ -42,5 +42,4 @@ RSpec.configure do |config|
       example.call
     end
   end
-
 end

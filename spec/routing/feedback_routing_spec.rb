@@ -2,7 +2,6 @@ require "spec_helper"
 
 describe FeedbackController do
   describe "routing" do
-
     it "routes to #index" do
       get("/user_comments").should route_to("feedback#index")
     end
@@ -14,7 +13,5 @@ describe FeedbackController do
     it "routes to #create" do
       post("/user_comments").should route_to("feedback#create")
     end
-
   end
-
 end

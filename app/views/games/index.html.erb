@@ -24,8 +24,7 @@
 <% menu_item 'leaderboard', users_path, id: 'leaderboard' %>
 <% menu_item 'winners', winners_path, id: 'winners' %>
 <% menu_item 'scoring', explain_path(action: 'scoring_categories'), id: 'scoring_categories' %>
-<% menu_item 'feedback', feedback_index_path, id: 'feedback' %>
-<%# menu_item 'feedback',mxit_request? ? mxit_auth_url(state: "feedback") : feedback_index_path, id: 'feedback' %>
+<% menu_item 'feedback',mxit_request? ? mxit_auth_url(state: "feedback") : feedback_index_path, id: 'feedback' %>
 <% menu_item 'buy credits', purchases_path, id: 'buy_credits' %>
 <% menu_item 'redeem prize points', redeem_winnings_path, id: 'redeem' %>
 

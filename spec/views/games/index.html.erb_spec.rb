@@ -1,7 +1,6 @@
-require 'spec_helper'
+require 'view_spec_helper'
 
 describe "games/index" do
-
   before(:each) do
     @games =
     assign(:games, [
@@ -55,7 +54,6 @@ describe "games/index" do
   end
 
   it "must have a feedback link on the menu" do
-    pending
     args = {response_type: 'code',
             host: "test.host",
             protocol: 'http',
@@ -101,5 +99,4 @@ describe "games/index" do
     view.should_receive(:menu_item).with(anything,redeem_winnings_path,id: 'redeem')
     render
   end
-
 end
