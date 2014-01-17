@@ -69,7 +69,6 @@ class User < ActiveRecord::Base
 
   def self.find_or_create_from_auth_hash(auth_hash)
     auth_hash.stringify_keys!
-    logger.debug "Auth Login Attempt with: #{auth_hash.to_s}"
     return nil if auth_hash['uid'].blank? || auth_hash['provider'].blank?
     user = find_or_create_by(uid: auth_hash['uid'],provider: auth_hash['provider'])
     user.set_user_info(auth_hash['info'])
