@@ -1,9 +1,7 @@
 require "spec_helper"
 
 describe UsersController do
-
   describe "routing" do
-
     it "builds mxit authorise" do
       url = mxit_authorise_url(response_type: 'code',
                                host: "auth.mxit.com",
@@ -25,20 +23,8 @@ describe UsersController do
       get("/users/1").should route_to("users#show", :id => "1")
     end
 
-    it "routes to #profile" do
-      get("/users/profile").should route_to("users#profile")
-    end
-
     it "routes to #index" do
       get("/users").should route_to("users#index")
-    end
-
-    it "routes to #edit" do
-      get("/users/11/edit").should route_to("users#edit", :id => "11")
-    end
-
-    it "routes to #update" do
-      put("/users/11").should route_to("users#update", :id => "11")
     end
 
     it "routes to #hide_hangman when hide hangman enabled" do
@@ -48,6 +34,5 @@ describe UsersController do
     it "routes to #show_hangman when hide hangman deactivated" do
       get("/users/show_hangman").should route_to("users#show_hangman")
     end
-
   end
 end

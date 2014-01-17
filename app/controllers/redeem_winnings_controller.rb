@@ -17,7 +17,7 @@ class RedeemWinningsController < ApplicationController
 
   def create
     # @redeem_winning
-    @redeem_winning.user = current_user
+    @redeem_winning.user_account = current_user_account
     begin
       RedeemWinning.transaction do
         @redeem_winning.save!

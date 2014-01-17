@@ -8,8 +8,8 @@
 #  amount           :integer
 #  period           :string(255)
 #  end_of_period_on :date
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
+#  created_at       :datetime
+#  updated_at       :datetime
 #
 
 class Winner < ActiveRecord::Base
@@ -53,15 +53,15 @@ class Winner < ActiveRecord::Base
 
   def self.create_daily_winners(winnings = DAILY_PRIZE_AMOUNTS)
     if create_winners('daily',winnings)
-      User.send_message("We have selected our $winners$ for the daily prizes, Congratulations to those who have won.",
-                        User.mxit.where('updated_at > ?',2.day.ago))
+      UserSendMessage.send("We have selected our $winners$ for the daily prizes, Congratulations to those who have won.",
+                           User.mxit.where('updated_at > ?',2.day.ago))
     end
   end
 
   def self.create_weekly_winners(winnings = WEEKLY_PRIZE_AMOUNTS)
     if create_winners('weekly',winnings)
-      User.send_message("We have selected our $winners$ for the weekly prizes, Congratulations to those who have won.",
-                         User.mxit.where('updated_at > ?',7.day.ago))
+      UserSendMessage.send("We have selected our $winners$ for the weekly prizes, Congratulations to those who have won.",
+                           User.mxit.where('updated_at > ?',14.day.ago))
     end
   end
 
@@ -90,7 +90,7 @@ class Winner < ActiveRecord::Base
       end
     end
     winners.group_by{|w| w.amount }.each do |amount,winners_group|
-        User.send_message("Congratulations, you have won *#{amount} prize points* for _#{options[:period]} #{options[:score_by]}_.
+      UserSendMessage.send("Congratulations, you have won *#{amount} prize points* for _#{options[:period]} #{options[:score_by]}_.
                            Check the $redeem$ section to see what you can trade them in for.".squish,winners_group.map{|info| info.user })
     end
   end
@@ -100,11 +100,11 @@ class Winner < ActiveRecord::Base
   def increase_prize_points
     if amount > 0
       begin
-        user.increment!(:prize_points,amount)
+        user.account.increment!(:prize_points,amount)
       rescue
         user.reload
         begin
-          user.increment!(:prize_points,amount)
+          user.account.increment!(:prize_points,amount)
         rescue
           # ignore second time around
         end

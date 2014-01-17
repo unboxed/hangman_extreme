@@ -1,0 +1,23 @@
+<b>Your Profile</b>
+
+<div>We require your <b>Full real name</b> and <b>Mobile number</b> to payout any winnings</div>
+<div>This information will not be displayed anywhere on hangman extreme or sold to third parties</div>
+<br/>
+
+change full <%= smart_link_to 'real name', edit_user_accounts_path(:field => 'real_name'), id: 'edit_real_name' %>:
+<%= current_user_account.real_name %><br/>
+change <%= smart_link_to 'mobile number', edit_user_accounts_path(:field => 'mobile_number'), id: 'edit_mobile_number' %>:
+<%= current_user_account.mobile_number %><br/>
+<br/>
+
+Show Hangman: 
+<%= render 'users/show_hangman' %>
+
+<br/>
+<%= current_user_account.credits %> credits left
+
+<% menu_item 'buy credits', purchases_path, id: 'buy_credits' %>
+
+
+
+

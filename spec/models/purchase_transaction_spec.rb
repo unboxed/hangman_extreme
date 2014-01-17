@@ -3,15 +3,16 @@
 # Table name: purchase_transactions
 #
 #  id                  :integer          not null, primary key
-#  user_id             :integer
+#  _deprecated_user_id :integer
 #  product_id          :string(255)      not null
 #  product_name        :string(255)      not null
 #  product_description :text
 #  moola_amount        :integer          not null
 #  currency_amount     :string(255)      not null
 #  ref                 :string(255)
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
+#  created_at          :datetime
+#  updated_at          :datetime
+#  user_account_id     :integer
 #
 
 require 'spec_helper'
@@ -42,8 +43,8 @@ describe PurchaseTransaction do
     end
 
     it "must have a user_id" do
-      PurchaseTransaction.new.should have(1).errors_on(:user_id)
-      PurchaseTransaction.new(user_id: 1).should have(0).errors_on(:user_id)
+      PurchaseTransaction.new.should have(1).errors_on(:user_account_id)
+      PurchaseTransaction.new(user_account_id: 1).should have(0).errors_on(:user_account_id)
     end
 
     it "must have a currency_amount" do

@@ -2,30 +2,30 @@
 #
 # Table name: users
 #
-#  id                    :integer          not null, primary key
-#  name                  :text
-#  uid                   :string(255)
-#  provider              :string(255)
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  weekly_rating         :integer          default(0)
-#  yearly_rating         :integer          default(0)
-#  weekly_streak         :integer          default(0)
-#  daily_rating          :integer          default(0)
-#  daily_streak          :integer          default(0)
-#  real_name             :string(255)
-#  mobile_number         :string(255)
-#  email                 :string(255)
-#  credits               :integer          default(24), not null
-#  prize_points          :integer          default(0), not null
-#  login                 :string(255)
-#  lock_version          :integer          default(0), not null
-#  current_daily_streak  :integer          default(0), not null
-#  current_weekly_streak :integer          default(0), not null
-#  daily_wins            :integer          default(0), not null
-#  weekly_wins           :integer          default(0), not null
-#  show_hangman          :boolean          default(TRUE)
-#  winners_count         :integer          default(0), not null
+#  id                        :integer          not null, primary key
+#  name                      :text
+#  uid                       :string(255)
+#  provider                  :string(255)
+#  created_at                :datetime
+#  updated_at                :datetime
+#  weekly_rating             :integer          default(0)
+#  yearly_rating             :integer          default(0)
+#  weekly_streak             :integer          default(0)
+#  daily_rating              :integer          default(0)
+#  daily_streak              :integer          default(0)
+#  _deprecated_real_name     :string(255)
+#  _deprecated_mobile_number :string(255)
+#  _deprecated_email         :string(255)
+#  _deprecated_credits       :integer          default(24), not null
+#  _deprecated_prize_points  :integer          default(0), not null
+#  _deprecated_login         :string(255)
+#  lock_version              :integer          default(0), not null
+#  current_daily_streak      :integer          default(0), not null
+#  current_weekly_streak     :integer          default(0), not null
+#  daily_wins                :integer          default(0), not null
+#  weekly_wins               :integer          default(0), not null
+#  show_hangman              :boolean          default(TRUE)
+#  winners_count             :integer          default(0), not null
 #
 
 require 'mxit_api'
@@ -51,15 +51,14 @@ class User < ActiveRecord::Base
   scope :last_day, -> { where('created_at >= ?',1.day.ago) }
   scope :random_order, -> { order(connection.instance_values["config"][:adapter].include?("mysql") ? 'RAND()' : 'RANDOM()') }
 
-  delegate :credits, to: :account, prefix: true
-
   def account
     @account ||=
-      UserAccount.create_with(real_name: real_name,
-                              mobile_number: mobile_number,
-                              email: email,
-                              credits: credits,
-                              prize_points: prize_points).
+      UserAccount.create_with(real_name: _deprecated_real_name,
+                              mobile_number: _deprecated_mobile_number,
+                              email: _deprecated_email,
+                              credits: _deprecated_credits,
+                              mxit_login: _deprecated_login,
+                              prize_points: _deprecated_prize_points).
                   find_or_create_by({uid: uid,provider: provider})
   end
 
@@ -87,9 +86,9 @@ class User < ActiveRecord::Base
     if info
       info.stringify_keys!
       self.name = info['name']
-      self.login = info['login']
-      self.email = info['email'] if email.blank?
       save
+      account.update_attributes(:mxit_login => info['login'])
+      account.update_attributes(:email => info['email']) if account.email.blank?
     end
   end
 
@@ -126,30 +125,6 @@ class User < ActiveRecord::Base
 
   def google_tracking
     @google_tracking ||= GoogleTracking.find_or_create_by_user_id(id)
-  end
-
-  def send_message(msg)
-    User.send_message(msg,[self]) if provider == 'mxit'
-  end
-
-  def registered_on_mxit_money?(connection = MxitMoneyApi.connect(ENV['MXIT_MONEY_API_KEY']))
-    begin
-      if connection
-        result = connection.user_info(:id => uid)
-        result[:is_registered]
-      end
-    rescue Exception => e
-      Airbrake.notify_or_ignore(e,:parameters    => {:user => self, :connection => connection})
-      false
-    end
-  end
-
-  def not_registered_on_mxit_money?
-    !registered_on_mxit_money?
-  end
-
-  def self.send_message(msg, users = User.mxit)
-    UserSendMessage.new(msg,users).send_all
   end
 
   def self.purge_tracking!

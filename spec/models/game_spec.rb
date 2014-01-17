@@ -6,8 +6,8 @@
 #  word                    :string(255)
 #  choices                 :text
 #  user_id                 :integer
-#  created_at              :datetime         not null
-#  updated_at              :datetime         not null
+#  created_at              :datetime
+#  updated_at              :datetime
 #  completed               :boolean          default(FALSE)
 #  score                   :integer
 #  clue_revealed           :boolean          default(FALSE), not null

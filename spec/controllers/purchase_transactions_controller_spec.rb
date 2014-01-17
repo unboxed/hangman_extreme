@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe PurchaseTransactionsController do
-
   before :each do
     @current_user = create(:user)
+    @current_user_account = @current_user.account
     @ability = Object.new
     @ability.extend(CanCan::Ability)
     @ability.can(:manage, :all)
@@ -13,21 +13,18 @@ describe PurchaseTransactionsController do
   end
 
   describe "GET index" do
-
     def do_get_index
       get :index
     end
 
     it "assigns all purchase transactions as @purchase_transactions" do
-      trans = create(:purchase_transaction, user: @current_user)
+      trans = create(:purchase_transaction, user_account: @current_user_account)
       do_get_index
       assigns(:purchase_transactions).should eq([trans])
     end
-
   end
 
   describe "GET new" do
-
     def do_get_new
       get :new, product_id: PurchaseTransaction.products.keys.first
     end
@@ -41,11 +38,9 @@ describe PurchaseTransactionsController do
       get :new
       response.should redirect_to(action: 'index')
     end
-
   end
 
   describe "GET create" do
-
     def do_get_create(response = 0)
       get :create, product_id: PurchaseTransaction.products.keys.first, ref: 'a123', mxit_transaction_res: response
     end
@@ -54,7 +49,7 @@ describe PurchaseTransactionsController do
       do_get_create
       assigns(:purchase_transaction).should be_kind_of(PurchaseTransaction)
       assigns(:purchase_transaction).should be_persisted
-      assigns(:purchase_transaction).user.should == @current_user
+      assigns(:purchase_transaction).user_account.should == @current_user_account
       assigns(:purchase_transaction).ref.should == 'a123'
     end
 
@@ -64,7 +59,6 @@ describe PurchaseTransactionsController do
     end
 
     context "failed" do
-
       it "wont create if response != 0" do
         do_get_create(1)
         assigns(:purchase_transaction).should be_kind_of(PurchaseTransaction)
@@ -76,9 +70,6 @@ describe PurchaseTransactionsController do
         do_get_create(1)
         Gabba::Gabba.should_not_receive(:new)
       end
-
     end
-
   end
-
 end

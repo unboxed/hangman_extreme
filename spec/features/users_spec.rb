@@ -18,10 +18,10 @@ shared_examples "a registered user" do
     page.should have_content("Grant Speelman")
     page.should have_content("0821234567")
     click_link('edit_real_name')
-    fill_in 'user_real_name', with: "Joe Barber"
+    fill_in 'user_account_real_name', with: "Joe Barber"
     click_button 'submit'
     click_link('edit_mobile_number')
-    fill_in 'user_mobile_number', with: "0821234561"
+    fill_in 'user_account_mobile_number', with: "0821234561"
     click_button 'submit'
     page.should have_content("Joe Barber")
     page.should have_content("0821234561")
@@ -95,7 +95,7 @@ describe 'users', :redis => true do
     it "must show the profile if user mxit input is profile" do
       add_headers('X_MXIT_USER_INPUT' => 'profile')
       visit_home
-      page.current_path.should == profile_users_path
+      page.current_path.should == user_accounts_path
     end
 
   end
@@ -103,7 +103,7 @@ describe 'users', :redis => true do
   context "as mobile user", :facebook => true, :smaato_vcr => true, :js => true do
 
     before :each do
-      @current_user = facebook_user(:real_name => "Grant Speelman", :mobile_number => "0821234567")
+      @current_user = facebook_user({},:real_name => "Grant Speelman", :mobile_number => "0821234567")
       login_facebook_user(@current_user)
     end
 

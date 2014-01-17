@@ -7,8 +7,8 @@
 #  subject      :string(255)
 #  message      :text
 #  support_type :string(255)      default("suggestion")
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  created_at   :datetime
+#  updated_at   :datetime
 #
 
 class Feedback < ActiveRecord::Base

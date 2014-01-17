@@ -6,8 +6,8 @@
 #  word                    :string(255)
 #  choices                 :text
 #  user_id                 :integer
-#  created_at              :datetime         not null
-#  updated_at              :datetime         not null
+#  created_at              :datetime
+#  updated_at              :datetime
 #  completed               :boolean          default(FALSE)
 #  score                   :integer
 #  clue_revealed           :boolean          default(FALSE), not null
@@ -55,9 +55,9 @@ class Game < ActiveRecord::Base
   end
 
   def reveal_clue
-    if user.credits > 0 && !clue_revealed?
+    if user.account.credits > 0 && !clue_revealed?
       Game.transaction do
-        user.decrement!(:credits)
+        user.account.use_credit!
         toggle!(:clue_revealed)
       end
     end

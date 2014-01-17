@@ -4,7 +4,7 @@ require 'sidekiq/testing'
 shared_examples "a winner redeemer" do
 
   it "must show users redeem winnings link" do
-    @current_user.update_attributes(:prize_points => 100)
+    @current_user.account.update_attributes(:prize_points => 100)
     visit_home
     click_link('redeem')
     page.should have_content("Redeeming Winnings")
@@ -25,7 +25,7 @@ shared_examples "a winner redeemer" do
                          :record => :once,
                          :erb => true,
                          :match_requests_on => [:uri,:method]) do
-          @current_user.update_attributes(:prize_points => value + 1)
+          @current_user.account.update_attributes(:prize_points => value + 1)
           visit_home
           click_link('redeem')
           page.should have_content("#{value + 1} prize points")
@@ -63,7 +63,7 @@ describe 'redeem winnings', :redis => true do
     it_behaves_like "a winner redeemer"
 
     it "must allow to redeem prize points for mxit_money" do
-      @current_user.update_attributes(:prize_points => 257)
+      @current_user.account.update_attributes(:prize_points => 257)
       visit_home
       click_link('redeem')
       page.should have_content("257 prize points")

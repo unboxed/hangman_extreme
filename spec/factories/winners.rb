@@ -8,8 +8,8 @@
 #  amount           :integer
 #  period           :string(255)
 #  end_of_period_on :date
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
+#  created_at       :datetime
+#  updated_at       :datetime
 #
 
  # Read about factories at https://github.com/thoughtbot/factory_girl

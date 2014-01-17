@@ -19,7 +19,7 @@
 <% end %>
 <% unless guest? %>
   <% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
-  <% menu_item 'profile',mxit_request? ? mxit_auth_url(state: "profile") : profile_users_path, id: 'authorise' %>
+  <% menu_item 'profile',mxit_request? ? mxit_auth_url(state: "profile") : user_accounts_path, id: 'authorise' %>
 <% end %>
 <% menu_item 'leaderboard', users_path, id: 'leaderboard' %>
 <% menu_item 'winners', winners_path, id: 'winners' %>

@@ -33,6 +33,10 @@ class UserSendMessage
     Airbrake.notify_or_ignore(e, :parameters => {:msg => msg, :users => users})
   end
 
+  def self.send(msg,users)
+    new("Your airtime voucher is available in the $airtime vouchers$ section.", users).send_all
+  end
+
   private
 
   def send_message_to_array(batch)

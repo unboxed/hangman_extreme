@@ -15,7 +15,7 @@ class PurchaseTransactionsController < ApplicationController
   def create
 
     if params[:mxit_transaction_res].to_i == 0
-      @purchase_transaction.user = current_user
+      @purchase_transaction.user_account = current_user_account
       @purchase_transaction.product_id = params[:product_id]
       @purchase_transaction.ref = params[:ref]
       @purchase_transaction.save!

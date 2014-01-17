@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe UsersController do
-
   before :each do
     @current_user = create(:user)
     @ability = Object.new
@@ -23,11 +22,9 @@ describe UsersController do
       assigns(:user).should eq(@current_user)
       assigns(:user).should be_decorated
     end
-
   end
 
   describe "GET 'mxit_oauth'" do
-
     before :each do
       @connection = double('MxitApi', access_token: "123", profile: {}, scope: "profile")
       MxitApiWrapper.stub(:new).and_return(@connection)
@@ -40,7 +37,6 @@ describe UsersController do
       get 'mxit_oauth', code: "123"
     end
 
-
     it "Sets a alert if no code" do
       get 'mxit_oauth'
       flash[:alert].should_not be_blank
@@ -48,7 +44,7 @@ describe UsersController do
 
     it "returns redirects to profile page" do
       get 'mxit_oauth'
-      response.should redirect_to(profile_users_path)
+      response.should redirect_to(user_accounts_path)
     end
 
     it "returns redirects to feedback page if state is feedback" do
@@ -62,54 +58,47 @@ describe UsersController do
     end
 
     context "send invite" do
-
       it "returns sets and save profile information" do
         @connection.stub(:scope).and_return("contact/invite")
         @connection.should_receive(:send_invite).with("m40363966002")
         get 'mxit_oauth', code: "123"
       end
-
     end
 
     context "profile" do
+      let(:current_user_account){@current_user.account}
 
       it "returns sets and save profile information" do
         @connection.should_receive(:profile).and_return(:first_name => "Grant",
                                                         :last_name => "Speelman",
                                                         :mobile_number => "0821234567")
-        @current_user.should_receive(:save)
         get 'mxit_oauth', code: "123"
-        @current_user.real_name.should == "Grant Speelman"
-        @current_user.mobile_number.should == "0821234567"
+        current_user_account.real_name.should == "Grant Speelman"
+        current_user_account.mobile_number.should == "0821234567"
       end
 
       it "returns usings mxit.im address if no email set" do
         @connection.should_receive(:profile).and_return(:user_id => "gman")
-        @current_user.should_receive(:save)
         get 'mxit_oauth', code: "123"
-        @current_user.email.should == "gman@mxit.im"
+        current_user_account.email.should == "gman@mxit.im"
       end
 
       it "must not change values" do
-        @current_user.real_name = "Joe Barber"
-        @current_user.mobile_number = "0821234123"
-        @current_user.email = "joe.barber@mail.com"
+        current_user_account.update_attributes(real_name: "Joe Barber",
+                                               mobile_number: "0821234123",
+                                               email: "joe.barber@mail.com")
         @connection.stub(:profile).and_return(:first_name => "Grant",
                                               :last_name => "Speelman",
                                               :mobile_number => "0821234567")
-        @current_user.stub(:save)
         get 'mxit_oauth', code: "123"
-        @current_user.real_name.should == "Joe Barber"
-        @current_user.mobile_number.should == "0821234123"
+        current_user_account.reload
+        current_user_account.real_name.should == "Joe Barber"
+        current_user_account.mobile_number.should == "0821234123"
       end
-
     end
-
-
   end
 
   describe "GET index" do
-
     def do_get_index(params = {})
       get :index, params
     end
@@ -136,66 +125,5 @@ describe UsersController do
       do_get_index
       response.should be_success
     end
-
   end
-
-  describe "PUT update" do
-
-    before :each do
-      @user = create(:user)
-    end
-
-    def do_update
-      put :update, :user => {'real_name' => 'params'}, :id => @user.id
-    end
-
-    context "with valid params" do
-
-      it "updates the requested user" do
-        User.any_instance.should_receive(:update_attributes).with({'real_name' => 'params'}).and_return(true)
-        do_update
-      end
-
-      it "assigns the requested user as @user" do
-        do_update
-        assigns(:user).should eq(@user)
-      end
-
-      it "redirects to the profile page" do
-        do_update
-        response.should redirect_to(profile_users_path)
-      end
-
-      it "sets an notice" do
-        do_update
-        flash[:notice].should == 'Profile was successfully updated.'
-      end
-
-      context "with invalid params" do
-
-        before :each do
-          # Trigger the behavior that occurs when invalid params are submitted
-          User.any_instance.stub(:save).and_return(false)
-        end
-
-        it "sets an alert" do
-          do_update
-          flash[:alert].should_not be_blank
-        end
-
-        it "assigns the requested user as @user" do
-          do_update
-          assigns(:user).should eq(@user)
-        end
-
-        it "redirects to the profile page" do
-          do_update
-          response.should redirect_to(profile_users_path)
-        end
-
-      end
-    end
-
-  end
-
 end

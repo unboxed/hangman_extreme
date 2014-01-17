@@ -3,29 +3,30 @@
 # Table name: purchase_transactions
 #
 #  id                  :integer          not null, primary key
-#  user_id             :integer
+#  _deprecated_user_id :integer
 #  product_id          :string(255)      not null
 #  product_name        :string(255)      not null
 #  product_description :text
 #  moola_amount        :integer          not null
 #  currency_amount     :string(255)      not null
 #  ref                 :string(255)
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
+#  created_at          :datetime
+#  updated_at          :datetime
+#  user_account_id     :integer
 #
 
 class PurchaseTransaction < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user_account
 
-  validates :product_id, :user_id, :currency_amount, :product_name, :ref, presence: true
+  validates :product_id, :user_account_id, :currency_amount, :product_name, :ref, presence: true
   validates_numericality_of :moola_amount, only_integer: true, greater_than: 0
-  after_create :update_user_credits
+  after_create :update_user_account_credits
 
   scope :last_day, -> { where('created_at >= ?',1.day.ago) }
 
 
   def generate_ref
-    "R#{rand(8999) + 1000}T#{Time.now.strftime("%j%H%M")}U#{user_id}P#{product_id}M#{moola_amount}"
+    "R#{rand(8999) + 1000}T#{Time.now.strftime("%j%H%M")}UA#{user_account_id}P#{product_id}M#{moola_amount}"
   end
 
   def product_id=(v)
@@ -60,9 +61,7 @@ class PurchaseTransaction < ActiveRecord::Base
 
   protected
 
-  def update_user_credits
-    user.increment!(:credits,credits)
+  def update_user_account_credits
+    user_account.increment!(:credits,credits)
   end
-
-
 end

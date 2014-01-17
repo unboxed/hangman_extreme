@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe RedeemWinningsController do
-
   before :each do
     @current_user = create(:user)
+    @current_user_account = @current_user.account
     @ability = Object.new
     @ability.extend(CanCan::Ability)
     @ability.can(:manage, :all)
@@ -25,21 +25,19 @@ describe RedeemWinningsController do
   end
 
   describe "GET new" do
-
     it "redirects to index if no prize_type" do
       get :new
       response.should redirect_to(action: 'index')
     end
 
     it "assigns a new mxit_money redeem_winning as @redeem_winning" do
-      @current_user.prize_points = 9
+      @current_user_account.prize_points = 9
       get :new, :prize_type => "mxit_money", :prize_amount => "9"
       assigns(:redeem_winning).should be_a_new(RedeemWinning)
       assigns(:redeem_winning).prize_type.should == "mxit_money"
       assigns(:redeem_winning).prize_amount.should == 9
       assigns(:redeem_winning).state.should == 'pending'
     end
-
   end
 
   # update the return value of this method accordingly.
@@ -48,16 +46,14 @@ describe RedeemWinningsController do
   end
 
   describe "POST create" do
-
     def do_create
-      @current_user.increment!(:prize_points,valid_attributes[:prize_amount])
+      @current_user_account.increment!(:prize_points,valid_attributes[:prize_amount])
       post :create, :redeem_winning => valid_attributes
     end
 
     describe "with valid params" do
-
       before :each do
-        @current_user.increment!(:prize_points,11)
+        @current_user_account.increment!(:prize_points,11)
       end
 
       it "creates a new redeem winning" do
@@ -69,7 +65,7 @@ describe RedeemWinningsController do
       it "assigns a newly created redeem winning as @redeem_winning" do
         do_create
         assigns(:redeem_winning).should be_a(RedeemWinning)
-        assigns(:redeem_winning).user.should == @current_user
+        assigns(:redeem_winning).user_account.should == @current_user_account
         assigns(:redeem_winning).should be_persisted
       end
 
@@ -82,11 +78,9 @@ describe RedeemWinningsController do
         do_create
         flash[:notice].should_not be_blank
       end
-
     end
 
     describe "with invalid params" do
-
       before :each do
         # Trigger the behavior that occurs when invalid params are submitted
         RedeemWinning.any_instance.stub(:save!).and_raise("error")
@@ -106,8 +100,6 @@ describe RedeemWinningsController do
         do_create
         flash[:alert].should_not be_blank
       end
-
     end
   end
-
 end

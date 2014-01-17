@@ -6,7 +6,7 @@ describe 'purchases', :redis => true do
 
     before :each do
       @current_user = mxit_user('m2604100')
-      @credits = @current_user.credits
+      @credits = @current_user.account.credits
       set_mxit_headers('m2604100') # set mxit user
       stub_mxit_oauth # stub mixt profile auth
     end

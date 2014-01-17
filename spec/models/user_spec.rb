@@ -2,30 +2,30 @@
 #
 # Table name: users
 #
-#  id                    :integer          not null, primary key
-#  name                  :text
-#  uid                   :string(255)
-#  provider              :string(255)
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  weekly_rating         :integer          default(0)
-#  yearly_rating         :integer          default(0)
-#  weekly_streak         :integer          default(0)
-#  daily_rating          :integer          default(0)
-#  daily_streak          :integer          default(0)
-#  real_name             :string(255)
-#  mobile_number         :string(255)
-#  email                 :string(255)
-#  credits               :integer          default(24), not null
-#  prize_points          :integer          default(0), not null
-#  login                 :string(255)
-#  lock_version          :integer          default(0), not null
-#  current_daily_streak  :integer          default(0), not null
-#  current_weekly_streak :integer          default(0), not null
-#  daily_wins            :integer          default(0), not null
-#  weekly_wins           :integer          default(0), not null
-#  show_hangman          :boolean          default(TRUE)
-#  winners_count         :integer          default(0), not null
+#  id                        :integer          not null, primary key
+#  name                      :text
+#  uid                       :string(255)
+#  provider                  :string(255)
+#  created_at                :datetime
+#  updated_at                :datetime
+#  weekly_rating             :integer          default(0)
+#  yearly_rating             :integer          default(0)
+#  weekly_streak             :integer          default(0)
+#  daily_rating              :integer          default(0)
+#  daily_streak              :integer          default(0)
+#  _deprecated_real_name     :string(255)
+#  _deprecated_mobile_number :string(255)
+#  _deprecated_email         :string(255)
+#  _deprecated_credits       :integer          default(24), not null
+#  _deprecated_prize_points  :integer          default(0), not null
+#  _deprecated_login         :string(255)
+#  lock_version              :integer          default(0), not null
+#  current_daily_streak      :integer          default(0), not null
+#  current_weekly_streak     :integer          default(0), not null
+#  daily_wins                :integer          default(0), not null
+#  weekly_wins               :integer          default(0), not null
+#  show_hangman              :boolean          default(TRUE)
+#  winners_count             :integer          default(0), not null
 #
 
 require 'spec_helper'
@@ -227,37 +227,6 @@ describe User do
       expect{
         sleep 1; user.utma(false)
       }.to_not change(user,:utma)
-    end
-  end
-
-  describe "registered_on_mxit_money?" do
-    before :each do
-      @mxit_money_connection = double("connection", :user_info => {:is_registered => false})
-      MxitMoneyApi.stub(:connect).and_return(@mxit_money_connection)
-      @user = stub_model(User, :uid => 'm111')
-    end
-
-    it "must connect to MxitMoneyApi" do
-      MxitMoneyApi.should_receive(:connect).with(ENV['MXIT_MONEY_API_KEY']).and_return(@mxit_money_connection)
-      @user.registered_on_mxit_money?
-    end
-
-    it "must check the user_info with uid" do
-      @mxit_money_connection.should_receive(:user_info).with(:id => 'm111').and_return({})
-      @user.registered_on_mxit_money?
-    end
-
-    it "wont be registered on mxit money if is_registered is false" do
-      @user.should_not be_registered_on_mxit_money
-    end
-  end
-
-  describe "send_message" do
-    it "must use message sender" do
-      sender = double("send")
-      UserSendMessage.should_receive(:new).with("Nobody!!",[]).and_return(sender)
-      sender.should_receive(:send_all)
-      User.send_message("Nobody!!",[])
     end
   end
 
@@ -501,11 +470,11 @@ describe User do
     end
 
     it "must create account if it does not exist and set default values" do
-      @user.update_attributes(real_name: 'Grant',
-                              mobile_number: '000',
-                              email: 'grant@example.com',
-                              credits: 111,
-                              prize_points: 123)
+      @user.update_attributes(_deprecated_real_name: 'Grant',
+                              _deprecated_mobile_number: '000',
+                              _deprecated_email: 'grant@example.com',
+                              _deprecated_credits: 111,
+                              _deprecated_prize_points: 123)
       user_account = @user.account
       user_account.should_not be_nil
       user_account.real_name.should == 'Grant'
@@ -513,14 +482,6 @@ describe User do
       user_account.email.should == 'grant@example.com'
       user_account.credits.should == 111
       user_account.prize_points.should == 123
-    end
-  end
-
-  describe "account_credits" do
-    it "must return the accounts credits" do
-      user = create(:user, uid: 'grant', provider: 'mxit')
-      user_account = create(:user_account, uid: 'grant', provider: 'mxit', credits: 11)
-      user.account_credits.should == 11
     end
   end
 end
