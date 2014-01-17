@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130902071231) do
+ActiveRecord::Schema.define(version: 20140117032926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,6 +127,19 @@ ActiveRecord::Schema.define(version: 20130902071231) do
   end
 
   add_index "redeem_winnings", ["user_id"], name: "index_redeem_winnings_on_user_id", using: :btree
+
+  create_table "user_accounts", force: true do |t|
+    t.string   "uid",                        null: false
+    t.string   "provider",                   null: false
+    t.string   "real_name"
+    t.string   "mobile_number"
+    t.string   "email"
+    t.integer  "credits",       default: 24
+    t.integer  "prize_points"
+    t.integer  "lock_version",  default: 0,  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.text     "name"
