@@ -51,6 +51,18 @@ class User < ActiveRecord::Base
   scope :last_day, -> { where('created_at >= ?',1.day.ago) }
   scope :random_order, -> { order(connection.instance_values["config"][:adapter].include?("mysql") ? 'RAND()' : 'RANDOM()') }
 
+  delegate :credits, to: :account, prefix: true
+
+  def account
+    @account ||=
+      UserAccount.create_with(real_name: real_name,
+                              mobile_number: mobile_number,
+                              email: email,
+                              credits: credits,
+                              prize_points: prize_points).
+                  find_or_create_by({uid: uid,provider: provider})
+  end
+
   def self.find_or_create_from_auth_hash(auth_hash)
     auth_hash.stringify_keys!
     return nil if auth_hash['uid'].blank? || auth_hash['provider'].blank?
