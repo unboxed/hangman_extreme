@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: winners
+#
+#  id               :integer          not null, primary key
+#  user_id          :integer
+#  reason           :string(255)
+#  amount           :integer
+#  period           :string(255)
+#  end_of_period_on :date
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+
 class Winner < ActiveRecord::Base
   WEEKLY_PRIZE_AMOUNTS = [500,500,500,500,500]
   DAILY_PRIZE_AMOUNTS  = [ 25, 25, 25, 25, 25]

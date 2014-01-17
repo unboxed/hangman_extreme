@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: redeem_winnings
+#
+#  id                   :integer          not null, primary key
+#  user_id              :integer
+#  prize_amount         :integer
+#  prize_type           :string(255)
+#  state                :string(255)
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  mxit_money_reference :text
+#
+
 require 'spec_helper'
 require 'sidekiq/testing'
 

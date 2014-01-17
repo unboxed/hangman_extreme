@@ -1,3 +1,33 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                    :integer          not null, primary key
+#  name                  :text
+#  uid                   :string(255)
+#  provider              :string(255)
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  weekly_rating         :integer          default(0)
+#  yearly_rating         :integer          default(0)
+#  weekly_streak         :integer          default(0)
+#  daily_rating          :integer          default(0)
+#  daily_streak          :integer          default(0)
+#  real_name             :string(255)
+#  mobile_number         :string(255)
+#  email                 :string(255)
+#  credits               :integer          default(24), not null
+#  prize_points          :integer          default(0), not null
+#  login                 :string(255)
+#  lock_version          :integer          default(0), not null
+#  current_daily_streak  :integer          default(0), not null
+#  current_weekly_streak :integer          default(0), not null
+#  daily_wins            :integer          default(0), not null
+#  weekly_wins           :integer          default(0), not null
+#  show_hangman          :boolean          default(TRUE)
+#  winners_count         :integer          default(0), not null
+#
+
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do

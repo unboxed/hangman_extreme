@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: games
+#
+#  id                      :integer          not null, primary key
+#  word                    :string(255)
+#  choices                 :text
+#  user_id                 :integer
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  completed               :boolean          default(FALSE)
+#  score                   :integer
+#  clue_revealed           :boolean          default(FALSE), not null
+#  completed_attempts_left :integer
+#
+
 class Game < ActiveRecord::Base
   ATTEMPTS = 10
   belongs_to :user
