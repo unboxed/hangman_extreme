@@ -51,22 +51,6 @@ class User < ActiveRecord::Base
   scope :last_day, -> { where('created_at >= ?',1.day.ago) }
   scope :random_order, -> { order(connection.instance_values["config"][:adapter].include?("mysql") ? 'RAND()' : 'RANDOM()') }
 
-  def self.active_mxit
-    active.mxit
-  end
-
-  def self.active_mxit_today
-    last_day.mxit
-  end
-
-  def self.active_non_mxit
-    active.non_mxit
-  end
-
-  def self.active_non_mxit_today
-    last_day.non_mxit
-  end
-
   def self.find_or_create_from_auth_hash(auth_hash)
     auth_hash.stringify_keys!
     return nil if auth_hash['uid'].blank? || auth_hash['provider'].blank?
