@@ -119,26 +119,16 @@ class Winner < ActiveRecord::Base
     wins_required = options[:period] == 'daily' ? daily_random_games_required : weekly_random_games_required
     previous_winners = period(options[:period]).reason(options[:score_by]).order('created_at DESC').limit(options[:winnings].size)
     user_scope = User.where('id NOT IN (?)',previous_winners.map(&:user_id) + [0]).where("users.#{options[:period]}_wins >= ?",wins_required).random_order
-    # prefer players who have never won before
-    random_winner_users = user_scope.where('winners_count = ?', 0).limit(winners_left)
-    if random_winner_users.any?
-      winners[pos] = random_winner_users
-      winners_left -= random_winner_users.size
-      user_scope = user_scope.where('users.id NOT IN (?)',random_winner_users.map(&:id))
+    other_winners = winning_ranking_reasons.collect{|r| period(options[:period]).reason(r).order('created_at DESC').limit(options[:winnings].size).to_a }.flatten
+    #  prefer players who have not won in another category
+    second_random_winner_users = user_scope.where('users.id NOT IN (?)',other_winners.map(&:user_id)).limit(winners_left)
+    if second_random_winner_users.any?
+      winners[pos] = second_random_winner_users
+      winners_left -= second_random_winner_users.size
+      user_scope = user_scope.where('users.id NOT IN (?)',second_random_winner_users.map(&:id))
       pos += 1
     end
-    if winners_left > 0
-      other_winners = winning_ranking_reasons.collect{|r| period(options[:period]).reason(r).order('created_at DESC').limit(options[:winnings].size).to_a }.flatten
-      # then prefer players who have not won in another category
-      second_random_winner_users = user_scope.where('users.id NOT IN (?)',other_winners.map(&:user_id)).limit(winners_left)
-      if second_random_winner_users.any?
-        winners[pos] = second_random_winner_users
-        winners_left -= second_random_winner_users.size
-        user_scope = user_scope.where('users.id NOT IN (?)',second_random_winner_users.map(&:id))
-        pos += 1
-      end
-      winners[pos] = user_scope.limit(winners_left) if winners_left > 0
-    end
+    winners[pos] = user_scope.limit(winners_left) if winners_left > 0
     winners
   end
 
