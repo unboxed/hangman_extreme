@@ -1,3 +1,4 @@
+#!/bin/sh
 git remote add production git@heroku.com:mxithangmanleague.git
 heroku maintenance:on --app mxithangmanleague && \
 git push production master && \
