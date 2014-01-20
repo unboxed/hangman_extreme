@@ -2,6 +2,7 @@ if PurchaseTransaction.where('user_account_id IS NULL').any?
   puts "Migrating #{PurchaseTransaction.where('user_account_id IS NULL').count} purchase transactions to UserAccount"
   while PurchaseTransaction.where('user_account_id IS NULL').any?
     PurchaseTransaction.where('user_account_id IS NULL').limit(1000).each do |purchase_transaction|
+      PurchaseTransaction.where('_deprecated_user_id = ?',purchase_transaction._deprecated_user_id).update_all(user_account_id: User.find(purchase_transaction._deprecated_user_id).account.id)
       purchase_transaction.update_attributes( :user_account => User.find(purchase_transaction._deprecated_user_id).account )
       print "."
     end
