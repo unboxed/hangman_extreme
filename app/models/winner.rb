@@ -145,6 +145,4 @@ class Winner < ActiveRecord::Base
     winners[pos] = user_scope.limit(winners_left) if winners_left > 0
     winners
   end
-
-
 end
