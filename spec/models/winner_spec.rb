@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: winners
+#
+#  id               :integer          not null, primary key
+#  user_id          :integer
+#  reason           :string(255)
+#  amount           :integer
+#  period           :string(255)
+#  end_of_period_on :date
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
 require 'spec_helper'
 require 'timecop'
 
@@ -39,7 +53,7 @@ describe Winner do
   context "create_winners_for_category" do
 
     before :each do
-      User.stub(:send_message)
+      UserSendMessage.stub(:send)
     end
 
     ['daily', 'weekly'].each do |period|
@@ -136,7 +150,7 @@ describe Winner do
 
           it "must send the players a message" do
             create_list(:user, 5, "#{period}_wins" => required_wins)
-            User.should_receive(:send_message).with(anything(), kind_of(Array))
+            UserSendMessage.should_receive(:send).with(anything(), kind_of(Array))
             Winner.create_winners_for_category(period: period, score_by: "random", winnings: [10] * 5)
           end
 
@@ -145,7 +159,7 @@ describe Winner do
             Winner.create_winners_for_category(period: period, score_by: "random", winnings: [8] * 5)
             users.each do |user|
               user.reload
-              user.prize_points.should == 8
+              user.account.prize_points.should == 8
             end
           end
 
@@ -238,8 +252,7 @@ describe Winner do
 
             it "must send the players a message" do
               create_list(:user, 5, "#{period}_#{score_by}" => 10)
-              User.should_receive(:send_message).
-                with(anything(), kind_of(Array))
+              UserSendMessage.should_receive(:send).with(anything(), kind_of(Array))
               Winner.create_winners_for_category(period: period, score_by: score_by, winnings: [10] * 5)
             end
 
@@ -248,7 +261,7 @@ describe Winner do
               Winner.create_winners_for_category(period: period, score_by: score_by, winnings: [8] * 5)
               users.each do |user|
                 user.reload
-                user.prize_points.should == 8
+                user.account.prize_points.should == 8
               end
             end
 
@@ -267,8 +280,7 @@ describe Winner do
       create_list(:user, 10, daily_rating: 0, daily_streak: 0)
       Winner.should respond_to(:create_winners_for_category)
       Winner.stub(:create_winners_for_category)
-      User.should respond_to(:send_message)
-      User.stub(:send_message)
+      UserSendMessage.stub(:send)
     end
 
     it "must create the rating winner" do
@@ -282,7 +294,7 @@ describe Winner do
     end
 
     it "must send a message to everyone" do
-      User.should_receive(:send_message).
+      UserSendMessage.should_receive(:send).
         with("We have selected our $winners$ for the daily prizes, Congratulations to those who have won.",
              anything())
       Winner.create_daily_winners((11..20).to_a.reverse)

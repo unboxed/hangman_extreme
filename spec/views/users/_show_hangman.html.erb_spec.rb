@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'view_spec_helper'
 
 describe "users/_show_hangman.html.erb" do
 

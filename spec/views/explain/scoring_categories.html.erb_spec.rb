@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'view_spec_helper'
 
 describe "explain/scoring_categories.html.erb" do
 

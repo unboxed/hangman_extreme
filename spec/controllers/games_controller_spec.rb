@@ -2,9 +2,9 @@ require 'spec_helper'
 require 'timecop'
 
 describe GamesController do
-
   before :each do
     @current_user = create(:user)
+    @current_user_account = @current_user.account
     @ability = Object.new
     @ability.extend(CanCan::Ability)
     @ability.can(:manage, :all)
@@ -14,7 +14,6 @@ describe GamesController do
   end
 
   describe "GET index" do
-
     def do_get_index
       get :index
     end
@@ -35,11 +34,9 @@ describe GamesController do
       do_get_index
       response.should be_success
     end
-
   end
 
   describe "GET show" do
-
     before :each do
       @game = create(:game)
     end
@@ -57,11 +54,9 @@ describe GamesController do
       do_get_show
       response.should be_success
     end
-
   end
 
   describe "GET show_clue" do
-
     before :each do
       @game = create(:game)
       get :show_clue, {:id => @game.to_param}
@@ -74,11 +69,9 @@ describe GamesController do
     it "renders successfully" do
       response.should be_success
     end
-
   end
 
   describe "POST reveal_clue" do
-
     before :each do
       @game = create(:game, user: @current_user)
     end
@@ -88,14 +81,14 @@ describe GamesController do
     end
 
     it "must show clue" do
-      @current_user.update_attribute(:credits, 1)
+      @current_user_account.update_attribute(:credits, 1)
       expect {
         do_post_reveal_clue
       }.to change { @game.reload; @game.clue_revealed }
     end
 
     it "wont show clue" do
-      @current_user.update_attribute(:credits, 0)
+      @current_user_account.update_attribute(:credits, 0)
       do_post_reveal_clue
       response.should redirect_to(purchases_path)
       flash[:alert].should_not be_blank
@@ -110,11 +103,9 @@ describe GamesController do
       do_post_reveal_clue
       response.should redirect_to(action: 'show')
     end
-
   end
 
   describe "GET play_letter" do
-
     before :each do
       @game = create(:game, choices: "a", user: @current_user)
     end
@@ -310,7 +301,6 @@ describe GamesController do
   end
 
   describe "GET new" do
-
     def do_get_new
       get :new
     end
@@ -326,16 +316,14 @@ describe GamesController do
     end
 
     it "redirects to purchase_transaction_path if no more credits" do
-      @current_user.update_attribute(:credits,0)
+      @current_user.account.update_attribute(:credits,0)
       do_get_new
       response.should redirect_to(purchases_path)
       flash[:alert].should_not be_blank
     end
-
   end
 
   describe "GET play" do
-
     def do_get_play
       get :play
     end
@@ -350,7 +338,6 @@ describe GamesController do
       do_get_play
       response.should redirect_to(game)
     end
-
   end
 
 # update the return value of this method accordingly.
@@ -359,14 +346,12 @@ describe GamesController do
   end
 
   describe "POST create" do
-
     def do_create
       post :create,
            :game => valid_attributes
     end
 
     describe "with valid params" do
-
       it "creates a new Game" do
         expect {
           do_create
@@ -376,7 +361,7 @@ describe GamesController do
       it "reduces the users credits" do
         expect {
           do_create
-        }.to change{@current_user.reload; @current_user.credits}.by(-1)
+        }.to change{@current_user_account.reload; @current_user_account.credits}.by(-1)
       end
 
       it "assigns a newly created game as @game" do
@@ -393,7 +378,6 @@ describe GamesController do
     end
 
     describe "with invalid params" do
-
       before :each do
         # Trigger the behavior that occurs when invalid params are submitted
         Game.any_instance.stub(:save).and_return(false)
@@ -413,9 +397,6 @@ describe GamesController do
         do_create
         flash[:alert].should_not be_blank
       end
-
     end
-
   end
-
 end

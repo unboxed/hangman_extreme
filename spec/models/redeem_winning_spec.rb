@@ -1,10 +1,23 @@
+# == Schema Information
+#
+# Table name: redeem_winnings
+#
+#  id                   :integer          not null, primary key
+#  _deprecated_user_id  :integer
+#  prize_amount         :integer
+#  prize_type           :string(255)
+#  state                :string(255)
+#  created_at           :datetime
+#  updated_at           :datetime
+#  mxit_money_reference :text
+#  user_account_id      :integer
+#
+
 require 'spec_helper'
 require 'sidekiq/testing'
 
 describe RedeemWinning do
-
-  context "Validation" do
-
+  describe "Validation" do
     ['clue_points','vodago_airtime','cell_c_airtime','mtn_airtime',
      'mxit_money','virgin_airtime','heita_airtime'].each do |t|
       it "must accept #{t} as valid prize type" do
@@ -22,16 +35,16 @@ describe RedeemWinning do
       RedeemWinning.new(prize_amount: 1).should have(0).errors_on(:prize_amount)
     end
 
-    it "must have a user_id" do
-      RedeemWinning.new.should have(1).errors_on(:user_id)
-      RedeemWinning.new(user_id: 1).should have(0).errors_on(:user_id)
+    it "must have a user_account_id" do
+      RedeemWinning.new.should have(1).errors_on(:user_account_id)
+      RedeemWinning.new(user_account_id: 1).should have(0).errors_on(:user_account_id)
     end
 
     it "must have a user with enough prize_points" do
-      user = create(:user, prize_points: 9)
-      RedeemWinning.new(user_id: user.id, prize_amount: 10).should have(1).errors_on(:user_id)
-      user = create(:user, prize_points: 10)
-      RedeemWinning.new(user_id: user.id, prize_amount: 10).should have(0).errors_on(:user_id)
+      user_account = create(:user_account, prize_points: 9)
+      RedeemWinning.new(user_account_id: user_account.id, prize_amount: 10).should have(1).errors_on(:user_account_id)
+      user_account = create(:user_account, prize_points: 10)
+      RedeemWinning.new(user_account_id: user_account.id, prize_amount: 10).should have(0).errors_on(:user_account_id)
     end
 
     it "must have a valid state" do
@@ -43,46 +56,37 @@ describe RedeemWinning do
         RedeemWinning.new(state: t).should have(0).errors_on(:state)
       end
     end
-
   end
 
-  context "scopes" do
-
+  describe "scopes" do
     describe "pending_mxit_money" do
 
       it "must include a pending mxit money" do
         winning = create(:redeem_winning, prize_amount: 10, prize_type: 'mxit_money', state: 'pending')
         RedeemWinning.pending_mxit_money.should include(winning)
       end
-
     end
-
   end
 
-  context "update user" do
-
+  describe "update user" do
     it "must reduce user prize points after create" do
-      user = create(:user, prize_points: 11)
-      RedeemWinning.create!(user_id: user.id, prize_amount: 10, prize_type: 'clue_points', state: 'pending')
-      user.reload
-      user.prize_points.should == 1
+      user_account = create(:user_account, prize_points: 11)
+      RedeemWinning.create!(user_account_id: user_account.id, prize_amount: 10, prize_type: 'clue_points', state: 'pending')
+      user_account.reload
+      user_account.prize_points.should == 1
     end
-
   end
 
-  context "paid!" do
-
+  describe "paid!" do
     it "must update state to paid" do
       winning = create(:redeem_winning, prize_amount: 10, prize_type: 'vodago_airtime', state: 'pending')
       RedeemWinning.paid!(winning.id)
       winning.reload
       winning.should be_paid
     end
-
   end
 
-  context "issue_mxit_money" do
-
+  describe "issue_mxit_money" do
     after :each do
       IssueMxitMoneyToUsers.jobs.clear
     end
@@ -98,11 +102,9 @@ describe RedeemWinning do
         create(:redeem_winning, prize_amount: 10, prize_type: 'vodago_airtime', state: 'pending')
       }.to_not change(IssueMxitMoneyToUsers.jobs, :size)
     end
-
   end
 
-  context "issue_airtime" do
-
+  describe "issue_airtime" do
     after :each do
       IssueAirtimeToUsers.jobs.clear
     end
@@ -124,7 +126,5 @@ describe RedeemWinning do
         create(:redeem_winning, prize_amount: 10, prize_type: 'mtn_airtime', state: 'pending')
       }.to change(IssueAirtimeToUsers.jobs, :size).by(1)
     end
-
   end
-
 end

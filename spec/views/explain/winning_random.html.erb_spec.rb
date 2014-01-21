@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'view_spec_helper'
 
 describe "explain/winning_random.html.erb" do
   before(:each) do

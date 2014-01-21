@@ -1,7 +1,22 @@
+# == Schema Information
+#
+# Table name: redeem_winnings
+#
+#  id                   :integer          not null, primary key
+#  _deprecated_user_id  :integer
+#  prize_amount         :integer
+#  prize_type           :string(255)
+#  state                :string(255)
+#  created_at           :datetime
+#  updated_at           :datetime
+#  mxit_money_reference :text
+#  user_account_id      :integer
+#
+
 class RedeemWinning < ActiveRecord::Base
   PRIZE_TYPES = %W(clue_points vodago_airtime cell_c_airtime mtn_airtime mxit_money virgin_airtime heita_airtime).freeze
 
-  validates :user_id, presence: true
+  validates :user_account_id, presence: true
   validates :prize_type, inclusion: PRIZE_TYPES
   validates :state, inclusion: ['pending','cancelled','paid']
   validates_numericality_of :prize_amount, greater_than: 0
@@ -10,17 +25,14 @@ class RedeemWinning < ActiveRecord::Base
   after_create :update_user_prize_points
   after_commit :issue_mxit_money, :issue_airtime, :on => :create
 
-  belongs_to :user
-  delegate :prize_points, :login, :mobile_number, :uid, :to => :user, :prefix => true
+  belongs_to :user_account
+  delegate :prize_points, :login, :mobile_number, :uid, :to => :user_account, :prefix => true
+
 
   scope :pending, -> { where('state = ?','pending') }
   scope :pending_mxit_money, -> { where('prize_type = ? AND state = ?','mxit_money','pending') }
   scope :pending_airtime, -> { where('prize_type LIKE ? AND state = ?','%airtime','pending') }
   scope :last_day, -> { where('created_at >= ?',1.day.ago) }
-
-  def self.pending_winnings_text
-    pending.joins(:user).includes(:user).order('prize_type,uid').collect{|rw| [rw.prize_type,rw.id,rw.user_uid,rw.user_login,rw.user_mobile_number,rw.prize_amount].join(" : ")}.join("\n")
-  end
 
   def self.paid!(*ids)
     ids.each do |id|
@@ -60,13 +72,13 @@ class RedeemWinning < ActiveRecord::Base
   protected
 
   def check_user_prize_points
-    if user && prize_amount && user_prize_points < prize_amount
-      errors.add(:user_id,"does not have enough prize points")
+    if user_account && prize_amount && user_account_prize_points < prize_amount
+      errors.add(:user_account_id,"does not have enough prize points")
     end
   end
 
   def update_user_prize_points
-    user.decrement!(:prize_points,prize_amount)
+    user_account.decrement!(:prize_points,prize_amount)
   end
 
   def issue_mxit_money

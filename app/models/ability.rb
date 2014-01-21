@@ -10,9 +10,9 @@ class Ability
 
     can :update, user
 
-    can :read, PurchaseTransaction, user_id: user.id
-    can :read, RedeemWinning, user_id: user.id
-    can :read, AirtimeVoucher, user_id: user.id
+    can :read, PurchaseTransaction, user_account_id: user.account.id
+    can :read, RedeemWinning, user_account_id: user.account.id
+    can :read, AirtimeVoucher, user_account_id: user.account.id
     can :read, Feedback, user_id: user.id
 
     unless user.guest?

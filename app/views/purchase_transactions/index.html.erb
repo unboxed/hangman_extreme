@@ -1,6 +1,6 @@
 <h1>Buy Credits</h1>
 
-<p>You have currently have <b><%= current_user.credits %></b> credits.
+<p>You have currently have <b><%= current_user_account.credits %></b> credits.
 All Players will be updated to 18 credits a day unless you have more</p>
 
 <% if mxit_request? && PurchaseTransaction.purchases_enabled? %>
@@ -20,4 +20,4 @@ All Players will be updated to 18 credits a day unless you have more</p>
 
 <br/>
 
-<% menu_item 'profile', profile_users_path, id: 'profile' unless guest? %>
+<% menu_item 'profile', user_accounts_path, id: 'profile' unless guest? %>

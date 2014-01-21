@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: feedback
+#
+#  id           :integer          not null, primary key
+#  user_id      :integer
+#  subject      :string(255)
+#  message      :text
+#  support_type :string(255)      default("suggestion")
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
 class Feedback < ActiveRecord::Base
   validates :message, presence: true
 

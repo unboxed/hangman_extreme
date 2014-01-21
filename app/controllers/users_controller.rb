@@ -8,18 +8,6 @@ class UsersController < ApplicationController
     @users = @users.top_scorers(@send).limit(5)
   end
 
-  def edit
-
-  end
-
-  def update
-    if @user.update_attributes(user_params)
-      redirect_to profile_users_path, notice: 'Profile was successfully updated.'
-    else
-      redirect_to profile_users_path, alert: @user.errors.inspect
-    end
-  end
-
   def show
     @user = (@user || current_user).decorate
   end
@@ -27,13 +15,13 @@ class UsersController < ApplicationController
   def hide_hangman
     current_user.show_hangman = false 
     current_user.save
-    redirect_to profile_users_path, notice: 'Profile was successfully updated.'
+    redirect_to user_accounts_path, notice: 'Profile was successfully updated.'
   end
 
   def show_hangman
     current_user.show_hangman = true
     current_user.save
-    redirect_to profile_users_path, notice: 'Profie was successfully updated'
+    redirect_to user_accounts_path, notice: 'Profie was successfully updated'
   end
 
   def badges
@@ -56,10 +44,16 @@ class UsersController < ApplicationController
           if mxit_connection.scope.include?("profile")
             mxit_user_profile = mxit_connection.profile
             unless mxit_user_profile.empty?
-              current_user.real_name = "#{mxit_user_profile[:first_name]} #{mxit_user_profile[:last_name]}" if current_user.real_name.blank?
-              current_user.mobile_number = mxit_user_profile[:mobile_number] if current_user.mobile_number.blank?
-              current_user.email = "#{request.env['HTTP_X_MXIT_LOGIN'] || mxit_user_profile[:user_id]}@mxit.im"
-              current_user.save
+              if current_user_account.real_name.blank?
+                current_user_account.real_name = "#{mxit_user_profile[:first_name]} #{mxit_user_profile[:last_name]}"
+              end
+              if current_user_account.mobile_number.blank?
+                current_user_account.mobile_number = mxit_user_profile[:mobile_number]
+              end
+              if current_user_account.email.blank?
+                current_user_account.email = "#{request.env['HTTP_X_MXIT_LOGIN'] || mxit_user_profile[:user_id]}@mxit.im"
+              end
+              current_user_account.save
             end
           end
           if mxit_connection.scope.include?("invite")
@@ -82,12 +76,8 @@ class UsersController < ApplicationController
     elsif params[:state] == 'winnings'
       redeem_winnings_path
     else
-      profile_users_path
+      user_accounts_path
     end
-  end
-
-  def user_params
-    params[:user].permit(:real_name, :mobile_number)
   end
 
 end

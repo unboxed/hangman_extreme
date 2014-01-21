@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe ApplicationController do
-
   describe "login required" do
-
     before :each do
       controller.stub(:send_stats)
     end
@@ -20,17 +18,19 @@ describe ApplicationController do
       response.should redirect_to(root_path)
     end
 
+    it "should find the user" do
+      User.should_receive(:find_by).with(kind_of(Hash)).and_return(stub_model(User, uid: '123', provider: '123'))
+      get :index
+    end
+
     it "wont redirects to root_path if logged_in" do
-      user = stub_model(User)
-      User.should_receive(:find_by_id).with(nil).and_return(user)
+      User.stub(:find_by).and_return(stub_model(User, uid: '123', provider: '123'))
       get :index
       response.should be_success
     end
-
   end
 
   describe "load_guest_user" do
-
     before :each do
       controller.stub(:send_stats)
     end
@@ -52,12 +52,9 @@ describe ApplicationController do
       get :index
       assigns(:current_user).should_not be_a_guest
     end
-
   end
 
   describe "handling CanCan AccessDenied exceptions" do
-
-
     controller do
       def index
         raise CanCan::AccessDenied
@@ -72,7 +69,6 @@ describe ApplicationController do
   end
 
   describe "it attempts to load the mxit user" do
-
     before :each do
       controller.stub(:send_stats)
     end
@@ -150,11 +146,9 @@ describe ApplicationController do
       get :index
       assigns(:current_user).should be_a_guest
     end
-
   end
 
   describe "sending stats" do
-
     controller do
       def index
         render :text => "hello"
@@ -244,11 +238,9 @@ describe ApplicationController do
       @gabba.should_receive(:page_view).with("anonymous index","/anonymous",@user.id)
       get :index
     end
-
   end
 
   describe "it captures mxit user input" do
-
     before :each do
       controller.stub(:send_stats)
     end
@@ -279,7 +271,7 @@ describe ApplicationController do
     it "must redirect to mxit invite if input extremepayout" do
       request.env['HTTP_X_MXIT_USER_INPUT'] = "profile"
       get :index
-      response.should redirect_to(profile_users_path)
+      response.should redirect_to(user_accounts_path)
     end
 
     it "must redirect to mxit invite if input extremepayout" do
@@ -287,11 +279,9 @@ describe ApplicationController do
       get :index
       response.should redirect_to(winners_path)
     end
-
   end
 
   describe "it uses correct layout" do
-
     controller do
       layout :set_layout
 
@@ -311,7 +301,5 @@ describe ApplicationController do
       get :index
       response.should render_template("layouts/mxit")
     end
-
   end
-
 end

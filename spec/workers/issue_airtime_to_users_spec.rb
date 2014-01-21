@@ -43,7 +43,7 @@ describe IssueAirtimeToUsers do
       end
 
       it "must set user" do
-        @airtime_voucher.user.should == @redeem_winning.user
+        @airtime_voucher.user_account.should == @redeem_winning.user_account
       end
 
       it "must change the redeem winning to paid" do

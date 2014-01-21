@@ -2,16 +2,13 @@ require 'spec_helper'
 require 'cancan/matchers'
 
 describe Ability do
-
   context "User" do
-
     before :each do
       @user = create(:user)
       @ability = Ability.new(@user)
     end
 
     context "Games" do
-
       it "must be able to view games" do
         @ability.should be_able_to(:read, Game)
       end
@@ -39,11 +36,9 @@ describe Ability do
         game = create(:game, user: @user)
         @ability.should be_able_to(:play_letter, game)
       end
-
     end
 
     context "Feedback" do
-
       it "must be able to view" do
         @ability.should be_able_to(:read, Feedback)
       end
@@ -61,11 +56,9 @@ describe Ability do
       it "must be able to create" do
         @ability.should be_able_to(:create, Feedback)
       end
-
     end
 
     context "Users" do
-
       it "must be able to read users" do
         @ability.should be_able_to(:read, User)
       end
@@ -78,91 +71,79 @@ describe Ability do
         other_user = create(:user)
         @ability.should_not be_able_to(:update, other_user)
       end
-
     end
 
     context "Winners" do
-
       it "must be able to read winners" do
         @ability.should be_able_to(:read, Winner)
       end
-
     end
 
     context "Purchase Transactions" do
-
       it "must be able to view purchase transactions" do
         @ability.should be_able_to(:read, PurchaseTransaction)
       end
 
       it "wont be able to read other users purchase_transactions" do
-        trans = create(:purchase_transaction, user: create(:user))
+        trans = create(:purchase_transaction, user_account: create(:user_account))
         @ability.should_not be_able_to(:read, trans)
       end
 
       it "must be able to read own purchase_transactions" do
-        trans = create(:purchase_transaction, user: @user)
+        trans = create(:purchase_transaction, user_account: @user.account)
         @ability.should be_able_to(:read, trans)
       end
 
       it "must be able to create purchase_transactions" do
         @ability.should be_able_to(:create, PurchaseTransaction)
       end
-
     end
 
     context "Redeem Winnings" do
-
       it "must be able to view redeem_winning" do
         @ability.should be_able_to(:read, RedeemWinning)
       end
 
       it "wont be able to read other users redeem_winnings" do
-        trans = create(:redeem_winning, user: create(:user, prize_points: 2))
+        trans = create(:redeem_winning, user_account: create(:user_account, prize_points: 2))
         @ability.should_not be_able_to(:read, trans)
       end
 
       it "must be able to read own redeem_winnings" do
-        @user.increment!(:prize_points)
-        trans = create(:redeem_winning, user: @user)
+        @user.account.increment!(:prize_points)
+        trans = create(:redeem_winning, user_account: @user.account)
         @ability.should be_able_to(:read, trans)
       end
 
       it "must be able to create redeem_winning" do
         @ability.should be_able_to(:create, RedeemWinning)
       end
-
     end
 
     context "Airtime Vouchers" do
-
       it "must be able to read airtime vouchers" do
         @ability.should be_able_to(:read, AirtimeVoucher)
       end
 
       it "wont be able to read other users airtime vouchers" do
-        airtime_voucher = create(:airtime_voucher, user: create(:user))
+        airtime_voucher = create(:airtime_voucher, user_account: create(:user_account, prize_points: 2))
         @ability.should_not be_able_to(:read, airtime_voucher)
       end
 
       it "must be able to read own airtime vouchers" do
-        airtime_voucher = create(:airtime_voucher, user: @user)
+        airtime_voucher = create(:airtime_voucher, user_account: @user.account)
         @ability.should be_able_to(:read, airtime_voucher)
       end
-
     end
-
   end
 
   context "Guest" do
-
     before :each do
       @user = create(:user, provider: 'guest')
       @ability = Ability.new(@user)
     end
 
     context "Games" do
-
       it "must be able to view games" do
         @ability.should be_able_to(:read, Game)
       end
@@ -190,11 +171,9 @@ describe Ability do
         game = create(:game, user: @user)
         @ability.should be_able_to(:play_letter, game)
       end
-
     end
 
     context "Feedback" do
-
       it "must be able to view" do
         @ability.should be_able_to(:read, Feedback)
       end
@@ -212,11 +191,9 @@ describe Ability do
       it "wont be able to create" do
         @ability.should_not be_able_to(:create, Feedback)
       end
-
     end
 
     context "Users" do
-
       it "must be able to read users" do
         @ability.should be_able_to(:read, User)
       end
@@ -229,80 +206,69 @@ describe Ability do
         user = create(:user)
         @ability.should_not be_able_to(:update, user)
       end
-
     end
 
     context "Winners" do
-
       it "must be able to read winners" do
         @ability.should be_able_to(:read, Winner)
       end
-
     end
 
     context "Purchase Transactions" do
-
       it "must be able to view purchase transactions" do
         @ability.should be_able_to(:read, PurchaseTransaction)
       end
 
       it "wont be able to read other users purchase_transactions" do
-        trans = create(:purchase_transaction, user: create(:user))
+        trans = create(:purchase_transaction, user_account: create(:user).account)
         @ability.should_not be_able_to(:read, trans)
       end
 
       it "must be able to read own purchase_transactions" do
-        trans = create(:purchase_transaction, user: @user)
+        trans = create(:purchase_transaction, user_account: @user.account)
         @ability.should be_able_to(:read, trans)
       end
 
       it "wont be able to create purchase_transactions" do
         @ability.should_not be_able_to(:create, PurchaseTransaction)
       end
-
     end
 
     context "Redeem Winnings" do
-
       it "must be able to view redeem_winning" do
         @ability.should be_able_to(:read, RedeemWinning)
       end
 
       it "wont be able to read other users redeem_winnings" do
-        trans = create(:redeem_winning, user: create(:user, prize_points: 2))
+        trans = create(:redeem_winning, user_account: create(:user_account, prize_points: 2))
         @ability.should_not be_able_to(:read, trans)
       end
 
       it "must be able to read own redeem_winnings" do
-        @user.increment!(:prize_points)
-        trans = create(:redeem_winning, user: @user)
+        @user.account.increment!(:prize_points)
+        trans = create(:redeem_winning, user_account: @user.account)
         @ability.should be_able_to(:read, trans)
       end
 
       it "wont be able to create redeem_winning" do
         @ability.should_not be_able_to(:create, RedeemWinning)
       end
-
     end
 
     context "Airtime Vouchers" do
-
       it "must be able to read airtime vouchers" do
         @ability.should be_able_to(:read, AirtimeVoucher)
       end
 
       it "wont be able to read other users airtime vouchers" do
-        airtime_voucher = create(:airtime_voucher, user: create(:user))
+        airtime_voucher = create(:airtime_voucher, user_account: create(:user).account)
         @ability.should_not be_able_to(:read, airtime_voucher)
       end
 
       it "must be able to read own airtime vouchers" do
-        airtime_voucher = create(:airtime_voucher, user: @user)
+        airtime_voucher = create(:airtime_voucher, user_account: @user.account)
         @ability.should be_able_to(:read, airtime_voucher)
       end
-
     end
-
   end
-
 end

@@ -79,7 +79,7 @@ class GamesController < ApplicationController
       ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
     end
     if @game.save
-      current_user.decrement!(:credits)
+      current_user_account.use_credit!
       redirect_to @game, notice: 'Game was successfully created.'
     else
       redirect_to({action: 'index'}, alert: 'Failed to create new game.')
@@ -89,7 +89,7 @@ class GamesController < ApplicationController
   private 
 
   def check_credits
-    if current_user.credits > 0
+    if current_user_account.credits > 0
       true
     else
       redirect_to purchases_path, alert: "No more credits points left"

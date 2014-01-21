@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: winners
+#
+#  id               :integer          not null, primary key
+#  user_id          :integer
+#  reason           :string(255)
+#  amount           :integer
+#  period           :string(255)
+#  end_of_period_on :date
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
  # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do

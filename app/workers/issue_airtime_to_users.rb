@@ -11,8 +11,8 @@ class IssueAirtimeToUsers < IssueWinningToUser
     pin, response_body = create_voucher_pin(freepaid_refno, voucher_network, sellvalue)
     redeem_winning.paid!
     AirtimeVoucher.create!(redeem_winning: redeem_winning, freepaid_refno: freepaid_refno, network: voucher_network,
-                           pin: pin, sellvalue: sellvalue, response: response_body, user: redeem_winning.user)
-    redeem_winning.user.send_message("Your airtime voucher is available in the $airtime vouchers$ section.")
+                           pin: pin, sellvalue: sellvalue, response: response_body, user_account: redeem_winning.user_account)
+    UserSendMessage.send("Your airtime voucher is available in the $airtime vouchers$ section.", [redeem_winning.user_account])
   end
 
   private

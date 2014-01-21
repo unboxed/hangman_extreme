@@ -1,9 +1,8 @@
-require 'spec_helper'
+require 'view_spec_helper'
 
-describe "users/edit" do
-
+describe "user_accounts/edit" do
   before(:each) do
-    assign(:user, stub_model(User))
+    assign(:user_account, stub_model(UserAccount))
   end
 
   it "renders a submit button" do
@@ -17,8 +16,8 @@ describe "users/edit" do
     view.stub(:params).and_return(field: 'real_name')
     render
     within('form') do
-      rendered.should have_field('user_real_name')
-      rendered.should_not have_field('user_mobile_number')
+      rendered.should have_field('user_account_real_name')
+      rendered.should_not have_field('user_account_mobile_number')
     end
   end
 
@@ -26,10 +25,8 @@ describe "users/edit" do
     view.stub(:params).and_return(field: 'mobile_number')
     render
     within('form') do
-      rendered.should_not have_field('user_real_name')
-      rendered.should have_field('user_mobile_number')
+      rendered.should_not have_field('user_account_real_name')
+      rendered.should have_field('user_account_mobile_number')
     end
   end
-
-
 end

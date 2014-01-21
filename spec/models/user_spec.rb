@@ -1,14 +1,38 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                        :integer          not null, primary key
+#  name                      :text
+#  uid                       :string(255)
+#  provider                  :string(255)
+#  created_at                :datetime
+#  updated_at                :datetime
+#  weekly_rating             :integer          default(0)
+#  yearly_rating             :integer          default(0)
+#  weekly_streak             :integer          default(0)
+#  daily_rating              :integer          default(0)
+#  daily_streak              :integer          default(0)
+#  _deprecated_real_name     :string(255)
+#  _deprecated_mobile_number :string(255)
+#  _deprecated_email         :string(255)
+#  _deprecated_credits       :integer          default(24), not null
+#  _deprecated_prize_points  :integer          default(0), not null
+#  _deprecated_login         :string(255)
+#  lock_version              :integer          default(0), not null
+#  current_daily_streak      :integer          default(0), not null
+#  current_weekly_streak     :integer          default(0), not null
+#  daily_wins                :integer          default(0), not null
+#  weekly_wins               :integer          default(0), not null
+#  show_hangman              :boolean          default(TRUE)
+#  winners_count             :integer          default(0), not null
+#
+
 require 'spec_helper'
 require 'timecop'
 
 describe User do
-
   describe "Validation" do
-
-    it "must start with a default of 24 credits" do
-      User.new.credits.should == 24
-    end
-
     it "must have a provider" do
       User.new.should have(1).errors_on(:provider)
       User.new(provider: 'xx').should have(0).errors_on(:provider)
@@ -24,11 +48,9 @@ describe User do
       User.new(uid: 'xx', provider: "yy").should have(1).errors_on(:uid)
       User.new(uid: 'xx', provider: "zz").should have(0).errors_on(:uid)
     end
-
   end
 
-  context "calculate_daily_rating" do
-
+  describe "calculate_daily_rating" do
     it "must use 12 games in the last day" do
       user = create(:user)
       create_list(:game, 13,  score: 1, user: user)
@@ -50,11 +72,9 @@ describe User do
       create(:game, score: 21, user: user)
       user.calculate_daily_rating.should == 12
     end
-
   end
 
-  context "calculate_weekly_rating" do
-
+  describe "calculate_weekly_rating" do
     it "must use 75 games in the last week" do
       user = create(:user)
       create_list(:game, 76,  score: 1, user: user)
@@ -76,11 +96,9 @@ describe User do
       create(:game, score: 21, user: user)
       user.calculate_weekly_rating.should == 75
     end
-
   end
 
-  context "calculate_score" do
-
+  describe "calculate_score" do
     it "must update the ratings" do
       user = stub_model(User)
       user.stub(:calculate_daily_rating).and_return(10)
@@ -104,11 +122,9 @@ describe User do
       user.update_ratings
       user.weekly_rating.should == 20
     end
-
   end
 
-  context "new_day_set_scores!" do
-
+  describe "new_day_set_scores!" do
     it "must set all daily scores to 0" do
       user = create(:user,daily_wins: 10, daily_rating: 11, daily_streak: 13, current_daily_streak: 14)
       User.new_day_set_scores!
@@ -155,22 +171,18 @@ describe User do
         user.current_weekly_streak.should == 0
       end
     end
-
   end
 
-  context "rank" do
-
+  describe "rank" do
     it "should return correct rankings" do
       user1, user3, user2 = create(:user, weekly_rating: 20), create(:user, weekly_rating: 40), create(:user, weekly_rating: 30)
       user1.rank(:weekly_rating).should == 3
       user3.rank(:weekly_rating).should == 1
       user2.rank(:weekly_rating).should == 2
     end
-
   end
 
-  context "find_or_create_from_auth_hash" do
-
+  describe "find_or_create_from_auth_hash" do
     it "must create a new user if no uid and provider match exists" do
       expect {
         user = User.find_or_create_from_auth_hash(uid: "u", provider: "p", info: {name: "Grant"})
@@ -197,11 +209,9 @@ describe User do
     it "must return nil if no provider" do
       User.find_or_create_from_auth_hash(uid: "u", provider: "", info: {name: "Grant"}).should be_nil
     end
-
   end
 
-  context "umta" do
-
+  describe "umta" do
     it "must return proper encoded google umta" do
       user = stub_model(User)
       user.utma.should match(/1\.[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\.15/)
@@ -218,46 +228,9 @@ describe User do
         sleep 1; user.utma(false)
       }.to_not change(user,:utma)
     end
-
   end
 
-  context "registered_on_mxit_money?" do
-
-    before :each do
-      @mxit_money_connection = double("connection", :user_info => {:is_registered => false})
-      MxitMoneyApi.stub(:connect).and_return(@mxit_money_connection)
-      @user = stub_model(User, :uid => 'm111')
-    end
-
-    it "must connect to MxitMoneyApi" do
-      MxitMoneyApi.should_receive(:connect).with(ENV['MXIT_MONEY_API_KEY']).and_return(@mxit_money_connection)
-      @user.registered_on_mxit_money?
-    end
-
-    it "must check the user_info with uid" do
-      @mxit_money_connection.should_receive(:user_info).with(:id => 'm111').and_return({})
-      @user.registered_on_mxit_money?
-    end
-
-    it "wont be registered on mxit money if is_registered is false" do
-      @user.should_not be_registered_on_mxit_money
-    end
-
-  end
-
-  context "send_message" do
-
-    it "must use message sender" do
-      sender = double("send")
-      UserSendMessage.should_receive(:new).with("Nobody!!",[]).and_return(sender)
-      sender.should_receive(:send_all)
-      User.send_message("Nobody!!",[])
-    end
-
-  end
-
-  context "daily_wins" do
-
+  describe "daily_wins" do
     before :each do
       @user = create(:user)
     end
@@ -275,11 +248,9 @@ describe User do
       create_list(:won_game,2, :user => @user)
       @user.daily_wins.should == 2
     end
-
   end
 
-  context "weekly_wins" do
-
+  describe "weekly_wins" do
     before :each do
       @user = create(:user)
     end
@@ -297,11 +268,9 @@ describe User do
       create_list(:won_game,2, :user => @user)
       @user.weekly_wins.should == 2
     end
-
   end
 
-  context "reset_current_daily_streak" do
-
+  describe "reset_current_daily_streak" do
     it "must set current_daily_streak to 0" do
       user = User.new
       user.current_daily_streak = 2
@@ -309,11 +278,9 @@ describe User do
         user.reset_streak
       }.should change(user,:current_daily_streak).from(2).to(0)
     end
-
   end
 
-  context "increment_current_daily_streak" do
-
+  describe "increment_current_daily_streak" do
     it "must set current_daily_streak to 3" do
       user = User.new
       user.current_daily_streak = 2
@@ -338,11 +305,9 @@ describe User do
         user.increment_streak
       }.should_not change(user,:daily_streak)
     end
-
   end
 
-  context "daily_streak" do
-
+  describe "daily_streak" do
     before :each do
       @user = create(:user)
     end
@@ -373,11 +338,9 @@ describe User do
       create_list(:won_game, 2, :user => @user)
       @user.daily_streak.should == 2
     end
-
   end
 
-  context "reset_current_weekly_streak" do
-
+  describe "reset_current_weekly_streak" do
     it "must set current_weekly_streak to 0" do
       user = User.new
       user.current_weekly_streak = 2
@@ -385,11 +348,9 @@ describe User do
         user.reset_streak
       }.should change(user,:current_weekly_streak).from(2).to(0)
     end
-
   end
 
-  context "increment_current_weekly_streak" do
-
+  describe "increment_current_weekly_streak" do
     it "must set current_weekly_streak to 3" do
       user = User.new
       user.current_weekly_streak = 2
@@ -414,11 +375,9 @@ describe User do
         user.increment_streak
       }.should_not change(user,:weekly_streak)
     end
-
   end
 
-  context "weekly_streak" do
-
+  describe "weekly_streak" do
     before :each do
       @user = create(:user)
     end
@@ -449,11 +408,9 @@ describe User do
       create_list(:won_game, 2, :user => @user)
       @user.weekly_streak.should == 2
     end
-
   end
 
   describe "daily_wins_required_for_random" do
-
     before :each do
       @user = create(:user)
     end
@@ -471,11 +428,9 @@ describe User do
       create_list(:won_game,11, :user => @user)
       @user.daily_wins_required_for_random.should == 0
     end
-
   end
 
   describe "weekly_wins_required_for_random" do
-
     before :each do
       @user = create(:user)
     end
@@ -493,9 +448,42 @@ describe User do
       create_list(:won_game,36, :user => @user)
       @user.weekly_wins_required_for_random.should == 0
     end
-
   end
 
+  describe "account" do
+    before :each do
+      @user = create(:user, uid: 'grant', provider: 'mxit')
+    end
+
+    it "must find user account based on uid and provider" do
+      create(:user_account, uid: 'clive', provider: 'mxit')
+      create(:user_account, uid: 'grant', provider: 'facebook')
+      user_account = create(:user_account, uid: 'grant', provider: 'mxit')
+      @user.account.should == user_account
+    end
+
+    it "should not reload account if loaded before" do
+      user_account = create(:user_account, uid: 'grant', provider: 'mxit', real_name: 'Grant')
+      @user.account
+      user_account.update_attributes(real_name: 'Kim')
+      @user.account.real_name.should == 'Grant'
+    end
+
+    it "must create account if it does not exist and set default values" do
+      @user.update_attributes(_deprecated_real_name: 'Grant',
+                              _deprecated_mobile_number: '000',
+                              _deprecated_email: 'grant@example.com',
+                              _deprecated_credits: 111,
+                              _deprecated_prize_points: 123)
+      user_account = @user.account
+      user_account.should_not be_nil
+      user_account.real_name.should == 'Grant'
+      user_account.mobile_number.should == '000'
+      user_account.email.should == 'grant@example.com'
+      user_account.credits.should == 111
+      user_account.prize_points.should == 123
+    end
+  end
 end
 
 describe "has_five_game_clues_in_sequence" do

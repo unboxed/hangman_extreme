@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: winners
+#
+#  id               :integer          not null, primary key
+#  user_id          :integer
+#  reason           :string(255)
+#  amount           :integer
+#  period           :string(255)
+#  end_of_period_on :date
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
 class Winner < ActiveRecord::Base
   WEEKLY_PRIZE_AMOUNTS = [500,500,500,500,500]
   DAILY_PRIZE_AMOUNTS  = [ 25, 25, 25, 25, 25]
@@ -39,15 +53,15 @@ class Winner < ActiveRecord::Base
 
   def self.create_daily_winners(winnings = DAILY_PRIZE_AMOUNTS)
     if create_winners('daily',winnings)
-      User.send_message("We have selected our $winners$ for the daily prizes, Congratulations to those who have won.",
-                        User.mxit.where('updated_at > ?',2.day.ago))
+      UserSendMessage.send("We have selected our $winners$ for the daily prizes, Congratulations to those who have won.",
+                           User.mxit.where('updated_at > ?',2.day.ago))
     end
   end
 
   def self.create_weekly_winners(winnings = WEEKLY_PRIZE_AMOUNTS)
     if create_winners('weekly',winnings)
-      User.send_message("We have selected our $winners$ for the weekly prizes, Congratulations to those who have won.",
-                         User.mxit.where('updated_at > ?',7.day.ago))
+      UserSendMessage.send("We have selected our $winners$ for the weekly prizes, Congratulations to those who have won.",
+                           User.mxit.where('updated_at > ?',14.day.ago))
     end
   end
 
@@ -76,7 +90,7 @@ class Winner < ActiveRecord::Base
       end
     end
     winners.group_by{|w| w.amount }.each do |amount,winners_group|
-        User.send_message("Congratulations, you have won *#{amount} prize points* for _#{options[:period]} #{options[:score_by]}_.
+      UserSendMessage.send("Congratulations, you have won *#{amount} prize points* for _#{options[:period]} #{options[:score_by]}_.
                            Check the $redeem$ section to see what you can trade them in for.".squish,winners_group.map{|info| info.user })
     end
   end
@@ -86,11 +100,11 @@ class Winner < ActiveRecord::Base
   def increase_prize_points
     if amount > 0
       begin
-        user.increment!(:prize_points,amount)
+        user.account.increment!(:prize_points,amount)
       rescue
         user.reload
         begin
-          user.increment!(:prize_points,amount)
+          user.account.increment!(:prize_points,amount)
         rescue
           # ignore second time around
         end
@@ -119,28 +133,16 @@ class Winner < ActiveRecord::Base
     wins_required = options[:period] == 'daily' ? daily_random_games_required : weekly_random_games_required
     previous_winners = period(options[:period]).reason(options[:score_by]).order('created_at DESC').limit(options[:winnings].size)
     user_scope = User.where('id NOT IN (?)',previous_winners.map(&:user_id) + [0]).where("users.#{options[:period]}_wins >= ?",wins_required).random_order
-    # prefer players who have never won before
-    random_winner_users = user_scope.where('winners_count = ?', 0).limit(winners_left)
-    if random_winner_users.any?
-      winners[pos] = random_winner_users
-      winners_left -= random_winner_users.size
-      user_scope = user_scope.where('users.id NOT IN (?)',random_winner_users.map(&:id))
+    other_winners = winning_ranking_reasons.collect{|r| period(options[:period]).reason(r).order('created_at DESC').limit(options[:winnings].size).to_a }.flatten
+    #  prefer players who have not won in another category
+    second_random_winner_users = user_scope.where('users.id NOT IN (?)',other_winners.map(&:user_id)).limit(winners_left)
+    if second_random_winner_users.any?
+      winners[pos] = second_random_winner_users
+      winners_left -= second_random_winner_users.size
+      user_scope = user_scope.where('users.id NOT IN (?)',second_random_winner_users.map(&:id))
       pos += 1
     end
-    if winners_left > 0
-      other_winners = winning_ranking_reasons.collect{|r| period(options[:period]).reason(r).order('created_at DESC').limit(options[:winnings].size).to_a }.flatten
-      # then prefer players who have not won in another category
-      second_random_winner_users = user_scope.where('users.id NOT IN (?)',other_winners.map(&:user_id)).limit(winners_left)
-      if second_random_winner_users.any?
-        winners[pos] = second_random_winner_users
-        winners_left -= second_random_winner_users.size
-        user_scope = user_scope.where('users.id NOT IN (?)',second_random_winner_users.map(&:id))
-        pos += 1
-      end
-      winners[pos] = user_scope.limit(winners_left) if winners_left > 0
-    end
+    winners[pos] = user_scope.limit(winners_left) if winners_left > 0
     winners
   end
-
-
 end

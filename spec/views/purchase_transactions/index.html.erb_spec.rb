@@ -1,15 +1,10 @@
-require 'spec_helper'
+require 'view_spec_helper'
 
 describe "purchase_transactions/index.html.erb" do
 
   before(:each) do
-    @current_user = stub_model(User, id: 50)
-    @users =
-      assign(:users, [
-        stub_model(User, id: 100, name: "hello", daily_rating: "123"),
-        stub_model(User, id: 101, name: "goodbye", daily_rating: "345")
-      ])
-    view.stub(:current_user).and_return(@current_user)
+    @current_user_account = stub_model(UserAccount, id: 50)
+    view.stub(:current_user_account).and_return(@current_user_account)
     view.stub(:menu_item)
     view.stub(:mxit_request?).and_return(true)
     view.stub(:guest?)
@@ -37,13 +32,13 @@ describe "purchase_transactions/index.html.erb" do
 
   it "should have a profile link on menu unless guest" do
     view.stub(:guest?).and_return(false)
-    view.should_receive(:menu_item).with(anything,profile_users_path,id: 'profile')
+    view.should_receive(:menu_item).with(anything,user_accounts_path,id: 'profile')
     render
   end
 
   it "wont have a profile link on menu if guest" do
     view.stub(:guest?).and_return(true)
-    view.should_not_receive(:menu_item).with(anything,profile_users_path,id: 'profile')
+    view.should_not_receive(:menu_item).with(anything,user_accounts_path,id: 'profile')
     render
   end
 

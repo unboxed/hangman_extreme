@@ -1,7 +1,6 @@
-require 'spec_helper'
+require 'view_spec_helper'
 
 describe "games/index" do
-
   before(:each) do
     @games =
     assign(:games, [
@@ -55,7 +54,6 @@ describe "games/index" do
   end
 
   it "must have a feedback link on the menu" do
-    pending
     args = {response_type: 'code',
             host: "test.host",
             protocol: 'http',
@@ -88,7 +86,7 @@ describe "games/index" do
 
   it "must have a ordinary authorise link on the menu if not mxit request" do
     view.stub(:mxit_request?).and_return(false)
-    view.should_receive(:menu_item).with(anything,profile_users_path,id: 'authorise')
+    view.should_receive(:menu_item).with(anything,user_accounts_path,id: 'authorise')
     render
   end
 

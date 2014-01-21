@@ -16,6 +16,10 @@ class ApplicationController < ActionController::Base
     @current_user
   end
 
+  def current_user_account
+    current_user.account
+  end
+
   def current_user_request_info
     @current_user_request_info ||= UserRequestInfo.new
   end
@@ -32,7 +36,7 @@ class ApplicationController < ActionController::Base
     current_user.guest?
   end
 
-  helper_method :current_user, :current_user_request_info, :notify_airbrake, :mxit_request?, :facebook_user?, :guest?
+  helper_method :current_user, :current_user_account, :current_user_request_info, :notify_airbrake, :mxit_request?, :facebook_user?, :guest?
 
   def login_required
     return true if current_user && !guest?
@@ -76,7 +80,7 @@ class ApplicationController < ActionController::Base
     elsif params[:signed_request]
       load_facebook_user
     else # load browser user
-      @current_user = User.find_by_id(session[:current_user_id]) || User.new(provider: "guest")
+      @current_user = User.find_by(:uid => session[:current_uid],:provider => session[:current_provider]) || User.new(provider: "guest")
     end
   end
 
@@ -99,7 +103,7 @@ class ApplicationController < ActionController::Base
                                     scope: "contact/invite graph/read",
                                     state: "winnings"))
       when "profile"
-        redirect_to(profile_users_path) unless params[:action] == 'profile'
+        redirect_to(user_accounts_path) unless params[:controller] == 'user_accounts'
       when 'winners'
         redirect_to(winners_path) unless params[:controller] == 'winners'
       when 'airtime vouchers'
@@ -148,7 +152,8 @@ class ApplicationController < ActionController::Base
 
   def current_user=(user)
     @current_user = user
-    session[:current_user_id] = user.try(:id)
+    session[:current_uid] = user.try(:uid)
+    session[:current_provider] = user.try(:provider)
   end
 
   def tracking_enabled?
