@@ -7,10 +7,10 @@ shared_examples "badger" do
     visit '/'
     click_link 'badges'
     page.should have_content("Badges")
-    click_link 'Mr. Loader'
-    page.should have_content("credits")
-    click_link 'badges'
-    page.should have_content("Badges")
+    # click_link 'Mr. Loader'
+    # page.should have_content("credits")
+    # click_link 'badges'
+    # page.should have_content("Badges")
     click_link 'Clueless'
     page.should have_content("clues")
     click_link 'badges'
@@ -27,14 +27,14 @@ shared_examples "badger" do
     page.should have_content("seconds")
     click_link 'badges'
     page.should have_content("Badges")
-    click_link 'Gladiator'
-    page.should have_content("weekly")
-    click_link 'badges'
-    page.should have_content("Badges")
-    click_link 'Warrior'
-    page.should have_content("daily")
-    click_link 'badges'
-    page.should have_content("Badges")
+    # click_link 'Gladiator'
+    # page.should have_content("weekly")
+    # click_link 'badges'
+    # page.should have_content("Badges")
+    # click_link 'Warrior'
+    # page.should have_content("daily")
+    # click_link 'badges'
+    # page.should have_content("Badges")
   end
 
   def click_letter(l)
@@ -647,24 +647,24 @@ describe 'users', :redis => true do
 
     it_behaves_like "badger"
 
-    it "Mr_Loader badge is received after credits purchased" do
-      ENV['MXIT_VENDOR_ID'] ||= '1'
-      visit_home
-      click_link('buy_credits')
-      click_link('buy_credits11')
-      click_link('submit')
-      page.should have_content("Mr. Loader")
-      click_link 'Mr. Loader'
-      page.should have_content("bought credits")
-      page.should have_content("Achieved")
+    # it "Mr_Loader badge is received after credits purchased" do
+    #   ENV['MXIT_VENDOR_ID'] ||= '1'
+    #   visit_home
+    #   click_link('buy_credits')
+    #   click_link('buy_credits11')
+    #   click_link('submit')
+    #   page.should have_content("Mr. Loader")
+    #   click_link 'Mr. Loader'
+    #   page.should have_content("bought credits")
+    #   page.should have_content("Achieved")
 
-      # Should not give the badge twice 
-      visit_home
-      click_link('buy_credits')
-      click_link('buy_credits11')
-      click_link('submit')
-      page.should have_no_content("Mr. Loader")
-    end
+    #   # Should not give the badge twice 
+    #   visit_home
+    #   click_link('buy_credits')
+    #   click_link('buy_credits11')
+    #   click_link('submit')
+    #   page.should have_no_content("Mr. Loader")
+    # end
 
   end
 
