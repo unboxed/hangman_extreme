@@ -2,8 +2,8 @@ def facebook_user(params_or_uid = '1234567',account_params = {})
   generate_user('facebook',params_or_uid,account_params)
 end
 
-def mxit_user(params_or_uid = 'm2604100')
-  generate_user('mxit',params_or_uid)
+def mxit_user(params_or_uid = 'm2604100',account_params = {})
+  generate_user('mxit',params_or_uid,account_params)
 end
 
 def generate_user(provider,params_or_uid,account_params = {})
