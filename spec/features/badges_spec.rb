@@ -53,6 +53,7 @@ shared_examples "badger" do
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _ _ _ _ _ _ _")
+    sleep(31)
     click_link 'show_clue'
     click_button 'yes'
     %W(t e l v i s o n).each do |letter|
@@ -66,10 +67,13 @@ shared_examples "badger" do
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _ _ _ _ _ _ _")
+    sleep(5)
     %W(t e l v i s o n).each do |letter|
       click_letter(letter)
     end 
+    save_and_open_page
     page.should have_content("You win")
+    page.should have_content("Quickster")
     page.should have_content("Bookworm")
     click_link 'Bookworm'
     page.should have_content("Achieved")
