@@ -595,7 +595,6 @@ shared_examples "badger" do
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _ _ _")
-    sleep(5)
     click_link 'show_clue'
     click_button 'yes'
     %w(c a t l e).each do |letter|
@@ -614,7 +613,6 @@ shared_examples "badger" do
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _ _ _")
-    sleep(5)
     %w(c a t l e).each do |letter|
       page.should have_content("10 attempts")
       click_letter(letter)
@@ -626,7 +624,6 @@ shared_examples "badger" do
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _ _ _")
-    sleep(5)
     %w(c a t l e).each do |letter|
       page.should have_content("10 attempts")
       click_letter(letter)
