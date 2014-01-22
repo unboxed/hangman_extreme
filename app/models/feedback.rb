@@ -15,9 +15,17 @@ class Feedback < ActiveRecord::Base
   validates :message, presence: true
 
   belongs_to :user
-  delegate :email, :real_name, :name, to: :user, prefix: true
+  delegate :name, to: :user, prefix: true
 
   after_commit :send_to_uservoice, :on => :create
+
+  def user_email
+    user.account.email
+  end
+
+  def user_real_name
+    user.account.real_name
+  end
 
   def full_message=(v)
     self.message, self.subject = v.split(":",2).reverse
