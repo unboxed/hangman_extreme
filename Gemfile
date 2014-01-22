@@ -63,7 +63,9 @@ group :development, :test do
   gem 'annotate', require: false
   gem 'rspec-rails', '~> 2.13.0'
   gem 'factory_girl_rails'
-  gem 'debugger'
+  platforms :ruby do
+    gem 'debugger'
+  end
 end
 
 group :test do
