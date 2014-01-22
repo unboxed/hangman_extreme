@@ -36,5 +36,6 @@ FactoryGirl.define do
     sequence(:uid) {|n| "uid#{n}" }
     provider "mxit"
     show_hangman true
+    _deprecated_credits 1000
   end
 end
