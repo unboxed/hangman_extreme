@@ -10,7 +10,7 @@ class SendFeedbackToUservoice
     send_options = {:email => feedback.user_email,
                     :subject => feedback.subject || feedback.message[0,30],
                     :message => feedback.message,
-                    :name => feedback.user_real_name || CGI::unescape(feedback.user_name).gsub(/[^a-zA-Z0-9\s]/,"")}
+                    :name => feedback.user_real_name || CGI::unescape(feedback.user_name.to_s).gsub(/[^a-zA-Z0-9\s]/,"")}
     if feedback.support_type == 'suggestion'
       send_suggestion(send_options)
     else
@@ -56,5 +56,4 @@ class SendFeedbackToUservoice
   def api_secret
     ENV['UV_API_SECRET']
   end
-
 end
