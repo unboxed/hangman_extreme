@@ -5,7 +5,7 @@ class IssueMxitMoneyToUsers < IssueWinningToUser
   def redeem(redeem_winning)
     # do something
     if connection.balance >= redeem_winning.prize_amount
-      user_mxit_info = connection.user_info(:id => redeem_winning.user_uid)
+      user_mxit_info = connection.user_info(:id => redeem_winning.user_account_uid)
       if user_mxit_info[:is_registered]
         result = connection.issue_money(:phone_number => user_mxit_info[:msisdn],
                                         :merchant_reference => "RW#{redeem_winning.id}Y#{Time.current.yday}H#{Time.current.hour}",

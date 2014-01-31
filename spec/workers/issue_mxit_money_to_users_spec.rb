@@ -5,7 +5,7 @@ describe IssueMxitMoneyToUsers do
     before :each do
       @redeem_winning = stub_model(RedeemWinning, id: 333,
                                    prize_amount: 23,
-                                   user_uid: 'm221',
+                                   user_account: stub_model(UserAccount, uid: 'm221'),
                                    state: 'paid',
                                    cancel!: true)
       RedeemWinning.stub(:find).and_return(@redeem_winning)
