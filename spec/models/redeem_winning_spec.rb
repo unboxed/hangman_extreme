@@ -80,9 +80,18 @@ describe RedeemWinning do
   describe "paid!" do
     it "must update state to paid" do
       winning = create(:redeem_winning, prize_amount: 10, prize_type: 'vodago_airtime', state: 'pending')
-      RedeemWinning.paid!(winning.id)
+      winning.paid!
       winning.reload
       winning.should be_paid
+    end
+  end
+
+  describe "cancel!" do
+    it "must update state to cancelled" do
+      winning = create(:redeem_winning, prize_amount: 10, prize_type: 'vodago_airtime', state: 'pending')
+      winning.cancel!
+      winning.reload
+      winning.should be_cancelled
     end
   end
 

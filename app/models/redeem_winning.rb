@@ -34,12 +34,6 @@ class RedeemWinning < ActiveRecord::Base
   scope :pending_airtime, -> { where('prize_type LIKE ? AND state = ?','%airtime','pending') }
   scope :last_day, -> { where('created_at >= ?',1.day.ago) }
 
-  def self.paid!(*ids)
-    ids.each do |id|
-      find(id).paid!
-    end
-  end
-
   def paid!
     update_column(:state, 'paid')
   end
@@ -48,7 +42,7 @@ class RedeemWinning < ActiveRecord::Base
     if pending?
       self.class.transaction do
         update_column(:state, 'cancelled')
-        user.increment!(:prize_points,prize_amount)
+        user_account.increment!(:prize_points,prize_amount)
       end
     end
   end
@@ -59,6 +53,10 @@ class RedeemWinning < ActiveRecord::Base
 
   def pending?
     state == 'pending'
+  end
+
+  def cancelled?
+    state == 'cancelled'
   end
 
   def mxit_money?
