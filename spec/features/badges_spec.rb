@@ -62,7 +62,6 @@ shared_examples "badger" do
     page.should have_no_content("Bookworm")
 
   # 10 letter win completed with no clues
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _ _ _ _ _ _ _")
@@ -75,25 +74,10 @@ shared_examples "badger" do
     page.should have_content("Achieved")
 
   #should not give the badge twice
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _ _ _ _ _ _ _")
     %W(t e l v i s o n).each do |letter|
-      click_letter(letter)
-    end 
-    page.should have_content("You win") 
-    page.should have_no_content("Bookworm")
-  end 
-
-  it "should not give badge if word is less than 10" do 
-    Dictionary.clear
-    Dictionary.add("airport")
-    visit_home
-    click_link('Play')
-    click_button('start_game')
-    page.should have_content("_ _ _ _ _ _ _")
-    %W(a i r p o t).each do |letter|
       click_letter(letter)
     end 
     page.should have_content("You win") 
@@ -117,7 +101,6 @@ shared_examples "badger" do
     page.should have_content("You win")
     page.should have_no_content("Clueless")
 #second play with clue
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _")
@@ -129,7 +112,6 @@ shared_examples "badger" do
     page.should have_content("You win")
     page.should have_no_content("Clueless")    
 #third play with clue
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _")
@@ -141,7 +123,6 @@ shared_examples "badger" do
     page.should have_content("You win")
     page.should have_no_content("Clueless")    
 #forth play with clue
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _")
@@ -153,7 +134,6 @@ shared_examples "badger" do
     page.should have_content("You win")
     page.should have_no_content("Clueless")    
 #fifth play with clue 
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _")
@@ -169,7 +149,6 @@ shared_examples "badger" do
   
   #should not give the badge twice
 #first play with clue
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _")
@@ -181,7 +160,6 @@ shared_examples "badger" do
     page.should have_content("You win")
     page.should have_no_content("Clueless")
 #second play with clue
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _")
@@ -193,7 +171,6 @@ shared_examples "badger" do
     page.should have_content("You win")
     page.should have_no_content("Clueless")    
 #third play with clue
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _")
@@ -205,7 +182,6 @@ shared_examples "badger" do
     page.should have_content("You win")
     page.should have_no_content("Clueless")    
 #forth play with clue
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _")
@@ -217,7 +193,6 @@ shared_examples "badger" do
     page.should have_content("You win")
     page.should have_no_content("Clueless")    
 #fifth play with clue 
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _")
@@ -245,96 +220,7 @@ shared_examples "badger" do
     page.should have_content("You win")
     page.should have_no_content("Brainey")
 
-    #2nd play with win
-    visit_home
-    click_link('Play')
-    click_button('start_game')
-    page.should have_content("_ _ _ _ _")
-    %w(m e a o w).each do |letter|
-      click_letter(letter)
-    end 
-    page.should have_content("You win")
-    page.should have_no_content("Brainey")
-
-    #3rd play with win
-    visit_home
-    click_link('Play')
-    click_button('start_game')
-    page.should have_content("_ _ _ _ _")
-    %w(m e a o w).each do |letter|
-      click_letter(letter)
-    end 
-    page.should have_content("You win")
-    page.should have_no_content("Brainey")
-
-    #4th play with win
-    visit_home
-    click_link('Play')
-    click_button('start_game')
-    page.should have_content("_ _ _ _ _")
-    %w(m e a o w).each do |letter|
-      click_letter(letter)
-    end 
-    page.should have_content("You win")
-    page.should have_no_content("Brainey")
-
-    #5th play with win
-    visit_home
-    click_link('Play')
-    click_button('start_game')
-    page.should have_content("_ _ _ _ _")
-    %w(m e a o w).each do |letter|
-      click_letter(letter)
-    end 
-    page.should have_content("You win")
-    page.should have_no_content("Brainey")
-
-    #6th play with win
-    visit_home
-    click_link('Play')
-    click_button('start_game')
-    page.should have_content("_ _ _ _ _")
-    %w(m e a o w).each do |letter|
-      click_letter(letter)
-    end 
-    page.should have_content("You win")
-    page.should have_no_content("Brainey")
-
-    #7th play with win
-    visit_home
-    click_link('Play')
-    click_button('start_game')
-    page.should have_content("_ _ _ _ _")
-    %w(m e a o w).each do |letter|
-      click_letter(letter)
-    end 
-    page.should have_content("You win")
-    page.should have_no_content("Brainey")
-
-    #8th play with win
-    visit_home
-    click_link('Play')
-    click_button('start_game')
-    page.should have_content("_ _ _ _ _")
-    %w(m e a o w).each do |letter|
-      click_letter(letter)
-    end 
-    page.should have_content("You win")
-    page.should have_no_content("Brainey")
-
-    #9th play with win
-    visit_home
-    click_link('Play')
-    click_button('start_game')
-    page.should have_content("_ _ _ _ _")
-    %w(m e a o w).each do |letter|
-      click_letter(letter)
-    end 
-    page.should have_content("You win")
-    page.should have_no_content("Brainey")
-
     #10th play with win
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _ _")
@@ -342,13 +228,12 @@ shared_examples "badger" do
     click_button 'yes'
     %w(m e a o w).each do |letter|
       click_letter(letter)
-    end 
+    end
     page.should have_content("You win")
     page.should have_no_content("Brainey")
 
 #should give badge if no clues were used
     #1st play with win
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _ _")
@@ -359,7 +244,6 @@ shared_examples "badger" do
     page.should have_no_content("Brainey")
 
     #2nd play with win
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _ _")
@@ -370,7 +254,6 @@ shared_examples "badger" do
     page.should have_no_content("Brainey")
 
     #3rd play with win
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _ _")
@@ -381,7 +264,6 @@ shared_examples "badger" do
     page.should have_no_content("Brainey")
 
     #4th play with win
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _ _")
@@ -392,7 +274,6 @@ shared_examples "badger" do
     page.should have_no_content("Brainey")
 
     #5th play with win
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _ _")
@@ -403,7 +284,6 @@ shared_examples "badger" do
     page.should have_no_content("Brainey")
 
     #6th play with win
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _ _")
@@ -414,7 +294,6 @@ shared_examples "badger" do
     page.should have_no_content("Brainey")
 
     #7th play with win
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _ _")
@@ -425,7 +304,6 @@ shared_examples "badger" do
     page.should have_no_content("Brainey")
 
     #8th play with win
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _ _")
@@ -436,7 +314,6 @@ shared_examples "badger" do
     page.should have_no_content("Brainey")
 
     #9th play with win
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _ _")
@@ -447,7 +324,6 @@ shared_examples "badger" do
     page.should have_no_content("Brainey")
 
     #10th play with win
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _ _")
@@ -460,7 +336,6 @@ shared_examples "badger" do
     page.should have_content("Achieved")
   # does not give the badge twice 
    #1st play with win
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _ _")
@@ -469,141 +344,7 @@ shared_examples "badger" do
     end 
     page.should have_content("You win")
     page.should have_no_content("Brainey")
-
-    #2nd play with win
-    visit_home
-    click_link('Play')
-    click_button('start_game')
-    page.should have_content("_ _ _ _ _")
-    %w(m e a o w).each do |letter|
-      click_letter(letter)
-    end 
-    page.should have_content("You win")
-    page.should have_no_content("Brainey")
-
-    #3rd play with win
-    visit_home
-    click_link('Play')
-    click_button('start_game')
-    page.should have_content("_ _ _ _ _")
-    %w(m e a o w).each do |letter|
-      click_letter(letter)
-    end 
-    page.should have_content("You win")
-    page.should have_no_content("Brainey")
-
-    #4th play with win
-    visit_home
-    click_link('Play')
-    click_button('start_game')
-    page.should have_content("_ _ _ _ _")
-    %w(m e a o w).each do |letter|
-      click_letter(letter)
-    end 
-    page.should have_content("You win")
-    page.should have_no_content("Brainey")
-
-    #5th play with win
-    visit_home
-    click_link('Play')
-    click_button('start_game')
-    page.should have_content("_ _ _ _ _")
-    %w(m e a o w).each do |letter|
-      click_letter(letter)
-    end 
-    page.should have_content("You win")
-    page.should have_no_content("Brainey")
-
-    #6th play with win
-    visit_home
-    click_link('Play')
-    click_button('start_game')
-    page.should have_content("_ _ _ _ _")
-    %w(m e a o w).each do |letter|
-      click_letter(letter)
-    end 
-    page.should have_content("You win")
-    page.should have_no_content("Brainey")
-
-    #7th play with win
-    visit_home
-    click_link('Play')
-    click_button('start_game')
-    page.should have_content("_ _ _ _ _")
-    %w(m e a o w).each do |letter|
-      click_letter(letter)
-    end 
-    page.should have_content("You win")
-    page.should have_no_content("Brainey")
-
-    #8th play with win
-    visit_home
-    click_link('Play')
-    click_button('start_game')
-    page.should have_content("_ _ _ _ _")
-    %w(m e a o w).each do |letter|
-      click_letter(letter)
-    end 
-    page.should have_content("You win")
-    page.should have_no_content("Brainey")
-
-    #9th play with win
-    visit_home
-    click_link('Play')
-    click_button('start_game')
-    page.should have_content("_ _ _ _ _")
-    %w(m e a o w).each do |letter|
-      click_letter(letter)
-    end 
-    page.should have_content("You win")
-    page.should have_no_content("Brainey")
-
-    #10th play with win
-    visit_home
-    click_link('Play')
-    click_button('start_game')
-    page.should have_content("_ _ _ _ _")
-    %w(m e a o w).each do |letter|
-      click_letter(letter)
-    end 
-    page.should have_content("You win")
-    page.should have_no_content("Brainey")
-  end 
-
-  it "Should not give the Quickster Badge if game played longer than 30s" do 
-    Dictionary.clear
-    Dictionary.add("cattle")
-    Dictionary.set_clue("cattle","ranch")
-    visit_home
-    click_link('Play')
-    click_button('start_game')
-    page.should have_content("_ _ _ _ _ _")
-    sleep(31)
-    %w(c a t l e).each do |letter|
-      page.should have_content("10 attempts")
-      click_letter(letter)
-    end 
-    page.should have_content("You win")
-    page.should have_no_content("Quickster")
-  end 
-
-  it "should not give the Quickster Badge if game played under 30s and a clue was used" do 
-    Dictionary.clear
-    Dictionary.add("cattle")
-    Dictionary.set_clue("cattle","ranch")
-    visit_home
-    click_link('Play')
-    click_button('start_game')
-    page.should have_content("_ _ _ _ _ _")
-    click_link 'show_clue'
-    click_button 'yes'
-    %w(c a t l e).each do |letter|
-      page.should have_content("10 attempts")
-      click_letter(letter)
-    end 
-    page.should have_content("You win")
-    page.should have_no_content("Quickster")
-  end 
+  end
 
   it "should give the Quickster Badge if game played under 30s and a clue was not used" do 
     Dictionary.clear
@@ -620,7 +361,6 @@ shared_examples "badger" do
     page.should have_content("You win")
     page.should have_content("Quickster")
 #should not give badge twice
-    visit_home
     click_link('Play')
     click_button('start_game')
     page.should have_content("_ _ _ _ _ _")
@@ -634,51 +374,21 @@ shared_examples "badger" do
 end 
 
 describe 'users', :redis => true do
-
   context "as mxit user", :google_analytics_vcr => true do
-
     before :each do
       @current_user = mxit_user('m2604100')
       set_mxit_headers('m2604100') # set mxit user
     end
 
     it_behaves_like "badger"
-
-    # it "Mr_Loader badge is received after credits purchased" do
-    #   ENV['MXIT_VENDOR_ID'] ||= '1'
-    #   visit_home
-    #   click_link('buy_credits')
-    #   click_link('buy_credits11')
-    #   click_link('submit')
-    #   page.should have_content("Mr. Loader")
-    #   click_link 'Mr. Loader'
-    #   page.should have_content("bought credits")
-    #   page.should have_content("Achieved")
-
-    #   # Should not give the badge twice 
-    #   visit_home
-    #   click_link('buy_credits')
-    #   click_link('buy_credits11')
-    #   click_link('submit')
-    #   page.should have_no_content("Mr. Loader")
-    # end
-
   end
 
   context "as mobile user", :facebook => true, :smaato_vcr => true, :js => true do
-
     before :each do
       @current_user = facebook_user
       login_facebook_user(@current_user)
     end
 
     it_behaves_like "badger"
-
   end
-
-  # can't play games
-  context "as guest user", :smaato_vcr => true, :js => true do
-
-  end
-
 end

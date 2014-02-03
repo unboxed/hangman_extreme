@@ -19,7 +19,7 @@ You have <span><%= @game.attempts_left %></span> attempts left
 <br/>
 
 <% if @game.done? %>
-    <% menu_item 'new game', new_game_path, id: 'new_game' %>
+    <% menu_item(mxit_request? ? 'Play' : 'new game', new_game_path, id: 'new_game') %>
     <% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
     <% menu_item 'define the word', define_word_path(word: @game.hangman_text), id: 'define_word' %>
 <% else %>
