@@ -13,8 +13,8 @@
 #
 
 class Winner < ActiveRecord::Base
-  WEEKLY_PRIZE_AMOUNTS = [500,500,500,500,500]
-  DAILY_PRIZE_AMOUNTS  = [ 25, 25, 25, 25, 25]
+  WEEKLY_PRIZE_AMOUNTS = [330,330,330,330,330]
+  DAILY_PRIZE_AMOUNTS  = [ 16, 16, 16, 16, 16]
   WINNING_PERIODS = %w(daily weekly)
   WINNING_REASONS = %w(streak rating random)
   belongs_to :user, counter_cache: true
