@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  load_and_authorize_resource :except => [:mxit_authorise,:mxit_oauth,:profile, :hide_hangman, :show_hangman, :badges]
+  load_and_authorize_resource :except => [:mxit_authorise,:mxit_oauth,:options, :hide_hangman, :show_hangman, :badges]
 
   def index
     params[:period] = 'daily' unless Winner::WINNING_PERIODS.include?(params[:period].to_s)
@@ -15,13 +15,13 @@ class UsersController < ApplicationController
   def hide_hangman
     current_user.show_hangman = false 
     current_user.save
-    redirect_to user_accounts_path, notice: 'Profile was successfully updated.'
+    redirect_to options_users_path, notice: 'Options was successfully updated.'
   end
 
   def show_hangman
     current_user.show_hangman = true
     current_user.save
-    redirect_to user_accounts_path, notice: 'Profie was successfully updated'
+    redirect_to options_users_path, notice: 'Options was successfully updated'
   end
 
   def badges
@@ -40,6 +40,7 @@ class UsersController < ApplicationController
         mxit_connection = MxitApiWrapper.connect(:grant_type => 'authorization_code',
                                                  :code => params[:code],
                                                  :redirect_uri => mxit_oauth_users_url(host: request.host))
+        current_user_account = current_user.account
         if mxit_connection
           if mxit_connection.scope.include?("profile")
             mxit_user_profile = mxit_connection.profile
@@ -73,10 +74,8 @@ class UsersController < ApplicationController
   def mxit_oauth_redirect_to_path
     if params[:state] == 'feedback'
       feedback_index_path
-    elsif params[:state] == 'winnings'
-      redeem_winnings_path
     else
-      user_accounts_path
+      options_users_path
     end
   end
 

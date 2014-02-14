@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe SendFeedbackToUservoice do
-
   before :each do
     @send_feedback_to_uservoice =  SendFeedbackToUservoice.new
     @send_feedback_to_uservoice.stub(:subdomain_name).and_return('ubxd')
@@ -10,9 +9,9 @@ describe SendFeedbackToUservoice do
   end
 
   describe "perform" do
-
     before :each do
-      @user = stub_model(User, account: stub_model(UserAccount, real_name: "Grant", email: "m123_mxit@noreply.io"))
+      @user = stub_model(User)
+      @user.stub(:account).and_return(UserAccount.new(real_name: "Grant", email: "m123_mxit@noreply.io"))
       @feedback = stub_model(Feedback, subject: 'The message', message: 'long part', user: @user)
       Feedback.stub(:find).and_return(@feedback)
       @send_feedback_to_uservoice.stub(:send_suggestion)
@@ -44,22 +43,18 @@ describe SendFeedbackToUservoice do
         with(email: 'm123_mxit@noreply.io', subject: 'long part', message: "long part", name: "Grant")
       @send_feedback_to_uservoice.perform(123)
     end
-
   end
 
   describe "send_support" do
-
     it "must send the support" do
       stub_request(:post, "https://ubxd.uservoice.com/api/v1/tickets.json").to_return(:status => 200, :body => "{}", :headers => {})
       @send_feedback_to_uservoice.send_support(name: "Grant", email: "test@mail.com", subject: "Test subject", message: "hello")
       assert_requested(:post, "https://ubxd.uservoice.com/api/v1/tickets.json",
                        :body => '{"email":"test@mail.com","name":"Grant","ticket":{"subject":"Test subject","message":"hello"}}')
     end
-
   end
 
   describe "send_suggestion" do
-
     it "must send the support" do
       voice = double('Voice')
       UserVoice::Client.should_receive(:new).and_return(voice)
@@ -67,7 +62,5 @@ describe SendFeedbackToUservoice do
       voice.should_receive(:login_as).with("test@mail.com")
       @send_feedback_to_uservoice.send_suggestion(email: "test@mail.com", subject: "Test subject", message: "hello")
     end
-
   end
-
 end

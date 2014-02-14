@@ -43,7 +43,7 @@ shared_examples "badger" do
     end 
   end 
 
-  it "Bookworm is received after win of 10 letter word with no clues used" do 
+  it "Bookworm is received after win of 10 letter word with no clues used", :user_accounts_vcr => true do
   
   # Should not give badge if clues were used
     Dictionary.clear
@@ -84,7 +84,7 @@ shared_examples "badger" do
     page.should have_no_content("Bookworm")
   end
 
-  it "Clueless Badge received after using 5 clues in a row" do 
+  it "Clueless Badge received after using 5 clues in a row", :user_accounts_vcr => true do
     Dictionary.clear
     Dictionary.add("duck")
     Dictionary.set_clue("duck", "quack")
@@ -205,7 +205,7 @@ shared_examples "badger" do
     page.should_not have_content("Clueless")
   end
 
-  it "Brainey is received after winning 10 words in a row without using clues" do
+  it "Brainey is received after winning 10 words in a row without using clues", :user_accounts_vcr => true do
     Dictionary.clear
     Dictionary.add("meaow")
     Dictionary.set_clue("meaow","cat")
@@ -346,7 +346,7 @@ shared_examples "badger" do
     page.should have_no_content("Brainey")
   end
 
-  it "should give the Quickster Badge if game played under 30s and a clue was not used" do 
+  it "should give the Quickster Badge if game played under 30s and a clue was not used", :user_accounts_vcr => true do
     Dictionary.clear
     Dictionary.add("cattle")
     Dictionary.set_clue("cattle","ranch")

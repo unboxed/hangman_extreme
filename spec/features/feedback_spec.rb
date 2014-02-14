@@ -3,7 +3,7 @@ require 'support/vcr_helper'
 
 shared_examples "a feedbacker" do
 
-  it "must allow to send support feedback" do
+  it "must allow to send support feedback", :user_accounts_vcr => true do
     VCR.use_cassette('support_feedback',
                      :record => :once,
                      :erb => true,
@@ -17,7 +17,7 @@ shared_examples "a feedbacker" do
     end
   end
 
-  it "must allow to send suggestion feedback" do
+  it "must allow to send suggestion feedback", :user_accounts_vcr => true do
     VCR.use_cassette('suggestion_feedback',
                      :record => :once,
                      :erb => true,

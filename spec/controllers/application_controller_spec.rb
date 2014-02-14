@@ -48,6 +48,7 @@ describe ApplicationController do
     end
 
     it "wont assign a guest current_user if already a user" do
+      create(:user, uid: 'm2604100')
       request.env['HTTP_X_MXIT_USERID_R'] = 'm2604100'
       get :index
       assigns(:current_user).should_not be_a_guest
@@ -82,6 +83,7 @@ describe ApplicationController do
     context "has mxit headers" do
 
       before :each do
+        create(:user, uid: 'm2604100')
         request.env['HTTP_X_MXIT_USERID_R'] = 'm2604100'
         request.env['HTTP_X_MXIT_NICK'] = 'grant'
         @user_request_info = UserRequestInfo.new
@@ -269,9 +271,9 @@ describe ApplicationController do
     end
 
     it "must redirect to mxit invite if input extremepayout" do
-      request.env['HTTP_X_MXIT_USER_INPUT'] = "profile"
+      request.env['HTTP_X_MXIT_USER_INPUT'] = "options"
       get :index
-      response.should redirect_to(user_accounts_path)
+      response.should redirect_to(options_users_path)
     end
 
     it "must redirect to mxit invite if input extremepayout" do
@@ -297,6 +299,7 @@ describe ApplicationController do
 
     it "must render mxit layout" do
       controller.stub(:send_stats)
+      create(:user, uid: 'm123')
       request.env['HTTP_X_MXIT_USERID_R'] = "m123"
       get :index
       response.should render_template("layouts/mxit")

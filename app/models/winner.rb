@@ -98,18 +98,7 @@ class Winner < ActiveRecord::Base
   protected
 
   def increase_prize_points
-    if amount > 0
-      begin
-        user.account.increment!(:prize_points,amount)
-      rescue
-        user.reload
-        begin
-          user.account.increment!(:prize_points,amount)
-        rescue
-          # ignore second time around
-        end
-      end
-    end
+    IncrementPrizePoints.perform_async(id)
   end
 
   private

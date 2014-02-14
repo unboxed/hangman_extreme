@@ -72,31 +72,9 @@ describe "games/index" do
     render
   end
 
-  it "must have a authorise" do
-    args = {response_type: 'code',
-            host: "test.host",
-            protocol: 'http',
-            client_id: ENV['MXIT_CLIENT_ID'],
-            redirect_uri: mxit_oauth_users_url(host: "test.host"),
-            scope: "profile/public profile/private",
-            state: "profile"}
-    view.should_receive(:menu_item).with(anything,mxit_authorise_url(args),id: 'authorise')
-    render
-  end
-
-  it "must have a ordinary authorise link on the menu if not mxit request" do
+  it "must have a ordinary options link on the menu" do
     view.stub(:mxit_request?).and_return(false)
-    view.should_receive(:menu_item).with(anything,user_accounts_path,id: 'authorise')
-    render
-  end
-
-  it "must have a buy more credits link" do
-    view.should_receive(:menu_item).with(anything,purchases_path,id: 'buy_credits')
-    render
-  end
-
-  it "must have a link to redeem winnings if user have prize points" do
-    view.should_receive(:menu_item).with(anything,redeem_winnings_path,id: 'redeem')
+    view.should_receive(:menu_item).with(anything,options_users_path,id: 'options')
     render
   end
 
@@ -104,5 +82,4 @@ describe "games/index" do
     view.should_receive(:menu_item).with(anything,badges_users_path,id: 'badges')
     render
   end
-
 end

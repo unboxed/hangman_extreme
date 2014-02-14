@@ -28,6 +28,8 @@ describe UsersController do
     before :each do
       @connection = double('MxitApi', access_token: "123", profile: {}, scope: "profile")
       MxitApiWrapper.stub(:new).and_return(@connection)
+      @account = double('UserAccount').as_null_object
+      @current_user.stub(:account).and_return(@account)
     end
 
     it "must create a new mxit connection" do
@@ -42,19 +44,14 @@ describe UsersController do
       flash[:alert].should_not be_blank
     end
 
-    it "returns redirects to profile page" do
+    it "returns redirects to options page" do
       get 'mxit_oauth'
-      response.should redirect_to(user_accounts_path)
+      response.should redirect_to(options_users_path)
     end
 
     it "returns redirects to feedback page if state is feedback" do
       get 'mxit_oauth', state: 'feedback'
       response.should redirect_to(feedback_index_path)
-    end
-
-    it "returns redirects to winnings page if state is winnings" do
-      get 'mxit_oauth', state: 'winnings'
-      response.should redirect_to(redeem_winnings_path)
     end
 
     context "send invite" do
@@ -66,34 +63,47 @@ describe UsersController do
     end
 
     context "profile" do
-      let(:current_user_account){@current_user.account}
-
-      it "returns sets and save profile information" do
+      it "returns sets real_name if blank" do
         @connection.should_receive(:profile).and_return(:first_name => "Grant",
                                                         :last_name => "Speelman",
                                                         :mobile_number => "0821234567")
+        @account.stub(:real_name).and_return('')
+        @account.should_receive(:real_name=).and_return('Grant Speelman')
         get 'mxit_oauth', code: "123"
-        current_user_account.real_name.should == "Grant Speelman"
-        current_user_account.mobile_number.should == "0821234567"
+      end
+
+      it "wont sets real_name if present" do
+        @connection.should_receive(:profile).and_return(:first_name => "Grant",
+                                                        :last_name => "Speelman",
+                                                        :mobile_number => "0821234567")
+        @account.stub(:real_name).and_return('other')
+        @account.should_not_receive(:real_name=)
+        get 'mxit_oauth', code: "123"
+      end
+
+      it "returns sets mobile_number if blank" do
+        @connection.should_receive(:profile).and_return(:first_name => "Grant",
+                                                        :last_name => "Speelman",
+                                                        :mobile_number => "0821234567")
+        @account.stub(:mobile_number).and_return('')
+        @account.should_receive(:mobile_number=).with('0821234567')
+        get 'mxit_oauth', code: "123"
+      end
+
+      it "wont sets mobile_number if present" do
+        @connection.should_receive(:profile).and_return(:first_name => "Grant",
+                                                        :last_name => "Speelman",
+                                                        :mobile_number => "0821234567")
+        @account.stub(:mobile_number).and_return('123123')
+        @account.should_not_receive(:mobile_number=)
+        get 'mxit_oauth', code: "123"
       end
 
       it "returns usings mxit.im address if no email set" do
         @connection.should_receive(:profile).and_return(:user_id => "gman")
+        @account.stub(:email).and_return('')
+        @account.should_receive(:email=).with('gman@mxit.im')
         get 'mxit_oauth', code: "123"
-        current_user_account.email.should == "gman@mxit.im"
-      end
-
-      it "must not change values" do
-        current_user_account.update_attributes(real_name: "Joe Barber",
-                                               mobile_number: "0821234123",
-                                               email: "joe.barber@mail.com")
-        @connection.stub(:profile).and_return(:first_name => "Grant",
-                                              :last_name => "Speelman",
-                                              :mobile_number => "0821234567")
-        get 'mxit_oauth', code: "123"
-        current_user_account.reload
-        current_user_account.real_name.should == "Joe Barber"
-        current_user_account.mobile_number.should == "0821234123"
       end
     end
   end

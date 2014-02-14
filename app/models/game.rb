@@ -54,10 +54,10 @@ class Game < ActiveRecord::Base
     self.choices += letter if letter =~ /\p{Lower}/
   end
 
-  def reveal_clue
-    if user.account.credits > 0 && !clue_revealed?
+  def reveal_clue(account)
+    if account.credits > 0 && !clue_revealed?
       Game.transaction do
-        user.account.use_credit!
+        account.use_credit!
         toggle!(:clue_revealed)
       end
     end

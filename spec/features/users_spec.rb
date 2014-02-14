@@ -1,7 +1,6 @@
 require 'features_helper'
 
 shared_examples "a registered user" do
-
   it "must show users rating" do
     create_list(:won_game, 10, user: @current_user)
     visit_home
@@ -12,24 +11,7 @@ shared_examples "a registered user" do
     page.current_path.should == '/'
   end
 
-  it "must have a fill in profile information" do
-    visit_home
-    click_link('authorise')
-    page.should have_content("Grant Speelman")
-    page.should have_content("0821234567")
-    click_link('edit_real_name')
-    fill_in 'user_account_real_name', with: "Joe Barber"
-    click_button 'submit'
-    click_link('edit_mobile_number')
-    fill_in 'user_account_mobile_number', with: "0821234561"
-    click_button 'submit'
-    page.should have_content("Joe Barber")
-    page.should have_content("0821234561")
-    click_link('Home')
-    page.current_path.should == '/'
-  end
-
-  it "must allow to show and hide the hangman" do
+  it "must allow to show and hide the hangman", :user_accounts_vcr => true do
     Dictionary.clear
     Dictionary.add("example")
     visit_home
@@ -40,24 +22,22 @@ shared_examples "a registered user" do
     end
     page.should have_content(".---------")
     click_link('Home')
-    click_link('authorise')
+    click_link('options')
     click_link('No')
 
     click_link('Play')
     page.should have_no_content(".---------")
 
     click_link('Home')
-    click_link('authorise')
+    click_link('options')
     click_link('Yes')
 
     click_link('Play')
     page.should have_content(".---------")
   end
-
 end
 
 shared_examples "a user browser" do
-
   it "must the show the current top players" do
     users = create_list(:user,4).each{|user| create(:won_game, user: user) }
     User.new_day_set_scores!
@@ -76,13 +56,10 @@ shared_examples "a user browser" do
       end
     end
   end
-
 end
 
 describe 'users', :redis => true do
-
   context "as mxit user", :google_analytics_vcr => true do
-
     before :each do
       @current_user = mxit_user('m2604100')
       set_mxit_headers('m2604100') # set mxit user
@@ -92,30 +69,24 @@ describe 'users', :redis => true do
     it_behaves_like "a user browser"
     it_behaves_like "a registered user"
 
-    it "must show the profile if user mxit input is profile" do
-      add_headers('X_MXIT_USER_INPUT' => 'profile')
+    it "must show the options if user mxit input is options" do
+      add_headers('X_MXIT_USER_INPUT' => 'options')
       visit_home
-      page.current_path.should == user_accounts_path
+      page.current_path.should == options_users_path
     end
-
   end
 
   context "as mobile user", :facebook => true, :smaato_vcr => true, :js => true do
-
     before :each do
-      @current_user = facebook_user({},:real_name => "Grant Speelman", :mobile_number => "0821234567")
+      @current_user = facebook_user
       login_facebook_user(@current_user)
     end
 
     it_behaves_like "a user browser"
     it_behaves_like "a registered user"
-
   end
 
   context "as guest user", :smaato_vcr => true, :js => true do
-
     it_behaves_like "a user browser"
-
   end
-
 end

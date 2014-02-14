@@ -20,10 +20,6 @@ require 'spec_helper'
 
 describe UserAccount do
   describe "Validation" do
-    it "must start with a default of 24 credits" do
-      UserAccount.new.credits.should == 24
-    end
-
     it "must have a provider" do
       UserAccount.new.should have(1).errors_on(:provider)
       UserAccount.new(provider: 'xx').should have(0).errors_on(:provider)
@@ -33,26 +29,19 @@ describe UserAccount do
       UserAccount.new.should have(1).errors_on(:uid)
       UserAccount.new(uid: 'xx').should have(0).errors_on(:uid)
     end
-
-    it "must have a unique uid per provider" do
-      create(:user_account, uid: "xx", provider: "yy")
-      UserAccount.new(uid: 'xx', provider: "yy").should have(1).errors_on(:uid)
-      UserAccount.new(uid: 'xx', provider: "zz").should have(0).errors_on(:uid)
-    end
   end
 
   describe 'use_credit' do
     it 'must decrease credits by 1' do
-      user_account = create(:user_account, uid: "xx", provider: "yy", credits: 20)
+      user_account = UserAccount.new(uid: 'm111', credits: 20)
+      user_account.should_receive(:save)
       user_account.use_credit!
-      user_account.reload
       user_account.credits.should == 19
     end
 
     it 'will raise an error if 0 credits' do
-      user_account = create(:user_account, uid: "xx", provider: "yy", credits: 0)
+      user_account = UserAccount.new(uid: 'm111', credits: 0)
       expect{ user_account.use_credit!}.to raise_error
-      user_account.reload
       user_account.credits.should == 0
     end
   end
@@ -61,7 +50,7 @@ describe UserAccount do
     before :each do
       @mxit_money_connection = double("connection", :user_info => {:is_registered => false})
       MxitMoneyApi.stub(:connect).and_return(@mxit_money_connection)
-      @user_account = stub_model(UserAccount, :uid => 'm111')
+      @user_account = UserAccount.new(uid: 'm111')
     end
 
     it "must connect to MxitMoneyApi" do

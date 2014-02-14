@@ -24,12 +24,11 @@ HangmanLeague::Application.routes.draw do
       get 'hide_hangman', action: 'hide_hangman', as: 'hide_hangman'
       get 'show_hangman', action: 'show_hangman', as: 'show_hangman'
       get 'badges', action: 'badges', as: 'badges'
+      get 'options', action: 'options'
     end
   end
-  resource :user_accounts, only: [:show, :edit, :update], path: 'profile'
   resources :feedback, path: "user_comments", :except => [:show, :edit, :update, :destroy]
   resources :winners, :except => [:edit, :update, :create, :new, :destroy]
-  resources :redeem_winnings, :except => [:edit, :update, :destroy]
 
   get '/define/:word', to: 'words#define', as: 'define_word'
   get '/auth/:provider/callback', to: 'sessions#create'

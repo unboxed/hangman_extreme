@@ -15,13 +15,6 @@
 #  user_account_id     :integer
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
-FactoryGirl.define do
-  factory :purchase_transaction do
-    ref {PurchaseTransaction.new.generate_ref}
-    product_id {PurchaseTransaction.products.keys.first}
-    product_description "MyText"
-    user_account
-  end
+class Deprecated::PurchaseTransaction < ActiveRecord::Base
+  self.table_name = 'purchase_transactions'
 end

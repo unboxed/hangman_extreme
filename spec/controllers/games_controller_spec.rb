@@ -4,7 +4,7 @@ require 'timecop'
 describe GamesController do
   before :each do
     @current_user = create(:user)
-    @current_user_account = @current_user.account
+    @current_user.stub(:account).and_return(@current_user_account = double('UserAccount', :credits => 100, :use_credit! => true))
     @ability = Object.new
     @ability.extend(CanCan::Ability)
     @ability.can(:manage, :all)
@@ -81,14 +81,14 @@ describe GamesController do
     end
 
     it "must show clue" do
-      @current_user_account.update_attribute(:credits, 1)
+      @current_user_account.stub(:credits).and_return(1)
       expect {
         do_post_reveal_clue
       }.to change { @game.reload; @game.clue_revealed }
     end
 
     it "wont show clue" do
-      @current_user_account.update_attribute(:credits, 0)
+      @current_user_account.stub(:credits).and_return(0)
       do_post_reveal_clue
       response.should redirect_to(purchases_path)
       flash[:alert].should_not be_blank
@@ -316,7 +316,7 @@ describe GamesController do
     end
 
     it "redirects to purchase_transaction_path if no more credits" do
-      @current_user.account.update_attribute(:credits,0)
+      @current_user_account.stub(:credits).and_return(0)
       do_get_new
       response.should redirect_to(purchases_path)
       flash[:alert].should_not be_blank
@@ -359,9 +359,8 @@ describe GamesController do
       end
 
       it "reduces the users credits" do
-        expect {
-          do_create
-        }.to change{@current_user_account.reload; @current_user_account.credits}.by(-1)
+        @current_user_account.should_receive(:use_credit!)
+        do_create
       end
 
       it "assigns a newly created game as @game" do

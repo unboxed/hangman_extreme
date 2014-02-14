@@ -16,12 +16,6 @@
 #  updated_at    :datetime
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
-FactoryGirl.define do
-  factory :user_account do
-    sequence(:uid) {|n| "UID#{n}" }
-    provider "mxit"
-    credits 1000
-  end
+class Deprecated::UserAccount < ActiveRecord::Base
+  self.table_name = 'user_accounts'
 end

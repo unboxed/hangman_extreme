@@ -35,11 +35,8 @@ class User < ActiveRecord::Base
 
   has_many :games, -> { order('id ASC') }
   has_many :winners
-  has_many :redeem_winnings
-  has_many :airtime_vouchers
   has_many :feedback
   has_many :badges
-  has_many :purchase_transactions
   has_many :show_clue
 
   has_one  :badge_tracker
@@ -56,22 +53,27 @@ class User < ActiveRecord::Base
   scope :last_day, -> { where('created_at >= ?',1.day.ago) }
   scope :random_order, -> { order(connection.instance_values["config"][:adapter].include?("mysql") ? 'RAND()' : 'RANDOM()') }
 
+  delegate :credits, to: :account, prefix: true
+
   def account
     @account ||=
-      UserAccount.create_with(real_name: _deprecated_real_name,
-                              mobile_number: _deprecated_mobile_number,
-                              email: _deprecated_email,
-                              credits: _deprecated_credits,
-                              mxit_login: _deprecated_login,
-                              prize_points: _deprecated_prize_points).
-                  find_or_create_by({uid: uid,provider: provider})
+      UserAccount.find_or_create_with({uid: uid,provider: provider},
+                                       real_name: _deprecated_real_name,
+                                       mobile_number: _deprecated_mobile_number,
+                                       email: _deprecated_email,
+                                       credits: _deprecated_credits,
+                                       mxit_login: _deprecated_login,
+                                       prize_points: _deprecated_prize_points)
   end
 
   def self.find_or_create_from_auth_hash(auth_hash)
     auth_hash.stringify_keys!
     return nil if auth_hash['uid'].blank? || auth_hash['provider'].blank?
-    user = find_or_create_by(uid: auth_hash['uid'],provider: auth_hash['provider'])
-    user.set_user_info(auth_hash['info'])
+    user = find_by(uid: auth_hash['uid'],provider: auth_hash['provider'])
+    unless user
+      user = find_or_create_by(uid: auth_hash['uid'],provider: auth_hash['provider'])
+      user.set_user_info(auth_hash['info'])
+    end
     return user
   end
 

@@ -183,6 +183,9 @@ describe User do
   end
 
   describe "find_or_create_from_auth_hash" do
+    before :each do
+      UserAccount.stub(:find_or_create_with).and_return(double('UserAccount').as_null_object)
+    end
     it "must create a new user if no uid and provider match exists" do
       expect {
         user = User.find_or_create_from_auth_hash(uid: "u", provider: "p", info: {name: "Grant"})
@@ -455,33 +458,21 @@ describe User do
       @user = create(:user, uid: 'grant', provider: 'mxit')
     end
 
-    it "must find user account based on uid and provider" do
-      create(:user_account, uid: 'clive', provider: 'mxit')
-      create(:user_account, uid: 'grant', provider: 'facebook')
-      user_account = create(:user_account, uid: 'grant', provider: 'mxit')
-      @user.account.should == user_account
-    end
-
-    it "should not reload account if loaded before" do
-      user_account = create(:user_account, uid: 'grant', provider: 'mxit', real_name: 'Grant')
-      @user.account
-      user_account.update_attributes(real_name: 'Kim')
-      @user.account.real_name.should == 'Grant'
-    end
-
     it "must create account if it does not exist and set default values" do
       @user.update_attributes(_deprecated_real_name: 'Grant',
                               _deprecated_mobile_number: '000',
                               _deprecated_email: 'grant@example.com',
                               _deprecated_credits: 111,
+                              _deprecated_login: 'gman',
                               _deprecated_prize_points: 123)
-      user_account = @user.account
-      user_account.should_not be_nil
-      user_account.real_name.should == 'Grant'
-      user_account.mobile_number.should == '000'
-      user_account.email.should == 'grant@example.com'
-      user_account.credits.should == 111
-      user_account.prize_points.should == 123
+      UserAccount.should_receive(:find_or_create_with).with({uid: 'grant',provider: 'mxit'},
+                                                            {real_name: 'Grant',
+                                                             mobile_number: '000',
+                                                             email: 'grant@example.com',
+                                                             credits: 111,
+                                                             mxit_login: 'gman',
+                                                             prize_points: 123}).and_return('test')
+      @user.account.should == 'test'
     end
   end
 end

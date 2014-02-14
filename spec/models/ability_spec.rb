@@ -78,63 +78,6 @@ describe Ability do
         @ability.should be_able_to(:read, Winner)
       end
     end
-
-    context "Purchase Transactions" do
-      it "must be able to view purchase transactions" do
-        @ability.should be_able_to(:read, PurchaseTransaction)
-      end
-
-      it "wont be able to read other users purchase_transactions" do
-        trans = create(:purchase_transaction, user_account: create(:user_account))
-        @ability.should_not be_able_to(:read, trans)
-      end
-
-      it "must be able to read own purchase_transactions" do
-        trans = create(:purchase_transaction, user_account: @user.account)
-        @ability.should be_able_to(:read, trans)
-      end
-
-      it "must be able to create purchase_transactions" do
-        @ability.should be_able_to(:create, PurchaseTransaction)
-      end
-    end
-
-    context "Redeem Winnings" do
-      it "must be able to view redeem_winning" do
-        @ability.should be_able_to(:read, RedeemWinning)
-      end
-
-      it "wont be able to read other users redeem_winnings" do
-        trans = create(:redeem_winning, user_account: create(:user_account, prize_points: 2))
-        @ability.should_not be_able_to(:read, trans)
-      end
-
-      it "must be able to read own redeem_winnings" do
-        @user.account.increment!(:prize_points)
-        trans = create(:redeem_winning, user_account: @user.account)
-        @ability.should be_able_to(:read, trans)
-      end
-
-      it "must be able to create redeem_winning" do
-        @ability.should be_able_to(:create, RedeemWinning)
-      end
-    end
-
-    context "Airtime Vouchers" do
-      it "must be able to read airtime vouchers" do
-        @ability.should be_able_to(:read, AirtimeVoucher)
-      end
-
-      it "wont be able to read other users airtime vouchers" do
-        airtime_voucher = create(:airtime_voucher, user_account: create(:user_account, prize_points: 2))
-        @ability.should_not be_able_to(:read, airtime_voucher)
-      end
-
-      it "must be able to read own airtime vouchers" do
-        airtime_voucher = create(:airtime_voucher, user_account: @user.account)
-        @ability.should be_able_to(:read, airtime_voucher)
-      end
-    end
   end
 
   context "Guest" do
@@ -211,63 +154,6 @@ describe Ability do
     context "Winners" do
       it "must be able to read winners" do
         @ability.should be_able_to(:read, Winner)
-      end
-    end
-
-    context "Purchase Transactions" do
-      it "must be able to view purchase transactions" do
-        @ability.should be_able_to(:read, PurchaseTransaction)
-      end
-
-      it "wont be able to read other users purchase_transactions" do
-        trans = create(:purchase_transaction, user_account: create(:user).account)
-        @ability.should_not be_able_to(:read, trans)
-      end
-
-      it "must be able to read own purchase_transactions" do
-        trans = create(:purchase_transaction, user_account: @user.account)
-        @ability.should be_able_to(:read, trans)
-      end
-
-      it "wont be able to create purchase_transactions" do
-        @ability.should_not be_able_to(:create, PurchaseTransaction)
-      end
-    end
-
-    context "Redeem Winnings" do
-      it "must be able to view redeem_winning" do
-        @ability.should be_able_to(:read, RedeemWinning)
-      end
-
-      it "wont be able to read other users redeem_winnings" do
-        trans = create(:redeem_winning, user_account: create(:user_account, prize_points: 2))
-        @ability.should_not be_able_to(:read, trans)
-      end
-
-      it "must be able to read own redeem_winnings" do
-        @user.account.increment!(:prize_points)
-        trans = create(:redeem_winning, user_account: @user.account)
-        @ability.should be_able_to(:read, trans)
-      end
-
-      it "wont be able to create redeem_winning" do
-        @ability.should_not be_able_to(:create, RedeemWinning)
-      end
-    end
-
-    context "Airtime Vouchers" do
-      it "must be able to read airtime vouchers" do
-        @ability.should be_able_to(:read, AirtimeVoucher)
-      end
-
-      it "wont be able to read other users airtime vouchers" do
-        airtime_voucher = create(:airtime_voucher, user_account: create(:user).account)
-        @ability.should_not be_able_to(:read, airtime_voucher)
-      end
-
-      it "must be able to read own airtime vouchers" do
-        airtime_voucher = create(:airtime_voucher, user_account: @user.account)
-        @ability.should be_able_to(:read, airtime_voucher)
       end
     end
   end

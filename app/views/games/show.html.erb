@@ -1,4 +1,3 @@
-<% clue = Dictionary.clue(@game.word) %>
 <% if @game.is_won? %>
 <b style="color:green">You win!</b>
 <% elsif @game.is_lost? %>
@@ -7,6 +6,7 @@
 You have <span><%= @game.attempts_left %></span> attempts left
 <% end %>
 <div <% if @game.is_lost? %>style="color:red;"<% end %>><%= render 'hangman' if current_user.show_hangman %></div>
+<%- clue = Dictionary.clue(@game.word) -%>
 <% if clue  %>
     <% if @game.clue_revealed? %>
     (<i><%= clue %></i>)

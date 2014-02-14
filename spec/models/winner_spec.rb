@@ -16,9 +16,7 @@ require 'spec_helper'
 require 'timecop'
 
 describe Winner do
-
   context "Validation" do
-
     it "must have a user_id" do
       Winner.new.should have(1).errors_on(:user_id)
       Winner.new(user_id: 1).should have(0).errors_on(:user_id)
@@ -47,21 +45,16 @@ describe Winner do
       Winner.new.should have(1).errors_on(:end_of_period_on)
       Winner.new(end_of_period_on: Date.current).should have(0).errors_on(:end_of_period_on)
     end
-
   end
 
   context "create_winners_for_category" do
-
     before :each do
       UserSendMessage.stub(:send)
     end
 
     ['daily', 'weekly'].each do |period|
-
       context "#{period}" do
-
         context "random" do
-
           let(:required_wins){period == 'daily' ? 5 : 15}
 
           it "wont allow players to win 2 randoms in a row" do
@@ -159,16 +152,13 @@ describe Winner do
             Winner.create_winners_for_category(period: period, score_by: "random", winnings: [8] * 5)
             users.each do |user|
               user.reload
-              user.account.prize_points.should == 8
+              user.winners.last.amount.should == 8
             end
           end
-
         end
 
         ['rating', 'streak'].each do |score_by|
-
           context "#{score_by}" do
-
             it "wont allow players to win 2 #{period}s in a row" do
               day1 = Time.current.end_of_week
               other_players = create_list(:user, 5, "#{period}_#{score_by}" => 9)
@@ -261,21 +251,16 @@ describe Winner do
               Winner.create_winners_for_category(period: period, score_by: score_by, winnings: [8] * 5)
               users.each do |user|
                 user.reload
-                user.account.prize_points.should == 8
+                user.winners.last.amount.should == 8
               end
             end
-
           end
-
         end
-
       end
-
     end
   end
 
   context "create_winners" do
-
     before :each do
       create_list(:user, 10, daily_rating: 0, daily_streak: 0)
       Winner.should respond_to(:create_winners_for_category)
@@ -313,7 +298,5 @@ describe Winner do
     it "must run without arguments" do
       Winner.create_weekly_winners
     end
-
   end
-
 end

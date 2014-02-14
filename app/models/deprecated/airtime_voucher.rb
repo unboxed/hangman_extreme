@@ -15,9 +15,6 @@
 #  user_account_id     :integer
 #
 
-class AirtimeVoucher < ActiveRecord::Base
-  belongs_to :redeem_winning
-  belongs_to :user_account
-  validates_presence_of :freepaid_refno, :network, :pin, :redeem_winning_id
-  serialize :response
+class Deprecated::AirtimeVoucher < ActiveRecord::Base
+  self.table_name = 'airtime_vouchers'
 end

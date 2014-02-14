@@ -24,6 +24,7 @@ gem 'whenever', require: false
 gem 'sidekiq', require: false
 gem 'sinatra', '>= 1.3.0', require: false # for sidekiq
 gem 'slim', require: false # for sidekiq
+gem 'her'
 
 #gem 'backup', :require => false
 #gem 'httparty', :require => false # for backup
@@ -66,6 +67,7 @@ group :development, :test do
   platforms :ruby do
     gem 'debugger'
   end
+  gem 'jazz_hands'
 end
 
 group :test do

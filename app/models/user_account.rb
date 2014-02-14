@@ -1,25 +1,28 @@
-# == Schema Information
-#
-# Table name: user_accounts
-#
-#  id            :integer          not null, primary key
-#  uid           :string(255)      not null
-#  provider      :string(255)      not null
-#  mxit_login    :string(255)
-#  real_name     :string(255)
-#  mobile_number :string(255)
-#  email         :string(255)
-#  credits       :integer          default(24)
-#  prize_points  :integer          default(0)
-#  lock_version  :integer          default(0), not null
-#  created_at    :datetime
-#  updated_at    :datetime
-#
+require 'mxit_api'
 
-class UserAccount < ActiveRecord::Base
+class UserAccount
+  include Her::Model
+
   validates :provider, :uid, presence: true
-  validates_uniqueness_of :uid, :scope => :provider
 
+  def initialize(values = {})
+    values.reverse_merge!(uid: nil, provider: nil)
+    super
+  end
+
+  def self.find_or_create_with(uid_and_provider, defaults)
+    where(uid_and_provider).first || create(uid_and_provider.reverse_merge(defaults))
+  end
+
+  def increment_prize_points!(amount)
+    assign_attributes(prize_points: prize_points + amount)
+    save
+  end
+
+  #
+  #validates :provider, :uid, presence: true
+  #validates_uniqueness_of :uid, :scope => :provider
+  #
   def registered_on_mxit_money?(connection = MxitMoneyApi.connect(ENV['MXIT_MONEY_API_KEY']))
     begin
       if connection
@@ -38,6 +41,7 @@ class UserAccount < ActiveRecord::Base
 
   def use_credit!
     raise 'not enough credits' if credits <= 0
-    decrement!(:credits)
+    assign_attributes(credits: credits - 1)
+    save
   end
 end

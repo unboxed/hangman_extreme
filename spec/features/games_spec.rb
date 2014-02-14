@@ -89,7 +89,7 @@ end
 
 describe 'games', :redis => true do
 
-  context "as mxit user", :google_analytics_vcr => true do
+  context "as mxit user", :google_analytics_vcr => true, :user_accounts_vcr => true do
 
     before :each do
       @current_user = mxit_user('m2604100')
@@ -100,7 +100,7 @@ describe 'games', :redis => true do
 
   end
 
-  context "as mobile user", :facebook => true, :smaato_vcr => true, :js => true do
+  context "as mobile user", :facebook => true, :smaato_vcr => true, :js => true, :user_accounts_vcr => true do
 
     before :each do
       @current_user = facebook_user

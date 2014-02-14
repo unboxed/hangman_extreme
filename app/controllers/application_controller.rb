@@ -16,10 +16,6 @@ class ApplicationController < ActionController::Base
     @current_user
   end
 
-  def current_user_account
-    current_user.account
-  end
-
   def current_user_request_info
     @current_user_request_info ||= UserRequestInfo.new
   end
@@ -102,8 +98,8 @@ class ApplicationController < ActionController::Base
                                     redirect_uri: mxit_oauth_users_url(host: request.host),
                                     scope: "contact/invite graph/read",
                                     state: "winnings"))
-      when "profile"
-        redirect_to(user_accounts_path) unless params[:controller] == 'user_accounts'
+      when 'options'
+        redirect_to(options_users_path) unless params[:controller] == 'users'
       when 'winners'
         redirect_to(winners_path) unless params[:controller] == 'winners'
       when 'airtime vouchers'
