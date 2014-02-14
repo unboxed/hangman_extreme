@@ -8,9 +8,8 @@ ENV['UV_API_SECRET'] ||= '1'
 ENV['MXIT_CLIENT_ID'] ||= '1'
 ENV['SHINKA_AUID'] ||= '1'
 ENV['GA_TRACKING_CODE'] ||= 'UA-00000000-3'
-ENV['FREEPAID_USER'] ||= '1'
-ENV['FREEPAID_PASS'] ||= '1'
 ENV['MXIT_VENDOR_ID'] ||= '1'
+ENV['USER_ACCOUNT_API'] ||= 'http://user.example.com/api'
 ENV['SESSION_TOKEN'] ||= ('a' * 31)
 
 if (ENV['COVERAGE'] == 'on')
