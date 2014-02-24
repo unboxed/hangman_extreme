@@ -57,6 +57,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]
   gem 'quiet_assets'
+  gem 'jazz_hands', :platforms=>[:mri_19, :rbx]
 end
 
 group :development, :test do
@@ -67,7 +68,6 @@ group :development, :test do
   platforms :ruby do
     gem 'debugger'
   end
-  gem 'jazz_hands'
 end
 
 group :test do
