@@ -14,21 +14,16 @@ gem 'ohm-contrib', require: false
 gem 'cancan', require: false
 gem 'omniauth'
 gem 'omniauth-facebook'
-gem 'kaminari'
 gem 'mxit_api', '>= 0.2.2.pre', require: false
-gem 'savon', require: false
 gem 'draper'
 gem 'puma', require: false
 gem 'whenever', require: false
+gem 'her'
 
 gem 'sidekiq', require: false
 gem 'sinatra', '>= 1.3.0', require: false # for sidekiq
 gem 'slim', require: false # for sidekiq
-gem 'her'
 
-#gem 'backup', :require => false
-#gem 'httparty', :require => false # for backup
-#gem 'dropbox-sdk', :require => false  # for backup
 
 # third party
 gem 'airbrake'

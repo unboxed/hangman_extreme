@@ -5,7 +5,7 @@ class GamesController < ApplicationController
 
   def index
     @current_game = current_user.current_game
-    @games = @games.completed.active_first.page(params[:page]).per(1)
+    @games = @games.completed.active_first.limit(1)
   end
 
   def show

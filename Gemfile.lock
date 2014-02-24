@@ -47,9 +47,6 @@ GEM
     airbrake (3.1.15)
       builder
       multi_json
-    akami (1.2.0)
-      gyoku (>= 0.4.0)
-      nokogiri (>= 1.4.0)
     annotate (2.6.1)
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
@@ -145,8 +142,6 @@ GEM
       diff-lcs (~> 1.1)
       mime-types (~> 1.15)
       posix-spawn (~> 0.3.6)
-    gyoku (1.1.1)
-      builder (>= 2.1.2)
     hashie (2.0.5)
     her (0.6.8)
       activemodel (>= 3.0.0)
@@ -159,9 +154,6 @@ GEM
     htmlentities (4.3.1)
     http_parser.rb (0.5.3)
     http_parser.rb (0.5.3-java)
-    httpi (2.1.0)
-      rack
-      rubyntlm (~> 0.3.2)
     i18n (0.6.9)
     jazz_hands (0.5.2)
       awesome_print (~> 1.2)
@@ -185,9 +177,6 @@ GEM
     json (1.8.1-java)
     jwt (0.1.10)
       multi_json (>= 1.5)
-    kaminari (0.15.1)
-      actionpack (>= 3.0.0)
-      activesupport (>= 3.0.0)
     launchy (2.4.2)
       addressable (~> 2.3)
     launchy (2.4.2-java)
@@ -224,7 +213,6 @@ GEM
       mini_portile (~> 0.5.0)
     nokogiri (1.6.1-java)
       mini_portile (~> 0.5.0)
-    nori (2.3.0)
     oauth (0.4.7)
     oauth2 (0.9.3)
       faraday (>= 0.8, < 0.10)
@@ -259,11 +247,6 @@ GEM
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
-    pry (0.9.12.6-java)
-      coderay (~> 1.0)
-      method_source (~> 0.8)
-      slop (~> 3.4)
-      spoon (~> 0.0)
     pry-debugger (0.2.2)
       debugger (~> 1.3)
       pry (~> 0.9.10)
@@ -327,19 +310,10 @@ GEM
       rspec-mocks (~> 2.13.0)
     ruby_parser (3.3.0)
       sexp_processor (~> 4.1)
-    rubyntlm (0.3.4)
     rubyzip (1.1.0)
     rvm-capistrano (1.5.1)
       capistrano (~> 2.15.4)
     safe_yaml (0.9.7)
-    savon (2.3.3)
-      akami (~> 1.2.0)
-      builder (>= 2.1.2)
-      gyoku (~> 1.1.0)
-      httpi (~> 2.1.0)
-      nokogiri (>= 1.4.0)
-      nori (~> 2.3.0)
-      wasabi (~> 3.2.2)
     scrivener (0.0.3)
     selenium-webdriver (2.39.0)
       childprocess (>= 0.2.5)
@@ -413,10 +387,6 @@ GEM
       json (>= 1.7.5)
       oauth (>= 0.4.7)
     vcr (2.8.0)
-    wasabi (3.2.3)
-      httpi (~> 2.0)
-      mime-types (< 2.0.0)
-      nokogiri (>= 1.4.0)
     webmock (1.17.0)
       addressable (>= 2.2.7)
       crack (>= 0.3.2)
@@ -463,7 +433,6 @@ DEPENDENCIES
   jazz_hands
   jdbc-mysql
   jquery-rails
-  kaminari
   launchy
   libv8 (~> 3.11.8)
   mxit_api (>= 0.2.2.pre)
@@ -480,7 +449,6 @@ DEPENDENCIES
   rails (~> 4.0.0)
   rspec-rails (~> 2.13.0)
   rvm-capistrano
-  savon
   selenium-webdriver
   sidekiq
   simplecov
