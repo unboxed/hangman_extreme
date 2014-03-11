@@ -34,7 +34,7 @@ class UserSendMessage
   end
 
   def self.send(msg,users)
-    new("Your airtime voucher is available in the $airtime vouchers$ section.", users).send_all
+    new(msg, users).send_all
   end
 
   private
