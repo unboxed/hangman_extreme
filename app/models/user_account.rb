@@ -20,6 +20,10 @@ class UserAccount < ActiveRecord::Base
   validates :provider, :uid, presence: true
   validates_uniqueness_of :uid, :scope => :provider
 
+  has_many :redeem_winnings
+  has_many :airtime_vouchers
+  has_many :purchase_transactions
+
   def registered_on_mxit_money?(connection = MxitMoneyApi.connect(ENV['MXIT_MONEY_API_KEY']))
     begin
       if connection
@@ -27,7 +31,7 @@ class UserAccount < ActiveRecord::Base
         result[:is_registered]
       end
     rescue Exception => e
-      Airbrake.notify_or_ignore(e,:parameters    => {:user => self, :connection => connection})
+      Airbrake.notify_or_ignore(e,:parameters => {:user => self, :connection => connection})
       false
     end
   end
