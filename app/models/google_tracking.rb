@@ -2,6 +2,7 @@ require 'ohm/contrib'
 class GoogleTracking < Ohm::Model
   include Ohm::Timestamps
   include Ohm::DataTypes
+  include ActiveModel::Validations
   include ActiveModel::Dirty
   define_attribute_methods [:user_id, :initial_visit, :previous_session, :current_session, :last_visit]
 
@@ -13,9 +14,7 @@ class GoogleTracking < Ohm::Model
   attribute :current_session, Type::Time
   attribute :last_visit, Type::Time
 
-  def validate
-    assert_numeric :user_id
-  end
+  validates_presence_of :user_id
 
   def save
     (new? || changed?) && super
