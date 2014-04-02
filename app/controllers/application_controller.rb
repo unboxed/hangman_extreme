@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
       begin
         Timeout::timeout(15) do
           g = Gabba::Gabba.new(tracking_code, request.host)
-          g.user_agent = current_user_request_info.user_agent || request.env['HTTP_USER_AGENT']
+          g.user_agent = current_user_request_info.user_agent || request.env['HTTP_USER_AGENT'] || 'unknown'
           g.utmul = current_user_request_info.language || "en"
           g.set_custom_var(1, 'Gender', current_user_request_info.gender || "unknown", 1)
           g.set_custom_var(2, 'Age', current_user_request_info.age || "unknown", 1)
