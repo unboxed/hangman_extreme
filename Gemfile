@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 #ruby '2.0.0' if ENV['STACK'] == 'cedar'
 
-gem 'rails', '~> 4.0.0'
+gem 'rails', '~> 4.1.0.rc2'
 
 platforms :jruby do
   gem 'activerecord-jdbcpostgresql-adapter', '>= 1.3.0', require: false
@@ -61,7 +61,7 @@ end
 group :development, :test do
   gem 'timecop', require: false
   gem 'annotate', require: false
-  gem 'rspec-rails', '~> 2.13.0'
+  gem 'rspec-rails', '~> 2.13'
   gem 'factory_girl_rails'
   platforms :ruby do
     gem 'debugger'
