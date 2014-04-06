@@ -28,7 +28,7 @@ class Feedback < ActiveRecord::Base
   end
 
   def full_message=(v)
-    self.message, self.subject = v.split(":",2).reverse
+    self.message, self.subject = v.split(':',2).reverse
   end
 
   def full_message

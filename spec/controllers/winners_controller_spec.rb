@@ -12,19 +12,19 @@ describe WinnersController do
     controller.stub(:send_stats)
   end
 
-  describe "GET index" do
+  describe 'GET index' do
 
     def do_get_index(params = {})
       get :index, params
     end
 
-    it "assigns all winners as @winners" do
+    it 'assigns all winners as @winners' do
       create(:winner, end_of_period_on: Date.yesterday, period: 'daily', reason: 'rating')
       do_get_index
       assigns(:winners).should include(Winner.last)
     end
 
-    it "renders succesfully" do
+    it 'renders succesfully' do
       do_get_index
       response.should be_success
     end

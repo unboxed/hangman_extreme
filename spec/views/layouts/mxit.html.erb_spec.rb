@@ -1,6 +1,6 @@
 require 'view_spec_helper'
 
-describe "layouts/mxit" do
+describe 'layouts/mxit' do
 
   before(:each) do
     @current_user = stub_model(User, id: 50)
@@ -11,16 +11,16 @@ describe "layouts/mxit" do
   end
 
 
-  it "should a menu" do
-    view.stub(:menu).and_return("--MENU--")
+  it 'should a menu' do
+    view.stub(:menu).and_return('--MENU--')
     render
-    rendered.should have_content("--MENU--")
+    rendered.should have_content('--MENU--')
   end
 
-  it "should a ad" do
-    view.stub(:shinka_ad).and_return("--AD--")
+  it 'should a ad' do
+    view.stub(:shinka_ad).and_return('--AD--')
     render
-    rendered.should have_content("--AD--")
+    rendered.should have_content('--AD--')
   end
 
 end

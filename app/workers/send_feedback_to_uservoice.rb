@@ -10,7 +10,7 @@ class SendFeedbackToUservoice
     send_options = {:email => feedback.user_email,
                     :subject => feedback.subject || feedback.message[0,30],
                     :message => feedback.message,
-                    :name => feedback.user_real_name || CGI::unescape(feedback.user_name.to_s).gsub(/[^a-zA-Z0-9\s]/,"")}
+                    :name => feedback.user_real_name || CGI::unescape(feedback.user_name.to_s).gsub(/[^a-zA-Z0-9\s]/, '')}
     if feedback.support_type == 'suggestion'
       send_suggestion(send_options)
     else
@@ -20,7 +20,7 @@ class SendFeedbackToUservoice
 
   def send_suggestion(options = {})
     client = UserVoice::Client.new(subdomain_name, api_key, api_secret)
-    forum = client.get("/api/v1/forums.json")['forums'].first
+    forum = client.get('/api/v1/forums.json')['forums'].first
     forum_id = forum['id']
     client.login_as(options[:email]) do |access_token|
       access_token.post("/api/v1/forums/#{forum_id}/suggestions.json", {
@@ -35,7 +35,7 @@ class SendFeedbackToUservoice
 
   def send_support(options = {})
     client = UserVoice::Client.new(subdomain_name, api_key, api_secret)
-    client.post("/api/v1/tickets.json", {
+    client.post('/api/v1/tickets.json', {
       :email => options[:email],
       :name => options[:name],
       :ticket => {

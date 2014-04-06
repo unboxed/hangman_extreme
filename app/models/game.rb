@@ -48,7 +48,7 @@ class Game < ActiveRecord::Base
   end
 
   def add_choice(letter)
-    self.choices ||= ""
+    self.choices ||= ''
     return if is_lost? || letter.to_s.size > 1
     letter.downcase!
     self.choices += letter if letter =~ /\p{Lower}/
@@ -78,7 +78,7 @@ class Game < ActiveRecord::Base
   def hangman_text
     return word if done?
     text = word
-    word_letters.each{|letter| text.gsub!(letter,"_") unless choices.to_s.include?(letter)}
+    word_letters.each{|letter| text.gsub!(letter, '_') unless choices.to_s.include?(letter)}
     text
   end
 
@@ -114,11 +114,11 @@ class Game < ActiveRecord::Base
   protected
 
   def word_letters
-    word.to_s.split("")
+    word.to_s.split('')
   end
 
   def choice_letters
-    choices.to_s.split("")
+    choices.to_s.split('')
   end
 
 

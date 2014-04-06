@@ -1,6 +1,6 @@
 require 'rubygems'
 
-ENV["RAILS_ENV"] ||= 'test'
+ENV['RAILS_ENV'] ||= 'test'
 ENV['DB_CLEANER_STRATEGY'] ||= 'transaction'
 ENV['UV_SUBDOMAIN_NAME'] ||= 'uv'
 ENV['UV_API_KEY'] ||= '1'
@@ -23,7 +23,7 @@ if (ENV['COVERAGE'] == 'on')
   end
   SimpleCov.formatter = SimpleCov::Formatter::MergedFormatter
   SimpleCov.start 'rails' do
-    add_filter "/vendor/"
+    add_filter '/vendor/'
   end
 end
 
@@ -32,7 +32,7 @@ if ENV['COVERALLS']
   Coveralls.wear!('rails')
 end
 
-require File.expand_path("../../config/environment", __FILE__)
+require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'webmock/rspec'
@@ -41,7 +41,7 @@ require 'database_cleaner'
 
 WebMock.disable_net_connect!(:allow_localhost => true)
 def in_memory_database?
-  Rails.configuration.database_configuration[ENV["RAILS_ENV"]]['database'] == ':memory:'
+  Rails.configuration.database_configuration[ENV['RAILS_ENV']]['database'] == ':memory:'
 end
 
 if in_memory_database?
@@ -60,14 +60,14 @@ DatabaseCleaner.clean_with :truncation
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
-  config.filter_run_excluding :inconsistent => true if ENV["EXCLUDE_INCONSISTENT"]
+  config.filter_run_excluding :inconsistent => true if ENV['EXCLUDE_INCONSISTENT']
 
 
   # Run specs in random order to surface order dependencies. If you find an
   # order dependency and want to debug it, you can fix the order by providing
   # the seed, which is printed after each run.
   #     --seed 1234
-  config.order = "random"
+  config.order = 'random'
   config.before(:suite) do
     DatabaseCleaner.strategy = ENV['DB_CLEANER_STRATEGY'].to_sym
   end

@@ -40,11 +40,11 @@ class GamesController < ApplicationController
     @game.save
     if @game.completed?
       current_user.reload
-      @notice ||= ""
+      @notice ||= ''
       unless ranks.empty?
         User.scoring_fields.each do |rank_by|
           rank = current_user.rank(rank_by)
-          @notice << "#{rank_by.gsub("_"," ")}: #{rank.ordinalize}. "  if rank < ranks[rank_by]
+          @notice << "#{rank_by.gsub('_', ' ')}: #{rank.ordinalize}. "  if rank < ranks[rank_by]
         end 
       end   
       if @game.word.length >= 10 && current_user.badges.where(name: 'Bookworm').count == 0 && @game.clue_revealed == false
@@ -75,7 +75,7 @@ class GamesController < ApplicationController
     @game.user = current_user
     @game.select_random_word
     if @game.word == 'missing'
-      e = Exception.new("Dictionary not loaded")
+      e = Exception.new('Dictionary not loaded')
       ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
     end
     if @game.save
@@ -92,7 +92,7 @@ class GamesController < ApplicationController
     if current_user.account.credits > 0
       true
     else
-      redirect_to purchases_path, alert: "No more credits points left"
+      redirect_to purchases_path, alert: 'No more credits points left'
       false
     end
   end

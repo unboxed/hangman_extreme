@@ -2,7 +2,7 @@
   <% grouped_menu_items.each_with_index do |menu_items,i| %>
     <li class="item<%= i + 1%>">
       <% menu_items.each_with_index do |menu_item, j| %>
-        <%= "|" if j > 0 %>
+        <%= '|' if j > 0 %>
         <%= menu_item.size == 1 ? menu_item.first.html_safe : smart_link_to(*menu_item) %>
       <% end %>
     </li>

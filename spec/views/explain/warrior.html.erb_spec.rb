@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "explain/warrior.html.erb" do 
+describe 'explain/warrior.html.erb' do
 
 	# before(:each) do
 	# 	view.stub!(:menu_item)

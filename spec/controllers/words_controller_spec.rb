@@ -11,10 +11,10 @@ describe WordsController do
   describe "GET 'define'" do
 
     before :each do
-      Dictionary.stub(:define).and_return(["Noun","The Definition"])
+      Dictionary.stub(:define).and_return(['Noun', 'The Definition'])
     end
 
-    it "returns http success" do
+    it 'returns http success' do
       get 'define', word: 'dog'
       response.should be_success
     end

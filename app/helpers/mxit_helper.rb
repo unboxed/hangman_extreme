@@ -6,11 +6,11 @@ module MxitHelper
 
   def mxit_auth_url(url_options)
     mxit_authorise_url(url_options.reverse_merge(response_type: 'code',
-                                                 host: Rails.env.test? ? request.host : "auth.mxit.com",
+                                                 host: Rails.env.test? ? request.host : 'auth.mxit.com',
                                                  protocol: Rails.env.test? ? 'http' : 'https',
                                                  client_id: ENV['MXIT_CLIENT_ID'],
                                                  redirect_uri: mxit_oauth_users_url(host: request.host),
-                                                 scope: "profile/public profile/private")).html_safe
+                                                 scope: 'profile/public profile/private')).html_safe
   end
 
 
@@ -19,7 +19,7 @@ module MxitHelper
   end
 
   def mxit_only(text)
-    mxit_request? ? text : ""
+    mxit_request? ? text : ''
   end
 
 end

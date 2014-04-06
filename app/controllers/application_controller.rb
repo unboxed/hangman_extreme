@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
   end
 
   def access_denied
-    redirect_to('/', :alert => "You are required to be logged")
+    redirect_to('/', :alert => 'You are required to be logged')
     false
   end
 
@@ -50,10 +50,10 @@ class ApplicationController < ActionController::Base
         Timeout::timeout(15) do
           g = Gabba::Gabba.new(tracking_code, request.host)
           g.user_agent = current_user_request_info.user_agent || request.env['HTTP_USER_AGENT'] || 'unknown'
-          g.utmul = current_user_request_info.language || "en"
-          g.set_custom_var(1, 'Gender', current_user_request_info.gender || "unknown", 1)
-          g.set_custom_var(2, 'Age', current_user_request_info.age || "unknown", 1)
-          g.set_custom_var(3, current_user_request_info.country || "unknown Country", current_user_request_info.area || "unknown", 1)
+          g.utmul = current_user_request_info.language || 'en'
+          g.set_custom_var(1, 'Gender', current_user_request_info.gender || 'unknown', 1)
+          g.set_custom_var(2, 'Age', current_user_request_info.age || 'unknown', 1)
+          g.set_custom_var(3, current_user_request_info.country || 'unknown Country', current_user_request_info.area || 'unknown', 1)
           g.set_custom_var(5, 'Provider', current_user.provider, 1)
           g.identify_user(current_user.utma(true))
           g.ip(request.remote_ip)
@@ -76,7 +76,7 @@ class ApplicationController < ActionController::Base
     elsif params[:signed_request]
       load_facebook_user
     else # load browser user
-      @current_user = User.find_by(:uid => session[:current_uid],:provider => session[:current_provider]) || User.new(provider: "guest")
+      @current_user = User.find_by(:uid => session[:current_uid],:provider => session[:current_provider]) || User.new(provider: 'guest')
     end
   end
 
@@ -89,15 +89,15 @@ class ApplicationController < ActionController::Base
   end
 
   def check_mxit_input_for_redirect
-    case request.env["HTTP_X_MXIT_USER_INPUT"]
-     when "extremepayout"
+    case request.env['HTTP_X_MXIT_USER_INPUT']
+     when 'extremepayout'
       redirect_to(mxit_authorise_url(response_type: 'code',
-                                    host: Rails.env.test? ? request.host : "auth.mxit.com",
+                                    host: Rails.env.test? ? request.host : 'auth.mxit.com',
                                     protocol: Rails.env.test? ? 'http' : 'https',
                                     client_id: ENV['MXIT_CLIENT_ID'],
                                     redirect_uri: mxit_oauth_users_url(host: request.host),
-                                    scope: "contact/invite graph/read",
-                                    state: "winnings"))
+                                    scope: 'contact/invite graph/read',
+                                    state: 'winnings'))
       when 'options'
         redirect_to(options_users_path) unless params[:controller] == 'users'
       when 'winners'
@@ -116,15 +116,15 @@ class ApplicationController < ActionController::Base
                                                        info: { name: request.env['HTTP_X_MXIT_NICK'],
                                                                login: request.env['HTTP_X_MXIT_LOGIN'],
                                                                email: request.env['HTTP_X_MXIT_LOGIN'] && "#{request.env['HTTP_X_MXIT_LOGIN']}@mxit.im"})
-    if request.env["HTTP_X_MXIT_PROFILE"]
-      @mxit_profile = MxitProfile.new(request.env["HTTP_X_MXIT_PROFILE"])
+    if request.env['HTTP_X_MXIT_PROFILE']
+      @mxit_profile = MxitProfile.new(request.env['HTTP_X_MXIT_PROFILE'])
       current_user_request_info.mxit_profile = @mxit_profile
     end
     if request.env['HTTP_X_DEVICE_USER_AGENT']
       current_user_request_info.user_agent = "Mxit #{request.env['HTTP_X_DEVICE_USER_AGENT']}"
     end
-    if request.env["HTTP_X_MXIT_LOCATION"]
-      @mxit_location = MxitLocation.new(request.env["HTTP_X_MXIT_LOCATION"])
+    if request.env['HTTP_X_MXIT_LOCATION']
+      @mxit_location = MxitLocation.new(request.env['HTTP_X_MXIT_LOCATION'])
       current_user_request_info.mxit_location = @mxit_location
     end
   end

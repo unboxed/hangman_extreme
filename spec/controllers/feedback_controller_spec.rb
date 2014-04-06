@@ -12,56 +12,56 @@ describe FeedbackController do
     controller.stub(:send_stats)
   end
 
-  describe "GET index" do
+  describe 'GET index' do
 
     def do_get_index
       get :index
     end
 
-    it "renders succesfully" do
+    it 'renders succesfully' do
       do_get_index
       response.should be_success
     end
 
   end
 
-  describe "GET new" do
+  describe 'GET new' do
 
     def do_get_new
       get :new
     end
 
-    it "renders the application layout" do
+    it 'renders the application layout' do
       do_get_new
       response.should be_success
     end
 
   end
 
-  describe "POST create" do
+  describe 'POST create' do
 
     let(:last_feedback){Feedback.last}
 
     def do_create(type = nil)
-      post :create, feedback:{ support_type: type, full_message: "The message:The very long part of the message"}
+      post :create, feedback:{ support_type: type, full_message: 'The message:The very long part of the message'}
     end
 
-    it "must send support feedback" do
+    it 'must send support feedback' do
       do_create
       last_feedback.support_type == 'support'
     end
 
-    it "must send suggestion feedback" do
+    it 'must send suggestion feedback' do
       do_create 'suggestion'
       last_feedback.support_type == 'suggestion'
     end
 
-    it "must set feedback to current user" do
+    it 'must set feedback to current user' do
       do_create
       last_feedback.user == @current_user
     end
 
-    it "redirects to home" do
+    it 'redirects to home' do
       do_create
       response.should redirect_to(root_path)
     end

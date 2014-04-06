@@ -32,7 +32,7 @@ module MenuHelper
   end
 
   def menu
-    render :partial => "layouts/menu", :locals => {:grouped_menu_items => grouped_menu_items}
+    render :partial => 'layouts/menu', :locals => {:grouped_menu_items => grouped_menu_items}
   end
 
 end

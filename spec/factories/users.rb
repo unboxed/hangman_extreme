@@ -34,7 +34,7 @@ FactoryGirl.define do
   factory :user do
     sequence(:name) {|n| "User #{n}" }
     sequence(:uid) {|n| "uid#{n}" }
-    provider "mxit"
+    provider 'mxit'
     show_hangman true
     _deprecated_credits 1000
   end

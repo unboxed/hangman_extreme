@@ -16,7 +16,7 @@
 
 FactoryGirl.define do
   factory :winner do
-    reason "rating"
+    reason 'rating'
     amount 1
     end_of_period_on Date.current
     period 'daily'

@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
   scope :active_last_hour, -> { where('updated_at >= ?',1.hour.ago) }
   scope :active, -> { where('updated_at >= ?',7.days.ago) }
   scope :last_day, -> { where('created_at >= ?',1.day.ago) }
-  scope :random_order, -> { order(connection.instance_values["config"][:adapter].include?("mysql") ? 'RAND()' : 'RANDOM()') }
+  scope :random_order, -> { order(connection.instance_values['config'][:adapter].include?('mysql') ? 'RAND()' : 'RANDOM()') }
 
   delegate :credits, to: :account, prefix: true
 
@@ -210,15 +210,15 @@ class User < ActiveRecord::Base
   end
 
   def mxit?
-    provider == "mxit"
+    provider == 'mxit'
   end
 
   def facebook?
-    provider == "facebook"
+    provider == 'facebook'
   end
 
   def guest?
-    provider == "guest"
+    provider == 'guest'
   end
 
   private

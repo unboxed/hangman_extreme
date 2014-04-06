@@ -22,8 +22,8 @@ class Winner < ActiveRecord::Base
   validates :user_id, :amount, :reason, :end_of_period_on, presence: true
   validates :period, inclusion: %w(daily weekly)
 
-  scope :period, lambda{ |p| where("period = ?",p) }
-  scope :reason, lambda{ |r| where("reason = ?",r) }
+  scope :period, lambda{ |p| where('period = ?',p) }
+  scope :reason, lambda{ |r| where('reason = ?',r) }
   scope :yesterday, -> { where(:end_of_period_on => Date.yesterday) }
   scope :last_week, -> { where(:end_of_period_on => Date.current.beginning_of_week.yesterday) }
 
@@ -53,14 +53,14 @@ class Winner < ActiveRecord::Base
 
   def self.create_daily_winners(winnings = DAILY_PRIZE_AMOUNTS)
     if create_winners('daily',winnings)
-      UserSendMessage.send("We have selected our $winners$ for the daily prizes, Congratulations to those who have won.",
+      UserSendMessage.send('We have selected our $winners$ for the daily prizes, Congratulations to those who have won.',
                            User.mxit.where('updated_at > ?',2.day.ago))
     end
   end
 
   def self.create_weekly_winners(winnings = WEEKLY_PRIZE_AMOUNTS)
     if create_winners('weekly',winnings)
-      UserSendMessage.send("We have selected our $winners$ for the weekly prizes, Congratulations to those who have won.",
+      UserSendMessage.send('We have selected our $winners$ for the weekly prizes, Congratulations to those who have won.',
                            User.mxit.where('updated_at > ?',14.day.ago))
     end
   end

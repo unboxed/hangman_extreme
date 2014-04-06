@@ -1,6 +1,6 @@
 require 'view_spec_helper'
 
-describe "layouts/mobile" do
+describe 'layouts/mobile' do
 
   before(:each) do
     @current_user = stub_model(User, id: 50)
@@ -10,14 +10,14 @@ describe "layouts/mobile" do
     view.stub(:mxit_request?).and_return(false)
   end
 
-  it "should have a home link" do
+  it 'should have a home link' do
     render
-    rendered.should have_link("Home", href: root_path)
+    rendered.should have_link('Home', href: root_path)
   end
 
-  it "should have a play game link" do
+  it 'should have a play game link' do
     render
-    rendered.should have_link("Play", href: play_games_path)
+    rendered.should have_link('Play', href: play_games_path)
   end
 
 end

@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :badge do
-    name "MyString"
+    name 'MyString'
     user nil
   end
 end

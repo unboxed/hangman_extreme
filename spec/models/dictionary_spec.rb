@@ -6,69 +6,81 @@ describe Dictionary do
     Dictionary.clear
   end
 
-  context "adding words" do
+  context 'adding words' do
 
-    it "must have a value" do
-      expect{Dictionary << ""}.to_not change(Dictionary,:size)
-      expect{Dictionary.add("")}.to_not change(Dictionary,:size)
+    it 'must have a value' do
+      expect{Dictionary << ''
+      }.to_not change(Dictionary,:size)
+      expect{Dictionary.add('')}.to_not change(Dictionary,:size)
     end
 
-    it "must be able to add clues for words" do
-      Dictionary.set_clue("test","pass")
-      Dictionary.clue("test").should == "pass"
+    it 'must be able to add clues for words' do
+      Dictionary.set_clue('test', 'pass')
+      Dictionary.clue('test').should == 'pass'
     end
 
-    it "must have a unique value" do
-      expect{Dictionary << "test"}.to change(Dictionary,:size)
-      expect{Dictionary << "test"}.to_not change(Dictionary,:size)
+    it 'must have a unique value' do
+      expect{Dictionary << 'test'
+      }.to change(Dictionary,:size)
+      expect{Dictionary << 'test'
+      }.to_not change(Dictionary,:size)
     end
 
-    it "must only contain letters" do
-      expect{Dictionary << "qwertyuiopasdfghjklzxcvbnm"}.to change(Dictionary,:size)
+    it 'must only contain letters' do
+      expect{Dictionary << 'qwertyuiopasdfghjklzxcvbnm'
+      }.to change(Dictionary,:size)
     end
 
-    it "wont contain numbers" do
-      expect{Dictionary << "he11o"}.to_not change(Dictionary,:size)
+    it 'wont contain numbers' do
+      expect{Dictionary << 'he11o'
+      }.to_not change(Dictionary,:size)
     end
 
-    it "wont contain other characters" do
-      expect{Dictionary << "goodbye!"}.to_not change(Dictionary,:size)
-      expect{Dictionary << "g**d"}.to_not change(Dictionary,:size)
+    it 'wont contain other characters' do
+      expect{Dictionary << 'goodbye!'
+      }.to_not change(Dictionary,:size)
+      expect{Dictionary << 'g**d'
+      }.to_not change(Dictionary,:size)
     end
 
-    it "wont have least than 4 letters" do
-      expect{Dictionary << "day"}.to_not change(Dictionary,:size)
-      expect{Dictionary << "love"}.to change(Dictionary,:size)
+    it 'wont have least than 4 letters' do
+      expect{Dictionary << 'day'
+      }.to_not change(Dictionary,:size)
+      expect{Dictionary << 'love'
+      }.to change(Dictionary,:size)
     end
 
   end
 
-  it "must lower case the text when adding" do
-    expect{Dictionary << "Birthday"}.to change(Dictionary,:size)
-    Dictionary.should be_member("birthday")
+  it 'must lower case the text when adding' do
+    expect{Dictionary << 'Birthday'
+    }.to change(Dictionary,:size)
+    Dictionary.should be_member('birthday')
   end
 
-  it "must return a random word" do
+  it 'must return a random word' do
     Dictionary.clear
-    expect{Dictionary << "hello"}.to change(Dictionary,:size)
-    expect{Dictionary << "goodbye"}.to change(Dictionary,:size)
-    ["hello","goodbye"].should include(Dictionary.random_value)
+    expect{Dictionary << 'hello'
+    }.to change(Dictionary,:size)
+    expect{Dictionary << 'goodbye'
+    }.to change(Dictionary,:size)
+    ['hello', 'goodbye'].should include(Dictionary.random_value)
   end
 
-  it "must return a random word even if no words in database" do
+  it 'must return a random word even if no words in database' do
     Dictionary.clear
-    Dictionary.random_value.should == "missing"
+    Dictionary.random_value.should == 'missing'
   end
 
-  it "must empty the dictionary" do
+  it 'must empty the dictionary' do
     Dictionary.clear.size.should == 0
   end
 
-  it "must define the word" do
-   word_stub = double("Wordnik.word")
+  it 'must define the word' do
+   word_stub = double('Wordnik.word')
    Wordnik.should_receive(:word).and_return(word_stub)
-   word_stub.should_receive(:get_definitions).with('word').and_return([{'text' => "hello word"}])
-   Dictionary.define("word").should == "hello word"
+   word_stub.should_receive(:get_definitions).with('word').and_return([{'text' => 'hello word'}])
+   Dictionary.define('word').should == 'hello word'
   end
 
 end

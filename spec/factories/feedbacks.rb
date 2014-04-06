@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :feedback do
     user
-    subject "MyString"
-    message "MyText"
+    subject 'MyString'
+    message 'MyText'
   end
 end

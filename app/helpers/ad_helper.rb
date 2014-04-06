@@ -6,7 +6,7 @@ module AdHelper
     if shinka_ads_enabled?
       "<mxit:advert auid=\"#{shinka_auid}\"/>".html_safe
     else
-      ""
+      ''
     end
   end
 
@@ -35,7 +35,7 @@ module AdHelper
   end
 
   def request_ip_address
-    env["HTTP_X_FORWARDED_FOR"] || env['HTTP_X_CLIENT'] || env['REMOTE_ADDR']
+    env['HTTP_X_FORWARDED_FOR'] || env['HTTP_X_CLIENT'] || env['REMOTE_ADDR']
   end
 
 end

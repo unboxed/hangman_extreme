@@ -12,7 +12,7 @@
       <%= smart_link_to('show', game, id: dom_id(game, 'show')) %>
   <% end %>
 </ul>
-<%= shinka_ad if current_user && current_user.provider == "mxit" %>
+<%= shinka_ad if current_user && current_user.provider == 'mxit' %>
 <% if mxit_request? %>
   <% menu_item 'Share with your <a href="mxit://[communityportal]/RecommendPage?ItemId=7297721" type="mxit/service-navigation">friends</a>' %>
 <% elsif facebook_user? %>
@@ -26,4 +26,4 @@
 <% menu_item 'leaderboard', users_path, id: 'leaderboard' %>
 <% menu_item 'winners', winners_path, id: 'winners' %>
 <% menu_item 'scoring', explain_path(action: 'scoring_categories'), id: 'scoring_categories' %>
-<% menu_item 'feedback',mxit_request? ? mxit_auth_url(state: "feedback") : feedback_index_path, id: 'feedback' %>
+<% menu_item 'feedback',mxit_request? ? mxit_auth_url(state: 'feedback') : feedback_index_path, id: 'feedback' %>

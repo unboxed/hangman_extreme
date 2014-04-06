@@ -1,9 +1,9 @@
 require 'features_helper'
 require 'support/vcr_helper'
 
-shared_examples "a feedbacker" do
+shared_examples 'a feedbacker' do
 
-  it "must allow to send support feedback", :user_accounts_vcr => true do
+  it 'must allow to send support feedback', :user_accounts_vcr => true do
     VCR.use_cassette('support_feedback',
                      :record => :once,
                      :erb => true,
@@ -11,13 +11,13 @@ shared_examples "a feedbacker" do
       visit_home
       click_link('feedback')
       click_link('support')
-      fill_in 'feedback_full_message', with: "I have a support issue for you"
+      fill_in 'feedback_full_message', with: 'I have a support issue for you'
       click_button 'send'
-      page.should have_css("div.alert-info")
+      page.should have_css('div.alert-info')
     end
   end
 
-  it "must allow to send suggestion feedback", :user_accounts_vcr => true do
+  it 'must allow to send suggestion feedback', :user_accounts_vcr => true do
     VCR.use_cassette('suggestion_feedback',
                      :record => :once,
                      :erb => true,
@@ -25,9 +25,9 @@ shared_examples "a feedbacker" do
       visit_home
       click_link('feedback')
       click_link('suggestion')
-      fill_in 'feedback_full_message', with: "I have a suggestion issue for you"
+      fill_in 'feedback_full_message', with: 'I have a suggestion issue for you'
       click_button 'send'
-      page.should have_css("div.alert-info")
+      page.should have_css('div.alert-info')
     end
   end
 
@@ -35,7 +35,7 @@ end
 
 describe 'explain', :redis => true do
 
-  context "as mxit user", :google_analytics_vcr => true  do
+  context 'as mxit user', :google_analytics_vcr => true  do
 
     before :each do
       @current_user = mxit_user('m2604100')
@@ -43,28 +43,28 @@ describe 'explain', :redis => true do
       stub_mxit_oauth
     end
 
-    it_behaves_like "a feedbacker"
+    it_behaves_like 'a feedbacker'
 
   end
 
-  context "as mobile user", :smaato_vcr => true, :js => true do
+  context 'as mobile user', :smaato_vcr => true, :js => true do
 
     before :each do
       @current_user = facebook_user
       login_facebook_user(@current_user)
     end
 
-    it_behaves_like "a feedbacker"
+    it_behaves_like 'a feedbacker'
 
   end
 
-  context "as guest user", :smaato_vcr => true, :js => true do
+  context 'as guest user', :smaato_vcr => true, :js => true do
 
-    it "wont allow you to give feedback" do
+    it 'wont allow you to give feedback' do
       visit_home
       click_link('feedback')
       click_link('support')
-      page.should have_css("div.alert")
+      page.should have_css('div.alert')
     end
 
   end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "explain/gladiator.html.erb" do 
+describe 'explain/gladiator.html.erb' do
 
 	# before(:each) do
 	# 	view.stub!(:menu_item)

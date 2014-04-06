@@ -18,14 +18,14 @@
 
 FactoryGirl.define do
   factory :game do
-    word "better"
-    choices ""
+    word 'better'
+    choices ''
     user
     factory :won_game do
       choices{ word }
     end
     factory :lost_game do
-      choices{ "zzzzzzzzzzzzzzz" }
+      choices{ 'zzzzzzzzzzzzzzz' }
     end
   end
 end

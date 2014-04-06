@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "explain/mr_loader.html.erb" do 
+describe 'explain/mr_loader.html.erb' do
 
 	# before(:each) do
 	# 	@user = create(:user)
