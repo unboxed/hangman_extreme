@@ -50,9 +50,8 @@ group :development do
   gem 'capistrano', require: false
   gem 'rvm-capistrano', require: false
   gem 'better_errors'
-  gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]
+  gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :mri_21, :rbx]
   gem 'quiet_assets'
-  gem 'jazz_hands', :platforms=>[:mri_19, :rbx]
 end
 
 group :development, :test do
