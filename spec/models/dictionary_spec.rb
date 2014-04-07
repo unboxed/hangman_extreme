@@ -16,7 +16,7 @@ describe Dictionary do
 
     it 'must be able to add clues for words' do
       Dictionary.set_clue('test', 'pass')
-      Dictionary.clue('test').should == 'pass'
+      Dictionary.clue('test').should be == 'pass'
     end
 
     it 'must have a unique value' do
@@ -69,18 +69,18 @@ describe Dictionary do
 
   it 'must return a random word even if no words in database' do
     Dictionary.clear
-    Dictionary.random_value.should == 'missing'
+    Dictionary.random_value.should be == 'missing'
   end
 
   it 'must empty the dictionary' do
-    Dictionary.clear.size.should == 0
+    Dictionary.clear.size.should be == 0
   end
 
   it 'must define the word' do
    word_stub = double('Wordnik.word')
    Wordnik.should_receive(:word).and_return(word_stub)
    word_stub.should_receive(:get_definitions).with('word').and_return([{'text' => 'hello word'}])
-   Dictionary.define('word').should == 'hello word'
+   Dictionary.define('word').should be == 'hello word'
   end
 
 end

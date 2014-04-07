@@ -112,13 +112,13 @@ describe ApplicationController do
       it 'must assign the mxit user' do
         User.stub(:find_or_create_from_auth_hash).and_return('mxit_user')
         get :index
-        assigns(:current_user).should == 'mxit_user'
+        assigns(:current_user).should be == 'mxit_user'
       end
 
       it 'must assign the user request info' do
         request.env['HTTP_X_MXIT_PROFILE'] = 'test'
         get :index
-        assigns(:current_user_request_info).should == @user_request_info
+        assigns(:current_user_request_info).should be == @user_request_info
       end
 
       it 'must assign mxit profile to user request info' do

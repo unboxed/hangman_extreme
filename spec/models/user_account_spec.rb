@@ -36,13 +36,13 @@ describe UserAccount do
       user_account = UserAccount.new(uid: 'm111', credits: 20)
       user_account.should_receive(:save)
       user_account.use_credit!
-      user_account.credits.should == 19
+      user_account.credits.should be == 19
     end
 
     it 'will raise an error if 0 credits' do
       user_account = UserAccount.new(uid: 'm111', credits: 0)
       expect{ user_account.use_credit!}.to raise_error
-      user_account.credits.should == 0
+      user_account.credits.should be == 0
     end
   end
 

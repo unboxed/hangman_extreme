@@ -33,7 +33,7 @@ describe Game do
     Dictionary.should_receive(:random_value).and_return('wood')
     game = Game.new
     game.select_random_word
-    game.word.should == 'wood'
+    game.word.should be == 'wood'
   end
 
   context 'add_choice' do
@@ -83,18 +83,18 @@ describe Game do
 
     it 'must return the correct amount for no attempts' do
       game = Game.new(word: 'testing')
-      game.attempts_left.should == Game::ATTEMPTS
+      game.attempts_left.should be == Game::ATTEMPTS
     end
 
     it 'must return the correct amount for attempts' do
       game = Game.new(word: 'testing', choices: 'a')
-      game.attempts_left.should == Game::ATTEMPTS - 1
+      game.attempts_left.should be == Game::ATTEMPTS - 1
       game = Game.new(word: 'testing', choices: 'ab')
-      game.attempts_left.should == Game::ATTEMPTS - 2
+      game.attempts_left.should be == Game::ATTEMPTS - 2
       game = Game.new(word: 'testing', choices: 'testin')
-      game.attempts_left.should == Game::ATTEMPTS
+      game.attempts_left.should be == Game::ATTEMPTS
       game = Game.new(word: 'testing', choices: 'atestinb')
-      game.attempts_left.should == Game::ATTEMPTS - 2
+      game.attempts_left.should be == Game::ATTEMPTS - 2
     end
 
   end
@@ -118,19 +118,19 @@ describe Game do
 
     it 'must return the correct hangman text' do
       game = Game.new(word: 'hangman', choices: 'angmh')
-      game.hangman_text.should == 'hangman'
+      game.hangman_text.should be == 'hangman'
       game = Game.new(word: 'hangman', choices: 'b')
-      game.hangman_text.should == '_______'
+      game.hangman_text.should be == '_______'
       game = Game.new(word: 'hangman', choices: 'a')
-      game.hangman_text.should == '_a___a_'
+      game.hangman_text.should be == '_a___a_'
       game = Game.new(word: 'hangman', choices: 'ahca')
-      game.hangman_text.should == 'ha___a_'
+      game.hangman_text.should be == 'ha___a_'
     end
 
     it 'must return the full word if game done' do
       game = Game.new(word: 'hangman', choices: 'a')
       game.should_receive(:done?).and_return(true)
-      game.hangman_text.should == 'hangman'
+      game.hangman_text.should be == 'hangman'
     end
 
   end
@@ -183,7 +183,7 @@ describe Game do
       end
 
       it 'must set completed_attempts_left' do
-        @game.completed_attempts_left.should == 5
+        @game.completed_attempts_left.should be == 5
       end
 
     end
@@ -214,16 +214,16 @@ describe Game do
 
       game = stub_model(Game, created_at: time)
       Timecop.freeze(time + 9.seconds) do
-        game.time_score.should == 10
+        game.time_score.should be == 10
       end
       Timecop.freeze(time + 19.seconds) do
-        game.time_score.should == 9
+        game.time_score.should be == 9
       end
       Timecop.freeze(time + 79.seconds) do
-        game.time_score.should == 3
+        game.time_score.should be == 3
       end
       Timecop.freeze(time + 100.seconds) do
-        game.time_score.should == 0
+        game.time_score.should be == 0
       end
     end
 
@@ -246,7 +246,7 @@ describe Game do
       @game.stub(:correct_choices).and_return(['a','b'])
       @game.stub(:time_score).and_return(2)
       @game.save
-      @game.score.should == 6
+      @game.score.should be == 6
     end
 
   end

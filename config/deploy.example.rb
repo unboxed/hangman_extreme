@@ -87,17 +87,9 @@ namespace :pull do
     download "#{shared_path}/log/twopuma.log", "log/twopuma.log", :via => :scp
     download "#{shared_path}/log/cron_log.log", "log/cron_log.log", :via => :scp
   end
-
-  desc "Download schema.rb"
-  task :schema, :roles => :db do
-    "cd #{current_path};RAILS_ENV=production bundle exec db:schema:dump"
-    download "#{current_path}/db/schema.rb", "db/schema.rb"
-  end
-
 end
 
 after 'puma:force_start', 'puma:start'
-
 
 namespace :puma do
   desc 'Force start puma'

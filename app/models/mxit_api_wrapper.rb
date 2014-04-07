@@ -19,7 +19,7 @@ class MxitApiWrapper
   def send_message(params)
     begin
       connection.send_message(params.reverse_merge(from: app_name, spool_timeout: 23.hours))
-    rescue Exception => e
+    rescue  => e
       Rails.logger.error(e.message)
     end
   end

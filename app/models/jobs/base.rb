@@ -4,7 +4,7 @@ class Jobs::Base
     job = new
     begin
       job.run
-    rescue Exception => e
+    rescue => e
       job.on_error(e)
     end
   end

@@ -101,8 +101,6 @@ class Winner < ActiveRecord::Base
     IncrementPrizePoints.perform_async(id)
   end
 
-  private
-
   def self.select_winners(options)
     if options[:score_by] == 'random'
       select_random_winners(options)

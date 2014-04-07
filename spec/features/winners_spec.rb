@@ -66,7 +66,7 @@ describe 'winners',  :redis => true do
     it 'must show the winners if user mxit input is winner' do
       add_headers('X_MXIT_USER_INPUT' => 'winners')
       visit_home
-      page.current_path.should == winners_path
+      page.current_path.should be == winners_path
     end
 
     it_behaves_like 'a winner viewer'

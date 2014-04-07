@@ -42,7 +42,7 @@ describe GoogleTracking, :redis => true do
   describe 'find_or_create_by_user_id' do
     it 'must work' do
       tracking = GoogleTracking.find_or_create_by_user_id(1)
-      tracking.user_id.should == '1'
+      tracking.user_id.should be == '1'
     end
   end
 end

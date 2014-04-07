@@ -366,7 +366,7 @@ describe GamesController do
       it 'assigns a newly created game as @game' do
         do_create
         assigns(:game).should be_a(Game)
-        assigns(:game).user.should == @current_user
+        assigns(:game).user.should be == @current_user
         assigns(:game).should be_persisted
       end
 

@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 
   def mxit_oauth
     if params[:code].blank?
-      redirect_to mxit_oauth_redirect_to_path, alert: "Authorisation failed: #{params[:error].to_s}"
+      redirect_to mxit_oauth_redirect_to_path, alert: "Authorisation failed: #{params[:error]}"
     else
       begin
         mxit_connection = MxitApiWrapper.connect(:grant_type => 'authorization_code',
@@ -61,7 +61,7 @@ class UsersController < ApplicationController
             mxit_connection.send_invite('m40363966002') # mxitid of extremepayout
           end
         end
-      rescue Exception => e
+      rescue => e
         # ignore error
         ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : raise
       end

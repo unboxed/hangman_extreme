@@ -24,7 +24,7 @@ describe AdHelper do
     end
 
     it 'must return mxit advert tag' do
-      helper.shinka_ad.should == "<mxit:advert auid=\"123\"/>"
+      helper.shinka_ad.should be == "<mxit:advert auid=\"123\"/>"
     end
 
     it 'must return blank if shinka ads disabled' do

@@ -29,7 +29,7 @@ class UserSendMessage
         send_message_to_array(user_batch)
       end
     end
-  rescue Exception => e
+  rescue => e
     Airbrake.notify_or_ignore(e, :parameters => {:msg => msg, :users => users})
   end
 

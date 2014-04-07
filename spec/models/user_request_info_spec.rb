@@ -10,27 +10,27 @@ describe UserRequestInfo do
     end
 
     it do
-      @request.user_agent.should == 'Agent'
+      @request.user_agent.should be == 'Agent'
     end
 
     it do
-      @request.language.should == 'en'
+      @request.language.should be == 'en'
     end
 
     it do
-      @request.gender.should == 'male'
+      @request.gender.should be == 'male'
     end
 
     it do
-      @request.age.should == '30'
+      @request.age.should be == '30'
     end
 
     it  do
-      @request.country.should == 'South Africa'
+      @request.country.should be == 'South Africa'
     end
 
     it do
-      @request.area.should == 'Western Cape'
+      @request.area.should be == 'Western Cape'
     end
 
     context 'assigning mxit location' do
@@ -41,24 +41,24 @@ describe UserRequestInfo do
 
       it 'must assign the right country' do
         @request.mxit_location = @mxit_location
-        @request.country.should == 'Nambia'
+        @request.country.should be == 'Nambia'
       end
 
       it 'must assign the area' do
         @request.mxit_location = @mxit_location
-        @request.area.should == 'Kraaifontein'
+        @request.area.should be == 'Kraaifontein'
       end
 
       it 'must assign the code if country name is blank' do
         @mxit_location.stub(:country_name).and_return('')
         @request.mxit_location = @mxit_location
-        @request.country.should == 'NA'
+        @request.country.should be == 'NA'
       end
 
       it 'must assign the area code if city_name is blank' do
         @mxit_location.stub(:city_name).and_return('')
         @request.mxit_location = @mxit_location
-        @request.area.should == '23'
+        @request.area.should be == '23'
       end
 
     end
@@ -72,20 +72,20 @@ describe UserRequestInfo do
       end
 
       it 'must assign the right gender' do
-        @request.gender.should == 'female'
+        @request.gender.should be == 'female'
       end
 
       it 'must assign the right country' do
-        @request.country.should == 'ZA'
+        @request.country.should be == 'ZA'
       end
 
       it 'must return the correct age' do
         # result must be a string, not a integer
-        @request.age.should == '29'
+        @request.age.should be == '29'
       end
 
       it 'must assign the right language' do
-        @request.language.should == 'afr'
+        @request.language.should be == 'afr'
       end
 
     end

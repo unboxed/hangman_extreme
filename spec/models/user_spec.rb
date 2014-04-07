@@ -54,7 +54,7 @@ describe User do
     it 'must use 12 games in the last day' do
       user = create(:user)
       create_list(:game, 13,  score: 1, user: user)
-      user.calculate_daily_rating.should == 12
+      user.calculate_daily_rating.should be == 12
     end
 
     it 'must use games only from today' do
@@ -63,14 +63,14 @@ describe User do
       Timecop.freeze(1.day.ago) do
         create(:game, score: 20, user: user)
       end
-      user.calculate_daily_rating.should == 20
+      user.calculate_daily_rating.should be == 20
     end
 
     it 'must use first scoring games in the last day' do
       user = create(:user)
       create_list(:game, 12,  score: 1, user: user)
       create(:game, score: 21, user: user)
-      user.calculate_daily_rating.should == 12
+      user.calculate_daily_rating.should be == 12
     end
   end
 
@@ -78,7 +78,7 @@ describe User do
     it 'must use 75 games in the last week' do
       user = create(:user)
       create_list(:game, 76,  score: 1, user: user)
-      user.calculate_weekly_rating.should == 75
+      user.calculate_weekly_rating.should be == 75
     end
 
     it 'must use games only from this week' do
@@ -87,14 +87,14 @@ describe User do
       Timecop.freeze(1.week.ago - 1.day) do
         create(:game, score: 20, user: user)
       end
-      user.calculate_weekly_rating.should == 20
+      user.calculate_weekly_rating.should be == 20
     end
 
     it 'must use first scoring games in the last week' do
       user = create(:user)
       create_list(:game, 75,  score: 1, user: user)
       create(:game, score: 21, user: user)
-      user.calculate_weekly_rating.should == 75
+      user.calculate_weekly_rating.should be == 75
     end
   end
 
@@ -104,15 +104,15 @@ describe User do
       user.stub(:calculate_daily_rating).and_return(10)
       user.stub(:calculate_weekly_rating).and_return(20)
       user.update_ratings
-      user.daily_rating.should == 10
-      user.weekly_rating.should == 20
+      user.daily_rating.should be == 10
+      user.weekly_rating.should be == 20
     end
 
     it 'must update the daily scores' do
       user = stub_model(User)
       user.should_receive(:calculate_daily_rating).and_return(10)
       user.update_daily_scores
-      user.daily_rating.should == 10
+      user.daily_rating.should be == 10
     end
 
     it 'must update weekly scores' do
@@ -120,7 +120,7 @@ describe User do
       user.stub(:calculate_weekly_rating).and_return(20)
       user.stub(:calculate_weekly_score).and_return(200)
       user.update_ratings
-      user.weekly_rating.should == 20
+      user.weekly_rating.should be == 20
     end
   end
 
@@ -129,10 +129,10 @@ describe User do
       user = create(:user,daily_wins: 10, daily_rating: 11, daily_streak: 13, current_daily_streak: 14)
       User.new_day_set_scores!
       user.reload
-      user.daily_wins.should == 0
-      user.daily_rating.should == 0
-      user.daily_streak.should == 0
-      user.current_daily_streak.should == 0
+      user.daily_wins.should be == 0
+      user.daily_rating.should be == 0
+      user.daily_streak.should be == 0
+      user.current_daily_streak.should be == 0
     end
 
     it 'must set all weekly scores to 0 if beginning of week' do
@@ -141,10 +141,10 @@ describe User do
       Timecop.freeze(Time.current.beginning_of_week) do
         User.new_day_set_scores!
         user.reload
-        user.weekly_wins.should == 0
-        user.weekly_rating.should == 0
-        user.weekly_streak.should == 0
-        user.current_weekly_streak.should == 0
+        user.weekly_wins.should be == 0
+        user.weekly_rating.should be == 0
+        user.weekly_streak.should be == 0
+        user.current_weekly_streak.should be == 0
       end
     end
 
@@ -154,10 +154,10 @@ describe User do
       Timecop.freeze(Time.current.beginning_of_week + 2.days) do
         User.new_day_set_scores!
         user.reload
-        user.weekly_wins.should == 10
-        user.weekly_rating.should == 11
-        user.weekly_streak.should == 13
-        user.current_weekly_streak.should == 14
+        user.weekly_wins.should be == 10
+        user.weekly_rating.should be == 11
+        user.weekly_streak.should be == 13
+        user.current_weekly_streak.should be == 14
       end
     end
 
@@ -166,9 +166,9 @@ describe User do
       Timecop.freeze(Time.current.beginning_of_week + 2.days) do
         User.new_day_set_scores!(true)
         user.reload
-        user.weekly_rating.should == 0
-        user.weekly_streak.should == 0
-        user.current_weekly_streak.should == 0
+        user.weekly_rating.should be == 0
+        user.weekly_streak.should be == 0
+        user.current_weekly_streak.should be == 0
       end
     end
   end
@@ -176,9 +176,9 @@ describe User do
   describe 'rank' do
     it 'should return correct rankings' do
       user1, user3, user2 = create(:user, weekly_rating: 20), create(:user, weekly_rating: 40), create(:user, weekly_rating: 30)
-      user1.rank(:weekly_rating).should == 3
-      user3.rank(:weekly_rating).should == 1
-      user2.rank(:weekly_rating).should == 2
+      user1.rank(:weekly_rating).should be == 3
+      user3.rank(:weekly_rating).should be == 1
+      user2.rank(:weekly_rating).should be == 2
     end
   end
 
@@ -189,9 +189,9 @@ describe User do
     it 'must create a new user if no uid and provider match exists' do
       expect {
         user = User.find_or_create_from_auth_hash(uid: 'u', provider: 'p', info: {name: 'Grant'})
-        user.uid.should == 'u'
-        user.provider.should == 'p'
-        user.name.should == 'Grant'
+        user.uid.should be == 'u'
+        user.provider.should be == 'p'
+        user.name.should be == 'Grant'
       }.to change(User, :count).by(1)
     end
 
@@ -199,8 +199,8 @@ describe User do
       user_id = create(:user, uid: 'u1', provider: 'p', name: 'Pawel').id
       expect {
         user = User.find_or_create_from_auth_hash(uid: 'u1', provider: 'p', info: {name: 'Grant'})
-        user.uid.should == 'u1'
-        user.provider.should == 'p'
+        user.uid.should be == 'u1'
+        user.provider.should be == 'p'
         user.id == user_id
       }.to change(User, :count).by(0)
     end
@@ -239,17 +239,17 @@ describe User do
     end
 
     it 'starts at zero' do
-      @user.daily_wins.should == 0
+      @user.daily_wins.should be == 0
     end
 
     it 'should have 1 after 1 win' do
       create(:won_game, :user => @user)
-      @user.daily_wins.should == 1
+      @user.daily_wins.should be == 1
     end
 
     it 'should have 2 after 2 wins' do
       create_list(:won_game,2, :user => @user)
-      @user.daily_wins.should == 2
+      @user.daily_wins.should be == 2
     end
   end
 
@@ -259,17 +259,17 @@ describe User do
     end
 
     it 'starts at zero' do
-      @user.weekly_wins.should == 0
+      @user.weekly_wins.should be == 0
     end
 
     it 'should have 1 after 1 win' do
       create(:won_game, :user => @user)
-      @user.weekly_wins.should == 1
+      @user.weekly_wins.should be == 1
     end
 
     it 'should have 2 after 2 wins' do
       create_list(:won_game,2, :user => @user)
-      @user.weekly_wins.should == 2
+      @user.weekly_wins.should be == 2
     end
   end
 
@@ -316,30 +316,30 @@ describe User do
     end
 
     it 'starts at zero' do
-      @user.daily_streak.should == 0
+      @user.daily_streak.should be == 0
     end
 
     it 'should have a streak of 1 after 1 win' do
       create(:won_game, :user => @user)
-      @user.daily_streak.should == 1
+      @user.daily_streak.should be == 1
     end
 
     it 'should have a streak of 2 after 2 wins' do
       create_list(:won_game,2, :user => @user)
-      @user.daily_streak.should == 2
+      @user.daily_streak.should be == 2
     end
 
     it 'should have a streak of 1 after 1 win and 1 loss' do
       create(:won_game, :user => @user)
       create(:lost_game, :user => @user)
-      @user.daily_streak.should == 1
+      @user.daily_streak.should be == 1
     end
 
     it 'should have a streak of 2 after 1 win and 1 loss and 2 wins' do
       create(:won_game, :user => @user)
       create(:lost_game, :user => @user)
       create_list(:won_game, 2, :user => @user)
-      @user.daily_streak.should == 2
+      @user.daily_streak.should be == 2
     end
   end
 
@@ -386,30 +386,30 @@ describe User do
     end
 
     it 'starts at zero' do
-      @user.weekly_streak.should == 0
+      @user.weekly_streak.should be == 0
     end
 
     it 'should have a streak of 1 after 1 win' do
       create(:won_game, :user => @user)
-      @user.weekly_streak.should == 1
+      @user.weekly_streak.should be == 1
     end
 
     it 'should have a streak of 2 after 2 wins' do
       create_list(:won_game,2, :user => @user)
-      @user.weekly_streak.should == 2
+      @user.weekly_streak.should be == 2
     end
 
     it 'should have a streak of 1 after 1 win and 1 loss' do
       create(:won_game, :user => @user)
       create(:lost_game, :user => @user)
-      @user.weekly_streak.should == 1
+      @user.weekly_streak.should be == 1
     end
 
     it 'should have a streak of 2 after 1 win and 1 loss and 2 wins' do
       create(:won_game, :user => @user)
       create(:lost_game, :user => @user)
       create_list(:won_game, 2, :user => @user)
-      @user.weekly_streak.should == 2
+      @user.weekly_streak.should be == 2
     end
   end
 
@@ -419,17 +419,17 @@ describe User do
     end
 
     it 'must return 5' do
-      @user.daily_wins_required_for_random.should == 5
+      @user.daily_wins_required_for_random.should be == 5
     end
 
     it 'must return 1' do
       create_list(:won_game,4, :user => @user)
-      @user.daily_wins_required_for_random.should == 1
+      @user.daily_wins_required_for_random.should be == 1
     end
 
     it 'must return 0' do
       create_list(:won_game,11, :user => @user)
-      @user.daily_wins_required_for_random.should == 0
+      @user.daily_wins_required_for_random.should be == 0
     end
   end
 
@@ -439,17 +439,17 @@ describe User do
     end
 
     it 'must return 35' do
-      @user.weekly_wins_required_for_random.should == 15
+      @user.weekly_wins_required_for_random.should be == 15
     end
 
     it 'must return 26' do
       create_list(:won_game,9, :user => @user)
-      @user.weekly_wins_required_for_random.should == 6
+      @user.weekly_wins_required_for_random.should be == 6
     end
 
     it 'must return 0' do
       create_list(:won_game,36, :user => @user)
-      @user.weekly_wins_required_for_random.should == 0
+      @user.weekly_wins_required_for_random.should be == 0
     end
   end
 
@@ -472,7 +472,7 @@ describe User do
                                                              credits: 111,
                                                              mxit_login: 'gman',
                                                              prize_points: 123}).and_return('test')
-      @user.account.should == 'test'
+      @user.account.should be == 'test'
     end
   end
 end
@@ -486,7 +486,7 @@ describe 'has_five_game_clues_in_sequence' do
     create(:game, :clue_revealed => false, user: @user)
     create(:game, :clue_revealed => true, user: @user)
     create(:game, :clue_revealed => true, user: @user)
-    @user.has_five_game_clues_in_sequence.should == false 
+    @user.has_five_game_clues_in_sequence.should be == false
   end 
 
   it 'same user counts 5 clues_revealed in sequence' do
@@ -496,7 +496,7 @@ describe 'has_five_game_clues_in_sequence' do
     create(:game, :clue_revealed => true, user: @user)
     create(:game, :clue_revealed => true, user: @user)
     create(:game, :clue_revealed => true, user: @user)
-    @user.has_five_game_clues_in_sequence.should == true     
+    @user.has_five_game_clues_in_sequence.should be == true
   end 
 
   it 'does not count 5 clues_revealed if different user' do
@@ -506,7 +506,7 @@ describe 'has_five_game_clues_in_sequence' do
     create(:game, :clue_revealed => true)
     create(:game, :clue_revealed => true, user: @user)
     create(:game, :clue_revealed => true, user: @user)
-    @user.has_five_game_clues_in_sequence.should == false   
+    @user.has_five_game_clues_in_sequence.should be == false
   end 
 end 
 
@@ -524,7 +524,7 @@ describe 'counting winning games in a row' do
     create(:game,user: @user)
     create(:game,user: @user)
     create(:game,user: @user)
-    @user.has_ten_games_in_sequence.should == true 
+    @user.has_ten_games_in_sequence.should be == true
   end 
 
   it 'does not count if a clue was revealed' do
@@ -540,7 +540,7 @@ describe 'counting winning games in a row' do
     create(:game,user: @user)
     create(:game, :clue_revealed => true, user: @user)
     create(:game,user: @user)    
-    @user.has_ten_games_in_sequence.should == false
+    @user.has_ten_games_in_sequence.should be == false
   end 
 
   it 'does not count different users for 10 games in sequence' do
@@ -555,7 +555,7 @@ describe 'counting winning games in a row' do
     create(:game) 
     create(:game,user: @user)
     create(:game,user: @user)    
-    @user.has_ten_games_in_sequence.should == false
+    @user.has_ten_games_in_sequence.should be == false
   end 
 end 
 

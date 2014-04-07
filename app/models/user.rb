@@ -224,7 +224,7 @@ class User < ActiveRecord::Base
   private
 
   def calculate_rating(scope)
-    scope.inject(0){|sum,game| sum += game.score.to_i }
+    scope.inject(0){|sum,game| sum + game.score.to_i }
   end
 
 end

@@ -59,7 +59,7 @@ class Dictionary < SortedSet
 end
 
 # load words
-File.readlines(File.exists?('db/words.csv') ? 'db/words.csv' : 'db/words.sample.csv').each do |line|
+File.readlines(File.exist?('db/words.csv') ? 'db/words.csv' : 'db/words.sample.csv').each do |line|
   word,clue = line.split(',',2)
   clue.squish!
   Dictionary.set_clue(word,clue) unless clue.blank?

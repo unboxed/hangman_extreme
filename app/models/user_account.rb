@@ -29,7 +29,7 @@ class UserAccount
         result = connection.user_info(:id => uid)
         result[:is_registered]
       end
-    rescue Exception => e
+    rescue => e
       Airbrake.notify_or_ignore(e,:parameters => {:user => self, :connection => connection})
       false
     end

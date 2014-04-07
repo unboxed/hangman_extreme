@@ -119,8 +119,8 @@ describe UsersController do
           user = create(:user)
           do_get_index :rank_by => ranking, :period => period
           assigns(:users).should include(user)
-          controller.params[:rank_by].should == ranking
-          controller.params[:period].should == period
+          controller.params[:rank_by].should be == ranking
+          controller.params[:period].should be == period
         end
       end
     end

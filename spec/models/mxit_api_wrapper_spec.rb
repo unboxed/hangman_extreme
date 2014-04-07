@@ -27,7 +27,7 @@ describe MxitApiWrapper do
                                         :redirect_uri => '/').and_return(connection)
       MxitApiWrapper.connect(:grant_type => 'authorization_code',
                       :code => '456',
-                      :redirect_uri => '/').should == connection
+                      :redirect_uri => '/').should be == connection
     end
 
     it 'wont return connection if not access_token' do

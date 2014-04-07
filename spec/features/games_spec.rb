@@ -116,7 +116,7 @@ describe 'games', :redis => true do
     it 'wont allow you to start a new game' do
       visit_home
       click_link('Play')
-      page.current_path.should == '/'
+      page.current_path.should be == '/'
     end
 
   end

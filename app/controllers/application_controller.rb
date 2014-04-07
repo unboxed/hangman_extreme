@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
       rescue Timeout::Error => te
         Rails.logger.warn(te.message)
         Settings.ga_tracking_disabled_until = 1.minute.from_now # disable for a 1 minute
-      rescue Exception => e
+      rescue => e
         ENV['AIRBRAKE_API_KEY'].present? ? notify_airbrake(e) : Rails.logger.error(e.message)
         Settings.ga_tracking_disabled_until = 20.minutes.from_now# disable for a 20 minutes
         raise e unless Rails.env.production?
@@ -130,7 +130,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_facebook_user
-    encoded_sig, payload = params[:signed_request].split('.')
+    _, payload = params[:signed_request].split('.')
     encoded_str = payload.gsub('-','+').gsub('_','/')
     encoded_str += '=' while !(encoded_str.size % 4).zero?
     @data = ActiveSupport::JSON.decode(Base64.decode64(encoded_str))

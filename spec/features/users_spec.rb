@@ -8,7 +8,7 @@ shared_examples 'a registered user' do
     page.should have_content('Entered')
     page.should have_content('5 more games')
     click_link('Home')
-    page.current_path.should == '/'
+    page.current_path.should be == '/'
   end
 
   it 'must allow to show and hide the hangman', :user_accounts_vcr => true do
@@ -72,7 +72,7 @@ describe 'users', :redis => true do
     it 'must show the options if user mxit input is options' do
       add_headers('X_MXIT_USER_INPUT' => 'options')
       visit_home
-      page.current_path.should == options_users_path
+      page.current_path.should be == options_users_path
     end
   end
 

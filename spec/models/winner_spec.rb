@@ -62,30 +62,30 @@ describe Winner do
             first_group_of_players = create_list(:user, 5, "#{period}_wins" => required_wins)
             Timecop.freeze(day1) do
               Winner.create_winners_for_category(period: period, score_by: 'random', winnings: [10] * 5)
-              Winner.period(period).reason('random').count.should == 5
+              Winner.period(period).reason('random').count.should be == 5
               first_group_of_players.each do |user|
-                user.winners.period(period).reason('random').count.should == 1
+                user.winners.period(period).reason('random').count.should be == 1
               end
             end
             second_group_of_players = create_list(:user, 5, "#{period}_wins" => required_wins)
             Timecop.freeze(day1 + (period == 'daily' ? 1.day : 1.week)) do
               Winner.create_winners_for_category(period: period, score_by: 'random', winnings: [10] * 5)
-              Winner.period(period).reason('random').count.should == 10
+              Winner.period(period).reason('random').count.should be == 10
               first_group_of_players.each do |user|
-                user.winners.period(period).reason('random').count.should == 1
+                user.winners.period(period).reason('random').count.should be == 1
               end
               second_group_of_players.each do |user|
-                user.winners.period(period).reason('random').count.should == 1
+                user.winners.period(period).reason('random').count.should be == 1
               end
             end
             Timecop.freeze(day1 + (period == 'daily' ? 2.days : 2.weeks)) do
               Winner.create_winners_for_category(period: period, score_by: 'random', winnings: [10] * 5)
-              Winner.period(period).reason('random').count.should == 15
+              Winner.period(period).reason('random').count.should be == 15
               first_group_of_players.each do |user|
-                user.winners.period(period).reason('random').count.should == 2
+                user.winners.period(period).reason('random').count.should be == 2
               end
               second_group_of_players.each do |user|
-                user.winners.period(period).reason('random').count.should == 1
+                user.winners.period(period).reason('random').count.should be == 1
               end
             end
           end
@@ -95,12 +95,12 @@ describe Winner do
             top_players = create_list(:user, 5, "#{period}_wins" => required_wins)
             Winner.create_winners_for_category(period: period, score_by: 'random', winnings: [10] * 5)
             top_players.each do |user|
-              user.winners.period(period).reason('random').count.should == 1
+              user.winners.period(period).reason('random').count.should be == 1
               winner = user.winners.period(period).reason('random').first
-              winner.period.should == period
-              winner.end_of_period_on.should == Date.current
-              winner.amount.should == 10
-              winner.reason.should == 'random'
+              winner.period.should be == period
+              winner.end_of_period_on.should be == Date.current
+              winner.amount.should be == 10
+              winner.reason.should be == 'random'
             end
           end
 
@@ -113,11 +113,11 @@ describe Winner do
                         "#{period}_streak" => 10 )
             Winner.create_winners_for_category(period: period, score_by: 'streak', winnings: [10] * 5)
             Winner.create_winners_for_category(period: period, score_by: 'random', winnings: [10] * 5)
-            Winner.period(period).reason('random').count.should == 5
+            Winner.period(period).reason('random').count.should be == 5
             random_players.each do |user|
-              user.winners.period(period).reason('random').count.should == 1
+              user.winners.period(period).reason('random').count.should be == 1
               winner = user.winners.period(period).reason('random').first
-              winner.amount.should == 10
+              winner.amount.should be == 10
             end
           end
 
@@ -133,11 +133,11 @@ describe Winner do
                         "#{period}_streak" => 10 )
             Winner.create_winners_for_category(period: period, score_by: 'streak', winnings: [10] * 5)
             Winner.create_winners_for_category(period: period, score_by: 'random', winnings: [10] * 5)
-            Winner.period(period).reason('random').count.should == 5
+            Winner.period(period).reason('random').count.should be == 5
             last_week_winners_players.each do |user|
-              user.winners.period(period).reason('random').count.should == 1
+              user.winners.period(period).reason('random').count.should be == 1
               winner = user.winners.period(period).reason('random').first
-              winner.amount.should == 10
+              winner.amount.should be == 10
             end
           end
 
@@ -152,7 +152,7 @@ describe Winner do
             Winner.create_winners_for_category(period: period, score_by: 'random', winnings: [8] * 5)
             users.each do |user|
               user.reload
-              user.winners.last.amount.should == 8
+              user.winners.last.amount.should be == 8
             end
           end
         end
@@ -165,32 +165,32 @@ describe Winner do
               better_players = create_list(:user, 5, "#{period}_#{score_by}" => 10)
               Timecop.freeze(day1) do
                 Winner.create_winners_for_category(period: period, score_by: score_by, winnings: [10] * 5)
-                Winner.period(period).reason(score_by).count.should == 5
+                Winner.period(period).reason(score_by).count.should be == 5
                 better_players.each do |user|
-                  user.winners.period(period).reason(score_by).count.should == 1
+                  user.winners.period(period).reason(score_by).count.should be == 1
                 end
                 other_players.each do |user|
-                  user.winners.period(period).reason(score_by).count.should == 0
+                  user.winners.period(period).reason(score_by).count.should be == 0
                 end
               end
               Timecop.freeze(day1 + (period == 'daily' ? 1.day : 1.week)) do
                 Winner.create_winners_for_category(period: period, score_by: score_by, winnings: [10] * 5)
-                Winner.period(period).reason(score_by).count.should == 10
+                Winner.period(period).reason(score_by).count.should be == 10
                 better_players.each do |user|
-                  user.winners.period(period).reason(score_by).count.should == 1
+                  user.winners.period(period).reason(score_by).count.should be == 1
                 end
                 other_players.each do |user|
-                  user.winners.period(period).reason(score_by).count.should == 1
+                  user.winners.period(period).reason(score_by).count.should be == 1
                 end
               end
               Timecop.freeze(day1 + (period == 'daily' ? 2.day : 2.week)) do
                 Winner.create_winners_for_category(period: period, score_by: score_by, winnings: [10] * 5)
-                Winner.period(period).reason(score_by).count.should == 15
+                Winner.period(period).reason(score_by).count.should be == 15
                 better_players.each do |user|
-                  user.winners.period(period).reason(score_by).count.should == 2
+                  user.winners.period(period).reason(score_by).count.should be == 2
                 end
                 other_players.each do |user|
-                  user.winners.period(period).reason(score_by).count.should == 1
+                  user.winners.period(period).reason(score_by).count.should be == 1
                 end
               end
             end
@@ -200,12 +200,12 @@ describe Winner do
               top_players = create_list(:user, 5, "#{period}_#{score_by}" => 10)
               Winner.create_winners_for_category(period: period, score_by: score_by, winnings: [10] * 5)
               top_players.each do |user|
-                user.winners.period(period).reason(score_by).count.should == 1
+                user.winners.period(period).reason(score_by).count.should be == 1
                 winner = user.winners.period(period).reason(score_by).first
-                winner.period.should == period
-                winner.end_of_period_on.should == Date.current
-                winner.amount.should == 10
-                winner.reason.should == score_by
+                winner.period.should be == period
+                winner.end_of_period_on.should be == Date.current
+                winner.amount.should be == 10
+                winner.reason.should be == score_by
               end
             end
 
@@ -215,9 +215,9 @@ describe Winner do
               Winner.create_winners_for_category(period: period, score_by: score_by, winnings: [50, 50, 50, 50, 50])
               [[users_with_10, 50], [users_with_9, 34]].each do |users, amount|
                 users.each do |user|
-                  user.winners.period(period).reason(score_by).count.should == 1
+                  user.winners.period(period).reason(score_by).count.should be == 1
                   winner = user.winners.period(period).reason(score_by).first
-                  winner.amount.should == amount
+                  winner.amount.should be == amount
                 end
               end
             end
@@ -226,16 +226,16 @@ describe Winner do
               (6..11).each{|i|create(:user, "#{period}_#{score_by}" => i)}
               Timecop.freeze(Time.current + (period == 'daily' ? 2.day : 2.week)) do
                 Winner.create_winners_for_category(period: period, score_by: score_by, winnings: [10] * 5)
-                Winner.period(period).reason(score_by).count.should == 5
+                Winner.period(period).reason(score_by).count.should be == 5
               end
               users_with_10 = create_list(:user, 3, "#{period}_#{score_by}" => 10)
               users_with_9 = create_list(:user, 3, "#{period}_#{score_by}" => 9)
               Winner.create_winners_for_category(period: period, score_by: score_by, winnings: [50, 50, 50, 50, 50])
               [[users_with_10, 50], [users_with_9, 34]].each do |users, amount|
                 users.each do |user|
-                  user.winners.period(period).reason(score_by).count.should == 1
+                  user.winners.period(period).reason(score_by).count.should be == 1
                   winner = user.winners.period(period).reason(score_by).first
-                  winner.amount.should == amount
+                  winner.amount.should be == amount
                 end
               end
             end
@@ -251,7 +251,7 @@ describe Winner do
               Winner.create_winners_for_category(period: period, score_by: score_by, winnings: [8] * 5)
               users.each do |user|
                 user.reload
-                user.winners.last.amount.should == 8
+                user.winners.last.amount.should be == 8
               end
             end
           end

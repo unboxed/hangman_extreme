@@ -26,11 +26,9 @@ describe 'users/_show_hangman.html.erb' do
     rendered.should have_link('Yes')
   end
 
- it 'wont render no link when show hangman disabled' do
+  it 'wont render no link when show hangman disabled' do
     @user.show_hangman = false
     render
     rendered.should_not have_link('No')
   end
-
-
 end
