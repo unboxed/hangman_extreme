@@ -9,7 +9,7 @@ end
 platforms :ruby do
   gem 'pg'
 end
-gem 'ohm'
+gem 'ohm', github: 'grantspeelman/ohm'
 gem 'ohm-contrib', require: false
 gem 'cancan', require: false
 gem 'omniauth'
@@ -24,6 +24,11 @@ gem 'sidekiq', require: false
 gem 'sinatra', '>= 1.3.0', require: false # for sidekiq
 gem 'slim', require: false # for sidekiq
 
+platforms :rbx do
+  gem 'racc'
+  gem 'rubysl', '~> 2.0'
+  gem 'psych'
+end
 
 # third party
 gem 'airbrake'
@@ -50,9 +55,9 @@ group :development do
   gem 'capistrano', require: false
   gem 'rvm-capistrano', require: false
   gem 'better_errors'
-  gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :mri_21, :rbx]
+  gem 'binding_of_caller', :platforms=>[:mri, :rbx]
   gem 'quiet_assets'
-  gem 'spring', :platforms=>[:mri_19, :mri_20, :mri_21]
+  gem 'spring', :platforms=>[:mri]
   gem 'rubocop'
 end
 
@@ -61,7 +66,7 @@ group :development, :test do
   gem 'annotate', require: false
   gem 'rspec-rails', '~> 2.13.0'
   gem 'factory_girl_rails'
-  platforms :ruby do
+  platforms :mri do
     gem 'debugger'
   end
 end
@@ -82,8 +87,8 @@ group :test do
   gem 'poltergeist', require: false
   gem 'selenium-webdriver', require: false
   gem 'capybara', '~> 2.0.0', require: false
-  gem 'database_cleaner', "~> 1.1.1", :git => 'https://github.com/tommeier/database_cleaner', ref: 'b0c666e'
-  gem 'launchy', require: false
+  gem 'database_cleaner', '~> 1.1.1', :git => 'https://github.com/tommeier/database_cleaner', ref: 'b0c666e'
+  gem 'launchy', require: false, :platforms=>[:mri]
   gem 'simplecov', require: false
   gem 'simplecov-rcov', require: false
   gem 'flog', require: false
