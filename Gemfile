@@ -9,7 +9,7 @@ end
 platforms :ruby do
   gem 'pg'
 end
-gem 'ohm', github: 'grantspeelman/ohm'
+gem 'ohm', '~> 1.3.2'
 gem 'ohm-contrib', require: false
 gem 'cancan', require: false
 gem 'omniauth'
