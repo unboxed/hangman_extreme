@@ -40,10 +40,6 @@ every :day, :at => '10:10 pm', :roles => [:db] do
   runner "Jobs::RecordDailyStats.execute"
 end
 
-every :day, :at => '10:15 pm', :roles => [:db] do
-  runner "Jobs::SetUserCredits.execute"
-end
-
 every :hour, :roles => [:db] do
   runner "Jobs::RecordHourlyStats.execute"
 end
