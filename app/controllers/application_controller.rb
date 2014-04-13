@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   end
 
   def mxit_request?
-    current_user.mxit?
+    request.env['HTTP_X_MXIT_USERID_R'].present?
   end
 
   def facebook_user?
