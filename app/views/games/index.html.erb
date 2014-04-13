@@ -3,7 +3,7 @@
   <p>Here you can play hangman on your mobile and you could also win airtime</p>
 <% else %>
   <p>Welcome to <b>Hangman Extreme</b>. Have fun guessing the word.</p>
-  <p style="color: blue;">We have fixed redeeming your points for mxit money</p>
+  <p style="color: blue;">Please use the store to redeem points or buy more credits</p>
 <% end %>
 
 <ul>
@@ -26,3 +26,4 @@
 <% menu_item 'winners', winners_path, id: 'winners' %>
 <% menu_item 'scoring', explain_path(action: 'scoring_categories'), id: 'scoring_categories' %>
 <% menu_item 'feedback',feedback_url, id: 'feedback' %>
+<% menu_item store_url %>
