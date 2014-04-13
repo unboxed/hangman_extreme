@@ -12,7 +12,7 @@ module ApplicationHelper
 
   def store_url
     if mxit_request?
-      "<a href=\"mxit://[mxit_recommend:Refresh]/Referral?from=#{ENV['MXIT_APP_NAME']}&to=#{ENV['MXIT_STORE_APP_NAME']}\" type=\"mxit/service-navigation\">Store</a><br/>"
+      "<a href=\"mxit://[mxit_recommend:Refresh]/Referral?from=#{ENV['MXIT_APP_NAME']}&to=#{ENV['STORE_MXIT_APP_NAME']}\" type=\"mxit/service-navigation\">Store</a><br/>"
     else
       link_to 'store', ENV['STORE_URL']
     end
