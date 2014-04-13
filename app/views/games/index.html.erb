@@ -5,6 +5,7 @@
   <p>Welcome to <b>Hangman Extreme</b>. Have fun guessing the word.</p>
   <p style="color: blue;">We have fixed redeeming your points for mxit money</p>
 <% end %>
+
 <ul>
   <%= content_tag_for(:li, @games) do |game| %>
       <span><%= game.hangman_text %></span> -
@@ -12,13 +13,11 @@
       <%= smart_link_to('show', game, id: dom_id(game, 'show')) %>
   <% end %>
 </ul>
+
 <%= shinka_ad if current_user && current_user.provider == 'mxit' %>
-<% if mxit_request? %>
-  <% menu_item 'Share with your <a href="mxit://[communityportal]/RecommendPage?ItemId=7297721" type="mxit/service-navigation">friends</a>' %>
-<% elsif facebook_user? %>
-  <% menu_item '<a href="#" onclick="fb_invite_friends();">Share with your friends</a>' %>
-<% end %>
+
 <% unless guest? %>
+  <% menu_item share_url %>
   <% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
   <% menu_item 'options', options_users_path, id: 'options' %>
 <% end %>
@@ -26,4 +25,4 @@
 <% menu_item 'leaderboard', users_path, id: 'leaderboard' %>
 <% menu_item 'winners', winners_path, id: 'winners' %>
 <% menu_item 'scoring', explain_path(action: 'scoring_categories'), id: 'scoring_categories' %>
-<% menu_item 'feedback',mxit_request? ? mxit_auth_url(state: 'feedback') : feedback_index_path, id: 'feedback' %>
+<% menu_item 'feedback',feedback_url, id: 'feedback' %>
