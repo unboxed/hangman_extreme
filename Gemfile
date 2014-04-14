@@ -9,6 +9,7 @@ end
 platforms :ruby do
   gem 'pg'
 end
+
 gem 'ohm', '~> 1.3.2'
 gem 'ohm-contrib', require: false
 gem 'cancan', require: false
@@ -20,7 +21,7 @@ gem 'puma', require: false
 gem 'whenever', require: false
 gem 'her'
 
-gem 'sidekiq', require: false
+gem 'sidekiq', '~> 2.17', require: false
 gem 'sinatra', '>= 1.3.0', require: false # for sidekiq
 gem 'slim', require: false # for sidekiq
 
@@ -52,7 +53,7 @@ gem 'wordnik', require: false
 #end
 
 group :development do
-  gem 'capistrano', require: false
+  gem 'capistrano', '~> 2.0', require: false
   gem 'rvm-capistrano', require: false
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri, :rbx]
