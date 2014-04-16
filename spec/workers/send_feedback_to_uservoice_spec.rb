@@ -25,14 +25,14 @@ describe SendFeedbackToUservoice do
     it 'must send support' do
       @feedback.support_type = 'support'
       @send_feedback_to_uservoice.should_receive(:send_support).
-        with(email: 'm123_mxit@noreply.io', subject: 'The message', message: 'long part', name: 'Grant')
+        with(email: 'm123_mxit@noreply.io', subject: '[HMX] The message', message: 'long part', name: 'Grant')
       @send_feedback_to_uservoice.perform(123)
     end
 
     it 'must send suggestion' do
       @feedback.support_type = 'suggestion'
       @send_feedback_to_uservoice.should_receive(:send_suggestion).
-        with(email: 'm123_mxit@noreply.io', subject: 'The message', message: 'long part', name: 'Grant')
+        with(email: 'm123_mxit@noreply.io', subject: '[HMX] The message', message: 'long part', name: 'Grant')
       @send_feedback_to_uservoice.perform(123)
     end
 
@@ -40,7 +40,7 @@ describe SendFeedbackToUservoice do
       @feedback.support_type = 'support'
       @feedback.subject = nil
       @send_feedback_to_uservoice.should_receive(:send_support).
-        with(email: 'm123_mxit@noreply.io', subject: 'long part', message: 'long part', name: 'Grant')
+        with(email: 'm123_mxit@noreply.io', subject: '[HMX] long part', message: 'long part', name: 'Grant')
       @send_feedback_to_uservoice.perform(123)
     end
   end
