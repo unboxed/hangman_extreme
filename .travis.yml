@@ -2,9 +2,7 @@ language: ruby
 services:
   - redis-server
 rvm:
-  - 1.9.3
   - jruby
-  - 2.0.0
   - 2.1.0
   - rbx-2
 before_script:
