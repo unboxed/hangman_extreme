@@ -59,15 +59,23 @@ describe GamesController do
   describe 'GET show_clue' do
     before :each do
       @game = create(:game)
-      get :show_clue, {:id => @game.to_param}
     end
 
     it 'assigns the requested game as @game' do
+      get :show_clue, {:id => @game.to_param}
       assigns(:game).should eq(@game)
     end
 
     it 'renders successfully' do
+      get :show_clue, {:id => @game.to_param}
       response.should be_success
+    end
+
+    it 'redirects home if no credits left' do
+      @current_user_account.stub(:credits).and_return(0)
+      get :show_clue, {:id => @game.to_param}
+      response.should redirect_to(root_path)
+      flash[:alert].should_not be_blank
     end
   end
 
@@ -90,7 +98,7 @@ describe GamesController do
     it 'wont show clue' do
       @current_user_account.stub(:credits).and_return(0)
       do_post_reveal_clue
-      response.should redirect_to(purchases_path)
+      response.should redirect_to(root_path)
       flash[:alert].should_not be_blank
     end
 
@@ -318,7 +326,7 @@ describe GamesController do
     it 'redirects to purchase_transaction_path if no more credits' do
       @current_user_account.stub(:credits).and_return(0)
       do_get_new
-      response.should redirect_to(purchases_path)
+      response.should redirect_to(root_path)
       flash[:alert].should_not be_blank
     end
   end

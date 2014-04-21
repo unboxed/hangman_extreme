@@ -89,10 +89,10 @@ class GamesController < ApplicationController
   private
 
   def check_credits
-    if current_user.account.credits > 0
+    if current_user.account_credits > 0
       true
     else
-      redirect_to purchases_path, alert: 'No more credits points left'
+      redirect_to root_path, alert: 'No more credits points left'
       false
     end
   end

@@ -1,20 +1,15 @@
 HangmanLeague::Application.routes.draw do
-  get "purchase_transactions", to: 'purchase_transactions#index', as: 'purchases'
-  get "purchase_transactions/new", as: 'new_purchase'
-  get "purchase_transactions/create", to: 'purchase_transactions#create', as: 'create_purchase'
-  get "Transaction/PaymentRequest", to: 'purchase_transactions#simulate_purchase', as: 'mxit_purchase'
-  get "explain/:action", as: 'explain', controller: 'explain'
-  get "airtime_vouchers", to: 'airtime_vouchers#index', as: 'airtime_vouchers'
+  get 'explain/:action', as: 'explain', controller: 'explain'
 
   resources :games, :except => [:edit, :update, :destroy] do
     collection do
-      get 'play', action: "play"
+      get 'play', action: 'play'
     end
     get 'page/:page', :action => :index, :on => :collection
     member do
-      get 'show_clue', action: "show_clue", as: 'show_clue'
-      post 'show_clue', action: "reveal_clue"
-      get "letter/:letter", action: 'play_letter', as: 'play_letter'
+      get 'show_clue', action: 'show_clue', as: 'show_clue'
+      post 'show_clue', action: 'reveal_clue'
+      get 'letter/:letter', action: 'play_letter', as: 'play_letter'
     end
   end
   resources :users, only: [:show, :index] do
@@ -27,7 +22,7 @@ HangmanLeague::Application.routes.draw do
       get 'options', action: 'options'
     end
   end
-  resources :feedback, path: "user_comments", :except => [:show, :edit, :update, :destroy]
+  resources :feedback, path: 'user_comments', :except => [:show, :edit, :update, :destroy]
   resources :winners, :except => [:edit, :update, :create, :new, :destroy]
 
   get '/define/:word', to: 'words#define', as: 'define_word'

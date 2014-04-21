@@ -31,7 +31,7 @@ describe MenuHelper do
 
         it 'returns links in there own items' do
           new_game_item = ['new game', new_game_path, id: 'new_game']
-          buy_item = ['buy', purchases_path, id: 'buy']
+          buy_item = ['buy', root_path, id: 'buy']
           helper.menu_item(*new_game_item)
           helper.menu_item(*buy_item)
           helper.grouped_menu_items.should eq [[new_game_item],[buy_item]]
@@ -47,7 +47,7 @@ describe MenuHelper do
 
         it 'returns 2 links in separate items if they are longer 20 chars' do
           new_game_item = ['new game', new_game_path, id: 'new_game']
-          buy_item = ['buy asdasdasdasdasdasd', purchases_path, id: 'buy']
+          buy_item = ['buy asdasdasdasdasdasd', root_path, id: 'buy']
           helper.menu_item(*new_game_item)
           helper.menu_item(*buy_item)
           helper.grouped_menu_items.should include([buy_item])

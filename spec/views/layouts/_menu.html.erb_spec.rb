@@ -16,11 +16,11 @@ describe 'layouts/_menu' do
 
   it 'must group 2 links into first li if shorter than 20 characters' do
     grouped_menu_items = [[['new game', new_game_path, id: 'new_game'],
-                           ['buy', purchases_path, id: 'buy']]]
+                           ['buy', root_path, id: 'buy']]]
     render :partial => 'layouts/menu', :locals => {:grouped_menu_items => grouped_menu_items}
     within('li.item1') do
       rendered.should have_css("a#new_game[href='#{new_game_path}']")
-      rendered.should have_css("a#buy[href='#{purchases_path}']")
+      rendered.should have_css("a#buy[href='#{root_path}']")
     end
   end
 
