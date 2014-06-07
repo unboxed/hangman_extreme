@@ -91,7 +91,7 @@ class Winner < ActiveRecord::Base
     end
     winners.group_by{|w| w.amount }.each do |amount,winners_group|
       UserSendMessage.send("Congratulations, you have won *#{amount} prize points* for _#{options[:period]} #{options[:score_by]}_.
-                           Check the $redeem$ section to see what you can trade them in for.".squish,winners_group.map{|info| info.user })
+                           Check the $store$ section to see what you can trade them in for.".squish,winners_group.map{|info| info.user })
     end
   end
 
