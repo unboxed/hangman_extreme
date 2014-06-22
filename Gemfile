@@ -32,7 +32,7 @@ platforms :rbx do
 end
 
 # third party
-gem 'airbrake'
+gem 'airbrake', '~> 3.1'
 gem 'newrelic_rpm'
 gem 'uservoice-ruby', require: false
 gem 'gabba', require: false # google analytics
