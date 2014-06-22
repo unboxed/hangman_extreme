@@ -124,11 +124,10 @@ class Game < ActiveRecord::Base
 
   def set_score
     if clue_revealed
-      correct_choices_size = correct_choices.size
+      self.score ||= correct_choices.size + attempts_left + time_score
     else
-      correct_choices_size = correct_choices.size * 2
+      self.score ||= (correct_choices.size + attempts_left + time_score) * 2
     end
-    self.score ||= correct_choices_size + attempts_left + time_score
   end
 
   def update_user_score

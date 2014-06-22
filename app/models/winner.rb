@@ -78,7 +78,7 @@ class Winner < ActiveRecord::Base
     winners = []
     select_winners(options).each do |rank,users|
       prize_total = 0
-      users.each_with_index do |user,index|
+      users.each_with_index do |_user,index|
         prize_total += (options[:winnings][rank - 1 + index] || 1)
       end
       users.each do |user|

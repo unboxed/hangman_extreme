@@ -3,6 +3,6 @@ AllCops:
     - Rakefile
     - config.ru
   Exclude:
-    - bin/**
-    - config/**
-    - script/**
+    - bin/**/*
+    - config/**/*
+    - script/**/*
