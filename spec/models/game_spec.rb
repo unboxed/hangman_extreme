@@ -241,15 +241,27 @@ describe Game do
       @game.score.should be_nil
     end
 
-    it 'must set score to correct choices + attempts left + time_score' do
-      @game.stub(:attempts_left).and_return(2)
-      @game.stub(:correct_choices).and_return(['a','b'])
-      @game.stub(:time_score).and_return(2)
-      @game.save
-      @game.score.should be == 6
+    context 'no clue revealed' do
+      it 'must set score to correct choices + attempts left + time_score' do
+        @game.stub(:attempts_left).and_return(2)
+        @game.stub(:correct_choices).and_return(['a','b'])
+        @game.stub(:time_score).and_return(2)
+        @game.clue_revealed = false
+        @game.save
+        @game.score.should be == 8
+      end
     end
 
+    context 'clue revealed' do
+      it 'must set score to correct choices + attempts left + time_score' do
+        @game.stub(:attempts_left).and_return(2)
+        @game.stub(:correct_choices).and_return(['a','b'])
+        @game.stub(:time_score).and_return(2)
+        @game.clue_revealed = true
+        @game.save
+        @game.score.should be == 6
+      end
+    end
   end
-
 end
 
