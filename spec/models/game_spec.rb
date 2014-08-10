@@ -248,7 +248,7 @@ describe Game do
         @game.stub(:time_score).and_return(2)
         @game.clue_revealed = false
         @game.save
-        @game.score.should be == 8
+        @game.score.should be == 12
       end
     end
 
