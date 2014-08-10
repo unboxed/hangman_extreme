@@ -73,17 +73,6 @@ group :development, :test do
 end
 
 group :test do
-  platforms :jruby do
-    gem 'jdbc-mysql'
-    gem 'activerecord-jdbcmysql-adapter', '>= 1.3.0', require: false
-    gem 'activerecord-jdbcsqlite3-adapter', '>= 1.3.0', require: false
-    #gem 'activerecord-jdbcpostgresql-adapter', '>= 1.3.0', require: false
-  end
-  platforms :ruby do
-    gem 'mysql2'
-    gem 'sqlite3'
-    #gem 'pg'
-  end
   gem 'test_after_commit'
   gem 'poltergeist', require: false
   gem 'selenium-webdriver', require: false

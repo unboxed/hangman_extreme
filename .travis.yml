@@ -13,6 +13,4 @@ before_script:
   - RAILS_ENV=test bundle exec rake db:migrate
 script: bundle exec rspec spec
 env:
-  - DB_ADAPTER=mysql RAILS_ENV=test COVERALLS=yes EXCLUDE_INCONSISTENT=yes
-  - DB_ADAPTER=sqlite3 RAILS_ENV=test DB_CLEANER_STRATEGY=truncation COVERALLS=yes EXCLUDE_INCONSISTENT=yes
   - DB_ADAPTER=postgresql RAILS_ENV=test COVERALLS=yes EXCLUDE_INCONSISTENT=yes

@@ -1,7 +1,6 @@
 require 'rubygems'
 
 ENV['RAILS_ENV'] ||= 'test'
-ENV['DB_CLEANER_STRATEGY'] ||= 'transaction'
 ENV['UV_SUBDOMAIN_NAME'] ||= 'uv'
 ENV['UV_API_KEY'] ||= '1'
 ENV['UV_API_SECRET'] ||= '1'
@@ -69,7 +68,7 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = 'random'
   config.before(:suite) do
-    DatabaseCleaner.strategy = ENV['DB_CLEANER_STRATEGY'].to_sym
+    DatabaseCleaner.strategy = :transaction
   end
 
   config.before(:all, :js => true) do
@@ -77,7 +76,7 @@ RSpec.configure do |config|
   end
 
   config.after(:all, :js => true) do
-    DatabaseCleaner.strategy = ENV['DB_CLEANER_STRATEGY'].to_sym
+    DatabaseCleaner.strategy = :transaction
   end
 
   config.before(:each) do
