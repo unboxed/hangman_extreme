@@ -4,7 +4,6 @@ services:
 rvm:
   - jruby
   - 2.1.0
-  - rbx-2
 before_script:
   - mkdir -p tmp/cache
   - cp -f db/words.sample.csv db/words.csv

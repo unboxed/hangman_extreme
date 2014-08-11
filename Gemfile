@@ -25,12 +25,6 @@ gem 'sidekiq', '~> 2.17', require: false
 gem 'sinatra', '>= 1.3.0', require: false # for sidekiq
 gem 'slim', require: false # for sidekiq
 
-platforms :rbx do
-  gem 'racc'
-  gem 'rubysl', '~> 2.0'
-  gem 'psych'
-end
-
 # third party
 gem 'airbrake', '~> 3.1'
 gem 'newrelic_rpm'
@@ -56,7 +50,7 @@ group :development do
   gem 'capistrano', '~> 2.0', require: false
   gem 'rvm-capistrano', require: false
   gem 'better_errors'
-  gem 'binding_of_caller', :platforms=>[:mri, :rbx]
+  gem 'binding_of_caller', :platforms=>[:mri]
   gem 'quiet_assets'
   gem 'spring', :platforms=>[:mri]
   gem 'rubocop'
