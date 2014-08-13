@@ -1,7 +1,6 @@
 require 'features_helper'
 
 shared_examples 'a game player' do
-
   def click_letter(l)
     within('.letters') do
       click_link(l)
@@ -88,37 +87,20 @@ shared_examples 'a game player' do
 end
 
 describe 'games', :redis => true do
-
   context 'as mxit user', :google_analytics_vcr => true, :user_accounts_vcr => true do
-
     before :each do
       @current_user = mxit_user('m2604100')
       set_mxit_headers('m2604100') # set mxit user
     end
 
     it_behaves_like 'a game player'
-
   end
 
-  context 'as mobile user', :facebook => true, :smaato_vcr => true, :js => true, :user_accounts_vcr => true do
-
-    before :each do
-      @current_user = facebook_user
-      login_facebook_user(@current_user)
-    end
-
-    it_behaves_like 'a game player'
-
-  end
-
-  context 'as guest user', :smaato_vcr => true, :js => true do
-
+  context 'as guest user' do
     it 'wont allow you to start a new game' do
       visit_home
       click_link('Play')
       page.current_path.should be == '/'
     end
-
   end
-
 end

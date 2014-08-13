@@ -26,10 +26,7 @@ HangmanLeague::Application.routes.draw do
   resources :winners, :except => [:edit, :update, :create, :new, :destroy]
 
   get '/define/:word', to: 'words#define', as: 'define_word'
-  get '/auth/:provider/callback', to: 'sessions#create'
-  post '/auth/:provider/callback', to: 'sessions#create'
-  get '/auth/:provider/failure', to: 'sessions#failure'
-  get '/auth/failure', to: 'sessions#failure'
+  get '/auth/callback', to: 'sessions#create'
   get '/authorize', to: 'users#mxit_authorise', as: 'mxit_authorise'
   get '/about', to: 'explain#about', as: 'about'
   get '/terms', to: 'explain#terms', as: 'terms'

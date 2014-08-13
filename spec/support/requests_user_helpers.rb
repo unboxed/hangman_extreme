@@ -1,9 +1,9 @@
-def facebook_user(params_or_uid = '1234567')
-  generate_user('facebook',params_or_uid)
-end
-
 def mxit_user(params_or_uid = 'm2604100')
   generate_user('mxit',params_or_uid)
+end
+
+def login_user(user)
+  visit "/auth/callback?uid=#{user.uid}&provider=#{user.provider}"
 end
 
 def generate_user(provider,params_or_uid)

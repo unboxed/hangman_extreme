@@ -10,7 +10,7 @@ describe 'games/index' do
     @current_user = stub_model(User, id: 50)
     view.stub(:current_user).and_return(@current_user)
     view.stub(:mxit_request?).and_return(true)
-    view.stub(:facebook_user?).and_return(false)
+    view.stub(:mxit_user?).and_return(true)
     view.stub(:guest?).and_return(false)
     view.stub(:menu_item)
   end
@@ -62,13 +62,6 @@ describe 'games/index' do
             scope: 'profile/public profile/private',
             state: 'feedback'}
     view.should_receive(:menu_item).with(anything,mxit_authorise_url(args),id: 'feedback')
-    render
-  end
-
-  it 'must have a ordinary feedback link on the menu if not mxit request' do
-    view.stub(:mxit_request?).and_return(false)
-    view.stub(:mxit_request?).and_return(false)
-    view.should_receive(:menu_item).with(anything,feedback_index_path,id: 'feedback')
     render
   end
 

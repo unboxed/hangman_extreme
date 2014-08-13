@@ -2,16 +2,16 @@
 <% if @winners.empty? %>
     <p><b>Coming Soon</b></p>
 <% else %>
-<table class="table table-bordered table-hover table-condensed">
+<table>
   <thead>
     <tr>
-      <th>points<%= mxit_dash %></th>
+      <th>points -</th>
       <th>name</th>
     </tr>
   </thead>
   <tbody>
   <%= content_tag_for(:tr, @winners.sort{|x,y| y.amount <=> x.amount}) do |winner| %>
-      <td><%= winner.amount %><%= mxit_dash %></td>
+      <td><%= winner.amount %> -</td>
       <td><%= display_user_name(winner.name) %></td>
   <% end %>
   </tbody>
@@ -22,7 +22,7 @@
   <%= link_to_unless params[:period] == time_period,
                      time_period,
                      {period: time_period, reason: params[:reason]},
-                     id: "#{time_period}_#{params[:reason] || 'rating'}", class: 'btn' %><% mxit_only('|') %>
+                     id: "#{time_period}_#{params[:reason] || 'rating'}", class: 'btn' %>|
 <% end %>
 </div>
 <div class="btn-group">
@@ -30,7 +30,7 @@
   <%= link_to_unless params[:reason] == reason,
                      reason,
                      {period: params[:period], reason: reason},
-                     id: "#{params[:period] || 'daily'}_#{reason}", class: 'btn' %><% mxit_only('|') %>
+                     id: "#{params[:period] || 'daily'}_#{reason}", class: 'btn' %>|
 <% end %>
 </div>
 

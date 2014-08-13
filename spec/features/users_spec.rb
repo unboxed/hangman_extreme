@@ -76,17 +76,7 @@ describe 'users', :redis => true do
     end
   end
 
-  context 'as mobile user', :facebook => true, :smaato_vcr => true, :js => true do
-    before :each do
-      @current_user = facebook_user
-      login_facebook_user(@current_user)
-    end
-
-    it_behaves_like 'a user browser'
-    it_behaves_like 'a registered user'
-  end
-
-  context 'as guest user', :smaato_vcr => true, :js => true do
+  context 'as guest user' do
     it_behaves_like 'a user browser'
   end
 end

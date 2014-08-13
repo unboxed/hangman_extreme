@@ -285,8 +285,6 @@ describe ApplicationController do
 
   describe 'it uses correct layout' do
     controller do
-      layout :set_layout
-
       def index
         render 'games/index', layout: true
       end
@@ -294,15 +292,7 @@ describe ApplicationController do
 
     it 'must render mobile layout' do
       get :index
-      response.should render_template('layouts/mobile')
-    end
-
-    it 'must render mxit layout' do
-      controller.stub(:send_stats)
-      create(:user, uid: 'm123')
-      request.env['HTTP_X_MXIT_USERID_R'] = 'm123'
-      get :index
-      response.should render_template('layouts/mxit')
+      response.should render_template('layouts/application')
     end
   end
 end

@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :load_user, :check_mxit_input_for_redirect
   after_filter :send_stats
-  layout :set_layout
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_path, :alert => exception.message
@@ -24,15 +23,15 @@ class ApplicationController < ActionController::Base
     request.env['HTTP_X_MXIT_USERID_R'].present?
   end
 
-  def facebook_user?
-    current_user.facebook?
-  end
-
   def guest?
     current_user.guest?
   end
 
-  helper_method :current_user, :current_user_account, :current_user_request_info, :notify_airbrake, :mxit_request?, :facebook_user?, :guest?
+  def mxit_user?
+    current_user.mxit?
+  end
+
+  helper_method :current_user, :current_user_account, :current_user_request_info, :notify_airbrake, :mxit_request?, :guest?, :mxit_user?
 
   def login_required
     return true if current_user && !guest?
@@ -45,7 +44,7 @@ class ApplicationController < ActionController::Base
   end
 
   def send_stats
-    if tracking_enabled? && current_user && mxit_request? && status != 302
+    if tracking_enabled? && mxit_request? && status != 302
       begin
         Timeout::timeout(15) do
           g = Gabba::Gabba.new(tracking_code, request.host)
@@ -73,18 +72,8 @@ class ApplicationController < ActionController::Base
   def load_user
     if request.env['HTTP_X_MXIT_USERID_R'] # load mxit user
       load_mxit_user
-    elsif params[:signed_request]
-      load_facebook_user
     else # load browser user
       @current_user = User.find_by(:uid => session[:current_uid],:provider => session[:current_provider]) || User.new(provider: 'guest')
-    end
-  end
-
-  def set_layout
-    if current_user.try(:provider) == 'developer'
-      current_user.uid == 'mxit' ? 'mxit' : 'mobile'
-    else
-      mxit_request? ? 'mxit' : 'mobile'
     end
   end
 
@@ -129,23 +118,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def load_facebook_user
-    _, payload = params[:signed_request].split('.')
-    encoded_str = payload.gsub('-','+').gsub('_','/')
-    encoded_str += '=' while !(encoded_str.size % 4).zero?
-    @data = ActiveSupport::JSON.decode(Base64.decode64(encoded_str))
-    Rails.logger.info "signed_request: #{@data.inspect}"
-    if @data.kind_of?(Hash) && @data['user_id']
-      self.current_user = User.find_facebook_user_by_uid(@data['user_id'])
-    end
-    if current_user
-      true
-    else
-      redirect_to '/auth/facebook'
-      false
-    end
-  end
-
   def current_user=(user)
     @current_user = user
     session[:current_uid] = user.try(:uid)
@@ -160,5 +132,4 @@ class ApplicationController < ActionController::Base
   def tracking_code
     ENV['GA_TRACKING_CODE']
   end
-
 end

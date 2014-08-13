@@ -1,10 +1,3 @@
-GIT
-  remote: https://github.com/tommeier/database_cleaner
-  revision: b0c666e1f0c3d05bd0c219558c72a82db55ce9e2
-  ref: b0c666e
-  specs:
-    database_cleaner (1.1.1)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -72,13 +65,6 @@ GEM
       ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
     coderay (1.1.0)
-    coffee-rails (4.0.1)
-      coffee-script (>= 2.2.0)
-      railties (>= 4.0.0, < 5.0)
-    coffee-script (2.3.0)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.7.1)
     columnize (0.8.9)
     connection_pool (2.0.0)
     coveralls (0.7.0)
@@ -89,6 +75,7 @@ GEM
       thor
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
+    database_cleaner (1.2.0)
     debug_inspector (0.0.2)
     debugger (1.6.8)
       columnize (>= 0.3.1)
@@ -106,8 +93,6 @@ GEM
     erubis (2.7.0)
     ethon (0.7.1)
       ffi (>= 1.3.0)
-    eventmachine (1.0.3)
-    eventmachine (1.0.3-java)
     execjs (2.2.1)
     ezcrypto (0.7.2)
     factory_girl (4.4.0)
@@ -117,17 +102,12 @@ GEM
       railties (>= 3.0.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
-    faye-websocket (0.4.7)
-      eventmachine (>= 0.12.0)
-    faye-websocket (0.4.7-java)
-      eventmachine (>= 0.12.0)
     ffi (1.9.3)
     ffi (1.9.3-java)
     flog (4.3.0)
       ruby_parser (~> 3.1, > 3.1.0)
       sexp_processor (~> 4.4)
     gabba (1.0.1)
-    hashie (3.2.0)
     her (0.7.2)
       activemodel (>= 3.0.0, < 4.2)
       activesupport (>= 3.0.0, < 4.2)
@@ -136,16 +116,10 @@ GEM
     highline (1.6.21)
     hike (1.2.3)
     htmlentities (4.3.2)
-    http_parser.rb (0.5.3)
-    http_parser.rb (0.5.3-java)
     i18n (0.6.11)
     jdbc-postgres (9.3.1102)
-    jquery-rails (3.1.1)
-      railties (>= 3.0, < 5.0)
-      thor (>= 0.14, < 2.0)
     json (1.8.1)
     json (1.8.1-java)
-    jwt (1.0.0)
     launchy (2.4.2)
       addressable (~> 2.3)
     libv8 (3.11.8.17)
@@ -156,7 +130,6 @@ GEM
     mini_portile (0.6.0)
     minitest (4.7.5)
     multi_json (1.10.1)
-    multi_xml (0.5.5)
     multipart-post (2.0.0)
     mxit_api (0.2.3.pre)
       activesupport (>= 3.0.0)
@@ -178,36 +151,16 @@ GEM
       mini_portile (= 0.6.0)
     nokogiri (1.6.3.1-java)
     oauth (0.4.7)
-    oauth2 (1.0.0)
-      faraday (>= 0.8, < 0.10)
-      jwt (~> 1.0)
-      multi_json (~> 1.3)
-      multi_xml (~> 0.5)
-      rack (~> 1.2)
     ohm (1.3.2)
       nest (~> 1.0)
       redis
       scrivener (~> 0.0.3)
     ohm-contrib (1.2)
       ohm (~> 1.2)
-    omniauth (1.2.2)
-      hashie (>= 1.2, < 4)
-      rack (~> 1.0)
-    omniauth-facebook (2.0.0)
-      omniauth-oauth2 (~> 1.2)
-    omniauth-oauth2 (1.2.0)
-      faraday (>= 0.8, < 0.10)
-      multi_json (~> 1.3)
-      oauth2 (~> 1.0)
-      omniauth (~> 1.2)
     parser (2.2.0.pre.4)
       ast (>= 1.1, < 3.0)
       slop (~> 3.4, >= 3.4.5)
     pg (0.17.1)
-    poltergeist (1.1.2)
-      capybara (~> 2.0.1)
-      faye-websocket (~> 0.4.4)
-      http_parser.rb (~> 0.5.3)
     polyglot (0.3.5)
     powerpack (0.0.9)
     puma (2.9.0)
@@ -345,7 +298,6 @@ GEM
     whenever (0.9.2)
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
-    wiselinks (1.2.1)
     wordnik (4.12)
       activemodel (>= 3.0.3)
       addressable (>= 2.2.4)
@@ -369,33 +321,27 @@ DEPENDENCIES
   cancan
   capistrano (~> 2.0)
   capybara (~> 2.0.0)
-  coffee-rails (~> 4.0.0)
   coveralls
-  database_cleaner (~> 1.1.1)!
+  database_cleaner (~> 1.2.0)
   debugger
   draper
   factory_girl_rails
   flog
   gabba
   her
-  jquery-rails
   launchy
   libv8 (~> 3.11.8)
   mxit_api (>= 0.2.2.pre)
   newrelic_rpm
   ohm (~> 1.3.2)
   ohm-contrib
-  omniauth
-  omniauth-facebook
   pg
-  poltergeist
   puma
   quiet_assets
   rails (~> 4.0.0)
   rspec-rails (~> 2.13.0)
   rubocop
   rvm-capistrano
-  selenium-webdriver
   sidekiq (~> 2.17)
   simplecov
   simplecov-rcov
@@ -411,5 +357,4 @@ DEPENDENCIES
   vcr
   webmock
   whenever
-  wiselinks
   wordnik

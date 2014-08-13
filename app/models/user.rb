@@ -43,7 +43,6 @@ class User < ActiveRecord::Base
 
   scope :top_scorers, lambda{ |field| order("#{field} DESC") }
   scope :mxit, -> { where(provider: 'mxit') }
-  scope :facebook, -> { where(provider: 'facebook') }
   scope :non_mxit, -> { where('provider <> ?','mxit') }
   scope :active_last_hour, -> { where('updated_at >= ?',1.hour.ago) }
   scope :active, -> { where('updated_at >= ?',7.days.ago) }
@@ -73,17 +72,8 @@ class User < ActiveRecord::Base
     end
     return user
   end
-
-  def self.find_facebook_user_by_uid(uid)
-    facebook.find_by_uid(uid)
-  end
-
   def self.find_mxit_user(i)
     mxit.find_by_uid(i)
-  end
-
-  def self.find_facebook_user(i)
-    facebook.find_by_uid(i)
   end
 
   def set_user_info(info)
@@ -211,10 +201,6 @@ class User < ActiveRecord::Base
 
   def mxit?
     provider == 'mxit'
-  end
-
-  def facebook?
-    provider == 'facebook'
   end
 
   def guest?

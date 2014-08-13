@@ -12,14 +12,4 @@ module MxitHelper
                                                  redirect_uri: mxit_oauth_users_url(host: request.host),
                                                  scope: 'profile/public profile/private')).html_safe
   end
-
-
-  def mxit_dash
-    mxit_only('-')
-  end
-
-  def mxit_only(text)
-    mxit_request? ? text : ''
-  end
-
 end

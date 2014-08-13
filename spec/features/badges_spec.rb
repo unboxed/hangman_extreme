@@ -2,7 +2,6 @@
 require 'features_helper'
 
 shared_examples 'badger' do
-
   it 'must allow to visit the badges page and see descriptions' do
     visit '/'
     click_link 'badges'
@@ -378,15 +377,6 @@ describe 'users', :redis => true do
     before :each do
       @current_user = mxit_user('m2604100')
       set_mxit_headers('m2604100') # set mxit user
-    end
-
-    it_behaves_like 'badger'
-  end
-
-  context 'as mobile user', :facebook => true, :smaato_vcr => true, :js => true do
-    before :each do
-      @current_user = facebook_user
-      login_facebook_user(@current_user)
     end
 
     it_behaves_like 'badger'

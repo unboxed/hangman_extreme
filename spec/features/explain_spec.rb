@@ -27,15 +27,6 @@ describe 'explain', :redis => true do
     it_behaves_like 'a knowledge seeker'
   end
 
-  context 'as mobile user', :facebook => true, :smaato_vcr => true, :js => true do
-    before :each do
-      @current_user = facebook_user
-      login_facebook_user(@current_user)
-    end
-
-    it_behaves_like 'a knowledge seeker'
-  end
-
   context 'as guest user', :smaato_vcr => true do
     it_behaves_like 'a knowledge seeker'
   end

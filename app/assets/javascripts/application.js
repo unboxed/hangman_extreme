@@ -10,19 +10,5 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
-//= require bootstrap.js
-//= require wiselinks
-//= require wiselinks_config
 //= require_self
-
-function fb_invite_friends() {
-  FB.ui({
-      method: 'apprequests',
-      message: 'invites you to play hangman extreme and win airtime!',
-    },
-    function(response) {
-      console.log('sendRequest response: ', response);
-    });
-}
 

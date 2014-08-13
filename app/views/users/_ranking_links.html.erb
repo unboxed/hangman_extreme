@@ -3,7 +3,7 @@
     <%= link_to_unless params[:period] == time_period,
                        time_period,
                        users_path(period: time_period, rank_by: params[:rank_by]),
-                       id: "#{time_period}_#{params[:rank_by] || 'rating'}", class: 'btn' %><% mxit_only('|') %>
+                       id: "#{time_period}_#{params[:rank_by] || 'rating'}", class: 'btn' %>|
 <% end %>
 </div>
 <div class="btn-group">
@@ -11,7 +11,7 @@
     <%= link_to_unless params[:rank_by] == rank,
                        rank,
                        users_path(period: params[:period], rank_by: rank),
-                       id: "#{params[:period] || 'daily'}_#{rank}", class: 'btn' %><% mxit_only('|') %>
+                       id: "#{params[:period] || 'daily'}_#{rank}", class: 'btn' %>|
 <% end %>
 </div>
 <% menu_item 'scoring/rules', explain_path(action: 'scoring_categories'), id: 'scoring_categories' %>

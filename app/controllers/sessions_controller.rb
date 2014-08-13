@@ -1,25 +1,16 @@
 class SessionsController < ApplicationController
-  skip_before_filter  :verify_authenticity_token if Rails.env.development?
-
-  def create
-    self.current_user = User.find_or_create_from_auth_hash(auth_hash)
-    redirect_to '/'
-  end
-
   def destroy
     self.current_user = nil
     redirect_to '/'
   end
 
-  def failure
-    redirect_to '/', alert: params[:message]
-  end
-
-  protected
-
-  def auth_hash
-    request.env['omniauth.auth']
-  end
-
+  # if Rails.env.test?
+    def create
+      self.current_user = User.find_or_create_by(uid: params[:uid], provider: params[:provider])
+      redirect_to '/'
+    end
+  # else
+  #
+  # end
 end
 

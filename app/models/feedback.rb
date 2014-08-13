@@ -40,6 +40,5 @@ class Feedback < ActiveRecord::Base
   def send_to_uservoice
     SendFeedbackToUservoice.perform_async(id)
   end
-
 end
 

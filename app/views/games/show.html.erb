@@ -19,14 +19,14 @@ You have <span><%= @game.attempts_left %></span> attempts left
 <br/>
 
 <% if @game.done? %>
-    <% menu_item(mxit_request? ? 'Play' : 'new game', new_game_path, id: 'new_game') %>
+    <% menu_item('Play', new_game_path, id: 'new_game') %>
     <% menu_item 'rank', user_path(current_user), id: 'view_rank' %>
     <% menu_item 'define the word', define_word_path(word: @game.hangman_text), id: 'define_word' %>
 <% else %>
   <p class="letters">
-    <% ('a'..'z').to_a.in_groups_of((mxit_request? ? 9 : 100),false).each do |letters| -%>
+    <% ('a'..'z').to_a.in_groups_of(9,false).each do |letters| -%>
         <% letters.each do |letter| -%>
-            <%= letter_link(@game,letter) %><% if mxit_request? %>&nbsp;<% end %>
+            <%= letter_link(@game,letter) %>&nbsp;
         <% end -%>
         <br/>
     <% end -%>
