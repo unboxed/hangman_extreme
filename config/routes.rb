@@ -22,11 +22,11 @@ HangmanLeague::Application.routes.draw do
       get 'options', action: 'options'
     end
   end
-  resources :feedback, path: 'user_comments', :except => [:show, :edit, :update, :destroy]
+  resources :feedback, :except => [:show, :edit, :update, :destroy]
   resources :winners, :except => [:edit, :update, :create, :new, :destroy]
 
   get '/define/:word', to: 'words#define', as: 'define_word'
-  get '/auth/callback', to: 'sessions#create'
+  get '/auth/callback', to: 'sessions#create', as: 'create_session'
   get '/authorize', to: 'users#mxit_authorise', as: 'mxit_authorise'
   get '/about', to: 'explain#about', as: 'about'
   get '/terms', to: 'explain#terms', as: 'terms'

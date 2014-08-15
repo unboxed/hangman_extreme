@@ -99,8 +99,7 @@ describe 'games', :redis => true do
   context 'as guest user' do
     it 'wont allow you to start a new game' do
       visit_home
-      click_link('Play')
-      page.current_path.should be == '/'
+      page.should_not have_link('Play')
     end
   end
 end

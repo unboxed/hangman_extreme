@@ -1,4 +1,4 @@
 <% menu_item 'scoring categories', explain_path(action: 'scoring_categories'), id: 'scoring_categories' %>
 <% menu_item 'rank', user_path(current_user), id: 'view_rank' unless guest? %>
-<% menu_item 'feedback',mxit_auth_url(state: 'feedback'), id: 'feedback' %>
+<% menu_item 'feedback',mxit_auth_url(state: 'feedback'), id: 'feedback' if mxit_user? %>
 

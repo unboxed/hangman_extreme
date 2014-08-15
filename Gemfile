@@ -13,7 +13,7 @@ end
 gem 'ohm', '~> 1.3.2'
 gem 'ohm-contrib', require: false
 gem 'cancan', require: false
-gem 'mxit_api', '>= 0.2.2.pre', require: false
+gem 'mxit_api', '~> 0.3.0', require: false
 gem 'draper'
 gem 'puma', require: false
 gem 'whenever', require: false

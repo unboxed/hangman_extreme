@@ -131,10 +131,8 @@ GEM
     minitest (4.7.5)
     multi_json (1.10.1)
     multipart-post (2.0.0)
-    mxit_api (0.2.3.pre)
+    mxit_api (0.3.0)
       activesupport (>= 3.0.0)
-      activesupport (>= 3.0.0)
-      i18n (>= 0.5.0)
       i18n (>= 0.5.0)
     nest (1.1.2)
       redis
@@ -331,7 +329,7 @@ DEPENDENCIES
   her
   launchy
   libv8 (~> 3.11.8)
-  mxit_api (>= 0.2.2.pre)
+  mxit_api (~> 0.3.0)
   newrelic_rpm
   ohm (~> 1.3.2)
   ohm-contrib
