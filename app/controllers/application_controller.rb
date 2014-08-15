@@ -1,5 +1,5 @@
 require 'cancan'
-require 'gabba'
+require 'staccato'
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :load_user, :check_mxit_input_for_redirect
@@ -47,16 +47,18 @@ class ApplicationController < ActionController::Base
     if tracking_enabled? && mxit_request? && status != 302
       begin
         Timeout::timeout(15) do
-          g = Gabba::Gabba.new(tracking_code, request.host)
-          g.user_agent = current_user_request_info.user_agent || request.env['HTTP_USER_AGENT'] || 'unknown'
-          g.utmul = current_user_request_info.language || 'en'
-          g.set_custom_var(1, 'Gender', current_user_request_info.gender || 'unknown', 1)
-          g.set_custom_var(2, 'Age', current_user_request_info.age || 'unknown', 1)
-          g.set_custom_var(3, current_user_request_info.country || 'unknown Country', current_user_request_info.area || 'unknown', 1)
-          g.set_custom_var(5, 'Provider', current_user.provider, 1)
-          g.identify_user(current_user.utma(true))
-          g.ip(request.remote_ip)
-          g.page_view("#{params[:controller]} #{params[:action]}", request.fullpath,current_user.id)
+          tracker = Staccato.tracker(tracking_code)
+          hit = Staccato::Pageview.new(tracker,
+                           path: request.fullpath,
+                           hostname: request.host,
+                           title: "#{params[:controller]} #{params[:action]}",
+                           user_id: current_user.id,
+                           user_ip: request.remote_ip,
+                           user_agent: "#{request.env['HTTP_USER_AGENT']} #{current_user_request_info.user_agent}",
+                           user_language: current_user_request_info.language || 'en')
+          hit.add_custom_dimension(1,current_user_request_info.gender || 'unknown')
+          hit.add_custom_metric(2,current_user_request_info.age || 'unknown')
+          hit.track!
         end
       rescue Timeout::Error => te
         Rails.logger.warn(te.message)

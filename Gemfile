@@ -27,7 +27,7 @@ gem 'slim', require: false # for sidekiq
 gem 'airbrake', '~> 3.1'
 gem 'newrelic_rpm'
 gem 'uservoice-ruby', require: false
-gem 'gabba', require: false # google analytics
+gem 'staccato', require: false # google analytics
 gem 'wordnik', require: false
 
 platforms :jruby do

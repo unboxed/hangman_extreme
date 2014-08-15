@@ -81,7 +81,6 @@ describe ApplicationController do
     end
 
     context 'has mxit headers' do
-
       before :each do
         create(:user, uid: 'm2604100')
         request.env['HTTP_X_MXIT_USERID_R'] = 'm2604100'
@@ -140,7 +139,6 @@ describe ApplicationController do
         @user_request_info.should_receive(:mxit_location=).with('location')
         get :index
       end
-
     end
 
     it 'wont load mxit user if no userid' do
@@ -164,80 +162,76 @@ describe ApplicationController do
       controller.stub(:mxit_request?).and_return(true)
       controller.stub(:current_user).and_return(@user)
       controller.stub(:current_user_request_info).and_return(@user_request_info)
-      @gabba = double('connection',
-                    :ip => '',
-                    :user_agent= => '',
-                    :utmul= => '',
-                    :set_custom_var => '',
-                    :cookie_params => '',
-                    :page_view => '',
-                    :identify_user => '')
-      Gabba::Gabba.stub(:new).and_return(@gabba)
+      @page_view = double('Staccato::Pageview',
+                          add_custom_dimension: true,
+                          add_custom_metric: true,
+                          track!: true)
+      Staccato::Pageview.stub(:new).and_return(@page_view)
     end
 
-    it 'wont create a new gabba connection if being redirected' do
+    it 'wont create a new connection if being redirected' do
       controller.stub(:status).and_return(302)
-      Gabba::Gabba.should_not_receive(:new)
+      Staccato::Pageview.should_not_receive(:new)
       get :index
     end
 
-    it 'wont create a new gabba connection if not mxit request' do
+    it 'wont create a new connection if not mxit request' do
       controller.stub(:mxit_request?).and_return(false)
-      Gabba::Gabba.should_not_receive(:new)
+      Staccato::Pageview.should_not_receive(:new)
       get :index
     end
 
-    it 'must create a new gabba connection' do
+    it 'must create a new connection' do
       controller.stub(:tracking_code).and_return('test')
-      Gabba::Gabba.should_receive(:new).with('test','test.host').and_return(@gabba)
+      Staccato::Pageview.should_receive(:new).with(anything,kind_of(Hash)).and_return(@page_view)
       get :index
     end
 
     it 'must set the user_agent' do
       @user_request_info.user_agent = 'Mxit Nokia'
-      @gabba.should_receive(:user_agent=).with('Mxit Nokia')
+      Staccato::Pageview.should_receive(:new).
+        with(anything,hash_including(user_agent: 'Rails Testing Mxit Nokia')).
+         and_return(@page_view)
       get :index
     end
 
     it 'must set the user_agent if no user_request_info' do
       request.env['HTTP_USER_AGENT'] = 'iphone'
-      @gabba.should_receive(:user_agent=).with('iphone')
+      Staccato::Pageview.should_receive(:new).
+        with(anything,hash_including(user_agent: 'iphone ')).
+        and_return(@page_view)
       get :index
     end
 
     it 'must set the language' do
       @user_request_info.language = 'afr'
-      @gabba.should_receive(:utmul=).with('afr')
+      Staccato::Pageview.should_receive(:new).
+        with(anything,hash_including(user_language: 'afr')).
+        and_return(@page_view)
       get :index
     end
 
     it 'must set the mxit gender' do
       @user_request_info.gender = 'female'
-      @gabba.should_receive(:set_custom_var).with(1,'Gender','female',1)
+      @page_view.should_receive(:add_custom_dimension).with(1,'female')
       get :index
     end
 
     it 'must set the mxit age' do
       @user_request_info.age = '21'
-      @gabba.should_receive(:set_custom_var).with(2,'Age','21',1)
+      @page_view.should_receive(:add_custom_metric).with(2,'21')
       get :index
     end
 
-    it 'must set the mxit location' do
-      @user_request_info.country = 'South Africa'
-      @user_request_info.area = 'Cape'
-      @gabba.should_receive(:set_custom_var).with(3,'South Africa','Cape',1)
-      get :index
-    end
-
-    it 'must set the user provider' do
-      @user.stub(:provider).and_return('the provider')
-      @gabba.should_receive(:set_custom_var).with(5,'Provider','the provider',1)
+    it 'must set the path' do
+      Staccato::Pageview.should_receive(:new).
+        with(anything,hash_including(path: '/anonymous')).
+        and_return(@page_view)
       get :index
     end
 
     it 'must send the page view' do
-      @gabba.should_receive(:page_view).with('anonymous index', '/anonymous',@user.id)
+      @page_view.should_receive(:track!)
       get :index
     end
   end
