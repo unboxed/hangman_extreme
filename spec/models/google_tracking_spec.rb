@@ -29,20 +29,20 @@ describe GoogleTracking, :redis => true do
     end
   end
 
-  describe 'utma' do
+  describe '#tracking_uuid' do
     before :each do
       @tracking = GoogleTracking.new(user_id: rand(99))
     end
 
     it 'must work' do
-      @tracking.utma
+      @tracking.tracking_uuid
     end
   end
 
-  describe 'find_or_create_by_user_id' do
+  describe '.tracking_uuid' do
     it 'must work' do
-      tracking = GoogleTracking.find_or_create_by_user_id(1)
-      tracking.user_id.should be == '1'
+      tracking = GoogleTracking.tracking_uuid(1)
+      tracking.should be_kind_of(String)
     end
   end
 end

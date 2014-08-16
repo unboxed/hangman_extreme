@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
     if tracking_enabled? && mxit_request? && status != 302
       begin
         Timeout::timeout(15) do
-          tracker = Staccato.tracker(tracking_code)
+          tracker = Staccato.tracker(tracking_code,GoogleTracking.tracking_uuid(current_user.id))
           hit = Staccato::Pageview.new(tracker,
                            path: request.fullpath,
                            hostname: request.host,

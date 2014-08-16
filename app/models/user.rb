@@ -143,14 +143,6 @@ class User < ActiveRecord::Base
     user_scope.where("#{field} > ?", send(field)).count + 1
   end
 
-  def utma(update_tracking = false)
-    google_tracking.utma(update_tracking)
-  end
-
-  def google_tracking
-    @google_tracking ||= GoogleTracking.find_or_create_by_user_id(id)
-  end
-
   def self.purge_tracking!
     User.where('updated_at < ?',20.days.ago).each{|u| u.google_tracking.delete }.size
   end

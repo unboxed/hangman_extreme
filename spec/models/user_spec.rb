@@ -214,25 +214,6 @@ describe User do
     end
   end
 
-  describe 'umta' do
-    it 'must return proper encoded google umta' do
-      user = stub_model(User)
-      user.utma.should match(/1\.[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\.15/)
-    end
-
-    it 'must update umta if inactive for a hour' do
-      user = stub_model(User)
-      last_utma = user.utma(true)
-      Timecop.freeze(1.hour.from_now + 5.minutes) do
-        user.utma(true).should_not == last_utma
-      end
-      user = stub_model(User)
-      expect{
-        sleep 1; user.utma(false)
-      }.to_not change(user,:utma)
-    end
-  end
-
   describe 'daily_wins' do
     before :each do
       @user = create(:user)
