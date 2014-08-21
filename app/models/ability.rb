@@ -9,9 +9,6 @@ class Ability
     can :read, User
 
     can :update, user
-
-    unless user.guest?
-      can :create, Game
-    end
+    can :create, Game
   end
 end

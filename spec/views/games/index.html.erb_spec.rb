@@ -9,9 +9,6 @@ describe 'games/index' do
     ])
     @current_user = stub_model(User, id: 50)
     view.stub(:current_user).and_return(@current_user)
-    view.stub(:mxit_request?).and_return(true)
-    view.stub(:mxit_user?).and_return(true)
-    view.stub(:guest?).and_return(false)
     view.stub(:menu_item)
   end
 
@@ -42,12 +39,6 @@ describe 'games/index' do
     render
   end
 
-  it 'wont have a view rank link on the menu if guest' do
-    view.stub(:guest?).and_return(true)
-    view.should_not_receive(:menu_item).with(anything,user_path(50),anything)
-    render
-  end
-
   it 'should have a leaderboard link on menu' do
     view.should_receive(:menu_item).with(anything,users_path,id: 'leaderboard')
     render
@@ -59,7 +50,6 @@ describe 'games/index' do
   end
 
   it 'must have a ordinary options link on the menu' do
-    view.stub(:mxit_request?).and_return(false)
     view.should_receive(:menu_item).with(anything,options_users_path,id: 'options')
     render
   end

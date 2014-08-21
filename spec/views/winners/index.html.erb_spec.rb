@@ -10,9 +10,7 @@ describe 'winners/index.html.erb' do
       ])
     @current_user = stub_model(User, id: 33)
     view.stub(:current_user).and_return(@current_user)
-    view.stub(:mxit_request?).and_return(true)
     view.stub(:menu_item)
-    view.stub(:guest?)
   end
 
   it 'renders a list of users' do
@@ -27,15 +25,8 @@ describe 'winners/index.html.erb' do
     end
   end
 
-  it 'should have a view rank link if not guest' do
-    view.stub(:guest?).and_return(false)
+  it 'should have a view rank link' do
     view.should_receive(:menu_item).with(anything,user_path(33),id: 'view_rank')
-    render
-  end
-
-  it 'wont have a view rank link if guest' do
-    view.stub(:guest?).and_return(true)
-    view.should_not_receive(:menu_item).with(anything,user_path(33),id: 'view_rank')
     render
   end
 

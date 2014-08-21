@@ -66,8 +66,4 @@ describe 'winners',  :redis => true do
 
     it_behaves_like 'a winner viewer'
   end
-
-  context 'as guest user' do
-    it_behaves_like 'a winner viewer'
-  end
 end

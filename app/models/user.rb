@@ -190,14 +190,6 @@ class User < ActiveRecord::Base
     [Winner.weekly_random_games_required - weekly_wins,0].max
   end
 
-  def mxit?
-    provider == 'mxit'
-  end
-
-  def guest?
-    provider == 'guest'
-  end
-
   private
 
   def calculate_rating(scope)

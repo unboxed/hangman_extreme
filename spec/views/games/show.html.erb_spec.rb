@@ -11,7 +11,6 @@ describe 'games/show' do
     @user = stub_model(User, id: 50)
     view.stub(:current_user).and_return(@user)
     view.stub(:menu_item)
-    view.stub(:mxit_request?).and_return(true)
   end
 
   it 'must show the attempts left' do

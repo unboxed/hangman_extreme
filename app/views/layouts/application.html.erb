@@ -19,40 +19,6 @@
 
 <%= yield %>
 <%= menu %>
-<% if mxit_request? %>
-  <%= shinka_ad %>
-<% else %>
-  <%= javascript_include_tag 'application' %>
-  <% if smaato_ads_enabled? %>
-    <div id="smaatoad" style="padding: 0px"></div>
-    <script id="smaatoAdDisplay" language="javascript" type="text/javascript"
-            src="http://soma.smaato.net/oapi/js/smaatoAdDisplay.js">
-    </script>
-    <script>
-      (function () {
-        var request = new SomaRequest();
-        request.adSpaceID = <%= smaato_adspace %>;
-        request.publisherID = <%= smaato_pub %>;
-        /*insert additional targeting data here */
-        SomaTag.requestAd(request);
-      })();
-    </script>
-  <% end %>
-
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', '<%= ENV['GA_TRACKING_CODE'] %>']);
-    _gaq.push(['_trackPageview']);
-
-    (function () {
-      var ga = document.createElement('script');
-      ga.type = 'text/javascript';
-      ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-<% end %>
+<%= shinka_ad %>
 </body>
 </html>

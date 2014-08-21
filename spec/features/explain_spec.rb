@@ -26,8 +26,4 @@ describe 'explain', :redis => true do
 
     it_behaves_like 'a knowledge seeker'
   end
-
-  context 'as guest user', :smaato_vcr => true do
-    it_behaves_like 'a knowledge seeker'
-  end
 end

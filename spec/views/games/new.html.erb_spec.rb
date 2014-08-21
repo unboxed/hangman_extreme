@@ -5,7 +5,6 @@ describe 'games/new' do
     assign(:game, stub_model(Game).as_new_record)
     @current_user = stub_model(User, id: 50, account_credits: 50)
     view.stub(:current_user).and_return(@current_user)
-    view.stub(:mxit_request?)
   end
 
   it 'renders new game form' do

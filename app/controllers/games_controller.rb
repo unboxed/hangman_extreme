@@ -1,5 +1,4 @@
 class GamesController < ApplicationController
-  before_filter :login_required, :except => ['index']
   before_filter :check_credits, :only => ['new', 'create', 'show_clue', 'reveal_clue']
   load_and_authorize_resource except: 'play'
 

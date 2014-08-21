@@ -7,7 +7,6 @@ describe 'layouts/application' do
     view.stub(:current_page?).and_return(false)
     view.stub(:menu)
     view.stub(:shinka_ad)
-    view.stub(:mxit_request?).and_return(false)
   end
 
   it 'should a menu' do
@@ -17,7 +16,6 @@ describe 'layouts/application' do
   end
 
   it 'should a ad' do
-    view.stub(:mxit_request?).and_return(true)
     view.stub(:shinka_ad).and_return('--AD--')
     render
     rendered.should have_content('--AD--')

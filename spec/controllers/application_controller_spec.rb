@@ -1,60 +1,6 @@
 require 'spec_helper'
 
 describe ApplicationController do
-  describe 'login required' do
-    before :each do
-      controller.stub(:send_stats)
-    end
-
-    controller do
-      before_filter :login_required
-      def index
-        render :text => 'hello'
-      end
-    end
-
-    it 'must redirects to root_path if not user_id' do
-      get :index
-      response.should redirect_to(root_path)
-    end
-
-    it 'should find the user' do
-      User.should_receive(:find_by).with(kind_of(Hash)).and_return(stub_model(User, uid: '123', provider: '123'))
-      get :index
-    end
-
-    it 'wont redirects to root_path if logged_in' do
-      User.stub(:find_by).and_return(stub_model(User, uid: '123', provider: '123'))
-      get :index
-      response.should be_success
-    end
-  end
-
-  describe 'load_guest_user' do
-    before :each do
-      controller.stub(:send_stats)
-    end
-
-    controller do
-      def index
-        render :text => 'hello'
-      end
-    end
-
-    it 'must assign a guest current_user' do
-      get :index
-      assigns(:current_user).should be_kind_of(User)
-      assigns(:current_user).should be_a_guest
-    end
-
-    it 'wont assign a guest current_user if already a user' do
-      create(:user, uid: 'm2604100')
-      request.env['HTTP_X_MXIT_USERID_R'] = 'm2604100'
-      get :index
-      assigns(:current_user).should_not be_a_guest
-    end
-  end
-
   describe 'handling CanCan AccessDenied exceptions' do
     controller do
       def index
@@ -140,12 +86,6 @@ describe ApplicationController do
         get :index
       end
     end
-
-    it 'wont load mxit user if no userid' do
-      User.should_not_receive(:find_or_create_from_auth_hash)
-      get :index
-      assigns(:current_user).should be_a_guest
-    end
   end
 
   describe 'sending stats' do
@@ -159,7 +99,6 @@ describe ApplicationController do
       @user = stub_model(User)
       @user_request_info = UserRequestInfo.new
       controller.stub(:tracking_enabled?).and_return(true)
-      controller.stub(:mxit_request?).and_return(true)
       controller.stub(:current_user).and_return(@user)
       controller.stub(:current_user_request_info).and_return(@user_request_info)
       @page_view = double('Staccato::Pageview',
@@ -171,12 +110,6 @@ describe ApplicationController do
 
     it 'wont create a new connection if being redirected' do
       controller.stub(:status).and_return(302)
-      Staccato::Pageview.should_not_receive(:new)
-      get :index
-    end
-
-    it 'wont create a new connection if not mxit request' do
-      controller.stub(:mxit_request?).and_return(false)
       Staccato::Pageview.should_not_receive(:new)
       get :index
     end
@@ -284,7 +217,7 @@ describe ApplicationController do
       end
     end
 
-    it 'must render mobile layout' do
+    it 'must render layout' do
       get :index
       response.should render_template('layouts/application')
     end

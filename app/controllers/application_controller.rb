@@ -19,24 +19,7 @@ class ApplicationController < ActionController::Base
     @current_user_request_info ||= UserRequestInfo.new
   end
 
-  def mxit_request?
-    request.env['HTTP_X_MXIT_USERID_R'].present?
-  end
-
-  def guest?
-    current_user.guest?
-  end
-
-  def mxit_user?
-    current_user.mxit?
-  end
-
-  helper_method :current_user, :current_user_account, :current_user_request_info, :notify_airbrake, :mxit_request?, :guest?, :mxit_user?
-
-  def login_required
-    return true if current_user && !guest?
-    access_denied
-  end
+  helper_method :current_user, :current_user_account, :current_user_request_info, :notify_airbrake
 
   def access_denied
     redirect_to('/', :alert => 'You are required to be logged')
@@ -44,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   def send_stats
-    if tracking_enabled? && mxit_request? && status != 302
+    if tracking_enabled? && status != 302 && current_user
       begin
         Timeout::timeout(15) do
           tracker = Staccato.tracker(tracking_code,GoogleTracking.tracking_uuid(current_user.id))
@@ -72,11 +55,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_user
-    if request.env['HTTP_X_MXIT_USERID_R'] # load mxit user
-      load_mxit_user
-    else # load browser user
-      @current_user = User.find_by(:uid => session[:current_uid],:provider => session[:current_provider]) || User.new(provider: 'guest')
-    end
+    load_mxit_user
   end
 
   def check_mxit_input_for_redirect

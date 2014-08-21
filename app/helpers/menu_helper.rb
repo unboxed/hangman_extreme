@@ -4,9 +4,7 @@ module MenuHelper
     return @menu_items if @menu_items
     @menu_items = []
     @menu_items << ['Home', root_path, id: 'home'] unless current_page?(root_path)
-    if guest?
-      @menu_items << ['Login', mxit_auth_url(redirect_uri: create_session_url, scope: 'openid'), id: 'login', style: 'color:green;']
-    elsif params[:action] == 'index' || (params[:controller] != 'games'  && params[:action] != 'new')
+    if params[:action] == 'index' || (params[:controller] != 'games'  && params[:action] != 'new')
       @menu_items << ['Play', play_games_path, id: 'play_game', style: 'color:green;']
     end
     @menu_items

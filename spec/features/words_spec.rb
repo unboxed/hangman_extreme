@@ -24,9 +24,4 @@ describe 'users', :redis => true do
 
     it_behaves_like 'a user geek'
   end
-
-  # can't play games
-  context 'as guest user' do
-
-  end
 end

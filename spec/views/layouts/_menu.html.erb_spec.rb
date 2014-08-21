@@ -1,11 +1,6 @@
 require 'view_spec_helper'
 
 describe 'layouts/_menu' do
-
-  before(:each) do
-    view.stub(:mxit_request?).and_return(false)
-  end
-
   it 'must build ul menu' do
     grouped_menu_items = [[[ 'new game', new_game_path, id: 'new_game']]]
     render :partial => 'layouts/menu', :locals => {:grouped_menu_items => grouped_menu_items}
@@ -31,5 +26,4 @@ describe 'layouts/_menu' do
       rendered.should have_css("a#grant[href='/speelman']")
     end
   end
-
 end

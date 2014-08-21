@@ -75,8 +75,4 @@ describe 'users', :redis => true do
       page.current_path.should be == options_users_path
     end
   end
-
-  context 'as guest user' do
-    it_behaves_like 'a user browser'
-  end
 end

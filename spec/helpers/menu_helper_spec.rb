@@ -2,17 +2,8 @@ require 'spec_helper'
 
 describe MenuHelper do
   context 'Menu' do
-    before :each do
-      helper.stub(:guest?).and_return(false)
-    end
-
     it 'must start with home menu items' do
       helper.menu_items.should include(['Home', root_path, id: 'home'])
-    end
-
-    it 'must have login for guest user' do
-      helper.stub(:guest?).and_return(true)
-      helper.menu_items.second[0].should == 'Login'
     end
 
     it 'must add a item to menu items' do

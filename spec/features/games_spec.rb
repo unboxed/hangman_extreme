@@ -95,11 +95,4 @@ describe 'games', :redis => true do
 
     it_behaves_like 'a game player'
   end
-
-  context 'as guest user' do
-    it 'wont allow you to start a new game' do
-      visit_home
-      page.should_not have_link('Play')
-    end
-  end
 end
