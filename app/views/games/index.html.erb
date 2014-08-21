@@ -25,5 +25,5 @@
 <% menu_item 'leaderboard', users_path, id: 'leaderboard' %>
 <% menu_item 'winners', winners_path, id: 'winners' %>
 <% menu_item 'scoring', explain_path(action: 'scoring_categories'), id: 'scoring_categories' %>
-<% menu_item 'feedback',feedback_url, id: 'feedback' if mxit_user? %>
+<% menu_item 'feedback','/feedback', id: 'feedback' if mxit_request? %>
 <% menu_item store_url %>

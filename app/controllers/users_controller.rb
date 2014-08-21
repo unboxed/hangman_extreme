@@ -72,11 +72,7 @@ class UsersController < ApplicationController
   private
 
   def mxit_oauth_redirect_to_path
-    if params[:state] == 'feedback'
-      feedback_index_path
-    else
-      options_users_path
-    end
+    options_users_path
   end
 
 end

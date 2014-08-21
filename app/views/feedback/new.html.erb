@@ -1,9 +1,0 @@
-<%= form_for(@feedback) do |f| %>
-    Enter your message or <%= link_to 'cancel', root_path %>.<br/>
-    Type in following format <b>Subject:Message</b>, example : <br/>
-    <i>Fun Game:I really enjoy hangman extreme, keep up the good work!</i><br/>
-    <label for="textarea">Textarea:</label>
-    <%= f.text_field :full_message %>
-    <%= f.hidden_field :support_type %>
-    <%= f.submit 'send' %>
-<% end %>

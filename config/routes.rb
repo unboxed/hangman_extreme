@@ -22,7 +22,6 @@ HangmanLeague::Application.routes.draw do
       get 'options', action: 'options'
     end
   end
-  resources :feedback, :except => [:show, :edit, :update, :destroy]
   resources :winners, :except => [:edit, :update, :create, :new, :destroy]
 
   get '/define/:word', to: 'words#define', as: 'define_word'

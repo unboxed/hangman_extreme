@@ -26,7 +26,6 @@ gem 'slim', require: false # for sidekiq
 # third party
 gem 'airbrake', '~> 3.1'
 gem 'newrelic_rpm'
-gem 'uservoice-ruby', require: false
 gem 'staccato', require: false # google analytics
 gem 'wordnik', require: false
 

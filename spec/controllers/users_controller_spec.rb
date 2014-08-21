@@ -49,11 +49,6 @@ describe UsersController do
       response.should redirect_to(options_users_path)
     end
 
-    it 'returns redirects to feedback page if state is feedback' do
-      get 'mxit_oauth', state: 'feedback'
-      response.should redirect_to(feedback_index_path)
-    end
-
     context 'send invite' do
       it 'returns sets and save profile information' do
         @connection.stub(:scope).and_return('contact/invite')

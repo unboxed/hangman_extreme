@@ -35,7 +35,6 @@ class User < ActiveRecord::Base
 
   has_many :games, -> { order('id ASC') }
   has_many :winners
-  has_many :feedback
   has_many :badges
 
   validates :provider, :uid, presence: true

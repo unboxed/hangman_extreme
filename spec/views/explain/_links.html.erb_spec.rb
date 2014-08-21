@@ -16,14 +16,7 @@ describe 'explain/_links.html.erb' do
   end
 
   it 'should have a feedback link on menu' do
-    args = {response_type: 'code',
-            host: 'test.host',
-            protocol: 'http',
-            client_id: ENV['MXIT_CLIENT_ID'],
-            redirect_uri: mxit_oauth_users_url(host: 'test.host'),
-            scope: 'profile/public profile/private',
-            state: 'feedback'}
-    view.should_receive(:menu_item).with(anything,mxit_authorise_url(args),id: 'feedback')
+    view.should_receive(:menu_item).with(anything,'/feedback',id: 'feedback')
     render :partial => 'explain/links'
   end
 

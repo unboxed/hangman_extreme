@@ -1,6 +1,45 @@
 ---
 http_interactions:
 - request:
+    method: get
+    uri: http://user.example.com/api/user_accounts?provider=mxit&uid=m2604100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '257'
+      Etag:
+      - '"245b3b4961c906927a525f3a9b8ab018"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 4df3a279-c3dc-4493-a5d5-74cd7cc7bfdb
+      X-Runtime:
+      - '0.005319'
+      Date:
+      - Thu, 13 Feb 2014 15:00:42 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '[{"id":5,"uid":"m2604100","provider":"mxit","mxit_login":"","name":null,"real_name":"","mobile_number":"","email":"","credits":1000,"prize_points":0,"lock_version":0,"created_at":"2014-02-13T17:00:42.000+02:00","updated_at":"2014-02-13T17:00:42.000+02:00"}]'
+    http_version:
+  recorded_at: Thu, 13 Feb 2014 15:00:42 GMT
+- request:
     method: post
     uri: https://<%= ENV['UV_SUBDOMAIN_NAME'] %>.uservoice.com/api/v1/tickets.json
     body:
