@@ -2,7 +2,7 @@ require 'cancan'
 require 'staccato'
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :load_user, :check_mxit_input_for_redirect
+  before_filter :check_mxit_input_for_redirect, :check_for_mxit
   after_filter :send_stats
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -12,11 +12,28 @@ class ApplicationController < ActionController::Base
   protected
 
   def current_user
-    @current_user
+    @current_user ||= User.find_or_create_from_auth_hash(provider: 'mxit',
+                                                       uid: request.env['HTTP_X_MXIT_USERID_R'],
+                                                       info: { name: request.env['HTTP_X_MXIT_NICK'],
+                                                               login: request.env['HTTP_X_MXIT_LOGIN'],
+                                                               email: request.env['HTTP_X_MXIT_LOGIN'] && "#{request.env['HTTP_X_MXIT_LOGIN']}@mxit.im"})
   end
 
   def current_user_request_info
-    @current_user_request_info ||= UserRequestInfo.new
+    return @current_user_request_info if @current_user_request_info
+    @current_user_request_info = UserRequestInfo.new
+    if request.env['HTTP_X_MXIT_PROFILE']
+      @mxit_profile = MxitProfile.new(request.env['HTTP_X_MXIT_PROFILE'])
+      current_user_request_info.mxit_profile = @mxit_profile
+    end
+    if request.env['HTTP_X_DEVICE_USER_AGENT']
+      current_user_request_info.user_agent = "Mxit #{request.env['HTTP_X_DEVICE_USER_AGENT']}"
+    end
+    if request.env['HTTP_X_MXIT_LOCATION']
+      @mxit_location = MxitLocation.new(request.env['HTTP_X_MXIT_LOCATION'])
+      current_user_request_info.mxit_location = @mxit_location
+    end
+    @current_user_request_info
   end
 
   helper_method :current_user, :current_user_account, :current_user_request_info, :notify_airbrake
@@ -54,8 +71,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def load_user
-    load_mxit_user
+  def check_for_mxit
+    if request.env['HTTP_X_MXIT_USERID_R'] || Rails.env.test?
+      true
+    else
+      render file: 'public/401.html', status: :unauthorized, layout: nil
+      false
+    end
   end
 
   def check_mxit_input_for_redirect
@@ -79,31 +101,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
-  def load_mxit_user
-    @current_user = User.find_or_create_from_auth_hash(provider: 'mxit',
-                                                       uid: request.env['HTTP_X_MXIT_USERID_R'],
-                                                       info: { name: request.env['HTTP_X_MXIT_NICK'],
-                                                               login: request.env['HTTP_X_MXIT_LOGIN'],
-                                                               email: request.env['HTTP_X_MXIT_LOGIN'] && "#{request.env['HTTP_X_MXIT_LOGIN']}@mxit.im"})
-    if request.env['HTTP_X_MXIT_PROFILE']
-      @mxit_profile = MxitProfile.new(request.env['HTTP_X_MXIT_PROFILE'])
-      current_user_request_info.mxit_profile = @mxit_profile
-    end
-    if request.env['HTTP_X_DEVICE_USER_AGENT']
-      current_user_request_info.user_agent = "Mxit #{request.env['HTTP_X_DEVICE_USER_AGENT']}"
-    end
-    if request.env['HTTP_X_MXIT_LOCATION']
-      @mxit_location = MxitLocation.new(request.env['HTTP_X_MXIT_LOCATION'])
-      current_user_request_info.mxit_location = @mxit_location
-    end
-  end
-
-  def current_user=(user)
-    @current_user = user
-    session[:current_uid] = user.try(:uid)
-    session[:current_provider] = user.try(:provider)
-  end
 
   def tracking_enabled?
     tracking_code.present? &&

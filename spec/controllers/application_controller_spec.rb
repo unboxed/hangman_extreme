@@ -22,6 +22,8 @@ describe ApplicationController do
 
     controller do
       def index
+        current_user
+        current_user_request_info
         render :text => 'hello'
       end
     end
