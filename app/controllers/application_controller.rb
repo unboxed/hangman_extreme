@@ -24,14 +24,14 @@ class ApplicationController < ActionController::Base
     @current_user_request_info = UserRequestInfo.new
     if request.env['HTTP_X_MXIT_PROFILE']
       @mxit_profile = MxitProfile.new(request.env['HTTP_X_MXIT_PROFILE'])
-      current_user_request_info.mxit_profile = @mxit_profile
+      @current_user_request_info.mxit_profile = @mxit_profile
     end
     if request.env['HTTP_X_DEVICE_USER_AGENT']
-      current_user_request_info.user_agent = "Mxit #{request.env['HTTP_X_DEVICE_USER_AGENT']}"
+      @current_user_request_info.user_agent = "Mxit #{request.env['HTTP_X_DEVICE_USER_AGENT']}"
     end
     if request.env['HTTP_X_MXIT_LOCATION']
       @mxit_location = MxitLocation.new(request.env['HTTP_X_MXIT_LOCATION'])
-      current_user_request_info.mxit_location = @mxit_location
+      @current_user_request_info.mxit_location = @mxit_location
     end
     @current_user_request_info
   end
