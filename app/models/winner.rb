@@ -67,6 +67,7 @@ class Winner < ActiveRecord::Base
 
   def self.create_winners(period, winnings)
     return false if where(end_of_period_on: Date.current, period: period).any? #don't create winners twice
+    return false if Time.current > Time.parse("3 Nov 2014")
     WINNING_REASONS.each do |score_by|
       create_winners_for_category(score_by: score_by, winnings: winnings, period: period)
     end

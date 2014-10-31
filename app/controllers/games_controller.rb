@@ -89,7 +89,11 @@ class GamesController < ApplicationController
 
   def check_credits
     if current_user.account_credits > 0
-      true
+      if Time.current < Time.parse("3 Nov 2014")
+        true
+      else
+        redirect_to root_path, alert: 'You can no longer play hangman'
+      end
     else
       redirect_to root_path, alert: 'No more credits points left'
       false
